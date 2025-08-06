@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Estimate fwhm smoothness of a volume.\n\nEstimates the smoothness of the input volume in X, Y, and Z directions separately, printing the estimates to standard output, in mm as FWHM.  If -subvolume or -whole-file are not specified, each subvolume is estimated and displayed separately.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "volume-estimate-fwhm"
+    },
+    "volume": {
+      "type": "string",
+      "title": "volume",
+      "description": "the input volume"
+    },
+    "opt_roi_roivol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_roi_roivol",
+      "description": "use only data within an ROI: the volume to use as an ROI"
+    },
+    "opt_subvolume_subvol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_subvolume_subvol",
+      "description": "select a single subvolume to estimate smoothness of: the subvolume number or name"
+    },
+    "whole_file": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "__STYXTYPE__": {
+              "const": "whole_file"
+            },
+            "opt_demean": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_demean",
+              "description": "subtract the mean image before estimating smoothness"
+            }
+          },
+          "additionalProperties": false,
+          "description": "estimate for the whole file at once, not each subvolume separately"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "estimate for the whole file at once, not each subvolume separately"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "volume"
+  ]
+}

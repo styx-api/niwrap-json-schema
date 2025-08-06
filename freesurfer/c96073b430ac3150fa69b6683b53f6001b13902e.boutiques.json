@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Computes partial volume fractions for cortex, subcortical GM, WM and CSF",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_compute_volume_fractions"
+    },
+    "output_stem": {
+      "type": "string",
+      "title": "Output Stem",
+      "description": "Output stem for generated files (e.g. cortex, subcort_gm, wm, csf). Files will be saved with this stem in different formats based on the selected flags."
+    },
+    "registration_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Registration File",
+      "description": "Registration file (can be LTA or reg.dat). If using reg.dat, a template volume is needed."
+    },
+    "regheader": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Registration Header Subject",
+      "description": "Specify the subject for regheader."
+    },
+    "usf": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Anatomical Upsample Factor",
+      "description": "Set anatomical upsample factor (default is 2)."
+    },
+    "resolution": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolution",
+      "description": "Resolution setting. Sets USF to round(1/res)."
+    },
+    "resmm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Functional Upsampling Resolution",
+      "description": "Set functional upsampling resolution (default is aseg->xsize/(USF))."
+    },
+    "segmentation_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation File",
+      "description": "Use specified segmentation file instead of aseg.mgz."
+    },
+    "wsurf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "White Surface",
+      "description": "Specify the white surface (default is 'white')."
+    },
+    "psurf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pial Surface",
+      "description": "Specify the pial surface (default is 'pial')."
+    },
+    "no_aseg": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Aseg Flag",
+      "description": "Do not include aseg in processing (useful for testing)."
+    },
+    "stackfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stack File",
+      "description": "Put cortex, subcortical GM, WM, CSF into a single multi-frame file."
+    },
+    "gmfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GM File",
+      "description": "Put cortex + subcortical GM into a single-frame file."
+    },
+    "no_fill_csf": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Fill CSF Flag",
+      "description": "Do not attempt to fill voxels surrounding segmentation with extracerebral CSF segmentation."
+    },
+    "dilation": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dilation",
+      "description": "For xCSF fill, dilate by specified number (default is 3). Use -1 to fill the entire volume."
+    },
+    "out_seg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Seg File",
+      "description": "Save segmentation (after adding xCSF voxels)."
+    },
+    "ttseg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tissue Type Segmentation",
+      "description": "Save tissue type segmentation."
+    },
+    "ttseg_ctab": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tissue Type Segmentation CTab",
+      "description": "Save tissue type segmentation color table."
+    },
+    "mgz_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "MGZ Format Flag",
+      "description": "Use MGZ format."
+    },
+    "mgh_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "MGH Format Flag",
+      "description": "Use MGH format."
+    },
+    "nii_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "NII Format Flag",
+      "description": "Use NII format."
+    },
+    "nii_gz_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "NII.GZ Format Flag",
+      "description": "Use NII.GZ format."
+    },
+    "ttype_head": {
+      "type": "boolean",
+      "default": false,
+      "title": "Default Head Tissue Type Flag",
+      "description": "Use default+head instead of default tissue type info for segmentation."
+    },
+    "vg_thresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "VG Threshold",
+      "description": "Threshold for 'ERROR: LTAconcat(): LTAs 0 and 1 do not match'."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Turn on debugging mode."
+    },
+    "checkopts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Options Flag",
+      "description": "Do not run anything, just check options and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "output_stem"
+  ]
+}

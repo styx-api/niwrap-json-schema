@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A quick and dirty way of loading a surface into SUMA or command line programs using a spec file.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "quickspec"
+    },
+    "tn": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Type and Name",
+      "description": "Specify surface type and name."
+    },
+    "tsn": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Type, State and Name",
+      "description": "Specify surface type, state, and name."
+    },
+    "tsnad": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Type, State, Name, Anatomical correctness, and LDP",
+      "description": "Specify surface type, state, name, anatomical correctness, and Local Domain Parent."
+    },
+    "tsnadm": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Type, State, Name, Anatomical correctness, LDP and node marker",
+      "description": "Specify surface type, state, name, anatomical correctness, Local Domain Parent, and node marker file."
+    },
+    "tsnadl": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Type, State, Name, Anatomical correctness, LDP and label dataset",
+      "description": "Specify surface type, state, name, anatomical correctness, Local Domain Parent, and label dataset file."
+    },
+    "spec": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output spec file",
+      "description": "Name of spec file output. Default is quick.spec."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Display help message."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "tn",
+    "tsn"
+  ]
+}

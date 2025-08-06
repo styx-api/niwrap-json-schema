@@ -1,0 +1,282 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program performs a two-factor Analysis of Variance (ANOVA) on 3D datasets.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dANOVA2"
+    },
+    "type": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3,
+      "title": "ANOVA Model Type",
+      "description": "Type of ANOVA model to be used: 1=fixed, 2=random, 3=mixed"
+    },
+    "alevels": {
+      "type": "integer",
+      "title": "A Levels",
+      "description": "Number of levels of factor A"
+    },
+    "blevels": {
+      "type": "integer",
+      "title": "B Levels",
+      "description": "Number of levels of factor B"
+    },
+    "dataset": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset",
+      "description": "Data set for levels of factor A and factor B"
+    },
+    "voxel": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel Number",
+      "description": "Screen output for voxel number"
+    },
+    "diskspace": {
+      "type": "boolean",
+      "default": false,
+      "title": "Disk Space Flag",
+      "description": "Print out disk space required for program execution"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Dataset",
+      "description": "Use sub-brick #0 of dataset 'mset' to define which voxels to process"
+    },
+    "ftr": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "F-statistic Treatment Prefix",
+      "description": "F-statistic for treatment effect"
+    },
+    "fa": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "F-statistic A Prefix",
+      "description": "F-statistic for factor A effect"
+    },
+    "fb": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "F-statistic B Prefix",
+      "description": "F-statistic for factor B effect"
+    },
+    "fab": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "F-statistic Interaction Prefix",
+      "description": "F-statistic for interaction"
+    },
+    "amean": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimate Mean A Prefix",
+      "description": "Estimate mean of factor A level"
+    },
+    "bmean": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimate Mean B Prefix",
+      "description": "Estimate mean of factor B level"
+    },
+    "xmean": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimate Mean Cell Prefix",
+      "description": "Estimate mean of cell at level i of factor A and level j of factor B"
+    },
+    "adiff": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Difference A Prefix",
+      "description": "Difference between levels i and j of factor A"
+    },
+    "bdiff": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Difference B Prefix",
+      "description": "Difference between levels i and j of factor B"
+    },
+    "xdiff": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Difference Cell Mean Prefix",
+      "description": "Difference between cell mean at A=i, B=j and cell mean at A=k, B=l"
+    },
+    "acontr": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Contrast A Prefix",
+      "description": "Contrast in factor A levels"
+    },
+    "bcontr": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Contrast B Prefix",
+      "description": "Contrast in factor B levels"
+    },
+    "xcontr": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Contrast Cell Means Prefix",
+      "description": "Contrast in cell means"
+    },
+    "bucket": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bucket Prefix",
+      "description": "Create one AFNI 'bucket' dataset whose sub-bricks are obtained by concatenating the above output files"
+    },
+    "old_method": {
+      "type": "boolean",
+      "default": false,
+      "title": "Old Method Flag",
+      "description": "Request to perform ANOVA using the previous functionality (requires -OK, also)"
+    },
+    "ok": {
+      "type": "boolean",
+      "default": false,
+      "title": "OK Flag",
+      "description": "Confirm understanding that contrasts that do not sum to zero have inflated t-stats, and contrasts that do sum to zero assume sphericity (to be used with -old_method)"
+    },
+    "assume_sph": {
+      "type": "boolean",
+      "default": false,
+      "title": "Assume Sphericity Flag",
+      "description": "Assume sphericity (zero-sum contrasts, only). This allows use of the old_method for computing contrasts which sum to zero"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "alevels",
+    "blevels"
+  ]
+}

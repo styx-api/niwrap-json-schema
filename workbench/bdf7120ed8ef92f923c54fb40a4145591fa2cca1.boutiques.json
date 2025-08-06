@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Convert to scalar, copy mapping, etc.\n\nTake an existing cifti file and change one of the mappings.  Exactly one of -series, -scalar, or -from-cifti must be specified.  The direction can be either an integer starting from 1, or the strings 'ROW' or 'COLUMN'.\n\nThe argument to -unit must be one of the following:\n\nSECOND\nHERTZ\nMETER\nRADIAN",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "cifti-change-mapping"
+    },
+    "data_cifti": {
+      "type": "string",
+      "title": "data_cifti",
+      "description": "the cifti file to use the data from"
+    },
+    "direction": {
+      "type": "string",
+      "title": "direction",
+      "description": "which direction on <data-cifti> to replace the mapping"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "the output cifti file"
+    },
+    "series": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "__STYXTYPE__": {
+              "const": "series"
+            },
+            "step": {
+              "type": "number",
+              "title": "step",
+              "description": "increment between series points"
+            },
+            "start": {
+              "type": "number",
+              "title": "start",
+              "description": "start value of the series"
+            },
+            "opt_unit_unit": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_unit_unit",
+              "description": "select unit for series (default SECOND): unit identifier"
+            }
+          },
+          "additionalProperties": false,
+          "description": "set the mapping to series",
+          "required": [
+            "step",
+            "start"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "set the mapping to series"
+    },
+    "scalar": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "__STYXTYPE__": {
+              "const": "scalar"
+            },
+            "opt_name_file_file": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_name_file_file",
+              "description": "specify names for the maps: text file containing map names, one per line"
+            }
+          },
+          "additionalProperties": false,
+          "description": "set the mapping to scalar"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "set the mapping to scalar"
+    },
+    "from_cifti": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "__STYXTYPE__": {
+              "const": "from_cifti"
+            },
+            "template_cifti": {
+              "type": "string",
+              "title": "template_cifti",
+              "description": "a cifti file containing the desired mapping"
+            },
+            "direction": {
+              "type": "string",
+              "title": "direction",
+              "description": "which direction to copy the mapping from"
+            }
+          },
+          "additionalProperties": false,
+          "description": "copy mapping from another cifti file",
+          "required": [
+            "template_cifti",
+            "direction"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "copy mapping from another cifti file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "data_cifti",
+    "direction",
+    "cifti_out"
+  ]
+}

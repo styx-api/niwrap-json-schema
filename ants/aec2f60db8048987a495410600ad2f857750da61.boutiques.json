@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Extract a sub-region from an image using the bounding box from a label image, with an optional padding radius.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "ExtractRegionFromImageByMask"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "title": "Image Dimension",
+      "description": "Dimension of the input image."
+    },
+    "input_image": {
+      "type": "string",
+      "title": "Input Image",
+      "description": "The input image from which a region will be extracted."
+    },
+    "output_image": {
+      "type": "string",
+      "title": "Output Image",
+      "description": "The output image containing the extracted region."
+    },
+    "label_mask_image": {
+      "type": "string",
+      "title": "Label Mask Image",
+      "description": "The label mask image used to extract the bounding box."
+    },
+    "label": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Label",
+      "description": "The label value used to extract the sub-region."
+    },
+    "pad_radius": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0,
+      "title": "Pad Radius",
+      "description": "Optional padding radius to be added around the bounding box."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "input_image",
+    "output_image",
+    "label_mask_image"
+  ]
+}

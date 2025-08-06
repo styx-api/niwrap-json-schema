@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Generate an appropriate response function from the image data for spherical deconvolution.\n\nThe spherical harmonic coefficients are stored according the conventions described the main documentation, which can be found at the following link: \nhttps://mrtrix.readthedocs.io/en/3.0.4/concepts/spherical_harmonics.html\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "sh2response"
+    },
+    "lmax": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "lmax",
+      "description": "specify the maximum harmonic degree of the response function to estimate"
+    },
+    "dump": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "dump",
+      "description": "dump the m=0 SH coefficients from all voxels in the mask to the output file, rather than their mean"
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "__STYXTYPE__": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "SH": {
+      "type": "string",
+      "title": "SH",
+      "description": "the spherical harmonic decomposition of the diffusion-weighted images"
+    },
+    "mask": {
+      "type": "string",
+      "title": "mask",
+      "description": "the mask containing the voxels from which to estimate the response function"
+    },
+    "directions": {
+      "type": "string",
+      "title": "directions",
+      "description": "a 4D image containing the direction vectors along which to estimate the response function"
+    },
+    "response": {
+      "type": "string",
+      "title": "response",
+      "description": "the output axially-symmetric spherical harmonic coefficients"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "SH",
+    "mask",
+    "directions",
+    "response"
+  ]
+}

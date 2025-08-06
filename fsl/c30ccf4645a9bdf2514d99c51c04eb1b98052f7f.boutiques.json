@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "FSL tool used to calculate motion outliers in 4D image data",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "fsl_motion_outliers"
+    },
+    "input_4d_image": {
+      "type": "string",
+      "title": "Input 4D image",
+      "description": "Input 4D image (e.g. 4D.nii.gz)"
+    },
+    "output_confound_file": {
+      "type": "string",
+      "title": "Output confound file",
+      "description": "Output confound file (e.g. confounds.txt)"
+    },
+    "mask_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask image",
+      "description": "Use supplied mask image for calculating metric"
+    },
+    "save_metric_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Save metric file",
+      "description": "Save metric values (e.g. DVARS) as text into specified file"
+    },
+    "save_metric_plot": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Save metric plot",
+      "description": "Save metric values (e.g. DVARS) as a graphical plot (png format)"
+    },
+    "temp_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Temporary files path",
+      "description": "[Optional] Path to the location where temporary files should be created. Defaults to /tmp"
+    },
+    "refrms_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Reference RMS flag",
+      "description": "Use RMS intensity difference to reference volume as metric"
+    },
+    "dvars_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "DVARS flag",
+      "description": "Use DVARS as metric"
+    },
+    "refmse_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Reference MSE flag",
+      "description": "Mean Square Error version of --refrms (used in original version of fsl_motion_outliers)"
+    },
+    "fd_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Framewise displacement flag",
+      "description": "Use FD (framewise displacement) as metric"
+    },
+    "fdrms_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "FD RMS flag",
+      "description": "Use FD with RMS matrix calculation as metric"
+    },
+    "abs_thresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Absolute threshold",
+      "description": "Specify absolute threshold value (otherwise use box-plot cutoff = P75 + 1.5*IQR)"
+    },
+    "no_moco_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No motion correction flag",
+      "description": "Do not run motion correction (assumed already done)"
+    },
+    "dummy_scans": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of dummy scans",
+      "description": "Specify number of dummy scans to delete (before running anything and creating EVs)"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Verbose mode"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_4d_image",
+    "output_confound_file"
+  ]
+}

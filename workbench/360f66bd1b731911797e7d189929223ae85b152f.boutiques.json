@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Merge cifti files along dense dimension.\n\nThe input cifti files must have matching mappings along the direction not specified, and the mapping along the specified direction must be brain models.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "cifti-merge-dense"
+    },
+    "direction": {
+      "type": "string",
+      "title": "direction",
+      "description": "which dimension to merge along, ROW or COLUMN"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "the output cifti file"
+    },
+    "opt_label_collision_action": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_label_collision_action",
+      "description": "how to handle conflicts between label keys: 'ERROR', 'FIRST', or 'LEGACY', default 'ERROR', use 'LEGACY' to match v1.4.2 and earlier"
+    },
+    "cifti": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "__STYXTYPE__": {
+                "const": "cifti"
+              },
+              "cifti_in": {
+                "type": "string",
+                "title": "cifti_in",
+                "description": "a cifti file to merge"
+              }
+            },
+            "additionalProperties": false,
+            "description": "specify an input cifti file",
+            "required": [
+              "cifti_in"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify an input cifti file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "direction",
+    "cifti_out"
+  ]
+}

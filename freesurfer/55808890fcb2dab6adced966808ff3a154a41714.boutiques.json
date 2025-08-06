@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Converts a surface-based segmentation into a custom annotation file.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mris_seg2annot"
+    },
+    "surfseg": {
+      "type": "string",
+      "title": "Surface segmentation file",
+      "description": "Volume-encoded surface segmentation. Values are indices into the color table."
+    },
+    "colortable": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Color table file",
+      "description": "Color table used to map segmentation index to name and color."
+    },
+    "auto_ctab": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Automatic color table",
+      "description": "Create a random color table and optionally save it."
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject name",
+      "description": "Subject name."
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Surface hemifield."
+    },
+    "output_annotation": {
+      "type": "string",
+      "title": "Output annotation file",
+      "description": "Output annotation file. E.g., lh.aparc.annot"
+    },
+    "surf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface name",
+      "description": "Surface name, default is white."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug mode",
+      "description": "Turn on debugging."
+    },
+    "debug_vertex": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug vertex number",
+      "description": "Turn on debugging for vertex."
+    },
+    "checkopts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check options",
+      "description": "Don't run anything, just check options and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Print out version and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surfseg",
+    "subject",
+    "hemi",
+    "output_annotation"
+  ]
+}

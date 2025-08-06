@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Take gradient of a cifti file.\n\nPerforms gradient calculation on each component of the cifti file, and optionally averages the resulting gradients.  The -vectors and -average-output options may not be used together.  You must specify a surface for each surface structure in the cifti file.  The COLUMN direction should be faster, and is the direction that works on dtseries.  For dconn, you probably want ROW, unless you are using -average-output.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "cifti-gradient"
+    },
+    "cifti": {
+      "type": "string",
+      "title": "cifti",
+      "description": "the input cifti"
+    },
+    "direction": {
+      "type": "string",
+      "title": "direction",
+      "description": "which dimension to take the gradient along, ROW or COLUMN"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "the output cifti"
+    },
+    "left_surface": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "__STYXTYPE__": {
+              "const": "left_surface"
+            },
+            "surface": {
+              "type": "string",
+              "title": "surface",
+              "description": "the left surface file"
+            },
+            "opt_left_corrected_areas_area_metric": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_left_corrected_areas_area_metric",
+              "description": "vertex areas to use instead of computing them from the left surface: the corrected vertex areas, as a metric"
+            }
+          },
+          "additionalProperties": false,
+          "description": "specify the left surface to use",
+          "required": [
+            "surface"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify the left surface to use"
+    },
+    "right_surface": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "__STYXTYPE__": {
+              "const": "right_surface"
+            },
+            "surface": {
+              "type": "string",
+              "title": "surface",
+              "description": "the right surface file"
+            },
+            "opt_right_corrected_areas_area_metric": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_right_corrected_areas_area_metric",
+              "description": "vertex areas to use instead of computing them from the right surface: the corrected vertex areas, as a metric"
+            }
+          },
+          "additionalProperties": false,
+          "description": "specify the right surface to use",
+          "required": [
+            "surface"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify the right surface to use"
+    },
+    "cerebellum_surface": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "__STYXTYPE__": {
+              "const": "cerebellum_surface"
+            },
+            "surface": {
+              "type": "string",
+              "title": "surface",
+              "description": "the cerebellum surface file"
+            },
+            "opt_cerebellum_corrected_areas_area_metric": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_cerebellum_corrected_areas_area_metric",
+              "description": "vertex areas to use instead of computing them from the cerebellum surface: the corrected vertex areas, as a metric"
+            }
+          },
+          "additionalProperties": false,
+          "description": "specify the cerebellum surface to use",
+          "required": [
+            "surface"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify the cerebellum surface to use"
+    },
+    "opt_surface_presmooth_surface_kernel": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_surface_presmooth_surface_kernel",
+      "description": "smooth on the surface before computing the gradient: the size of the gaussian surface smoothing kernel in mm, as sigma by default"
+    },
+    "opt_volume_presmooth_volume_kernel": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_volume_presmooth_volume_kernel",
+      "description": "smooth on the surface before computing the gradient: the size of the gaussian volume smoothing kernel in mm, as sigma by default"
+    },
+    "opt_presmooth_fwhm": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_presmooth_fwhm",
+      "description": "smoothing kernel sizes are FWHM, not sigma"
+    },
+    "opt_average_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_average_output",
+      "description": "output the average of the gradient magnitude maps instead of each gradient map separately"
+    },
+    "opt_vectors_vectors_out": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_vectors_vectors_out",
+      "description": "output gradient vectors: the vectors, as a dscalar file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti",
+    "direction",
+    "cifti_out"
+  ]
+}

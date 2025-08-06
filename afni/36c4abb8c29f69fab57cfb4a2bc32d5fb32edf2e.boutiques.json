@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool to compute convex hulls and related structures.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "qhull"
+    },
+    "input_coords": {
+      "type": "string",
+      "title": "Input Coordinates",
+      "description": "Dimension, number of points, and point coordinates provided via stdin."
+    },
+    "delaunay": {
+      "type": "boolean",
+      "default": false,
+      "title": "Delaunay Triangulation",
+      "description": "Compute Delaunay triangulation by lifting points to a paraboloid."
+    },
+    "furthest_delaunay": {
+      "type": "boolean",
+      "default": false,
+      "title": "Furthest-site Delaunay Triangulation",
+      "description": "Compute furthest-site Delaunay triangulation (upper convex hull)."
+    },
+    "voronoi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Voronoi Diagram",
+      "description": "Compute Voronoi diagram as the dual of the Delaunay triangulation."
+    },
+    "furthest_voronoi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Furthest-site Voronoi Diagram",
+      "description": "Compute furthest-site Voronoi diagram."
+    },
+    "halfspace_intersection": {
+      "type": "boolean",
+      "default": false,
+      "title": "Halfspace Intersection",
+      "description": "Compute halfspace intersection about [1,1,0,...] via polar duality."
+    },
+    "triangulated_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "Triangulated Output",
+      "description": "Triangulated output."
+    },
+    "joggled_input": {
+      "type": "boolean",
+      "default": false,
+      "title": "Joggled Input",
+      "description": "Joggled input instead of merged facets."
+    },
+    "verify": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verify Result",
+      "description": "Verify result: structure, convexity, and point inclusion."
+    },
+    "summary": {
+      "type": "boolean",
+      "default": false,
+      "title": "Summary of Results",
+      "description": "Summary of results."
+    },
+    "vertices_incident": {
+      "type": "boolean",
+      "default": false,
+      "title": "Vertices Incident",
+      "description": "Vertices incident to each facet."
+    },
+    "normals": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normals with Offsets",
+      "description": "Normals with offsets."
+    },
+    "vertex_coordinates": {
+      "type": "boolean",
+      "default": false,
+      "title": "Vertex Coordinates",
+      "description": "Vertex coordinates (if 'Qc', includes coplanar points). If 'v', Voronoi vertices."
+    },
+    "halfspace_intersections": {
+      "type": "boolean",
+      "default": false,
+      "title": "Halfspace Intersections",
+      "description": "Halfspace intersections."
+    },
+    "extreme_points": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extreme Points",
+      "description": "Extreme points (convex hull vertices)."
+    },
+    "total_area_volume": {
+      "type": "boolean",
+      "default": false,
+      "title": "Total Area and Volume",
+      "description": "Compute total area and volume."
+    },
+    "off_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "OFF Format",
+      "description": "OFF format (if 'v', outputs Voronoi regions)."
+    },
+    "geomview_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "Geomview Output",
+      "description": "Geomview output (2-d, 3-d and 4-d)."
+    },
+    "mathematica_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mathematica Output",
+      "description": "Mathematica output (2-d and 3-d)."
+    },
+    "print_facets": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Print Facets",
+      "description": "Print facets that include point n, -n if not."
+    },
+    "output_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output File",
+      "description": "Output results to file."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_coords"
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Reorient fixel directions.\n\nReorientation is performed by transforming the vector representing the fixel direction with the Jacobian (local affine transform) computed at each voxel in the warp, then re-normalising the vector.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "fixelreorient"
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "__STYXTYPE__": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "fixel_in": {
+      "type": "string",
+      "title": "fixel_in",
+      "description": "the input fixel directory"
+    },
+    "warp": {
+      "type": "string",
+      "title": "warp",
+      "description": "a 4D deformation field used to perform reorientation. Reorientation is performed by applying the Jacobian affine transform in each voxel in the warp, then re-normalising the vector representing the fixel direction"
+    },
+    "fixel_out": {
+      "type": "string",
+      "title": "fixel_out",
+      "description": "the output fixel directory. If the the input and output directories are the same, the existing directions file will be replaced (providing the -force option is supplied). If a new directory is supplied then the fixel directions and all other fixel data will be copied to the new directory."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "fixel_in",
+    "warp",
+    "fixel_out"
+  ]
+}

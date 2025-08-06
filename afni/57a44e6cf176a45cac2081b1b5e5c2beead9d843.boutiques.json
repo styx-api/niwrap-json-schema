@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Sorts each voxel in a dataset and produces a new dataset.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dTsort"
+    },
+    "input_file": {
+      "type": "string",
+      "title": "Input dataset",
+      "description": "Input dataset to be sorted"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output prefix",
+      "description": "Prefix for the output dataset"
+    },
+    "inc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sort increasing",
+      "description": "Sort into increasing order (default)"
+    },
+    "dec": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sort decreasing",
+      "description": "Sort into decreasing order"
+    },
+    "rank": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output rank",
+      "description": "Output rank instead of sorted values; ranks range from 1 to Nvals"
+    },
+    "ind": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output sorting index",
+      "description": "Output sorting index (0 to Nvals -1)"
+    },
+    "val": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output sorted values",
+      "description": "Output sorted values (default)"
+    },
+    "random": {
+      "type": "boolean",
+      "default": false,
+      "title": "Random shuffle",
+      "description": "Randomly shuffle (permute) the time points in each voxel"
+    },
+    "ranfft": {
+      "type": "boolean",
+      "default": false,
+      "title": "Randomize FFT",
+      "description": "Randomize each time series by scrambling the FFT phase"
+    },
+    "randft": {
+      "type": "boolean",
+      "default": false,
+      "title": "Randomize DFT",
+      "description": "Randomize each time series by scrambling the DFT phase"
+    },
+    "datum": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Datum type",
+      "description": "Coerce the output data to be stored as the given type (byte, short, or float)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file"
+  ]
+}

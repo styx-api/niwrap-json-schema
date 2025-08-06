@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Reads in a surface and writes it out in another format. Only fields pertinent to SUMA are preserved.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "ConvertSurface"
+    },
+    "input_surface": {
+      "type": "string",
+      "title": "Input Surface",
+      "description": "Specifies the input surface."
+    },
+    "output_surface": {
+      "type": "string",
+      "title": "Output Surface",
+      "description": "Specifies the output surface."
+    },
+    "surface_volume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Volume",
+      "description": "Specifies a surface volume."
+    },
+    "transform_tlrc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Talairach Transform",
+      "description": "Apply Talairach transform."
+    },
+    "mni_rai": {
+      "type": "boolean",
+      "default": false,
+      "title": "MNI RAI",
+      "description": "Turn AFNI tlrc coordinates (RAI) into MNI coord space in RAI."
+    },
+    "mni_lpi": {
+      "type": "boolean",
+      "default": false,
+      "title": "MNI LPI",
+      "description": "Turn AFNI tlrc coordinates (RAI) into MNI coord space in LPI."
+    },
+    "xmat_1D": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "1D Transformation Matrix",
+      "description": "Apply transformation specified in 1D file."
+    },
+    "ixmat_1D": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inverse 1D Transformation Matrix",
+      "description": "Apply inverse transformation specified in 1D file."
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random Seed",
+      "description": "Specify SEED to seed the random number generator for random matrix generation."
+    },
+    "native": {
+      "type": "boolean",
+      "default": false,
+      "title": "Native Coordinate System",
+      "description": "Write the output surface in the coordinate system native to its format."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_surface",
+    "output_surface"
+  ]
+}

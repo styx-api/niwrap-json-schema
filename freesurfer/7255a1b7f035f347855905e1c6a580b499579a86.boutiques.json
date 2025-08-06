@@ -1,0 +1,562 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "No description",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_label2label"
+    },
+    "src_label": {
+      "type": "string",
+      "title": "Source Label",
+      "description": "Input label file"
+    },
+    "trg_label": {
+      "type": "string",
+      "title": "Target Label",
+      "description": "Output label file"
+    },
+    "erode": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Erode",
+      "description": "Erode the label N times before writing"
+    },
+    "open": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Open",
+      "description": "Open the label N times before writing"
+    },
+    "close": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Close",
+      "description": "Close the label N times before writing"
+    },
+    "dilate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dilate",
+      "description": "Dilate the label N times before writing"
+    },
+    "ring": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ring",
+      "description": "Dilate the label N times then remove the original before writing"
+    },
+    "src_subject": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Subject",
+      "description": "Source subject"
+    },
+    "trg_subject": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Subject",
+      "description": "Target subject"
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject",
+      "description": "Use for both target and source"
+    },
+    "outmask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Mask",
+      "description": "Save output label as a binary mask (surf only)"
+    },
+    "outstat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Stat",
+      "description": "Save output label stat as a mask (surf only)"
+    },
+    "sample": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sample",
+      "description": "Sample label onto surface"
+    },
+    "regmethod": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Registration Method",
+      "description": "Registration method (surface, volume)"
+    },
+    "usepathfiles": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Path Files",
+      "description": "Read from and write to a path file"
+    },
+    "hemi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hemisphere",
+      "description": "Hemisphere (lh or rh) (with surface)"
+    },
+    "src_hemi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Hemisphere",
+      "description": "Source Hemisphere (lh or rh)"
+    },
+    "trg_hemi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Hemisphere",
+      "description": "Target Hemisphere (lh or rh)"
+    },
+    "src_ico_order": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Ico Order",
+      "description": "When srcsubject=ico"
+    },
+    "trg_ico_order": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Ico Order",
+      "description": "When trgsubject=ico"
+    },
+    "direct": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Direct",
+      "description": "Use the [xyz] coords for src and trg surfaces to do direct lookup"
+    },
+    "trgsurf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Surface",
+      "description": "Get xyz from this surface (white)"
+    },
+    "surfreg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Registration",
+      "description": "Surface registration (sphere.reg)"
+    },
+    "srcsurfreg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Surface Registration",
+      "description": "Source surface registration (sphere.reg)"
+    },
+    "trgsurfreg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Surface Registration",
+      "description": "Target surface registration (sphere.reg)"
+    },
+    "srcsurfreg_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Surface Registration File",
+      "description": "Specify full path to source reg"
+    },
+    "trgsurfreg_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Surface Registration File",
+      "description": "Specify full path to target reg"
+    },
+    "paint": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Paint",
+      "description": "Map to closest vertex on source surfname if d < dmax"
+    },
+    "dmindmin": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dmindmin",
+      "description": "Bin mask with vertex of closest label point when painting"
+    },
+    "baryfill": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Baryfill",
+      "description": "Fill with barycentric interpolation"
+    },
+    "label_cortex": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Cortex",
+      "description": "Create a label like ?h.cortex.label"
+    },
+    "surf_label2mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Label to Mask",
+      "description": "Convert a label to a binary mask"
+    },
+    "srcmask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Mask",
+      "description": "Source mask surfvalfile thresh <format>"
+    },
+    "srcmasksign": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Mask Sign",
+      "description": "Source mask sign (<abs>, pos, neg)"
+    },
+    "srcmaskframe": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Mask Frame",
+      "description": "Source mask frame number (0-based)"
+    },
+    "xfm": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "XFM File",
+      "description": "Use xfm file instead of computing tal xfm"
+    },
+    "reg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reg File",
+      "description": "Use register.dat file instead of computing tal xfm"
+    },
+    "xfm_invert": {
+      "type": "boolean",
+      "default": false,
+      "title": "XFM Invert",
+      "description": "Invert xfm, or reg"
+    },
+    "projabs": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Absolute",
+      "description": "Project dist mm along surf normal"
+    },
+    "projfrac": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Fraction",
+      "description": "Project frac of thickness along surf normal"
+    },
+    "sd": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Use specified subjects directory"
+    },
+    "nohash": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Hash",
+      "description": "Don't use hash table when regmethod is surface"
+    },
+    "norevmap": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Reverse Map",
+      "description": "Don't use reverse mapping when regmethod is surface"
+    },
+    "to_scanner": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "To Scanner RAS",
+      "description": "Convert coords to scanner RAS prior to other operations"
+    },
+    "to_tkr": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "To Tkregister RAS",
+      "description": "Convert coords to tkregister RAS prior to other operations"
+    },
+    "scanner": {
+      "type": "boolean",
+      "default": false,
+      "title": "Scanner Coordinate",
+      "description": "Set output coordinate type to scanner"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "src_label",
+    "trg_label"
+  ]
+}

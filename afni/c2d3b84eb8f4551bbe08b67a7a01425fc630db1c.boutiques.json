@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Fills in blank regions in 1D rows extracted from a 3D dataset",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dRowFillin"
+    },
+    "maxgap": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Gap",
+      "description": "Set the maximum length of a blank region that will be filled in"
+    },
+    "dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Direction of Fill",
+      "description": "Set the direction of fill, e.g., A-P, P-A, I-S, S-I, L-R, R-L, x, y, z, XYZ.OR, XYZ.AND"
+    },
+    "binary": {
+      "type": "boolean",
+      "default": false,
+      "title": "Binary Flag",
+      "description": "Turn input dataset to binary (0 and 1) before filling in. Output will also be binary."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Set the prefix for the output dataset"
+    },
+    "input_dataset": {
+      "type": "string",
+      "title": "Input Dataset",
+      "description": "Input 3D dataset (e.g., dataset+orig)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_dataset"
+  ]
+}

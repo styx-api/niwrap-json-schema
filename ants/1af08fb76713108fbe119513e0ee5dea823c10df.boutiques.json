@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This script performs T1 anatomical brain processing including brain extraction, brain n-tissue segmentation, cortical thickness estimation, and optional registration to a template.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "antsCorticalThickness.sh"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "title": "Image dimension",
+      "description": "2 or 3 for 2- or 3-dimensional image"
+    },
+    "anatomical_image": {
+      "type": "string",
+      "title": "Anatomical image",
+      "description": "Structural intensity image, typically T1."
+    },
+    "brain_template": {
+      "type": "string",
+      "title": "Brain segmentation template",
+      "description": "Anatomical intensity template. This template is not skull-stripped."
+    },
+    "brain_extraction_probability_mask": {
+      "type": "string",
+      "title": "Brain extraction probability mask",
+      "description": "Brain probability mask in the segmentation template space. A binary mask is acceptable."
+    },
+    "brain_segmentation_priors": {
+      "type": "string",
+      "title": "Brain segmentation priors",
+      "description": "Tissue probability priors corresponding to the template image specified with the -e option. At least four priors must exist, corresponding to CSF, Cortical GM, WM, Subcortical GM."
+    },
+    "output_prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Output prefix for the generated filenames."
+    },
+    "image_file_suffix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Image file suffix",
+      "description": "Any of the standard ITK IO formats e.g. nrrd, nii.gz (default), mhd."
+    },
+    "template_for_t1_registration": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template for T1 registration",
+      "description": "Anatomical intensity template. This template must be skull-stripped."
+    },
+    "extraction_registration_mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Extraction registration mask",
+      "description": "Binary metric mask defined in the segmentation template space (-e). Only used in brain extraction registration."
+    },
+    "keep_temporary_files": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Keep temporary files",
+      "description": "Keep brain extraction/segmentation warps, etc (default = 0)."
+    },
+    "denoise_anatomical_images": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Denoise anatomical images",
+      "description": "Denoise anatomical images (default = 0)."
+    },
+    "max_iterations_for_registration": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max iterations for registration",
+      "description": "ANTS registration max iterations (default = 100x100x70x20)."
+    },
+    "atropos_prior_segmentation_weight": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atropos prior segmentation weight",
+      "description": "Atropos spatial prior probability weight for the segmentation (default = 0.25)."
+    },
+    "number_of_segmentation_iterations": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of segmentation iterations",
+      "description": "N4 -> Atropos -> N4 iterations during segmentation (default = 3)."
+    },
+    "posterior_formulation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Posterior formulation",
+      "description": "Atropos posterior formulation and whether or not to use mixture model proportions. e.g 'Socrates[ 1 ]' (default) or 'Aristotle[ 1 ]'."
+    },
+    "use_floating_point_precision": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use floating-point precision",
+      "description": "Use single float precision in registrations (default = 0)."
+    },
+    "use_random_seeding": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use random seeding",
+      "description": "Use random number generated from system clock (default = 1)."
+    },
+    "use_b_spline_smoothing": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use B-spline smoothing",
+      "description": "Use B-spline SyN for registrations and B-spline exponential mapping in DiReCT (default = 0)."
+    },
+    "cortical_thickness_prior_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cortical thickness prior image",
+      "description": "Cortical thickness prior image in the template space, with an estimated upper limit of cortical thickness at each voxel."
+    },
+    "label_propagation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label propagation",
+      "description": "Incorporate a distance prior on the posterior formulation."
+    },
+    "additional_priors_for_thickness": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Additional priors for thickness",
+      "description": "Add segmentation classes for thickness estimation."
+    },
+    "use_quick_registration_parameters": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use quick registration parameters",
+      "description": "Use antsRegistrationSyNQuick.sh for registrations (default = 0)."
+    },
+    "atropos_iterations": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atropos iterations",
+      "description": "Number of iterations within Atropos (default = 5)."
+    },
+    "script_stage_to_run": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Script stage to run",
+      "description": "Which stage of ACT to run (default = 0, run all)."
+    },
+    "test_debug_mode": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Test / debug mode",
+      "description": "If > 0, runs a faster version of the script. Only for testing (default = 0)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "anatomical_image",
+    "brain_template",
+    "brain_extraction_probability_mask",
+    "brain_segmentation_priors",
+    "output_prefix"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Front-end for Avi Snyder's image registration tool. Computes the Talairach transform that maps the input volume to the MNI average_305.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "talairach_avi"
+    },
+    "input_file": {
+      "type": "string",
+      "title": "Input File",
+      "description": "Input volume"
+    },
+    "output_xfm": {
+      "type": "string",
+      "title": "Output XFM",
+      "description": "Output transform file"
+    },
+    "atlas": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlas",
+      "description": "Alternate target atlas (in freesurfer/average dir)"
+    },
+    "log": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log File",
+      "description": "Log file. Default is outdir/talairach_avi.log"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Turn on debugging"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "output_xfm"
+  ]
+}

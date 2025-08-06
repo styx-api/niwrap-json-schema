@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Calculates correlation coefficients between two 4D datasets using space+time patterns",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dSpaceTimeCorr"
+    },
+    "insetA": {
+      "type": "string",
+      "title": "Input data set A",
+      "description": "First 4D data set."
+    },
+    "insetB": {
+      "type": "string",
+      "title": "Input data set B",
+      "description": "Second 4D data set. Must have the same spatial dimensions and number of time points as insetA."
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Output filename/base."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Optional mask for calculations. Recommended for speed and interpretability."
+    },
+    "out_Zcorr": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output Z-transformed correlation",
+      "description": "Switch to output Fisher Z transform of spatial map correlation instead of Pearson r values."
+    },
+    "freeze_insetA_ijk": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Freeze insetA ijk indices",
+      "description": "Freeze the seed voxel location in the insetA data set using ijk indices while the seed location in insetB moves throughout the volume or mask. Provide three ijk values."
+    },
+    "freeze_insetA_xyz": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Freeze insetA xyz coordinates",
+      "description": "Freeze the seed voxel location in the insetA data set using xyz coordinates while the seed location in insetB moves throughout the volume or mask. Provide three xyz values."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "insetA",
+    "insetB",
+    "prefix"
+  ]
+}

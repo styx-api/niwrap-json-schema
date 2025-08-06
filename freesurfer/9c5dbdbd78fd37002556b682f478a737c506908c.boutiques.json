@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Perform motion correction for the longitudinal recon-all stream when creating the longitudinal timepoint of a subject.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "longmc"
+    },
+    "cross_tp_name": {
+      "type": "string",
+      "title": "Cross Time Point Name",
+      "description": "Cross time point name for the longitudinal analysis"
+    },
+    "base_name": {
+      "type": "string",
+      "title": "Base Name",
+      "description": "Base name for the longitudinal analysis"
+    },
+    "conform_to_hires": {
+      "type": "boolean",
+      "default": false,
+      "title": "Conform to High Resolution Flag",
+      "description": "Option to conform input to high-resolution"
+    },
+    "no_conform_to_hires": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Conform to High Resolution Flag",
+      "description": "Option to not conform input to high-resolution"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "title": "Subjects Directory",
+      "description": "Set the SUBJECTS_DIR directory"
+    },
+    "subject_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject Name",
+      "description": "Subject name override, must be declared after -long"
+    },
+    "no_force_update": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Force Update Flag",
+      "description": "Do not force update"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cross_tp_name",
+    "base_name",
+    "subjects_dir"
+  ]
+}

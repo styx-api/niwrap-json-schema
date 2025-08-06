@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool to extract all slices from a 3D volume and store as 2D images",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "fslslice"
+    },
+    "volume": {
+      "type": "string",
+      "title": "Input 3D Volume",
+      "description": "Input 3D volume (e.g. volume.nii.gz)"
+    },
+    "output_basename": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Basename",
+      "description": "Output basename for extracted slices"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "volume"
+  ]
+}

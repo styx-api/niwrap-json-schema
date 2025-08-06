@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Helps align the major axes of an anatomical volume to those of the volumetric field of view.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "fat_proc_axialize_anat"
+    },
+    "in_file": {
+      "type": "string",
+      "title": "Input file",
+      "description": "Input anatomical volume full name"
+    },
+    "ref_file": {
+      "type": "string",
+      "title": "Reference file",
+      "description": "Reference volume full name, such as TT or MNI"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Output prefix for files and snapshots"
+    },
+    "mode_t2w": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mode T2w flag",
+      "description": "Switch for T2-weighted image processing"
+    },
+    "mode_t1w": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mode T1w flag",
+      "description": "Switch for T1-weighted image processing"
+    },
+    "workdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Working directory",
+      "description": "Name of the working subdirectory in the output directory"
+    },
+    "out_match_ref": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output match reference space flag",
+      "description": "Match the final output volume space FOV and spatial resolution to the reference file"
+    },
+    "do_ceil_out": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ceiling output flag",
+      "description": "Apply a ceiling based on the 98%ile value within an automasked volume"
+    },
+    "extra_al_wtmask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Extra weight mask file",
+      "description": "Extra weight mask to emphasize specific parts for alignment"
+    },
+    "extra_al_cost": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Extra alignment cost function",
+      "description": "Specify a cost function for 3dAllineate to use (default 'lpa')"
+    },
+    "extra_al_opts": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Extra alignment options",
+      "description": "Extra options for 3dAllineate when applying the warp"
+    },
+    "focus_mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Focus mask file",
+      "description": "Input mask to focus processing and alignment"
+    },
+    "focus_by_ss": {
+      "type": "boolean",
+      "default": false,
+      "title": "Focus by skullstrip flag",
+      "description": "Make a mask by simply skullstripping input data set"
+    },
+    "remove_inf_sli": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Remove inferior slices",
+      "description": "Remove a number of slices from the inferior part of the FOV"
+    },
+    "pre_align_center_mass": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pre-align center of mass flag",
+      "description": "Pre-align the centers of mass of the volumes"
+    },
+    "pre_center_mass": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pre-center mass flag",
+      "description": "Pre-recenter input center of mass to (0, 0, 0)"
+    },
+    "post_lr_symm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Post-alignment left-right symmetrization flag",
+      "description": "Apply post-alignment left-right symmetrization"
+    },
+    "no_pre_lr_symm": {
+      "type": "boolean",
+      "default": false,
+      "title": "No pre-alignment left-right symmetrization flag",
+      "description": "Turn off pre-alignment left-right symmetrization"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "No clean flag",
+      "description": "Do not remove working directory '__WORKING_axialize_anat'"
+    },
+    "qc_ulay_range": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "QC underlay range",
+      "description": "Provide a min (UMIN) and max (UMAX) range for underlay grayscale bar"
+    },
+    "no_qc_view": {
+      "type": "boolean",
+      "default": false,
+      "title": "No QC view flag",
+      "description": "Turn off default QC image saving/viewing"
+    },
+    "qc_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "QC prefix",
+      "description": "Provide a prefix for QC outputs separate from the main prefix"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in_file",
+    "ref_file",
+    "prefix"
+  ]
+}

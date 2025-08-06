@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Find extrema in a volume file.\n\nFinds extrema in a volume file, such that no two extrema of the same type are within <distance> of each other.  The extrema are labeled as -1 for minima, 1 for maxima, 0 otherwise.  If -only-maxima or -only-minima is specified, then it will ignore extrema not of the specified type.  These options are mutually exclusive.\n\nIf -sum-subvols is specified, these extrema subvolumes are summed, and the output has a single subvolume with this result.\n\nBy default, a datapoint is an extrema only if it is more extreme than every other datapoint that is within <distance> from it.  If -consolidate-mode is used, it instead starts by finding all datapoints that are more extreme than their immediate neighbors, then while there are any extrema within <distance> of each other, take the two extrema closest to each other and merge them into one by a weighted average based on how many original extrema have been merged into each.\n\nBy default, all input subvolumes are used with no smoothing, use -subvolume to specify a single subvolume to use, and -presmooth to smooth the input before finding the extrema.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "volume-extrema"
+    },
+    "volume_in": {
+      "type": "string",
+      "title": "volume_in",
+      "description": "volume file to find the extrema of"
+    },
+    "distance": {
+      "type": "number",
+      "title": "distance",
+      "description": "the minimum distance between identified extrema of the same type"
+    },
+    "volume_out": {
+      "type": "string",
+      "title": "volume_out",
+      "description": "the output extrema volume"
+    },
+    "presmooth": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "__STYXTYPE__": {
+              "const": "presmooth"
+            },
+            "kernel": {
+              "type": "number",
+              "title": "kernel",
+              "description": "the size of the gaussian smoothing kernel in mm, as sigma by default"
+            },
+            "opt_fwhm": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_fwhm",
+              "description": "kernel size is FWHM, not sigma"
+            }
+          },
+          "additionalProperties": false,
+          "description": "smooth the volume before finding extrema",
+          "required": [
+            "kernel"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "smooth the volume before finding extrema"
+    },
+    "opt_roi_roi_volume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_roi_roi_volume",
+      "description": "ignore values outside the selected area: the area to find extrema in"
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "__STYXTYPE__": {
+              "const": "threshold"
+            },
+            "low": {
+              "type": "number",
+              "title": "low",
+              "description": "the largest value to consider for being a minimum"
+            },
+            "high": {
+              "type": "number",
+              "title": "high",
+              "description": "the smallest value to consider for being a maximum"
+            }
+          },
+          "additionalProperties": false,
+          "description": "ignore small extrema",
+          "required": [
+            "low",
+            "high"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "ignore small extrema"
+    },
+    "opt_sum_subvols": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_sum_subvols",
+      "description": "output the sum of the extrema subvolumes instead of each subvolume separately"
+    },
+    "opt_consolidate_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_consolidate_mode",
+      "description": "use consolidation of local minima instead of a large neighborhood"
+    },
+    "opt_only_maxima": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_only_maxima",
+      "description": "only find the maxima"
+    },
+    "opt_only_minima": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_only_minima",
+      "description": "only find the minima"
+    },
+    "opt_subvolume_subvolume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_subvolume_subvolume",
+      "description": "select a single subvolume to find extrema in: the subvolume number or name"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "volume_in",
+    "distance",
+    "volume_out"
+  ]
+}

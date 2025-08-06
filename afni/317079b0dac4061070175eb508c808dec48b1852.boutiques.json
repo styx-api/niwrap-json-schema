@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program performs nonparametric Kruskal-Wallis test for comparison of multiple treatments.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dKruskalWallis"
+    },
+    "levels": {
+      "type": "integer",
+      "minimum": 2,
+      "title": "Number of treatments",
+      "description": "Number of treatments"
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Data sets for treatments",
+      "description": "Data set for treatment #1 through to treatment #s. Specify sub-brick if more than one present."
+    },
+    "workmem": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Workspace memory",
+      "description": "Number of megabytes of RAM to use for statistical workspace"
+    },
+    "voxel": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel number",
+      "description": "Screen output for voxel # num"
+    },
+    "output": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Kruskal-Wallis statistics are written to file prefixname"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "levels",
+    "datasets",
+    "output"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Event matrix generator for POSSUM simulation in FSL",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "possum_matrix"
+    },
+    "pulse_sequence": {
+      "type": "string",
+      "title": "Pulse sequence file",
+      "description": "Pulse sequence - all additional files with extensions .posx, .posy, etc., expected to be in the same directory"
+    },
+    "motion_matrix": {
+      "type": "string",
+      "title": "Motion matrix file",
+      "description": "Motion matrix [time(s) Tx(m) Ty(m) Tz(m) Rx(rad) Ry(rad) Rz(rad)]"
+    },
+    "output_matrix": {
+      "type": "string",
+      "title": "Output main event matrix file",
+      "description": "Main event matrix [t(s), rf_ang(rad), rf_freq_band(Hz), (4)=rf_cent_freq(Hz), read(1/0), Gx, Gy, Gz(T/m), Tx, Ty, Tz(m), angle_of_rot B(rad), rot_axis Bx, By, Bz(m), angle_of_rot A(rad), rot_axis Ax, Ay, Az(m)]"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Display this help message"
+    },
+    "old_version_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Old version flag",
+      "description": "Allows for the old version of the sorter to run"
+    },
+    "segment_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segment size",
+      "description": "Setting the size of the segment of the matrix that is read in one at a time"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "pulse_sequence",
+    "motion_matrix",
+    "output_matrix"
+  ]
+}

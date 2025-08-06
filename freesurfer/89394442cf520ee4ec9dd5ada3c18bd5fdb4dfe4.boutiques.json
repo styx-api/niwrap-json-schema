@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Computes three different types of overlap measures for labels in input volumes.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_compute_overlap"
+    },
+    "volumes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input volumes",
+      "description": "Input volume files for which overlap measures are computed."
+    },
+    "label_numbers": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label numbers",
+      "description": "List of specific label numbers for which to compute overlap measures. If not specified, all labels are considered if -a is provided."
+    },
+    "all_labels": {
+      "type": "boolean",
+      "default": false,
+      "title": "All labels flag",
+      "description": "Compute overlap for all labels."
+    },
+    "show_label": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show label flag",
+      "description": "Show label name for segmentation."
+    },
+    "total_overlap": {
+      "type": "boolean",
+      "default": false,
+      "title": "Total overlap flag",
+      "description": "Compute the total overlap, which is the number of voxels that are the same among all labels."
+    },
+    "no_summary": {
+      "type": "boolean",
+      "default": false,
+      "title": "No summary flag",
+      "description": "Do not compute total label summary."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask volume",
+      "description": "Limit the domain of the calculation to the nonzero voxels in specified volume."
+    },
+    "output_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output filename",
+      "description": "Filename to write results to."
+    },
+    "quiet_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet mode flag",
+      "description": "Do not display results on standard display. If -l is specified, this flag is automatically set."
+    },
+    "translate_label": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Translate label",
+      "description": "Translate label l1 to label l2."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Print help."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "volumes"
+  ]
+}

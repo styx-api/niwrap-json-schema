@@ -1,0 +1,945 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "FSL utility for image arithmetic, statistics, and mathematical operations",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "fslmaths"
+    },
+    "datatype_internal": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Internal datatype",
+      "description": "Datatype used internally for calculations"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input images",
+      "description": "Input images for processing"
+    },
+    "operations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "__STYXTYPE__": {
+            "const": "operation"
+          },
+          "add": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Add",
+            "description": "Add following input to current image"
+          },
+          "sub": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Subtract",
+            "description": "Subtract following input from current image"
+          },
+          "mul": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Multiply",
+            "description": "Multiply current image by following input"
+          },
+          "div": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Divide",
+            "description": "Divide current image by following input"
+          },
+          "rem": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Modulus remainder",
+            "description": "Modulus remainder - divide current image by following input and take remainder"
+          },
+          "mas": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Mask",
+            "description": "Use (following image>0) to mask current image"
+          },
+          "thr": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Threshold",
+            "description": "Use following number to threshold current image (zero anything below the number)"
+          },
+          "thrp": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Threshold percentage",
+            "description": "Use following percentage (0-100) of ROBUST RANGE to threshold current image (zero anything below the number)"
+          },
+          "thrP": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Threshold percentage of non-zero voxels",
+            "description": "Use following percentage (0-100) of ROBUST RANGE of non-zero voxels and threshold below"
+          },
+          "uthr": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Upper threshold",
+            "description": "Use following number to upper-threshold current image (zero anything above the number)"
+          },
+          "uthrp": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Upper threshold percentage",
+            "description": "Use following percentage (0-100) of ROBUST RANGE to upper-threshold current image (zero anything above the number)"
+          },
+          "uthrP": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Upper threshold percentage of non-zero voxels",
+            "description": "Use following percentage (0-100) of ROBUST RANGE of non-zero voxels and threshold above"
+          },
+          "max": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Maximum",
+            "description": "Take maximum of following input and current image"
+          },
+          "min": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Minimum",
+            "description": "Take minimum of following input and current image"
+          },
+          "seed": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Seed",
+            "description": "Seed random number generator with following number"
+          },
+          "restart": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Restart",
+            "description": "Replace the current image with input for future processing operations"
+          },
+          "save": {
+            "type": "boolean",
+            "default": false,
+            "title": "Save",
+            "description": "Save the current working image to the input filename"
+          },
+          "exp": {
+            "type": "boolean",
+            "default": false,
+            "title": "Exponential",
+            "description": "Exponential"
+          },
+          "log": {
+            "type": "boolean",
+            "default": false,
+            "title": "Natural logarithm",
+            "description": "Natural logarithm"
+          },
+          "sin": {
+            "type": "boolean",
+            "default": false,
+            "title": "Sine",
+            "description": "Sine function"
+          },
+          "cos": {
+            "type": "boolean",
+            "default": false,
+            "title": "Cosine",
+            "description": "Cosine function"
+          },
+          "tan": {
+            "type": "boolean",
+            "default": false,
+            "title": "Tangent",
+            "description": "Tangent function"
+          },
+          "asin": {
+            "type": "boolean",
+            "default": false,
+            "title": "Arc sine",
+            "description": "Arc sine function"
+          },
+          "acos": {
+            "type": "boolean",
+            "default": false,
+            "title": "Arc cosine",
+            "description": "Arc cosine function"
+          },
+          "atan": {
+            "type": "boolean",
+            "default": false,
+            "title": "Arc tangent",
+            "description": "Arc tangent function"
+          },
+          "sqr": {
+            "type": "boolean",
+            "default": false,
+            "title": "Square",
+            "description": "Square"
+          },
+          "sqrt": {
+            "type": "boolean",
+            "default": false,
+            "title": "Square root",
+            "description": "Square root"
+          },
+          "recip": {
+            "type": "boolean",
+            "default": false,
+            "title": "Reciprocal",
+            "description": "Reciprocal (1/current image)"
+          },
+          "abs": {
+            "type": "boolean",
+            "default": false,
+            "title": "Absolute value",
+            "description": "Absolute value"
+          },
+          "bin": {
+            "type": "boolean",
+            "default": false,
+            "title": "Binarise",
+            "description": "Use (current image>0) to binarise"
+          },
+          "binv": {
+            "type": "boolean",
+            "default": false,
+            "title": "Binarise and invert",
+            "description": "Binarise and invert (binarisation and logical inversion)"
+          },
+          "fillh": {
+            "type": "boolean",
+            "default": false,
+            "title": "Fill holes",
+            "description": "Fill holes in a binary mask (holes are internal - i.e. do not touch the edge of the FOV)"
+          },
+          "fillh26": {
+            "type": "boolean",
+            "default": false,
+            "title": "Fill holes using 26 connectivity",
+            "description": "Fill holes using 26 connectivity"
+          },
+          "index": {
+            "type": "boolean",
+            "default": false,
+            "title": "Index",
+            "description": "Replace each nonzero voxel with a unique (subject to wrapping) index number"
+          },
+          "grid": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Grid",
+            "description": "Add a 3D grid of intensity <value> with grid spacing <spacing>"
+          },
+          "edge": {
+            "type": "boolean",
+            "default": false,
+            "title": "Edge strength",
+            "description": "Edge strength"
+          },
+          "tfce": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Enhance with TFCE",
+            "description": "Enhance with TFCE, e.g. -tfce 2 0.5 6 (maybe change 6 to 26 for skeletons)"
+          },
+          "tfceS": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Show support area for voxel",
+            "description": "Show support area for voxel (X,Y,Z)"
+          },
+          "nan": {
+            "type": "boolean",
+            "default": false,
+            "title": "Replace NaNs",
+            "description": "Replace NaNs (improper numbers) with 0"
+          },
+          "nanm": {
+            "type": "boolean",
+            "default": false,
+            "title": "Make NaN mask",
+            "description": "Make NaN (improper number) mask with 1 for NaN voxels, 0 otherwise"
+          },
+          "rand": {
+            "type": "boolean",
+            "default": false,
+            "title": "Add uniform noise",
+            "description": "Add uniform noise (range 0:1)"
+          },
+          "randn": {
+            "type": "boolean",
+            "default": false,
+            "title": "Add Gaussian noise",
+            "description": "Add Gaussian noise (mean=0 sigma=1)"
+          },
+          "inm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Intensity normalisation",
+            "description": "Intensity normalisation (per 3D volume mean)"
+          },
+          "ing": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Intensity normalisation, global 4D mean",
+            "description": "Intensity normalisation, global 4D mean"
+          },
+          "range": {
+            "type": "boolean",
+            "default": false,
+            "title": "Set output calmin/max to full data range",
+            "description": "Set the output calmin/max to full data range"
+          },
+          "tensor_decomp": {
+            "type": "boolean",
+            "default": false,
+            "title": "Tensor decomposition",
+            "description": "Convert a 4D (6-timepoint) tensor image into L1,2,3,FA,MD,MO,V1,2,3 (remaining image in pipeline is FA)"
+          },
+          "kernel_3D": {
+            "type": "boolean",
+            "default": false,
+            "title": "3D kernel",
+            "description": "3x3x3 box centered on target voxel (set as default kernel)"
+          },
+          "kernel_2D": {
+            "type": "boolean",
+            "default": false,
+            "title": "2D kernel",
+            "description": "3x3x1 box centered on target voxel"
+          },
+          "kernel_box": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Box kernel",
+            "description": "All voxels in a cube of width <size> mm centered on target voxel"
+          },
+          "kernel_boxv": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Box kernel (voxels)",
+            "description": "All voxels in a cube of width <size> voxels centered on target voxel"
+          },
+          "kernel_boxv3": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Box kernel (3D voxels)",
+            "description": "All voxels in a cuboid of dimensions X x Y x Z centered on target voxel"
+          },
+          "kernel_gauss": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Gaussian kernel",
+            "description": "Gaussian kernel (sigma in mm, not voxels)"
+          },
+          "kernel_sphere": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sphere kernel",
+            "description": "All voxels in a sphere of radius <size> mm centered on target voxel"
+          },
+          "kernel_file": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "External file kernel",
+            "description": "Use external file as kernel"
+          },
+          "dilM": {
+            "type": "boolean",
+            "default": false,
+            "title": "Mean dilation",
+            "description": "Mean Dilation of non-zero voxels"
+          },
+          "dilD": {
+            "type": "boolean",
+            "default": false,
+            "title": "Modal dilation",
+            "description": "Modal Dilation of non-zero voxels"
+          },
+          "dilF": {
+            "type": "boolean",
+            "default": false,
+            "title": "Maximum filtering",
+            "description": "Maximum filtering of all voxels"
+          },
+          "dilall": {
+            "type": "boolean",
+            "default": false,
+            "title": "Dilate all",
+            "description": "Apply -dilM repeatedly until the entire FOV is covered"
+          },
+          "ero": {
+            "type": "boolean",
+            "default": false,
+            "title": "Erode",
+            "description": "Erode by zeroing non-zero voxels when zero voxels found in kernel"
+          },
+          "eroF": {
+            "type": "boolean",
+            "default": false,
+            "title": "Minimum filtering",
+            "description": "Minimum filtering of all voxels"
+          },
+          "fmedian": {
+            "type": "boolean",
+            "default": false,
+            "title": "Median filtering",
+            "description": "Median Filtering"
+          },
+          "fmean": {
+            "type": "boolean",
+            "default": false,
+            "title": "Mean filtering",
+            "description": "Mean filtering, kernel weighted (conventionally used with gauss kernel)"
+          },
+          "fmeanu": {
+            "type": "boolean",
+            "default": false,
+            "title": "Mean filtering un-normalised",
+            "description": "Mean filtering, kernel weighted, un-normalised (gives edge effects)"
+          },
+          "s": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Gaussian kernel filtering",
+            "description": "Create a gauss kernel of sigma mm and perform mean filtering"
+          },
+          "subsamp2": {
+            "type": "boolean",
+            "default": false,
+            "title": "Downsample by factor of 2",
+            "description": "Downsamples image by a factor of 2 (keeping new voxels centred on old)"
+          },
+          "subsamp2offc": {
+            "type": "boolean",
+            "default": false,
+            "title": "Downsample by factor of 2 (non-centred)",
+            "description": "Downsamples image by a factor of 2 (non-centred)"
+          },
+          "Tmean": {
+            "type": "boolean",
+            "default": false,
+            "title": "Mean across time",
+            "description": "Mean across time"
+          },
+          "Xmean": {
+            "type": "boolean",
+            "default": false,
+            "title": "Mean across X axis",
+            "description": "Mean across X axis"
+          },
+          "Ymean": {
+            "type": "boolean",
+            "default": false,
+            "title": "Mean across Y axis",
+            "description": "Mean across Y axis"
+          },
+          "Zmean": {
+            "type": "boolean",
+            "default": false,
+            "title": "Mean across Z axis",
+            "description": "Mean across Z axis"
+          },
+          "Tstd": {
+            "type": "boolean",
+            "default": false,
+            "title": "Standard deviation across time",
+            "description": "Standard deviation across time"
+          },
+          "Xstd": {
+            "type": "boolean",
+            "default": false,
+            "title": "Standard deviation across X axis",
+            "description": "Standard deviation across X axis"
+          },
+          "Ystd": {
+            "type": "boolean",
+            "default": false,
+            "title": "Standard deviation across Y axis",
+            "description": "Standard deviation across Y axis"
+          },
+          "Zstd": {
+            "type": "boolean",
+            "default": false,
+            "title": "Standard deviation across Z axis",
+            "description": "Standard deviation across Z axis"
+          },
+          "Tmax": {
+            "type": "boolean",
+            "default": false,
+            "title": "Max across time",
+            "description": "Max across time"
+          },
+          "Xmax": {
+            "type": "boolean",
+            "default": false,
+            "title": "Max across X axis",
+            "description": "Max across X axis"
+          },
+          "Ymax": {
+            "type": "boolean",
+            "default": false,
+            "title": "Max across Y axis",
+            "description": "Max across Y axis"
+          },
+          "Zmax": {
+            "type": "boolean",
+            "default": false,
+            "title": "Max across Z axis",
+            "description": "Max across Z axis"
+          },
+          "Tmaxn": {
+            "type": "boolean",
+            "default": false,
+            "title": "Time index of max across time",
+            "description": "Time index of max across time"
+          },
+          "Xmaxn": {
+            "type": "boolean",
+            "default": false,
+            "title": "X index of max across X axis",
+            "description": "X index of max across X axis"
+          },
+          "Ymaxn": {
+            "type": "boolean",
+            "default": false,
+            "title": "Y index of max across Y axis",
+            "description": "Y index of max across Y axis"
+          },
+          "Zmaxn": {
+            "type": "boolean",
+            "default": false,
+            "title": "Z index of max across Z axis",
+            "description": "Z index of max across Z axis"
+          },
+          "Tmin": {
+            "type": "boolean",
+            "default": false,
+            "title": "Min across time",
+            "description": "Min across time"
+          },
+          "Xmin": {
+            "type": "boolean",
+            "default": false,
+            "title": "Min across X axis",
+            "description": "Min across X axis"
+          },
+          "Ymin": {
+            "type": "boolean",
+            "default": false,
+            "title": "Min across Y axis",
+            "description": "Min across Y axis"
+          },
+          "Zmin": {
+            "type": "boolean",
+            "default": false,
+            "title": "Min across Z axis",
+            "description": "Min across Z axis"
+          },
+          "Tmedian": {
+            "type": "boolean",
+            "default": false,
+            "title": "Median across time",
+            "description": "Median across time"
+          },
+          "Xmedian": {
+            "type": "boolean",
+            "default": false,
+            "title": "Median across X axis",
+            "description": "Median across X axis"
+          },
+          "Ymedian": {
+            "type": "boolean",
+            "default": false,
+            "title": "Median across Y axis",
+            "description": "Median across Y axis"
+          },
+          "Zmedian": {
+            "type": "boolean",
+            "default": false,
+            "title": "Median across Z axis",
+            "description": "Median across Z axis"
+          },
+          "Tperc": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Percentile across time",
+            "description": "Nth percentile (0-100) of FULL RANGE across time"
+          },
+          "Xperc": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Percentile across X axis",
+            "description": "Nth percentile (0-100) of FULL RANGE across X axis"
+          },
+          "Yperc": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Percentile across Y axis",
+            "description": "Nth percentile (0-100) of FULL RANGE across Y axis"
+          },
+          "Zperc": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Percentile across Z axis",
+            "description": "Nth percentile (0-100) of FULL RANGE across Z axis"
+          },
+          "Tar1": {
+            "type": "boolean",
+            "default": false,
+            "title": "Temporal AR(1) coefficient",
+            "description": "Temporal AR(1) coefficient (use -odt float and probably demean first)"
+          },
+          "roi": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 6,
+                "maxItems": 6
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Zero outside ROI",
+            "description": "<xmin> <xsize> <ymin> <ysize> <zmin> <zsize> <tmin> <tsize>. Zero outside roi (using voxel coordinates). Inputting -1 for a size will set it to the full image extent for that dimension."
+          },
+          "bptf": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Bandpass temporal filtering",
+            "description": "<lowpass> <highpass>. Bandpass temporal filtering (use -odt float and probably demean first)"
+          },
+          "roc": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "ROC analysis",
+            "description": "<threshold> <output>. ROC analysis"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Operations to perform on input images"
+      },
+      "description": "Operations to perform on input images"
+    },
+    "output": {
+      "type": "string",
+      "title": "Output",
+      "description": "Output image file"
+    },
+    "output_datatype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output datatype",
+      "description": "Datatype used for the output image"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files",
+    "operations",
+    "output"
+  ]
+}

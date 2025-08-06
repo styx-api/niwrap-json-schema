@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Prepare surfaces for viewing in SUMA, tested with Caret-5.2 surfaces.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@SUMA_Make_Spec_Caret"
+    },
+    "subject_id": {
+      "type": "string",
+      "title": "Subject ID",
+      "description": "Subject ID for file naming"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Show help information"
+    },
+    "debug": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Level",
+      "description": "Print debug information along the way"
+    },
+    "echo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Echo Flag",
+      "description": "Turn shell echo on"
+    },
+    "surface_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Path",
+      "description": "Path to directory containing 'SURFACES' and AFNI volume used in creating the surfaces"
+    },
+    "side_labels_style": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Side Labels Style",
+      "description": "Naming style for Left, Right sides. Allowed values: 1 for L R LR style (default), 2 for LEFT RIGHT LR style, 3 for A B AB"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_id"
+  ]
+}

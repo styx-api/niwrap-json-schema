@@ -1,0 +1,277 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Converts a subcortical stats file created by recon-all and/or mri_segstats (e.g., aseg.stats) into a table.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "asegstats2table"
+    },
+    "subjects": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects",
+      "description": "List of subjects."
+    },
+    "inputs": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inputs",
+      "description": "List of input stat files."
+    },
+    "tablefile": {
+      "type": "string",
+      "title": "Output Table File",
+      "description": "The output table file."
+    },
+    "subjectsfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects File",
+      "description": "Name of the file which has the list of subjects (one subject per line)."
+    },
+    "qdec": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "QDEC Table",
+      "description": "Name of the qdec table which has the column of subjects ids (fsid)."
+    },
+    "qdec_long": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Longitudinal QDEC Table",
+      "description": "Name of the longitudinal qdec table with column of tp ids (fsid) and subject templates (fsid-base)."
+    },
+    "fsgd": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FSGD File",
+      "description": "Name of the FSGD file to extract subjects from."
+    },
+    "maxsegno": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Segmentation Number",
+      "description": "Specify the maximum segmentation number."
+    },
+    "segids_from_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation IDs from File",
+      "description": "Output only the segmentations present in the specified file."
+    },
+    "segno_include": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Include Segmentation IDs",
+      "description": "Include only the specified segmentation IDs."
+    },
+    "segno_exclude": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Exclude Segmentation IDs",
+      "description": "Exclude the specified segmentation IDs."
+    },
+    "measure": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Measure",
+      "description": "Measure to report: default is volume (alternative: mean, std)."
+    },
+    "delimiter": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delimiter",
+      "description": "Delimiter between measures in the table. Default is tab (alternative: comma, space, semicolon)."
+    },
+    "statsfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stats File",
+      "description": "Use specified stats file instead of 'aseg.stats'."
+    },
+    "subdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subdirectory",
+      "description": "Use specified subdir instead of 'stats/'."
+    },
+    "scale": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale Factor",
+      "description": "Scale factor for all values written to output file. Default is 1."
+    },
+    "write_etiv": {
+      "type": "boolean",
+      "default": false,
+      "title": "Write eTIV",
+      "description": "Report volume as percent estimated total intracranial volume."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Mode",
+      "description": "Increase verbosity for debugging purposes."
+    },
+    "transpose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Transpose Table",
+      "description": "Transpose the table: subjects in columns and segmentations in rows."
+    },
+    "common_segs_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Common Segmentations Flag",
+      "description": "Output only the segmentations common to all stats files."
+    },
+    "all_segs_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "All Segmentations Flag",
+      "description": "Output all segmentations in the stats files given."
+    },
+    "no_vol_extras_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Volume Extras Flag",
+      "description": "Do not include global volume measures like BrainSegVol."
+    },
+    "skip_missing_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip Missing Flag",
+      "description": "Skip subjects that do not have a stats file."
+    },
+    "replace53_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Replace 5.3 Names Flag",
+      "description": "Replace 5.3 structure names with later names."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "tablefile"
+  ]
+}

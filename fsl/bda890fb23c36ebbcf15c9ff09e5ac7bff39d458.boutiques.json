@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Splits parts of data for GPU processing",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "split_parts_gpu"
+    },
+    "datafile": {
+      "type": "string",
+      "title": "Data file",
+      "description": "Input data file"
+    },
+    "maskfile": {
+      "type": "string",
+      "title": "Mask file",
+      "description": "Input mask file"
+    },
+    "bvals_file": {
+      "type": "string",
+      "title": "bvals file",
+      "description": "bvals file"
+    },
+    "bvecs_file": {
+      "type": "string",
+      "title": "bvecs file",
+      "description": "bvecs file"
+    },
+    "grad_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gradient file",
+      "description": "Gradient file (can be null)"
+    },
+    "use_grad_file": {
+      "type": "integer",
+      "title": "Use gradient file",
+      "description": "Use gradient file (0 or 1)"
+    },
+    "total_num_parts": {
+      "type": "integer",
+      "title": "Total number of parts",
+      "description": "Total number of parts"
+    },
+    "output_directory": {
+      "type": "string",
+      "title": "Output directory",
+      "description": "Output directory"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "datafile",
+    "maskfile",
+    "bvals_file",
+    "bvecs_file",
+    "use_grad_file",
+    "total_num_parts",
+    "output_directory"
+  ]
+}

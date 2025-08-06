@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "TBSS processing for non-FA images",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "tbss_non_FA"
+    },
+    "concat_auto": {
+      "type": "boolean",
+      "default": false,
+      "title": "Auto-choose concatenation",
+      "description": "Auto-choose: single slices -> volume, volumes -> 4D (time series)."
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output file for merged images."
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input files",
+      "description": "Images to concatenate."
+    },
+    "concat_x": {
+      "type": "boolean",
+      "default": false,
+      "title": "Concatenate in x direction",
+      "description": "Concatenate images in the x direction."
+    },
+    "concat_y": {
+      "type": "boolean",
+      "default": false,
+      "title": "Concatenate in y direction",
+      "description": "Concatenate images in the y direction."
+    },
+    "concat_z": {
+      "type": "boolean",
+      "default": false,
+      "title": "Concatenate in z direction",
+      "description": "Concatenate images in the z direction."
+    },
+    "concat_t": {
+      "type": "boolean",
+      "default": false,
+      "title": "Concatenate in time",
+      "description": "Concatenate images in time."
+    },
+    "concat_tr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0,
+      "title": "Concatenate in time with TR set",
+      "description": "Concatenate images in time and set the output image TR (repetition time) to the final option value."
+    },
+    "volume_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volume Number",
+      "description": "Only use volume <N> from each input file (first volume is 0 not 1)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "output_file",
+    "input_files"
+  ]
+}

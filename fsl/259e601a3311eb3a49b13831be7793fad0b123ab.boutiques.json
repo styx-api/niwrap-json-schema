@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool to calculate distance maps using FSL",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "distancemap"
+    },
+    "input_image": {
+      "type": "string",
+      "title": "Input image",
+      "description": "Input image filename (calc distance to non-zero voxels)"
+    },
+    "output_image": {
+      "type": "string",
+      "title": "Output image",
+      "description": "Output image filename"
+    },
+    "mask_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask image",
+      "description": "Mask image filename (only calc values at these voxels)"
+    },
+    "second_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second image",
+      "description": "Second image filename (calc closest distance of this and primary input image, using non-zero voxels, negative distances mean this secondary image is the closer one)"
+    },
+    "local_maxima_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Local maxima image",
+      "description": "Local maxima output image filename"
+    },
+    "segmented_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmented image",
+      "description": "Segmented output image filename (unique value per segment is local maxima label)"
+    },
+    "invert_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Invert flag",
+      "description": "Invert input image"
+    },
+    "interpolate_values": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolate values",
+      "description": "Filename for values to interpolate (sparse sampling interpolation)"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Display help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image",
+    "output_image"
+  ]
+}

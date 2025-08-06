@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Processes whole hemisphere data for Jeans entorhinal subfield labeling project.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "exvivo-hemi-proc"
+    },
+    "flashdir": {
+      "type": "string",
+      "title": "Flash Directory",
+      "description": "Path to the FLASH data directory."
+    },
+    "outdir": {
+      "type": "string",
+      "title": "Output Directory",
+      "description": "Output directory where results will be saved."
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject Path",
+      "description": "Full path to the subject."
+    },
+    "left_hemi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Left Hemisphere Flag",
+      "description": "Process left hemisphere."
+    },
+    "right_hemi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Right Hemisphere Flag",
+      "description": "Process right hemisphere."
+    },
+    "suptent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Supratentorial Flag",
+      "description": "Indicate no tentorium (cblum and bstem) in the sample."
+    },
+    "no_rotate": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Rotate Flag",
+      "description": "Indicate rotation is not needed."
+    },
+    "t1thresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T1 Threshold",
+      "description": "T1 threshold, default is 415."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "Number of threads to use."
+    },
+    "check_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Only Flag",
+      "description": "Only perform check, without further processing."
+    },
+    "prep_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Prep Only Flag",
+      "description": "Only run up to manual rotation."
+    },
+    "mask_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mask Only Flag",
+      "description": "Only run up to creation of masks."
+    },
+    "samseg_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Samseg Only Flag",
+      "description": "Only run up to samseg."
+    },
+    "stop_mmppsp_after": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stop after step",
+      "description": "Stop processing after a specific step {tess,fix,preaparc,sphere,spherereg,white,pial}."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force Execution Flag",
+      "description": "Force the execution, overriding checks."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "flashdir",
+    "outdir",
+    "subject"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool to process 4dfp image files by zeroing values less than a given float threshold.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "zero_lt_4dfp"
+    },
+    "flt_value": {
+      "type": "number",
+      "title": "Float threshold",
+      "description": "Floating point threshold value. Values less than this in the 4dfp file will be zeroed."
+    },
+    "file_4dfp": {
+      "type": "string",
+      "title": "4dfp input file",
+      "description": "Input 4dfp file."
+    },
+    "outroot": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output root",
+      "description": "Output root name for 4dfp file. If not specified, defaults to input file root with 'z' appended."
+    },
+    "endianness": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Endianness",
+      "description": "Specify output endian format: 'b' for big endian or 'l' for little endian. Defaults to input endian."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "flt_value",
+    "file_4dfp"
+  ]
+}

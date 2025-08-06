@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool to calculate the total intracranial volume of a subject by summing individual volumes computed by samseg.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "sbtiv"
+    },
+    "input_file": {
+      "type": "string",
+      "title": "Input File",
+      "description": "Volume stats input file."
+    },
+    "output_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output File",
+      "description": "Intracranial stats output file."
+    },
+    "labels_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Labels File",
+      "description": "File containing a list of intracranial structure labelnames to include in the calculation"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file"
+  ]
+}

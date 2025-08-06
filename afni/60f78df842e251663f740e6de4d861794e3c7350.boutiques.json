@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Catenate files horizontally. Each line of output is the concatenation of each current line from the input files, all on the same line, separated by a space or a user-defined separator.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "column_cat"
+    },
+    "line_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Line number",
+      "description": "Print only the specified line number (1-based)"
+    },
+    "separator_string": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Separator string",
+      "description": "Use the specified string as a separator between columns"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input files",
+      "description": "Input files to be concatenated"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files"
+  ]
+}

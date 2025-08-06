@@ -1,0 +1,340 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Convert a DICOM file into another DICOM file.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "gdcmconv.fs"
+    },
+    "input_file": {
+      "type": "string",
+      "title": "Input File",
+      "description": "Input DICOM filename"
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output File",
+      "description": "Output DICOM filename"
+    },
+    "explicit_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Explicit Transfer Syntax Flag",
+      "description": "Change Transfer Syntax to explicit."
+    },
+    "implicit_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Implicit Transfer Syntax Flag",
+      "description": "Change Transfer Syntax to implicit."
+    },
+    "use_dict_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Dict Flag",
+      "description": "Use dict for VR (only public by default)."
+    },
+    "with_private_dict_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "With Private Dict Flag",
+      "description": "Use private dict for VR (advanced user only)."
+    },
+    "check_meta_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Meta Information Flag",
+      "description": "Check File Meta Information (advanced user only)."
+    },
+    "root_uid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Root UID",
+      "description": "Root UID."
+    },
+    "remove_gl_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Remove Group Length Flag",
+      "description": "Remove group length (deprecated in DICOM 2008)."
+    },
+    "remove_private_tags_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Remove Private Tags Flag",
+      "description": "Remove private tags."
+    },
+    "remove_retired_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Remove Retired Tags Flag",
+      "description": "Remove retired tags."
+    },
+    "apply_lut_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Apply LUT Flag",
+      "description": "Apply LUT (non-standard, advanced user only)."
+    },
+    "photometric_interpretation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Photometric Interpretation",
+      "description": "Change Photometric Interpretation (when possible)."
+    },
+    "raw_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Raw Decompression Flag",
+      "description": "Decompress image."
+    },
+    "deflated_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Deflated Compression Flag",
+      "description": "Compress using deflated (gzip)."
+    },
+    "jpeg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "JPEG Compression Flag",
+      "description": "Compress image in jpeg."
+    },
+    "j2k_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "J2K Compression Flag",
+      "description": "Compress image in j2k."
+    },
+    "jpegls_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "JPEG-LS Compression Flag",
+      "description": "Compress image in jpeg-ls."
+    },
+    "rle_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "RLE Compression Flag",
+      "description": "Compress image in rle (lossless only)."
+    },
+    "force_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force Flag",
+      "description": "Force decompression/merging before recompression/splitting."
+    },
+    "generate_icon_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Generate Icon Flag",
+      "description": "Generate icon."
+    },
+    "icon_minmax": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Icon Min/Max Values",
+      "description": "Min/Max value for icon."
+    },
+    "icon_auto_minmax_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Auto Compute Icon Min/Max Flag",
+      "description": "Automatically compute best Min/Max values for icon."
+    },
+    "compress_icon_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Compress Icon Flag",
+      "description": "Decide whether icon follows main Transfer Syntax or remains uncompressed."
+    },
+    "planar_configuration": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Planar Configuration",
+      "description": "Change planar configuration."
+    },
+    "lossy_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Lossy Compression Flag",
+      "description": "Use the lossy (if possible) compressor."
+    },
+    "split": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Split Fragments",
+      "description": "Write 2D image with multiple fragments (using max size)."
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "More verbose (warning+error)."
+    },
+    "warning_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Warning Info Flag",
+      "description": "Print warning info."
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Info Flag",
+      "description": "Print debug info."
+    },
+    "error_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Error Info Flag",
+      "description": "Print error info."
+    },
+    "quiet_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet Mode Flag",
+      "description": "Do not print to stdout."
+    },
+    "jpeg_quality": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "JPEG Quality",
+      "description": "Set JPEG quality."
+    },
+    "lossy_error": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "JPEG-LS Lossy Error",
+      "description": "Set JPEG-LS lossy error."
+    },
+    "rate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "J2K Rate",
+      "description": "Set J2K rate."
+    },
+    "j2k_quality": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "J2K Quality",
+      "description": "Set J2K quality."
+    },
+    "tile": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "J2K Tile Size",
+      "description": "Set J2K tile size."
+    },
+    "number_resolution": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Resolutions",
+      "description": "Set number of resolution."
+    },
+    "irreversible_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Irreversible Flag",
+      "description": "Set irreversible."
+    },
+    "ignore_errors_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore Errors Flag",
+      "description": "Convert even if file is corrupted (advanced users only, see disclaimers)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "output_file"
+  ]
+}

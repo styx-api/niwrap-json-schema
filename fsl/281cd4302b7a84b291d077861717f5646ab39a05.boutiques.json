@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Reordering of the dyadic vectors and fsamples according to average inter-subject modal orientations",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "swap_subjectwise"
+    },
+    "dyads": {
+      "type": "string",
+      "title": "List of dyads",
+      "description": "List of list of dyads"
+    },
+    "fmean": {
+      "type": "string",
+      "title": "List of mean fsamples",
+      "description": "List of list of mean fsamples"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brain mask",
+      "description": "Filename of brain mask"
+    },
+    "obasename": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output obasename",
+      "description": "Output obasename [default=swapped]"
+    },
+    "xthresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "A.R.D. threshold",
+      "description": "A.R.D. threshold - default=0.1"
+    },
+    "averageonly_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Average only flag",
+      "description": "Average only?"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Switch on diagnostic messages"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dyads",
+    "fmean"
+  ]
+}

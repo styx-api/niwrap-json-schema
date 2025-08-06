@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Generate a script to apply 3dTfitter to deconvolve an MRI signal (BOLD response curve) into a neuro response curve.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "neuro_deconvolve.py"
+    },
+    "input_file": {
+      "type": "string",
+      "title": "Input dataset",
+      "description": "Set the data to deconvolve"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Set the prefix for output filenames"
+    },
+    "script": {
+      "type": "string",
+      "title": "Output script name",
+      "description": "Specify the name of the output script"
+    },
+    "kernel": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Response kernel",
+      "description": "Set the response kernel"
+    },
+    "kernel_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Kernel file",
+      "description": "Set the filename to store the kernel in; should be at the upsampled TR"
+    },
+    "mask_dset": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask dataset",
+      "description": "Set a mask dataset for 3dTfitter to use"
+    },
+    "old_style": {
+      "type": "boolean",
+      "default": false,
+      "title": "Old style script",
+      "description": "Make old-style script (pre-2015.02.24) for 1D case"
+    },
+    "tr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scanner TR",
+      "description": "Set the scanner TR; needed for 1D formatted input files"
+    },
+    "tr_nup": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "TR upsample factor",
+      "description": "Upsample factor for TR; number of pieces each original TR is divided into"
+    },
+    "verbosity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose level",
+      "description": "Set the verbose level"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "prefix",
+    "script"
+  ]
+}

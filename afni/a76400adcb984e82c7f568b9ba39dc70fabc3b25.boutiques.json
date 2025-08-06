@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program computes a local histogram at each voxel in the input datasets.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dLocalHistog"
+    },
+    "nbhd_option": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Neighborhood String",
+      "description": "Defines the region around each voxel to be used for the statistics calculation. Available formats: 'SPHERE(r)', 'RECT(a,b,c)', 'RHDD(a)', 'TOHD(a)'."
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Use string 'ppp' as the prefix for the output dataset."
+    },
+    "hsave": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Histogram Save File",
+      "description": "Save the overall histogram into file 'sss'. This file will have 2 columns: value and count."
+    },
+    "lab_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label File",
+      "description": "Use file 'LL' as a label file."
+    },
+    "exclude": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Exclude Values",
+      "description": "Exclude values from 'a' to 'b' from the counting. This option can be used more than once."
+    },
+    "exc_nonlab": {
+      "type": "boolean",
+      "default": false,
+      "title": "Exclude Non-Labeled Values Flag",
+      "description": "If '-lab_file' is used, then exclude all values that are NOT in the label file (except for 0)."
+    },
+    "mincount": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Count",
+      "description": "Exclude values which appear in the overall histogram fewer than 'mm' times."
+    },
+    "probability": {
+      "type": "boolean",
+      "default": false,
+      "title": "Probability Flag",
+      "description": "Convert each count to a probability by dividing by the total number of counts at each voxel."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet Flag",
+      "description": "Stop the highly informative progress reports."
+    },
+    "input_datasets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Datasets",
+      "description": "Input dataset(s) for the 3dLocalHistog tool"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix",
+    "input_datasets"
+  ]
+}

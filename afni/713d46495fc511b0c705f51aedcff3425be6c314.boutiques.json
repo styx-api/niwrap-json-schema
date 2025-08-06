@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Beta version of updating 3ddot, currently only performing eta2 tests and outputting a full matrix to a text file.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3ddot_beta"
+    },
+    "input_file": {
+      "type": "string",
+      "title": "Input file",
+      "description": "Input file with N bricks"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Prefix",
+      "description": "Output prefix for the result file"
+    },
+    "doeta2": {
+      "type": "boolean",
+      "default": false,
+      "title": "Doeta2 Flag",
+      "description": "Required flag for performing eta2 tests"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Optional mask file within which to take values"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "prefix"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Trains GCA data with multiple subjects for FreeSurfer",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_rf_long_train"
+    },
+    "seg_dir": {
+      "type": "string",
+      "title": "Segmentation Directory",
+      "description": "Path to the segmentation volume directory, relative to $subject/mri."
+    },
+    "xform": {
+      "type": "string",
+      "title": "Atlas Transform",
+      "description": "Atlas transform path relative to $subject/mri/transforms."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Volume",
+      "description": "Volume name to use as a mask, path relative to $subject/mri."
+    },
+    "node_spacing": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Node Spacing",
+      "description": "Spacing of classifiers in canonical space."
+    },
+    "prior_spacing": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prior Spacing",
+      "description": "Spacing of class priors in canonical space."
+    },
+    "input_data": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Data",
+      "description": "Specify training data, path relative to $subject/mri. Can specify multiple inputs. Defaults to 'orig' if not specified."
+    },
+    "check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sanity Check Flag",
+      "description": "Conduct sanity-check of labels for obvious edit errors."
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Subjects",
+      "description": "List of subjects for training."
+    },
+    "output_rfa": {
+      "type": "string",
+      "title": "Output RFA Filename",
+      "description": "Output RFA filename."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "seg_dir",
+    "xform",
+    "subjects",
+    "output_rfa"
+  ]
+}

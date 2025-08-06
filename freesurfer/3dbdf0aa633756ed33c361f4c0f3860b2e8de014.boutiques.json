@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Trains GCA data with multiple subjects using provided segmentation volumes and other configuration.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_ca_train"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Subjects",
+      "description": "List of subject directories under the SUBJECTS_DIR. Each is a path relative to the subject's MRI directory."
+    },
+    "output_gca": {
+      "type": "string",
+      "title": "Output GCA filename",
+      "description": "Output GCA file name."
+    },
+    "segmentation": {
+      "type": "string",
+      "title": "Segmentation Volume Directory",
+      "description": "Segmentation volume directory relative to each subject's MRI path."
+    },
+    "transform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlas Transform Path",
+      "description": "Atlas transform path relative to each subject's MRI transforms directory."
+    },
+    "mask_volume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Volume Name",
+      "description": "Volume name used as a mask, path relative to each subject's MRI directory."
+    },
+    "node_spacing": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Node Spacing",
+      "description": "Spacing of classifiers in canonical space"
+    },
+    "prior_spacing": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prior Spacing",
+      "description": "Spacing of class priors in canonical space"
+    },
+    "input_training": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Training Data",
+      "description": "Specifying training data, path relative to each subject's MRI directory. Can specify multiple inputs."
+    },
+    "symmetrize": {
+      "type": "boolean",
+      "default": false,
+      "title": "Symmetrize Flag",
+      "description": "Symmetrize the atlas after creation"
+    },
+    "makesym": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Make Symmetrized GCA",
+      "description": "Symmetrize an already existing atlas. Specify input GCA and symmetrized GCA."
+    },
+    "check_symmetry": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Check Symmetry",
+      "description": "Check the symmetry of an already existing atlas. Specify input GCA and symmetrized GCA."
+    },
+    "sanity_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sanity Check Flag",
+      "description": "Conduct sanity-check of labels for obvious edit errors"
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Threads",
+      "description": "Specify number of threads to use (also known as -nthreads)"
+    },
+    "done_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Done File",
+      "description": "Create DoneFile when done (contents: 0=ok, 1=error)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subjects",
+    "output_gca",
+    "segmentation"
+  ]
+}

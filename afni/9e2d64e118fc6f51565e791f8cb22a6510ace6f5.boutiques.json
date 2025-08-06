@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Converts 3 sub-bricks of input to an RGB-valued dataset.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dThreetoRGB"
+    },
+    "output_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output prefix",
+      "description": "Write output into dataset with specified prefix"
+    },
+    "scale_factor": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale factor",
+      "description": "Multiply input values by this factor before using as RGB"
+    },
+    "mask_dataset": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask dataset",
+      "description": "Only output nonzero values where the mask dataset is nonzero"
+    },
+    "fim": {
+      "type": "boolean",
+      "default": false,
+      "title": "FIM flag",
+      "description": "Write result as a 'fim' type dataset (default behavior)"
+    },
+    "anat": {
+      "type": "boolean",
+      "default": false,
+      "title": "Anatomical flag",
+      "description": "Write result as a anatomical type dataset"
+    },
+    "input_dataset": {
+      "type": "string",
+      "title": "Input dataset",
+      "description": "Input dataset or first dataset if three datasets are provided"
+    },
+    "input_dataset2": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second input dataset",
+      "description": "Second dataset, required only if three datasets are provided"
+    },
+    "input_dataset3": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Third input dataset",
+      "description": "Third dataset, required only if three datasets are provided"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_dataset"
+  ]
+}

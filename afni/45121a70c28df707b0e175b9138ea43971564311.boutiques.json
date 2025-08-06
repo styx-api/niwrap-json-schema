@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program makes a directionally encoded color (DEC) map for DTI results.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "fat_proc_decmap"
+    },
+    "in_fa": {
+      "type": "string",
+      "title": "Input FA",
+      "description": "Input FA (scalar) map."
+    },
+    "in_v1": {
+      "type": "string",
+      "title": "Input V1",
+      "description": "Input first eigenvector (3-vector) map."
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Prefix",
+      "description": "Set prefix (and path) for output DWI data."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask",
+      "description": "Optional mask for picking out a region. Otherwise, only places with FA>0 are given coloration."
+    },
+    "fa_thr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FA Threshold",
+      "description": "For QC1 type of DEC images, use FFF to threshold where DEC values are calculated (default: 0.2)."
+    },
+    "fa_sca": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FA Scale",
+      "description": "For QC2 type of DEC images, use SSS to scale the FA weighting of what would otherwise be a 'classical' DEC map (default: 0.7)."
+    },
+    "workdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Working Directory",
+      "description": "Specify a working directory, which can be removed (default: '__WORKING_decmap')."
+    },
+    "no_clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Clean",
+      "description": "Do not delete temporary files when finishing."
+    },
+    "qc_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "QC Prefix",
+      "description": "Set the prefix of the QC image files (default: 'PREFIX')."
+    },
+    "no_cmd_out": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Command Output",
+      "description": "Do not save the command line call of this program and location where it was run."
+    },
+    "no_qc_view": {
+      "type": "boolean",
+      "default": false,
+      "title": "No QC View",
+      "description": "Turn off generating QC image files."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in_fa",
+    "in_v1",
+    "prefix"
+  ]
+}

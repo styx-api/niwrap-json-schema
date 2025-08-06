@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Runs FSL epi_reg script for simultaneous coregistration and fieldmap unwarping.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "epi_reg"
+    },
+    "epi": {
+      "type": "string",
+      "title": "Epi",
+      "description": "EPI Nifti image."
+    },
+    "t1_head": {
+      "type": "string",
+      "title": "T1 head",
+      "description": "Wholehead T1 image."
+    },
+    "t1_brain": {
+      "type": "string",
+      "title": "T1 brain",
+      "description": "Brain-extracted T1 image."
+    },
+    "out_base_name": {
+      "type": "string",
+      "title": "Output files base name",
+      "description": "Output base name."
+    },
+    "echospacing": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Echospacing",
+      "description": "Effective epi echo spacing (sometimes called dwell time) - in seconds."
+    },
+    "fmap": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fmap",
+      "description": "Fieldmap image (in rad/s)."
+    },
+    "fmapmag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fmapmag",
+      "description": "Fieldmap magnitude image - wholehead."
+    },
+    "fmapmagbrain": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fmapmagbrain",
+      "description": "Fieldmap magnitude image - brain extracted."
+    },
+    "no_clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "No clean",
+      "description": "Do not clean up intermediate files."
+    },
+    "no_fmapreg": {
+      "type": "boolean",
+      "default": false,
+      "title": "No fmapreg",
+      "description": "Do not perform registration of fmap to t1 (use if fmap already registered)."
+    },
+    "pedir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pedir",
+      "description": "'x' or 'y' or 'z' or '-x' or '-y' or '-z'. Phase encoding direction, dir = x/y/z/-x/-y/-z."
+    },
+    "weight_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Weight image",
+      "description": "Weighting image (in t1 space)."
+    },
+    "wmseg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Wmseg",
+      "description": "White matter segmentation of t1 image, has to be named                  like the t1brain and end on _wmseg."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "epi",
+    "t1_head",
+    "t1_brain",
+    "out_base_name"
+  ]
+}

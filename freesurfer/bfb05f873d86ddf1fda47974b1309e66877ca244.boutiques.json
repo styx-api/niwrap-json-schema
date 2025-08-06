@@ -1,0 +1,277 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "DMRI training tool for processing diffusion MRI data in FreeSurfer",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "dmri_train"
+    },
+    "slist": {
+      "type": "string",
+      "title": "Subject list file",
+      "description": "Text file with list of training subject directories"
+    },
+    "trk_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input .trk files",
+      "description": "Name(s) of input .trk file(s), one per path"
+    },
+    "rois": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tract labeling ROI files",
+      "description": "Optional, names of input tract labeling ROIs, two per path"
+    },
+    "seg": {
+      "type": "string",
+      "title": "Aparc+aseg volume",
+      "description": "Name of input aparc+aseg volume"
+    },
+    "cmask": {
+      "type": "string",
+      "title": "Cortex mask volume",
+      "description": "Name of input cortex mask volume"
+    },
+    "lmask": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "title": "Label ID for cortex mask",
+      "description": "Add a label ID from aparc+aseg to cortex mask, one per path"
+    },
+    "bmask_training": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Brain mask volumes for training",
+      "description": "Input brain mask volume(s)"
+    },
+    "outtrk": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Output pre-sorted .trk files",
+      "description": "Name(s) of output, pre-sorted .trk file(s), one per path"
+    },
+    "bmask_test": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Brain mask volumes for test subject",
+      "description": "Input brain mask volume(s) for test subject"
+    },
+    "fa": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FA volumes",
+      "description": "Input FA volume(s) for test subject"
+    },
+    "reg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Affine registration",
+      "description": "Affine registration from atlas to base space"
+    },
+    "regnl": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Nonlinear registration",
+      "description": "Nonlinear registration from atlas to base space"
+    },
+    "refnl": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Nonlinear registration source reference",
+      "description": "Nonlinear registration source reference volume"
+    },
+    "basereg": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Base to FA affine registration",
+      "description": "Affine registration(s) from base to FA volume(s)"
+    },
+    "baseref": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Base reference volume",
+      "description": "Base space reference volume"
+    },
+    "ncpts": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "title": "Control points for initial spline",
+      "description": "Number of control points for initial spline"
+    },
+    "max_streamlines": {
+      "type": "number",
+      "title": "Max training streamlines",
+      "description": "Maximum number of training streamlines to keep per path"
+    },
+    "xstr": {
+      "type": "boolean",
+      "default": false,
+      "title": "Exclude center streamlines",
+      "description": "Exclude previously chosen center streamline(s)"
+    },
+    "aprior": {
+      "type": "boolean",
+      "default": false,
+      "title": "Anatomy priors",
+      "description": "Compute priors on underlying anatomy"
+    },
+    "sprior": {
+      "type": "boolean",
+      "default": false,
+      "title": "Shape priors",
+      "description": "Compute priors on shape"
+    },
+    "trunc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use truncated streamlines",
+      "description": "Use all training streamlines, truncated or not"
+    },
+    "out_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Output base names",
+      "description": "Base name(s) of output(s) for test subject, one per path"
+    },
+    "outdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output directory",
+      "description": "Output directory"
+    },
+    "cptdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Control points output directory",
+      "description": "Output directory for control points in test subject's space"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug mode",
+      "description": "Turn on debugging"
+    },
+    "checkopts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check options",
+      "description": "Don't run anything, just check options and exit"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Print out information on how to use this program"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Print out version and exit"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "slist",
+    "trk_files",
+    "seg",
+    "cmask",
+    "lmask",
+    "bmask_training",
+    "outtrk",
+    "bmask_test",
+    "ncpts",
+    "max_streamlines",
+    "out_files"
+  ]
+}

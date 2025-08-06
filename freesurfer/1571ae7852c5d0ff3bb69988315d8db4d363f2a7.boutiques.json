@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool for extracting surface measurements from diffusion MRI data.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "dmri_extractSurfaceMeasurements"
+    },
+    "streamline_file": {
+      "type": "string",
+      "title": "Streamline File",
+      "description": "Streamline file in .trk format"
+    },
+    "lh_surface_file": {
+      "type": "string",
+      "title": "Left Hemisphere Surface File",
+      "description": "Left hemisphere surface file"
+    },
+    "lh_thickness_overlay": {
+      "type": "string",
+      "title": "Left Hemisphere Thickness Overlay",
+      "description": "Left hemisphere thickness overlay file"
+    },
+    "lh_curvature_overlay": {
+      "type": "string",
+      "title": "Left Hemisphere Curvature Overlay",
+      "description": "Left hemisphere curvature overlay file"
+    },
+    "rh_surface_file": {
+      "type": "string",
+      "title": "Right Hemisphere Surface File",
+      "description": "Right hemisphere surface file"
+    },
+    "rh_thickness_overlay": {
+      "type": "string",
+      "title": "Right Hemisphere Thickness Overlay",
+      "description": "Right hemisphere thickness overlay file"
+    },
+    "rh_curvature_overlay": {
+      "type": "string",
+      "title": "Right Hemisphere Curvature Overlay",
+      "description": "Right hemisphere curvature overlay file"
+    },
+    "output_directory": {
+      "type": "string",
+      "title": "Output Directory",
+      "description": "Output directory"
+    },
+    "reference_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference Image",
+      "description": "Reference image for situations where FA is not used"
+    },
+    "reference_image_anatomical": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference Image for Anatomical Space",
+      "description": "Reference image for anatomical space when diffusion and anatomical spaces are not registered"
+    },
+    "transformation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transformation File",
+      "description": "Transformation from diffusion to anatomical space"
+    },
+    "annotation_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Annotation File",
+      "description": "Annotation file"
+    },
+    "fa_options": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FA Options",
+      "description": "FA options including the number of files and their respective paths"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "streamline_file",
+    "lh_surface_file",
+    "lh_thickness_overlay",
+    "lh_curvature_overlay",
+    "rh_surface_file",
+    "rh_thickness_overlay",
+    "rh_curvature_overlay",
+    "output_directory"
+  ]
+}

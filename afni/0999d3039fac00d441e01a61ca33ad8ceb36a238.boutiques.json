@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool to clip regions of a volume in various ways, such as above/below certain coordinates or within a specified box.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@clip_volume"
+    },
+    "input_volume": {
+      "type": "string",
+      "title": "Input Volume",
+      "description": "Volume to clip"
+    },
+    "below_zmm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Below Zmm",
+      "description": "Set to 0 slices below Zmm"
+    },
+    "above_zmm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Above Zmm",
+      "description": "Set to 0 slices above Zmm"
+    },
+    "left_xmm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Left Xmm",
+      "description": "Set to 0 slices left of Xmm"
+    },
+    "right_xmm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Right Xmm",
+      "description": "Set to 0 slices right of Xmm"
+    },
+    "anterior_ymm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Anterior Ymm",
+      "description": "Set to 0 slices anterior to Ymm"
+    },
+    "posterior_ymm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Posterior Ymm",
+      "description": "Set to 0 slices posterior to Ymm"
+    },
+    "box": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Box Clipping",
+      "description": "Clip the volume to a box centered at Cx, Cy, Cz (RAI mm), and of dimensions Dx Dy Dz (RAI mm)."
+    },
+    "mask_box": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Box Clipping",
+      "description": "Set all values inside the box to 1. Box centered at Cx, Cy, Cz (RAI mm), and of dimensions Dx Dy Dz (RAI mm)."
+    },
+    "and_logic": {
+      "type": "boolean",
+      "default": false,
+      "title": "And Logic",
+      "description": "Combine with next clipping planes using 'and'."
+    },
+    "or_logic": {
+      "type": "boolean",
+      "default": false,
+      "title": "Or Logic",
+      "description": "Combine with next clipping planes using 'or'."
+    },
+    "verbosity": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbosity Flag",
+      "description": "Show command details (verbose output)."
+    },
+    "crop_allzero": {
+      "type": "boolean",
+      "default": false,
+      "title": "Crop Allzero",
+      "description": "Crop the output volume with 3dAutobox -noclust."
+    },
+    "crop_greedy": {
+      "type": "boolean",
+      "default": false,
+      "title": "Crop Greedy",
+      "description": "Crop the output volume with 3dAutobox."
+    },
+    "crop": {
+      "type": "boolean",
+      "default": false,
+      "title": "Crop",
+      "description": "Same as -crop_greedy, kept for backward compatibility."
+    },
+    "crop_npad": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Crop Npad",
+      "description": "Set 3dAutobox's -npad option to NPAD. NPAD fattens the volume a little after cropping."
+    },
+    "output_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Output prefix for the resultant volume. Default is the input prefix with _clp suffixed to it."
+    },
+    "followers": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Followers",
+      "description": "Apply the same clipping or cropping treatment to the follower datasets."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume"
+  ]
+}

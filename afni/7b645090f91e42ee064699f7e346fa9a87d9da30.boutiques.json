@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Convert a DTIStudio Fiber file to a SUMA segment file",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "DTIStudioFibertoSegments"
+    },
+    "dataset": {
+      "type": "string",
+      "title": "Dataset file",
+      "description": "Input dataset file"
+    },
+    "output_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output file",
+      "description": "Name of the output file (default is rawxyzseg.dat)"
+    },
+    "swap_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Swap bytes flag",
+      "description": "Swap bytes in data"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset"
+  ]
+}

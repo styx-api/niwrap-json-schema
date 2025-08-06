@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Automated segmentation tool for T1 and T2 weighted images to estimate the Alveus.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "run_segmentSubjectT1T2_autoEstimateAlveusML.sh"
+    },
+    "deployed_mcr_root": {
+      "type": "string",
+      "title": "Deployed MCR root",
+      "description": "Root directory for the deployed MATLAB Compiler Runtime (MCR)."
+    },
+    "additional_args": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Additional Arguments",
+      "description": "Additional command-line arguments for the underlying processing tool."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "deployed_mcr_root"
+  ]
+}

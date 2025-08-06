@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Front-end for MINC's mritotal. Computes the Talairach transform for mapping the input volume to the MNI305 space.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "segment_subject_sc"
+    },
+    "invol": {
+      "type": "string",
+      "title": "Input Volume",
+      "description": "Input volume"
+    },
+    "outxfm": {
+      "type": "string",
+      "title": "Output XFM File",
+      "description": "Output xfm file"
+    },
+    "log": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "outdir/talarach.log",
+      "title": "Log File",
+      "description": "Log file. Default is outdir/talarach.log"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Turn on debugging"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "invol",
+    "outxfm"
+  ]
+}

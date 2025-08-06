@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Process T1w anatomical images to generate an imitation T2w-contrast image",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "fat_proc_imit2w_from_t1w"
+    },
+    "t1_file": {
+      "type": "string",
+      "title": "Input T1w File",
+      "description": "Full name of the input T1w volume"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Output prefix for files and snapshots"
+    },
+    "workdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Working Directory",
+      "description": "Specify a working directory, which can be removed (default: __WORKING_imit2w_from_t1w)"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pre-skullstripped Mask",
+      "description": "Optional input of a pre-skullstripped T1_FILE (either mask or skull-stripped volume)"
+    },
+    "ss_blur_fwhm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Skull Strip Blur FWHM",
+      "description": "Optional, add in blurring during the 3dSkullStrip part (in mm, default: 2 FWHM)"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Clean",
+      "description": "Optional switch to NOT remove working directory '__WORKING_imit2w_from_t1w' (default: remove working dir)"
+    },
+    "no_qc_view": {
+      "type": "boolean",
+      "default": false,
+      "title": "No QC View",
+      "description": "Turn off the automatic creation of QC montages (default: on)"
+    },
+    "qc_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "QC Image Prefix",
+      "description": "Change the prefix of the QC images (default: use prefix of volumes)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "t1_file",
+    "prefix"
+  ]
+}

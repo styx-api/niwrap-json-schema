@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A front-end tool for FSL's FLIRT that computes a rigid registration matrix and resamples the input volume to the reference volume.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "fsl_rigid_register"
+    },
+    "refvol": {
+      "type": "string",
+      "title": "Reference Volume",
+      "description": "Reference/Target volume."
+    },
+    "inputvol": {
+      "type": "string",
+      "title": "Input Volume",
+      "description": "Input/Moveable volume."
+    },
+    "outputvol": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Input resampled to reference."
+    },
+    "fslmat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FSL Matrix File",
+      "description": "Specifies explicitly where to store the FSL registration matrix."
+    },
+    "regmat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Register Matrix File",
+      "description": "Get registration matrix in register.dat file format."
+    },
+    "xfmmat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "MNI XFM File",
+      "description": "Get registration matrix as MNI xfm file."
+    },
+    "ltamat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "MGH LTA File",
+      "description": "Get registration matrix as MGH lta file."
+    },
+    "noinitgeom": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Initial Geometry Flag",
+      "description": "Do not initialize matrix based on geometry."
+    },
+    "applyxfm": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Apply Transformation File",
+      "description": "Apply a transformation file to the input without registration."
+    },
+    "applyinitxfm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Apply Initial Transformation Flag",
+      "description": "Apply initial transformation to the input without registration."
+    },
+    "initxfm": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Transformation File",
+      "description": "Use this as an initial matrix for registration."
+    },
+    "maxangle": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Angle",
+      "description": "Only search over +/- max angle degrees."
+    },
+    "interp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolation Method",
+      "description": "Interpolation method: trilinear, nearestneighbour, sinc."
+    },
+    "dof": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Degrees of Freedom",
+      "description": "Use degrees of freedom instead of 6."
+    },
+    "bins": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bins",
+      "description": "Number of bins to use (default 256)."
+    },
+    "cost": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Objective Function",
+      "description": "Objective function: mutualinfo, corratio (default), normcorr, normmi, leastsq."
+    },
+    "tmpdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Temporary Directory",
+      "description": "Specify temporary directory."
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cleanup Flag",
+      "description": "Do not delete temporary files."
+    },
+    "cleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cleanup Flag",
+      "description": "Delete temporary files (default)."
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject",
+      "description": "Only puts it in the register.dat file."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Print version and exit."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Print help and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "refvol",
+    "inputvol",
+    "outputvol"
+  ]
+}

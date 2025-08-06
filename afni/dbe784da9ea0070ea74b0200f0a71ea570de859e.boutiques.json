@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool to extract information from BIDS formatted json files.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "abids_json_info.py"
+    },
+    "json_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "JSON files",
+      "description": "Specify .json file(s)."
+    },
+    "tr_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "TR flag",
+      "description": "Print the TR from the json file in seconds, from the 'RepetitionTime' field."
+    },
+    "te_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "TE flag",
+      "description": "Print out the 'EchoTime' field in milliseconds (the json file stores it in seconds)."
+    },
+    "te_sec_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "TE seconds flag",
+      "description": "Print the 'EchoTime' field in seconds."
+    },
+    "match_nii_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Match NII flag",
+      "description": "Check if there is a .nii or .nii.gz file that matches the .json file (1 if the dataset is loadable)."
+    },
+    "field_list": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Field list",
+      "description": "Print any field or list of fields from the json file."
+    },
+    "list_fields_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "List fields flag",
+      "description": "Print a list of the available fields from the .json file. This must be the only argument specified."
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Show this help message and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "json_files"
+  ]
+}

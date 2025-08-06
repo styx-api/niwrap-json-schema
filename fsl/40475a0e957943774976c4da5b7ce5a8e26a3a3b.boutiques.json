@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool to convert a T-statistic image to a Z-statistic image",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "ttoz"
+    },
+    "varsfile": {
+      "type": "string",
+      "title": "Variables file",
+      "description": "Input variables file"
+    },
+    "cbsfile": {
+      "type": "string",
+      "title": "CBS file",
+      "description": "Input CBS file"
+    },
+    "dof": {
+      "type": "integer",
+      "title": "Degrees of freedom",
+      "description": "Degrees of freedom"
+    },
+    "outputvol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output volume",
+      "description": "Output volume name (default is zstats)"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Display help information"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "varsfile",
+    "cbsfile",
+    "dof"
+  ]
+}

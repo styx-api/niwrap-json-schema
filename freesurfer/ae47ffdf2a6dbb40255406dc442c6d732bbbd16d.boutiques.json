@@ -1,0 +1,664 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Resample one surface onto another using FreeSurfer",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_surf2surf"
+    },
+    "src_subject": {
+      "type": "string",
+      "title": "Source Subject",
+      "description": "Name of source subject as found in $SUBJECTS_DIR or ico for icosahedron."
+    },
+    "sval_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Value File",
+      "description": "Path of the file with input values."
+    },
+    "sval_xyz": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Value XYZ Surface",
+      "description": "Use xyz of a surface as input."
+    },
+    "projfrac": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Frac",
+      "description": "Use projected xyz of a surface as input."
+    },
+    "projabs": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Absolute",
+      "description": "Use projected xyz absolute of a surface as input."
+    },
+    "sval_tal_xyz": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Value Tal XYZ Surface",
+      "description": "Use tal xyz of a surface as input."
+    },
+    "sval_area": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Value Area Surface",
+      "description": "Use vertex area of a surface as input."
+    },
+    "sval_annot": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Value Annot File",
+      "description": "Map annotation file."
+    },
+    "sval_nxyz": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Value NXyZ Surface",
+      "description": "Use surface normals of a surface as input."
+    },
+    "patch": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Patch",
+      "description": "Specify source patch file, target surface and number of dilations."
+    },
+    "sfmt": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Format",
+      "description": "Source format type string."
+    },
+    "reg": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Register",
+      "description": "Apply registration file to sval-xyz."
+    },
+    "reg_inv": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inverse Register",
+      "description": "Apply inverse registration file to sval-xyz."
+    },
+    "srcicoorder": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Ico Order",
+      "description": "Icosahedron order for the source."
+    },
+    "trg_subject": {
+      "type": "string",
+      "title": "Target Subject",
+      "description": "Name of target subject as found in $SUBJECTS_DIR or ico for icosahedron."
+    },
+    "trgicoorder": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Ico Order",
+      "description": "Icosahedron order for the target."
+    },
+    "tval_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Value File",
+      "description": "Path of the file in which to store output values."
+    },
+    "tval_xyz": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Value XYZ Volume",
+      "description": "Save target value as a surface file with source xyz."
+    },
+    "tfmt": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Format",
+      "description": "Target format type string."
+    },
+    "trg_dist": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Distance File",
+      "description": "Save distance from source to target vertices."
+    },
+    "s": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Single Subject",
+      "description": "Use the same subject for both source and target."
+    },
+    "hemi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hemisphere",
+      "description": "Hemisphere for both source and target (lh or rh)."
+    },
+    "src_hemi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Hemisphere",
+      "description": "Hemisphere for source (lh or rh)."
+    },
+    "trg_hemi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Hemisphere",
+      "description": "Hemisphere for target (lh or rh)."
+    },
+    "dual_hemi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dual Hemisphere Flag",
+      "description": "Assume source ?h.?h.surfreg file name."
+    },
+    "jac": {
+      "type": "boolean",
+      "default": false,
+      "title": "Jacobian Correction Flag",
+      "description": "Turn on jacobian correction, needed when applying to area or volume."
+    },
+    "surfreg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Registration",
+      "description": "Surface registration for source and target (sphere.reg)."
+    },
+    "src_surfreg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Surface Registration",
+      "description": "Source surface registration (sphere.reg)."
+    },
+    "trg_surfreg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Surface Registration",
+      "description": "Target surface registration (sphere.reg)."
+    },
+    "mapmethod": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mapping Method",
+      "description": "Method used to map from the vertices in one subject to another (nnfr or nnf)."
+    },
+    "frame": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Frame Number",
+      "description": "Save only nth frame (when using paint output format)."
+    },
+    "fwhm_src": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM Source",
+      "description": "Smooth the source to given FWHM."
+    },
+    "fwhm_trg": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM Target",
+      "description": "Smooth the target to given FWHM."
+    },
+    "nsmooth_in": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Smoothing Iterations",
+      "description": "Number of smoothing iterations for input."
+    },
+    "nsmooth_out": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Smoothing Iterations",
+      "description": "Number of smoothing iterations for output."
+    },
+    "cortex": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cortex Flag",
+      "description": "Use ?h.cortex.label as a smoothing mask."
+    },
+    "no_cortex": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cortex Flag",
+      "description": "Do NOT use ?h.cortex.label as a smoothing mask (default)."
+    },
+    "label_src": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Source",
+      "description": "Source smoothing mask."
+    },
+    "label_trg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Target",
+      "description": "Target smoothing mask."
+    },
+    "mul": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Multiply Input",
+      "description": "Multiply the input by the given value."
+    },
+    "div": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Divide Input",
+      "description": "Divide the input by the given value."
+    },
+    "reshape": {
+      "type": "boolean",
+      "default": false,
+      "title": "Reshape Flag",
+      "description": "Reshape output to multiple 'slices'."
+    },
+    "reshape_factor": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reshape Slices Factor",
+      "description": "Reshape to Nfactor 'slices'."
+    },
+    "reshape3d": {
+      "type": "boolean",
+      "default": false,
+      "title": "Reshape 3D Flag",
+      "description": "Reshape fsaverage (ico7) into 42 x 47 x 83."
+    },
+    "split": {
+      "type": "boolean",
+      "default": false,
+      "title": "Split Output Flag",
+      "description": "Output each frame separately."
+    },
+    "synth": {
+      "type": "boolean",
+      "default": false,
+      "title": "Synthesize Input Flag",
+      "description": "Replace input with white Gaussian noise."
+    },
+    "ones": {
+      "type": "boolean",
+      "default": false,
+      "title": "Replace with Ones Flag",
+      "description": "Replace input with 1s."
+    },
+    "normvar": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normalize Variance Flag",
+      "description": "Rescale so that stddev=1 (good with --synth)."
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Synthesize Seed",
+      "description": "Seed for synth (default is auto)."
+    },
+    "prune": {
+      "type": "boolean",
+      "default": false,
+      "title": "Prune Zero Voxels Flag",
+      "description": "Remove any voxel that is zero in any time point (for smoothing)."
+    },
+    "no_prune": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Pruning Flag",
+      "description": "Do not prune (default)."
+    },
+    "proj_surf": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Surface",
+      "description": "Project vertices by mag*scale at each vertex."
+    },
+    "proj_norm": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project Norm",
+      "description": "Project vertices by distmm at each vertex."
+    },
+    "reg_diff": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Register Difference File",
+      "description": "Subtract reg2 from --reg (primarily for testing)."
+    },
+    "rms": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "RMS File",
+      "description": "Save RMS of reg1-reg2 (primarily for testing)."
+    },
+    "rms_mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "RMS Mask File",
+      "description": "Compute RMS in mask (primarily for testing)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "src_subject",
+    "trg_subject"
+  ]
+}

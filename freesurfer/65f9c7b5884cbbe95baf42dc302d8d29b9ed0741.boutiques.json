@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Refines cortical surfaces around the region specified by the label file",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mris_refine_surfaces"
+    },
+    "subject_name": {
+      "type": "string",
+      "title": "Subject name",
+      "description": "The name of the subject"
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "The hemisphere to process ('lh' for left hemisphere, 'rh' for right hemisphere)"
+    },
+    "hires_volume": {
+      "type": "string",
+      "title": "High-resolution volume",
+      "description": "The high-resolution volume filename"
+    },
+    "label_file": {
+      "type": "string",
+      "title": "Label file",
+      "description": "The label file specifying the region to refine"
+    },
+    "low_to_hires_xfm": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Low-to-high resolution transform",
+      "description": "The optional low to high resolution transform file"
+    },
+    "sdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects directory",
+      "description": "Specify the SUBJECTS_DIR"
+    },
+    "use_mgz": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use mgz volumes",
+      "description": "Use .mgz volumes"
+    },
+    "suffix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Suffix for final surfaces",
+      "description": "Add specified suffix to the final surfaces"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_name",
+    "hemi",
+    "hires_volume",
+    "label_file"
+  ]
+}

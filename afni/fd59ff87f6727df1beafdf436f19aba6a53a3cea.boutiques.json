@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Prints to stdout the 4x3 transformation matrix+vector that would be applied by 3drotate to the given dataset.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "rotcom"
+    },
+    "rotate_ashift": {
+      "type": "string",
+      "title": "Rotate and Ashift Options",
+      "description": "Combination of rotate and ashift options in a single quoted string (e.g., '-rotate 10I 0R 0A -ashift 5S 0 0')"
+    },
+    "dataset": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Dataset",
+      "description": "Input dataset for determining coordinate order"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "rotate_ashift"
+  ]
+}

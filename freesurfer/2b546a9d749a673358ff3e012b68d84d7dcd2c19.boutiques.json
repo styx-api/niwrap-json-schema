@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool for registering multiple OCT (Optical Coherence Tomography) tiles or a mosaic list into a single output volume",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "oct_register_mosaic"
+    },
+    "tiles_or_mosaic_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Tiles or Mosaic List",
+      "description": "OCT tile images to be registered or a file listing the mosaic tiles"
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output registered volume"
+    },
+    "downsample": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Downsample",
+      "description": "Use Gaussian downsampling specified number of times"
+    },
+    "weight_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Weight File",
+      "description": "File with tile weights to use in tile averaging"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "tiles_or_mosaic_list",
+    "output_volume"
+  ]
+}

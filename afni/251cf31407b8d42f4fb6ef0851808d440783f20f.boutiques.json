@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Performs the FFT of the input dataset in 3 directions (x, y, z) and produces the output dataset.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dFFT"
+    },
+    "dataset": {
+      "type": "string",
+      "title": "Input dataset",
+      "description": "Input dataset (e.g., dataset.nii)"
+    },
+    "abs": {
+      "type": "boolean",
+      "default": false,
+      "title": "Magnitude of FFT flag",
+      "description": "Outputs the magnitude of the FFT (default)"
+    },
+    "phase": {
+      "type": "boolean",
+      "default": false,
+      "title": "Phase of FFT flag",
+      "description": "Outputs the phase of the FFT (-PI..PI)"
+    },
+    "complex": {
+      "type": "boolean",
+      "default": false,
+      "title": "Complex FFT flag",
+      "description": "Outputs the complex-valued FFT"
+    },
+    "inverse": {
+      "type": "boolean",
+      "default": false,
+      "title": "Inverse FFT flag",
+      "description": "Does the inverse FFT instead of the forward FFT"
+    },
+    "Lx": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FFT length in x-direction",
+      "description": "Use FFT of length 'xx' in the x-direction"
+    },
+    "Ly": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FFT length in y-direction",
+      "description": "Use FFT of length 'yy' in the y-direction"
+    },
+    "Lz": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FFT length in z-direction",
+      "description": "Use FFT of length 'zz' in the z-direction"
+    },
+    "altIN": {
+      "type": "boolean",
+      "default": false,
+      "title": "Alternate input signs flag",
+      "description": "Alternate signs of input data before FFT to bring zero frequency from edge of FFT-space to center of grid for cosmetic purposes."
+    },
+    "altOUT": {
+      "type": "boolean",
+      "default": false,
+      "title": "Alternate output signs flag",
+      "description": "Alternate signs of output data after FFT. Use '-altOUT' with '-altIN' on the forward transform to get the signs of the recovered image correct."
+    },
+    "input": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input file",
+      "description": "Read the input dataset from specified file instead of from the last argument on the command line."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output prefix",
+      "description": "Use specified prefix for the output dataset."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset"
+  ]
+}

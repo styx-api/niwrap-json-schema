@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Computes the difference of two surface data sets defined on two surface meshes.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mris_thickness_diff"
+    },
+    "src_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source type",
+      "description": "Input surface data format (curv, paint or w)"
+    },
+    "trg_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target type",
+      "description": "Output format (paint or w)"
+    },
+    "out_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output file name"
+    },
+    "out_resampled": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output resampled thickness file",
+      "description": "Output resampled thickness"
+    },
+    "nsmooth": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of smoothing steps",
+      "description": "Number of smoothing steps"
+    },
+    "register": {
+      "type": "boolean",
+      "default": false,
+      "title": "Register surfaces",
+      "description": "Perform ICP rigid registration"
+    },
+    "xform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform file",
+      "description": "Apply LTA transform to align input surface1 to surface2"
+    },
+    "invert": {
+      "type": "boolean",
+      "default": false,
+      "title": "Invert transform",
+      "description": "Reversely apply -xform"
+    },
+    "src_volume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source volume",
+      "description": "Source volume for -xform"
+    },
+    "dst_volume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Destination volume",
+      "description": "Target volume for -xform"
+    },
+    "abs": {
+      "type": "boolean",
+      "default": false,
+      "title": "Absolute difference",
+      "description": "Compute the std of abs-thickness-diff"
+    },
+    "log_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log file",
+      "description": "Log file name"
+    },
+    "subject_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject name",
+      "description": "Subject name (to be recorded in logfile)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "out_file"
+  ]
+}

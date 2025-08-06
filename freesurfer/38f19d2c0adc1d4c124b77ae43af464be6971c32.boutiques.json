@@ -1,0 +1,311 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Smooths surface data and/or estimates FWHM",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mris_fwhm"
+    },
+    "input_file": {
+      "type": "string",
+      "title": "Input File",
+      "description": "Input data file."
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject whose surface the input is defined on."
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemifield that the input is defined on. Legal values are lh and rh."
+    },
+    "surf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface",
+      "description": "Surface name to compute AR1 on. Default is white."
+    },
+    "label_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label File",
+      "description": "Label file to be used as a mask."
+    },
+    "cortex_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cortex Flag",
+      "description": "Use hemi.cortex.label as a mask."
+    },
+    "mask_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask File",
+      "description": "Mask file. Compute AR1 only over voxels in the given mask."
+    },
+    "x_matrix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detrending Matrix",
+      "description": "Detrend data with the matrix in x.mat."
+    },
+    "detrend_order": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detrend Order",
+      "description": "Order of polynomial detrending."
+    },
+    "smooth_only_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Smooth Only Flag",
+      "description": "Only smooth the data, implies --no-detrend."
+    },
+    "no_detrend_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Detrend Flag",
+      "description": "Turn off polynomial detrending."
+    },
+    "sqr_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Square Input Flag",
+      "description": "Compute square of input before smoothing."
+    },
+    "sum_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sum File",
+      "description": "Prints ascii summary to sumfile."
+    },
+    "dat_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dat File",
+      "description": "File for FWHM data."
+    },
+    "ar1dat_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "AR1 Data File",
+      "description": "File containing ar1mean and ar1std."
+    },
+    "ar1vol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "AR1 Volume",
+      "description": "Save spatial AR1 as an overlay."
+    },
+    "fwhmmap": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM Map",
+      "description": "Save vertex-wise spatial FWHM as an overlay."
+    },
+    "prune_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Prune Flag",
+      "description": "Remove any voxel that is zero in any subject (after any inversion)."
+    },
+    "no_prune_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Prune Flag",
+      "description": "Do not prune (default)."
+    },
+    "out_mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Out Mask",
+      "description": "File to save the final mask."
+    },
+    "varnorm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Variance Normalize Flag",
+      "description": "Normalize the variance across space within any mask."
+    },
+    "fwhm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM Value",
+      "description": "Smooth input by the specified FWHM in mm."
+    },
+    "niters_only": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Niters Only",
+      "description": "File that reports the number of iterations needed to achieve the specified FWHM."
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output File",
+      "description": "Output file to save the processed data."
+    },
+    "sd": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Subjects directory."
+    },
+    "synth_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Synthesize Input Flag",
+      "description": "Synthesize input with white gaussian noise."
+    },
+    "synth_frames": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Synth Frames",
+      "description": "Number of frames for synthesized input."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Threads",
+      "description": "Number of threads to use."
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Turn on debugging."
+    },
+    "checkopts_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Options Flag",
+      "description": "Don't run anything, just check options and exit."
+    },
+    "version_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Print out version and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "subject",
+    "hemi",
+    "output_file"
+  ]
+}

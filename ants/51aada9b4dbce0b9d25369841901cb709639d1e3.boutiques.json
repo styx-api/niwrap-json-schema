@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Non-local super resolution described in the papers by JV Manjon et al., focusing on MRI superresolution using self-similarity and image priors.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "NonLocalSuperResolution"
+    },
+    "image_dimensionality": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Image Dimensionality",
+      "description": "This option forces the image to be treated as a specified-dimensional image. If not specified, the program tries to infer the dimensionality from the input image."
+    },
+    "input_image": {
+      "type": "string",
+      "title": "Input Image",
+      "description": "A low-resolution input image to be superresoluted."
+    },
+    "interpolated_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolated Image",
+      "description": "An interpolated version of the low-resolution image (such as B-spline). Specify either this option or a high-resolution multi-modal counterpart (cf the -k option)."
+    },
+    "reference_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference Image",
+      "description": "A high-resolution reference multi-modal image. Assumed to be in the same space as the low-resolution input image. Specify either this option or an interpolated version (cf the -j option)."
+    },
+    "patch_radius": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Patch Radius",
+      "description": "Patch radius. Default = 1x1x1."
+    },
+    "search_radius": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Search Radius",
+      "description": "Search radius. Default = 3x3x3."
+    },
+    "intensity_difference_sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1.0,
+      "title": "Intensity Difference Sigma",
+      "description": "Intensity difference sigma. Default = 1.0."
+    },
+    "patch_similarity_sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1.0,
+      "title": "Patch Similarity Sigma",
+      "description": "Patch similarity sigma. Default = 1.0."
+    },
+    "scale_levels": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "32x16x8x2x1",
+      "title": "Scale Levels",
+      "description": "Scale levels. Default = 32x16x8x2x1."
+    },
+    "interpolation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolation",
+      "description": "Several interpolation options are available in ITK."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output",
+      "description": "The output consists of the noise corrected version of the input image. Optionally, one can also output the estimated noise image."
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose",
+      "description": "Verbose output."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image",
+    "output"
+  ]
+}

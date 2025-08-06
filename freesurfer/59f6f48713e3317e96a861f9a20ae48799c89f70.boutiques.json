@@ -1,0 +1,349 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A program to binarize a volume or volume-encoded surface file, with options to merge and manipulate binarized output.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_binarize"
+    },
+    "input_volume": {
+      "type": "string",
+      "title": "Input Volume",
+      "description": "Input volume to be binarized."
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Path to output volume."
+    },
+    "min_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Threshold",
+      "description": "Minimum threshold (default is -inf)."
+    },
+    "max_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Threshold",
+      "description": "Maximum threshold (default is +inf)."
+    },
+    "pct_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Percent Threshold",
+      "description": "Set threshold to capture top P% of voxels."
+    },
+    "rmin": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "RMIN",
+      "description": "Compute min threshold based on rmin times global mean."
+    },
+    "rmax": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "RMAX",
+      "description": "Compute max threshold based on rmax times global mean."
+    },
+    "fdr_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FDR Threshold",
+      "description": "Compute min threshold based on FDR."
+    },
+    "match_values": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Match Values",
+      "description": "Binarize based on matching values."
+    },
+    "replace_values": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Replace Values",
+      "description": "Replace voxels with specified values. Format: V1 V2"
+    },
+    "binval": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bin Value",
+      "description": "Set voxel value within threshold to specified value (default is 1)."
+    },
+    "binval_not": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bin Value Not",
+      "description": "Set voxel value outside threshold range to specified value (default is 0)."
+    },
+    "frame": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Frame Number",
+      "description": "Use specific frame of the input. 0-based index."
+    },
+    "merge_volume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Merge Volume",
+      "description": "Merge with another volume. Must be the same dimensions as input volume."
+    },
+    "mask_volume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Volume",
+      "description": "Mask input with a specified mask volume."
+    },
+    "mask_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Threshold",
+      "description": "Set threshold for mask volume (default is 0.5)."
+    },
+    "surf_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Name",
+      "description": "Create a surface mesh from the binarization."
+    },
+    "surf_smooth": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Smoothing Iterations",
+      "description": "Smooth the surface mesh iteratively, specifying the number of iterations."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Threads",
+      "description": "Specify number of threads to use."
+    },
+    "ctx_wm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cerebral WM Flag",
+      "description": "Set match values for cerebral white matter."
+    },
+    "all_wm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "All WM Flag",
+      "description": "Set match values for all white matter."
+    },
+    "ventricles_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ventricles Flag",
+      "description": "Set match values for ventricles and choroid."
+    },
+    "wm_vcsf_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "WM and VCSF Flag",
+      "description": "Match for WM and ventricular CSF."
+    },
+    "gm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Gray Matter Flag",
+      "description": "Match for all WM, VCSF and background, then invert."
+    },
+    "subcort_gm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Subcortical GM Flag",
+      "description": "Match for subcortical gray matter."
+    },
+    "scm_lh_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Left Hemisphere Subcortical Mass Flag",
+      "description": "Subcortical mass for left hemisphere."
+    },
+    "scm_rh_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Right Hemisphere Subcortical Mass Flag",
+      "description": "Subcortical mass for right hemisphere."
+    },
+    "zero_edges_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Zero Edges Flag",
+      "description": "Set edge voxels to zero."
+    },
+    "zero_slice_edges_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Zero Slice Edges Flag",
+      "description": "Set edge slice voxels to zero."
+    },
+    "dilate_vertex": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dilate Vertex",
+      "description": "Dilate vertex to a specific target area."
+    },
+    "remove_islands_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Remove Islands Flag",
+      "description": "Remove islands in the mask."
+    },
+    "fill_holes_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fill Holes Flag",
+      "description": "Remove holes in the mask."
+    },
+    "noverbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Verbose Flag",
+      "description": "Suppress verbose output."
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Enable debugging output."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume",
+    "output_volume"
+  ]
+}

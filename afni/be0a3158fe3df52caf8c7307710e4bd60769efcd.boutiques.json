@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Combine FATCAT output with CSV data for statistical modeling.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "fat_mvm_prep"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Prefix for output files."
+    },
+    "csv_file": {
+      "type": "string",
+      "title": "CSV Input File",
+      "description": "Comma-separated variable (CSV) file for input."
+    },
+    "matrix_files": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Matrix Files",
+      "description": "Set of matrix (*.grid or *.netcc) files by searchable path."
+    },
+    "list_match": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "List Match File",
+      "description": "Text file containing two columns: path to subject matrix file and CSV IDs."
+    },
+    "unionize_rois": {
+      "type": "boolean",
+      "default": false,
+      "title": "Unionize ROIs",
+      "description": "Make the ROI list as the union of elements across the group."
+    },
+    "na_warn_off": {
+      "type": "boolean",
+      "default": false,
+      "title": "NA Warnings Off",
+      "description": "Turn off the automatic warnings as the data table is created."
+    },
+    "extern_labels_no": {
+      "type": "boolean",
+      "default": false,
+      "title": "Disable External Labels",
+      "description": "Turn off the writing/usage of user-defined labels in the *.grid/*.netcc files."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix",
+    "csv_file"
+  ]
+}

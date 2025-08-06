@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Connects to AFNI and receives notification whenever the user changes Talairach coordinates, then drives Netscape to display the closest figures from the Talairach-Tournoux atlas.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "plugout_tta"
+    },
+    "host": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Host",
+      "description": "Connect to AFNI running on the specified computer using TCP/IP. Use '-host localhost' to connect on current host with TCP/IP."
+    },
+    "port": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Port Number",
+      "description": "Use TCP/IP port number 'pp'. Default is 8005."
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Verbose mode: prints out progress reports."
+    },
+    "port_offset": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Port Offset",
+      "description": "Provide a port offset to allow multiple instances of programs to communicate on the same machine. All ports are assigned numbers relative to PORT_OFFSET. Range: [1025, 65500]."
+    },
+    "port_offset_quiet": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Port Offset Quiet",
+      "description": "Like -np, but more quiet in the face of adversity."
+    },
+    "port_offset_bloc": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Port Offset Block",
+      "description": "Provide a port offset block. Easier to use than -np. Range: [0, MAX_BLOC]. Using this reduces chances of port conflicts."
+    },
+    "max_port_bloc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Max Port Block",
+      "description": "Print the current value of MAX_BLOC and exit."
+    },
+    "max_port_bloc_quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Max Port Block Quiet",
+      "description": "Print MAX_BLOC value and exit quietly."
+    },
+    "num_assigned_ports": {
+      "type": "boolean",
+      "default": false,
+      "title": "Number of Assigned Ports",
+      "description": "Print the number of assigned ports used by AFNI then quit."
+    },
+    "num_assigned_ports_quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Number of Assigned Ports Quiet",
+      "description": "Print the number of assigned ports used by AFNI then quit quietly."
+    }
+  },
+  "additionalProperties": false
+}

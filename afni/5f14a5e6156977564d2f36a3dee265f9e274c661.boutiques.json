@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A command-line tool to execute a specified program command line on a list of input bricks.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@CommandGlobb"
+    },
+    "program_command": {
+      "type": "string",
+      "title": "Program Command Line",
+      "description": "The entire command line for the program desired. The command is best put between single quotes, do not use the \\ to break a long line within the quotes."
+    },
+    "output_dir": {
+      "type": "string",
+      "title": "Output Directory",
+      "description": "The output directory where the results will be saved."
+    },
+    "extension": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Extension Prefix",
+      "description": "If the program requires a -prefix option, then you can specify the extension which will get appended to the Brick names before +orig."
+    },
+    "brick_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Brick List",
+      "description": "A list of bricks (or anything) on which the program command will be executed."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "program_command",
+    "output_dir",
+    "brick_list"
+  ]
+}

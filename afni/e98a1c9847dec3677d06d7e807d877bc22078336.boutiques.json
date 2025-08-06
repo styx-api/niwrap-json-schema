@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "3dcopy copies datasets with or without altering prefixes and converting formats.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dcopy"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Print progress reports."
+    },
+    "denote": {
+      "type": "boolean",
+      "default": false,
+      "title": "Denote Flag",
+      "description": "Remove any Notes from the file."
+    },
+    "old_prefix": {
+      "type": "string",
+      "title": "Old Prefix",
+      "description": "Old dataset prefix (and view if specific dataset view is to be copied)."
+    },
+    "view": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Specified View",
+      "description": "Specified view (orig, acpc, tlrc)."
+    },
+    "new_prefix": {
+      "type": "string",
+      "title": "New Prefix",
+      "description": "New dataset prefix or directory path."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "old_prefix",
+    "new_prefix"
+  ]
+}

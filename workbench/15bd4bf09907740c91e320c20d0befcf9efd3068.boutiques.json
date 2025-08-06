@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Copy extended data to another volume file.\n\nThis command copies the information in a volume file that isn't a critical part of the standard header or data matrix, e.g. map names, palette settings, label tables.  If -drop-unknown is not specified, it also copies similar kinds of information set by other software.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "volume-copy-extensions"
+    },
+    "data_volume": {
+      "type": "string",
+      "title": "data_volume",
+      "description": "the volume file containing the voxel data to use"
+    },
+    "extension_volume": {
+      "type": "string",
+      "title": "extension_volume",
+      "description": "the volume file containing the extensions to use"
+    },
+    "volume_out": {
+      "type": "string",
+      "title": "volume_out",
+      "description": "the output volume"
+    },
+    "opt_drop_unknown": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_drop_unknown",
+      "description": "don't copy extensions that workbench doesn't understand"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "data_volume",
+    "extension_volume",
+    "volume_out"
+  ]
+}

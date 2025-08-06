@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Generate a connectome matrix from a streamlines file and a node parcellation image.\n\n\n\nReferences:\n\nIf using the default streamline-parcel assignment mechanism (or -assignment_radial_search option): Smith, R. E.; Tournier, J.-D.; Calamante, F. & Connelly, A. The effects of SIFT on the reproducibility and biological accuracy of the structural connectome. NeuroImage, 2015, 104, 253-265\n\nIf using -scale_invlength or -scale_invnodevol options: Hagmann, P.; Cammoun, L.; Gigandet, X.; Meuli, R.; Honey, C.; Wedeen, V. & Sporns, O. Mapping the Structural Core of Human Cerebral Cortex. PLoS Biology 6(7), e159",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "tck2connectome"
+    },
+    "assignment_end_voxels": {
+      "type": "boolean",
+      "default": false,
+      "title": "assignment_end_voxels",
+      "description": "use a simple voxel lookup value at each streamline endpoint"
+    },
+    "assignment_radial_search": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "assignment_radial_search",
+      "description": "perform a radial search from each streamline endpoint to locate the nearest node. Argument is the maximum radius in mm; if no node is found within this radius, the streamline endpoint is not assigned to any node. Default search distance is 4mm."
+    },
+    "assignment_reverse_search": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "assignment_reverse_search",
+      "description": "traverse from each streamline endpoint inwards along the streamline, in search of the last node traversed by the streamline. Argument is the maximum traversal length in mm (set to 0 to allow search to continue to the streamline midpoint)."
+    },
+    "assignment_forward_search": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "assignment_forward_search",
+      "description": "project the streamline forwards from the endpoint in search of a parcellation node voxel. Argument is the maximum traversal length in mm."
+    },
+    "assignment_all_voxels": {
+      "type": "boolean",
+      "default": false,
+      "title": "assignment_all_voxels",
+      "description": "assign the streamline to all nodes it intersects along its length (note that this means a streamline may be assigned to more than two nodes, or indeed none at all)"
+    },
+    "scale_length": {
+      "type": "boolean",
+      "default": false,
+      "title": "scale_length",
+      "description": "scale each contribution to the connectome edge by the length of the streamline"
+    },
+    "scale_invlength": {
+      "type": "boolean",
+      "default": false,
+      "title": "scale_invlength",
+      "description": "scale each contribution to the connectome edge by the inverse of the streamline length"
+    },
+    "scale_invnodevol": {
+      "type": "boolean",
+      "default": false,
+      "title": "scale_invnodevol",
+      "description": "scale each contribution to the connectome edge by the inverse of the two node volumes"
+    },
+    "scale_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "scale_file",
+      "description": "scale each contribution to the connectome edge according to the values in a vector file"
+    },
+    "symmetric": {
+      "type": "boolean",
+      "default": false,
+      "title": "symmetric",
+      "description": "Make matrices symmetric on output"
+    },
+    "zero_diagonal": {
+      "type": "boolean",
+      "default": false,
+      "title": "zero_diagonal",
+      "description": "Set matrix diagonal to zero on output"
+    },
+    "stat_edge": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "stat_edge",
+      "description": "statistic for combining the values from all streamlines in an edge into a single scale value for that edge (options are: sum,mean,min,max; default=sum)"
+    },
+    "tck_weights_in": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "tck_weights_in",
+      "description": "specify a text scalar file containing the streamline weights"
+    },
+    "keep_unassigned": {
+      "type": "boolean",
+      "default": false,
+      "title": "keep_unassigned",
+      "description": "By default, the program discards the information regarding those streamlines that are not successfully assigned to a node pair. Set this option to keep these values (will be the first row/column in the output matrix)"
+    },
+    "out_assignments": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "out_assignments",
+      "description": "output the node assignments of each streamline to a file; this can be used subsequently e.g. by the command connectome2tck"
+    },
+    "vector": {
+      "type": "boolean",
+      "default": false,
+      "title": "vector",
+      "description": "output a vector representing connectivities from a given seed point to target nodes, rather than a matrix of node-node connectivities"
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "__STYXTYPE__": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "tracks_in": {
+      "type": "string",
+      "title": "tracks_in",
+      "description": "the input track file"
+    },
+    "nodes_in": {
+      "type": "string",
+      "title": "nodes_in",
+      "description": "the input node parcellation image"
+    },
+    "connectome_out": {
+      "type": "string",
+      "title": "connectome_out",
+      "description": "the output .csv file containing edge weights"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "tracks_in",
+    "nodes_in",
+    "connectome_out"
+  ]
+}

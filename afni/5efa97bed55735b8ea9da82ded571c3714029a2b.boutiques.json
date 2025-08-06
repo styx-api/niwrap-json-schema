@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Perform 2D registration on each slice of a 3D+time dataset, and combine the results.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@2dwarper.Allin"
+    },
+    "input_prefix": {
+      "type": "string",
+      "title": "Input Prefix",
+      "description": "Prefix for the input 3D+time dataset"
+    },
+    "mask_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Prefix",
+      "description": "Prefix of an existing mask dataset"
+    },
+    "output_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Prefix for output datasets"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_prefix"
+  ]
+}

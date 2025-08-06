@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Get projection vertex for foci.\n\nFor each focus, a column is created in <metric-out>, and the vertex with the most influence on its projection is assigned a value of 1 in that column, with all other vertices 0.  If -name is used, only one focus will be used.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "foci-get-projection-vertex"
+    },
+    "foci": {
+      "type": "string",
+      "title": "foci",
+      "description": "the foci file"
+    },
+    "surface": {
+      "type": "string",
+      "title": "surface",
+      "description": "the surface related to the foci file"
+    },
+    "metric_out": {
+      "type": "string",
+      "title": "metric_out",
+      "description": "the output metric file"
+    },
+    "opt_name_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_name_name",
+      "description": "select a focus by name: the name of the focus"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "foci",
+    "surface",
+    "metric_out"
+  ]
+}

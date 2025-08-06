@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Masks the input image based on specified criteria and produces the output image",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "immask"
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold Value",
+      "description": "Threshold value; all pixels with absolute value below this will be set to zero in the output image"
+    },
+    "mask_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Image",
+      "description": "Mask image; only locations that are nonzero in the mask image will be nonzero in the output image"
+    },
+    "positive_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Positive Only Flag",
+      "description": "Use only positive pixels from input image"
+    },
+    "input_image": {
+      "type": "string",
+      "title": "Input Image",
+      "description": "Input image to be masked"
+    },
+    "output_image": {
+      "type": "string",
+      "title": "Output Image",
+      "description": "Output image after masking"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image",
+    "output_image"
+  ]
+}

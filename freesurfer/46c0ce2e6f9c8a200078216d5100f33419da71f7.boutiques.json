@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Decodes RLE-compressed DICOM files.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "dcmdrle.fs"
+    },
+    "input_file": {
+      "type": "string",
+      "title": "Input DICOM file",
+      "description": "DICOM input filename to be converted."
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output DICOM file",
+      "description": "DICOM output filename."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Print help text and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version flag",
+      "description": "Print version information and exit."
+    },
+    "arguments": {
+      "type": "boolean",
+      "default": false,
+      "title": "Arguments flag",
+      "description": "Print expanded command line arguments."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet flag",
+      "description": "Quiet mode, print no warnings and errors."
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Verbose mode, print processing details."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Debug mode, print debug information."
+    },
+    "log_level": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log Level",
+      "description": "Set logger level."
+    },
+    "log_config": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log Config",
+      "description": "Use config file for the logger."
+    },
+    "read_file": {
+      "type": "boolean",
+      "default": false,
+      "title": "Read file flag",
+      "description": "Read file format or data set (default)."
+    },
+    "read_file_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Read file only flag",
+      "description": "Read file format only."
+    },
+    "read_dataset": {
+      "type": "boolean",
+      "default": false,
+      "title": "Read dataset flag",
+      "description": "Read data set without file meta information."
+    },
+    "uid_default": {
+      "type": "boolean",
+      "default": false,
+      "title": "UID default flag",
+      "description": "Keep same SOP Instance UID (default)."
+    },
+    "uid_always": {
+      "type": "boolean",
+      "default": false,
+      "title": "UID always flag",
+      "description": "Always assign new UID."
+    },
+    "byte_order_default": {
+      "type": "boolean",
+      "default": false,
+      "title": "Byte order default flag",
+      "description": "Most significant byte first (default)."
+    },
+    "byte_order_reverse": {
+      "type": "boolean",
+      "default": false,
+      "title": "Byte order reverse flag",
+      "description": "Least significant byte first."
+    },
+    "write_file": {
+      "type": "boolean",
+      "default": false,
+      "title": "Write file flag",
+      "description": "Write file format (default)."
+    },
+    "write_dataset": {
+      "type": "boolean",
+      "default": false,
+      "title": "Write dataset flag",
+      "description": "Write data set without file meta information."
+    },
+    "write_xfer_little": {
+      "type": "boolean",
+      "default": false,
+      "title": "Write xfer little flag",
+      "description": "Write with explicit VR little endian (default)."
+    },
+    "write_xfer_big": {
+      "type": "boolean",
+      "default": false,
+      "title": "Write xfer big flag",
+      "description": "Write with explicit VR big endian TS."
+    },
+    "write_xfer_implicit": {
+      "type": "boolean",
+      "default": false,
+      "title": "Write xfer implicit flag",
+      "description": "Write with implicit VR little endian TS."
+    },
+    "enable_new_vr": {
+      "type": "boolean",
+      "default": false,
+      "title": "Enable new VR flag",
+      "description": "Enable support for new VRs (UN/UT) (default)."
+    },
+    "disable_new_vr": {
+      "type": "boolean",
+      "default": false,
+      "title": "Disable new VR flag",
+      "description": "Disable support for new VRs, convert to OB."
+    },
+    "group_length_recalc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Group length recalc flag",
+      "description": "Recalculate group lengths if present (default)."
+    },
+    "group_length_create": {
+      "type": "boolean",
+      "default": false,
+      "title": "Group length create flag",
+      "description": "Always write with group length elements."
+    },
+    "group_length_remove": {
+      "type": "boolean",
+      "default": false,
+      "title": "Group length remove flag",
+      "description": "Always write without group length elements."
+    },
+    "length_explicit": {
+      "type": "boolean",
+      "default": false,
+      "title": "Length explicit flag",
+      "description": "Write with explicit lengths (default)."
+    },
+    "length_undefined": {
+      "type": "boolean",
+      "default": false,
+      "title": "Length undefined flag",
+      "description": "Write with undefined lengths."
+    },
+    "padding_retain": {
+      "type": "boolean",
+      "default": false,
+      "title": "Padding retain flag",
+      "description": "Do not change padding."
+    },
+    "padding_off": {
+      "type": "boolean",
+      "default": false,
+      "title": "Padding off flag",
+      "description": "No padding (implicit if --write-dataset)."
+    },
+    "padding_create": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Padding create",
+      "description": "Align file on multiple of file-pad bytes and items on multiple of item-pad bytes."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "output_file"
+  ]
+}

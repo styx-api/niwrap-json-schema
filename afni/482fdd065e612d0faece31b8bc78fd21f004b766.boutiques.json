@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Program to apply a nonlinear 3D warp saved from 3dQwarp (or 3dNwarpCat, etc.) to a 3D dataset, to produce a warped version of the source dataset.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dNwarpApply"
+    },
+    "nwarp": {
+      "type": "string",
+      "title": "Nonlinear Warp",
+      "description": "The name of the 3D warp dataset. Multiple warps can be catenated."
+    },
+    "iwarp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Invert Warp Flag",
+      "description": "Invert the warp specified in '-nwarp'."
+    },
+    "source": {
+      "type": "string",
+      "title": "Source Dataset",
+      "description": "The name of the source dataset to be warped. Multiple datasets can be supplied."
+    },
+    "master": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Master Dataset",
+      "description": "The name of the master dataset which defines the output grid."
+    },
+    "newgrid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "New Grid Spacing",
+      "description": "The new grid spacing (cubical voxels, in mm)."
+    },
+    "dxyz": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Grid Spacing",
+      "description": "Specify a different grid spacing (cubical voxels, in mm)."
+    },
+    "interp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolation Mode",
+      "description": "The interpolation mode ('NN', 'linear', 'cubic', 'quintic', 'wsinc5')."
+    },
+    "ainterp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Alternative Interpolation Mode",
+      "description": "Specify a different interpolation mode for the data than the warp."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "The name of the new output dataset. Multiple names can be supplied if more than one source dataset is input."
+    },
+    "suffix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Suffix",
+      "description": "Change the default suffix '_Nwarp' to a user-defined suffix."
+    },
+    "short": {
+      "type": "boolean",
+      "default": false,
+      "title": "Short Output Flag",
+      "description": "Write output dataset using 16-bit short integers rather than the usual 32-bit floats."
+    },
+    "wprefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Warp Prefix",
+      "description": "Save every warp generated in the process to a separate dataset."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet Flag",
+      "description": "Don't be verbose."
+    },
+    "verb": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Be extra verbose."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "nwarp",
+    "source"
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program creates a mask used to stop the search for the maximum gradient in mris_place_surface, preventing the surface from wandering into areas it should not.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_stopmask"
+    },
+    "output_mask": {
+      "type": "string",
+      "title": "Output Mask",
+      "description": "Output stop mask in volume format"
+    },
+    "filled": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 2,
+      "title": "Filled Volume Files",
+      "description": "Include voxels edited fill voxels that are set in the filled.mgz"
+    },
+    "aseg_presurf": {
+      "type": "string",
+      "title": "ASEG presurf file",
+      "description": "Used with --lv and/or --wmsa; Note: must be aseg.presurf.mgz, not aseg.mgz"
+    },
+    "lateral_ventricles": {
+      "type": "boolean",
+      "default": false,
+      "title": "Lateral Ventricles Flag",
+      "description": "Add lateral ventricles and choroid plexus to the mask (needs --aseg)"
+    },
+    "wmsa": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "WMSA Erode mm",
+      "description": "Add WM hypointensities to the mask (needs --aseg); erode by given distance away from any adjacent cortex"
+    },
+    "wm_voxels": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "WM Voxels File",
+      "description": "Include voxels that =255 from wm.mgz"
+    },
+    "brain_final_surfs": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brain Final Surfaces File",
+      "description": "Include voxels that =255 from brain.finalsurfs.mgz"
+    },
+    "no_filled": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Filled Flag",
+      "description": "Turns off --filled option"
+    },
+    "no_lv": {
+      "type": "boolean",
+      "default": false,
+      "title": "No LV Flag",
+      "description": "Turns off --lv option"
+    },
+    "no_wmsa": {
+      "type": "boolean",
+      "default": false,
+      "title": "No WMSA Flag",
+      "description": "Turns off --wmsa option"
+    },
+    "no_wm": {
+      "type": "boolean",
+      "default": false,
+      "title": "No WM Flag",
+      "description": "Turns off --wm option"
+    },
+    "no_bfs": {
+      "type": "boolean",
+      "default": false,
+      "title": "No BFS Flag",
+      "description": "Turns off --bfs option"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "output_mask",
+    "filled",
+    "aseg_presurf"
+  ]
+}

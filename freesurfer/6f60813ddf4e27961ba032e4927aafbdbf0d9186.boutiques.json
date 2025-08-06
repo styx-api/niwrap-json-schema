@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "EasyReg: deep learning registration simple and easy",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_easywarp"
+    },
+    "input_image": {
+      "type": "string",
+      "title": "Input image",
+      "description": "Input image"
+    },
+    "output_image": {
+      "type": "string",
+      "title": "Output image",
+      "description": "Output (deformed) image"
+    },
+    "deformation_field": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Deformation field",
+      "description": "Deformation field"
+    },
+    "nearest_neighbor": {
+      "type": "boolean",
+      "default": false,
+      "title": "Nearest neighbor flag",
+      "description": "Use nearest neighbor (rather than linear) interpolation"
+    },
+    "num_threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "Number of cores to be used. Default is 1. You can use -1 to use all available cores"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image",
+    "output_image"
+  ]
+}

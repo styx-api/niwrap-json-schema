@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Bayesian Estimation of Diffusion Parameters Obtained using Sampling Techniques (BEDPOST) for modeling multiple fibers per voxel.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "bedpostx"
+    },
+    "subject_dir": {
+      "type": "string",
+      "title": "Subject Directory",
+      "description": "Input subject directory which contains bvals, bvecs, data, and nodif_brain_mask files."
+    },
+    "num_fibres": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 3,
+      "title": "Number of Fibres",
+      "description": "Number of fibres per voxel (default 3)."
+    },
+    "ard_weight": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "ARD Weight",
+      "description": "ARD weight, more weight means less secondary fibres per voxel (default 1)."
+    },
+    "burnin": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1000,
+      "title": "Burnin Period",
+      "description": "Burnin period (default 1000)."
+    },
+    "num_jumps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1250,
+      "title": "Number of Jumps",
+      "description": "Number of jumps (default 1250)."
+    },
+    "sample_every": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 25,
+      "title": "Sample Every",
+      "description": "Sample every (default 25)."
+    },
+    "model_type": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 2,
+      "title": "Model Type",
+      "description": "Deconvolution model. 1: with sticks, 2: with sticks with a range of diffusivities (default), 3: with zeppelins."
+    },
+    "grad_nonlinear": {
+      "type": "boolean",
+      "default": false,
+      "title": "Gradient Nonlinearities",
+      "description": "Consider gradient nonlinearities, expects grad_dev in the subject directory."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_dir"
+  ]
+}

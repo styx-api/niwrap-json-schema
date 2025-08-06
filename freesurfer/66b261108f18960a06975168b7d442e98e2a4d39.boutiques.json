@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Prints out information about a surface file.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mris_info"
+    },
+    "surfacefile": {
+      "type": "string",
+      "title": "Surface file",
+      "description": "Surface file to process"
+    },
+    "outfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outfile",
+      "description": "Save some data to outfile"
+    },
+    "subject_hemi_surfname": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject hemi surfname",
+      "description": "Instead of surfacefile"
+    },
+    "talairach_xfm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Talairach XFM flag",
+      "description": "Apply talairach xfm before reporting info"
+    },
+    "rescale_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rescale flag",
+      "description": "Rescale group surface to match average metrics"
+    },
+    "patchfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Patch file",
+      "description": "Load patch before reporting"
+    },
+    "vertex_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Vertex number",
+      "description": "Print out vertex information for vertex vnum"
+    },
+    "extended_vertex_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Extended vertex number",
+      "description": "Print out extended vertex information for vertex vnum"
+    },
+    "curvfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Curvature file",
+      "description": "Check if curvature file vertices match surface vertices"
+    },
+    "annotfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Annotation file",
+      "description": "Check if annotation file vertices match surface vertices; dump colortable"
+    },
+    "area_stats_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Area stats flag",
+      "description": "Compute stats on triangle area (n, mean, std, min, max)"
+    },
+    "edge_stats_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Edge metric ID",
+      "description": "Compute stats on edge metric (n, mean, std, min, max); id=0=length, id=1=dot, id=2=angle, id<0= all"
+    },
+    "edge_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Edge number",
+      "description": "Print out extended information about edge"
+    },
+    "vtxno": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Vertex number for Matlab",
+      "description": "Write Matlab file to plot vertex neighborhood"
+    },
+    "matrix_format": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Matrix format",
+      "description": "Set format for matrix printing (e.g., %12.8f)"
+    },
+    "quality_stats_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quality stats flag",
+      "description": "Print out surface quality stats"
+    },
+    "intersections_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Intersections flag",
+      "description": "Print the number of vertices that belong to a face that intersects another face"
+    },
+    "mask_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Only compute edge and area stats using vertices in mask"
+    },
+    "label_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label file",
+      "description": "Only compute edge and area stats using vertices in label"
+    },
+    "edge_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Edge file",
+      "description": "Print edge info for all edges into file"
+    },
+    "nogifti_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No GIFTI display flag",
+      "description": "No dump of GIFTI struct, read .gii as surface instead"
+    },
+    "version_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version flag",
+      "description": "Print version and exits"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "No clue what this does"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surfacefile"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Report length of borders.\n\nFor each border, print its length along the surface, in mm.  If a border has multiple parts, their lengths are summed before printing, unless -separate-pieces is specified.\n\nThe -corrected-areas option is intended for when the length is not meaningfully measurable on individual surfaces, it is only an approximate correction for the reduction in structure of a group average surface.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "border-length"
+    },
+    "border": {
+      "type": "string",
+      "title": "border",
+      "description": "the input border file"
+    },
+    "surface": {
+      "type": "string",
+      "title": "surface",
+      "description": "the surface to measure the borders on"
+    },
+    "opt_corrected_areas_area_metric": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_corrected_areas_area_metric",
+      "description": "vertex areas to use instead of computing them from the surface: the corrected vertex areas, as a metric"
+    },
+    "opt_separate_pieces": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_separate_pieces",
+      "description": "report lengths for multi-part borders as separate numbers"
+    },
+    "opt_hide_border_name": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_hide_border_name",
+      "description": "don't print border name before each output"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "border",
+    "surface"
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Script to test the correct flip for a data set when using 1dDW_Grad_o_Mat++.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@GradFlipTest"
+    },
+    "dwi": {
+      "type": "string",
+      "title": "DWI",
+      "description": "Set of DWIs (N total volumes)"
+    },
+    "grad_row_vec": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Row-Wise Gradient Vectors",
+      "description": "Set of row-wise gradient vectors"
+    },
+    "grad_col_vec": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Column-Wise Gradient Vectors",
+      "description": "Set of column-wise gradient vectors"
+    },
+    "grad_col_matA": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Column-Wise Matrix A",
+      "description": "Set of column-wise g- or b-matrix elements (\"AFNI\"-style format, \"diagonal-first\")"
+    },
+    "grad_col_matT": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Column-Wise Matrix T",
+      "description": "Set of column-wise g- or b-matrix elements (\"TORTOISE\"-style format, \"row-first\")"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask",
+      "description": "Optional mask (probably whole brain); otherwise, automasking is performed"
+    },
+    "bvals": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bvals",
+      "description": "Can input bvals, if necessary (but shouldn't be necessary?)"
+    },
+    "thresh_fa": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FA Threshold",
+      "description": "Set minimum FA value for tracking (default X=0.2)"
+    },
+    "thresh_len": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tract Length Threshold",
+      "description": "Set minimum tract length to keep a tract when propagating (default L=30mm)"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Output name of text file that stores recommended flip option"
+    },
+    "check_abs_min": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Check Absolute Minimum",
+      "description": "Handle tiny negative values in gradient vectors"
+    },
+    "scale_out_1000": {
+      "type": "boolean",
+      "default": false,
+      "title": "Scale Output to 1000 Flag",
+      "description": "Scale output to 1000, as in 3dDWItoDT (probably not necessary)"
+    },
+    "wdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Working Directory",
+      "description": "Rename working directory output; useful if running multiple iterations"
+    },
+    "do_clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Clean temporary directory",
+      "description": "Remove temporary directory"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dwi"
+  ]
+}

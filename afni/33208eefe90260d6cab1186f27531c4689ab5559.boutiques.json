@@ -1,0 +1,302 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Warp a dataset to match another one (the base) using an affine transformation.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dWarpDrive"
+    },
+    "dataset": {
+      "type": "string",
+      "title": "Input dataset",
+      "description": "Input dataset"
+    },
+    "base_dataset": {
+      "type": "string",
+      "title": "Base dataset",
+      "description": "Load dataset as the base to which the input dataset will be matched. This is a mandatory option."
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Sets the prefix of the output dataset. If 'NULL', no output dataset is written."
+    },
+    "shift_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Shift Only",
+      "description": "3 parameters (shifts)"
+    },
+    "shift_rotate": {
+      "type": "boolean",
+      "default": false,
+      "title": "Shift and Rotate",
+      "description": "6 parameters (shifts + angles)"
+    },
+    "shift_rotate_scale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Shift, Rotate, and Scale",
+      "description": "9 parameters (shifts + angles + scale factors)"
+    },
+    "affine_general": {
+      "type": "boolean",
+      "default": false,
+      "title": "Affine General",
+      "description": "12 parameters (3 shifts + 3x3 matrix)"
+    },
+    "bilinear_general": {
+      "type": "boolean",
+      "default": false,
+      "title": "Bilinear General",
+      "description": "39 parameters (3 + 3x3 + 3x3x3). Not implemented and will never be."
+    },
+    "linear": {
+      "type": "boolean",
+      "default": false,
+      "title": "Linear interpolation",
+      "description": "Linear interpolation method"
+    },
+    "cubic": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cubic interpolation",
+      "description": "Cubic interpolation method"
+    },
+    "NN": {
+      "type": "boolean",
+      "default": false,
+      "title": "Nearest Neighbor interpolation",
+      "description": "Nearest neighbor interpolation method [default]"
+    },
+    "quintic": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quintic interpolation",
+      "description": "Quintic interpolation method"
+    },
+    "input_dataset": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input dataset (alternative option)",
+      "description": "Specify the input dataset anywhere in the command line option list."
+    },
+    "verbosity_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Print out lots of information along the way."
+    },
+    "summary_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Summary file",
+      "description": "Save summary of calculations into text file. If value is '-', summary goes to stdout."
+    },
+    "max_iterations": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Iterations",
+      "description": "Allow up to 'm' iterations for convergence."
+    },
+    "delta": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delta for Finite Differences",
+      "description": "Distance, in voxel size, used to compute image derivatives using finite differences. [Default=1.0]"
+    },
+    "weight": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Weight Dataset",
+      "description": "Set the weighting applied to each voxel proportional to the brick specified here. [Default=computed by program from base]"
+    },
+    "convergence_thresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Convergence Threshold",
+      "description": "Set the convergence parameter to be RMS 't' voxels movement between iterations. [Default=0.03]"
+    },
+    "twopass": {
+      "type": "boolean",
+      "default": false,
+      "title": "Two-Pass Estimation",
+      "description": "Do the parameter estimation in two passes, coarse-but-fast first, then fine-but-slow second."
+    },
+    "final_mode": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Final Interpolation Mode",
+      "description": "Set the final warp to be interpolated using 'mode'."
+    },
+    "parfix": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fix Parameters",
+      "description": "Fix the n'th parameter of the warp model to the value 'v'. More than one -parfix option can be used."
+    },
+    "oned_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Warping Parameters File",
+      "description": "Write out the warping parameters to this file."
+    },
+    "float_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "Float Format Output",
+      "description": "Write output dataset in float format, even if input dataset is short or byte."
+    },
+    "coarserot_init": {
+      "type": "boolean",
+      "default": false,
+      "title": "Coarse Rotation Initialization",
+      "description": "Initialize shift+rotation parameters by a brute force coarse search."
+    },
+    "oned_matrix_save": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transformation Matrices File",
+      "description": "Save base-to-input transformation matrices in specified file. If the file does not end in '.1D', the program will append '.aff12.1D'."
+    },
+    "sdu_order": {
+      "type": "boolean",
+      "default": false,
+      "title": "Matrix Order SDU",
+      "description": "Set the order of the matrix multiplication for the affine transformations (S=triangular shear, D=diagonal scaling matrix, U=rotation matrix)."
+    },
+    "sud_order": {
+      "type": "boolean",
+      "default": false,
+      "title": "Matrix Order SUD",
+      "description": "Set the order of the matrix multiplication for the affine transformations (S=triangular shear, U=rotation matrix, D=diagonal scaling matrix)."
+    },
+    "dsu_order": {
+      "type": "boolean",
+      "default": false,
+      "title": "Matrix Order DSU",
+      "description": "Set the order of the matrix multiplication for the affine transformations (D=diagonal scaling matrix, S=triangular shear, U=rotation matrix)."
+    },
+    "dus_order": {
+      "type": "boolean",
+      "default": false,
+      "title": "Matrix Order DUS",
+      "description": "Set the order of the matrix multiplication for the affine transformations (D=diagonal scaling matrix, U=rotation matrix, S=triangular shear)."
+    },
+    "usd_order": {
+      "type": "boolean",
+      "default": false,
+      "title": "Matrix Order USD",
+      "description": "Set the order of the matrix multiplication for the affine transformations (U=rotation matrix, S=triangular shear, D=diagonal scaling matrix)."
+    },
+    "uds_order": {
+      "type": "boolean",
+      "default": false,
+      "title": "Matrix Order UDS",
+      "description": "Set the order of the matrix multiplication for the affine transformations (U=rotation matrix, D=diagonal scaling matrix, S=triangular shear)."
+    },
+    "supper_s_matrix": {
+      "type": "boolean",
+      "default": false,
+      "title": "Upper Triangular S Matrix",
+      "description": "Set the S matrix to be upper triangular."
+    },
+    "slower_s_matrix": {
+      "type": "boolean",
+      "default": false,
+      "title": "Lower Triangular S Matrix",
+      "description": "Set the S matrix to be lower triangular."
+    },
+    "ashift": {
+      "type": "boolean",
+      "default": false,
+      "title": "Shift After Transformation",
+      "description": "Apply the shift parameters after the matrix transformation."
+    },
+    "bshift": {
+      "type": "boolean",
+      "default": false,
+      "title": "Shift Before Transformation",
+      "description": "Apply the shift parameters before the matrix transformation."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset",
+    "base_dataset",
+    "prefix"
+  ]
+}

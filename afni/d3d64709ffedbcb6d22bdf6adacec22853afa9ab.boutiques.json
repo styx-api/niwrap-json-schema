@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Program to generate an ARMA(1,1) time series, for simulation studies. Results are written to stdout.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "1dgenARMA11"
+    },
+    "length": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Length of time series",
+      "description": "Specify the length of the time series vector to generate (equivalent to -len option)."
+    },
+    "length_alt": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Length of time series (alternative)",
+      "description": "Specify the length of the time series vector to generate (equivalent to -num option)."
+    },
+    "num_series": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of time series vectors",
+      "description": "The number of time series vectors to generate; defaults to 1 if not given."
+    },
+    "param_a": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ARMA(1,1) parameter a",
+      "description": "Specify ARMA(1,1) parameters 'a'."
+    },
+    "param_b": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ARMA(1,1) parameter b",
+      "description": "Specify ARMA(1,1) parameter 'b' directly."
+    },
+    "param_lam": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ARMA(1,1) parameter lam",
+      "description": "Specify ARMA(1,1) parameter 'b' indirectly."
+    },
+    "std_dev": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Standard Deviation",
+      "description": "Set standard deviation of results [default=1]."
+    },
+    "normalize": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normalize Flag",
+      "description": "Normalize time series so sum of squares is 1."
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random Seed",
+      "description": "Set random number seed."
+    },
+    "corcut": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Correlation Cutoff",
+      "description": "Specify a cutoff for the correlation coefficient r(k) of noise samples at k units apart. Default is 0.00010."
+    },
+    "arma31": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Restricted ARMA(3,1) model parameters",
+      "description": "Specify parameters for a restricted ARMA(3,1) model: -arma31 a r theta vrat"
+    },
+    "arma51": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Restricted ARMA(5,1) model parameters",
+      "description": "Specify parameters for a restricted ARMA(5,1) model: -arma51 a r1 theta1 r2 theta2 vrat"
+    }
+  },
+  "additionalProperties": false
+}

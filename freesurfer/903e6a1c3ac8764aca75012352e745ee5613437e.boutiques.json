@@ -1,0 +1,357 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Computes slope maps (e.g., of thickness) in a longitudinal study using FreeSurfer",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "long_mris_slopes"
+    },
+    "qdec": {
+      "type": "string",
+      "title": "QDEC Table File",
+      "description": "(REQUIRED) QDEC table file specifying the subjects and time points"
+    },
+    "meas": {
+      "type": "string",
+      "title": "Measurement",
+      "description": "(REQUIRED) The surface input measure (e.g. thickness)"
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "(REQUIRED) Run one hemisphere: lh or rh or both"
+    },
+    "sd": {
+      "type": "string",
+      "title": "Subjects Directory",
+      "description": "(REQUIRED) Full path to FreeSurfer subjects directory"
+    },
+    "do_avg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Compute Temporal Average",
+      "description": "Compute and output the temporal average"
+    },
+    "do_rate": {
+      "type": "boolean",
+      "default": false,
+      "title": "Compute Rate",
+      "description": "Compute and output the rate"
+    },
+    "do_pc1fit": {
+      "type": "boolean",
+      "default": false,
+      "title": "Compute Percent Change Fit",
+      "description": "Compute and output the percent change (w.r.t. tp1 from linear fit)"
+    },
+    "do_pc1": {
+      "type": "boolean",
+      "default": false,
+      "title": "Compute Percent Change",
+      "description": "Compute and output the percent change (w.r.t. tp1)"
+    },
+    "do_spc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Compute Symmetrized Percent Change",
+      "description": "Compute and output the symmetrized percent change (w.r.t. temporal average)"
+    },
+    "do_stack": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Stacked File",
+      "description": "Save the stacked within subject file (time series)"
+    },
+    "do_label": {
+      "type": "boolean",
+      "default": false,
+      "title": "Compute Intersected Cortex Label",
+      "description": "Compute and output intersected cortex label"
+    },
+    "qcache": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "QCache Target",
+      "description": "Create cache for QDEC (resample to subject <QCACHE>, e.g. fsaverage)"
+    },
+    "resid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Residual Time Point",
+      "description": "Residual time point (pass 1 for tp1 etc., pass 0 for average) to export"
+    },
+    "fwhm": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smoothing FWHM",
+      "description": "Smoothing at specific FWHM (required for percent change)"
+    },
+    "nosmooth": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Smoothing",
+      "description": "Do not smooth the data"
+    },
+    "time": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time Column Variable",
+      "description": "Variable name for time column variable (e.g. age) in QDEC table"
+    },
+    "generic_time": {
+      "type": "boolean",
+      "default": false,
+      "title": "Generic Time Ordering",
+      "description": "Time points are ordered in QDEC file, assume time=1,2,3..."
+    },
+    "in_label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Label",
+      "description": "Use pre-existing label for smoothing and to mask the output"
+    },
+    "jac": {
+      "type": "boolean",
+      "default": false,
+      "title": "Correct Jacobian",
+      "description": "Use this flag when mapping area or volume maps to correct Jacobian"
+    },
+    "name_avg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filename for Temporal Average",
+      "description": "Filename (without hemi ?h) to store temporal average"
+    },
+    "name_rate": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filename for Rate",
+      "description": "Filename (without hemi ?h) to store rate"
+    },
+    "name_pc1fit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filename for Percent Change Fit",
+      "description": "Filename (without hemi ?h) to store percent change fit"
+    },
+    "name_pc1": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filename for Percent Change",
+      "description": "Filename (without hemi ?h) to store percent change"
+    },
+    "name_spc": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filename for Symmetrized Percent Change",
+      "description": "Filename (without hemi ?h) to store symmetrized percent change"
+    },
+    "name_resid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filename for Residual",
+      "description": "Filename (without hemi ?h) to store residual"
+    },
+    "out_stack": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filename for Stacked Measure",
+      "description": "Filename to store stacked measure file"
+    },
+    "out_label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Label Filename",
+      "description": "Filename to store within-subject intersected cortex labels"
+    },
+    "isec_labels": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intersected Labels",
+      "description": "Intersect labels on <qtarget> (usually cortex labels)"
+    },
+    "stack_avg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stacked Avg Maps",
+      "description": "Output stacked avg maps on <qtarget>"
+    },
+    "stack_rate": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stacked Rate Maps",
+      "description": "Output stacked rate maps on <qtarget>"
+    },
+    "stack_pc1fit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stacked PC1FIT Maps",
+      "description": "Output stacked PC1FIT maps on <qtarget>"
+    },
+    "stack_pc1": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stacked PC1 Maps",
+      "description": "Output stacked PC1 maps on <qtarget>"
+    },
+    "stack_spc": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stacked SPC Maps",
+      "description": "Output stacked SPC maps on <qtarget>"
+    },
+    "stack_resid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stacked Residual Maps",
+      "description": "Output stacked residual maps on <qtarget>"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "qdec",
+    "meas",
+    "hemi",
+    "sd"
+  ]
+}

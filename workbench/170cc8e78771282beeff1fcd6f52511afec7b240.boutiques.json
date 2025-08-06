@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Estimate fwhm smoothness of a metric file.\n\nEstimates the smoothness of the metric columns, printing the estimates to standard output.  These estimates ignore variation in vertex spacing.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "metric-estimate-fwhm"
+    },
+    "surface": {
+      "type": "string",
+      "title": "surface",
+      "description": "the surface to use for distance and neighbor information"
+    },
+    "metric_in": {
+      "type": "string",
+      "title": "metric_in",
+      "description": "the input metric"
+    },
+    "opt_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_roi_roi_metric",
+      "description": "use only data within an ROI: the metric file to use as an ROI"
+    },
+    "opt_column_column": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_column_column",
+      "description": "select a single column to estimate smoothness of: the column number or name"
+    },
+    "whole_file": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "__STYXTYPE__": {
+              "const": "whole_file"
+            },
+            "opt_demean": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_demean",
+              "description": "subtract the mean image before estimating smoothness"
+            }
+          },
+          "additionalProperties": false,
+          "description": "estimate for the whole file at once, not each column separately"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "estimate for the whole file at once, not each column separately"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface",
+    "metric_in"
+  ]
+}

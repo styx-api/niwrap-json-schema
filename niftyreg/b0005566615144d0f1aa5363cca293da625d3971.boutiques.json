@@ -1,0 +1,459 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Fast Free-Form Deformation algorithm for non-rigid registration based on Rueckert's 99 TMI work.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "reg_f3d"
+    },
+    "reference_image": {
+      "type": "string",
+      "title": "Reference Image",
+      "description": "Filename of the reference image"
+    },
+    "floating_image": {
+      "type": "string",
+      "title": "Floating Image",
+      "description": "Filename of the floating image"
+    },
+    "affine_transform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Affine Transformation",
+      "description": "Filename which contains an affine transformation"
+    },
+    "flirt_affine_transform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Flirt Affine Transformation",
+      "description": "Filename which contains a flirt affine transformation"
+    },
+    "control_point_grid_input": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Control Point Grid Input",
+      "description": "Filename of control point grid input"
+    },
+    "output_cpp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Control Point Grid",
+      "description": "Filename of control point grid"
+    },
+    "output_resampled_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Resampled Image",
+      "description": "Filename of the resampled image"
+    },
+    "reference_mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference Mask Image",
+      "description": "Filename of a mask image in the reference space"
+    },
+    "smooth_reference": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smooth Reference Image",
+      "description": "Smooth the reference image using the specified sigma (mm)"
+    },
+    "smooth_floating": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smooth Floating Image",
+      "description": "Smooth the floating image using the specified sigma (mm)"
+    },
+    "num_bins_joint_histogram": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Bins for Joint Histogram",
+      "description": "Number of bins to use for the joint histogram (reference)"
+    },
+    "num_bins_floating_joint_histogram": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Bins for Floating Joint Histogram",
+      "description": "Number of bins to use for the joint histogram (floating)"
+    },
+    "lower_threshold_reference": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lower Threshold for Reference Image",
+      "description": "Lower threshold to apply to the reference image intensities"
+    },
+    "upper_threshold_reference": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Upper Threshold for Reference Image",
+      "description": "Upper threshold to apply to the reference image intensities"
+    },
+    "lower_threshold_floating": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lower Threshold for Floating Image",
+      "description": "Lower threshold to apply to the floating image intensities"
+    },
+    "upper_threshold_floating": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Upper Threshold for Floating Image",
+      "description": "Upper threshold to apply to the floating image intensities"
+    },
+    "spacing_x": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Grid Spacing X",
+      "description": "Final grid spacing along the x axis in mm (or in voxel if negative value)"
+    },
+    "spacing_y": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Grid Spacing Y",
+      "description": "Final grid spacing along the y axis in mm (or in voxel if negative value)"
+    },
+    "spacing_z": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Grid Spacing Z",
+      "description": "Final grid spacing along the z axis in mm (or in voxel if negative value)"
+    },
+    "bending_energy": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bending Energy Penalty Term Weight",
+      "description": "Weight of the bending energy penalty term"
+    },
+    "linear_elasticity": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Linear Elasticity Penalty Term Weights",
+      "description": "Weights of linear elasticity penalty term"
+    },
+    "l2_norm_displacement": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "L2 Norm Displacement Penalty Term Weight",
+      "description": "Weight of L2 norm displacement penalty term"
+    },
+    "jacobian_determinant": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log of the Jacobian Determinant Penalty Term Weight",
+      "description": "Weight of log of the Jacobian determinant penalty term"
+    },
+    "no_approx_jl": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Approximate JL",
+      "description": "Do not approximate the JL value only at the control point position"
+    },
+    "no_conj": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Conjugate Gradient",
+      "description": "Do not use the conjugate gradient optimization but a simple gradient ascent"
+    },
+    "ssd": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use SSD Similarity Measure",
+      "description": "Use the SSD as the similarity measure instead of NMI"
+    },
+    "kld": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use KL Divergence",
+      "description": "Use the KL divergence as the similarity measure instead of NMI"
+    },
+    "amc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Additive NMI for Multichannel Data",
+      "description": "Use the additive NMI for multichannel data"
+    },
+    "max_iterations": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximal Number of Iterations Per Level",
+      "description": "Maximal number of iterations per level"
+    },
+    "num_levels": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Levels",
+      "description": "Number of levels to perform"
+    },
+    "first_levels": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First Levels",
+      "description": "Only perform the first levels"
+    },
+    "no_pyramid": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Pyramidal Approach",
+      "description": "Do not use a pyramidal approach"
+    },
+    "symmetric": {
+      "type": "boolean",
+      "default": false,
+      "title": "Symmetric Approach",
+      "description": "Use symmetric approach"
+    },
+    "floating_mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Floating Mask Image",
+      "description": "Filename of a mask image in the floating space"
+    },
+    "inverse_consistency": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inverse Consistency Penalty Term Weight",
+      "description": "Weight of the inverse consistency penalty term"
+    },
+    "velocity_field": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Velocity Field Integration",
+      "description": "Use velocity field integration to generate the deformation"
+    },
+    "composition_steps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Composition Steps",
+      "description": "Number of composition steps"
+    },
+    "smooth_gradient": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smooth Metric Derivative",
+      "description": "Smooth the metric derivative (in mm)"
+    },
+    "padding_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Padding Value",
+      "description": "Padding value"
+    },
+    "verbose_off": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Off",
+      "description": "Turn verbose off"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "reference_image",
+    "floating_image"
+  ]
+}

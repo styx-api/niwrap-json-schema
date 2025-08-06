@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Special implementation of boundary-based registration for a single slice.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_sbbr"
+    },
+    "template_volume": {
+      "type": "string",
+      "title": "Template Volume",
+      "description": "Template volume file."
+    },
+    "surface_file": {
+      "type": "string",
+      "title": "Surface File",
+      "description": "Surface file."
+    },
+    "init_reg_file": {
+      "type": "string",
+      "title": "Initial Registration File",
+      "description": "Initial registration file."
+    },
+    "t1": {
+      "type": "boolean",
+      "default": false,
+      "title": "T1 Flag",
+      "description": "Use T1-weighted image."
+    },
+    "t2": {
+      "type": "boolean",
+      "default": false,
+      "title": "T2 Flag",
+      "description": "Use T2-weighted image."
+    },
+    "optimization_type": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Optimization Type",
+      "description": "Optimization type; choose 1, 2, or 3 (default is 1, 6 dof)."
+    },
+    "distance_in": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Distance In",
+      "description": "Distance in mm into surface (default 1.0)."
+    },
+    "distance_out": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Distance Out",
+      "description": "Distance in mm out of surface (default 2.0)."
+    },
+    "slope": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "BBR Slope",
+      "description": "BBR slope (default 0.5)."
+    },
+    "ftol": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fitting Tolerance",
+      "description": "Tolerance for fitting (default 1.000000e-08)."
+    },
+    "linmintol": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Linear Minimization Tolerance",
+      "description": "Linear minimization tolerance (default 0.0)."
+    },
+    "niters_max": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Iterations",
+      "description": "Maximum number of iterations (default 10)."
+    },
+    "search": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parameter Space Search",
+      "description": "Brute force search through parameter space."
+    },
+    "search1d": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "1D Parameter Search",
+      "description": "1D search through parameter space."
+    },
+    "parameter_set": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Parameter",
+      "description": "Set initial parameter."
+    },
+    "increment": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Face Number Increment",
+      "description": "Face number increment (default 1)."
+    },
+    "slice_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Slice Number",
+      "description": "Slice number (defaults to 0)."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "Number of threads."
+    },
+    "output_registration": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Registration",
+      "description": "Output registration file."
+    },
+    "inverted_output_registration": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inverted Output Registration",
+      "description": "Inverted output registration file."
+    },
+    "output_surface": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Surface",
+      "description": "Output surface in slice coordinates."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Turn on debugging."
+    },
+    "diagnostic": {
+      "type": "boolean",
+      "default": false,
+      "title": "Diagnostic Flag",
+      "description": "Turn on diagnostics."
+    },
+    "check_options": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Options Flag",
+      "description": "Don't run anything, just check options and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "template_volume",
+    "surface_file",
+    "init_reg_file"
+  ]
+}

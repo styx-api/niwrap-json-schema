@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool to run FSL's FIRST for subcortical segmentation",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "run_first"
+    },
+    "input_image": {
+      "type": "string",
+      "title": "Input Image",
+      "description": "Input image file (e.g. img.nii.gz)"
+    },
+    "transformation_matrix": {
+      "type": "string",
+      "title": "Transformation Matrix",
+      "description": "Input transformation matrix file (e.g. input_to_mni.mat)"
+    },
+    "n_modes": {
+      "type": "number",
+      "title": "Number of Modes",
+      "description": "Number of modes"
+    },
+    "output_basename": {
+      "type": "string",
+      "title": "Output Basename",
+      "description": "Output basename"
+    },
+    "model_name": {
+      "type": "string",
+      "title": "Model Name",
+      "description": "Model name"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Verbose mode"
+    },
+    "intref_model_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intensity Reference Model Name",
+      "description": "Reference structure for the local intensity normalization"
+    },
+    "load_bvars": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Load Bvars",
+      "description": "Initializes FIRST with a previous estimate of the structure"
+    },
+    "multiple_images_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Multiple Images Flag",
+      "description": "Run FIRST on multiple images; provide a list of images, transformation matrices, and output names"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image",
+    "transformation_matrix",
+    "n_modes",
+    "output_basename",
+    "model_name"
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Program for Voxelwise Inter-Subject Correlation (ISC) Analysis using linear mixed-effects modeling.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dISC"
+    },
+    "outfile_prefix": {
+      "type": "string",
+      "title": "Output file prefix",
+      "description": "Output file name. For AFNI format, provide prefix only, with no view+suffix needed."
+    },
+    "num_jobs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of jobs",
+      "description": "Specify the number of jobs to run concurrently. Choose 1 for a single-processor computer."
+    },
+    "mask_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Process voxels inside this mask only. Default is no masking."
+    },
+    "model_structure": {
+      "type": "string",
+      "title": "Model structure formula",
+      "description": "Specify the model structure for all the variables. The expression FORMULA with more than one variable has to be surrounded within quotes."
+    },
+    "qvar_centers": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quantitative variable centers",
+      "description": "Specify centering values for quantitative variables identified under -qVars. Multiple centers are separated by commas without spaces and should be within quotes."
+    },
+    "quantitative_vars": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quantitative variables",
+      "description": "Identify quantitative variables (or covariates). The list should be comma-separated and within quotes."
+    },
+    "fisher_transform": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fisher transformation flag",
+      "description": "Perform Fisher transformation on the response variable (input files) if it is a correlation value."
+    },
+    "io_functions": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "IO Functions",
+      "description": "Use AFNI's C io functions (default) or R's io functions."
+    },
+    "data_table": {
+      "type": "string",
+      "title": "Data table",
+      "description": "List the data structure with a header as the first line. Has to occur last in the script."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "outfile_prefix",
+    "model_structure",
+    "data_table"
+  ]
+}

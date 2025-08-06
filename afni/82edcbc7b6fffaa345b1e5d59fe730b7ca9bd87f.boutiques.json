@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A script to find and kill AFNI processes",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@Quiet_Talkers"
+    },
+    "sudo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sudo flag",
+      "description": "Invoke higher powers to kill processes that you do not own"
+    },
+    "prog": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Program list",
+      "description": "Instead of the default program list, only kill the specified program. You can use multiple -prog options"
+    },
+    "npb_val": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "NIML port block values",
+      "description": "Kill those programs using NIML port block NV"
+    },
+    "npb_range": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "NIML port block range",
+      "description": "Kill those using NIML port blocks between NV0 and NV1"
+    },
+    "pif_key": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Key string",
+      "description": "Kill those programs that have a string matching KEY_STRING in their commandline"
+    },
+    "no_npb": {
+      "type": "boolean",
+      "default": false,
+      "title": "No NPB flag",
+      "description": "Kill any program in the list regardless of -npb options or -pif"
+    },
+    "list": {
+      "type": "boolean",
+      "default": false,
+      "title": "List flag",
+      "description": "Just list process numbers, don't run kill command"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet flag",
+      "description": "Do it quietly"
+    }
+  },
+  "additionalProperties": false
+}

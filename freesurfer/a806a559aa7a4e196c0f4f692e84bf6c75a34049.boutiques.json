@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool for merging diffusion MRI path data.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "dmri_mergepaths"
+    },
+    "input_volumes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Volumes",
+      "description": "Input volume(s)"
+    },
+    "input_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Directory",
+      "description": "Input directory (optional). If specified, names of input files are relative to this"
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume"
+    },
+    "color_table": {
+      "type": "string",
+      "title": "Color Table",
+      "description": "Color table file"
+    },
+    "threshold": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "title": "Threshold",
+      "description": "Lower threshold for display (0<=num<=1, as fraction of max)"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Turn on debugging"
+    },
+    "check_opts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Options Flag",
+      "description": "Don't run anything, just check options and exit"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volumes",
+    "output_volume",
+    "color_table",
+    "threshold"
+  ]
+}

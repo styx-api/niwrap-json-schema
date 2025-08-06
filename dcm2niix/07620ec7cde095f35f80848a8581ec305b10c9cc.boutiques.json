@@ -1,0 +1,359 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Chris Rorden's dcm2niiX - DICOM to NIfTI converter. Converts DICOM files to NIfTI format with optional BIDS sidecar generation.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "dcm2niix"
+    },
+    "compression_level": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 9
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Compression level",
+      "description": "gz compression level (1=fastest..9=smallest)"
+    },
+    "adjacent": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Adjacent DICOMs",
+      "description": "Adjacent DICOMs (images from same series always in same folder) for faster conversion"
+    },
+    "bids": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "BIDS sidecar",
+      "description": "Generate BIDS sidecar JSON files (o=only: no NIfTI)"
+    },
+    "bids_anon": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Anonymize BIDS",
+      "description": "Anonymize BIDS sidecar files by removing personal information"
+    },
+    "comment": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Comment",
+      "description": "Comment stored in NIfTI aux_file (up to 24 characters)"
+    },
+    "depth": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 9
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Search depth",
+      "description": "Directory search depth for DICOM files in sub-folders"
+    },
+    "export_format": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Export format",
+      "description": "Export format: NRRD (y), MGH (o), JSON/JNIfTI (j), or BJNIfTI (b)"
+    },
+    "filename": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filename template",
+      "description": "Output filename template (%a=antenna, %b=basename, %c=comments, %d=description, %e=echo number, %f=folder name, %g=accession number, %i=ID of patient, %j=seriesInstanceUID, %k=studyInstanceUID, %m=manufacturer, %n=name of patient, %o=mediaObjectInstanceUID, %p=protocol, %r=instance number, %s=series number, %t=time, %u=acquisition number, %v=vendor, %x=study ID; %z=sequence name)"
+    },
+    "defaults": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Generate defaults",
+      "description": "Generate defaults file (o=only: reset and write defaults; i=ignore: reset defaults)"
+    },
+    "ignore_derived": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ignore derived images",
+      "description": "Ignore derived, localizer and 2D images"
+    },
+    "scaling": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Integer scaling",
+      "description": "Losslessly scale 16-bit integers (y=scale, n=no but uint16->int16, o=original)"
+    },
+    "merge_2d": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Merge 2D slices",
+      "description": "Merge 2D slices from same series regardless of echo, exposure, etc. (0=no, 1=yes, 2=auto)"
+    },
+    "series_number": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Series number",
+      "description": "Only convert specified series CRC number (can be used up to 16 times)"
+    },
+    "output_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": ".",
+      "title": "Output directory",
+      "description": "Output directory (omit to save to input folder)"
+    },
+    "philips_scaling": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Philips scaling",
+      "description": "Use Philips precise float (not display) scaling"
+    },
+    "search_mode": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Search mode",
+      "description": "Search mode (y=show number of DICOMs, l=list DICOMs, n=no)"
+    },
+    "rename": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rename only",
+      "description": "Rename instead of convert DICOMs"
+    },
+    "single_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Single file mode",
+      "description": "Single file mode, do not convert other images in folder"
+    },
+    "update_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Update check",
+      "description": "Check for newer versions"
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose output",
+      "description": "Verbose output (0=no, 1=yes, 2=logorrheic)"
+    },
+    "conflict_behavior": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Conflict behavior",
+      "description": "Write behavior for name conflicts (0=skip, 1=overwrite, 2=add suffix)"
+    },
+    "crop_3d": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Crop 3D",
+      "description": "Crop 3D acquisitions (i=ignore: neither crop nor rotate)"
+    },
+    "compression": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Compression",
+      "description": "gz compress images (y=pigz, o=optimal pigz, i=internal:zlib, n=no, 3=no,3D)"
+    },
+    "endian": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Byte order",
+      "description": "Byte order (y=big-end, n=little-end, o=optimal/native)"
+    },
+    "progress": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Progress information",
+      "description": "Slicer format progress information"
+    },
+    "ignore_trigger": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore trigger times",
+      "description": "Disregard values in 0018,1060 and 0020,9153"
+    },
+    "terse": {
+      "type": "boolean",
+      "default": false,
+      "title": "Terse output",
+      "description": "Omit filename post-fixes (can cause overwrites)"
+    },
+    "xml": {
+      "type": "boolean",
+      "default": false,
+      "title": "XML output",
+      "description": "Output Slicer format features"
+    },
+    "input_dir": {
+      "type": "string",
+      "title": "Input directory",
+      "description": "Input folder containing DICOM files. Will be searched recursively based on depth parameter."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_dir"
+  ]
+}

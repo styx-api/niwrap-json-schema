@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Test-Retest Reliability Program through Bayesian Multilevel Modeling",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "TRR"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Prefix for output file names"
+    },
+    "chains": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of chains",
+      "description": "Specify the number of Markov chains"
+    },
+    "iterations": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of iterations",
+      "description": "Specify the number of iterations per Markov chain"
+    },
+    "response_var": {
+      "type": "string",
+      "title": "Response variable",
+      "description": "Specify the column name for the response variable"
+    },
+    "subject_var": {
+      "type": "string",
+      "title": "Subject variable",
+      "description": "Specify the column name for the subject variable"
+    },
+    "repetition_var": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Repetition variable",
+      "description": "Specify the column name for the repetition variable"
+    },
+    "condition_var": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Condition variable",
+      "description": "Specify the column name for the condition variable"
+    },
+    "data_table": {
+      "type": "string",
+      "title": "Data table",
+      "description": "Specify the path to the data table in pure text format"
+    },
+    "categorical_vars": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Categorical variables",
+      "description": "Identify categorical (qualitative) variables"
+    },
+    "quantitative_vars": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quantitative variables",
+      "description": "Identify quantitative (covariate) variables"
+    },
+    "response_dist": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Response Distribution",
+      "description": "Specify the distribution for the response variable (e.g., 'gaussian', 'student', 'exgaussian')"
+    },
+    "model": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model",
+      "description": "Specify the effects associated with explanatory variables"
+    },
+    "plot_size": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Posterior distribution plot size",
+      "description": "Specify the layout of posterior distribution plot (PDP) with width and height in inches"
+    },
+    "standard_error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Standard error column",
+      "description": "Include standard error for the response variable as input"
+    },
+    "t_stat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T-statistic column",
+      "description": "Specify the column name for the t-statistic values"
+    },
+    "within_chain_parallelization": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Within-chain parallelization",
+      "description": "Invoke within-chain parallelization; specify number of threads per chain"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Enable R to save the parameters for debugging"
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose level",
+      "description": "Specify verbose level"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix",
+    "response_var",
+    "subject_var",
+    "data_table"
+  ]
+}

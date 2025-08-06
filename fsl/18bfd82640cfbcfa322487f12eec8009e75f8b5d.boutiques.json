@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Lesion filling tool as part of FSL",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "lesion_filling"
+    },
+    "infile": {
+      "type": "string",
+      "title": "Input file",
+      "description": "Input image filename (e.g., T1w image)"
+    },
+    "outfile": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output filename (lesion filled image)"
+    },
+    "lesionmask": {
+      "type": "string",
+      "title": "Lesion mask file",
+      "description": "Filename of lesion mask image"
+    },
+    "wmmask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "White matter mask file",
+      "description": "Filename of white matter mask image"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "components_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Components Flag",
+      "description": "Save all lesion components as volumes"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Display help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "infile",
+    "outfile",
+    "lesionmask"
+  ]
+}

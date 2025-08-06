@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program makes a *.spec file after a set of intermediate surfaces have been generated with SurfLayers. It can also make a *.spec file that relates inflated surfaces to anatomically-correct surfaces.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "quickspecSL"
+    },
+    "surf_A": {
+      "type": "string",
+      "title": "Surface A",
+      "description": "Inner (anatomically-correct) boundary surface dataset (e.g. smoothwm.gii)"
+    },
+    "surf_B": {
+      "type": "string",
+      "title": "Surface B",
+      "description": "Outer (anatomically-correct) boundary surface dataset (e.g. pial.gii)"
+    },
+    "surf_intermed_pref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intermediate Surface Prefix",
+      "description": "Prefix for (anatomically-correct) intermediate surfaces, typically output by SurfLayers (default: isurf)"
+    },
+    "infl_surf_A": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inflated Surface A",
+      "description": "Inner (inflated) boundary surface dataset (e.g. infl.smoothwm.gii)"
+    },
+    "infl_surf_B": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inflated Surface B",
+      "description": "Outer (inflated) boundary surface dataset (e.g. infl.pial.gii)"
+    },
+    "infl_surf_intermed_pref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inflated Intermediate Surface Prefix",
+      "description": "Prefix for (inflated) intermediate surfaces, typically output by SurfLayers (default: infl.isurf)"
+    },
+    "both_lr_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Both Hemispheres Flag",
+      "description": "Specify an output spec for both hemispheres if surfaces for both exist"
+    },
+    "out_spec": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Spec File",
+      "description": "Name for output *.spec file (default: newspec.spec)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surf_A",
+    "surf_B"
+  ]
+}

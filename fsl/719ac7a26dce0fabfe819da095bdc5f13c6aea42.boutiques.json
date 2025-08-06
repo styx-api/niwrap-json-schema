@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Swap dimensions of an image volume",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "fslswapdim"
+    },
+    "input_file": {
+      "type": "string",
+      "title": "Input file",
+      "description": "Input image (e.g. img.nii.gz)"
+    },
+    "axis_a": {
+      "type": "string",
+      "title": "X-axis dimension",
+      "description": "New x-axis dimension (e.g., -x, x, RL, etc.)"
+    },
+    "axis_b": {
+      "type": "string",
+      "title": "Y-axis dimension",
+      "description": "New y-axis dimension (e.g., -y, y, PA, etc.)"
+    },
+    "axis_c": {
+      "type": "string",
+      "title": "Z-axis dimension",
+      "description": "New z-axis dimension (e.g., -z, z, IS, etc.)"
+    },
+    "output_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output file",
+      "description": "Output image (e.g., output.nii.gz). If not specified, the equivalent transformation matrix is written to the standard output."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "axis_a",
+    "axis_b",
+    "axis_c"
+  ]
+}

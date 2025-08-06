@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Computes mutual information (mi) between two input volumes.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_mi"
+    },
+    "input_file1": {
+      "type": "string",
+      "title": "Input file 1",
+      "description": "First input file name."
+    },
+    "input_file2": {
+      "type": "string",
+      "title": "Input file 2",
+      "description": "Second input file name."
+    },
+    "bins": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bins",
+      "description": "Specifies the number of bins for the two input volumes. Default is 64x64."
+    },
+    "silent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Silent Flag",
+      "description": "Write out only the final mutual information result."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file1",
+    "input_file2"
+  ]
+}

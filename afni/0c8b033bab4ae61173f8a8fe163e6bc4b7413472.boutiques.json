@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "1dCorrelate calculates the correlation coefficients between columns of input 1D files along with confidence intervals via a bootstrap procedure.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "1dCorrelate"
+    },
+    "ktaub": {
+      "type": "boolean",
+      "default": false,
+      "title": "Kendall's tau_b correlation method",
+      "description": "Kendall's tau_b correlation (popular somewhere, maybe)"
+    },
+    "nboot": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of bootstrap replicates",
+      "description": "Set the number of bootstrap replicates"
+    },
+    "alpha": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 20
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Confidence interval width",
+      "description": "Set the 2-sided confidence interval width to '100-A' percent."
+    },
+    "block": {
+      "type": "boolean",
+      "default": false,
+      "title": "Block resampling flag",
+      "description": "Use variable-length block resampling to account for serial correlation"
+    },
+    "blk": {
+      "type": "boolean",
+      "default": false,
+      "title": "Block resampling alternate flag",
+      "description": "Alternate flag for variable-length block resampling"
+    },
+    "pearson": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pearson correlation method",
+      "description": "Pearson correlation (the default method)"
+    },
+    "spearman": {
+      "type": "boolean",
+      "default": false,
+      "title": "Spearman correlation method",
+      "description": "Spearman (rank) correlation (more robust versus outliers)"
+    },
+    "quadrant": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quadrant correlation method",
+      "description": "Quadrant (binarized) correlation (most robust, but weaker)"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input 1D files",
+      "description": "Input 1D files"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files"
+  ]
+}

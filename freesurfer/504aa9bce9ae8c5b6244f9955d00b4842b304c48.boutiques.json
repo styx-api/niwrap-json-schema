@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Recon-all-like stream for processing clinical brain MRI scans of arbitrary orientation, resolution, and contrast using SynthSeg and SynthSR.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "recon-all-clinical.sh"
+    },
+    "input_scan": {
+      "type": "string",
+      "title": "Input scan",
+      "description": "Input scan file to be processed."
+    },
+    "subject_id": {
+      "type": "string",
+      "title": "Subject ID",
+      "description": "Identifier for the subject being processed."
+    },
+    "threads": {
+      "type": "integer",
+      "title": "Threads",
+      "description": "Number of threads to use for processing."
+    },
+    "subject_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject directory",
+      "description": "Optional subjects directory. Only necessary if the environment variable SUBJECTS_DIR is not set or needs to be overridden."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_scan",
+    "subject_id",
+    "threads"
+  ]
+}

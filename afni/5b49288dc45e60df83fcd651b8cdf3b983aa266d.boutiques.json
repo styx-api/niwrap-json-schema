@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Compute GCOR, the global correlation",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@compute_gcor"
+    },
+    "input": {
+      "type": "string",
+      "title": "Input File",
+      "description": "Specify input dataset to compute the GCOR over"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask File",
+      "description": "Specify mask dataset, for restricting the computation"
+    },
+    "corr_vol_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Correlation Volume Prefix",
+      "description": "Specify prefix for correlation volume output"
+    },
+    "initial_trs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial TRs to Ignore",
+      "description": "Specify number of initial TRs to ignore"
+    },
+    "no_demean": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Demean Flag",
+      "description": "Do not demean as the first step"
+    },
+    "save_tmp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Temporary Files Flag",
+      "description": "Save temporary files (do not remove at end)"
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose Level",
+      "description": "Set verbose level (0=quiet, 3=max)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input"
+  ]
+}

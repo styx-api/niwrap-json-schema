@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Transpose an AFNI *.1D file (ASCII list of numbers arranged in columns).",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "1dtranspose"
+    },
+    "infile": {
+      "type": "string",
+      "title": "Input file",
+      "description": "Input file (e.g. data.1D)"
+    },
+    "outfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output file",
+      "description": "Output file (e.g. transposed_data.1D), or '-' to write to stdout"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "infile"
+  ]
+}

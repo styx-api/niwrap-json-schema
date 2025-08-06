@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Compose any number of linear transformations and/or warps into a single transformation.\n\nAny linear transforms must be supplied as a 4x4 matrix in a text file (e.g. as per the output of mrregister). Any warp fields must be supplied as a 4D image representing a deformation field (e.g. as output from mrrregister -nl_warp).\n\nInput transformations should be provided to the command in the order in which they would be applied to an image if they were to be applied individually.\n\nIf all input transformations are linear, and the -template option is not provided, then the file output by the command will also be a linear transformation saved as a 4x4 matrix in a text file. If a template image is supplied, then the output will always be a deformation field. If at least one of the inputs is a warp field, then the output will be a deformation field, which will be defined on the grid of the last input warp image supplied if the -template option is not used.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "transformcompose"
+    },
+    "template": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "template",
+      "description": "define the output grid defined by a template image"
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "__STYXTYPE__": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "input": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "input",
+      "description": "the input transforms (either linear or non-linear warps)."
+    },
+    "output": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "__STYXTYPE__": {
+              "const": "VariousString"
+            },
+            "obj": {
+              "type": "string",
+              "title": "Object",
+              "description": "String object."
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "obj"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "__STYXTYPE__": {
+              "const": "VariousFile"
+            },
+            "obj": {
+              "type": "string",
+              "title": "Object",
+              "description": "File object."
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "obj"
+          ]
+        }
+      ],
+      "title": "output",
+      "description": "the output file (may be a linear transformation text file, or a deformation warp field image, depending on usage)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input",
+    "output"
+  ]
+}

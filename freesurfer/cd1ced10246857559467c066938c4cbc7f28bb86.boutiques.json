@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program processes an image using a nonlocal filter and writes the results to an output file. It supports different filtering methods such as median, Gaussian, and mean.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_nlfilter"
+    },
+    "input_image": {
+      "type": "string",
+      "title": "Input Image File",
+      "description": "The input image file to be processed."
+    },
+    "output_image": {
+      "type": "string",
+      "title": "Output Image File",
+      "description": "The output image file where the processed image will be saved."
+    },
+    "blur_sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Blur Sigma",
+      "description": "Specify sigma of the blurring kernel. Default is 0.500."
+    },
+    "gaussian_sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gaussian Sigma",
+      "description": "Filter with Gaussian instead of median. Requires sigma value."
+    },
+    "mean_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mean Filter Flag",
+      "description": "Filter with mean instead of median."
+    },
+    "window_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Window Size",
+      "description": "Specify window size used for offset calculation. Default is 3."
+    },
+    "cplov_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cplov Filter Flag",
+      "description": "Filter with cplov."
+    },
+    "minmax_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Minmax Filter Flag",
+      "description": "Filter with minmax."
+    },
+    "no_offsets_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Offsets Flag",
+      "description": "Don't use offsets, just apply standard filters."
+    },
+    "no_crop_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Crop Flag",
+      "description": "Don't crop to >0 region of image."
+    },
+    "version_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Display version number."
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Display help message."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image",
+    "output_image"
+  ]
+}

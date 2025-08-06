@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "DiReCT is a registration based estimate of cortical thickness. It was published in S. R. Das, B. B. Avants, M. Grossman, and J. C. Gee, Registration based cortical thickness measurement, Neuroimage 2009, 45:867--879.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "KellyKapowski"
+    },
+    "image_dimensionality": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Image dimensionality",
+      "description": "This option forces the image to be treated as a specified-dimensional image. If not specified, DiReCT tries to infer the dimensionality from the input image."
+    },
+    "segmentation_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation image",
+      "description": "A segmentation image must be supplied labeling the gray and white matters. Default values = 2 and 3, respectively."
+    },
+    "gray_matter_probability_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gray matter probability image",
+      "description": "In addition to the segmentation image, a gray matter probability image can be used. If no such image is supplied, one is created using the segmentation image and a variance of 1.0 mm."
+    },
+    "white_matter_probability_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "White matter probability image",
+      "description": "In addition to the segmentation image, a white matter probability image can be used. If no such image is supplied, one is created using the segmentation image and a variance of 1.0 mm."
+    },
+    "convergence": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Convergence",
+      "description": "Convergence is determined by fitting a line to the normalized energy profile of the last N iterations (where N is specified by the window size) and determining the slope which is then compared with the convergence threshold."
+    },
+    "thickness_prior_estimate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Thickness prior estimate",
+      "description": "Provides a prior constraint on the final thickness measurement. Default = 10 mm."
+    },
+    "thickness_prior_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Thickness prior image",
+      "description": "An image containing spatially varying prior thickness values."
+    },
+    "gradient_step": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gradient step",
+      "description": "Gradient step size for the optimization. Default = 0.025."
+    },
+    "smoothing_variance": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smoothing variance",
+      "description": "Defines the Gaussian smoothing of the hit and total images. Default = 1.0 mm."
+    },
+    "smoothing_velocity_field_parameter": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smoothing velocity field parameter",
+      "description": "Defines the Gaussian smoothing of the velocity field (default = 1.5 voxels). If the b-spline smoothing option is chosen, then this defines the isotropic mesh spacing for the smoothing spline (default = 15 mm)."
+    },
+    "use_bspline_smoothing": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use B-spline smoothing",
+      "description": "Sets the option for B-spline smoothing of the velocity field. Default = false."
+    },
+    "use_masked_smoothing": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use masked smoothing",
+      "description": "Sets the option for masked-based smoothing of the velocity field. Default = false."
+    },
+    "time_points": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time points",
+      "description": "Time points for irregularly spaced time samples and time-variance with which to compute distance metric."
+    },
+    "restrict_deformation": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Restrict deformation",
+      "description": "Restrict the last dimension's deformation. Meant for use with multiple time points. Default = false."
+    },
+    "number_of_integration_points": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of integration points",
+      "description": "Number of compositions of the diffeomorphism per iteration. Default = 10."
+    },
+    "maximum_number_of_invert_displacement_field_iterations": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum number of invert displacement field iterations",
+      "description": "Maximum number of iterations for estimating the invert displacement field. Default = 20."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output",
+      "description": "The output consists of a thickness map defined in the segmented gray matter."
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose",
+      "description": "Verbose output."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "output"
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Program to lowpass and/or highpass each voxel time series in a dataset, offering more/different options than Fourier.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dBandpass"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Prefix for output file."
+    },
+    "automask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automask",
+      "description": "Create a mask from the input dataset."
+    },
+    "blur": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Blur",
+      "description": "Blur (inside the mask only) with a filter width (fwhm) of 'fff' millimeters."
+    },
+    "despike": {
+      "type": "boolean",
+      "default": false,
+      "title": "Despike",
+      "description": "Despike each time series before other processing. hopefully, you don't actually need to do this, which is why it is optional."
+    },
+    "highpass": {
+      "type": "number",
+      "title": "Highpass",
+      "description": "Highpass."
+    },
+    "lowpass": {
+      "type": "number",
+      "title": "Lowpass",
+      "description": "Lowpass."
+    },
+    "in_file": {
+      "type": "string",
+      "title": "In file",
+      "description": "Input file to 3dbandpass."
+    },
+    "localPV": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Localpv",
+      "description": "Replace each vector by the local principal vector (aka first singular vector) from a neighborhood of radius 'rrr' millimeters. note that the pv time series is l2 normalized. this option is mostly for bob cox to have fun with."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask",
+      "description": "Mask file."
+    },
+    "nfft": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Nfft",
+      "description": "Set the fft length [must be a legal value]."
+    },
+    "no_detrend": {
+      "type": "boolean",
+      "default": false,
+      "title": "No detrend",
+      "description": "Skip the quadratic detrending of the input that occurs before the fft-based bandpassing. you would only want to do this if the dataset had been detrended already in some other program."
+    },
+    "normalize": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normalize",
+      "description": "Make all output time series have l2 norm = 1 (i.e., sum of squares = 1)."
+    },
+    "notrans": {
+      "type": "boolean",
+      "default": false,
+      "title": "Notrans",
+      "description": "Don't check for initial positive transients in the data. the test is a little slow, so skipping it is ok, if you know the data time series are transient-free."
+    },
+    "orthogonalize_dset": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Orthogonalize dset",
+      "description": "Orthogonalize each voxel to the corresponding voxel time series in dataset 'fset', which must have the same spatial and temporal grid structure as the main input dataset. at present, only one '-dsort' option is allowed."
+    },
+    "orthogonalize_file": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Orthogonalize file",
+      "description": "Also orthogonalize input to columns in f.1d. multiple '-ort' options are allowed."
+    },
+    "outputtype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outputtype",
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype."
+    },
+    "tr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tr",
+      "description": "Set time step (tr) in sec [default=from dataset header]."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "highpass",
+    "lowpass",
+    "in_file"
+  ]
+}

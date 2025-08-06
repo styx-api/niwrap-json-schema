@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Diagnostic tool for analyzing and computing mean values for FSL data.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mean"
+    },
+    "datafile": {
+      "type": "string",
+      "title": "Data file",
+      "description": "Regressor data file"
+    },
+    "maskfile": {
+      "type": "string",
+      "title": "Mask file",
+      "description": "Mask file"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "debug_level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug level",
+      "description": "Set debug level"
+    },
+    "timing_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Timing flag",
+      "description": "Turn timing on"
+    },
+    "log_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log directory",
+      "description": "Log directory (default is logdir)"
+    },
+    "forcedir_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force directory flag",
+      "description": "Use the actual directory name given - i.e. don't add + to make a new directory"
+    },
+    "inference_tech": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inference technique",
+      "description": "Inference technique: mcmc or laplace (default is mcmc)"
+    },
+    "num_jumps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of jumps",
+      "description": "Number of jumps to be made by MCMC (default is 5000)"
+    },
+    "num_burnin": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of burn-in jumps",
+      "description": "Number of jumps at start of MCMC to be discarded (default is 500)"
+    },
+    "num_sample_every": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of jumps per sample",
+      "description": "Number of jumps for each sample (MCMC) (default is 1)"
+    },
+    "num_update_proposalevery": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of jumps per proposal update",
+      "description": "Number of jumps for each update to the proposal density std (MCMC) (default is 40)"
+    },
+    "acceptance_rate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Acceptance rate",
+      "description": "Acceptance rate to aim for (MCMC) (default is 0.6)"
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Seed",
+      "description": "Seed for pseudo random number generator"
+    },
+    "error_precision": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error precision",
+      "description": "Value to fix error precision to (default is -1, which means error precision is not fixed)"
+    },
+    "noamp_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No AMP flag",
+      "description": "Turn off Analytical Marginalisation of error Precision"
+    },
+    "prior_mean": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prior mean",
+      "description": "Prior mean"
+    },
+    "prior_std": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prior standard deviation",
+      "description": "Prior standard deviation"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Display help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "datafile",
+    "maskfile"
+  ]
+}

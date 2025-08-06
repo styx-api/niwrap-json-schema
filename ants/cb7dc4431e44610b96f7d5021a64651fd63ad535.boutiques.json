@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Rebase Tensor Image using specified dimensionality and method.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "RebaseTensorImage"
+    },
+    "dimension": {
+      "type": "integer",
+      "title": "Dimension",
+      "description": "The dimensionality of the input image."
+    },
+    "infile": {
+      "type": "string",
+      "title": "Input File",
+      "description": "The input image file."
+    },
+    "outfile": {
+      "type": "string",
+      "title": "Output File",
+      "description": "The output image file."
+    },
+    "method": {
+      "type": "string",
+      "title": "Method",
+      "description": "Method of rebasing the tensor image."
+    },
+    "reference": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference Image",
+      "description": "Reference image file (required if PHYSICAL or LOCAL method is chosen)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dimension",
+    "infile",
+    "outfile",
+    "method"
+  ]
+}

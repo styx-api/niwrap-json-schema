@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Creates a version of Surface Anatomy that is registered to Experiment Anatomy.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@SUMA_AlignToExperiment"
+    },
+    "exp_anat": {
+      "type": "string",
+      "title": "Experiment Anatomy",
+      "description": "Name of high resolution anatomical data set in register with experimental data."
+    },
+    "surf_anat": {
+      "type": "string",
+      "title": "Surface Anatomy",
+      "description": "Path and name of high resolution antomical data set used to create the surface."
+    },
+    "dxyz": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolution for Downsampling",
+      "description": "Optional parameter to downsample anatomical volumes to dxyz mm voxel resolution before registration."
+    },
+    "out_dxyz": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Voxel Size",
+      "description": "Output the final aligned volume at a cubic voxelsize of DXYZmm."
+    },
+    "wd": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use 3dWarpDrive",
+      "description": "Use 3dWarpDrive's general affine transform (12 param) instead of 3dvolreg's 6 parameters."
+    },
+    "al": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use 3dAllineate",
+      "description": "Use 3dAllineate to do the 12 parameter alignment. Cost function is 'lpa'."
+    },
+    "al_opt": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Options for 3dAllineate",
+      "description": "Specify set of options to pass to 3dAllineate."
+    },
+    "ok_change_view": {
+      "type": "boolean",
+      "default": false,
+      "title": "OK Change View",
+      "description": "Be quiet when view of registered volume is changed to match that of the Experiment_Anatomy."
+    },
+    "strip_skull": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Strip Skull",
+      "description": "Use 3dSkullStrip to remove non-brain tissue."
+    },
+    "skull_strip_opt": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Options for 3dSkullStrip",
+      "description": "Pass the options to 3dSkullStrip."
+    },
+    "align_centers": {
+      "type": "boolean",
+      "default": false,
+      "title": "Align Centers",
+      "description": "Add an additional transformation to align the volume centers."
+    },
+    "init_xform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Transform",
+      "description": "Apply affine transform file to Surface_Anatomy before beginning registration."
+    },
+    "EA_clip_below": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Clip Below",
+      "description": "Set slices below CLPmm in 'Experiment Anatomy' to zero."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix for Output",
+      "description": "Prefix for the output volume."
+    },
+    "surf_anat_followers": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Anatomy Followers",
+      "description": "Apply the same alignment transform to additional datasets."
+    },
+    "followers_interp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolation Mode",
+      "description": "Set the interpolation mode for the follower datasets."
+    },
+    "atlas_followers": {
+      "type": "boolean",
+      "default": false,
+      "title": "Atlas Followers",
+      "description": "Automatically set the followers to be atlases in the directory of -surf_anat."
+    },
+    "echo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Echo Commands",
+      "description": "Echo all commands to terminal for debugging."
+    },
+    "keep_tmp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep Temporary Files",
+      "description": "Keep temporary files for debugging."
+    },
+    "overwrite_resp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Overwrite Response",
+      "description": "Answer 'overwrite' questions automatically."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "exp_anat",
+    "surf_anat"
+  ]
+}

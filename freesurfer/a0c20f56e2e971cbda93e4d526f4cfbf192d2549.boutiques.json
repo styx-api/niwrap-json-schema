@@ -1,0 +1,376 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Segments white matter from the input volume.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_segment"
+    },
+    "in_vol": {
+      "type": "string",
+      "title": "Input Volume",
+      "description": "Input volume to be segmented"
+    },
+    "out_vol": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume after segmentation"
+    },
+    "no1d_remove": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "No 1D Remove",
+      "description": "Don't run code that removes 1D strands from segmentation"
+    },
+    "slope": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Curvature Slope",
+      "description": "Set the curvature slope (both n and p)"
+    },
+    "pslope": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1.0,
+      "title": "Curvature Pslope",
+      "description": "Set the curvature pslope (default=1.0)"
+    },
+    "nslope": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1.0,
+      "title": "Curvature Nslope",
+      "description": "Set the curvature nslope (default=1.0)"
+    },
+    "debug_voxel": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Voxel",
+      "description": "Set voxel for debugging"
+    },
+    "auto": {
+      "type": "boolean",
+      "default": false,
+      "title": "Auto Detection",
+      "description": "Automatically detect class statistics (default)"
+    },
+    "noauto": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Auto Detection",
+      "description": "Don't automatically detect class statistics"
+    },
+    "log": {
+      "type": "boolean",
+      "default": false,
+      "title": "Log",
+      "description": "Log to ./segment.dat"
+    },
+    "keep": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep WM Edits",
+      "description": "Keep wm edits, maintains all values of 1 and 255"
+    },
+    "gray_hi": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 100.0,
+      "title": "Gray Matter High Limit",
+      "description": "Set the gray matter high limit (default=100.000)"
+    },
+    "wm_low": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 80.0,
+      "title": "White Matter Low Limit",
+      "description": "Set the white matter low limit (default=80.000)"
+    },
+    "wm_low_factor": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "WM Low Factor",
+      "description": "wm_low = f*gray_mean + (1-f)*white_mean;"
+    },
+    "wm_hi": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 125.0,
+      "title": "White Matter High Limit",
+      "description": "Set the white matter high limit (default=125.000)"
+    },
+    "nseg": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 20,
+      "title": "N Segments",
+      "description": "Thicken the n largest thin strands (default=20)"
+    },
+    "thicken": {
+      "type": "boolean",
+      "default": false,
+      "title": "Thickening Step",
+      "description": "Toggle thickening step (default=ON)"
+    },
+    "fillbg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fill Basal Ganglia",
+      "description": "Toggle filling of the basal ganglia (default=OFF)"
+    },
+    "fillv": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fill Ventricles",
+      "description": "Toggle filling of the ventricles (default=OFF)"
+    },
+    "blur_sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.25,
+      "title": "Blur Sigma",
+      "description": "Set blur sigma (default=0.25)"
+    },
+    "iterations": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Iterations",
+      "description": "Set # iterations of border classification (default=1)"
+    },
+    "thin_strand_limit": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 4,
+      "title": "Thin Strand Limit",
+      "description": "Set limit to thin strands in mm (default=4)"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose",
+      "description": "Verbose"
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.8,
+      "title": "Threshold",
+      "description": "Set % threshold (default=0.80)"
+    },
+    "extract_options": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Extract Options",
+      "description": "Extract options from filename"
+    },
+    "wsize": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 11,
+      "title": "Wsize",
+      "description": "Set wsize (default=11 voxels)"
+    },
+    "wsizemm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Wsize MM",
+      "description": "Set wsize based on mm instead of voxels"
+    },
+    "polvw_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 5,
+      "title": "Plane of Least Variance Wsize",
+      "description": "Set wsize for plane of least variance (default=5)"
+    },
+    "polv_len": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 3,
+      "title": "Plane of Least Variance Length",
+      "description": "Set length for plane of least variance (default=3)"
+    },
+    "datfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Datfile",
+      "description": "Set datfile (default is segment.dat)"
+    },
+    "segmentation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation Volume",
+      "description": "Use segmentation to set thresholds"
+    },
+    "diagno": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Diagnostic Number",
+      "description": "Set diagnostic number"
+    },
+    "diag_write": {
+      "type": "boolean",
+      "default": false,
+      "title": "Diagnostic Write",
+      "description": "Set diagnostic write"
+    },
+    "diag_verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Diagnostic Verbose",
+      "description": "Set diagnostic verbose"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in_vol",
+    "out_vol"
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A program to fill holes in volumes.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dinfill"
+    },
+    "input": {
+      "type": "string",
+      "title": "Input Dataset",
+      "description": "Fill volume dataset"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Use PREF for output prefix."
+    },
+    "niter": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Iterations",
+      "description": "Do not allow the fill function to do more than NITER passes."
+    },
+    "blend": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Blend Method",
+      "description": "Method for assigning a value to a hole."
+    },
+    "minhits": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Hits",
+      "description": "Criterion for considering a zero voxel to be a hole. Can only be used with -blend SOLID."
+    },
+    "ed": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Erode and Dilate Parameters",
+      "description": "Erode N times then dilate N times to get rid of hanging chunks. Values filled in by this process get value V."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Dataset",
+      "description": "Provide mask dataset to select subset of input."
+    },
+    "mask_range": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Range",
+      "description": "Specify the range of values to consider from mask dataset."
+    },
+    "mrange": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "MRange",
+      "description": "Alias for -mask_range option."
+    },
+    "cmask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CMask Expression",
+      "description": "Provide cmask expression. Voxels where expression is 0 are excluded from computations."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input"
+  ]
+}

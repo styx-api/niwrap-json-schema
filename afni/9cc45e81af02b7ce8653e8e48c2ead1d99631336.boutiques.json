@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Make a grayplot from a 3D+time dataset, like a carpet plot. Result is saved to a PNG image.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dGrayplot"
+    },
+    "input": {
+      "type": "string",
+      "title": "Input dataset",
+      "description": "Input dataset"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask dataset",
+      "description": "Name of mask dataset. Voxels that are 0 in the mask will not be processed."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output file",
+      "description": "Name for the output file. Default is Grayplot.png"
+    },
+    "dimensions": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output dimensions",
+      "description": "Output size of image in pixels: [width height]. Defaults are width=1024 and height=512."
+    },
+    "resample_old": {
+      "type": "boolean",
+      "default": false,
+      "title": "Old resampling method",
+      "description": "Original resampling method for processed dataset."
+    },
+    "polort": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Polynomial order",
+      "description": "Order of polynomials for detrending. Default is 2. Use '-1' if data is already detrended and de-meaned."
+    },
+    "fwhm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Blurring FWHM",
+      "description": "FWHM of blurring radius to use in the dataset before making the image. Default is 0 mm."
+    },
+    "pvorder": {
+      "type": "boolean",
+      "default": false,
+      "title": "PV order",
+      "description": "Order the voxels by how well they match the two leading principal components of their partition."
+    },
+    "LJorder": {
+      "type": "boolean",
+      "default": false,
+      "title": "LJ order",
+      "description": "Order the voxels by their Ljung-Box statistics, a measure of temporal correlation."
+    },
+    "peelorder": {
+      "type": "boolean",
+      "default": false,
+      "title": "Peel order",
+      "description": "Order the voxels by how many 'peel' steps are needed to get from the partition boundary to the voxel."
+    },
+    "ijkorder": {
+      "type": "boolean",
+      "default": false,
+      "title": "IJK order",
+      "description": "Default intra-partition ordering by dataset 3D index ('ijk')."
+    },
+    "range": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Data range",
+      "description": "Set the range of the data to be plotted. Value of 0 is middle-gray, +X is white, -X is black."
+    },
+    "percent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Percent scaling",
+      "description": "Scale values to percent differences from the mean of each voxel timeseries. Suitable for raw time series datasets."
+    },
+    "raw_with_bounds": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Raw with bounds",
+      "description": "Map values <= A to black, values >= B to white, and intermediate values to grays."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input"
+  ]
+}

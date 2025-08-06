@@ -1,0 +1,407 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Script used to create, modify, and transform label tables",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@MakeLabelTable"
+    },
+    "labeltable": {
+      "type": "string",
+      "title": "Label Table",
+      "description": "Name of output label table"
+    },
+    "atlas_pointlist": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlas Point List",
+      "description": "Instead of a label table, produce an atlas point list"
+    },
+    "lab_r": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Range Definition",
+      "description": "Define a label with its minimum and maximum key values"
+    },
+    "lab_v": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Value Definition",
+      "description": "Define a label and its value"
+    },
+    "lab_file_delim": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label File Delimiter",
+      "description": "Set column delimiter for -lab_file option"
+    },
+    "lab_file": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label File",
+      "description": "Specify labels and keys from a text file"
+    },
+    "dset": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset",
+      "description": "Attach the label table (or atlas point list) to dataset"
+    },
+    "longnames": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Long Names Column Index",
+      "description": "Allow for another column of long names for regions"
+    },
+    "last_longname_col": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Long Name Column Index",
+      "description": "Limit long names to nth column"
+    },
+    "centers": {
+      "type": "boolean",
+      "default": false,
+      "title": "Centers Flag",
+      "description": "Compute center of mass location for each ROI"
+    },
+    "centertype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Center Type",
+      "description": "Different ways to compute centers (Icent, Dcent, cm)"
+    },
+    "centermask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Center Mask",
+      "description": "Calculate center of mass locations using a subset of voxels"
+    },
+    "skip_novoxels": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip No Voxels Flag",
+      "description": "Skip regions without voxels"
+    },
+    "all_labels": {
+      "type": "boolean",
+      "default": false,
+      "title": "All Labels Flag",
+      "description": "Return a listing of all labels"
+    },
+    "all_keys": {
+      "type": "boolean",
+      "default": false,
+      "title": "All Keys Flag",
+      "description": "Return a listing of all keys"
+    },
+    "lkeys": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Keys",
+      "description": "Return the keys whose labels match a given label"
+    },
+    "rkeys": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Range Keys",
+      "description": "Return the range (min max) of keys whose labels match a given label"
+    },
+    "klabel": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Key Label",
+      "description": "Return the label associated with a given key"
+    },
+    "match_label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Match Label",
+      "description": "Return labels matching a given label"
+    },
+    "labeltable_of_dset": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Table of Dataset",
+      "description": "Dump the labeltable from a dataset"
+    },
+    "word_label_match": {
+      "type": "boolean",
+      "default": false,
+      "title": "Word Label Match Flag",
+      "description": "Use word matching for labels"
+    },
+    "quiet_death": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet Death Flag",
+      "description": "Do not give error messages when failing"
+    },
+    "lt_to_atlas_pl": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Table to Atlas Point List",
+      "description": "Transform Label Table to Atlas Point List"
+    },
+    "dset_lt_to_atlas_pl": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset Label Table to Atlas Point List",
+      "description": "Get Label Table in dataset and write as an Atlas Point List"
+    },
+    "lt_to_csv": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Table to CSV",
+      "description": "Transform Label Table to CSV format"
+    },
+    "atlasize_labeled_dset": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlasize Labeled Dataset",
+      "description": "Transform a labeled ROI dataset into an atlas"
+    },
+    "atlas_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlas File",
+      "description": "Specify the name of the NIML file where atlas attributes are stored"
+    },
+    "atlas_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlas Name",
+      "description": "Name of the Atlas"
+    },
+    "atlas_description": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlas Description",
+      "description": "Description of the Atlas, which appears in AFNI's whereami window"
+    },
+    "replace": {
+      "type": "boolean",
+      "default": false,
+      "title": "Replace Flag",
+      "description": "Replace existing Atlas if the name already exists in the NIML file"
+    },
+    "add_atlas_dset": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Add Atlas Dataset",
+      "description": "Add an existing atlas to an atlas file"
+    },
+    "h_web": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Web",
+      "description": "Open webpage with help for this program"
+    },
+    "h_view": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help View",
+      "description": "Open -help output in a GUI editor"
+    },
+    "all_opts": {
+      "type": "boolean",
+      "default": false,
+      "title": "All Options",
+      "description": "List all of the options for this script"
+    },
+    "h_find": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Help Find",
+      "description": "Search for lines containing a specific word in the help output"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "labeltable"
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Converts values in a volume or surface overlay to a label. Designed to convert parcellation volumes stored in mri format.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_cor2label"
+    },
+    "input_file": {
+      "type": "string",
+      "title": "Input File",
+      "description": "Input volume or surface overlay file."
+    },
+    "label_id": {
+      "type": "number",
+      "title": "Label Identifier",
+      "description": "Value to match in the input data."
+    },
+    "label_file": {
+      "type": "string",
+      "title": "Output Label File",
+      "description": "Name of the output label file."
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold Value",
+      "description": "Threshold the input to make label, e.g., input values must be greater than the threshold."
+    },
+    "volume_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volume File",
+      "description": "Write the label volume to a file."
+    },
+    "surface_overlay": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Overlay",
+      "description": "Interpret input as a surface overlay, specifying subject, hemisphere, and surface."
+    },
+    "surface_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Path",
+      "description": "Specify surface path rather than subject/hemisphere."
+    },
+    "optimize": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Optimize",
+      "description": "Treat input as a probability map and optimize thresholding."
+    },
+    "remove_holes_islands": {
+      "type": "boolean",
+      "default": false,
+      "title": "Remove Holes and Islands",
+      "description": "Remove holes in label and islands (only valid with --surf)."
+    },
+    "dilate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dilate",
+      "description": "Dilate label with specified number of dilations (only valid with --surf)."
+    },
+    "erode": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Erode",
+      "description": "Erode label with specified number of erosions (only valid with --surf)."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Display help information."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "label_id",
+    "label_file"
+  ]
+}

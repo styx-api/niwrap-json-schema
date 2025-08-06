@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Perform agglomerative hierarchical clustering for user specified parameter sub-bricks, for all voxels whose threshold statistic is above a user specified value.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dStatClust"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output dataset prefix",
+      "description": "Use 'pname' for the output dataset prefix name."
+    },
+    "session_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Session directory",
+      "description": "Use 'dir' for the output dataset session directory."
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose output",
+      "description": "Print out verbose output as the program proceeds."
+    },
+    "dist_euc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Euclidean distance",
+      "description": "Calculate Euclidean distance between parameters"
+    },
+    "dist_ind": {
+      "type": "boolean",
+      "default": false,
+      "title": "Statistical distance for independent parameters",
+      "description": "Statistical distance for independent parameters"
+    },
+    "dist_cor": {
+      "type": "boolean",
+      "default": false,
+      "title": "Statistical distance for correlated parameters",
+      "description": "Statistical distance for correlated parameters"
+    },
+    "thresh": {
+      "type": "string",
+      "title": "Threshold",
+      "description": "Threshold statistic from file tname. Only voxels whose threshold statistic is greater than t in absolute value will be considered. If file tname contains more than 1 sub-brick, the threshold stat. sub-brick must be specified."
+    },
+    "nclust": {
+      "type": "number",
+      "title": "Number of clusters",
+      "description": "Maximum number of clusters for output (= number of sub-bricks in output dataset)."
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Parameter datasets",
+      "description": "Parameter datasets."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "thresh",
+    "nclust",
+    "datasets"
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Convert, dewarp, and resample DICOM files to MGH files.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "grad_unwarp"
+    },
+    "infile": {
+      "type": "string",
+      "title": "Input file",
+      "description": "Input file or directory (dcmfile, dcmdir, or mghfile)"
+    },
+    "seriesno": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Series number",
+      "description": "DICOM series number, required if input is a directory"
+    },
+    "unwarp_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unwarp type",
+      "description": "Gradient unwarping displacement type or map file (required for MGH file)"
+    },
+    "nojac": {
+      "type": "boolean",
+      "default": false,
+      "title": "Nojac flag",
+      "description": "Do not perform jacobian correction when unwarping"
+    },
+    "corfov": {
+      "type": "boolean",
+      "default": false,
+      "title": "Corfov flag",
+      "description": "Resample to Coronal FOV"
+    },
+    "cor": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cor format flag",
+      "description": "Output in COR format instead of MGH"
+    },
+    "interp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolation method",
+      "description": "Interpolation method (cubic, linear, nearest, spline)"
+    },
+    "outfile": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output file in MGH format"
+    },
+    "matlab_binary": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "/space/lyon/6/pubsw/common/matlab/6.5/bin/matlab",
+      "title": "Matlab binary path",
+      "description": "Path to the Matlab binary, version 6.5 or higher required"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "infile",
+    "outfile"
+  ]
+}

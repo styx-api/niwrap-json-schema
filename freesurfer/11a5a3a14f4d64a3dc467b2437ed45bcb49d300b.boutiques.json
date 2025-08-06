@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool to estimate white matter surfaces using MRI data.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mris_estimate_wm"
+    },
+    "subjs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Subjects",
+      "description": "List of subjects to process."
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere to reconstruct (lh or rh)."
+    },
+    "sdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Override SUBJECTS_DIR."
+    },
+    "model": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model",
+      "description": "Override default model."
+    },
+    "suffix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Surface Suffix",
+      "description": "Suffix of output surface (default is 'topofit')."
+    },
+    "gpu": {
+      "type": "boolean",
+      "default": false,
+      "title": "GPU flag",
+      "description": "Use the GPU."
+    },
+    "rsi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Remove self-intersecting faces",
+      "description": "Remove self-intersecting faces during the deformation."
+    },
+    "single_iter": {
+      "type": "boolean",
+      "default": false,
+      "title": "Single iteration",
+      "description": "Prevent deformation steps from running more than once."
+    },
+    "vol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volume",
+      "description": "Subject volume to use as input."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subjs",
+    "hemi"
+  ]
+}

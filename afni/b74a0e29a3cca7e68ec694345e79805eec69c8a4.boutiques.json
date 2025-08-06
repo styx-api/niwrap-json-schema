@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Computes the first two principal component vectors of a time series dataset, then outputs the R-squared coefficient of each voxel time series with these first two components.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dPVmap"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Output prefix for generated files"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask File",
+      "description": "Mask dataset (e.g., brainmask.nii)"
+    },
+    "automask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automask Flag",
+      "description": "Automatically generate a mask from the input dataset"
+    },
+    "inputdataset": {
+      "type": "string",
+      "title": "Input Dataset",
+      "description": "Input dataset (e.g., fred.nii)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "inputdataset"
+  ]
+}

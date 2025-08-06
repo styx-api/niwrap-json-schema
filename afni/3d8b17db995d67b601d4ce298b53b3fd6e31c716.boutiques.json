@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Demo script to create a graph dataset to show names of individuals and groups, potentially useful for acknowledgements in a talk.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@suma_acknowledge"
+    },
+    "input_file": {
+      "type": "string",
+      "title": "Input file",
+      "description": "Required input text file with format for each line: first last groupname."
+    },
+    "surface_file": {
+      "type": "string",
+      "title": "Surface file",
+      "description": "Required surface to place nodes."
+    },
+    "output_prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Output prefix for graph dataset."
+    },
+    "center_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Center flag",
+      "description": "Put center coord at x,y,z=0,0,0. Otherwise, uses average xyz in surface."
+    },
+    "subsurface_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subsurface file",
+      "description": "Surface for surrounding members of group (use ld2, ld4, ld5, ld6, .... default is ld5)."
+    },
+    "scale_factor": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale factor",
+      "description": "Scale xyz for group nodes (default is 1.0)."
+    },
+    "reduce_factor": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reduce factor",
+      "description": "Scale xyz offsets for member nodes (xyz/r), default is 10."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "surface_file",
+    "output_prefix"
+  ]
+}

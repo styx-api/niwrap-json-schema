@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool for labeling regions of a surface using random forest classification.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mris_rf_label"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject identifier"
+    },
+    "rf_classifier": {
+      "type": "string",
+      "title": "RF Classifier",
+      "description": "Random Forest classifier"
+    },
+    "output_name": {
+      "type": "string",
+      "title": "Output Name",
+      "description": "Output name"
+    },
+    "hemi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hemisphere",
+      "description": "Process specified hemisphere instead of default (lh)."
+    },
+    "surf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface",
+      "description": "Change default surface name from 'white' to specified surface."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject",
+    "rf_classifier",
+    "output_name"
+  ]
+}

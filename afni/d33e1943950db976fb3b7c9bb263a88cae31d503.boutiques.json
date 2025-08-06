@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Compares two (or more) affine spatial transformations on a dataset and outputs measurements of their differences in spatial displacements.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dCompareAffine"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask",
+      "description": "Dataset containing non-zero voxels used as the region over which to compare the affine transformations."
+    },
+    "dset": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset",
+      "description": "Dataset to compute an automask from it and use that mask as the spatial region for comparison."
+    },
+    "affine": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Affine transformation",
+      "description": "Input an affine transformation (file or 'MATRIX'). Multiple '-affine' options can be used to input multiple files."
+    }
+  },
+  "additionalProperties": false
+}

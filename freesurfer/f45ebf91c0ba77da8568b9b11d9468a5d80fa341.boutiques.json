@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program creates a surface by tessellating a given input volume.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_tessellate"
+    },
+    "input_volume": {
+      "type": "string",
+      "title": "Input volume",
+      "description": "Input volume (e.g., a filled MRI image)."
+    },
+    "label_value": {
+      "type": "integer",
+      "title": "Label value",
+      "description": "Label value for the tessellation. Integer value, if input is filled volume, 127 is rh, 255 is lh."
+    },
+    "output_surf": {
+      "type": "string",
+      "title": "Output surface",
+      "description": "Binary surface of the tessellation, output file."
+    },
+    "different_labels": {
+      "type": "boolean",
+      "default": false,
+      "title": "Different labels flag",
+      "description": "Tessellate the surface of all voxels with different labels."
+    },
+    "max_vertices": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max vertices",
+      "description": "Set the max number of vertices to nvertices, and the max number of faces to (2 * nvertices)."
+    },
+    "real_ras": {
+      "type": "boolean",
+      "default": false,
+      "title": "Real RAS flag",
+      "description": "Save surface with real RAS coordinates where c_(r,a,s) != 0."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume",
+    "label_value",
+    "output_surf"
+  ]
+}

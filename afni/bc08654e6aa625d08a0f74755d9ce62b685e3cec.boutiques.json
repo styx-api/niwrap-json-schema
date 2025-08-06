@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Automated QC snapshots generator in AFNI",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@chauffeur_afni"
+    },
+    "ulay": {
+      "type": "string",
+      "title": "Underlay dataset",
+      "description": "Name of underlay dataset (required); can be 3D or 4D set"
+    },
+    "olay": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Overlay dataset",
+      "description": "Name of overlay dataset (optional)"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Prefix for output files (required)"
+    },
+    "mode_4D": {
+      "type": "boolean",
+      "default": false,
+      "title": "4D mode",
+      "description": "For each viewing plane, one slice is selected across all volumes in a 4D dataset"
+    },
+    "func_range": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Functional range",
+      "description": "Specify upper value of the overlay dataset to be matched to top of colorbar (default: 98%ile non-zero value of dataset)"
+    },
+    "opacity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Overlay opacity",
+      "description": "Enter an opacity factor for the overlay (0-9, with 9 being opaque)"
+    },
+    "set_subbricks": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Set subbricks",
+      "description": "Specify subbricks for 3D image viewing"
+    },
+    "montx": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Montage X",
+      "description": "Number of image panels in a row (default: 3)"
+    },
+    "monty": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Montage Y",
+      "description": "Number of image panels in a column (default: 3)"
+    },
+    "montgap": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Montage gap",
+      "description": "Number of pixels as gap between image panels (default: 0)"
+    },
+    "label_mode": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label mode",
+      "description": "Control labels, ON/OFF and location (default: 1)"
+    },
+    "label_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label size",
+      "description": "Control labels, size (default: 3)"
+    },
+    "label_color": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label color",
+      "description": "Control labels, color (default: white)"
+    },
+    "label_setback": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label setback",
+      "description": "Control labels, offset from edge (default: 0.01)"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "No clean",
+      "description": "Do not remove the temporary directory of copied/intermediate files"
+    },
+    "do_clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Do clean",
+      "description": "Remove the temporary directory of copied/intermediate files"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Display help information"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Display version number"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ulay",
+    "prefix"
+  ]
+}

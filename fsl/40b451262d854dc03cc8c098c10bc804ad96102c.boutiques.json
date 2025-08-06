@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool to align point coordinates between volumes and compute affine transformation matrices.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "pointflirt"
+    },
+    "invol_coords": {
+      "type": "string",
+      "title": "Input volume coordinates",
+      "description": "Filename of input volume coordinates"
+    },
+    "refvol_coords": {
+      "type": "string",
+      "title": "Reference volume coordinates",
+      "description": "Filename of reference volume coordinates"
+    },
+    "out_matrix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output matrix",
+      "description": "Filename of affine matrix output"
+    },
+    "use_vox": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Voxel Coordinates",
+      "description": "Use voxel coordinates, not mm, for input"
+    },
+    "vol_input": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input volume",
+      "description": "Filename of input volume (needed for --vox option)"
+    },
+    "vol_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference volume",
+      "description": "Filename of reference volume (needed for --vox option)"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Switch on diagnostic messages"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "invol_coords",
+    "refvol_coords"
+  ]
+}

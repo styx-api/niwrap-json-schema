@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Writes AFNI dataset to ANALYZE 7.5 format .hdr/.img file pairs.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dAFNItoANALYZE"
+    },
+    "4d_option": {
+      "type": "boolean",
+      "default": false,
+      "title": "4D flag",
+      "description": "Write all data to one big ANALYZE file pair named aname.hdr/aname.img"
+    },
+    "orient_option": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Orientation code",
+      "description": "Flip the dataset to a different orientation when writing to ANALYZE files (e.g., LPI)"
+    },
+    "output_name": {
+      "type": "string",
+      "title": "Output name",
+      "description": "Output ANALYZE file base name (e.g., aname)"
+    },
+    "afni_dataset": {
+      "type": "string",
+      "title": "Input dataset",
+      "description": "Input AFNI dataset"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "output_name",
+    "afni_dataset"
+  ]
+}

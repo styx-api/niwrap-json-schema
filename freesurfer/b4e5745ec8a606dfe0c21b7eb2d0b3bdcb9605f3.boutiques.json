@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Compute the area of specific labels on a surface of a brain hemisphere in FreeSurfer.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mris_label_area"
+    },
+    "pct_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Percentage Flag",
+      "description": "Compute brain area as a percentage of all brain labels"
+    },
+    "log_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log File",
+      "description": "Log results to file (use %d to include label number)"
+    },
+    "brain_vol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brain Volume",
+      "description": "Load brain volume and use it to normalize areas"
+    },
+    "subject_name": {
+      "type": "string",
+      "title": "Subject Name",
+      "description": "Name of the subject"
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere, typically 'lh' or 'rh'"
+    },
+    "surf_name": {
+      "type": "string",
+      "title": "Surface Name",
+      "description": "Surface name"
+    },
+    "annot_name": {
+      "type": "string",
+      "title": "Annotation Name",
+      "description": "Annotation name"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Labels",
+      "description": "Labels to calculate area for"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_name",
+    "hemi",
+    "surf_name",
+    "annot_name",
+    "labels"
+  ]
+}

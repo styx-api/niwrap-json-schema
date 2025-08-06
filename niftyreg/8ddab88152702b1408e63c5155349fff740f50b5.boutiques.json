@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A versatile tool for manipulating and processing medical images.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "reg_tools"
+    },
+    "input_image": {
+      "type": "string",
+      "title": "Input Image",
+      "description": "Filename of the input image"
+    },
+    "output_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Image",
+      "description": "Filename of the output image"
+    },
+    "add_value_or_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Add Image or Value",
+      "description": "This image (or value) is added to the input"
+    },
+    "sub_value_or_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subtract Image or Value",
+      "description": "This image (or value) is subtracted from the input"
+    },
+    "mul_value_or_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Multiply Image or Value",
+      "description": "This image (or value) is multiplied with the input"
+    },
+    "div_value_or_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Divide Image or Value",
+      "description": "This image (or value) is divided by the input"
+    },
+    "smooth_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smooth with B-Spline Curve",
+      "description": "The input image is smoothed using a B-spline curve"
+    },
+    "smooth_gaussian": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smooth with Gaussian Kernel",
+      "description": "The input image is smoothed using a Gaussian kernel"
+    },
+    "rms_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Compute RMS",
+      "description": "Compute the mean RMS between the input image and this image"
+    },
+    "binarize": {
+      "type": "boolean",
+      "default": false,
+      "title": "Binarize Image",
+      "description": "Binarize the input image (val!=0?val=1:val=0)"
+    },
+    "threshold_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold Image",
+      "description": "Threshold the input image (val<thr?val=0:val=1)"
+    },
+    "nan_mask_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "NaN Mask Image",
+      "description": "This image is used to mask the input image. Voxels outside of the mask are set to NaN"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image"
+  ]
+}

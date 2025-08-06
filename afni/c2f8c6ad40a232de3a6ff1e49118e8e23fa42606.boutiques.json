@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Helper script to convert (x, y, z) coordinates to (i, j, k) indices for a volumetric dataset.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@xyz_to_ijk"
+    },
+    "inset": {
+      "type": "string",
+      "title": "Volumetric file",
+      "description": "Volumetric file name (e.g. FILE.nii.gz)"
+    },
+    "x_coord": {
+      "type": "number",
+      "title": "X coordinate",
+      "description": "Three coordinates (in units of the dataset, like mm)"
+    },
+    "y_coord": {
+      "type": "number",
+      "title": "Y coordinate",
+      "description": "Three coordinates (in units of the dataset, like mm)"
+    },
+    "z_coord": {
+      "type": "number",
+      "title": "Z coordinate",
+      "description": "Three coordinates (in units of the dataset, like mm)"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output prefix",
+      "description": "File name (including path) to output the three indices"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "inset",
+    "x_coord",
+    "y_coord",
+    "z_coord"
+  ]
+}

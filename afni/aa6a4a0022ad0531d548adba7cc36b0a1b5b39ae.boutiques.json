@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Helper script for various tasks, heavily modeled on RW Cox's '@snapshot_volreg' script",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@djunct_edgy_align_check"
+    },
+    "ULAY": {
+      "type": "string",
+      "title": "ULAY",
+      "description": "ULAY dataset"
+    },
+    "OLAY": {
+      "type": "string",
+      "title": "OLAY",
+      "description": "OLAY dataset"
+    },
+    "PREFIX": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Prefix for output files"
+    },
+    "set_dicom_xyz": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DICOM Coordinates",
+      "description": "DICOM coordinates {XX YY ZZ}"
+    },
+    "box_focus_slices": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Focus Slices Dataset",
+      "description": "Dataset to focus slices"
+    },
+    "montgap": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Montage Gap",
+      "description": "Gap between slices in montage"
+    },
+    "montcolor": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Montage Color",
+      "description": "Color for montage"
+    },
+    "cbar": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Color Bar",
+      "description": "Color bar for overlay"
+    },
+    "save_ftype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Save File Type",
+      "description": "File type to save"
+    },
+    "umin_fac": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Underlay Min Factor",
+      "description": "Scaling factor for underlay minimum"
+    },
+    "montx": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Montage X Slices",
+      "description": "Number of slices in X-direction for montage"
+    },
+    "monty": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Montage Y Slices",
+      "description": "Number of slices in Y-direction for montage"
+    },
+    "use_olay_grid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Overlay Grid Interpolation",
+      "description": "Grid interpolation method for overlay"
+    },
+    "label_mode": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Mode",
+      "description": "Mode for labeling"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Display help message"
+    },
+    "ver_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Show version"
+    },
+    "echo_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Echo",
+      "description": "Echo commands"
+    },
+    "sharpen_ulay_off_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sharpen Underlay Off",
+      "description": "Disable underlay sharpening"
+    },
+    "mask_olay_edges_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mask Overlay Edges",
+      "description": "Mask overlay edges"
+    },
+    "no_cor_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Coronal",
+      "description": "Exclude coronal plane"
+    },
+    "no_sag_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Sagittal",
+      "description": "Exclude sagittal plane"
+    },
+    "no_axi_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Axial",
+      "description": "Exclude axial plane"
+    },
+    "no_clean_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Clean",
+      "description": "Disable cleaning temporary files"
+    },
+    "ulay_range": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Underlay Range",
+      "description": "Range for underlay {umin umax}"
+    },
+    "ulay_range_nz": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Non-zero Underlay Range",
+      "description": "Range for non-zero underlay {umin umax}"
+    },
+    "ulay_range_am": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Auto-mask Underlay Range",
+      "description": "Range for auto-mask underlay {umin umax}"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ULAY",
+    "OLAY",
+    "PREFIX"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Purifies a series of 1D files for faster I/O into matlab.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "@Purify_1D"
+    },
+    "sub_brick": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sub-brick selection",
+      "description": "The sub-brick selection mode to output a select number of columns, following AFNI conventions."
+    },
+    "suffix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output suffix",
+      "description": "STRING is attached to the output prefix which is formed from the input names."
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input files",
+      "description": "Input 1D dataset files."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files"
+  ]
+}

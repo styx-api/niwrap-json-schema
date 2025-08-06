@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Measures the anatomical SNR in white matter (WM) for quality assurance (QA). This is an experimental metric.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "wm-anat-snr"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "FreeSurfer subject name"
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output file"
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force Flag",
+      "description": "Force analysis even if output is up-to-date"
+    },
+    "nerode": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Erodes",
+      "description": "Number of erosions for the WM mask"
+    },
+    "tmp_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Temporary Directory",
+      "description": "Temporary directory"
+    },
+    "cleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cleanup Flag",
+      "description": "Delete temporary directory after execution"
+    },
+    "no_cleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cleanup Flag",
+      "description": "Do not delete temporary directory after execution"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject",
+    "output_file"
+  ]
+}

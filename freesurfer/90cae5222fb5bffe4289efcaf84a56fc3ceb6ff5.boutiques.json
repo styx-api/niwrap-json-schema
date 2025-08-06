@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Registers FSL-Feat example_func to FreeSurfer anatomical data.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "reg-feat2anat"
+    },
+    "feat_dir": {
+      "type": "string",
+      "title": "Feat directory",
+      "description": "Directory in which to find example_func."
+    },
+    "subject_id": {
+      "type": "string",
+      "title": "Subject ID",
+      "description": "FreeSurfer subject identifier as found in SUBJECTS_DIR."
+    },
+    "overwrite_exf2std": {
+      "type": "boolean",
+      "default": false,
+      "title": "Overwrite example_func2standard flag",
+      "description": "Replace Feat-generated example_func2standard."
+    },
+    "manual": {
+      "type": "boolean",
+      "default": false,
+      "title": "Manual registration flag",
+      "description": "Interactively view/edit registration."
+    },
+    "manxfm_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Manual xfm type",
+      "description": "Interactively view/edit registration for xfm type. xfmtype can be: func2anat, std2anat, or func2std."
+    },
+    "dof": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Degrees of Freedom",
+      "description": "FLIRT degrees of freedom (default is 6)."
+    },
+    "bins": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bins",
+      "description": "FLIRT number of bins (default is 256)."
+    },
+    "cost": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cost function",
+      "description": "FLIRT cost function (default is corratio)."
+    },
+    "max_angle": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum search angle",
+      "description": "FLIRT maximum search angle (default is 90)."
+    },
+    "bet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Bet function flag",
+      "description": "Run betfunc on example_func (not with FSL 4.0)."
+    },
+    "title": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Title for tkregister",
+      "description": "Title for tkregister window."
+    },
+    "no_bbr": {
+      "type": "boolean",
+      "default": false,
+      "title": "No BBR flag",
+      "description": "Do not use boundary-based registration."
+    },
+    "spm": {
+      "type": "boolean",
+      "default": false,
+      "title": "SPM flag",
+      "description": "Use SPM instead of FLIRT, 6 dof only."
+    },
+    "no_inorm": {
+      "type": "boolean",
+      "default": false,
+      "title": "No inorm flag",
+      "description": "Do not inorm when running tkregister2."
+    },
+    "fmov": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fmov",
+      "description": "fmov argument for tkregister2."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Turn on debugging."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "feat_dir",
+    "subject_id"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Uses the Remez algorithm to calculate the FIR filter weights for a bandpass filter; results are written to stdout in an unadorned (no header) column of numbers.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "FIRdesign"
+    },
+    "fbot": {
+      "type": "number",
+      "minimum": 0,
+      "title": "Low Passband Frequency",
+      "description": "Lowest frequency in the pass band."
+    },
+    "ftop": {
+      "type": "number",
+      "minimum": 0,
+      "title": "High Passband Frequency",
+      "description": "Highest frequency in the pass band, must be higher than fbot and <= 0.5/TR."
+    },
+    "ntap": {
+      "type": "number",
+      "minimum": 8,
+      "maximum": 2000,
+      "title": "Number of Taps",
+      "description": "Number of filter weights (AKA 'taps') to use, must be in the range 8..2000 (inclusive)."
+    },
+    "tr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time Grid Spacing",
+      "description": "Set time grid spacing to 'dd' [default is 1.0]"
+    },
+    "alternative_band": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Alternative Passband",
+      "description": "Alternative way to specify the passband"
+    },
+    "alternative_ntap": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 8,
+          "maximum": 2000
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Alternative Number of Taps",
+      "description": "Alternative way to specify the number of taps"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "fbot",
+    "ftop",
+    "ntap"
+  ]
+}

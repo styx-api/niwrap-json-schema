@@ -1,0 +1,360 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A program to perform clustering analysis surfaces",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "SurfClust"
+    },
+    "specfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spec file",
+      "description": "The surface spec file"
+    },
+    "input_surface": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input surface name",
+      "description": "The input surface name"
+    },
+    "input_surf_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input surface file",
+      "description": "Full name of the input surface"
+    },
+    "input_dataset": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "title": "Input dataset",
+      "description": "The input dataset and the index of the datacolumn to use (index 0 for 1st column). Values of 0 indicate inactive nodes."
+    },
+    "rmm": {
+      "type": "number",
+      "title": "RMM radius",
+      "description": "Maximum distance between an activated node and the cluster to which it belongs."
+    },
+    "amm2": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum area",
+      "description": "Minimum area for clusters"
+    },
+    "min_nodes": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum nodes",
+      "description": "Minimum nodes for clusters"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output prefix",
+      "description": "Prefix for output. Default is the prefix of the input dataset."
+    },
+    "out_clusterdset": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output clustered dataset",
+      "description": "Output a clustered version of input dataset"
+    },
+    "out_roidset": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output ROI dataset",
+      "description": "Output an ROI dataset with the rank of its cluster"
+    },
+    "out_fulllist": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output full list",
+      "description": "Output a value for all nodes of input surface"
+    },
+    "sort_none": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sort none",
+      "description": "No sorting of ROI clusters"
+    },
+    "sort_n_nodes": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sort by number of nodes",
+      "description": "Sorting based on number of nodes in cluster"
+    },
+    "sort_area": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sort by area",
+      "description": "Sorting based on area of clusters (default)"
+    },
+    "thresh_col": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold column index",
+      "description": "Index of thresholding column. Default is column 0."
+    },
+    "thresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold value",
+      "description": "Apply thresholding prior to clustering."
+    },
+    "athresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Absolute threshold value",
+      "description": "Apply absolute thresholding prior to clustering"
+    },
+    "ir_range": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "In range threshold",
+      "description": "Apply thresholding in range. A node n is considered if thresh_col[n] >= R0 && thresh_col[n] <= R1"
+    },
+    "ex_range": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Out of range threshold",
+      "description": "Apply thresholding outside of range. A node n is considered if thresh_col[n] < R0 || thresh_col[n] > R1"
+    },
+    "prepend_node_index": {
+      "type": "boolean",
+      "default": false,
+      "title": "Prepend node index",
+      "description": "Force the output dataset to have node indices in column 0 of output."
+    },
+    "update": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Update percentage",
+      "description": "Pacify me when perc of the data have been processed. perc is between 1% and 50%. Default is no update."
+    },
+    "no_cent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Do not find central nodes",
+      "description": "Do not find the central nodes"
+    },
+    "cent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Find central nodes",
+      "description": "Do find the central nodes (default)"
+    },
+    "novolreg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore volume registrations",
+      "description": "Ignore any Rotate, Volreg, Tagalign, or WarpDrive transformations present in the Surface Volume."
+    },
+    "noxform": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore transformations",
+      "description": "Same as -novolreg"
+    },
+    "set_env": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Set environment variable",
+      "description": "Set environment variable ENVname to be ENVvalue. Quotes are necessary."
+    },
+    "trace": {
+      "type": "boolean",
+      "default": false,
+      "title": "Trace",
+      "description": "Turns on In/Out debug and Memory tracing."
+    },
+    "trace_extreme": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extreme trace",
+      "description": "Turns on extreme tracing."
+    },
+    "no_memory_trace": {
+      "type": "boolean",
+      "default": false,
+      "title": "Turn off memory tracing",
+      "description": "Turn off memory tracing."
+    },
+    "yes_memory_trace": {
+      "type": "boolean",
+      "default": false,
+      "title": "Turn on memory tracing",
+      "description": "Turn on memory tracing (default)."
+    },
+    "mini_help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mini help",
+      "description": "Mini help, same as -help in many cases."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "The entire help output."
+    },
+    "extreme_help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extreme help",
+      "description": "Extreme help, same as -help in majority of cases."
+    },
+    "view_help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Open help in editor",
+      "description": "Open help in text editor. AFNI will try to find a GUI editor on your machine. You can control which it should use by setting environment variable AFNI_GUI_EDITOR."
+    },
+    "web_help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Open help in web browser",
+      "description": "Open help in web browser. AFNI will try to find a browser. You can control which it should use by setting environment variable AFNI_GUI_EDITOR."
+    },
+    "find_help": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Find help keyword",
+      "description": "Look for lines in this program's -help output that match (approximately) the given word."
+    },
+    "raw_help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Raw help string",
+      "description": "Help string unedited."
+    },
+    "spx_help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sphinx help",
+      "description": "Help string in sphinx format, but do not try to autoformat."
+    },
+    "aspx_help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Autoformat sphinx help",
+      "description": "Help string in sphinx format with autoformatting of options."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_dataset",
+    "rmm"
+  ]
+}

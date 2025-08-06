@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Computes a quality index for each sub-brick in a 3D+time dataset.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "3dTqual"
+    },
+    "dataset": {
+      "type": "string",
+      "title": "Dataset",
+      "description": "Input 3D+time dataset"
+    },
+    "spearman": {
+      "type": "boolean",
+      "default": false,
+      "title": "Spearman correlation flag",
+      "description": "Quality index is 1 minus the Spearman (rank) correlation coefficient of each sub-brick with the median sub-brick (default method)."
+    },
+    "quadrant": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quadrant correlation flag",
+      "description": "Quality index is 1 minus the quadrant correlation coefficient as the quality index."
+    },
+    "autoclip": {
+      "type": "boolean",
+      "default": false,
+      "title": "Autoclip flag",
+      "description": "Clip off low-intensity regions in the median sub-brick, only compute correlation between high-intensity voxels."
+    },
+    "automask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automask flag",
+      "description": "Automatically mask and compute correlation only across high-intensity (presumably brain) voxels."
+    },
+    "clip": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Clip value",
+      "description": "Clip off values below given threshold in the median sub-brick."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask dataset",
+      "description": "Compute correlation only across masked voxels from the given dataset."
+    },
+    "range": {
+      "type": "boolean",
+      "default": false,
+      "title": "Range flag",
+      "description": "Print the median-3.5*MAD and median+3.5*MAD values with each quality index for plotting."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset"
+  ]
+}

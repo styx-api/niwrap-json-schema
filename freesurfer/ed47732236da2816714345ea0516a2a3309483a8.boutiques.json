@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool for training a random forest classifier using MRIS surface data.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mris_rf_train"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Subjects",
+      "description": "List of subjects to process"
+    },
+    "output_name": {
+      "type": "string",
+      "title": "Output Name",
+      "description": "Output name for the trained model"
+    },
+    "hemi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hemisphere",
+      "description": "Process specified hemisphere instead of the default 'lh'."
+    },
+    "surf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface",
+      "description": "Change the default surface name from 'white' to the specified surface."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subjects",
+    "output_name"
+  ]
+}

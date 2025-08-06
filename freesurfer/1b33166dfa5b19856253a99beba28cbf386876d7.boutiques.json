@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Applies a Gaussian filter to 4dfp or conc input files.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "gauss_4dfp"
+    },
+    "input_file": {
+      "type": "string",
+      "title": "4dfp or conc input file",
+      "description": "Input 4dfp or conc file to be processed."
+    },
+    "f_half": {
+      "type": "number",
+      "title": "Half frequency",
+      "description": "Half frequency in 1/cm for the Gaussian filter application (f_half is the half frequency in 1/cm)."
+    },
+    "output_root": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output root name",
+      "description": "Root name for the output file. Default is <inroot>_g<10*f_half>."
+    },
+    "endian_flag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output endian",
+      "description": "Specify output endian; 'b' for big or 'l' for little endian. Default is input endian."
+    },
+    "wrap_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Wrap XY padding",
+      "description": "Suppress x and y padding (wrap-around)."
+    },
+    "differentiate_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Differentiate",
+      "description": "Apply differentiation."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "f_half"
+  ]
+}

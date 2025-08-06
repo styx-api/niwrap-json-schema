@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Transforms a 4dfp image using a specified t4 file.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "t4img_4dfp"
+    },
+    "t4file": {
+      "type": "string",
+      "title": "T4 File",
+      "description": "Transformation matrix file (t4 file format)."
+    },
+    "imgfile": {
+      "type": "string",
+      "title": "Input Image File",
+      "description": "Input image file (4dfp format)."
+    },
+    "outfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Image File",
+      "description": "Output image file (optional, defaults to <imgfile>t if not provided)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "t4file",
+    "imgfile"
+  ]
+}

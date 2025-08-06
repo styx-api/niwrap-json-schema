@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Part of FSL - estimates diffusion parameters for multiple fibres per voxel",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "xfibres"
+    },
+    "datafile": {
+      "type": "string",
+      "title": "Data file",
+      "description": "Data file (e.g., diffusion data)"
+    },
+    "maskfile": {
+      "type": "string",
+      "title": "Mask file",
+      "description": "Mask file defining brain voxels"
+    },
+    "bvecs": {
+      "type": "string",
+      "title": "B vectors file",
+      "description": "B vectors file"
+    },
+    "bvals": {
+      "type": "string",
+      "title": "B values file",
+      "description": "B values file"
+    },
+    "logdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log directory",
+      "description": "Log directory (default is logdir)"
+    },
+    "forcedir": {
+      "type": "boolean",
+      "default": false,
+      "title": "Forced directory flag",
+      "description": "Use the actual directory name given - i.e., don't add + to make a new directory"
+    },
+    "max_fibres": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum fibres",
+      "description": "Maximum number of fibres to fit in each voxel (default 1)"
+    },
+    "model": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model",
+      "description": "Model to use: 1=deconv. with sticks (default), 2=deconv. with sticks and a range of diffusivities, 3=deconv. with zeppelins"
+    },
+    "fudge": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fudge factor",
+      "description": "ARD fudge factor"
+    },
+    "num_jumps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of MCMC jumps",
+      "description": "Number of jumps to be made by MCMC (default 1250)"
+    },
+    "num_burnin": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of burnin jumps",
+      "description": "Total number of jumps at start of MCMC to be discarded (default 1000)"
+    },
+    "burnin_noard": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Burnin before ARD",
+      "description": "Number of burnin jumps before ARD is imposed (default 0)"
+    },
+    "sampleevery": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sample jumps",
+      "description": "Number of jumps for each sample (MCMC) (default 25)"
+    },
+    "updateproposal": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Update proposal jumps",
+      "description": "Number of jumps for each update to the proposal density std (MCMC) (default 40)"
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random seed",
+      "description": "Seed for pseudo-random number generator"
+    },
+    "noard": {
+      "type": "boolean",
+      "default": false,
+      "title": "No ARD flag",
+      "description": "Turn ARD off on all fibres"
+    },
+    "allard": {
+      "type": "boolean",
+      "default": false,
+      "title": "All ARD flag",
+      "description": "Turn ARD on all fibres"
+    },
+    "nospat": {
+      "type": "boolean",
+      "default": false,
+      "title": "No spatial initialization",
+      "description": "Initialize with tensor, not spatially"
+    },
+    "nonlinear": {
+      "type": "boolean",
+      "default": false,
+      "title": "Nonlinear initialization",
+      "description": "Initialize with nonlinear fitting"
+    },
+    "cnonlinear": {
+      "type": "boolean",
+      "default": false,
+      "title": "Constrained nonlinear initialization",
+      "description": "Initialize with constrained nonlinear fitting"
+    },
+    "rician": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rician noise modelling",
+      "description": "Use Rician noise modelling"
+    },
+    "add_f0": {
+      "type": "boolean",
+      "default": false,
+      "title": "Add F0 compartment",
+      "description": "Add to the model an unattenuated signal compartment"
+    },
+    "ard_f0": {
+      "type": "boolean",
+      "default": false,
+      "title": "ARD on F0",
+      "description": "Use ARD on F0"
+    },
+    "rmean": {
+      "anyOf": [
+        {
+          "type": "number",
+          "maximum": 0.5
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prior mean R",
+      "description": "Set the prior mean for R of model 3 (default: 0.13 - must be <0.5)"
+    },
+    "rstd": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prior standard deviation R",
+      "description": "Set the prior standard deviation for R of model 3 (default: 0.03)"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Display help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "datafile",
+    "maskfile",
+    "bvecs",
+    "bvals"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Calculates texture co-occurrence features such as Energy, Entropy, Inverse Difference Moment, Inertia, Cluster Shade, and Cluster Prominence from an input image.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "TextureCooccurrenceFeatures"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "title": "Image Dimension",
+      "description": "The dimensionality of the input image, e.g., 2 for 2D images, 3 for 3D images."
+    },
+    "input_image": {
+      "type": "string",
+      "title": "Input Image",
+      "description": "The input image file for which texture co-occurrence features will be calculated."
+    },
+    "number_of_bins_per_axis": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 256,
+      "title": "Number of Bins Per Axis",
+      "description": "The number of bins per axis to be used in the histogram for texture calculation. Defaults to 256."
+    },
+    "mask_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Image",
+      "description": "Optional mask image to specify the regions of interest in the input image for which features will be calculated."
+    },
+    "mask_label": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Mask Label",
+      "description": "Label value in the mask image to specify which region to process. Defaults to 1."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "input_image"
+  ]
+}

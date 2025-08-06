@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "SynthSeg is a tool for brain image segmentation.",
+  "type": "object",
+  "properties": {
+    "__STYXTYPE__": {
+      "const": "mri_synthseg"
+    },
+    "input_image": {
+      "type": "string",
+      "title": "Input image or folder",
+      "description": "Image(s) to segment. Can be a path to an image or to a folder."
+    },
+    "output_segmentation": {
+      "type": "string",
+      "title": "Output segmentation",
+      "description": "Segmentation output(s). Must be a folder if --i designates a folder."
+    },
+    "cortex_parcellation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cortex parcellation flag",
+      "description": "Perform cortex parcellation."
+    },
+    "robust_prediction": {
+      "type": "boolean",
+      "default": false,
+      "title": "Robust prediction flag",
+      "description": "Use robust predictions (slower)."
+    },
+    "fast_prediction": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fast prediction flag",
+      "description": "Bypass some processing for faster prediction."
+    },
+    "clip_ct": {
+      "type": "boolean",
+      "default": false,
+      "title": "Clip CT scans flag",
+      "description": "Clip CT scans in Hounsfield scale to [0, 80]."
+    },
+    "output_volume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output volume file",
+      "description": "Output CSV file with volumes for all structures and subjects."
+    },
+    "output_qc": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output quality control file",
+      "description": "Output CSV file with QC scores for all subjects."
+    },
+    "output_posteriors": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output posteriors",
+      "description": "Posteriors output(s). Must be a folder if --i designates a folder."
+    },
+    "resampled_images": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resampled images",
+      "description": "Resampled image(s). Must be a folder if --i is a folder."
+    },
+    "image_patch_size": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Image patch size",
+      "description": "Only analyse an image patch of the given size."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "Number of cores to be used. Default is 1."
+    },
+    "cpu": {
+      "type": "boolean",
+      "default": false,
+      "title": "CPU execution flag",
+      "description": "Enforce running with CPU rather than GPU."
+    },
+    "version_1": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version 1 flag",
+      "description": "Use SynthSeg 1.0 (updated 25/06/22)."
+    },
+    "photo_synthseg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Photo-SynthSeg mode",
+      "description": "Photo-SynthSeg: segment 3D reconstructed stack of coronal dissection photos of the cerebrum; must be left, right, or both."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image",
+    "output_segmentation"
+  ]
+}
