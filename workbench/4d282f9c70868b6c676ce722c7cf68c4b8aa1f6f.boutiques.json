@@ -3,8 +3,8 @@
   "description": "Merge or split on series, scalar, or label dimensions.\n\nGiven input CIFTI files for which mappings along the selected direction are the same type, all either series, scalars, or labels, and the other dimensions are index-compatible, this command concatenates the data in the specified indices/ranges along the selected direction (by default, on typical 2D cifti, concatenate horizontally, so rows become longer).  The direction can be either an integer starting from 1, or the strings 'ROW' or 'COLUMN'.\n\nExample: wb_command -cifti-merge out.dtseries.nii -cifti first.dtseries.nii -index 1 -cifti second.dtseries.nii\n\nThis example would take the first column from first.dtseries.nii, followed by all columns from second.dtseries.nii, and write these columns to out.dtseries.nii.  ",
   "type": "object",
   "properties": {
-    "__STYXTYPE__": {
-      "const": "cifti-merge"
+    "@type": {
+      "const": "workbench.cifti-merge"
     },
     "cifti_out": {
       "type": "string",
@@ -44,7 +44,7 @@
           "items": {
             "type": "object",
             "properties": {
-              "__STYXTYPE__": {
+              "@type": {
                 "const": "cifti"
               },
               "cifti_in": {
@@ -59,7 +59,7 @@
                     "items": {
                       "type": "object",
                       "properties": {
-                        "__STYXTYPE__": {
+                        "@type": {
                           "const": "index"
                         },
                         "index": {
@@ -72,7 +72,7 @@
                             {
                               "type": "object",
                               "properties": {
-                                "__STYXTYPE__": {
+                                "@type": {
                                   "const": "up_to"
                                 },
                                 "last_index": {

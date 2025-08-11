@@ -3,8 +3,8 @@
   "description": "Resample a cifti file to a new cifti space.\n\nResample cifti data to a different brainordinate space.  Use COLUMN for the direction to resample dscalar, dlabel, or dtseries.  Resampling both dimensions of a dconn requires running this command twice, once with COLUMN and once with ROW.  If you are resampling a dconn and your machine has a large amount of memory, you might consider using -cifti-resample-dconn-memory to avoid writing and rereading an intermediate file.  The <template-direction> argument should usually be COLUMN, as dtseries, dscalar, and dlabel all have brainordinates on that direction.  If spheres are not specified for a surface structure which exists in the cifti files, its data is copied without resampling or dilation.  Dilation is done with the 'nearest' method, and is done on <new-sphere> for surface data.  Volume components are padded before dilation so that dilation doesn't run into the edge of the component bounding box.  If neither -affine nor -warpfield are specified, the identity transform is assumed for the volume data.\n\nThe recommended resampling methods are ADAP_BARY_AREA and CUBIC (cubic spline), except for label data which should use ADAP_BARY_AREA and ENCLOSING_VOXEL.  Using ADAP_BARY_AREA requires specifying an area option to each used -*-spheres option.\n\nThe <volume-method> argument must be one of the following:\n\nCUBIC\nENCLOSING_VOXEL\nTRILINEAR\n\nThe <surface-method> argument must be one of the following:\n\nADAP_BARY_AREA\nBARYCENTRIC\n",
   "type": "object",
   "properties": {
-    "__STYXTYPE__": {
-      "const": "cifti-resample"
+    "@type": {
+      "const": "workbench.cifti-resample"
     },
     "cifti_in": {
       "type": "string",
@@ -52,7 +52,7 @@
         {
           "type": "object",
           "properties": {
-            "__STYXTYPE__": {
+            "@type": {
               "const": "volume_predilate"
             },
             "dilate_mm": {
@@ -71,7 +71,7 @@
                 {
                   "type": "object",
                   "properties": {
-                    "__STYXTYPE__": {
+                    "@type": {
                       "const": "weighted"
                     },
                     "opt_exponent_exponent": {
@@ -123,7 +123,7 @@
         {
           "type": "object",
           "properties": {
-            "__STYXTYPE__": {
+            "@type": {
               "const": "surface_postdilate"
             },
             "dilate_mm": {
@@ -148,7 +148,7 @@
                 {
                   "type": "object",
                   "properties": {
-                    "__STYXTYPE__": {
+                    "@type": {
                       "const": "weighted_1"
                     },
                     "opt_exponent_exponent": {
@@ -200,7 +200,7 @@
         {
           "type": "object",
           "properties": {
-            "__STYXTYPE__": {
+            "@type": {
               "const": "affine"
             },
             "affine_file": {
@@ -213,7 +213,7 @@
                 {
                   "type": "object",
                   "properties": {
-                    "__STYXTYPE__": {
+                    "@type": {
                       "const": "flirt"
                     },
                     "source_volume": {
@@ -260,7 +260,7 @@
         {
           "type": "object",
           "properties": {
-            "__STYXTYPE__": {
+            "@type": {
               "const": "warpfield"
             },
             "warpfield": {
@@ -300,7 +300,7 @@
         {
           "type": "object",
           "properties": {
-            "__STYXTYPE__": {
+            "@type": {
               "const": "left_spheres"
             },
             "current_sphere": {
@@ -318,7 +318,7 @@
                 {
                   "type": "object",
                   "properties": {
-                    "__STYXTYPE__": {
+                    "@type": {
                       "const": "left_area_surfs"
                     },
                     "current_area": {
@@ -351,7 +351,7 @@
                 {
                   "type": "object",
                   "properties": {
-                    "__STYXTYPE__": {
+                    "@type": {
                       "const": "left_area_metrics"
                     },
                     "current_area": {
@@ -399,7 +399,7 @@
         {
           "type": "object",
           "properties": {
-            "__STYXTYPE__": {
+            "@type": {
               "const": "right_spheres"
             },
             "current_sphere": {
@@ -417,7 +417,7 @@
                 {
                   "type": "object",
                   "properties": {
-                    "__STYXTYPE__": {
+                    "@type": {
                       "const": "right_area_surfs"
                     },
                     "current_area": {
@@ -450,7 +450,7 @@
                 {
                   "type": "object",
                   "properties": {
-                    "__STYXTYPE__": {
+                    "@type": {
                       "const": "right_area_metrics"
                     },
                     "current_area": {
@@ -498,7 +498,7 @@
         {
           "type": "object",
           "properties": {
-            "__STYXTYPE__": {
+            "@type": {
               "const": "cerebellum_spheres"
             },
             "current_sphere": {
@@ -516,7 +516,7 @@
                 {
                   "type": "object",
                   "properties": {
-                    "__STYXTYPE__": {
+                    "@type": {
                       "const": "cerebellum_area_surfs"
                     },
                     "current_area": {
@@ -549,7 +549,7 @@
                 {
                   "type": "object",
                   "properties": {
-                    "__STYXTYPE__": {
+                    "@type": {
                       "const": "cerebellum_area_metrics"
                     },
                     "current_area": {
