@@ -1,0 +1,340 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool for transforming and analyzing tractography data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.dmri_trk2trk"
+    },
+    "in_trk": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input TRK files",
+      "description": "Input .trk file(s)"
+    },
+    "in_asc": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input ASCII files",
+      "description": "Input ASCII plain text file(s), as an alternative to .trk"
+    },
+    "in_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input directory",
+      "description": "Input directory (optional)"
+    },
+    "out_trk": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output TRK files",
+      "description": "Output .trk file(s), as many as inputs (or 1 to merge inputs)"
+    },
+    "out_asc": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output ASCII files",
+      "description": "Output ASCII plain text file(s), as many as inputs (or 1 to merge inputs)"
+    },
+    "out_vol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output volumes",
+      "description": "Output volume(s), as many as inputs (or 1 to merge inputs)"
+    },
+    "out_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output directory",
+      "description": "Output directory (optional)"
+    },
+    "in_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input reference volume",
+      "description": "Input reference volume (needed for --reg/--regnl)"
+    },
+    "out_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output reference volume",
+      "description": "Output reference volume (needed for --reg/--regnl/--outvol)"
+    },
+    "reg_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Affine registration file",
+      "description": "Affine registration file (.lta or .mat), applied first"
+    },
+    "regnl_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Nonlinear registration file",
+      "description": "Nonlinear registration file (.m3z), applied second"
+    },
+    "inv_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Inverse registration flag",
+      "description": "Apply inverse of registration (default: no)"
+    },
+    "fill_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fill gaps flag",
+      "description": "Fill gaps b/w mapped points by linear interpolation"
+    },
+    "overlay": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scalar overlay volumes",
+      "description": "Scalar overlay 1D volume(s), applied to all input .trk files"
+    },
+    "inclusion_mask": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inclusion masks",
+      "description": "Inclusion mask(s), applied to all input .trk files"
+    },
+    "exclusion_mask": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Exclusion masks",
+      "description": "Exclusion mask(s), applied to all input .trk files"
+    },
+    "terminal_inclusion_mask": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Terminal inclusion masks",
+      "description": "Terminal inclusion mask(s), applied to all input .trk files"
+    },
+    "terminal_exclusion_mask": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Terminal exclusion masks",
+      "description": "Terminal exclusion mask(s), applied to all input .trk files"
+    },
+    "length_min": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum streamline length",
+      "description": "Only save streamlines with length greater than this number"
+    },
+    "length_max": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum streamline length",
+      "description": "Only save streamlines with length smaller than this number"
+    },
+    "mean_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save mean streamline flag",
+      "description": "Only save the mean of the streamlines (Default: save all)"
+    },
+    "nearmean_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save nearest to mean streamline flag",
+      "description": "Only save the streamline nearest to the mean (Default: save all)"
+    },
+    "nth_streamline": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Save nth streamline",
+      "description": "Only save the n-th (0-based) streamline (Default: save all)"
+    },
+    "every_nth_streamline": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Save every nth streamline",
+      "description": "Only save every n-th streamline (Default: save all)"
+    },
+    "smooth_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Smooth streamlines flag",
+      "description": "Smooth streamlines (default: no)"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Turn on debugging"
+    },
+    "check_opts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check options flag",
+      "description": "Don't run anything, just check options and exit"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in_trk"
+  ]
+}

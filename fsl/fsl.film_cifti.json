@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool for statistical analysis of CIFTI files using FILM.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.film_cifti"
+    },
+    "input_filename": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input CIFTI file"
+    },
+    "basename": {
+      "type": "string",
+      "title": "Output basename",
+      "description": "Output basename"
+    },
+    "left_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Left cortex surface geometry",
+      "description": "Geometry for left cortex"
+    },
+    "right_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Right cortex surface geometry",
+      "description": "Geometry for right cortex"
+    },
+    "susan_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Susan brightness threshold",
+      "description": "Susan brightness threshold for volumetric analysis (default: 0)"
+    },
+    "susan_extent": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Susan mask size",
+      "description": "Susan mask size for volumetric analysis (default: 4)"
+    },
+    "surface_sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smoothing sigma",
+      "description": "Smoothing sigma for surface analysis (default: 0)"
+    },
+    "surface_extent": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smoothing extent",
+      "description": "Smoothing extent for surface analysis (default: 4)"
+    },
+    "film_options": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Film options",
+      "description": "Film options to be used with all modes, list must be wrapped by quotes"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_filename",
+    "basename",
+    "left_surface",
+    "right_surface"
+  ]
+}

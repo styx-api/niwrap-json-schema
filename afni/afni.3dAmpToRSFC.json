@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Convert spectral amplitudes into standard RSFC parameters.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dAmpToRSFC"
+    },
+    "in_amp": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Amplitudes",
+      "description": "Input file of one-sided spectral amplitudes, such as output by 3dLombScargle."
+    },
+    "in_pow": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Power Spectrum",
+      "description": "Input file of a one-sided power spectrum, such as output by 3dLombScargle."
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Output file prefix; file names will be: PREFIX_ALFF, PREFIX_FALFF, etc."
+    },
+    "band": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "title": "Frequency Band",
+      "description": "Lower and upper boundaries of the low frequency fluctuations (LFFs), within the interval [FBOT, FTOP]."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask",
+      "description": "Volume mask of voxels to include for calculations."
+    },
+    "nifti": {
+      "type": "boolean",
+      "default": false,
+      "title": "NIfTI Output",
+      "description": "Output files as *.nii.gz (default is BRIK/HEAD)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix",
+    "band"
+  ]
+}

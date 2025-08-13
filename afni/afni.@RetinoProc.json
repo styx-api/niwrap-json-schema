@@ -1,0 +1,518 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A script to process retinotopic FMRI data, using AFNI's 3dRetinoPhase and SurfRetinMap.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.@RetinoProc"
+    },
+    "ccw": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Counterclockwise time series",
+      "description": "Input time series dataset for counterclockwise stimulus"
+    },
+    "clw": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Clockwise time series",
+      "description": "Input time series dataset for clockwise stimulus"
+    },
+    "exp": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expanding time series",
+      "description": "Input time series dataset for expanding stimulus"
+    },
+    "con": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Contracting time series",
+      "description": "Input time series dataset for contracting stimulus"
+    },
+    "epi_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "EPI Reference Volume",
+      "description": "Specify a volume from the EPI time series to which all EPI volumes are aligned"
+    },
+    "epi_anat_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "EPI Anatomical Reference Volume",
+      "description": "Specify a volume from the EPI time series that is better suited for aligning the T1 to it than EpiRef might be"
+    },
+    "anat_vol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Anatomical Volume",
+      "description": "T1 volume acquired during the same session as the retinotopic scans"
+    },
+    "anat_vol_epi": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Aligned Anatomical Volume",
+      "description": "Anatomical volume aligned to EPI reference"
+    },
+    "surf_vol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Volume",
+      "description": "Surface Volume for the cortical surfaces"
+    },
+    "surf_vol_epi": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Aligned Surface Volume",
+      "description": "Surface volume aligned to experiment's EPI data"
+    },
+    "phase": {
+      "type": "boolean",
+      "default": false,
+      "title": "Phase Estimation Flag",
+      "description": "Use phase of fundamental frequency to estimate latency"
+    },
+    "delay": {
+      "type": "boolean",
+      "default": false,
+      "title": "Delay Estimation Flag",
+      "description": "Use delay relative to reference time series to estimate latency"
+    },
+    "tr": {
+      "type": "number",
+      "title": "TR",
+      "description": "TR, in seconds, of retinotopic scans"
+    },
+    "period_ecc": {
+      "type": "number",
+      "title": "Period (Eccentricity)",
+      "description": "Period, in seconds, of eccentricity stimuli"
+    },
+    "period_pol": {
+      "type": "number",
+      "title": "Period (Polar Angle)",
+      "description": "Period, in seconds, of polar angle stimuli"
+    },
+    "pre_ecc": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pre-Eccentricity Stimulus Duration",
+      "description": "Duration, in seconds, before eccentricity stimulus"
+    },
+    "pre_pol": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pre-Polar Angle Stimulus Duration",
+      "description": "Duration, in seconds, before polar angle stimulus"
+    },
+    "on_ecc": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "On Eccentricity Stimulus",
+      "description": "Number of stimulation blocks and duration of stimulation for eccentricity stimulus"
+    },
+    "on_pol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "On Polar Angle Stimulus",
+      "description": "Number of stimulation blocks and duration of stimulation for polar angle stimulus"
+    },
+    "var_on_ecc": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Variable On Eccentricity",
+      "description": "Multiple on durations for eccentricity stimulus"
+    },
+    "var_on_pol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Variable On Polar Angle",
+      "description": "Multiple on durations for polar angle stimulus"
+    },
+    "nwedges": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Wedges",
+      "description": "Number of wedges in polar stimulus"
+    },
+    "nrings": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Rings",
+      "description": "Number of rings in eccentricity stimulus"
+    },
+    "fwhm_pol": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM Polar",
+      "description": "Target smoothness for polar stimulus"
+    },
+    "fwhm_ecc": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM Eccentricity",
+      "description": "Target smoothness for eccentricity stimulus"
+    },
+    "ignore": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ignore Volumes",
+      "description": "Ignore volumes from the beginning of each time series"
+    },
+    "no_tshift": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Slice Timing Correction",
+      "description": "Do not correct for slice timing"
+    },
+    "spec_left": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Left Hemisphere Spec",
+      "description": "Spec file for left hemisphere"
+    },
+    "spec_right": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Right Hemisphere Spec",
+      "description": "Spec file for right hemisphere"
+    },
+    "dorts": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detrend ORT File",
+      "description": "Detrend time series using columns in ORT1D file"
+    },
+    "ccw_orts": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detrend ORT for CCW",
+      "description": "Detrend time series for counterclockwise stimulus"
+    },
+    "clw_orts": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detrend ORT for CLW",
+      "description": "Detrend time series for clockwise stimulus"
+    },
+    "exp_orts": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detrend ORT for EXP",
+      "description": "Detrend time series for expanding stimulus"
+    },
+    "con_orts": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detrend ORT for CON",
+      "description": "Detrend time series for contracting stimulus"
+    },
+    "sid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject ID",
+      "description": "SID is a flag identifying the subject"
+    },
+    "out_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Directory",
+      "description": "Directory where processing results are to be stored"
+    },
+    "echo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Echo Command Flag",
+      "description": "Turn on the command echoing to help with debugging script failure"
+    },
+    "echo_edu": {
+      "type": "boolean",
+      "default": false,
+      "title": "Educational Echo Command Flag",
+      "description": "Turn on command echoing for certain programs only"
+    },
+    "a2e_opts": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "A2E Options",
+      "description": "Pass options to @SUMA_AlignToExperiment script"
+    },
+    "aea_opts": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "AEA Options",
+      "description": "Pass options to align_epi_anat.py"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "tr",
+    "period_ecc",
+    "period_pol"
+  ]
+}

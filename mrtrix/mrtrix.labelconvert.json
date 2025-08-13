@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Convert a connectome node image from one lookup table to another.\n\nTypical usage is to convert a parcellation image provided by some other software, based on the lookup table provided by that software, to conform to a new lookup table, particularly one where the node indices increment from 1, in preparation for connectome construction; examples of such target lookup table files are provided in share//mrtrix3//labelconvert//, but can be created by the user to provide the desired node set // ordering // colours.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix.labelconvert"
+    },
+    "spine": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "spine",
+      "description": "provide a manually-defined segmentation of the base of the spine where the streamlines terminate, so that this can become a node in the connection matrix."
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "path_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "path_in",
+      "description": "the input image"
+    },
+    "lut_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "lut_in",
+      "description": "the connectome lookup table corresponding to the input image"
+    },
+    "lut_out": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "lut_out",
+      "description": "the target connectome lookup table for the output image"
+    },
+    "image_out": {
+      "type": "string",
+      "title": "image_out",
+      "description": "the output image"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "path_in",
+    "lut_in",
+    "lut_out",
+    "image_out"
+  ]
+}

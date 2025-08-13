@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Draw borders as vertices in a metric file.\n\nOutputs a metric with 1s on vertices that follow a border, and 0s elsewhere.  By default, a separate metric column is created for each border.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.border-to-vertices"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface",
+      "description": "the surface the borders are drawn on"
+    },
+    "border_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "border_file",
+      "description": "the border file"
+    },
+    "metric_out": {
+      "type": "string",
+      "title": "metric_out",
+      "description": "the output metric file"
+    },
+    "opt_border_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_border_name",
+      "description": "create ROI for only one border: the name of the border"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface",
+    "border_file",
+    "metric_out"
+  ]
+}

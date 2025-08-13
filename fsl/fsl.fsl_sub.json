@@ -1,0 +1,384 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "FSL cluster submission tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.fsl_sub"
+    },
+    "arch": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Architecture",
+      "description": "Architectures not available."
+    },
+    "coprocessor": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Co-processor",
+      "description": "No co-processor configured - ignored."
+    },
+    "coprocessor_multi": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Co-processor Multi",
+      "description": "No co-processor configured - ignored"
+    },
+    "coprocessor_class": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Co-processor Class",
+      "description": "No co-processor classes configured - ignored."
+    },
+    "coprocessor_class_strict": {
+      "type": "boolean",
+      "default": false,
+      "title": "Co-processor Class Strict",
+      "description": "No co-processor classes configured - ignored."
+    },
+    "coprocessor_toolkit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Co-processor Toolkit",
+      "description": "No co-processor toolkits configured - ignored."
+    },
+    "usescript": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Script",
+      "description": "Use flags embedded in scripts to set queuing options - not supported"
+    },
+    "jobhold": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Job Hold",
+      "description": "Place a hold on this task until specified job id has completed."
+    },
+    "not_requeueable": {
+      "type": "boolean",
+      "default": false,
+      "title": "Not Requeueable",
+      "description": "Job cannot be requeued in the event of a node failure."
+    },
+    "array_hold": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Array Hold",
+      "description": "Not supported - will be converted to simple job hold"
+    },
+    "logdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log Directory",
+      "description": "Where to output logfiles."
+    },
+    "mailoptions": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mail Options",
+      "description": "Email notification options (ignored)."
+    },
+    "mailto": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "root@fe8ea96c3a1a",
+      "title": "Mail To",
+      "description": "Email notification recipients (ignored)."
+    },
+    "novalidation": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Validation",
+      "description": "Don't check for presence of script/binary in your searchpath"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Job Name",
+      "description": "Specify job name as it will appear on queue."
+    },
+    "priority": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Priority",
+      "description": "Specify job priority (not supported)."
+    },
+    "queue": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Queue",
+      "description": "Specify the queue for the job (irrelevant if not running in a cluster environment)."
+    },
+    "resource": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resource",
+      "description": "Pass a resource request or constraint string through to the job scheduler."
+    },
+    "delete_job": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delete Job",
+      "description": "Deletes a queued/running job."
+    },
+    "jobram": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Job RAM",
+      "description": "Max total RAM required for job (integer in GB)."
+    },
+    "parallelenv_threads": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parallel Environment and Threads",
+      "description": "No parallel environments configured."
+    },
+    "array_task": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Array Task",
+      "description": "Specify a task file of commands to execute in parallel."
+    },
+    "array_native": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Array Native",
+      "description": "Binary/Script will handle array task internally (mutually exclusive with --array_task)."
+    },
+    "array_limit": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Array Limit",
+      "description": "Specify the maximum number of parallel job sub-tasks to run concurrently."
+    },
+    "keep_jobscript": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep Jobscript",
+      "description": "Whether to create and save a job submission script."
+    },
+    "project": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project",
+      "description": "Specify the project (not relevant when not running in a cluster environment)."
+    },
+    "noramsplit": {
+      "type": "boolean",
+      "default": false,
+      "title": "No RAM Split",
+      "description": "Disable RAM splitting (not relevant when not running in a cluster environment)."
+    },
+    "jobtime": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Job Time",
+      "description": "Estimated job length in minutes, used to automatically choose the queue name."
+    },
+    "has_coprocessor": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Has Coprocessor",
+      "description": "fsl_sub returns with exit code of 0 if specified coprocessor is configured."
+    },
+    "has_queues": {
+      "type": "boolean",
+      "default": false,
+      "title": "Has Queues",
+      "description": "fsl_sub returns with exit code of 0 if there's a compute cluster with queues configured."
+    },
+    "show_config": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Config",
+      "description": "Display the configuration currently in force."
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose",
+      "description": "Verbose mode."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Show program's version number and exit."
+    },
+    "fileisimage": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "File is Image",
+      "description": "If <file> already exists and is an MRI image file, do nothing and exit."
+    }
+  },
+  "additionalProperties": false
+}

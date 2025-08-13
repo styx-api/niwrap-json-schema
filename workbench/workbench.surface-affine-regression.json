@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Regress the affine transform between surfaces on the same mesh.\n\nUse linear regression to compute an affine that minimizes the sum of squares of the coordinate differences between the target surface and the warped source surface.  Note that this has a bias to shrink the surface that is being warped.  The output is written as a NIFTI 'world' matrix, see -convert-affine to convert it for use in other software.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.surface-affine-regression"
+    },
+    "source": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "source",
+      "description": "the surface to warp"
+    },
+    "target": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "target",
+      "description": "the surface to match the coordinates of"
+    },
+    "affine_out": {
+      "type": "string",
+      "title": "affine_out",
+      "description": "output - the output affine file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "source",
+    "target",
+    "affine_out"
+  ]
+}

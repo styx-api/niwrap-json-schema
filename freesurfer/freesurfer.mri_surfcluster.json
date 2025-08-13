@@ -1,0 +1,501 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool for clustering vertices on a cortical surface based on intensity values.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_surfcluster"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input File",
+      "description": "Source of surface values"
+    },
+    "thmin": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Intensity Threshold",
+      "description": "Minimum intensity threshold"
+    },
+    "sign": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold Sign",
+      "description": "Sign of threshold criteria (abs, pos, neg)"
+    },
+    "no_adjust_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Adjust Flag",
+      "description": "Do not adjust threshold for one-tailed tests"
+    },
+    "fdr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "False Discovery Rate",
+      "description": "Set thmin with False Discovery Rate"
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject ID",
+      "description": "Source surface subject (can be ico)"
+    },
+    "hemi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hemisphere",
+      "description": "Cortical hemisphere, either lh or rh"
+    },
+    "surf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface",
+      "description": "Coordinates from surface (e.g., white)"
+    },
+    "surfpath": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Path",
+      "description": "Full path to surface"
+    },
+    "annot": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Annotation Name",
+      "description": "Report annotation for max vertex (e.g., aparc)"
+    },
+    "frame": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Frame Number",
+      "description": "0-based frame number of the input file"
+    },
+    "csd": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CSD File(s)",
+      "description": "Load one or more CSD files"
+    },
+    "vwsig": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel-wise Significances Map",
+      "description": "Map of corrected voxel-wise significances"
+    },
+    "cwsig": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cluster-wise Significances Map",
+      "description": "Map of cluster-wise significances"
+    },
+    "maxcwpval": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Cluster P-Value File",
+      "description": "Save p-value of the largest (max) cluster"
+    },
+    "bonferroni": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bonferroni Correction",
+      "description": "Apply Bonferroni correction across N spaces"
+    },
+    "sig2p_max_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sig to P Max Flag",
+      "description": "Convert max from sig to p"
+    },
+    "bonferroni_max": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bonferroni Max Value",
+      "description": "Apply Bonferroni correction to maximum"
+    },
+    "csdpdf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CSD PDF File",
+      "description": "Compute PDF/CDF of CSD data and save"
+    },
+    "csdpdf_only_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "CSD PDF Only Flag",
+      "description": "Only write the CSD PDF file"
+    },
+    "csd_out": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Merged CSD Output File",
+      "description": "Write out merged CSD files as one"
+    },
+    "cwpvalthresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cluster-wise P-Value Threshold",
+      "description": "Cluster-wise threshold"
+    },
+    "fwhm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM",
+      "description": "FWHM in mm^2 for GRF"
+    },
+    "fwhmdat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM Data File",
+      "description": "Text file with FWHM in mm^2 for GRF"
+    },
+    "clabel": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Constrain Label File",
+      "description": "Constrain cluster search to be inside or outside clabel"
+    },
+    "cortex_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cortex Flag",
+      "description": "Set clabel to be subject/label/hemi.cortex.label"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask File",
+      "description": "Constrain to be within mask"
+    },
+    "mask_inv_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mask Inversion Flag",
+      "description": "Constrain cluster search to be outside mask or clabel"
+    },
+    "centroid_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Centroid Flag",
+      "description": "Report centroid instead of location of maximum stat"
+    },
+    "sum": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Summary File",
+      "description": "Text file to store cluster summary"
+    },
+    "pointset": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pointset File",
+      "description": "File that can be read into Freeview with -c"
+    },
+    "maxareafile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Area File",
+      "description": "Write area of largest cluster to this file"
+    },
+    "o": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output ID",
+      "description": "Output file with non-clusters set to 0"
+    },
+    "ocn": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Cluster Number ID",
+      "description": "Output file where value is cluster number"
+    },
+    "olab": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Labels Base",
+      "description": "Output clusters as labels"
+    },
+    "oannot": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Annotation Name",
+      "description": "Output clusters as an annotation"
+    },
+    "minarea": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Area",
+      "description": "Area threshold for a cluster (mm^2)"
+    },
+    "xfm": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform File",
+      "description": "Talairach transform file"
+    },
+    "no_fixmni_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Fix MNI Flag",
+      "description": "Do not fix MNI Talairach coordinates"
+    },
+    "sd": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "FreeSurfer subjects directory"
+    },
+    "thmax": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Intensity Threshold",
+      "description": "Maximum intensity threshold"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "infile"
+  ]
+}

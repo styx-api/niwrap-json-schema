@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool for defacing MRI images to anonymize patient data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.deface_subject"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "title": "Subjects Directory",
+      "description": "Directory containing FreeSurfer subject directories."
+    },
+    "subject_id": {
+      "type": "string",
+      "title": "Subject ID",
+      "description": "Subject ID that specifies the subject directory."
+    },
+    "volume_input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input volume to be defaced."
+    },
+    "volume_output": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume after defacing."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subjects_dir",
+    "subject_id",
+    "volume_input",
+    "volume_output"
+  ]
+}

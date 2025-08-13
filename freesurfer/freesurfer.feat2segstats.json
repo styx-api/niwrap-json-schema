@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Computes segmentation summaries and stores output in featdir/freesurfer/segstats/segvol/statname.dat",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.feat2segstats"
+    },
+    "feat_dir": {
+      "type": "string",
+      "title": "Feat Directory",
+      "description": "Feat output directory"
+    },
+    "featdirfile": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Feat Directory File",
+      "description": "File with a list of feat directories"
+    },
+    "seg_vol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation Volume",
+      "description": "Segmentation volume"
+    },
+    "aseg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "ASEG Flag",
+      "description": "Use aseg segmentation"
+    },
+    "aparc_aseg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "APARC+ASEG Flag",
+      "description": "Use aparc+aseg segmentation"
+    },
+    "ctab": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Color Table",
+      "description": "Color lookup table, default is FREESURFER_HOME/FreeSurferColorLUT.txt"
+    },
+    "all_segs_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "All Segments Flag",
+      "description": "Report on all segments, even empty ones"
+    },
+    "copes_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Copes Flag",
+      "description": "Do all copes"
+    },
+    "varcopes_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Varcopes Flag",
+      "description": "Do all varcopes"
+    },
+    "zstats_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Zstats Flag",
+      "description": "Do all zstats"
+    },
+    "pes_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "PES Flag",
+      "description": "Do all pes"
+    },
+    "rvar": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "RVar",
+      "description": "Sigma squared values"
+    },
+    "example_func": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Example Function",
+      "description": "Example function"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask",
+      "description": "Probably not too useful"
+    },
+    "mean_func": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mean Function",
+      "description": "Mean function"
+    },
+    "stat": {
+      "type": "string",
+      "title": "Stat",
+      "description": "Statistical output"
+    },
+    "version_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Print version and exit"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Print help and exit"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Turn on debugging"
+    },
+    "nolog_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Nolog Flag",
+      "description": "Do not create a log file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "feat_dir",
+    "stat"
+  ]
+}

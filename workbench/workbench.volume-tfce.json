@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Do tfce on a volume file.\n\nThis command does not do any statistical analysis.  Please use something like PALM if you are just trying to do statistics on your data.\n\nThreshold-free cluster enhancement is a method to increase the relative value of regions that would form clusters in a standard thresholding test.  This is accomplished by evaluating the integral of:\n\ne(h, p)^E * h^H * dh\n\nat each voxel p, where h ranges from 0 to the maximum value in the data, and e(h, p) is the extent of the cluster containing voxel p at threshold h.  Negative values are similarly enhanced by negating the data, running the same process, and negating the result.\n\nThis method is explained in: Smith SM, Nichols TE., \"Threshold-free cluster enhancement: addressing problems of smoothing, threshold dependence and localisation in cluster inference.\" Neuroimage. 2009 Jan 1;44(1):83-98. PMID: 18501637",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.volume-tfce"
+    },
+    "volume_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "volume_in",
+      "description": "the volume to run TFCE on"
+    },
+    "volume_out": {
+      "type": "string",
+      "title": "volume_out",
+      "description": "the output volume"
+    },
+    "presmooth": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "presmooth"
+            },
+            "kernel": {
+              "type": "number",
+              "title": "kernel",
+              "description": "the size of the gaussian smoothing kernel in mm, as sigma by default"
+            },
+            "opt_fwhm": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_fwhm",
+              "description": "smoothing kernel size is FWHM, not sigma"
+            }
+          },
+          "additionalProperties": false,
+          "description": "smooth the volume before running TFCE",
+          "required": [
+            "kernel"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "smooth the volume before running TFCE"
+    },
+    "opt_roi_roi_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_roi_roi_volume",
+      "description": "select a region of interest to run TFCE on: the area to run TFCE on, as a volume"
+    },
+    "parameters": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "parameters"
+            },
+            "e": {
+              "type": "number",
+              "title": "e",
+              "description": "exponent for cluster volume (default 0.5)"
+            },
+            "h": {
+              "type": "number",
+              "title": "h",
+              "description": "exponent for threshold value (default 2.0)"
+            }
+          },
+          "additionalProperties": false,
+          "description": "set parameters for TFCE integral",
+          "required": [
+            "e",
+            "h"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "set parameters for TFCE integral"
+    },
+    "opt_subvolume_subvolume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_subvolume_subvolume",
+      "description": "select a single subvolume: the subvolume number or name"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "volume_in",
+    "volume_out"
+  ]
+}

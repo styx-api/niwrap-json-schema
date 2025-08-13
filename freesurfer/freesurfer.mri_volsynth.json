@@ -1,0 +1,599 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Synthesizes a volume with specified geometry and probability distribution function.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_volsynth"
+    },
+    "output_volid": {
+      "type": "string",
+      "title": "Output volume",
+      "description": "Output volume path id and format"
+    },
+    "template": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template",
+      "description": "Template volume id"
+    },
+    "nframes": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of frames",
+      "description": "Override template number of frames"
+    },
+    "offset_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Offset flag",
+      "description": "Use template as intensity offset"
+    },
+    "offset_mid_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Offset mid flag",
+      "description": "Use middle frame of template as intensity offset"
+    },
+    "curv": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Curvature output",
+      "description": "Save output as curvature, uses lh.thickness as template. Requires subject and hemisphere."
+    },
+    "dim": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dimensions",
+      "description": "Specify dimensionality nc nr ns nf"
+    },
+    "res": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolution",
+      "description": "Voxel resolution dc dr ds df (df is TR, in msec)"
+    },
+    "vox_size": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel size",
+      "description": "Change template voxel resolution and dimension dc dr ds"
+    },
+    "tr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time between frames",
+      "description": "Time between frames in msec"
+    },
+    "cdircos": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Column Cosine Direction",
+      "description": "Column cosine direction x, y, z"
+    },
+    "rdircos": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Row Cosine Direction",
+      "description": "Row cosine direction x, y, z"
+    },
+    "sdircos": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Slice Cosine Direction",
+      "description": "Slice cosine direction x, y, z"
+    },
+    "c_ras": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "RAS Center Voxel",
+      "description": "RAS coordinates of 'center' voxel c_r c_a c_s"
+    },
+    "p0": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First voxel",
+      "description": "First voxel coordinates p0r p0a p0s"
+    },
+    "precision": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Precision",
+      "description": "Precision of the output (e.g., float)"
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Seed",
+      "description": "Seed for the random number generator"
+    },
+    "seedfile": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Seed file",
+      "description": "Write seed value to this file"
+    },
+    "pdf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "PDF",
+      "description": "Probability distribution function (e.g., gaussian, uniform, const)"
+    },
+    "bb": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bounding box",
+      "description": "Bounding box c r s dc dr ds (In=ValA, Out=ValB)"
+    },
+    "gmean": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gaussian mean",
+      "description": "Mean for the gaussian distribution"
+    },
+    "gstd": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gaussian stddev",
+      "description": "Standard deviation for the gaussian distribution"
+    },
+    "delta_crsf": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delta CRSF",
+      "description": "Delta's col, row, slice, and frame coordinates"
+    },
+    "delta_val": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delta Value",
+      "description": "Delta value"
+    },
+    "delta_val_off": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delta Background Value",
+      "description": "Delta background value"
+    },
+    "grid": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Grid",
+      "description": "Grid dimensions dcol, drow, dslice"
+    },
+    "dof": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Degrees of freedom",
+      "description": "Degrees of freedom for t and chi2 distributions"
+    },
+    "dof_num": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Numerator DOF",
+      "description": "Numerator degrees of freedom for F distribution"
+    },
+    "dof_den": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Denominator DOF",
+      "description": "Denominator degrees of freedom for F distribution"
+    },
+    "rescale_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rescale flag",
+      "description": "Rescale z, t, F, or chi2 after smoothing"
+    },
+    "val_a": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ValA",
+      "description": "Set ValA"
+    },
+    "val_b": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ValB",
+      "description": "Set ValB"
+    },
+    "vox_radius": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel Radius",
+      "description": "Radius in voxels for sphere"
+    },
+    "mm_radius": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "MM Radius",
+      "description": "Radius in mm for sphere"
+    },
+    "sphere_center": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sphere Center",
+      "description": "Sphere center coordinates column, row, slice"
+    },
+    "hsc": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "HSC Range",
+      "description": "Multiply each frame by a random number between min and max"
+    },
+    "abs_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Absolute value flag",
+      "description": "Compute absolute value"
+    },
+    "cp": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Control Points",
+      "description": "Set control point voxels to 1"
+    },
+    "spike": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spike Time Point",
+      "description": "Set all values at a given time point to 1e9"
+    },
+    "fwhm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM",
+      "description": "Smooth by Full Width at Half Maximum (FWHM) in mm"
+    },
+    "sum2": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sum Volume Squared",
+      "description": "Save sum of volume squared into specified file"
+    },
+    "dim_surf_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Surface Dimension Flag",
+      "description": "Set dimension to nvertices x 1 x 1"
+    },
+    "ctab": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Color Table",
+      "description": "Embed color table"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "output_volid"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "SmoothImage allows smoothing of images with adjustable sigma values, offering optional median filtering functionality.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.SmoothImage"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "title": "Image Dimension",
+      "description": "Specifies the dimensionality of the image."
+    },
+    "image_ext": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Image File",
+      "description": "The input image file to be smoothed."
+    },
+    "smoothing_sigma": {
+      "type": "string",
+      "title": "Smoothing Sigma",
+      "description": "The sigma value for smoothing. A separate sigma may be specified for each dimension, e.g., '1.5x1x2'."
+    },
+    "out_image_ext": {
+      "type": "string",
+      "title": "Output Image File",
+      "description": "The output smoothed image file."
+    },
+    "sigma_units": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sigma Units",
+      "description": "Determines if sigma is in spacing units (1) or not (0). Default is 0."
+    },
+    "median_filter": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use Median Filter",
+      "description": "Whether to use median filter. Default is 0. If using median filter, sigma represents the radius in voxels."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "image_ext",
+    "smoothing_sigma",
+    "out_image_ext"
+  ]
+}

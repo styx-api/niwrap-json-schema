@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool for converting IFH (Interfile Header) to HDR (Header) format in 4dfp (Four-Dimensional Functional Image) file format.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.ifh2hdr"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input File",
+      "description": "Input 4dfp file"
+    },
+    "range": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Range",
+      "description": "Set range for the 4dfp file. Format: <float>[to<float>]."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file"
+  ]
+}

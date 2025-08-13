@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Creates new versions of original-mesh surfaces using the mesh of an icosahedron.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.MapIcosahedron"
+    },
+    "spec_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Spec File",
+      "description": "Spec file containing original-mesh surfaces."
+    },
+    "rec_depth": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Recursive Depth",
+      "description": "Recursive (binary) tessellation depth for icosahedron (default: 3)."
+    },
+    "lin_depth": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Linear Depth",
+      "description": "Number of edge divides for linear icosahedron tessellation."
+    },
+    "morph_surf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Morph Surface",
+      "description": "Specifies the morphSurf surface."
+    },
+    "num_it": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Iterations",
+      "description": "Number of smoothing iterations."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Prefix for output files (default: 'std.')."
+    },
+    "nn_dset": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "NN Dataset",
+      "description": "Map DSET onto the new mesh using Nearest Neighbor interpolation."
+    },
+    "dset": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset",
+      "description": "Map DSET onto the new mesh using barycentric interpolation."
+    },
+    "fix_cut_surfaces": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fix Cut Surfaces",
+      "description": "Check and fix standard-mesh surfaces with cuts for cross-cut connections."
+    },
+    "verbosity": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbosity",
+      "description": "Enable verbose output."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Display the help text."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "spec_file"
+  ]
+}

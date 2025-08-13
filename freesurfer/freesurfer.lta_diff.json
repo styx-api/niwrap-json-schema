@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool to compute different distance norms for a single transform or for the difference between two transforms.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.lta_diff"
+    },
+    "transform1": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Transform 1",
+      "description": "First transform file"
+    },
+    "transform2": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform 2",
+      "description": "Second transform file"
+    },
+    "dist_type": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Distance Type",
+      "description": "Distance type: 1 (Rigid Trans. Dist.), 2 (Affine Transform Distance), 3 (8-corners mean distance), 4 (Max Displacement), 5 (Determinant scaling), 6 (Interpolation Smoothing), 7 (Decomposition). Default is 2."
+    },
+    "invert1": {
+      "type": "boolean",
+      "default": false,
+      "title": "Invert First Transform",
+      "description": "Invert first transform before computing difference matrix D"
+    },
+    "invert2": {
+      "type": "boolean",
+      "default": false,
+      "title": "Invert Second Transform",
+      "description": "Invert second transform before computing difference matrix D"
+    },
+    "vox": {
+      "type": "boolean",
+      "default": false,
+      "title": "Vox Coordinates",
+      "description": "Compute distance in vox coordinates, after adjusting for voxel sizes. Default is RAS coordinates."
+    },
+    "normdiv": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Normalization Divisor",
+      "description": "Divide final distance by this value for step adjustment."
+    },
+    "radius": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Radius",
+      "description": "Radius in mm, used for RMS distance. Default is 100 to include the head."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "transform1"
+  ]
+}

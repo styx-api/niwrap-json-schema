@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool for computing q-ball ODFs using bootstrap samples",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.qboot"
+    },
+    "data_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Data file",
+      "description": "Data file"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask file",
+      "description": "Mask file"
+    },
+    "bvecs_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "b vectors file",
+      "description": "b vectors file"
+    },
+    "bvals_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "b values file",
+      "description": "b values file"
+    },
+    "log_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output log directory",
+      "description": "Output directory (default is logdir)"
+    },
+    "forcedir_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force directory flag",
+      "description": "Use the actual directory name given - i.e. don't add + to make a new directory"
+    },
+    "q_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Multi-shell data file",
+      "description": "File provided with multi-shell data. Indicates the number of directions for each shell"
+    },
+    "model_type": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model type",
+      "description": "Which model to use. 1=Tuch's ODFs, 2=CSA ODFs (default), 3=multi-shell CSA ODFs"
+    },
+    "lmax_order": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lmax order",
+      "description": "Maximum spherical harmonic order employed (must be even, default=4)"
+    },
+    "npeaks": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of peaks",
+      "description": "Maximum number of ODF peaks to be detected (default 2)"
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold value",
+      "description": "Minimum threshold for a local maxima to be considered an ODF peak. Expressed as a fraction of the maximum ODF value (default 0.4)"
+    },
+    "num_samples": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of samples",
+      "description": "Number of bootstrap samples (default is 50)"
+    },
+    "lambda_param": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Laplace-Beltrami regularization parameter",
+      "description": "Laplace-Beltrami regularization parameter (default is 0)"
+    },
+    "delta_param": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Signal attenuation parameter",
+      "description": "Signal attenuation regularization parameter for models=2,3 (default is 0.01)"
+    },
+    "alpha_param": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Laplacian sharpening parameter",
+      "description": "Laplacian sharpening parameter for model=1 (default is 0, should be smaller than 1)"
+    },
+    "seed_param": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Seed value",
+      "description": "Seed for pseudo-random number generator"
+    },
+    "gfa_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Generalized FA flag",
+      "description": "Compute a generalised FA, using the mean ODF in each voxel"
+    },
+    "savecoeff_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save coefficients flag",
+      "description": "Save the ODF coefficients instead of the peaks. WARNING: These can be huge files, please use a few bootstrap samples and a low lmax!"
+    },
+    "savemeancoeff_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save mean coefficients flag",
+      "description": "Save the mean ODF coefficients across all samples"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Display this help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "data_file",
+    "mask_file",
+    "bvecs_file",
+    "bvals_file"
+  ]
+}

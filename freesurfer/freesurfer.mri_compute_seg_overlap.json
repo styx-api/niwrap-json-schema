@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Compute coefficients of overlap between segmentation volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_compute_seg_overlap"
+    },
+    "segvol1": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Segmentation Volume 1",
+      "description": "First segmentation volume."
+    },
+    "segvol2": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Segmentation Volume 2",
+      "description": "Second segmentation volume."
+    },
+    "log_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log File",
+      "description": "Log file for individual Dice coefficients for 12 structure pairs, plus mean, std, and 'overall'."
+    },
+    "mean_log_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mean Log File",
+      "description": "Log file for mean Dice."
+    },
+    "std_log_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Std Log File",
+      "description": "Log file for std Dice."
+    },
+    "overall_log_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Overall Log Flag",
+      "description": "Log file for 'overall' Dice (mean excluding wm, gm, and accumbens)."
+    },
+    "exclude_cortex_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Exclude Cortex Flag",
+      "description": "Exclude cerebral cortex labels from all calculation. (0/1 flag, if nonzero)"
+    },
+    "exclude_wm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Exclude White Matter Flag",
+      "description": "Exclude cerebral white matter labels from all calculation. (0/1 flag, if nonzero)"
+    },
+    "all_labels_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "All Labels Flag",
+      "description": "Check all labels, not just the predefined main structures."
+    },
+    "dice_params": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dice Params",
+      "description": "Standalone way to compute Dice coefficients, using seg1, seg2, ctab, ReportEmpty01, ExcludeId, datfile, and tablefile as additional parameters."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "segvol1",
+    "segvol2"
+  ]
+}

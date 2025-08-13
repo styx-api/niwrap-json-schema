@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Expand a given surface by a specified distance",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_expand"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Surface",
+      "description": "Input surface file (e.g. lh.white)"
+    },
+    "expansion_distance": {
+      "type": "number",
+      "title": "Expansion Distance",
+      "description": "Expansion distance in mm"
+    },
+    "output_surface": {
+      "type": "string",
+      "title": "Output Surface",
+      "description": "Output surface file"
+    },
+    "thickness": {
+      "type": "boolean",
+      "default": false,
+      "title": "Thickness Flag",
+      "description": "Use thickness for expansion"
+    },
+    "label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label File",
+      "description": "Use label file for expansion"
+    },
+    "tmap": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "TMap File",
+      "description": "Use a prespecified map of percent thickness to compute the target locations for expansion"
+    },
+    "tmap_random": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "TMap Random Parameters",
+      "description": "Create a random target distance map with Gaussian sampling for the target locations"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_surface",
+    "expansion_distance",
+    "output_surface"
+  ]
+}

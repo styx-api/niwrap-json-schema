@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Utility for creating and modifying colormaps with various formats and fiducial points",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.MakeColorMap"
+    },
+    "fiducials_ncol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fiducials Ncol",
+      "description": "Fiducial colors and their indices in the color map are listed in file Fiducials_Ncol."
+    },
+    "fiducials": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fiducials",
+      "description": "Fiducial colors are listed in an ascii file Fiducials."
+    },
+    "num_colors": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Colors",
+      "description": "Total number of colors in the color map."
+    },
+    "std_mapname": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Standard Map Name",
+      "description": "Returns one of SUMA's standard colormaps."
+    },
+    "palette_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Palette File",
+      "description": "Specify the palette file for colormap."
+    },
+    "cmap_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Colormap Name",
+      "description": "Specify the colormap name."
+    },
+    "fscolut_labels": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FSColut Labels",
+      "description": "Get AFNI/SUMA colormaps of FreeSurfer colors indexed between lbl0 and lbl1."
+    },
+    "fscolut_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FSColut File",
+      "description": "Use color LUT file FS_COL_LUT."
+    },
+    "afni_hex": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "AFNI Hex Format",
+      "description": "Afni Hex format. Use this option if you want a color map formatted to fit in AFNI's .afnirc file"
+    },
+    "afni_hex_complete": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Complete AFNI Hex Format",
+      "description": "Afni Hex format, ready to go into pbardefs.h."
+    },
+    "suma_colormap": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "SUMA Colormap",
+      "description": "Write colormap in SUMA's format."
+    },
+    "user_colut_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "User Color LUT File",
+      "description": "Provide a user's own color lookup file."
+    },
+    "sdset": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface-based Dataset",
+      "description": "Add colormap to surface-based dataset DSET, making it a labeled dataset."
+    },
+    "sdset_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Dataset Prefix",
+      "description": "Prefix of dset for writing labeled version of DSET."
+    },
+    "flipupdown": {
+      "type": "boolean",
+      "default": false,
+      "title": "Flip Upside-down Flag",
+      "description": "Flip the map upside down."
+    },
+    "skip_last": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip Last Color Flag",
+      "description": "If used, the last color in the Fiducial list is omitted."
+    },
+    "show_fscolut": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show FSColut Flag",
+      "description": "Show all of the FreeSurfer LUT."
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Displays the help message."
+    },
+    "help_full_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Full Help Flag",
+      "description": "Displays the help message."
+    },
+    "flip_map_updside_down": {
+      "type": "boolean",
+      "default": false,
+      "title": "Flip Map Upside Down Flag",
+      "description": "Flip the map upside down."
+    }
+  },
+  "additionalProperties": false
+}

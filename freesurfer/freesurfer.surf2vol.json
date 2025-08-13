@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Diffuse surface deformation to volumes using surface and MRI data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.surf2vol"
+    },
+    "fixed_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Fixed Surface",
+      "description": "File path for the main fixed surface."
+    },
+    "moving_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Moving Surface",
+      "description": "File path for the main moving surface."
+    },
+    "fixed_mri": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Fixed MRI",
+      "description": "Fixed volume file."
+    },
+    "moving_mri": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Moving MRI",
+      "description": "Moving volume file."
+    },
+    "output_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "out.mgz",
+      "title": "Output File",
+      "description": "Output file for the result, default is out.mgz."
+    },
+    "output_field": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "out_field.mgz",
+      "title": "Output Field",
+      "description": "Output field file, default is out_field.mgz."
+    },
+    "output_affine": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Affine",
+      "description": "Path for the output affine file."
+    },
+    "output_surf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Surface",
+      "description": "Root file name for output surfaces which will have indices appended for each surface."
+    },
+    "output_surf_affine": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Surface Affine",
+      "description": "Root file name for output surfaces with affine transformations."
+    },
+    "output_mesh": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Mesh",
+      "description": "File path for the output mesh."
+    },
+    "spacing_x": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spacing X",
+      "description": "Specifies the x spacing for the deformation grid."
+    },
+    "spacing_y": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spacing Y",
+      "description": "Specifies the y spacing for the deformation grid."
+    },
+    "spacing_z": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spacing Z",
+      "description": "Specifies the z spacing for the deformation grid."
+    },
+    "poisson_ratio": {
+      "anyOf": [
+        {
+          "type": "number",
+          "maximum": 0.5
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Poisson Ratio",
+      "description": "Poisson ratio for material properties, default is 0.3."
+    },
+    "dirty_factor": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dirty Factor",
+      "description": "Factor for dirty regions, between 0 and 1."
+    },
+    "debug_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Output",
+      "description": "Enable debug output, writing a morph file at each iteration."
+    },
+    "cache_transform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cache Transform",
+      "description": "Path to save transformation cache for reusing in subsequent runs."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "fixed_surface",
+    "moving_surface",
+    "fixed_mri",
+    "moving_mri"
+  ]
+}

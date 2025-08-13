@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Find frequency of volume labels.\n\nThis command outputs a set of soft ROIs, one for each label in the input, where the value is how many of the input maps had that label at that voxel, divided by the number of input maps.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.volume-label-probability"
+    },
+    "label_maps": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "label_maps",
+      "description": "volume label file containing individual label maps from many subjects"
+    },
+    "probability_out": {
+      "type": "string",
+      "title": "probability_out",
+      "description": "the relative frequencies of each label at each voxel"
+    },
+    "opt_exclude_unlabeled": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_exclude_unlabeled",
+      "description": "don't make a probability map of the unlabeled key"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "label_maps",
+    "probability_out"
+  ]
+}

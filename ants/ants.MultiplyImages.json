@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Multiply 2 images; 2nd image file may also be floating point numerical value, and program will act accordingly -- i.e. read as a number. Program handles vector and tensor images as well",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.MultiplyImages"
+    },
+    "dimension": {
+      "type": "integer",
+      "title": "Dimension",
+      "description": "3 or 2. Image dimension (2 or 3)."
+    },
+    "first_input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "First input",
+      "description": "Image 1."
+    },
+    "second_input": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second input",
+      "description": "file or string or a float. Image 2 or multiplication weight."
+    },
+    "second_input_2": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second input",
+      "description": "file or string or a float. Image 2 or multiplication weight."
+    },
+    "output_product_image": {
+      "type": "string",
+      "title": "Output product image",
+      "description": "Outputfname.nii.gz: the name of the resulting image."
+    },
+    "num_threads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Num threads",
+      "description": "Number of itk threads to use."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dimension",
+    "first_input",
+    "output_product_image"
+  ]
+}

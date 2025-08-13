@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Reads a '-cbucket' dataset and a '.xmat.1D' matrix from 3dDeconvolve, and synthesizes a fit dataset using selected sub-bricks and matrix columns.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dSynthesize"
+    },
+    "c_bucket": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Cbucket dataset",
+      "description": "Input dataset from 3dDeconvolve via the '-cbucket' option."
+    },
+    "matrix": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Matrix file",
+      "description": "Matrix file from 3dDeconvolve via the '-x1D' option."
+    },
+    "select": {
+      "type": "string",
+      "title": "Select columns",
+      "description": "Select columns from the matrix and corresponding sub-bricks from the cbucket. Can use forms like 'baseline', 'polort', 'allfunc', 'allstim', 'all', 'something', or numbers/ranges."
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Output result into dataset with the specified name."
+    },
+    "dry_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dry run",
+      "description": "Don't compute the output, just check the inputs."
+    },
+    "tr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Repetition Time (TR)",
+      "description": "Set TR in the output to the specified value."
+    },
+    "cenfill": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Censor fill option",
+      "description": "How censored time points from 3dDeconvolve will be filled (options: 'zero', 'nbhr', 'none')."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "c_bucket",
+    "matrix",
+    "select",
+    "prefix"
+  ]
+}

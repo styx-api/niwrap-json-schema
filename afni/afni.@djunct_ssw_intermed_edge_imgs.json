@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Helper script to generate intermediate edge images for SSW-related processing.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.@djunct_ssw_intermed_edge_imgs"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Prefix for generated output files"
+    },
+    "ulay": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Underlay File",
+      "description": "Underlay dataset"
+    },
+    "olay": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Overlay File",
+      "description": "Overlay dataset"
+    },
+    "box_focus_slices": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Box Focus Slices",
+      "description": "Slices of interest for focus box"
+    },
+    "montgap": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Montage Gap",
+      "description": "Gap between montage slices"
+    },
+    "cbar": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Color Bar",
+      "description": "Color bar specification for AFNI"
+    },
+    "ulay_range": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Underlay Range",
+      "description": "Range for underlay data mapping"
+    },
+    "montx": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Montage X",
+      "description": "Number of slices along x dimension in montage"
+    },
+    "monty": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Montage Y",
+      "description": "Number of slices along y dimension in montage"
+    },
+    "help_view": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help View",
+      "description": "View help file in viewer"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Displays help information"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Displays version information"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Clean",
+      "description": "Don't clean up intermediate files"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix",
+    "ulay",
+    "olay"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program will subdivide a triangular mesh surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_mesh_subdivide"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Surface",
+      "description": "Name of input surface file"
+    },
+    "output_surface": {
+      "type": "string",
+      "title": "Output Surface",
+      "description": "Name for output surface file (outputs to same directory as input if path not provided)"
+    },
+    "subdivision_method": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subdivision Method",
+      "description": "Subdivision method: options are 'butterfly' (default), 'loop', or 'linear'"
+    },
+    "iterations": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Iterations",
+      "description": "Number of subdivision iterations"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_surface",
+    "output_surface"
+  ]
+}

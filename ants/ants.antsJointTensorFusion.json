@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "antsJointTensorFusion is an image fusion algorithm developed by Hongzhi Wang and Paul Yushkevich which won segmentation challenges at MICCAI 2012 and MICCAI 2013. The original label fusion framework was extended to accommodate intensities by Brian Avants. This implementation is based on the original ITK-style implementation and ANTsR implementation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.antsJointTensorFusion"
+    },
+    "dimensionality": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dimensionality",
+      "description": "This option forces the image to be treated as a specified-dimensional image. If not specified, the program tries to infer the dimensionality from the input image."
+    },
+    "target_image": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Target Image",
+      "description": "The target image (or multimodal target images) assumed to be aligned to a common image domain."
+    },
+    "atlas_image": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Atlas Image",
+      "description": "The atlas image (or multimodal atlas images) assumed to be aligned to a common image domain."
+    },
+    "atlas_segmentation": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Atlas Segmentation",
+      "description": "The atlas segmentation images. For performing label fusion the number of specified segmentations should be identical to the number of atlas image sets."
+    },
+    "alpha": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.1,
+      "title": "Alpha",
+      "description": "Regularization term added to matrix Mx for calculating the inverse. Default = 0.1"
+    },
+    "beta": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 2.0,
+      "title": "Beta",
+      "description": "Exponent for mapping intensity difference to the joint error. Default = 2.0"
+    },
+    "retain_label_posterior_images": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Retain Label Posterior Images",
+      "description": "Retain label posterior probability images. Requires atlas segmentations to be specified. Default = false"
+    },
+    "retain_atlas_voting_images": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Retain Atlas Voting Images",
+      "description": "Retain atlas voting images. Default = false"
+    },
+    "constrain_nonnegative": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Constrain Nonnegative",
+      "description": "Constrain solution to non-negative weights."
+    },
+    "log_euclidean": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log Euclidean",
+      "description": "Use log Euclidean space for tensor math."
+    },
+    "patch_radius": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Patch Radius",
+      "description": "Patch radius for similarity measures. Default = 2x2x2"
+    },
+    "patch_metric": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Patch Metric",
+      "description": "Metric to be used in determining the most similar neighborhood patch. Options include Pearson's correlation (PC) and mean squares (MSQ). Default = PC."
+    },
+    "search_radius": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Search Radius",
+      "description": "Search radius for similarity measures. Default = 3x3x3"
+    },
+    "exclusion_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Exclusion Image",
+      "description": "Specify an exclusion region for the given label."
+    },
+    "mask_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Image",
+      "description": "If a mask image is specified, fusion is only performed in the mask region."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output",
+      "description": "The output is the intensity and/or label fusion image. Additional optional outputs include the label posterior probability images and the atlas voting weight images."
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose",
+      "description": "Verbose output."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "target_image",
+    "atlas_image",
+    "atlas_segmentation",
+    "output"
+  ]
+}

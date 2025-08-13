@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "White Matter Hyperintensity Segmentation Tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.wmsaseg"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject identifier"
+    },
+    "source_orig": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source original",
+      "description": "Use T2 and PD images from original subject"
+    },
+    "source_long": {
+      "type": "boolean",
+      "default": false,
+      "title": "Source long",
+      "description": "Use T2 and PD images from longitudinal subject"
+    },
+    "output_subdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output subdirectory",
+      "description": "Output subdirectory name (default is wmsa)"
+    },
+    "gca_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GCA file",
+      "description": "GCA file path"
+    },
+    "no_reg": {
+      "type": "boolean",
+      "default": false,
+      "title": "No registration",
+      "description": "Do not register mode to anatomical image"
+    },
+    "no_canorm": {
+      "type": "boolean",
+      "default": false,
+      "title": "No CA normalization",
+      "description": "Do not run mri_ca_normalize"
+    },
+    "init_spm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Initialize SPM",
+      "description": "Initialize SPM (default is FSL)"
+    },
+    "reg_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Register only",
+      "description": "Only perform registration"
+    },
+    "halo1": {
+      "type": "boolean",
+      "default": false,
+      "title": "Halo 1",
+      "description": "Halo 1 option"
+    },
+    "halo2": {
+      "type": "boolean",
+      "default": false,
+      "title": "Halo 2",
+      "description": "Halo 2 option"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject"
+  ]
+}

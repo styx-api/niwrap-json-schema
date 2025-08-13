@@ -1,0 +1,393 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Concatenates input data sets.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_concat"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input files",
+      "description": "Input image files (e.g. file1.mgh file2.mgh ...)."
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output file name (e.g. output.mgh)."
+    },
+    "file_list": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "File list",
+      "description": "List file containing a text list of files to process (up to 400000 files)."
+    },
+    "paired_sum": {
+      "type": "boolean",
+      "default": false,
+      "title": "Paired sum",
+      "description": "Compute paired sum (1+2, 3+4, etc)."
+    },
+    "paired_avg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Paired average",
+      "description": "Compute paired average (1+2, 3+4, etc)."
+    },
+    "paired_diff": {
+      "type": "boolean",
+      "default": false,
+      "title": "Paired difference",
+      "description": "Compute paired difference (1-2, 3-4, etc)."
+    },
+    "paired_diff_norm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Paired difference norm",
+      "description": "Compute paired difference normalized by TP1,2 average."
+    },
+    "paired_diff_norm1": {
+      "type": "boolean",
+      "default": false,
+      "title": "Paired difference norm1",
+      "description": "Compute paired difference normalized by TP1."
+    },
+    "paired_diff_norm2": {
+      "type": "boolean",
+      "default": false,
+      "title": "Paired difference norm2",
+      "description": "Compute paired difference normalized by TP2."
+    },
+    "norm_mean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normalize mean",
+      "description": "Normalize frames by mean of all time points."
+    },
+    "norm1": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normalize TP1",
+      "description": "Normalize frames by first time point (TP1)."
+    },
+    "matrix": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Matrix file",
+      "description": "Multiply by matrix from ASCII file."
+    },
+    "frame_weight": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Frame weight file",
+      "description": "Weight each frame by values in ASCII file (one value per frame)."
+    },
+    "norm_weight": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normalized weighting",
+      "description": "Normalize frames to sum to 1 after weighting."
+    },
+    "group_mean": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Group mean",
+      "description": "Create matrix to average Ng groups, Nper=Ntot/Ng."
+    },
+    "combine": {
+      "type": "boolean",
+      "default": false,
+      "title": "Combine frames",
+      "description": "Average frames from non-zero voxels."
+    },
+    "keep_datatype": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep datatype",
+      "description": "Write output in the same datatype as input (default is Float format)."
+    },
+    "abs": {
+      "type": "boolean",
+      "default": false,
+      "title": "Take absolute value",
+      "description": "Take absolute value of input."
+    },
+    "pos": {
+      "type": "boolean",
+      "default": false,
+      "title": "Set negatives to zero",
+      "description": "Set input negatives to 0."
+    },
+    "neg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Set positives to zero",
+      "description": "Set input positives to 0."
+    },
+    "mean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mean",
+      "description": "Compute mean of concatenated volumes."
+    },
+    "median": {
+      "type": "boolean",
+      "default": false,
+      "title": "Median",
+      "description": "Compute median of concatenated volumes."
+    },
+    "mean_div_n": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mean divided by N",
+      "description": "Compute mean divided by number of frames."
+    },
+    "sum": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sum",
+      "description": "Compute sum of concatenated volumes."
+    },
+    "var": {
+      "type": "boolean",
+      "default": false,
+      "title": "Variance",
+      "description": "Compute variance of concatenated volumes."
+    },
+    "std": {
+      "type": "boolean",
+      "default": false,
+      "title": "Standard deviation",
+      "description": "Compute standard deviation of concatenated volumes."
+    },
+    "max": {
+      "type": "boolean",
+      "default": false,
+      "title": "Maximum",
+      "description": "Compute maximum of concatenated volumes."
+    },
+    "max_index": {
+      "type": "boolean",
+      "default": false,
+      "title": "Maximum index",
+      "description": "Compute index of maximum of concatenated volumes."
+    },
+    "max_index_prune": {
+      "type": "boolean",
+      "default": false,
+      "title": "Max index prune",
+      "description": "Set max index to 0 where all frames are 0."
+    },
+    "max_index_add": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max index add value",
+      "description": "Add value to non-zero max indices."
+    },
+    "min": {
+      "type": "boolean",
+      "default": false,
+      "title": "Minimum",
+      "description": "Compute minimum of concatenated volumes."
+    },
+    "replicate_times": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Replicate frames",
+      "description": "Replicate N times over frames."
+    },
+    "fnorm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Functional normalization",
+      "description": "Normalize time series at each voxel."
+    },
+    "conjunction": {
+      "type": "boolean",
+      "default": false,
+      "title": "Conjunction",
+      "description": "Compute voxel-wise conjunction of concatenated volumes."
+    },
+    "vote": {
+      "type": "boolean",
+      "default": false,
+      "title": "Voting mechanism",
+      "description": "Most frequent value at each voxel and fraction of occurrences."
+    },
+    "sort": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sort voxel values",
+      "description": "Sort each voxel by ascending frame value."
+    },
+    "temporal_ar1": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Temporal AR1",
+      "description": "Compute temporal AR1 with degree of freedom adjustment."
+    },
+    "prune": {
+      "type": "boolean",
+      "default": false,
+      "title": "Prune non-zero values",
+      "description": "Set voxel value to 0 unless all frames are non-zero."
+    },
+    "pca": {
+      "type": "boolean",
+      "default": false,
+      "title": "Principal component analysis",
+      "description": "Compute and output principal component analysis (PCA)."
+    },
+    "pca_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "PCA mask",
+      "description": "Mask used to select voxels for PCA (mask > 0.5)."
+    },
+    "scm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Spatial covariance matrix",
+      "description": "Compute spatial covariance matrix."
+    },
+    "zconcat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Z concatenation",
+      "description": "Concatenate in slice direction skipping nskip slices."
+    },
+    "max_bonfcor": {
+      "type": "boolean",
+      "default": false,
+      "title": "Max Bonferroni correction",
+      "description": "Compute maximum and Bonferroni correct."
+    },
+    "multiply": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Multiply value",
+      "description": "Multiply volumes by value."
+    },
+    "add": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Add value",
+      "description": "Add value to volumes."
+    },
+    "mask_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Mask file used with vote or sort."
+    },
+    "rms": {
+      "type": "boolean",
+      "default": false,
+      "title": "Root mean square",
+      "description": "Compute root mean square of concatenated volumes."
+    },
+    "no_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "No input check",
+      "description": "Do not check inputs."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files",
+    "output_file"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Does 3D Edge detection using the library 3DEdge",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dedge3"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input dataset"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Print out some information along the way"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix of output",
+      "description": "Sets the prefix of the output dataset"
+    },
+    "datum": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output datum",
+      "description": "Sets the datum of the output dataset"
+    },
+    "fscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force scaling flag",
+      "description": "Force scaling of the output to the maximum integer range"
+    },
+    "gscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Global scaling flag",
+      "description": "Same as '-fscale', but also forces each output sub-brick to get the same scaling factor"
+    },
+    "nscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "No scaling flag",
+      "description": "Don't do any scaling on output to byte or short datasets"
+    },
+    "scale_floats": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale floats",
+      "description": "Multiply input by VAL, but only if the input datum is float."
+    },
+    "automask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automask flag",
+      "description": "For automatic internal calculation of a mask in the usual AFNI way"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file"
+  ]
+}

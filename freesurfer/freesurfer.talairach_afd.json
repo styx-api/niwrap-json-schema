@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Detects Talairach alignment failures",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.talairach_afd"
+    },
+    "subject_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject Name",
+      "description": "Specify subject's name"
+    },
+    "xfm_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "XFM File",
+      "description": "Specify the talairach.xfm file to check"
+    },
+    "p_value_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.01,
+      "title": "P-Value Threshold",
+      "description": "Threshold the p-values at #; Talairach transforms for subjects with p-values <= T are considered as very unlikely"
+    },
+    "afd_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "AFD Directory",
+      "description": "Specify directory containing .afd data files"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Enable verbose output"
+    }
+  },
+  "additionalProperties": false
+}

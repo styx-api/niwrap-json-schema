@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Deforms a surface to match it to a volumetric map of cortical labels.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_ca_deform"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Surface",
+      "description": "The input surface file to be deformed."
+    },
+    "label_vol": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Label Volume",
+      "description": "The input volumetric label map."
+    },
+    "transform": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Transform",
+      "description": "The transform file, typically a matrix that aligns the volumes."
+    },
+    "intensity_vol": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Intensity Volume",
+      "description": "The intensity volume that is used in the deformation process."
+    },
+    "output_surface": {
+      "type": "string",
+      "title": "Output Surface",
+      "description": "The file name for the output, deformed surface."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_surface",
+    "label_vol",
+    "transform",
+    "intensity_vol",
+    "output_surface"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This tool computes intensity statistics of an input image, optionally given a label image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.ImageIntensityStatistics"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "title": "Image Dimension",
+      "description": "The dimensionality of the image (e.g., 2D, 3D)."
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "The input image for which intensity statistics will be computed."
+    },
+    "label_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Image",
+      "description": "An optional label image which defines regions of interest."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "input_image"
+  ]
+}

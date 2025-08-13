@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Shifts voxel time series from input so that separate slices are aligned to the same temporal origin.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dTshift"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Prefix for output image file name."
+    },
+    "ignore": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ignore",
+      "description": "Ignore the first set of points specified."
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "In file",
+      "description": "Input file to 3dtshift."
+    },
+    "interp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interp",
+      "description": "'fourier' or 'linear' or 'cubic' or 'quintic' or 'heptic'. Different interpolation methods (see 3dtshift for details) default = fourier."
+    },
+    "num_threads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Num threads",
+      "description": "Set number of threads."
+    },
+    "outputtype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outputtype",
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype."
+    },
+    "rlt": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rlt",
+      "description": "Before shifting, remove the mean and linear trend."
+    },
+    "rltplus": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rltplus",
+      "description": "Before shifting, remove the mean and linear trend and later put back the mean."
+    },
+    "slice_encoding_direction": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Slice encoding direction",
+      "description": "'k' or 'k-'. Direction in which slice_timing is specified (default: k). if negative,slice_timing is defined in reverse order, that is, the first entry corresponds to the slice with the largest index, and the final entry corresponds to slice index zero. only in effect when slice_timing is passed as list, not when it is passed as file."
+    },
+    "tpattern": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tpattern",
+      "description": "'alt+z' or 'altplus' or 'alt+z2' or 'alt-z' or 'altminus' or 'alt-z2' or 'seq+z' or 'seqplus' or 'seq-z' or 'seqminus' or a string. Use specified slice time pattern rather than one in header."
+    },
+    "tr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tr",
+      "description": "Manually set the tr. you can attach suffix \"s\" for seconds or \"ms\" for milliseconds."
+    },
+    "tslice": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tslice",
+      "description": "Align each slice to time offset of given slice."
+    },
+    "tzero": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tzero",
+      "description": "Align each slice to given time offset."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in_file"
+  ]
+}

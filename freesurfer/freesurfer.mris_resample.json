@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Resample cortical surfaces in FreeSurfer",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_resample"
+    },
+    "atlas_reg": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Atlas Registration File",
+      "description": "Atlas spherical registration file."
+    },
+    "subject_reg": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Subject Registration File",
+      "description": "Subject spherical registration file."
+    },
+    "subject_surf": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Subject Surface File",
+      "description": "Subject actual surface."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output Resampled Surface",
+      "description": "Output resampled surface."
+    },
+    "annot_in": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Annotation",
+      "description": "Input annotation (for the subject). If present, output annotation must be present as well."
+    },
+    "annot_out": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Annotation",
+      "description": "Output annotation (for the resampled atlas). If present, input annotation must be present as well."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "atlas_reg",
+    "subject_reg",
+    "subject_surf",
+    "output"
+  ]
+}

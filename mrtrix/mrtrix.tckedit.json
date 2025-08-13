@@ -1,0 +1,459 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Perform various editing operations on track files.\n\nThis command can be used to perform various types of manipulations on track data. A range of such manipulations are demonstrated in the examples provided below.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix.tckedit"
+    },
+    "include": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "include"
+              },
+              "spec": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "const": "VariousString"
+                      },
+                      "obj": {
+                        "type": "string",
+                        "title": "Object",
+                        "description": "String object."
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "obj"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "const": "VariousFile"
+                      },
+                      "obj": {
+                        "type": "string",
+                        "x-styx-type": "file",
+                        "title": "Object",
+                        "description": "File object."
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "obj"
+                    ]
+                  }
+                ],
+                "title": "spec",
+                "description": "specify an inclusion region of interest, as either a binary mask image, or as a sphere using 4 comma-separared values (x,y,z,radius). Streamlines must traverse ALL inclusion regions to be accepted."
+              }
+            },
+            "additionalProperties": false,
+            "description": "specify an inclusion region of interest, as either a binary mask image, or as a sphere using 4 comma-separared values (x,y,z,radius). Streamlines must traverse ALL inclusion regions to be accepted.",
+            "required": [
+              "spec"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify an inclusion region of interest, as either a binary mask image, or as a sphere using 4 comma-separared values (x,y,z,radius). Streamlines must traverse ALL inclusion regions to be accepted."
+    },
+    "include_ordered": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "include_ordered"
+              },
+              "image": {
+                "type": "string",
+                "title": "image",
+                "description": "specify an inclusion region of interest, as either a binary mask image, or as a sphere using 4 comma-separared values (x,y,z,radius). Streamlines must traverse ALL inclusion_ordered regions in the order they are specified in order to be accepted."
+              }
+            },
+            "additionalProperties": false,
+            "description": "specify an inclusion region of interest, as either a binary mask image, or as a sphere using 4 comma-separared values (x,y,z,radius). Streamlines must traverse ALL inclusion_ordered regions in the order they are specified in order to be accepted.",
+            "required": [
+              "image"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify an inclusion region of interest, as either a binary mask image, or as a sphere using 4 comma-separared values (x,y,z,radius). Streamlines must traverse ALL inclusion_ordered regions in the order they are specified in order to be accepted."
+    },
+    "exclude": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "exclude"
+              },
+              "spec": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "const": "VariousString_1"
+                      },
+                      "obj": {
+                        "type": "string",
+                        "title": "Object",
+                        "description": "String object."
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "obj"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "const": "VariousFile_1"
+                      },
+                      "obj": {
+                        "type": "string",
+                        "x-styx-type": "file",
+                        "title": "Object",
+                        "description": "File object."
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "obj"
+                    ]
+                  }
+                ],
+                "title": "spec",
+                "description": "specify an exclusion region of interest, as either a binary mask image, or as a sphere using 4 comma-separared values (x,y,z,radius). Streamlines that enter ANY exclude region will be discarded."
+              }
+            },
+            "additionalProperties": false,
+            "description": "specify an exclusion region of interest, as either a binary mask image, or as a sphere using 4 comma-separared values (x,y,z,radius). Streamlines that enter ANY exclude region will be discarded.",
+            "required": [
+              "spec"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify an exclusion region of interest, as either a binary mask image, or as a sphere using 4 comma-separared values (x,y,z,radius). Streamlines that enter ANY exclude region will be discarded."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "mask"
+              },
+              "spec": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "const": "VariousString_2"
+                      },
+                      "obj": {
+                        "type": "string",
+                        "title": "Object",
+                        "description": "String object."
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "obj"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "const": "VariousFile_2"
+                      },
+                      "obj": {
+                        "type": "string",
+                        "x-styx-type": "file",
+                        "title": "Object",
+                        "description": "File object."
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "obj"
+                    ]
+                  }
+                ],
+                "title": "spec",
+                "description": "specify a masking region of interest, as either a binary mask image, or as a sphere using 4 comma-separared values (x,y,z,radius). If defined, streamlines exiting the mask will be truncated."
+              }
+            },
+            "additionalProperties": false,
+            "description": "specify a masking region of interest, as either a binary mask image, or as a sphere using 4 comma-separared values (x,y,z,radius). If defined, streamlines exiting the mask will be truncated.",
+            "required": [
+              "spec"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify a masking region of interest, as either a binary mask image, or as a sphere using 4 comma-separared values (x,y,z,radius). If defined, streamlines exiting the mask will be truncated."
+    },
+    "maxlength": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "maxlength",
+      "description": "set the maximum length of any streamline in mm"
+    },
+    "minlength": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "minlength",
+      "description": "set the minimum length of any streamline in mm"
+    },
+    "number": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "number",
+      "description": "set the desired number of selected streamlines to be propagated to the output file"
+    },
+    "skip": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "skip",
+      "description": "omit this number of selected streamlines before commencing writing to the output file"
+    },
+    "maxweight": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "maxweight",
+      "description": "set the maximum weight of any streamline"
+    },
+    "minweight": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "minweight",
+      "description": "set the minimum weight of any streamline"
+    },
+    "inverse": {
+      "type": "boolean",
+      "default": false,
+      "title": "inverse",
+      "description": "output the inverse selection of streamlines based on the criteria provided; i.e. only those streamlines that fail at least one selection criterion, and/or vertices that are outside masks if provided, will be written to file"
+    },
+    "ends_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "ends_only",
+      "description": "only test the ends of each streamline against the provided include/exclude ROIs"
+    },
+    "tck_weights_in": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "tck_weights_in",
+      "description": "specify a text scalar file containing the streamline weights"
+    },
+    "tck_weights_out": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "tck_weights_out",
+      "description": "specify the path for an output text scalar file containing streamline weights"
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "tracks_in": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "tracks_in",
+      "description": "the input track file(s)"
+    },
+    "tracks_out": {
+      "type": "string",
+      "title": "tracks_out",
+      "description": "the output track file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "tracks_in",
+    "tracks_out"
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Smooth a cifti file.\n\nThe input cifti file must have a brain models mapping on the chosen dimension, columns for .dtseries, and either for .dconn.  By default, data in different structures is smoothed independently (i.e., \"parcel constrained\" smoothing), so volume structures that touch do not smooth across this boundary.  Specify -merged-volume to ignore these boundaries.  Surface smoothing uses the GEO_GAUSS_AREA smoothing method.\n\nThe -*-corrected-areas options are intended for when it is unavoidable to smooth on group average surfaces, it is only an approximate correction for the reduction of structure in a group average surface.  It is better to smooth the data on individuals before averaging, when feasible.\n\nThe -fix-zeros-* options will treat values of zero as lack of data, and not use that value when generating the smoothed values, but will fill zeros with extrapolated values.  The ROI should have a brain models mapping along columns, exactly matching the mapping of the chosen direction in the input file.  Data outside the ROI is ignored.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.cifti-smoothing"
+    },
+    "cifti": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "cifti",
+      "description": "the input cifti"
+    },
+    "surface_kernel": {
+      "type": "number",
+      "title": "surface_kernel",
+      "description": "the size of the gaussian surface smoothing kernel in mm, as sigma by default"
+    },
+    "volume_kernel": {
+      "type": "number",
+      "title": "volume_kernel",
+      "description": "the size of the gaussian volume smoothing kernel in mm, as sigma by default"
+    },
+    "direction": {
+      "type": "string",
+      "title": "direction",
+      "description": "which dimension to smooth along, ROW or COLUMN"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "the output cifti"
+    },
+    "opt_fwhm": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_fwhm",
+      "description": "kernel sizes are FWHM, not sigma"
+    },
+    "left_surface": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "left_surface"
+            },
+            "surface": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "surface",
+              "description": "the left surface file"
+            },
+            "opt_left_corrected_areas_area_metric": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_left_corrected_areas_area_metric",
+              "description": "vertex areas to use instead of computing them from the left surface: the corrected vertex areas, as a metric"
+            }
+          },
+          "additionalProperties": false,
+          "description": "specify the left surface to use",
+          "required": [
+            "surface"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify the left surface to use"
+    },
+    "right_surface": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "right_surface"
+            },
+            "surface": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "surface",
+              "description": "the right surface file"
+            },
+            "opt_right_corrected_areas_area_metric": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_right_corrected_areas_area_metric",
+              "description": "vertex areas to use instead of computing them from the right surface: the corrected vertex areas, as a metric"
+            }
+          },
+          "additionalProperties": false,
+          "description": "specify the right surface to use",
+          "required": [
+            "surface"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify the right surface to use"
+    },
+    "cerebellum_surface": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "cerebellum_surface"
+            },
+            "surface": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "surface",
+              "description": "the cerebellum surface file"
+            },
+            "opt_cerebellum_corrected_areas_area_metric": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_cerebellum_corrected_areas_area_metric",
+              "description": "vertex areas to use instead of computing them from the cerebellum surface: the corrected vertex areas, as a metric"
+            }
+          },
+          "additionalProperties": false,
+          "description": "specify the cerebellum surface to use",
+          "required": [
+            "surface"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify the cerebellum surface to use"
+    },
+    "opt_cifti_roi_roi_cifti": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_cifti_roi_roi_cifti",
+      "description": "smooth only within regions of interest: the regions to smooth within, as a cifti file"
+    },
+    "opt_fix_zeros_volume": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_fix_zeros_volume",
+      "description": "treat values of zero in the volume as missing data"
+    },
+    "opt_fix_zeros_surface": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_fix_zeros_surface",
+      "description": "treat values of zero on the surface as missing data"
+    },
+    "opt_merged_volume": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_merged_volume",
+      "description": "smooth across subcortical structure boundaries"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti",
+    "surface_kernel",
+    "volume_kernel",
+    "direction",
+    "cifti_out"
+  ]
+}

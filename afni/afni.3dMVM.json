@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "AFNI Group Analysis Program with Multi-Variate Modeling Approach",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dMVM"
+    },
+    "dbgArgs": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Arguments",
+      "description": "Enable R to save parameters in a file for debugging"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Output file name prefix"
+    },
+    "jobs": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of jobs",
+      "description": "Number of jobs for parallel processing"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Only process voxels inside this mask"
+    },
+    "bsVars": {
+      "type": "string",
+      "title": "Between-subjects variables",
+      "description": "Formula for between-subjects variables"
+    },
+    "wsVars": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Within-subjects variables",
+      "description": "Formula for within-subjects variables"
+    },
+    "qVars": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quantitative variables",
+      "description": "Comma-separated list of quantitative variables (covariates)"
+    },
+    "qVarCenters": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quantitative variable centers",
+      "description": "Comma-separated centering values for quantitative variables"
+    },
+    "num_glt": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of GLTs",
+      "description": "Number of general linear t-tests (GLTs)"
+    },
+    "gltLabel": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GLT Label",
+      "description": "Label for each general linear t-test (GLT)"
+    },
+    "gltCode": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GLT Code",
+      "description": "Coding for each general linear t-test (GLT)"
+    },
+    "num_glf": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of GLFs",
+      "description": "Number of general linear F-tests (GLFs)"
+    },
+    "glfLabel": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GLF Label",
+      "description": "Label for each general linear F-test (GLF)"
+    },
+    "glfCode": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GLF Code",
+      "description": "Coding for each general linear F-test (GLF)"
+    },
+    "dataTable": {
+      "type": "string",
+      "title": "Data table",
+      "description": "Data table for analysis"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix",
+    "bsVars",
+    "dataTable"
+  ]
+}

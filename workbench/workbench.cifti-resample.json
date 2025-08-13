@@ -1,0 +1,626 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Resample a cifti file to a new cifti space.\n\nResample cifti data to a different brainordinate space.  Use COLUMN for the direction to resample dscalar, dlabel, or dtseries.  Resampling both dimensions of a dconn requires running this command twice, once with COLUMN and once with ROW.  If you are resampling a dconn and your machine has a large amount of memory, you might consider using -cifti-resample-dconn-memory to avoid writing and rereading an intermediate file.  The <template-direction> argument should usually be COLUMN, as dtseries, dscalar, and dlabel all have brainordinates on that direction.  If spheres are not specified for a surface structure which exists in the cifti files, its data is copied without resampling or dilation.  Dilation is done with the 'nearest' method, and is done on <new-sphere> for surface data.  Volume components are padded before dilation so that dilation doesn't run into the edge of the component bounding box.  If neither -affine nor -warpfield are specified, the identity transform is assumed for the volume data.\n\nThe recommended resampling methods are ADAP_BARY_AREA and CUBIC (cubic spline), except for label data which should use ADAP_BARY_AREA and ENCLOSING_VOXEL.  Using ADAP_BARY_AREA requires specifying an area option to each used -*-spheres option.\n\nThe <volume-method> argument must be one of the following:\n\nCUBIC\nENCLOSING_VOXEL\nTRILINEAR\n\nThe <surface-method> argument must be one of the following:\n\nADAP_BARY_AREA\nBARYCENTRIC\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.cifti-resample"
+    },
+    "cifti_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "cifti_in",
+      "description": "the cifti file to resample"
+    },
+    "direction": {
+      "type": "string",
+      "title": "direction",
+      "description": "the direction of the input that should be resampled, ROW or COLUMN"
+    },
+    "cifti_template": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "cifti_template",
+      "description": "a cifti file containing the cifti space to resample to"
+    },
+    "template_direction": {
+      "type": "string",
+      "title": "template_direction",
+      "description": "the direction of the template to use as the resampling space, ROW or COLUMN"
+    },
+    "surface_method": {
+      "type": "string",
+      "title": "surface_method",
+      "description": "specify a surface resampling method"
+    },
+    "volume_method": {
+      "type": "string",
+      "title": "volume_method",
+      "description": "specify a volume interpolation method"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "the output cifti file"
+    },
+    "opt_surface_largest": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_surface_largest",
+      "description": "use largest weight instead of weighted average or popularity when doing surface resampling"
+    },
+    "volume_predilate": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "volume_predilate"
+            },
+            "dilate_mm": {
+              "type": "number",
+              "title": "dilate_mm",
+              "description": "distance, in mm, to dilate"
+            },
+            "opt_nearest": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_nearest",
+              "description": "use nearest value dilation"
+            },
+            "weighted": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "weighted"
+                    },
+                    "opt_exponent_exponent": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "opt_exponent_exponent",
+                      "description": "specify exponent in weighting function: exponent 'n' to use in (1 / (distance ^ n)) as the weighting function (default 7)"
+                    },
+                    "opt_legacy_cutoff": {
+                      "type": "boolean",
+                      "default": false,
+                      "title": "opt_legacy_cutoff",
+                      "description": "use v1.3.2 logic for the kernel cutoff"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "use weighted dilation (default)"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "use weighted dilation (default)"
+            }
+          },
+          "additionalProperties": false,
+          "description": "dilate the volume components before resampling",
+          "required": [
+            "dilate_mm"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "dilate the volume components before resampling"
+    },
+    "surface_postdilate": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "surface_postdilate"
+            },
+            "dilate_mm": {
+              "type": "number",
+              "title": "dilate_mm",
+              "description": "distance, in mm, to dilate"
+            },
+            "opt_nearest": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_nearest",
+              "description": "use nearest value dilation"
+            },
+            "opt_linear": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_linear",
+              "description": "use linear dilation"
+            },
+            "weighted": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "weighted_1"
+                    },
+                    "opt_exponent_exponent": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null,
+                      "title": "opt_exponent_exponent",
+                      "description": "specify exponent in weighting function: exponent 'n' to use in (area / (distance ^ n)) as the weighting function (default 6)"
+                    },
+                    "opt_legacy_cutoff": {
+                      "type": "boolean",
+                      "default": false,
+                      "title": "opt_legacy_cutoff",
+                      "description": "use v1.3.2 logic for the kernel cutoff"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "use weighted dilation (default for non-label data)"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "use weighted dilation (default for non-label data)"
+            }
+          },
+          "additionalProperties": false,
+          "description": "dilate the surface components after resampling",
+          "required": [
+            "dilate_mm"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "dilate the surface components after resampling"
+    },
+    "affine": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "affine"
+            },
+            "affine_file": {
+              "type": "string",
+              "title": "affine_file",
+              "description": "the affine file to use"
+            },
+            "flirt": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "flirt"
+                    },
+                    "source_volume": {
+                      "type": "string",
+                      "title": "source_volume",
+                      "description": "the source volume used when generating the affine"
+                    },
+                    "target_volume": {
+                      "type": "string",
+                      "title": "target_volume",
+                      "description": "the target volume used when generating the affine"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "MUST be used if affine is a flirt affine",
+                  "required": [
+                    "source_volume",
+                    "target_volume"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "MUST be used if affine is a flirt affine"
+            }
+          },
+          "additionalProperties": false,
+          "description": "use an affine transformation on the volume components",
+          "required": [
+            "affine_file"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "use an affine transformation on the volume components"
+    },
+    "warpfield": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "warpfield"
+            },
+            "warpfield": {
+              "type": "string",
+              "title": "warpfield",
+              "description": "the warpfield to use"
+            },
+            "opt_fnirt_source_volume": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_fnirt_source_volume",
+              "description": "MUST be used if using a fnirt warpfield: the source volume used when generating the warpfield"
+            }
+          },
+          "additionalProperties": false,
+          "description": "use a warpfield on the volume components",
+          "required": [
+            "warpfield"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "use a warpfield on the volume components"
+    },
+    "left_spheres": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "left_spheres"
+            },
+            "current_sphere": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "current_sphere",
+              "description": "a sphere with the same mesh as the current left surface"
+            },
+            "new_sphere": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "new_sphere",
+              "description": "a sphere with the new left mesh that is in register with the current sphere"
+            },
+            "left_area_surfs": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "left_area_surfs"
+                    },
+                    "current_area": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "current_area",
+                      "description": "a relevant left anatomical surface with current mesh"
+                    },
+                    "new_area": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "new_area",
+                      "description": "a relevant left anatomical surface with new mesh"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "specify left surfaces to do vertex area correction based on",
+                  "required": [
+                    "current_area",
+                    "new_area"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "specify left surfaces to do vertex area correction based on"
+            },
+            "left_area_metrics": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "left_area_metrics"
+                    },
+                    "current_area": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "current_area",
+                      "description": "a metric file with vertex areas for the current mesh"
+                    },
+                    "new_area": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "new_area",
+                      "description": "a metric file with vertex areas for the new mesh"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "specify left vertex area metrics to do area correction based on",
+                  "required": [
+                    "current_area",
+                    "new_area"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "specify left vertex area metrics to do area correction based on"
+            }
+          },
+          "additionalProperties": false,
+          "description": "specify spheres for left surface resampling",
+          "required": [
+            "current_sphere",
+            "new_sphere"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify spheres for left surface resampling"
+    },
+    "right_spheres": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "right_spheres"
+            },
+            "current_sphere": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "current_sphere",
+              "description": "a sphere with the same mesh as the current right surface"
+            },
+            "new_sphere": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "new_sphere",
+              "description": "a sphere with the new right mesh that is in register with the current sphere"
+            },
+            "right_area_surfs": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "right_area_surfs"
+                    },
+                    "current_area": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "current_area",
+                      "description": "a relevant right anatomical surface with current mesh"
+                    },
+                    "new_area": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "new_area",
+                      "description": "a relevant right anatomical surface with new mesh"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "specify right surfaces to do vertex area correction based on",
+                  "required": [
+                    "current_area",
+                    "new_area"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "specify right surfaces to do vertex area correction based on"
+            },
+            "right_area_metrics": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "right_area_metrics"
+                    },
+                    "current_area": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "current_area",
+                      "description": "a metric file with vertex areas for the current mesh"
+                    },
+                    "new_area": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "new_area",
+                      "description": "a metric file with vertex areas for the new mesh"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "specify right vertex area metrics to do area correction based on",
+                  "required": [
+                    "current_area",
+                    "new_area"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "specify right vertex area metrics to do area correction based on"
+            }
+          },
+          "additionalProperties": false,
+          "description": "specify spheres for right surface resampling",
+          "required": [
+            "current_sphere",
+            "new_sphere"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify spheres for right surface resampling"
+    },
+    "cerebellum_spheres": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "cerebellum_spheres"
+            },
+            "current_sphere": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "current_sphere",
+              "description": "a sphere with the same mesh as the current cerebellum surface"
+            },
+            "new_sphere": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "new_sphere",
+              "description": "a sphere with the new cerebellum mesh that is in register with the current sphere"
+            },
+            "cerebellum_area_surfs": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "cerebellum_area_surfs"
+                    },
+                    "current_area": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "current_area",
+                      "description": "a relevant cerebellum anatomical surface with current mesh"
+                    },
+                    "new_area": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "new_area",
+                      "description": "a relevant cerebellum anatomical surface with new mesh"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "specify cerebellum surfaces to do vertex area correction based on",
+                  "required": [
+                    "current_area",
+                    "new_area"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "specify cerebellum surfaces to do vertex area correction based on"
+            },
+            "cerebellum_area_metrics": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "cerebellum_area_metrics"
+                    },
+                    "current_area": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "current_area",
+                      "description": "a metric file with vertex areas for the current mesh"
+                    },
+                    "new_area": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "new_area",
+                      "description": "a metric file with vertex areas for the new mesh"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "specify cerebellum vertex area metrics to do area correction based on",
+                  "required": [
+                    "current_area",
+                    "new_area"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "specify cerebellum vertex area metrics to do area correction based on"
+            }
+          },
+          "additionalProperties": false,
+          "description": "specify spheres for cerebellum surface resampling",
+          "required": [
+            "current_sphere",
+            "new_sphere"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify spheres for cerebellum surface resampling"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti_in",
+    "direction",
+    "cifti_template",
+    "template_direction",
+    "surface_method",
+    "volume_method",
+    "cifti_out"
+  ]
+}

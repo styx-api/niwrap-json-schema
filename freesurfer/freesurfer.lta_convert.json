@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program converts between different linear transform formats.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.lta_convert"
+    },
+    "in_lta": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input LTA Transform",
+      "description": "Input transform of LTA type"
+    },
+    "in_fsl": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input FSL Transform",
+      "description": "Input transform of FSL type"
+    },
+    "in_mni": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input MNI Transform",
+      "description": "Input transform of MNI / XFM type"
+    },
+    "in_reg": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input REG Transform",
+      "description": "Input transform of TK REG type (deprecated format)"
+    },
+    "in_niftyreg": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input NiftyReg Transform",
+      "description": "Input transform of NiftyReg type (inverse RAS2RAS)"
+    },
+    "in_itk": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input ITK Transform",
+      "description": "Input ITK transform (inverse LPS2LPS)."
+    },
+    "in_vox": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input VOX Transform",
+      "description": "Input transform in source image space (inverse VOX2VOX)"
+    },
+    "out_lta": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output LTA Transform",
+      "description": "Output linear transform (LTA FreeSurfer format)"
+    },
+    "out_fsl": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output FSL Transform",
+      "description": "Output transform in FSL format"
+    },
+    "out_mni": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output MNI Transform",
+      "description": "Output transform in MNI/XFM format"
+    },
+    "out_reg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output REG Transform",
+      "description": "Output transform in REG DAT format"
+    },
+    "out_niftyreg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output NiftyReg Transform",
+      "description": "Output transform in NiftyReg format (inverse RAS2RAS)"
+    },
+    "out_itk": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output ITK Transform",
+      "description": "Output transform in ITK TXT format (inverse LPS2LPS)"
+    },
+    "out_vox": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output VOX Transform",
+      "description": "Output transform in source image space (inverse VOX2VOX)"
+    },
+    "invert": {
+      "type": "boolean",
+      "default": false,
+      "title": "Invert Transform",
+      "description": "Inverts transform"
+    },
+    "ltavox2vox": {
+      "type": "boolean",
+      "default": false,
+      "title": "LTA VOX2VOX Output",
+      "description": "Output type VOX2VOX (default RAS2RAS) with --ltaout"
+    },
+    "ltatkreg": {
+      "type": "boolean",
+      "default": false,
+      "title": "LTA REGISTER_DAT Output",
+      "description": "Output type REGISTER_DAT (default RAS2RAS) with --ltaout"
+    },
+    "src_geometry": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Geometry Image",
+      "description": "Specify src image geometry (mov volume for TKREG/register.dat)"
+    },
+    "trg_geometry": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Geometry Image",
+      "description": "Specify trg image geometry"
+    },
+    "trg_conform": {
+      "type": "boolean",
+      "default": false,
+      "title": "Conform Target Geometry",
+      "description": "Conform trg image geometry (COR standard)"
+    },
+    "subject_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject Name",
+      "description": "Specify subject name (overrides if input has subject name defined)"
+    }
+  },
+  "additionalProperties": false
+}

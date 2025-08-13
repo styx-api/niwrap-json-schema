@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A program for calculating local and global FWHM.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.SurfFWHM"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Dataset for which the FWHM is to be calculated."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Node mask",
+      "description": "Node mask so that only nodes in the mask are used to obtain estimates."
+    },
+    "surf_1": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface 1",
+      "description": "Option for specifying the surface over which the input dataset is defined."
+    },
+    "surf_sphere": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Sphere",
+      "description": "Spherical version of -SURF_1 for Local FWHM estimates."
+    },
+    "clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Clean output",
+      "description": "Strip text from output to simplify parsing."
+    },
+    "detrend": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detrend",
+      "description": "Detrend to order 'q'. If q is not given, the program picks q=NT/30."
+    },
+    "detpoly": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detrend polynomial",
+      "description": "Detrend with polynomials of order p."
+    },
+    "detprefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detrend prefix",
+      "description": "Save the detrended file into a dataset with prefix 'd'."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output prefix",
+      "description": "Prefix of output data set."
+    },
+    "vox_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel size",
+      "description": "Specify the nominal voxel size in mm."
+    },
+    "neighborhood": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Neighborhood radius",
+      "description": "Neighborhood radius R for local FWHM estimates."
+    },
+    "ok_warn": {
+      "type": "boolean",
+      "default": false,
+      "title": "OK Warn",
+      "description": "Flag to set the mode to ok_warn."
+    },
+    "examples": {
+      "type": "boolean",
+      "default": false,
+      "title": "Examples",
+      "description": "Show command line examples and quit."
+    },
+    "slice": {
+      "type": "boolean",
+      "default": false,
+      "title": "Slice",
+      "description": "Use the contours from planar intersections to estimate gradients. For testing and development purposes only."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file"
+  ]
+}

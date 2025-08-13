@@ -1,0 +1,362 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Physiological data processing tool of FSL",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.popp"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input physiological data filename (text format)"
+    },
+    "output_basename": {
+      "type": "string",
+      "title": "Output basename",
+      "description": "Output basename for physiological data and timing/triggers (no extensions)"
+    },
+    "sampling_rate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 100,
+      "title": "Sampling Rate",
+      "description": "Sampling rate in Hz (default is 100Hz)"
+    },
+    "tr_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "TR Value",
+      "description": "TR value in seconds"
+    },
+    "resp_column": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Respiratory Column",
+      "description": "Specify column number of respiratory input"
+    },
+    "cardiac_column": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cardiac Column",
+      "description": "Specify column number of cardiac input"
+    },
+    "trigger_column": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Trigger Column",
+      "description": "Specify column number of trigger input"
+    },
+    "rvt_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "RVT Flag",
+      "description": "Generate RVT data"
+    },
+    "heart_rate_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Heartrate Flag",
+      "description": "Generate heartrate data"
+    },
+    "pulseox_trigger_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pulseox Trigger Flag",
+      "description": "Specify that cardiac data is a trigger"
+    },
+    "smooth_card": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cardiac Smoothing Amount",
+      "description": "Specify smoothing amount for cardiac (in seconds)"
+    },
+    "smooth_resp": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Respiratory Smoothing Amount",
+      "description": "Specify smoothing amount for respiratory (in seconds)"
+    },
+    "high_freq_cutoff": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 5,
+      "title": "High Frequency Cutoff",
+      "description": "High frequency cut off for respiratory filter in Hz (default is 5Hz)"
+    },
+    "low_freq_cutoff": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.1,
+      "title": "Low Frequency Cutoff",
+      "description": "Low frequency cut off for respiratory filter in Hz (default is 0.1Hz)"
+    },
+    "init_thresh_c": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 90,
+      "title": "Initial Threshold for Cardiac",
+      "description": "Initial threshold percentile for cardiac (default 90)"
+    },
+    "n_thresh_c": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 60,
+      "title": "Neighbourhood Threshold for Cardiac",
+      "description": "Neighbourhood exclusion threshold percentile for cardiac (default 60)"
+    },
+    "init_thresh_r": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 80,
+      "title": "Initial Threshold for Respiratory",
+      "description": "Initial threshold percentile for respiratory (default 80)"
+    },
+    "n_thresh_r": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 80,
+      "title": "Neighbourhood Threshold for Respiratory",
+      "description": "Neighbourhood exclusion threshold percentile for respiratory (default 80)"
+    },
+    "invert_resp_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Invert Respiratory Flag",
+      "description": "Invert respiratory trace"
+    },
+    "invert_cardiac_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Invert Cardiac Flag",
+      "description": "Invert cardiac trace"
+    },
+    "noclean1_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Clean Phase 1 Flag",
+      "description": "Turn off cleanup phase 1"
+    },
+    "noclean2_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Clean Phase 2 Flag",
+      "description": "Turn off cleanup phase 2"
+    },
+    "load_card_phase": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Load Cardiac Phase",
+      "description": "Input cardiac phase for reprocessing (text format)"
+    },
+    "load_resp_phase": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Load Respiratory Phase",
+      "description": "Input respiratory phase for reprocessing (text format)"
+    },
+    "vol_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volumetric Image File",
+      "description": "Input volumetric image (EPI) filename"
+    },
+    "start_sample": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Starting Sample",
+      "description": "Set sample number of the starting time (t=0)"
+    },
+    "resp_add": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Add Respiratory Peaks",
+      "description": "Comma separated list of times (in sec) to add to respiratory peak list (uses nearest local max)"
+    },
+    "resp_del": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delete Respiratory Peaks",
+      "description": "Comma separated list of times (in sec) to delete from respiratory peak list (uses nearest existing peak)"
+    },
+    "card_add": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Add Cardiac Peaks",
+      "description": "Comma separated list of times (in sec) to add to cardiac peak list (uses nearest local max)"
+    },
+    "card_del": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delete Cardiac Peaks",
+      "description": "Comma separated list of times (in sec) to delete from cardiac peak list (uses nearest existing peak)"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Output debugging information"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Display this help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "output_basename"
+  ]
+}

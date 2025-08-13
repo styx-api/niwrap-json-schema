@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Convert a set of 0/1 stim files into a set of stim_times files, or convert real-valued files into those for use with -stim_times_AM2.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.make_stim_times.py"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Stimulus files",
+      "description": "Specify stim files"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output file prefix",
+      "description": "Output prefix for files"
+    },
+    "tr": {
+      "type": "number",
+      "title": "TR time",
+      "description": "TR time, in seconds"
+    },
+    "nruns": {
+      "type": "number",
+      "title": "Number of runs",
+      "description": "Number of runs"
+    },
+    "nt": {
+      "type": "number",
+      "title": "Number of TRs per run",
+      "description": "Number of TRs per run"
+    },
+    "run_trs": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "TRs per run",
+      "description": "Specify TRs per run, if they differ"
+    },
+    "offset": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time offset",
+      "description": "Add OFFSET to all output times"
+    },
+    "labels": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Labels for filenames",
+      "description": "Provide labels for filenames"
+    },
+    "no_consec_events": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Consecutive Events",
+      "description": "Do not allow consecutive events"
+    },
+    "amplitudes": {
+      "type": "boolean",
+      "default": false,
+      "title": "Amplitude Modulation",
+      "description": "Marry times with amplitudes"
+    },
+    "show_valid_opts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Valid Options",
+      "description": "Output all options"
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose Level",
+      "description": "Provide verbose output"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "files",
+    "prefix",
+    "tr",
+    "nruns",
+    "nt"
+  ]
+}

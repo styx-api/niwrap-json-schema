@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Computes the correlation matrix of the input 1D files and their inverse correlation matrix.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.1ddot"
+    },
+    "one_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "One Flag",
+      "description": "Make 1st vector be all 1's."
+    },
+    "dem_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dem Flag",
+      "description": "Remove mean from all vectors (conflicts with '-one')."
+    },
+    "cov_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Covariance Flag",
+      "description": "Compute with covariance matrix instead of correlation."
+    },
+    "inn_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Inner Product Flag",
+      "description": "Compute with inner product matrix instead."
+    },
+    "rank_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rank Correlation Flag",
+      "description": "Compute Spearman rank correlation instead (also implies '-terse')."
+    },
+    "terse_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Terse Output Flag",
+      "description": "Output only the correlation or covariance matrix without any garnish."
+    },
+    "okzero_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "OK Zero Flag",
+      "description": "Do not quit if a vector is all zeros. The correlation matrix will have 0 where NaNs ought to go."
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Files",
+      "description": "Input 1D files."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files"
+  ]
+}

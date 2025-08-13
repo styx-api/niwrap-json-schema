@@ -1,0 +1,305 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Fabber Model-based Analysis",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.fabber_cest"
+    },
+    "output": {
+      "type": "string",
+      "title": "Output directory",
+      "description": "Directory for output files"
+    },
+    "method": {
+      "type": "string",
+      "title": "Inference method",
+      "description": "Inference method"
+    },
+    "model": {
+      "type": "string",
+      "title": "Forward model",
+      "description": "Forward model"
+    },
+    "data": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input data file",
+      "description": "Input data file"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Print usage help"
+    },
+    "listmethods": {
+      "type": "boolean",
+      "default": false,
+      "title": "List Methods",
+      "description": "List all known inference methods"
+    },
+    "listmodels": {
+      "type": "boolean",
+      "default": false,
+      "title": "List Models",
+      "description": "List all known forward models"
+    },
+    "listparams": {
+      "type": "boolean",
+      "default": false,
+      "title": "List Parameters",
+      "description": "List model parameters"
+    },
+    "descparams": {
+      "type": "boolean",
+      "default": false,
+      "title": "Describe Parameters",
+      "description": "Describe model parameters"
+    },
+    "listoutputs": {
+      "type": "boolean",
+      "default": false,
+      "title": "List Outputs",
+      "description": "List additional model outputs"
+    },
+    "evaluate": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evaluate Model",
+      "description": "Evaluate model and set to name of output required"
+    },
+    "evaluate_params": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evaluation Parameters",
+      "description": "List of parameter values for evaluation"
+    },
+    "evaluate_nt": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evaluation Time Points",
+      "description": "Number of time points for evaluation"
+    },
+    "simple_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "Simple Output",
+      "description": "Simple output series of lines each giving progress as percentage"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "default": false,
+      "title": "Overwrite Output",
+      "description": "Overwrite existing output"
+    },
+    "link_to_latest": {
+      "type": "boolean",
+      "default": false,
+      "title": "Link to Latest",
+      "description": "Create a link to the most recent output directory with the prefix _latest"
+    },
+    "loadmodels": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Load Models",
+      "description": "Load models dynamically from the specified filename"
+    },
+    "data_multi": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Multiple Data Files",
+      "description": "Specify multiple data files (data<n>)"
+    },
+    "data_order": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "interleave",
+      "title": "Data Order",
+      "description": "Handling of multiple data files (concatenate or interleave)"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask File",
+      "description": "Mask file. Inference performed where mask value > 0"
+    },
+    "masked_timepoints": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Masked Timepoints",
+      "description": "List of masked time points to ignore (mt<n>)"
+    },
+    "suppdata": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supplemental Data",
+      "description": "Supplemental timeseries data required for some models"
+    },
+    "dump_param_names": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dump Parameter Names",
+      "description": "Write the file paramnames.txt containing the names of the model parameters"
+    },
+    "save_model_fit": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Model Fit",
+      "description": "Output the model prediction as a 4d volume"
+    },
+    "save_residuals": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Residuals",
+      "description": "Output the residuals (difference between the data and the model prediction)"
+    },
+    "save_model_extras": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Model Extras",
+      "description": "Output additional model-specific timeseries data"
+    },
+    "save_mvn": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save MVN",
+      "description": "Output the final MVN distributions."
+    },
+    "save_mean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Mean",
+      "description": "Output the parameter means."
+    },
+    "save_std": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Std",
+      "description": "Output the parameter standard deviations."
+    },
+    "save_var": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Var",
+      "description": "Output the parameter variances."
+    },
+    "save_zstat": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Zstat",
+      "description": "Output the parameter Zstats."
+    },
+    "save_noise_mean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Noise Mean",
+      "description": "Output the noise means."
+    },
+    "save_noise_std": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Noise Std",
+      "description": "Output the noise standard deviations."
+    },
+    "save_free_energy": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Free Energy",
+      "description": "Output the free energy, if calculated."
+    },
+    "optfile": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Options File",
+      "description": "File containing additional options, one per line, in the same form as specified on the command line"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug",
+      "description": "Output large amounts of debug information. ONLY USE WITH VERY SMALL NUMBERS OF VOXELS"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "output",
+    "method",
+    "model",
+    "data"
+  ]
+}

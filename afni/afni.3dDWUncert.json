@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Use jackknifing to estimate uncertainty of DTI parameters, important for probabilistic tractography.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dDWUncert"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input file with b0 and DWI subbricks."
+    },
+    "input_prefix": {
+      "type": "string",
+      "title": "Input prefix",
+      "description": "Basename of DTI volumes."
+    },
+    "output_prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Output file name prefix."
+    },
+    "grad_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gradient file",
+      "description": "File with 3 columns for x-, y-, and z-comps of DW-gradients."
+    },
+    "bmatrix_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "B-matrix file (full)",
+      "description": "File with gradient info in b-matrix format."
+    },
+    "num_iters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of iterations",
+      "description": "Number of jackknife resample iterations."
+    },
+    "mask_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Mask file within which to calculate uncertainty."
+    },
+    "calc_thr_fa": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Calculate threshold FA",
+      "description": "Threshold for the minimum FA value above which to calculate uncertainty."
+    },
+    "csf_fa": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CSF FA value",
+      "description": "Number marking FA value of 'bad' voxels."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "input_prefix",
+    "output_prefix"
+  ]
+}

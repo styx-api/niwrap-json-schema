@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Command-line tool for multiplying and manipulating MRI transformation matrices.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_matrix_multiply"
+    },
+    "input_matrices": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input matrices",
+      "description": "Input matrix files for multiplication."
+    },
+    "inverted_input_matrices": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inverted input matrices",
+      "description": "Input matrix files to be inverted before multiplication."
+    },
+    "output_matrix": {
+      "type": "string",
+      "title": "Output matrix",
+      "description": "Output matrix file."
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Verbose output."
+    },
+    "fsl": {
+      "type": "boolean",
+      "default": false,
+      "title": "FSL-style matrix flag",
+      "description": "Assume input/output are FSL-style matrix files."
+    },
+    "binarize": {
+      "type": "boolean",
+      "default": false,
+      "title": "Binarize flag",
+      "description": "'Binarize' the output matrix."
+    },
+    "subject_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject name",
+      "description": "Subject name for output reg.dat files."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_matrices",
+    "output_matrix"
+  ]
+}

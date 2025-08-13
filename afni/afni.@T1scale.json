@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Fix bias field shading in T1 by scaling it with PD image. You can also get a decent result even without the PD volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.@T1scale"
+    },
+    "t1_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "T1 Volume",
+      "description": "The T1 volume"
+    },
+    "pd_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "PD Volume",
+      "description": "The PD volume (aligned to T1)"
+    },
+    "output_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Directory",
+      "description": "Directory where output gets dumped. Default is T1scale/"
+    },
+    "align": {
+      "type": "boolean",
+      "default": false,
+      "title": "Align PD with T1",
+      "description": "Align PD volume to T1. Without this option, PDvol is assumed in alignment with T1vol."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Volume",
+      "description": "Create mask for the output. If not specified, the script will generate one with 3dAutomask on fattened PDvol."
+    },
+    "head_mask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Head Mask",
+      "description": "Create mask using 3dSkullStrip's -head option."
+    },
+    "unmasked_uni": {
+      "type": "boolean",
+      "default": false,
+      "title": "Unmasked Uniformized Volume",
+      "description": "Do not apply masking to uniformized volume (default)"
+    },
+    "masked_uni": {
+      "type": "boolean",
+      "default": false,
+      "title": "Masked Uniformized Volume",
+      "description": "Apply masking to uniformized volume"
+    },
+    "echo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Echo Flag",
+      "description": "Set echo"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Display this help message and exit"
+    },
+    "h_web": {
+      "type": "boolean",
+      "default": false,
+      "title": "Web Help",
+      "description": "Open webpage with help for this program"
+    },
+    "h_view": {
+      "type": "boolean",
+      "default": false,
+      "title": "Open Help in GUI",
+      "description": "Open -help output in a GUI editor"
+    },
+    "all_opts": {
+      "type": "boolean",
+      "default": false,
+      "title": "List All Options",
+      "description": "List all of the options for this script"
+    },
+    "h_find_word": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Find Word in Help",
+      "description": "Search for lines containing WORD in -help output. Search is approximate."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "t1_volume"
+  ]
+}

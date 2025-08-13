@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "MSM (Multimodal Surface Matching) is a tool for aligning brain surface scans based on their cortical folding patterns or functional/structural data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.msm"
+    },
+    "inmesh": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input mesh",
+      "description": "Input mesh (available formats: VTK, ASCII, GIFTI). Needs to be a sphere"
+    },
+    "out": {
+      "type": "string",
+      "title": "Output basename",
+      "description": "Output basename"
+    },
+    "refmesh": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference mesh",
+      "description": "Reference mesh (available formats: VTK, ASCII, GIFTI). Needs to be a sphere. If not included algorithm assumes reference mesh is equivalent input"
+    },
+    "indata": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input data",
+      "description": "Scalar or multivariate data for input - can be ASCII (.asc,.dpv,.txt) or GIFTI (.func.gii or .shape.gii)"
+    },
+    "refdata": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference data",
+      "description": "Scalar or multivariate data for reference - can be ASCII (.asc,.dpv,.txt) or GIFTI (.func.gii or .shape.gii)"
+    },
+    "trans": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transformed source mesh",
+      "description": "Transformed source mesh (output of a previous registration). Use this to initialise the current registration."
+    },
+    "in_register": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input mesh at data resolution",
+      "description": "Input mesh at data resolution. Used to resample data onto input mesh if data is supplied at a different resolution. Note this mesh HAS to be in alignment with either the input_mesh of (if supplied) the transformed source mesh. Use with supreme caution."
+    },
+    "inweight": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input cost function weighting",
+      "description": "Cost function weighting for input - weights data in these vertices when calculating similarity (ASCII or GIFTI). Can be multivariate provided dimension equals that of data"
+    },
+    "refweight": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference cost function weighting",
+      "description": "Cost function weighting for reference - weights data in these vertices when calculating similarity (ASCII or GIFTI). Can be multivariate provided dimension equals that of data"
+    },
+    "format": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output format",
+      "description": "Format of output files, can be: GIFTI, VTK, ASCII or ASCII_MAT (for full details of output file formats see MSM wiki)"
+    },
+    "conf": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Configuration file",
+      "description": "Configuration file"
+    },
+    "levels": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolution levels",
+      "description": "Number of resolution levels (default = number of resolution levels specified by --opt in config file)"
+    },
+    "smoothout": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output smoothing",
+      "description": "Smooth transformed output with this sigma (default=0)"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Display help message"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "printoptions": {
+      "type": "boolean",
+      "default": false,
+      "title": "Print options flag",
+      "description": "Print configuration file options"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "inmesh",
+    "out"
+  ]
+}

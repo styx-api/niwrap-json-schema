@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Thalamic segmentation tool providing 0.7mm isotropic thalamus segmentation from registered T1, FA, and V1 volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_segment_thalamic_nuclei_dti_cnn"
+    },
+    "t1_images": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "T1 images",
+      "description": "Path to the T1 image(s) or folder containing images. These must be registered to the FAs in physical coordinates."
+    },
+    "aseg": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ASEG segmentation",
+      "description": "Path to the ASEG segmentation(s) or folder. These must be registered to the FAs in physical coordinates."
+    },
+    "fa": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "FA images",
+      "description": "Path to the FA image(s) or folder."
+    },
+    "v1": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "V1 images",
+      "description": "Path to the V1 image(s) or folder."
+    },
+    "output": {
+      "type": "string",
+      "title": "Segmentation output",
+      "description": "Path to the segmentation output(s) or folder."
+    },
+    "volume_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volume output",
+      "description": "CSV file for volumes of all structures and subjects."
+    },
+    "posteriors_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Posteriors output",
+      "description": "Path to the posteriors output(s) or folder."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of threads",
+      "description": "Number of cores to be used. Default is 1."
+    },
+    "force_cpu": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force CPU",
+      "description": "Enforce running with CPU rather than GPU."
+    },
+    "model": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model file",
+      "description": "Path to an alternative model file."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "t1_images",
+    "fa",
+    "v1",
+    "output"
+  ]
+}

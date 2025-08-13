@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program applies a translation table to an annotation file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_translate_annotation"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "The subject identifier."
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere identifier (e.g., lh or rh)."
+    },
+    "in_annot": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Annotation",
+      "description": "Input annotation file."
+    },
+    "translation_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Translation File",
+      "description": "Translation table file."
+    },
+    "out_annot": {
+      "type": "string",
+      "title": "Output Annotation",
+      "description": "Output annotation file."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject",
+    "hemi",
+    "in_annot",
+    "translation_file",
+    "out_annot"
+  ]
+}

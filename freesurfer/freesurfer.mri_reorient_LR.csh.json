@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A script to reorient MRI volumes from left-right orientation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_reorient_LR.csh"
+    },
+    "input_vol": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input file to be reoriented"
+    },
+    "output_vol": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Reoriented input file"
+    },
+    "display_result": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Result Flag",
+      "description": "Display registration result using FreeView"
+    },
+    "clean_files": {
+      "type": "boolean",
+      "default": false,
+      "title": "Clean Files Flag",
+      "description": "Delete all auxiliary and registration files"
+    },
+    "output_registration": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output Registration Flag",
+      "description": "Write out the registration file that is applied to the reoriented input file (fslmat or lta)"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Print version and exit"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Print help and exit"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_vol",
+    "output_vol"
+  ]
+}

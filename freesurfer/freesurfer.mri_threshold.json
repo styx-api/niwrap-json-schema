@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program will lower threshold an input volume",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_threshold"
+    },
+    "input_vol": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input volume file"
+    },
+    "threshold": {
+      "type": "number",
+      "title": "Threshold",
+      "description": "Threshold value for the volume"
+    },
+    "output_vol": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume file"
+    },
+    "binarize": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Binarize Flag",
+      "description": "Binarize the output volume with specified bval"
+    },
+    "upper_threshold": {
+      "type": "boolean",
+      "default": false,
+      "title": "Upper Threshold Flag",
+      "description": "Upper threshold the volume instead of lower thresholding"
+    },
+    "frame_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Frame Number",
+      "description": "Apply thresholding to a specific frame indexed by fnum"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_vol",
+    "threshold",
+    "output_vol"
+  ]
+}

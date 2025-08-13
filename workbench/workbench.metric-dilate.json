@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Dilate a metric file.\n\nFor all metric vertices that are designated as bad, if they neighbor a non-bad vertex with data or are within the specified distance of such a vertex, replace the value with a distance-based weighted average of nearby non-bad vertices that have data, otherwise set the value to zero.  No matter how small <distance> is, dilation will always use at least the immediate neighbor vertices.  If -nearest is specified, it will use the value from the closest non-bad vertex with data within range instead of a weighted average.\n\nIf -bad-vertex-roi is specified, all vertices with a positive ROI value are bad.  If it is not specified, only vertices that have data, with a value of zero, are bad.  If -data-roi is not specified, all vertices are assumed to have data.\n\nNote that the -corrected-areas option uses an approximate correction for the change in distances along a group average surface.\n\nTo get the behavior of version 1.3.2 or earlier, use '-legacy-cutoff -exponent 2'.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.metric-dilate"
+    },
+    "metric": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "metric",
+      "description": "the metric to dilate"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface",
+      "description": "the surface to compute on"
+    },
+    "distance": {
+      "type": "number",
+      "title": "distance",
+      "description": "distance in mm to dilate"
+    },
+    "metric_out": {
+      "type": "string",
+      "title": "metric_out",
+      "description": "the output metric"
+    },
+    "opt_bad_vertex_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_bad_vertex_roi_roi_metric",
+      "description": "specify an roi of vertices to overwrite, rather than vertices with value zero: metric file, positive values denote vertices to have their values replaced"
+    },
+    "opt_data_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_data_roi_roi_metric",
+      "description": "specify an roi of where there is data: metric file, positive values denote vertices that have data"
+    },
+    "opt_column_column": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_column_column",
+      "description": "select a single column to dilate: the column number or name"
+    },
+    "opt_nearest": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_nearest",
+      "description": "use the nearest good value instead of a weighted average"
+    },
+    "opt_linear": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_linear",
+      "description": "fill in values with linear interpolation along strongest gradient"
+    },
+    "opt_exponent_exponent": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_exponent_exponent",
+      "description": "use a different exponent in the weighting function: exponent 'n' to use in (area / (distance ^ n)) as the weighting function (default 6)"
+    },
+    "opt_corrected_areas_area_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_corrected_areas_area_metric",
+      "description": "vertex areas to use instead of computing them from the surface: the corrected vertex areas, as a metric"
+    },
+    "opt_legacy_cutoff": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_legacy_cutoff",
+      "description": "use the v1.3.2 method of choosing how many vertices to use when calulating the dilated value with weighted method"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "metric",
+    "surface",
+    "distance",
+    "metric_out"
+  ]
+}

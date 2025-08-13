@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool for decompressing DICOM files using GDCM or DCMTK.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.fsdcmdecompress"
+    },
+    "indcmfile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input DICOM file",
+      "description": "Input DICOM file to decompress"
+    },
+    "outdcmfile": {
+      "type": "string",
+      "title": "Output DICOM file",
+      "description": "Output decompressed DICOM file"
+    },
+    "dcmtk": {
+      "type": "boolean",
+      "default": false,
+      "title": "DCMTK Flag",
+      "description": "Use DCMTK for decompression (either dcmdrle.fs or dcmdjpeg.fs)"
+    },
+    "jpeg": {
+      "type": "boolean",
+      "default": false,
+      "title": "JPEG Compressed Flag",
+      "description": "DICOM is JPEG compressed (ignored without --dcmtk)"
+    },
+    "rle": {
+      "type": "boolean",
+      "default": false,
+      "title": "RLE Compressed Flag",
+      "description": "DICOM is RLE compressed (ignored without --dcmtk)"
+    },
+    "gdcm": {
+      "type": "boolean",
+      "default": false,
+      "title": "GDCM Flag",
+      "description": "Use GDCM for decompression (default)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "indcmfile",
+    "outdcmfile"
+  ]
+}

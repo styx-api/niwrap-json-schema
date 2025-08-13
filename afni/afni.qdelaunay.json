@@ -1,0 +1,326 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Compute the Delaunay triangulation using Qhull.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.qdelaunay"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input file containing point coordinates."
+    },
+    "furthest_site": {
+      "type": "boolean",
+      "default": false,
+      "title": "Furthest-site Delaunay flag",
+      "description": "Compute furthest-site Delaunay triangulation"
+    },
+    "triangulated_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "Triangulated output flag",
+      "description": "Triangulated output"
+    },
+    "joggled_input": {
+      "type": "boolean",
+      "default": false,
+      "title": "Joggled input flag",
+      "description": "Joggled input instead of merged facets"
+    },
+    "joggle_range": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Joggle range",
+      "description": "Randomly joggle input in range [-n,n]"
+    },
+    "search_simplex": {
+      "type": "boolean",
+      "default": false,
+      "title": "Search simplex flag",
+      "description": "Search all points for the initial simplex"
+    },
+    "point_infinity": {
+      "type": "boolean",
+      "default": false,
+      "title": "Point-at-infinity flag",
+      "description": "Add point-at-infinity to Delaunay triangulation"
+    },
+    "delaunay_visible": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delaunay region visibility",
+      "description": "Print Delaunay region if visible from point n, -n if not"
+    },
+    "delaunay_regions": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delaunay regions inclusion",
+      "description": "Print Delaunay regions that include point n, -n if not"
+    },
+    "trace_level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Trace level",
+      "description": "Trace at level n, 4=all, 5=mem/gauss, -1= events"
+    },
+    "check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check frequently flag",
+      "description": "Check frequently during execution"
+    },
+    "statistics": {
+      "type": "boolean",
+      "default": false,
+      "title": "Print statistics flag",
+      "description": "Print statistics"
+    },
+    "verify": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verify result flag",
+      "description": "Verify result: structure, convexity, and in-circle test"
+    },
+    "output_stdout": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output to stdout flag",
+      "description": "Send all output to stdout"
+    },
+    "facets_summary": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Facets summary",
+      "description": "Report summary when n or more facets created"
+    },
+    "input_file_option": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input option file",
+      "description": "Input data from file, no spaces or single quotes"
+    },
+    "output_file_option": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output option file",
+      "description": "Output results to file, may be enclosed in single quotes"
+    },
+    "trace_point": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Trace point flag",
+      "description": "Turn on tracing when point n added to hull"
+    },
+    "trace_merge": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Trace merge flag",
+      "description": "Turn on tracing at merge n"
+    },
+    "trace_merge_width": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Trace merge width flag",
+      "description": "Trace merge facets when width > n"
+    },
+    "stop_point": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stop at point flag",
+      "description": "Stop Qhull after adding point n, -n for before"
+    },
+    "stop_cone_point": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stop at cone point flag",
+      "description": "Stop Qhull after building cone for point n"
+    },
+    "centrum_radius": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Centrum radius",
+      "description": "Radius of centrum (roundoff added). Merge facets if non-convex"
+    },
+    "max_angle_cosine": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum angle cosine",
+      "description": "Cosine of maximum angle. Merge facets if cosine > n or non-convex"
+    },
+    "perturb_factor": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Perturb factor",
+      "description": "Randomly perturb computations by a factor of [1-n,1+n]"
+    },
+    "min_facet_width": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Min facet width",
+      "description": "Min facet width for outside point (before roundoff)"
+    },
+    "facet_dump": {
+      "type": "boolean",
+      "default": false,
+      "title": "Facet dump flag",
+      "description": "Facet dump"
+    },
+    "geomview": {
+      "type": "boolean",
+      "default": false,
+      "title": "Geomview flag",
+      "description": "Geomview output"
+    },
+    "vertices_incident": {
+      "type": "boolean",
+      "default": false,
+      "title": "Vertices incident flag",
+      "description": "Vertices incident to each Delaunay region"
+    },
+    "mathematica": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mathematica flag",
+      "description": "Mathematica output (2-d only, lifted to a paraboloid)"
+    },
+    "off_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "OFF format flag",
+      "description": "OFF format (dim, points, and facets as a paraboloid)"
+    },
+    "point_coordinates": {
+      "type": "boolean",
+      "default": false,
+      "title": "Point coordinates flag",
+      "description": "Point coordinates (lifted to a paraboloid)"
+    },
+    "summary": {
+      "type": "boolean",
+      "default": false,
+      "title": "Summary flag",
+      "description": "Summary (stderr)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file"
+  ]
+}

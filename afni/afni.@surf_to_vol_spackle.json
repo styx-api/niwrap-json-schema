@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Project data from a surface dataset into a volume primarily using 3dSurf2Vol but then filling any holes with an iterative smoothing procedure.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.@surf_to_vol_spackle"
+    },
+    "maskset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask Set",
+      "description": "Mask dataset in which to project surface measures."
+    },
+    "spec": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Surface Spec",
+      "description": "Surface specification file with list of surfaces."
+    },
+    "surfA": {
+      "type": "string",
+      "title": "Surface A",
+      "description": "Name of the first surface, e.g., smoothwm, pial, etc."
+    },
+    "surfB": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface B",
+      "description": "Name of the second surface. If not included, computes using normal vector."
+    },
+    "surfset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Surface Data Set",
+      "description": "Dataset of surface measures."
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Prefix",
+      "description": "Basename of output. Final name used is prefix.nii.gz."
+    },
+    "normal_vector_length": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Normal Vector Length",
+      "description": "Normal vector length if only using a single surface (default 2 mm)."
+    },
+    "search_radius": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Search Radius",
+      "description": "Radius for search for mean to fill holes (default 2 mm)."
+    },
+    "num_steps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Steps",
+      "description": "Number of steps on line segments (default 10)."
+    },
+    "keep_temp_files": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep Temporary Files Flag",
+      "description": "Do not remove any of the temporary files (default is to remove them)."
+    },
+    "max_iters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Iterations",
+      "description": "Maximum number of smoothing and filling iterations (default is 4)."
+    },
+    "use_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Mode Flag",
+      "description": "Use mode instead of non-zero median (appropriate for ROIs)."
+    },
+    "datum_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Datum Type",
+      "description": "Set datum type to byte, short, or float instead of maskset type. Mode triggers -datum short."
+    },
+    "ignore_unknown_options": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore Unknown Options Flag",
+      "description": "Ignore additional options that are not needed."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "maskset",
+    "spec",
+    "surfA",
+    "surfset",
+    "prefix"
+  ]
+}

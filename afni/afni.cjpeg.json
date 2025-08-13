@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Compresses an image file to a JPEG file",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.cjpeg"
+    },
+    "quality": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quality",
+      "description": "Quality of JPEG image (0-100)"
+    },
+    "grayscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Grayscale",
+      "description": "Create a grayscale JPEG file"
+    },
+    "optimize": {
+      "type": "boolean",
+      "default": false,
+      "title": "Optimize",
+      "description": "Optimize Huffman table"
+    },
+    "baseline": {
+      "type": "boolean",
+      "default": false,
+      "title": "Baseline",
+      "description": "Create a baseline JPEG file"
+    },
+    "progressive": {
+      "type": "boolean",
+      "default": false,
+      "title": "Progressive",
+      "description": "Create a progressive JPEG file"
+    },
+    "outfile": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output JPEG file"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input image file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "outfile",
+    "infile"
+  ]
+}

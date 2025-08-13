@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Program to align one dataset (the 'source') to a 'base' dataset using an affine (matrix) transformation of space.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dAllineate"
+    },
+    "source": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Source file",
+      "description": "Source dataset file"
+    },
+    "base": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Base file",
+      "description": "Base dataset file"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Output prefix"
+    },
+    "param_save": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "1D Parameters Save file",
+      "description": "Save the warp parameters in ASCII (.1D) format into file"
+    },
+    "param_apply": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "1D Parameters Apply file",
+      "description": "Read warp parameters from file and apply them to the source dataset"
+    },
+    "matrix_save": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "1D Matrix Save file",
+      "description": "Save the transformation matrix for each sub-brick into file"
+    },
+    "matrix_apply": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "1D Matrix Apply file",
+      "description": "Use the matrices in file to define the spatial transformations to be applied"
+    },
+    "cost": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cost function",
+      "description": "Defines the 'cost' function that defines the matching between the source and the base"
+    },
+    "interp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolation method",
+      "description": "Defines interpolation method to use during matching process"
+    },
+    "final": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Final interpolation mode",
+      "description": "Defines the interpolation mode used to create the output dataset"
+    },
+    "nmatch": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of match points",
+      "description": "Use at most 'nnn' scattered points to match the datasets"
+    },
+    "nopad": {
+      "type": "boolean",
+      "default": false,
+      "title": "No padding flag",
+      "description": "Do not use zero-padding on the base image"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Print out verbose progress reports"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet flag",
+      "description": "Don't print out verbose stuff"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "source",
+    "prefix"
+  ]
+}

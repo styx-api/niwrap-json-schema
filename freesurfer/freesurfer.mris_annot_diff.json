@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Compare two surface annotation files. The program works with .annot only.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_annot_diff"
+    },
+    "annot1": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Annotation File 1",
+      "description": "Input .annot file 1"
+    },
+    "annot2": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Annotation File 2",
+      "description": "Input .annot file 2"
+    },
+    "diff_ctab": {
+      "type": "boolean",
+      "default": false,
+      "title": "Diff Colortable Flag",
+      "description": "Diff colortable included in .annot"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Print details of annotation/colortable differences"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "annot1",
+    "annot2"
+  ]
+}

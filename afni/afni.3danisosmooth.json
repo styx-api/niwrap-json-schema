@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Smooths a dataset using an anisotropic smoothing technique.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3danisosmooth"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input dataset",
+      "description": "Input dataset to be smoothed"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output prefix",
+      "description": "Output dataset prefix name"
+    },
+    "iterations": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of iterations",
+      "description": "Number of iterations (default=10)"
+    },
+    "2d_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "2D smoothing flag",
+      "description": "Smooth a slice at a time (default)"
+    },
+    "3d_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "3D smoothing flag",
+      "description": "Smooth through slices"
+    },
+    "mask_dataset": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask dataset",
+      "description": "Use specified dataset as mask to include/exclude voxels"
+    },
+    "automask_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automask flag",
+      "description": "Automatically compute mask for dataset"
+    },
+    "viewer_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Viewer flag",
+      "description": "Show central axial slice image every iteration"
+    },
+    "nosmooth_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No intermediate smoothing flag",
+      "description": "Do not do intermediate smoothing of gradients"
+    },
+    "sigma1": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sigma1",
+      "description": "Gaussian smoothing sigma before gradient computation (default=0.5)"
+    },
+    "sigma2": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sigma2",
+      "description": "Gaussian smoothing sigma after gradient computation (default=1.0)"
+    },
+    "deltat": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DeltaT",
+      "description": "Pseudo-time step (default=0.25)"
+    },
+    "savetempdata_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save temporary datasets flag",
+      "description": "Save temporary datasets each iteration"
+    },
+    "save_temp_with_diff_measures_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save temporary datasets with different measures flag",
+      "description": "Save temporary datasets with different measures in a dataset"
+    },
+    "phiding_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Ding method for phi",
+      "description": "Use Ding method for computing phi (default)"
+    },
+    "phiexp_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use exponential method for phi",
+      "description": "Use exponential method for computing phi"
+    },
+    "noneg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Set negative voxels to 0",
+      "description": "Set negative voxels to 0"
+    },
+    "setneg_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Set negative voxels value",
+      "description": "Set negative voxels to specified value"
+    },
+    "edgefraction": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Edge fraction",
+      "description": "Adjust the fraction of the anisotropic component added (0 to 1, default=0.5)"
+    },
+    "datum_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Datum type",
+      "description": "Specify type for output data (byte, short, float) [default=float]"
+    },
+    "matchorig_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Match original datatype",
+      "description": "Match datum type and clip min/max to input data"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Print help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_dataset"
+  ]
+}

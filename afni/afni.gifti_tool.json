@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool for creating, displaying, modifying, or comparing GIFTI datasets.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.gifti_tool"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input File",
+      "description": "Specify one or more GIFTI datasets as input"
+    },
+    "new_numda": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "New Number of DataArray Elements",
+      "description": "New dataset will have NUMDA DataArray elements"
+    },
+    "new_dtype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "New Data Type",
+      "description": "Set data type to TYPE"
+    },
+    "new_intent": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "New Intent",
+      "description": "DA elements will have intent INTENT"
+    },
+    "new_ndim": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "New Dimensionality",
+      "description": "Set Dimensionality to NUMDIMS"
+    },
+    "new_dims": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "New Dimensions",
+      "description": "Set dims[] to these 6 values"
+    },
+    "write_gifti": {
+      "type": "string",
+      "title": "Output File",
+      "description": "Write out dataset as gifti image"
+    },
+    "set_extern_filelist": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "External File List",
+      "description": "Store data in external files"
+    },
+    "mod_add_data": {
+      "type": "boolean",
+      "default": false,
+      "title": "Add Data to DataArray",
+      "description": "Add data to empty DataArray elements"
+    },
+    "verb": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose Level",
+      "description": "Set verbose level"
+    },
+    "show_gifti": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show GIFTI Image",
+      "description": "Show final gifti image"
+    },
+    "read_das": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Read DataArray Indices",
+      "description": "Read DataArray list indices"
+    },
+    "mod_gim_atr": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Modify GIFTI Attribute",
+      "description": "Set the GIFTI NAME=VALUE attribute pair at GIFTI level"
+    },
+    "mod_gim_meta": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Modify GIFTI MetaData",
+      "description": "Add this pair to the GIFTI MetaData"
+    },
+    "mod_da_atr": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Modify DataArray Attribute",
+      "description": "Set the DataArray NAME=VALUE attribute pair"
+    },
+    "mod_da_meta": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Modify DataArray MetaData",
+      "description": "Set the DataArray NAME=VALUE pair in DA's MetaData"
+    },
+    "mod_das": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Modify DataArrays",
+      "description": "Specify the set of DataArrays to modify"
+    },
+    "new_dset": {
+      "type": "boolean",
+      "default": false,
+      "title": "Create new GIFTI dataset",
+      "description": "Create a new GIFTI dataset"
+    },
+    "compare_gifti": {
+      "type": "boolean",
+      "default": false,
+      "title": "Compare GIFTI datasets",
+      "description": "Compare two GIFTI datasets"
+    },
+    "compare_data": {
+      "type": "boolean",
+      "default": false,
+      "title": "Compare data",
+      "description": "Flag to request comparison of the data"
+    },
+    "compare_verb": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Compare Verbose Level",
+      "description": "Set the verbose level of comparisons"
+    },
+    "approx_gifti": {
+      "type": "boolean",
+      "default": false,
+      "title": "Approximate GIFTI comparison",
+      "description": "Approximate comparison of GIFTI datasets"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "infile",
+    "write_gifti"
+  ]
+}

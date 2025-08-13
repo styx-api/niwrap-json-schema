@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Convert ANALYZE image format to 4dfp format with various options",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.analyzeto4dfp"
+    },
+    "analyze_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Analyze Image",
+      "description": "Input ANALYZE image file"
+    },
+    "rois_scale": {
+      "type": "boolean",
+      "default": false,
+      "title": "ROIS Scale Factor",
+      "description": "Apply ROIScaleFactor"
+    },
+    "flip_x": {
+      "type": "boolean",
+      "default": false,
+      "title": "Flip First Axis",
+      "description": "Flip first axis"
+    },
+    "flip_y": {
+      "type": "boolean",
+      "default": false,
+      "title": "Flip Second Axis",
+      "description": "Flip second axis"
+    },
+    "flip_z": {
+      "type": "boolean",
+      "default": false,
+      "title": "Flip Third Axis",
+      "description": "Flip third axis"
+    },
+    "endian": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Endianness",
+      "description": "Output big or little endian (default CPU endian)"
+    },
+    "orientation": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Orientation Code",
+      "description": "Supply orientation code (in range [0-5])"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "analyze_image"
+  ]
+}

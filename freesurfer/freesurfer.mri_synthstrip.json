@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Robust, universal skull-stripping for brain images of any type.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_synthstrip"
+    },
+    "image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input image",
+      "description": "Input image to skullstrip."
+    },
+    "output_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output image",
+      "description": "Save stripped image to path."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output brain mask",
+      "description": "Save binary brain mask to path."
+    },
+    "gpu": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use GPU",
+      "description": "Use the GPU."
+    },
+    "border": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Mask border threshold",
+      "description": "Mask border threshold in mm. Default is 1."
+    },
+    "exclude_csf": {
+      "type": "boolean",
+      "default": false,
+      "title": "Exclude CSF",
+      "description": "Exclude CSF from brain border."
+    },
+    "model_weights": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model weights",
+      "description": "Alternative model weights."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image"
+  ]
+}

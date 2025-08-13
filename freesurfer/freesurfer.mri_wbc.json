@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool for working with functional brain imaging data on surfaces and volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_wbc"
+    },
+    "functional_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Functional Volume",
+      "description": "Functional volume file"
+    },
+    "volume_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volume Mask",
+      "description": "Mask for functional volume"
+    },
+    "lh_functional_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Left Hemisphere Functional Surface",
+      "description": "Left hemisphere functional surface file"
+    },
+    "lh_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Left Hemisphere Surface",
+      "description": "Left hemisphere surface file"
+    },
+    "lh_inflated": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Left Hemisphere Inflated Surface",
+      "description": "Optional left hemisphere inflated surface file"
+    },
+    "lh_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Left Hemisphere Mask",
+      "description": "Mask for left hemisphere functional surface"
+    },
+    "lh_label": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Left Hemisphere Label Mask",
+      "description": "Label mask for left hemisphere functional surface"
+    },
+    "rh_functional_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Right Hemisphere Functional Surface",
+      "description": "Right hemisphere functional surface file"
+    },
+    "rh_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Right Hemisphere Surface",
+      "description": "Right hemisphere surface file"
+    },
+    "rh_inflated": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Right Hemisphere Inflated Surface",
+      "description": "Optional right hemisphere inflated surface file"
+    },
+    "rh_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Right Hemisphere Mask",
+      "description": "Mask for right hemisphere functional surface"
+    },
+    "rh_label": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Right Hemisphere Label Mask",
+      "description": "Label mask for right hemisphere functional surface"
+    },
+    "rho_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rho Threshold",
+      "description": "Rho threshold value"
+    },
+    "dist_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Distance Threshold",
+      "description": "Distance threshold value"
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "Number of threads to use"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Turn on debugging"
+    },
+    "checkopts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Options Flag",
+      "description": "Check options and exit without running"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "functional_volume",
+    "lh_functional_surface",
+    "lh_surface",
+    "rh_functional_surface",
+    "rh_surface"
+  ]
+}

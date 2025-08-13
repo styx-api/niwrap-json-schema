@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "This program will paint average Talairach stats onto a surface",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_paint"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "The input volume file"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Surface",
+      "description": "The input surface file"
+    },
+    "registration_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Registration File",
+      "description": "The registration file"
+    },
+    "output_float_file": {
+      "type": "string",
+      "title": "Output Float File",
+      "description": "The output .float file"
+    },
+    "image_offset": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Image Offset",
+      "description": "Set offset to use"
+    },
+    "paint_surf_coords": {
+      "type": "boolean",
+      "default": false,
+      "title": "Paint Using Surface Coordinates",
+      "description": "Paint using surface coordinates"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume",
+    "input_surface",
+    "registration_file",
+    "output_float_file"
+  ]
+}

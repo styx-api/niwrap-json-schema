@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Program to apply a multi-threshold (mthresh) dataset to an input dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dMultiThresh"
+    },
+    "mthresh_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Multi-threshold File",
+      "description": "Multi-threshold dataset from 3dXClustSim, usually via running '3dttest++ -ETAC'."
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input File",
+      "description": "Dataset to threshold."
+    },
+    "index": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sub-brick Index",
+      "description": "Index (sub-brick) on which to threshold."
+    },
+    "signed_flag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Signed Flag",
+      "description": "Indicates if the .mthresh.nii file from 3dXClustSim was created using 1-sided thresholding. Choose sign + or -."
+    },
+    "positive_sign_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Positive Sign Flag",
+      "description": "Same as '-signed +'."
+    },
+    "negative_sign_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Negative Sign Flag",
+      "description": "Same as '-signed -'."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Prefix for output dataset. Can be 'NULL' to get no output dataset."
+    },
+    "mask_only_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mask Only Flag",
+      "description": "Instead of outputting a thresholded version of the input dataset, just output a 0/1 mask dataset of voxels that survive the process."
+    },
+    "all_mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "All Mask Prefix",
+      "description": "Write out a multi-volume dataset with prefix 'qqq' where each volume is the binary mask of voxels that pass ONE of the tests."
+    },
+    "no_zero_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Zero Flag",
+      "description": "Prevents the output of a dataset if it would be all zero."
+    },
+    "quiet_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet Flag",
+      "description": "Turn off progress report messages."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "mthresh_file",
+    "input_file"
+  ]
+}

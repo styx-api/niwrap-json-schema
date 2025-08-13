@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool to create morphological transformations using specified input transforms.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.createMorph"
+    },
+    "input_transforms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Transforms",
+      "description": "Input transforms, must specify type (affine, volume, morph, mesh, gcam) with filename."
+    },
+    "output_transform": {
+      "type": "string",
+      "title": "Output Transform",
+      "description": "Output transform file in tm3d format."
+    },
+    "template": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template Volume",
+      "description": "Template volume for geometry. Required if a gcam is present."
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject Volume",
+      "description": "Subject volume for geometry."
+    },
+    "debug_coordinates": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debugging Coordinates",
+      "description": "Coordinates for debugging purposes. Requires three integer values."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_transforms",
+    "output_transform"
+  ]
+}

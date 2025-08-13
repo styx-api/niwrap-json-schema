@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Find extrema in a cifti file.\n\nFinds spatial locations in a cifti file that have more extreme values than all nearby locations in the same component (surface or volume structure).  The input cifti file must have a brain models mapping along the specified direction.  COLUMN is the direction that works on dtseries and dscalar.  For dconn, if it is symmetric use COLUMN, otherwise use ROW.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.cifti-extrema"
+    },
+    "cifti": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "cifti",
+      "description": "the input cifti"
+    },
+    "surface_distance": {
+      "type": "number",
+      "title": "surface_distance",
+      "description": "the minimum distance between extrema of the same type, for surface components"
+    },
+    "volume_distance": {
+      "type": "number",
+      "title": "volume_distance",
+      "description": "the minimum distance between extrema of the same type, for volume components"
+    },
+    "direction": {
+      "type": "string",
+      "title": "direction",
+      "description": "which dimension to find extrema along, ROW or COLUMN"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "the output cifti"
+    },
+    "opt_left_surface_surface": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_left_surface_surface",
+      "description": "specify the left surface to use: the left surface file"
+    },
+    "opt_right_surface_surface": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_right_surface_surface",
+      "description": "specify the right surface to use: the right surface file"
+    },
+    "opt_cerebellum_surface_surface": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_cerebellum_surface_surface",
+      "description": "specify the cerebellum surface to use: the cerebellum surface file"
+    },
+    "opt_surface_presmooth_surface_kernel": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_surface_presmooth_surface_kernel",
+      "description": "smooth on the surface before finding extrema: the size of the gaussian surface smoothing kernel in mm, as sigma by default"
+    },
+    "opt_volume_presmooth_volume_kernel": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_volume_presmooth_volume_kernel",
+      "description": "smooth volume components before finding extrema: the size of the gaussian volume smoothing kernel in mm, as sigma by default"
+    },
+    "opt_presmooth_fwhm": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_presmooth_fwhm",
+      "description": "smoothing kernel distances are FWHM, not sigma"
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "threshold"
+            },
+            "low": {
+              "type": "number",
+              "title": "low",
+              "description": "the largest value to consider for being a minimum"
+            },
+            "high": {
+              "type": "number",
+              "title": "high",
+              "description": "the smallest value to consider for being a maximum"
+            }
+          },
+          "additionalProperties": false,
+          "description": "ignore small extrema",
+          "required": [
+            "low",
+            "high"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "ignore small extrema"
+    },
+    "opt_merged_volume": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_merged_volume",
+      "description": "treat volume components as if they were a single component"
+    },
+    "opt_sum_maps": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_sum_maps",
+      "description": "output the sum of the extrema maps instead of each map separately"
+    },
+    "opt_consolidate_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_consolidate_mode",
+      "description": "use consolidation of local minima instead of a large neighborhood"
+    },
+    "opt_only_maxima": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_only_maxima",
+      "description": "only find the maxima"
+    },
+    "opt_only_minima": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_only_minima",
+      "description": "only find the minima"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti",
+    "surface_distance",
+    "volume_distance",
+    "direction",
+    "cifti_out"
+  ]
+}

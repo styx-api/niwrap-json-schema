@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Conversions between surface formats and/or conventions",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.surf2surf"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Surface",
+      "description": "Input surface"
+    },
+    "output_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Output Surface",
+      "description": "Output surface"
+    },
+    "input_convention": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Convention",
+      "description": "Input convention [default=caret] - only used if output convention is different"
+    },
+    "output_convention": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Convention",
+      "description": "Output convention [default=same as input]"
+    },
+    "input_ref_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Reference Volume",
+      "description": "Input reference volume - Must set this if changing conventions"
+    },
+    "output_ref_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Reference Volume",
+      "description": "Output reference volume [default=same as input]"
+    },
+    "transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform",
+      "description": "In-to-out ASCII matrix or out-to-in warpfield [default=identity]"
+    },
+    "output_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Type",
+      "description": "Output type: ASCII, VTK, GIFTI_ASCII, GIFTI_BIN, GIFTI_BIN_GZ (default)"
+    },
+    "output_values": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Values",
+      "description": "Set output scalar values (e.g. --values=mysurface.func.gii or --values=1)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_surface",
+    "output_surface"
+  ]
+}

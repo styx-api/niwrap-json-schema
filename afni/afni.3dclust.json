@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Performs simple-minded cluster detection in 3D datasets",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dclust"
+    },
+    "rmm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Radius in millimeters",
+      "description": "Cluster connection radius in millimeters."
+    },
+    "vmul": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum cluster volume",
+      "description": "Minimum cluster volume in micro-liters or minimum number of voxels if negative."
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input dataset(s)",
+      "description": "Input dataset(s). More than one allowed, but only the first sub-brick of the dataset."
+    },
+    "nn1": {
+      "type": "boolean",
+      "default": false,
+      "title": "First nearest neighbor clustering flag",
+      "description": "1st nearest-neighbor clustering (faces touching)."
+    },
+    "nn2": {
+      "type": "boolean",
+      "default": false,
+      "title": "Second nearest neighbor clustering flag",
+      "description": "2nd nearest-neighbor clustering (edges touching)."
+    },
+    "nn3": {
+      "type": "boolean",
+      "default": false,
+      "title": "Third nearest neighbor clustering flag",
+      "description": "3rd nearest-neighbor clustering (corners touching)."
+    },
+    "noabs": {
+      "type": "boolean",
+      "default": false,
+      "title": "No absolute value flag",
+      "description": "Use the signed voxel intensities for calculations."
+    },
+    "summarize": {
+      "type": "boolean",
+      "default": false,
+      "title": "Summarize flag",
+      "description": "Write out only the total nonzero voxel count and volume for each dataset."
+    },
+    "nosum": {
+      "type": "boolean",
+      "default": false,
+      "title": "No summarize flag",
+      "description": "Suppress printout of the totals."
+    },
+    "verb": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbosity flag",
+      "description": "Print out a progress report to stderr as computations proceed."
+    },
+    "oned_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "1D format flag",
+      "description": "Write output in 1D format (default)."
+    },
+    "no_oned_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "No 1D format flag",
+      "description": "Do not write output in 1D format."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet flag",
+      "description": "Suppress all non-essential output."
+    },
+    "mni": {
+      "type": "boolean",
+      "default": false,
+      "title": "MNI space transformation flag",
+      "description": "Transform output xyz-coordinates from TLRC to MNI space if the input dataset has the +tlrc view."
+    },
+    "isovalue": {
+      "type": "boolean",
+      "default": false,
+      "title": "Isovalue clustering flag",
+      "description": "Clusters will be formed only from contiguous voxels that also have the same value."
+    },
+    "isomerge": {
+      "type": "boolean",
+      "default": false,
+      "title": "Isomerge clustering flag",
+      "description": "Clusters will be formed from each distinct value in the dataset; spatial contiguity will not be used."
+    },
+    "inmask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Inmask flag",
+      "description": "Use an internal mask from the dataset to eliminate voxels before clustering."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix for new dataset",
+      "description": "Write a new dataset that is a copy of the input, but with all voxels not in a cluster set to zero; provide a prefix for the new dataset."
+    },
+    "savemask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Order mask prefix",
+      "description": "Write a new dataset that is an ordered mask where the largest cluster is labeled '1', the next largest '2', and so forth."
+    },
+    "binary": {
+      "type": "boolean",
+      "default": false,
+      "title": "Binary mask flag",
+      "description": "Turn the output of '-savemask' into a binary (0 or 1) mask."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "datasets"
+  ]
+}

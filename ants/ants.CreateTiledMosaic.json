@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Render a 3-D image volume with optional Rgb overlay.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.CreateTiledMosaic"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "Main input is a 3-D grayscale image."
+    },
+    "rgb_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rgb Image",
+      "description": "An optional Rgb image can be added as an overlay. It must have the same image geometry as the input grayscale image."
+    },
+    "mask_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Image",
+      "description": "Specifies the ROI of the RGB voxels used."
+    },
+    "alpha": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Alpha",
+      "description": "If an Rgb image is provided, render the overlay using the specified alpha parameter."
+    },
+    "functional_overlay": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Functional Overlay",
+      "description": "A functional overlay can be specified using both and rgb image and a mask specifying where that rgb image should be applied. Both images must have the same image geometry as the input image. Optionally, an alpha parameter can be specified."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output Tiled Mosaic Image",
+      "description": "The output is the tiled mosaic image. The format must support the specific data type: floating point images without RGB overlays, Rgb images with intensities scaled to [0,255] if overlays are present."
+    },
+    "tile_geometry": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tile Geometry",
+      "description": "The tile geometry specifies the number of rows and columns in the output image. For example, specifying '5x10' renders 5 rows by 10 columns of slices."
+    },
+    "direction": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Direction",
+      "description": "Specifies the direction of the slices. Can be based on image storage in memory or aligned physical space. Defaults to z-direction if unspecified."
+    },
+    "pad_or_crop": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pad or Crop",
+      "description": "Specify padding or cropping with a voxel-width boundary for each slice. Padding uses a specified constant value. Cropping pads with negative voxel-widths."
+    },
+    "slices": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Slices",
+      "description": "Control over which slices to render. Specify slices directly or incrementally with optional start and end slices."
+    },
+    "flip_slice": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Flip Slice",
+      "description": "Flip individual slice images horizontally and/or vertically."
+    },
+    "permute_axes": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Permute Axes",
+      "description": "Permute (or swap) the axes of the individual slice images."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image",
+    "output"
+  ]
+}

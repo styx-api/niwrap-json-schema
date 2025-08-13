@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Simple GLM allowing temporal or spatial regression on either text data or images",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.fsl_glm"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input file name (text matrix or 3D/4D image file)"
+    },
+    "design_matrix": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Design matrix",
+      "description": "File name of the GLM design matrix (text time courses for temporal regression or an image file for spatial regression)"
+    },
+    "output_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output file",
+      "description": "Output file name for GLM parameter estimates (GLM betas)"
+    },
+    "contrasts": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Contrasts",
+      "description": "Matrix of t-statistics contrasts"
+    },
+    "mask_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Mask image file name if input is image"
+    },
+    "dof": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Degrees-of-freedom",
+      "description": "Set degrees-of-freedom explicitly"
+    },
+    "design_norm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Design normalisation flag",
+      "description": "Switch on normalisation of the design matrix columns to unit std. deviation"
+    },
+    "data_norm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Data normalisation flag",
+      "description": "Switch on normalisation of the data time series to unit std. deviation"
+    },
+    "vn_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Variance normalisation flag",
+      "description": "Perform MELODIC variance-normalisation on data"
+    },
+    "demean_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "De-mean flag",
+      "description": "Switch on de-meaning of design and data"
+    },
+    "output_copes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output COPEs file",
+      "description": "Output file name for COPEs (either as text file or image)"
+    },
+    "output_zstats": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Z-stats file",
+      "description": "Output file name for Z-stats (either as text file or image)"
+    },
+    "output_tstats": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output t-stats file",
+      "description": "Output file name for t-stats (either as text file or image)"
+    },
+    "output_pvals": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output p-values file",
+      "description": "Output file name for p-values of Z-stats (either as text file or image)"
+    },
+    "output_fvals": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output F-value file",
+      "description": "Output file name for F-value of full model fit"
+    },
+    "output_pfvals": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output p-value file",
+      "description": "Output file name for p-value for full model fit"
+    },
+    "output_residuals": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output residuals file",
+      "description": "Output file name for residuals"
+    },
+    "output_varcb": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output variance of COPEs file",
+      "description": "Output file name for variance of COPEs"
+    },
+    "output_sigsq": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output sigma-square variance file",
+      "description": "Output file name for residual noise variance sigma-square"
+    },
+    "output_data": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output pre-processed data",
+      "description": "Output file name for pre-processed data"
+    },
+    "output_vnscales": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output variance normalisation scales file",
+      "description": "Output file name for scaling factors for variance normalisation"
+    },
+    "vx_text": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "VXT confounds",
+      "description": "List of text files containing text matrix confounds. Caution, BETA option."
+    },
+    "vx_images": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "VXF confounds",
+      "description": "List of 4D images containing voxelwise confounds. Caution, BETA option."
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Display this help text"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "design_matrix"
+  ]
+}

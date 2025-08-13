@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Compute the absolute value of the FFT of input columns from an AFNI 1D file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.1dfft"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input .1D file containing an ASCII list of numbers arranged in columns."
+    },
+    "outfile": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output file to store the FFT results."
+    },
+    "ignore": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ignore lines",
+      "description": "Skip the first 'sss' lines in the input file. [default = no skipping]"
+    },
+    "use": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use lines",
+      "description": "Use only 'uuu' lines of the input file. [default = use them all]"
+    },
+    "nfft": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FFT length",
+      "description": "Set FFT length to 'nnn'. [default = length of data (# of lines used)]"
+    },
+    "tocx": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Re and Im parts flag",
+      "description": "Save Re and Im parts of transform in 2 columns."
+    },
+    "fromcx": {
+      "type": "boolean",
+      "default": false,
+      "title": "Convert complex to real flag",
+      "description": "Convert 2 column complex input into 1 column real output. Note: This will not work if the original data FFT length was an odd number."
+    },
+    "hilbert": {
+      "type": "boolean",
+      "default": false,
+      "title": "Hilbert transform flag",
+      "description": "When -fromcx is used, the inverse FFT will do the Hilbert transform instead."
+    },
+    "nodetrend": {
+      "type": "boolean",
+      "default": false,
+      "title": "No detrend flag",
+      "description": "Skip the detrending of the input."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "infile",
+    "outfile"
+  ]
+}

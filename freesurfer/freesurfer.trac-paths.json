@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tractography for a single subject.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.trac-paths"
+    },
+    "dmrirc_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "DMRIRC file",
+      "description": "dmrirc file (see dmrirc.example)"
+    },
+    "log_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log file",
+      "description": "Log file, default is trac-all.log in the same directory as dmrirc"
+    },
+    "no_log": {
+      "type": "boolean",
+      "default": false,
+      "title": "No log flag",
+      "description": "Do not save a log file"
+    },
+    "cmd_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cmd file",
+      "description": "Cmd file, default is trac-all.cmd in the same directory as dmrirc"
+    },
+    "no_cmd": {
+      "type": "boolean",
+      "default": false,
+      "title": "No cmd flag",
+      "description": "Do not save a cmd file"
+    },
+    "no_isrunning": {
+      "type": "boolean",
+      "default": false,
+      "title": "No isrunning flag",
+      "description": "Do not check whether this subject is currently being processed"
+    },
+    "umask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Umask value",
+      "description": "Set Unix file permission mask (default 002)"
+    },
+    "group_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Group ID",
+      "description": "Check that current group is alpha groupid"
+    },
+    "allow_core_dump": {
+      "type": "boolean",
+      "default": false,
+      "title": "Allow coredump flag",
+      "description": "Set coredump limit to unlimited"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Generate much more output"
+    },
+    "dontrun": {
+      "type": "boolean",
+      "default": false,
+      "title": "Don't run flag",
+      "description": "Do everything but execute each command"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version flag",
+      "description": "Print version of this script and exit"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Print full contents of help"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dmrirc_file"
+  ]
+}

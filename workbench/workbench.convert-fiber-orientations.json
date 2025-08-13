@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Convert bingham parameter volumes to fiber orientation file.\n\nTakes precomputed bingham parameters from volume files and converts them to the format workbench uses for display.  The <label-volume> argument must be a label volume, where the labels use these strings:\n\n\nCORTEX_LEFT\nCORTEX_RIGHT\nCEREBELLUM\nACCUMBENS_LEFT\nACCUMBENS_RIGHT\nALL_GREY_MATTER\nALL_WHITE_MATTER\nAMYGDALA_LEFT\nAMYGDALA_RIGHT\nBRAIN_STEM\nCAUDATE_LEFT\nCAUDATE_RIGHT\nCEREBELLAR_WHITE_MATTER_LEFT\nCEREBELLAR_WHITE_MATTER_RIGHT\nCEREBELLUM_LEFT\nCEREBELLUM_RIGHT\nCEREBRAL_WHITE_MATTER_LEFT\nCEREBRAL_WHITE_MATTER_RIGHT\nCORTEX\nDIENCEPHALON_VENTRAL_LEFT\nDIENCEPHALON_VENTRAL_RIGHT\nHIPPOCAMPUS_LEFT\nHIPPOCAMPUS_RIGHT\nINVALID\nOTHER\nOTHER_GREY_MATTER\nOTHER_WHITE_MATTER\nPALLIDUM_LEFT\nPALLIDUM_RIGHT\nPUTAMEN_LEFT\nPUTAMEN_RIGHT\nTHALAMUS_LEFT\nTHALAMUS_RIGHT",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.convert-fiber-orientations"
+    },
+    "label_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "label_volume",
+      "description": "volume of cifti structure labels"
+    },
+    "fiber_out": {
+      "type": "string",
+      "title": "fiber_out",
+      "description": "the output fiber orientation file"
+    },
+    "fiber": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "fiber"
+              },
+              "mean_f": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "mean_f",
+                "description": "mean fiber strength"
+              },
+              "stdev_f": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "stdev_f",
+                "description": "standard deviation of fiber strength"
+              },
+              "theta": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "theta",
+                "description": "theta angle"
+              },
+              "phi": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "phi",
+                "description": "phi angle"
+              },
+              "psi": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "psi",
+                "description": "psi angle"
+              },
+              "ka": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "ka",
+                "description": "ka bingham parameter"
+              },
+              "kb": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "kb",
+                "description": "kb bingham parameter"
+              }
+            },
+            "additionalProperties": false,
+            "description": "specify the parameter volumes for a fiber",
+            "required": [
+              "mean_f",
+              "stdev_f",
+              "theta",
+              "phi",
+              "psi",
+              "ka",
+              "kb"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify the parameter volumes for a fiber"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "label_volume",
+    "fiber_out"
+  ]
+}

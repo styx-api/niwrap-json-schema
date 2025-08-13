@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Cluster-based statistical thresholding tool from FSL",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.easythresh"
+    },
+    "raw_zstat_input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Raw Z-Statistic",
+      "description": "Input raw z-statistics image"
+    },
+    "brain_mask_input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Brain Mask",
+      "description": "Brain mask image"
+    },
+    "cluster_z_thresh_input": {
+      "type": "number",
+      "title": "Cluster Z Threshold",
+      "description": "Cluster z-threshold"
+    },
+    "cluster_prob_thresh_input": {
+      "type": "number",
+      "title": "Cluster Probability Threshold",
+      "description": "Cluster probability threshold"
+    },
+    "background_image_input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Background Image",
+      "description": "Background image for thresholding"
+    },
+    "output_root": {
+      "type": "string",
+      "title": "Output Root",
+      "description": "Root of output file names"
+    },
+    "mm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "MM Flag",
+      "description": "Flag to indicate the use of mm (millimeters)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "raw_zstat_input",
+    "brain_mask_input",
+    "cluster_z_thresh_input",
+    "cluster_prob_thresh_input",
+    "background_image_input",
+    "output_root"
+  ]
+}

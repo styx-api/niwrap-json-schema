@@ -1,0 +1,1256 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Apply generic voxel-wise mathematical operations to images.\n\nThis command will only compute per-voxel operations. Use 'mrmath' to compute summary statistics across images or along image axes.\n\nThis command uses a stack-based syntax, with operators (specified using options) operating on the top-most entries (i.e. images or values) in the stack. Operands (values or images) are pushed onto the stack in the order they appear (as arguments) on the command-line, and operators (specified as options) operate on and consume the top-most entries in the stack, and push their output as a new entry on the stack.\n\nAs an additional feature, this command will allow images with different dimensions to be processed, provided they satisfy the following conditions: for each axis, the dimensions match if they are the same size, or one of them has size one. In the latter case, the entire image will be replicated along that axis. This allows for example a 4D image of size [ X Y Z N ] to be added to a 3D image of size [ X Y Z ], as if it consisted of N copies of the 3D image along the 4th axis (the missing dimension is assumed to have size 1). Another example would a single-voxel 4D image of size [ 1 1 1 N ], multiplied by a 3D image of size [ X Y Z ], which would allow the creation of a 4D image where each volume consists of the 3D image scaled by the corresponding value for that volume in the single-voxel image.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix.mrcalc"
+    },
+    "abs": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "abs"
+              }
+            },
+            "additionalProperties": false,
+            "description": "|%1| : return absolute value (magnitude) of real or complex number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "|%1| : return absolute value (magnitude) of real or complex number"
+    },
+    "neg": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "neg"
+              }
+            },
+            "additionalProperties": false,
+            "description": "-%1 : negative value"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "-%1 : negative value"
+    },
+    "add": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "add"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 + %2) : add values"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 + %2) : add values"
+    },
+    "subtract": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "subtract"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 - %2) : subtract nth operand from (n-1)th"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 - %2) : subtract nth operand from (n-1)th"
+    },
+    "multiply": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "multiply"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 * %2) : multiply values"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 * %2) : multiply values"
+    },
+    "divide": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "divide"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 / %2) : divide (n-1)th operand by nth"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 / %2) : divide (n-1)th operand by nth"
+    },
+    "min": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "min"
+              }
+            },
+            "additionalProperties": false,
+            "description": "min (%1, %2) : smallest of last two operands"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "min (%1, %2) : smallest of last two operands"
+    },
+    "max": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "max"
+              }
+            },
+            "additionalProperties": false,
+            "description": "max (%1, %2) : greatest of last two operands"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "max (%1, %2) : greatest of last two operands"
+    },
+    "lt": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "lt"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 < %2) : less-than operator (true=1, false=0)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 < %2) : less-than operator (true=1, false=0)"
+    },
+    "gt": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "gt"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 > %2) : greater-than operator (true=1, false=0)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 > %2) : greater-than operator (true=1, false=0)"
+    },
+    "le": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "le"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 <= %2) : less-than-or-equal-to operator (true=1, false=0)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 <= %2) : less-than-or-equal-to operator (true=1, false=0)"
+    },
+    "ge": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "ge"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 >= %2) : greater-than-or-equal-to operator (true=1, false=0)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 >= %2) : greater-than-or-equal-to operator (true=1, false=0)"
+    },
+    "eq": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "eq"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 == %2) : equal-to operator (true=1, false=0)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 == %2) : equal-to operator (true=1, false=0)"
+    },
+    "neq": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "neq"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 != %2) : not-equal-to operator (true=1, false=0)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 != %2) : not-equal-to operator (true=1, false=0)"
+    },
+    "if": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "if"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 ? %2 : %3) : if first operand is true (non-zero), return second operand, otherwise return third operand"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 ? %2 : %3) : if first operand is true (non-zero), return second operand, otherwise return third operand"
+    },
+    "replace": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "replace"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1, %2 -> %3) : Wherever first operand is equal to the second operand, replace with third operand"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1, %2 -> %3) : Wherever first operand is equal to the second operand, replace with third operand"
+    },
+    "sqrt": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "sqrt"
+              }
+            },
+            "additionalProperties": false,
+            "description": "sqrt (%1) : square root"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "sqrt (%1) : square root"
+    },
+    "pow": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "pow"
+              }
+            },
+            "additionalProperties": false,
+            "description": "%1^%2 : raise (n-1)th operand to nth power"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "%1^%2 : raise (n-1)th operand to nth power"
+    },
+    "round": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "round"
+              }
+            },
+            "additionalProperties": false,
+            "description": "round (%1) : round to nearest integer"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "round (%1) : round to nearest integer"
+    },
+    "ceil": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "ceil"
+              }
+            },
+            "additionalProperties": false,
+            "description": "ceil (%1) : round up to nearest integer"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "ceil (%1) : round up to nearest integer"
+    },
+    "floor": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "floor"
+              }
+            },
+            "additionalProperties": false,
+            "description": "floor (%1) : round down to nearest integer"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "floor (%1) : round down to nearest integer"
+    },
+    "not": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "not"
+              }
+            },
+            "additionalProperties": false,
+            "description": "!%1 : NOT operator: true (1) if operand is false (i.e. zero)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "!%1 : NOT operator: true (1) if operand is false (i.e. zero)"
+    },
+    "and": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "and"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 && %2) : AND operator: true (1) if both operands are true (i.e. non-zero)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 && %2) : AND operator: true (1) if both operands are true (i.e. non-zero)"
+    },
+    "or": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "or"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 || %2) : OR operator: true (1) if either operand is true (i.e. non-zero)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 || %2) : OR operator: true (1) if either operand is true (i.e. non-zero)"
+    },
+    "xor": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "xor"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 ^^ %2) : XOR operator: true (1) if only one of the operands is true (i.e. non-zero)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 ^^ %2) : XOR operator: true (1) if only one of the operands is true (i.e. non-zero)"
+    },
+    "isnan": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "isnan"
+              }
+            },
+            "additionalProperties": false,
+            "description": "isnan (%1) : true (1) if operand is not-a-number (NaN)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "isnan (%1) : true (1) if operand is not-a-number (NaN)"
+    },
+    "isinf": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "isinf"
+              }
+            },
+            "additionalProperties": false,
+            "description": "isinf (%1) : true (1) if operand is infinite (Inf)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "isinf (%1) : true (1) if operand is infinite (Inf)"
+    },
+    "finite": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "finite"
+              }
+            },
+            "additionalProperties": false,
+            "description": "finite (%1) : true (1) if operand is finite (i.e. not NaN or Inf)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "finite (%1) : true (1) if operand is finite (i.e. not NaN or Inf)"
+    },
+    "complex": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "complex"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 + %2 i) : create complex number using the last two operands as real,imaginary components"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 + %2 i) : create complex number using the last two operands as real,imaginary components"
+    },
+    "polar": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "polar"
+              }
+            },
+            "additionalProperties": false,
+            "description": "(%1 /_ %2) : create complex number using the last two operands as magnitude,phase components (phase in radians)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "(%1 /_ %2) : create complex number using the last two operands as magnitude,phase components (phase in radians)"
+    },
+    "real": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "real"
+              }
+            },
+            "additionalProperties": false,
+            "description": "real (%1) : real part of complex number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "real (%1) : real part of complex number"
+    },
+    "imag": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "imag"
+              }
+            },
+            "additionalProperties": false,
+            "description": "imag (%1) : imaginary part of complex number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "imag (%1) : imaginary part of complex number"
+    },
+    "phase": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "phase"
+              }
+            },
+            "additionalProperties": false,
+            "description": "phase (%1) : phase of complex number (use -abs for magnitude)"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "phase (%1) : phase of complex number (use -abs for magnitude)"
+    },
+    "conj": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "conj"
+              }
+            },
+            "additionalProperties": false,
+            "description": "conj (%1) : complex conjugate"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "conj (%1) : complex conjugate"
+    },
+    "proj": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "proj"
+              }
+            },
+            "additionalProperties": false,
+            "description": "proj (%1) : projection onto the Riemann sphere"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "proj (%1) : projection onto the Riemann sphere"
+    },
+    "exp": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "exp"
+              }
+            },
+            "additionalProperties": false,
+            "description": "exp (%1) : exponential function"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "exp (%1) : exponential function"
+    },
+    "log": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "log"
+              }
+            },
+            "additionalProperties": false,
+            "description": "log (%1) : natural logarithm"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "log (%1) : natural logarithm"
+    },
+    "log10": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "log10"
+              }
+            },
+            "additionalProperties": false,
+            "description": "log10 (%1) : common logarithm"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "log10 (%1) : common logarithm"
+    },
+    "cos": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "cos"
+              }
+            },
+            "additionalProperties": false,
+            "description": "cos (%1) : cosine"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "cos (%1) : cosine"
+    },
+    "sin": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "sin"
+              }
+            },
+            "additionalProperties": false,
+            "description": "sin (%1) : sine"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "sin (%1) : sine"
+    },
+    "tan": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "tan"
+              }
+            },
+            "additionalProperties": false,
+            "description": "tan (%1) : tangent"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "tan (%1) : tangent"
+    },
+    "acos": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "acos"
+              }
+            },
+            "additionalProperties": false,
+            "description": "acos (%1) : inverse cosine"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "acos (%1) : inverse cosine"
+    },
+    "asin": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "asin"
+              }
+            },
+            "additionalProperties": false,
+            "description": "asin (%1) : inverse sine"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "asin (%1) : inverse sine"
+    },
+    "atan": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "atan"
+              }
+            },
+            "additionalProperties": false,
+            "description": "atan (%1) : inverse tangent"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "atan (%1) : inverse tangent"
+    },
+    "cosh": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "cosh"
+              }
+            },
+            "additionalProperties": false,
+            "description": "cosh (%1) : hyperbolic cosine"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "cosh (%1) : hyperbolic cosine"
+    },
+    "sinh": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "sinh"
+              }
+            },
+            "additionalProperties": false,
+            "description": "sinh (%1) : hyperbolic sine"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "sinh (%1) : hyperbolic sine"
+    },
+    "tanh": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "tanh"
+              }
+            },
+            "additionalProperties": false,
+            "description": "tanh (%1) : hyperbolic tangent"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "tanh (%1) : hyperbolic tangent"
+    },
+    "acosh": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "acosh"
+              }
+            },
+            "additionalProperties": false,
+            "description": "acosh (%1) : inverse hyperbolic cosine"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "acosh (%1) : inverse hyperbolic cosine"
+    },
+    "asinh": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "asinh"
+              }
+            },
+            "additionalProperties": false,
+            "description": "asinh (%1) : inverse hyperbolic sine"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "asinh (%1) : inverse hyperbolic sine"
+    },
+    "atanh": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "atanh"
+              }
+            },
+            "additionalProperties": false,
+            "description": "atanh (%1) : inverse hyperbolic tangent"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "atanh (%1) : inverse hyperbolic tangent"
+    },
+    "datatype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "datatype",
+      "description": "specify output image data type. Valid choices are: float32, float32le, float32be, float64, float64le, float64be, int64, uint64, int64le, uint64le, int64be, uint64be, int32, uint32, int32le, uint32le, int32be, uint32be, int16, uint16, int16le, uint16le, int16be, uint16be, cfloat32, cfloat32le, cfloat32be, cfloat64, cfloat64le, cfloat64be, int8, uint8, bit."
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "operand": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "VariousString"
+              },
+              "obj": {
+                "type": "string",
+                "title": "Object",
+                "description": "String object."
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "obj"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "VariousFile"
+              },
+              "obj": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "Object",
+                "description": "File object."
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "obj"
+            ]
+          }
+        ]
+      },
+      "title": "operand",
+      "description": "an input image, intensity value, or the special keywords 'rand' (random number between 0 and 1) or 'randn' (random number from unit std.dev. normal distribution) or the mathematical constants 'e' and 'pi'."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "operand"
+  ]
+}

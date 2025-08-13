@@ -1,0 +1,311 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool to run corrections for multiple comparisons on volumes or surfaces, using various methods including Monte Carlo simulation, permutation, and Gaussian Random Fields.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_glmfit-sim"
+    },
+    "glmdir": {
+      "type": "string",
+      "title": "GLM Directory",
+      "description": "Path to GLM directory."
+    },
+    "cwp": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cluster-wise p-value threshold",
+      "description": "Cluster-wise p-value threshold, default is 0.05."
+    },
+    "mczsim": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Monte Carlo Simulations",
+      "description": "Use pre-computed z-based Monte Carlo simulations. Requires vwthreshold and sign."
+    },
+    "mczsim_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Monte Carlo Simulations Directory",
+      "description": "Directory for custom Monte Carlo simulations, default is FREESURFER_HOME/average/mult-comp-cor."
+    },
+    "mczsim_label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Monte Carlo Simulations Label",
+      "description": "Label for custom Monte Carlo simulations, default is cortex."
+    },
+    "perm": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Permutation Simulation",
+      "description": "Use permutation simulation with nsim iterations, cluster forming threshold (CFT), and sign."
+    },
+    "perm_resid": {
+      "type": "boolean",
+      "default": false,
+      "title": "Permutation on Residual",
+      "description": "Use permutation on the residual instead of raw data for non-orthogonal designs."
+    },
+    "perm_signflip": {
+      "type": "boolean",
+      "default": false,
+      "title": "Permutation Sign Flipping",
+      "description": "Use sign flipping instead of shuffling for permutation."
+    },
+    "grf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gaussian Random Fields",
+      "description": "Use Gaussian Random Fields (GRF) method, with vwthreshold and sign."
+    },
+    "spaces_2": {
+      "type": "boolean",
+      "default": false,
+      "title": "Correction for 2 Spaces",
+      "description": "Apply additional Bonferroni correction across 2 spaces."
+    },
+    "spaces_3": {
+      "type": "boolean",
+      "default": false,
+      "title": "Correction for 3 Spaces",
+      "description": "Apply additional Bonferroni correction across 3 spaces."
+    },
+    "overwrite": {
+      "type": "boolean",
+      "default": false,
+      "title": "Overwrite Previous CSDs",
+      "description": "Delete previous CSDs."
+    },
+    "bg": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Background Jobs",
+      "description": "Divide simulation into njobs and put in background."
+    },
+    "sleep": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sleep Duration",
+      "description": "Number of seconds to sleep between background polls."
+    },
+    "a2009s": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use a2009s Annotation",
+      "description": "Use aparc.a2009s instead of aparc for region of vertex max."
+    },
+    "annot": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Annotation",
+      "description": "Use specific annotation for region of vertex max."
+    },
+    "log": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log File",
+      "description": "Specify logfile, default is csdbase.mri_glmfit-sim.log."
+    },
+    "base": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CSDBase Name",
+      "description": "Override csdbase name."
+    },
+    "no_sim": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "No Simulation",
+      "description": "Do not simulate, only run cluster."
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Simulation Seed",
+      "description": "Set simulation random number generator seed."
+    },
+    "fwhm_override": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM Override",
+      "description": "Override fwhm in glmdir."
+    },
+    "fwhm_add": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM Add",
+      "description": "Add fwhmAdd to the estimated fwhm."
+    },
+    "uniform": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Uniform PDF",
+      "description": "Use uniform PDF instead of gaussian, specify min and max."
+    },
+    "no_out_annot": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Output Annotation",
+      "description": "Do not output a cluster annotation."
+    },
+    "no_cluster_mean": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cluster Mean",
+      "description": "Do not compute means of each subject in each cluster."
+    },
+    "y_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GLM Input Y File",
+      "description": "Specify the GLM input y file."
+    },
+    "centroid": {
+      "type": "boolean",
+      "default": false,
+      "title": "Centroid Reporting",
+      "description": "Report the coordinates/annotation of the centroid instead of max."
+    },
+    "spatial_sum": {
+      "type": "boolean",
+      "default": false,
+      "title": "Spatial Sum",
+      "description": "Compute the sum over voxels in the cluster rather than the average."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Show the help message and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "glmdir"
+  ]
+}

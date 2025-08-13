@@ -1,0 +1,461 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "SAMSEG (Statistical and Algorithmic Methods for Segmentation) is a tool for segmenting neuroimaging data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.samseg"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input files",
+      "description": "Input image files, must be in registration with each other."
+    },
+    "t1w_files": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T1-weighted files",
+      "description": "T1-weighted input file, causes input to be conformed unless --hires is used."
+    },
+    "t2w_files": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T2-weighted files",
+      "description": "T2-weighted input file."
+    },
+    "flair_files": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FLAIR-weighted files",
+      "description": "FLAIR-weighted input file."
+    },
+    "other_modality_files": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Other modality files",
+      "description": "Specific mode input files, each associated with a custom modality name."
+    },
+    "output_directory": {
+      "type": "string",
+      "title": "Output directory",
+      "description": "Output directory where results will be saved."
+    },
+    "options_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Options file",
+      "description": "JSON file for specifying advanced options."
+    },
+    "dissection_photo_mode": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dissection photo mode",
+      "description": "Mode for processing 3D reconstructed dissection photos, specifying left/right/both."
+    },
+    "save_history": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save history flag",
+      "description": "Turns on saving of processing history."
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject",
+      "description": "Subject identifier, sets output directory to subject/mri/samseg. The first input must be the conformed T1 weighted input."
+    },
+    "save_posteriors": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save posteriors flag",
+      "description": "Save posterior probabilities."
+    },
+    "save_probabilities": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save probabilities flag",
+      "description": "Save posterior, prior, and likelihood as 3-frame volume for each tissue type."
+    },
+    "no_save_warp": {
+      "type": "boolean",
+      "default": false,
+      "title": "No save warp flag",
+      "description": "Do not save m3z-style warp."
+    },
+    "mrf": {
+      "type": "boolean",
+      "default": false,
+      "title": "MRF flag",
+      "description": "Perform Markov Random Field processing."
+    },
+    "no_mrf": {
+      "type": "boolean",
+      "default": false,
+      "title": "No MRF flag",
+      "description": "Do not perform Markov Random Field processing."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of threads",
+      "description": "Set the number of CPUs to use."
+    },
+    "atlas_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlas directory",
+      "description": "Path to the SAMSEG atlas directory."
+    },
+    "gmm_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GMM file",
+      "description": "Gaussian Mixture Model file."
+    },
+    "no_block_coordinate_descent": {
+      "type": "boolean",
+      "default": false,
+      "title": "No block coordinate descent flag",
+      "description": "Do not use block coordinate descent."
+    },
+    "logdomain_costandgradient_calculator": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use logdomain cost and gradient calculator flag",
+      "description": "Use log-domain cost and gradient calculator."
+    },
+    "no_logdomain_costandgradient_calculator": {
+      "type": "boolean",
+      "default": false,
+      "title": "No logdomain cost and gradient calculator flag",
+      "description": "Do not use log-domain cost and gradient calculator."
+    },
+    "recon": {
+      "type": "boolean",
+      "default": false,
+      "title": "Recon flag",
+      "description": "Run recon-all."
+    },
+    "fill": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fill flag",
+      "description": "Use samseg to create filled.mgz instead of recon-all."
+    },
+    "normalization2": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normalization2 flag",
+      "description": "Use samseg to create brain.mgz instead of recon-all (with --recon)."
+    },
+    "use_t2w": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use T2w flag",
+      "description": "Use the T2-weighted input when running recon-all."
+    },
+    "use_flair": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use FLAIR flag",
+      "description": "Use the FLAIR-weighted input when running recon-all."
+    },
+    "hires": {
+      "type": "boolean",
+      "default": false,
+      "title": "Hires flag",
+      "description": "Use -hires when running recon-all."
+    },
+    "subjects_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "SUBJECTS_DIR",
+      "description": "Path to the SUBJECTS_DIR."
+    },
+    "pallidum_separate": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pallidum separate flag",
+      "description": "Move pallidum outside of global white matter class, used for analyzing T2 or FLAIR."
+    },
+    "stiffness": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mesh stiffness",
+      "description": "Set mesh stiffness."
+    },
+    "lesion": {
+      "type": "boolean",
+      "default": false,
+      "title": "Lesion flag",
+      "description": "Turn on lesion segmentation."
+    },
+    "lesion_mask_pattern": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lesion mask pattern",
+      "description": "Pattern needed when using T2 for lesion mask, e.g., 0 1."
+    },
+    "bias_field_smoothing_kernel": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bias field smoothing kernel",
+      "description": "Width of bias field smoothness."
+    },
+    "registration_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Registration file",
+      "description": "Registration file (LTA or MAT) as output by samseg."
+    },
+    "regmat_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Regmat file",
+      "description": "Same as --reg."
+    },
+    "init_lta": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial LTA file",
+      "description": "Initial registration LTA file."
+    },
+    "reg_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Reg only flag",
+      "description": "Only perform registration."
+    },
+    "ssdd_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "SSDD directory",
+      "description": "Path to SAMSEG_Data_DIR where the atlas is located."
+    },
+    "save_mesh": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save mesh flag",
+      "description": "Save the mesh, useful for longitudinal analysis."
+    },
+    "max_iters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max iterations",
+      "description": "Maximum number of iterations."
+    },
+    "dice_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DICE file",
+      "description": "DICE coefficient file for segmentation."
+    },
+    "ignore_unknown": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore unknown flag",
+      "description": "Ignore unknown flags."
+    },
+    "smooth_wm_cortex": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smooth WM cortex",
+      "description": "Smooth white matter and cortex priors using specified sigma value."
+    },
+    "profile_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Profile file",
+      "description": "Run using the cProfile Python profiler, with the specified profile file."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files",
+    "output_directory"
+  ]
+}

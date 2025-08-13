@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Atropos is a finite mixture modeling (FMM) segmentation approach that allows for prior constraints including a prior label image, prior probability images, and/or an MRF prior to enforce spatial smoothing of the labels.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.Atropos"
+    },
+    "image_dimensionality": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Image Dimensionality",
+      "description": "This option forces the image to be treated as a specified-dimensional image. If not specified, Atropos tries to infer the dimensionality from the first input image."
+    },
+    "intensity_image": {
+      "type": "string",
+      "title": "Intensity Image",
+      "description": "One or more scalar images is specified for segmentation. For scenarios with no prior information, the first scalar image is used to order labelings by intensity. The optional adaptive smoothing weight is applicable with prior images, specified between [0,1]."
+    },
+    "bspline": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "B-Spline Parameters",
+      "description": "Parameters for B-Spline. Adaptive smoothing is applied to intensity images if smoothing weights > 0."
+    },
+    "initialization": {
+      "type": "string",
+      "title": "Initialization",
+      "description": "Initialize the FMM parameters. options include Random, Otsu, KMeans, PriorProbabilityImages, and PriorLabelImage."
+    },
+    "partial_volume_label_set": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Partial Volume Label Set",
+      "description": "Model mixtures of classes within single voxels. Specify labels for each partial volume class."
+    },
+    "use_partial_volume_likelihoods": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use Partial Volume Likelihoods",
+      "description": "Whether to use partial volume likelihoods. A value of 1 considers the partial volume class separate from tissue classes."
+    },
+    "posterior_formulation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Posterior Formulation",
+      "description": "Specify posterior probability formulation. Options are Socrates, Plato, Aristotle, or Sigmoid."
+    },
+    "mask_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask Image",
+      "description": "The required image mask defines the region to be labeled by Atropos."
+    },
+    "convergence": {
+      "type": "string",
+      "title": "Convergence",
+      "description": "Determine convergence based on mean maximum posterior probability over region of interest."
+    },
+    "likelihood_model": {
+      "type": "string",
+      "title": "Likelihood Model",
+      "description": "Specify parametric or non-parametric likelihood model. Options include Gaussian, HistogramParzenWindows, ManifoldParzenWindows, among others."
+    },
+    "mrf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "MRF Parameters",
+      "description": "Markov Random Field parameters to enforce spatial constraints on segmentation."
+    },
+    "icm": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ICM Parameters",
+      "description": "ICM (Iterated Conditional Modes) parameters for asynchronous updating."
+    },
+    "use_random_seed": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use Random Seed",
+      "description": "Initialize with a random seed or a constant seed number."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output",
+      "description": "Output labeled image and optionally posterior probability images."
+    },
+    "minimize_memory_usage": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimize Memory Usage",
+      "description": "Minimize memory usage by calculating images on the fly and storing only non-negligible pixel values."
+    },
+    "winsorize_outliers": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Winsorize Outliers",
+      "description": "Options to remove effects of outliers in calculations using methods like BoxPlot or GrubbsRosner."
+    },
+    "use_euclidean_distance": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use Euclidean Distance",
+      "description": "Propagate labels throughout the mask using a distance transform."
+    },
+    "label_propagation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Propagation",
+      "description": "Control propagation of each prior label by specified lambda and boundary probability."
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose",
+      "description": "Verbose output."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "intensity_image",
+    "initialization",
+    "mask_image",
+    "convergence",
+    "likelihood_model",
+    "output"
+  ]
+}

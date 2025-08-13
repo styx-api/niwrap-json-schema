@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Binarizes an input volume to identify the head's voxels.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_seghead"
+    },
+    "input_volume": {
+      "type": "string",
+      "title": "Input Volume ID",
+      "description": "Input volume identifier, e.g., T1."
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume ID",
+      "description": "Output volume identifier."
+    },
+    "fill_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fill Value",
+      "description": "Fill value for binarizing the head (default 255)."
+    },
+    "fhi_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FHI Value",
+      "description": "FHI value used in type change operation (default 0.999)."
+    },
+    "thresh1_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold 1",
+      "description": "Threshold value for detecting the skin (e.g., 20)."
+    },
+    "thresh2_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold 2",
+      "description": "Threshold value for the final binarization (e.g., 20)."
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Combined Threshold",
+      "description": "Single threshold value applied to both thresh1 and thresh2."
+    },
+    "nhitsmin_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Hits",
+      "description": "Minimum number of consecutive hits needed to identify skin (default 2)."
+    },
+    "hvoldat_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Head Volume Output File",
+      "description": "File to write the volume of the head in mm3 to an ASCII file."
+    },
+    "signal_behind_head": {
+      "type": "boolean",
+      "default": false,
+      "title": "Signal Behind Head Flag",
+      "description": "Consider signals behind the head in the binarization process."
+    },
+    "rescale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rescale Input Flag",
+      "description": "Rescale the input when converting to uchar."
+    },
+    "fill_holes_islands": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fill Holes and Remove Islands Flag",
+      "description": "Fill holes and remove islands in the binary volume."
+    },
+    "seed_point": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Seed Point",
+      "description": "Seed point specified by column, row, slice for filling operation."
+    },
+    "or_mask_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "OR Mask File",
+      "description": "Mask file to include voxels in the binarization process."
+    },
+    "gdiag_option": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gdiag Option",
+      "description": "Optional diagnostic option for internal use."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume",
+    "output_volume"
+  ]
+}

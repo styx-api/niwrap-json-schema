@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Draw borders around cifti labels.\n\nFor each surface, takes the labels on the matching structure and draws borders around the labels.  Use -column to only draw borders around one label map.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.cifti-label-to-border"
+    },
+    "cifti_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "cifti_in",
+      "description": "the input cifti dlabel file"
+    },
+    "opt_placement_fraction": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_placement_fraction",
+      "description": "set how far along the edge border points are drawn: fraction along edge from inside vertex (default 0.33)"
+    },
+    "opt_column_column": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_column_column",
+      "description": "select a single column: the column number or name"
+    },
+    "border": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "border"
+              },
+              "surface": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "surface",
+                "description": "the surface to use for neighbor and structure information"
+              },
+              "border_out": {
+                "type": "string",
+                "title": "border_out",
+                "description": "the output border file"
+              }
+            },
+            "additionalProperties": false,
+            "description": "specify output file for a surface structure",
+            "required": [
+              "surface",
+              "border_out"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify output file for a surface structure"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti_in"
+  ]
+}

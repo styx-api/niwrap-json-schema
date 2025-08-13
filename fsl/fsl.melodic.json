@@ -1,0 +1,500 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Multivariate Exploratory Linear Optimised Decomposition into Independent Components",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.melodic"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input file names (either single file name or comma-separated list or text file)"
+    },
+    "output_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output directory",
+      "description": "Output directory name"
+    },
+    "mask_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "File name of mask for thresholding"
+    },
+    "dimensionality_reduction": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dimensionality reduction",
+      "description": "Dimensionality reduction into specified number of dimensions (default is automatic estimation)"
+    },
+    "generate_report": {
+      "type": "boolean",
+      "default": false,
+      "title": "Generate report",
+      "description": "Generate Melodic web report"
+    },
+    "cifti_io": {
+      "type": "boolean",
+      "default": false,
+      "title": "CIFTI input/output",
+      "description": "Input/output as CIFTI (warning: auto-dimensionality estimation for CIFTI data is currently inaccurate)"
+    },
+    "variance_normalization": {
+      "type": "boolean",
+      "default": false,
+      "title": "Variance normalization",
+      "description": "Switch off variance normalization"
+    },
+    "no_masking": {
+      "type": "boolean",
+      "default": false,
+      "title": "No masking",
+      "description": "Switch off masking"
+    },
+    "update_masking": {
+      "type": "boolean",
+      "default": false,
+      "title": "Update masking",
+      "description": "Switch off mask updating"
+    },
+    "no_bet": {
+      "type": "boolean",
+      "default": false,
+      "title": "No BET",
+      "description": "Switch off BET"
+    },
+    "bg_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Background threshold",
+      "description": "Brain / non-brain threshold (only if --nobet selected)"
+    },
+    "dimest_technique": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dimensionality estimation technique",
+      "description": "Use specific dimensionality estimation technique: lap, bic, mdl, aic, mean (default: lap)"
+    },
+    "separate_variance_normalization": {
+      "type": "boolean",
+      "default": false,
+      "title": "Separate variance normalization",
+      "description": "Switch on separate variance normalization for each input dataset (off by default)"
+    },
+    "disable_migp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Disable MIGP",
+      "description": "Switch off MIGP data reduction when using -a concat (full temporal concatenation will be used)"
+    },
+    "num_internal_eigenmaps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of internal Eigenmaps",
+      "description": "Number of internal Eigenmaps"
+    },
+    "migp_shuffle": {
+      "type": "boolean",
+      "default": false,
+      "title": "Randomize MIGP order",
+      "description": "Randomize MIGP file order (default: TRUE)"
+    },
+    "migp_factor": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "MIGP factor",
+      "description": "Internal Factor of mem-threshold relative to number of Eigenmaps (default: 2)"
+    },
+    "num_ics": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of ICs",
+      "description": "Number of ICs to extract (for deflation approach)"
+    },
+    "nonlinearity": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Nonlinearity",
+      "description": "Nonlinearity: gauss, tanh, pow3 (default), pow4"
+    },
+    "covar_weights": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Covariance weights",
+      "description": "Voxel-wise weights for the covariance matrix (e.g. segmentation information)"
+    },
+    "eps_error": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum error change",
+      "description": "Minimum error change"
+    },
+    "eps_rank1_error": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum rank-1 error change",
+      "description": "Minimum error change for rank-1 approximation in TICA"
+    },
+    "max_iters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max iterations",
+      "description": "Maximum number of iterations before restart"
+    },
+    "max_restarts": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max restarts",
+      "description": "Maximum number of restarts"
+    },
+    "mm_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mixture Model threshold",
+      "description": "Threshold for Mixture Model based inference"
+    },
+    "no_mixture_modeling": {
+      "type": "boolean",
+      "default": false,
+      "title": "No mixture modeling",
+      "description": "Switch off mixture modeling on IC maps"
+    },
+    "ic_components_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "IC components file",
+      "description": "Input filename of the IC components file for mixture modeling"
+    },
+    "mixing_matrix_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mixing matrix file",
+      "description": "Input filename of mixing matrix for mixture modeling / filtering"
+    },
+    "session_modes_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Session modes file",
+      "description": "Input filename of matrix of session modes for report generation"
+    },
+    "component_filter": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Component filter",
+      "description": "List of component numbers to remove"
+    },
+    "background_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Background image",
+      "description": "Specify background image for report (default: mean image)"
+    },
+    "tr_seconds": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "TR in seconds",
+      "description": "TR in seconds"
+    },
+    "log_power_calc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Log power calculation",
+      "description": "Calculate log of power for frequency spectrum"
+    },
+    "time_domain_design_matrix": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time-domain design matrix",
+      "description": "Design matrix across time-domain"
+    },
+    "time_domain_t_contrast_matrix": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time-domain T-contrast matrix",
+      "description": "T-contrast matrix across time-domain"
+    },
+    "subject_domain_design_matrix": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject-domain design matrix",
+      "description": "Design matrix across subject-domain"
+    },
+    "subject_domain_t_contrast_matrix": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject-domain T-contrast matrix",
+      "description": "T-contrast matrix across subject-domain"
+    },
+    "output_unmixing_matrix": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output unmixing matrix",
+      "description": "Output unmixing matrix"
+    },
+    "output_stats": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output thresholded and probability maps",
+      "description": "Output thresholded maps and probability maps"
+    },
+    "output_pca": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output PCA results",
+      "description": "Output PCA results"
+    },
+    "output_whitening": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output whitening/dewhitening matrices",
+      "description": "Output whitening/dewhitening matrices"
+    },
+    "output_original_ics": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output original ICs",
+      "description": "Output the original ICs"
+    },
+    "output_mean_volume": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output mean volume",
+      "description": "Output mean volume"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Prints version information"
+    },
+    "copyright": {
+      "type": "boolean",
+      "default": false,
+      "title": "Copyright",
+      "description": "Prints copyright information"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Prints this help message"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug",
+      "description": "Switch on debug messages"
+    },
+    "report_maps": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Report maps control",
+      "description": "Control string for spatial map images (see slicer)"
+    },
+    "keep_meanvol": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep mean volume",
+      "description": "Do not subtract mean volume"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file"
+  ]
+}

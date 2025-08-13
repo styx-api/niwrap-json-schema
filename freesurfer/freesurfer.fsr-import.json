@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Copies/converts data into a directory structure for samseg-expected format",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.fsr-import"
+    },
+    "outdir": {
+      "type": "string",
+      "title": "Output directory",
+      "description": "Root directory for output data"
+    },
+    "t1w_input": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T1-weighted images",
+      "description": "Input T1-weighted image files"
+    },
+    "t2w_input": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T2-weighted images",
+      "description": "Input T2-weighted image files"
+    },
+    "flair_input": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FLAIR images",
+      "description": "Input FLAIR image files"
+    },
+    "custom_mode_input": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Custom modality images",
+      "description": "Custom modality image file with specified mode name (not t1w, t2w, or flair)"
+    },
+    "force_update": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force update flag",
+      "description": "Update files regardless of timestamp"
+    },
+    "no_conform": {
+      "type": "boolean",
+      "default": false,
+      "title": "No conform flag",
+      "description": "Do not conform inputs to 1mm, 256 dimensions"
+    },
+    "hires": {
+      "type": "boolean",
+      "default": false,
+      "title": "High resolution flag",
+      "description": "Same as --no-conform"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "outdir"
+  ]
+}

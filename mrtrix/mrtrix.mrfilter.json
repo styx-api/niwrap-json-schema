@@ -1,0 +1,374 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Perform filtering operations on 3D / 4D MR images.\n\nThe available filters are: fft, gradient, median, smooth, normalise, zclean.\n\nEach filter has its own unique set of optional parameters.\n\nFor 4D images, each 3D volume is processed independently.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix.mrfilter"
+    },
+    "axes": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "axes",
+      "description": "the axes along which to apply the Fourier Transform. By default, the transform is applied along the three spatial axes. Provide as a comma-separate list of axis indices."
+    },
+    "inverse": {
+      "type": "boolean",
+      "default": false,
+      "title": "inverse",
+      "description": "apply the inverse FFT"
+    },
+    "magnitude": {
+      "type": "boolean",
+      "default": false,
+      "title": "magnitude",
+      "description": "output a magnitude image rather than a complex-valued image"
+    },
+    "centre_zero": {
+      "type": "boolean",
+      "default": false,
+      "title": "centre_zero",
+      "description": "re-arrange the FFT results so that the zero-frequency component appears in the centre of the image, rather than at the edges"
+    },
+    "stdev": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "stdev",
+      "description": "the standard deviation of the Gaussian kernel used to smooth the input image (in mm). The image is smoothed to reduced large spurious gradients caused by noise. Use this option to override the default stdev of 1 voxel. This can be specified either as a single value to be used for all 3 axes, or as a comma-separated list of 3 values, one for each axis."
+    },
+    "magnitude_1": {
+      "type": "boolean",
+      "default": false,
+      "title": "magnitude",
+      "description": "output the gradient magnitude, rather than the default x,y,z components"
+    },
+    "scanner": {
+      "type": "boolean",
+      "default": false,
+      "title": "scanner",
+      "description": "define the gradient with respect to the scanner coordinate frame of reference."
+    },
+    "extent": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "extent",
+      "description": "specify extent of median filtering neighbourhood in voxels. This can be specified either as a single value to be used for all 3 axes, or as a comma-separated list of 3 values, one for each axis (default: 3x3x3)."
+    },
+    "extent_1": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "extent",
+      "description": "specify extent of normalisation filtering neighbourhood in voxels. This can be specified either as a single value to be used for all 3 axes, or as a comma-separated list of 3 values, one for each axis (default: 3x3x3)."
+    },
+    "stdev_1": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "stdev",
+      "description": "apply Gaussian smoothing with the specified standard deviation. The standard deviation is defined in mm (Default 1 voxel). This can be specified either as a single value to be used for all axes, or as a comma-separated list of the stdev for each axis."
+    },
+    "fwhm": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "fwhm",
+      "description": "apply Gaussian smoothing with the specified full-width half maximum. The FWHM is defined in mm (Default 1 voxel * 2.3548). This can be specified either as a single value to be used for all axes, or as a comma-separated list of the FWHM for each axis."
+    },
+    "extent_2": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "extent",
+      "description": "specify the extent (width) of kernel size in voxels. This can be specified either as a single value to be used for all axes, or as a comma-separated list of the extent for each axis. The default extent is 2 * ceil(2.5 * stdev / voxel_size) - 1."
+    },
+    "zupper": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "zupper",
+      "description": "define high intensity outliers: default: 2.5"
+    },
+    "zlower": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "zlower",
+      "description": "define low intensity outliers: default: 2.5"
+    },
+    "bridge": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "bridge",
+      "description": "number of voxels to gap to fill holes in mask: default: 4"
+    },
+    "maskin": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "maskin",
+      "description": "initial mask that defines the maximum spatial extent and the region from which to smaple the intensity range."
+    },
+    "maskout": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "maskout",
+      "description": "Output a refined mask based on a spatially coherent region with normal intensity range."
+    },
+    "strides": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "VariousString"
+                },
+                "obj": {
+                  "type": "string",
+                  "title": "Object",
+                  "description": "String object."
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "obj"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "VariousFile"
+                },
+                "obj": {
+                  "type": "string",
+                  "x-styx-type": "file",
+                  "title": "Object",
+                  "description": "File object."
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "obj"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "strides",
+      "description": "specify the strides of the output data in memory; either as a comma-separated list of (signed) integers, or as a template image from which the strides shall be extracted and used. The actual strides produced will depend on whether the output image format can support it."
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "input",
+      "description": "the input image."
+    },
+    "filter": {
+      "type": "string",
+      "title": "filter",
+      "description": "the type of filter to be applied"
+    },
+    "output": {
+      "type": "string",
+      "title": "output",
+      "description": "the output image."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input",
+    "filter",
+    "output"
+  ]
+}

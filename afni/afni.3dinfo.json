@@ -1,0 +1,737 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Prints out sort-of-useful information from a 3D dataset's header",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dinfo"
+    },
+    "orient": {
+      "type": "boolean",
+      "default": false,
+      "title": "Orientation",
+      "description": "Value of orientation string. For example, LPI means: i direction grows from Left(negative) to Right(positive). j direction grows from Posterior (neg.) to Anterior (pos.) k direction grows from Inferior (neg.) to Superior (pos.)"
+    },
+    "Lextent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extent along L",
+      "description": "Extent along L"
+    },
+    "Rextent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extent along R",
+      "description": "Extent along R"
+    },
+    "Aextent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extent along A",
+      "description": "Extent along A"
+    },
+    "Pextent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extent along P",
+      "description": "Extent along P"
+    },
+    "Iextent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extent along I",
+      "description": "Extent along I"
+    },
+    "Sextent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extent along S",
+      "description": "Extent along S"
+    },
+    "all_names": {
+      "type": "boolean",
+      "default": false,
+      "title": "All Names",
+      "description": "Value of various dset structures handling filenames"
+    },
+    "verb": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose",
+      "description": "Print out lots of information"
+    },
+    "very_verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Very Verbose",
+      "description": "Print out even more information including slice time offsets"
+    },
+    "short": {
+      "type": "boolean",
+      "default": false,
+      "title": "Short",
+      "description": "Print out less information (default)"
+    },
+    "no_hist": {
+      "type": "boolean",
+      "default": false,
+      "title": "No History",
+      "description": "Omit the HISTORY text"
+    },
+    "h": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Mini help"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Full Help",
+      "description": "Display entire help output"
+    },
+    "extreme_help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extreme Help",
+      "description": "Extreme help"
+    },
+    "h_view": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help View",
+      "description": "Open help in text editor"
+    },
+    "h_web": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Web",
+      "description": "Open help in web browser"
+    },
+    "h_find": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Help Find",
+      "description": "Look for lines in help output that match WORD"
+    },
+    "h_raw": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Raw",
+      "description": "Display unedited help string"
+    },
+    "h_spx": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help SPX",
+      "description": "Help string in sphinx format without autoformatting options"
+    },
+    "h_aspx": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help ASPX",
+      "description": "Help string in sphinx format with autoformatting options"
+    },
+    "all_opts": {
+      "type": "boolean",
+      "default": false,
+      "title": "All Options",
+      "description": "Try to identify all options for the program from the help output"
+    },
+    "label2index": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label to Index",
+      "description": "Output index corresponding to label"
+    },
+    "niml_hdr": {
+      "type": "boolean",
+      "default": false,
+      "title": "NIML Header",
+      "description": "Output entire NIML-formatted header"
+    },
+    "subbrick_info": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sub-brick Info",
+      "description": "Output only sub-brick part of information"
+    },
+    "exists": {
+      "type": "boolean",
+      "default": false,
+      "title": "Exists",
+      "description": "1 if dset is loadable, 0 otherwise. This works on prefix also."
+    },
+    "id": {
+      "type": "boolean",
+      "default": false,
+      "title": "ID",
+      "description": "Idcodestring of dset"
+    },
+    "is_atlas": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Atlas",
+      "description": "1 if dset is an atlas."
+    },
+    "is_atlas_or_labeltable": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Atlas or Labeltable",
+      "description": "1 if dset has an atlas or labeltable."
+    },
+    "is_nifti": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is NIFTI",
+      "description": "1 if dset is NIFTI format, 0 otherwise"
+    },
+    "dset_extension": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dataset Extension",
+      "description": "Show filename extension for valid dataset (e.g. .nii.gz)"
+    },
+    "storage_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "Storage Mode",
+      "description": "Show internal storage mode of dataset (e.g. NIFTI)"
+    },
+    "space": {
+      "type": "boolean",
+      "default": false,
+      "title": "Space",
+      "description": "Dataset's space"
+    },
+    "gen_space": {
+      "type": "boolean",
+      "default": false,
+      "title": "Generic Space",
+      "description": "Dataset's generic space"
+    },
+    "av_space": {
+      "type": "boolean",
+      "default": false,
+      "title": "AFNI View Space",
+      "description": "AFNI format's view extension for the space"
+    },
+    "nifti_code": {
+      "type": "boolean",
+      "default": false,
+      "title": "NIFTI Code",
+      "description": "What AFNI would use for an output NIFTI (q)sform_code"
+    },
+    "is_oblique": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Oblique",
+      "description": "1 if dset is oblique"
+    },
+    "handedness": {
+      "type": "boolean",
+      "default": false,
+      "title": "Handedness",
+      "description": "L if orientation is Left handed, R if it is right handed"
+    },
+    "obliquity": {
+      "type": "boolean",
+      "default": false,
+      "title": "Obliquity",
+      "description": "Angle from plumb direction. Angles of 0 (or close) are for cardinal orientations"
+    },
+    "prefix": {
+      "type": "boolean",
+      "default": false,
+      "title": "Prefix",
+      "description": "Return the prefix"
+    },
+    "prefix_noext": {
+      "type": "boolean",
+      "default": false,
+      "title": "Prefix No Extension",
+      "description": "Return the prefix without extensions"
+    },
+    "ni": {
+      "type": "boolean",
+      "default": false,
+      "title": "Number of Voxels in i",
+      "description": "Return the number of voxels in i dimension"
+    },
+    "nj": {
+      "type": "boolean",
+      "default": false,
+      "title": "Number of Voxels in j",
+      "description": "Return the number of voxels in j dimension"
+    },
+    "nk": {
+      "type": "boolean",
+      "default": false,
+      "title": "Number of Voxels in k",
+      "description": "Return the number of voxels in k dimension"
+    },
+    "nijk": {
+      "type": "boolean",
+      "default": false,
+      "title": "Number of Voxels in i*j*k",
+      "description": "Return ni*nj*nk"
+    },
+    "nv": {
+      "type": "boolean",
+      "default": false,
+      "title": "Number of Points in Time",
+      "description": "Return number of points in time or the number of sub-bricks"
+    },
+    "nt": {
+      "type": "boolean",
+      "default": false,
+      "title": "Number of Points in Time (Alias)",
+      "description": "Same as -nv"
+    },
+    "n4": {
+      "type": "boolean",
+      "default": false,
+      "title": "Number of Voxels in i*j*k and Points in Time",
+      "description": "Same as -ni -nj -nk -nv"
+    },
+    "nvi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Maximum Sub-brick Index",
+      "description": "The maximum sub-brick index (= nv -1 )"
+    },
+    "nti": {
+      "type": "boolean",
+      "default": false,
+      "title": "Maximum Sub-brick Index (Alias)",
+      "description": "Same as -nvi"
+    },
+    "ntimes": {
+      "type": "boolean",
+      "default": false,
+      "title": "Number of Sub-bricks Points in Time",
+      "description": "Return number of sub-bricks points in time. This is an option for debugging use, stay away from it."
+    },
+    "max_node": {
+      "type": "boolean",
+      "default": false,
+      "title": "Maximum Node Index",
+      "description": "For a surface-based dset, return the maximum node index"
+    },
+    "di": {
+      "type": "boolean",
+      "default": false,
+      "title": "Displacement in i",
+      "description": "Signed displacement per voxel along i direction, aka dx"
+    },
+    "dj": {
+      "type": "boolean",
+      "default": false,
+      "title": "Displacement in j",
+      "description": "Signed displacement per voxel along j direction, aka dy"
+    },
+    "dk": {
+      "type": "boolean",
+      "default": false,
+      "title": "Displacement in k",
+      "description": "Signed displacement per voxel along k direction, aka dz"
+    },
+    "d3": {
+      "type": "boolean",
+      "default": false,
+      "title": "Displacement in i, j, k",
+      "description": "Same as -di -dj -dk"
+    },
+    "adi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Voxel Size in i",
+      "description": "Voxel size along i direction (abs(di))"
+    },
+    "adj": {
+      "type": "boolean",
+      "default": false,
+      "title": "Voxel Size in j",
+      "description": "Voxel size along j direction (abs(dj))"
+    },
+    "adk": {
+      "type": "boolean",
+      "default": false,
+      "title": "Voxel Size in k",
+      "description": "Voxel size along k direction (abs(dk))"
+    },
+    "ad3": {
+      "type": "boolean",
+      "default": false,
+      "title": "Voxel Size in i, j, k",
+      "description": "Same as -adi -adj -adk"
+    },
+    "voxvol": {
+      "type": "boolean",
+      "default": false,
+      "title": "Voxel Volume",
+      "description": "Voxel volume in cubic millimeters"
+    },
+    "oi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Origin in i",
+      "description": "Volume origin along the i direction"
+    },
+    "oj": {
+      "type": "boolean",
+      "default": false,
+      "title": "Origin in j",
+      "description": "Volume origin along the j direction"
+    },
+    "ok": {
+      "type": "boolean",
+      "default": false,
+      "title": "Origin in k",
+      "description": "Volume origin along the k direction"
+    },
+    "o3": {
+      "type": "boolean",
+      "default": false,
+      "title": "Origin in i, j, k",
+      "description": "Same as -oi -oj -ok"
+    },
+    "dcx": {
+      "type": "boolean",
+      "default": false,
+      "title": "Center in x",
+      "description": "Volumetric center in x direction (DICOM coordinates)"
+    },
+    "dcy": {
+      "type": "boolean",
+      "default": false,
+      "title": "Center in y",
+      "description": "Volumetric center in y direction (DICOM coordinates)"
+    },
+    "dcz": {
+      "type": "boolean",
+      "default": false,
+      "title": "Center in z",
+      "description": "Volumetric center in z direction (DICOM coordinates)"
+    },
+    "dc3": {
+      "type": "boolean",
+      "default": false,
+      "title": "Center in x, y, z",
+      "description": "Same as -dcx -dcy -dcz"
+    },
+    "tr": {
+      "type": "boolean",
+      "default": false,
+      "title": "TR Value",
+      "description": "The TR value in seconds."
+    },
+    "dmin": {
+      "type": "boolean",
+      "default": false,
+      "title": "Minimum Value (Scaled)",
+      "description": "The dataset's minimum value, scaled by fac"
+    },
+    "dmax": {
+      "type": "boolean",
+      "default": false,
+      "title": "Maximum Value (Scaled)",
+      "description": "The dataset's maximum value, scaled by fac"
+    },
+    "dminus": {
+      "type": "boolean",
+      "default": false,
+      "title": "Minimum Value (Unscaled)",
+      "description": "The dataset's minimum value, unscaled."
+    },
+    "dmaxus": {
+      "type": "boolean",
+      "default": false,
+      "title": "Maximum Value (Unscaled)",
+      "description": "The dataset's maximum value, unscaled."
+    },
+    "smode": {
+      "type": "boolean",
+      "default": false,
+      "title": "Storage Mode String",
+      "description": "Dset storage mode string."
+    },
+    "header_name": {
+      "type": "boolean",
+      "default": false,
+      "title": "Header Name",
+      "description": "Value of dset structure (sub)field 'header_name'"
+    },
+    "brick_name": {
+      "type": "boolean",
+      "default": false,
+      "title": "Brick Name",
+      "description": "Value of dset structure (sub)field 'brick_name'"
+    },
+    "iname": {
+      "type": "boolean",
+      "default": false,
+      "title": "Input Name",
+      "description": "Name of dset as input on the command line"
+    },
+    "extent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Spatial Extent",
+      "description": "The spatial extent of the dataset along R, L, A, P, I and S"
+    },
+    "fac": {
+      "type": "boolean",
+      "default": false,
+      "title": "Float Scaling Factor",
+      "description": "Return the float scaling factor"
+    },
+    "label": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sub-brick Label",
+      "description": "The label of each sub-brick"
+    },
+    "datum": {
+      "type": "boolean",
+      "default": false,
+      "title": "Data Storage Type",
+      "description": "The data storage type"
+    },
+    "min": {
+      "type": "boolean",
+      "default": false,
+      "title": "Minimum Value (Scaled)",
+      "description": "The minimum value, scaled by fac"
+    },
+    "max": {
+      "type": "boolean",
+      "default": false,
+      "title": "Maximum Value (Scaled)",
+      "description": "The maximum value, scaled by fac"
+    },
+    "minus": {
+      "type": "boolean",
+      "default": false,
+      "title": "Minimum Value (Unscaled)",
+      "description": "The minimum value, unscaled"
+    },
+    "maxus": {
+      "type": "boolean",
+      "default": false,
+      "title": "Maximum Value (Unscaled)",
+      "description": "The maximum value, unscaled"
+    },
+    "labeltable": {
+      "type": "boolean",
+      "default": false,
+      "title": "Label Table",
+      "description": "Show label table, if any"
+    },
+    "labeltable_as_atlas_points": {
+      "type": "boolean",
+      "default": false,
+      "title": "Label Table as Atlas Points",
+      "description": "Show label table in atlas point format"
+    },
+    "atlas_points": {
+      "type": "boolean",
+      "default": false,
+      "title": "Atlas Points",
+      "description": "Show atlas points list, if any"
+    },
+    "history": {
+      "type": "boolean",
+      "default": false,
+      "title": "History Note",
+      "description": "History note"
+    },
+    "slice_timing": {
+      "type": "boolean",
+      "default": false,
+      "title": "Slice Timing",
+      "description": "Show slice timing"
+    },
+    "header_line": {
+      "type": "boolean",
+      "default": false,
+      "title": "Header Line",
+      "description": "Output as the first line the names of attributes in each field (column)"
+    },
+    "hdr": {
+      "type": "boolean",
+      "default": false,
+      "title": "Header Line",
+      "description": "Same as -header_line"
+    },
+    "sb_delim": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sub-brick Delimiter",
+      "description": "Delimiter string between sub-brick values. Default SB_DELIM is '|'"
+    },
+    "NA_flag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "NA Flag",
+      "description": "String to use when a field is not found or not applicable. Default is 'NA'"
+    },
+    "atr_delim": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Attribute Delimiter",
+      "description": "Delimiter string between attributes. Default ATR_DELIM is the tab character"
+    },
+    "aform_real": {
+      "type": "boolean",
+      "default": false,
+      "title": "Aform Real Matrix",
+      "description": "Display full 3x4 'aform_real' matrix (AFNI's RAI equivalent of the sform matrix in NIFTI, may contain obliquity info), with comment line first"
+    },
+    "aform_real_oneline": {
+      "type": "boolean",
+      "default": false,
+      "title": "Aform Real Matrix (One Line)",
+      "description": "Display full 'aform_real' matrix (see '-aform_real') as 1 row of 12 numbers. No additional comment"
+    },
+    "aform_real_refit_ori": {
+      "type": "boolean",
+      "default": false,
+      "title": "Aform Real Matrix (Refit Orientation)",
+      "description": "Display full 3x4 'aform_real' matrix (see '-aform_real') *if* the dset were reoriented (via 3drefit) to new orient XXX. Includes comment line first"
+    },
+    "is_aform_real_orth": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Aform Real Orthogonal",
+      "description": "If true, aform_real == aform_orth, which should be a very common occurrence"
+    },
+    "aform_orth": {
+      "type": "boolean",
+      "default": false,
+      "title": "Aform Orthogonal Matrix",
+      "description": "Display full 3x4 'aform_orth' matrix (AFNI's RAI matrix equivalent of the NIFTI quaternion, which may contain obliquity info), with comment line first. This matrix is the orthogonalized form of aform_real, and very often AFNI-produced dsets, we will have: aform_orth == aform_real"
+    },
+    "perm_to_orient": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Permutation to Orientation",
+      "description": "Display 3x3 permutation matrix to go from the dset's current orientation to the YYY orient"
+    },
+    "same_grid": {
+      "type": "boolean",
+      "default": false,
+      "title": "Same Grid",
+      "description": "Output 1 if the grid is identical between two dsets, 0 otherwise. For -same_grid to be 1, all of -same_dim, -same_delta, -same_orient, -same_center, and -same_obl must return 1"
+    },
+    "same_dim": {
+      "type": "boolean",
+      "default": false,
+      "title": "Same Dimensions",
+      "description": "1 if dimensions (nx, ny, nz) are the same between dset pairs"
+    },
+    "same_delta": {
+      "type": "boolean",
+      "default": false,
+      "title": "Same Voxel Sizes",
+      "description": "1 if voxel sizes are the same between dset pairs"
+    },
+    "same_orient": {
+      "type": "boolean",
+      "default": false,
+      "title": "Same Orientation",
+      "description": "1 if orientation is the same between dset pairs"
+    },
+    "same_center": {
+      "type": "boolean",
+      "default": false,
+      "title": "Same Geometric Center",
+      "description": "1 if geometric center is the same between dset pairs"
+    },
+    "same_obl": {
+      "type": "boolean",
+      "default": false,
+      "title": "Same Obliquity",
+      "description": "1 if obliquity is the same between dset pairs"
+    },
+    "same_all_grid": {
+      "type": "boolean",
+      "default": false,
+      "title": "Same All Grid",
+      "description": "Equivalent to listing all of -same_dim, -same_delta, -same_orient, -same_center, and -same_obl on the command line"
+    },
+    "val_diff": {
+      "type": "boolean",
+      "default": false,
+      "title": "Value Difference",
+      "description": "Output the sum of absolute differences of all voxels in the dataset pair. A -1.0 value indicates a grid mismatch between volume pairs"
+    },
+    "sval_diff": {
+      "type": "boolean",
+      "default": false,
+      "title": "Scaled Value Difference",
+      "description": "Same as -val_diff, but the sum is divided (scaled) by the total number of voxels that are not zero in at least one of the two datasets"
+    },
+    "monog_pairs": {
+      "type": "boolean",
+      "default": false,
+      "title": "Monogamous Pairs",
+      "description": "Instead of pairing each dset with the first, pair each couple separately. This requires you to have an even number of dsets on the command line"
+    },
+    "dataset": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Dataset",
+      "description": "Datasets to retrieve information from"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset"
+  ]
+}

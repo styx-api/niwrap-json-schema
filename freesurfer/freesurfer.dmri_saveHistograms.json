@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool to save histograms from diffusion MRI tractography data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.dmri_saveHistograms"
+    },
+    "parcellation": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Parcellation",
+      "description": "Parcellation file for the tractography data."
+    },
+    "number_of_bundles": {
+      "type": "number",
+      "title": "Number of Bundles",
+      "description": "Number of bundles in the tractography data."
+    },
+    "vtk_bundle_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "VTK Bundle List",
+      "description": "List of VTK bundles for creating histograms."
+    },
+    "output_csv": {
+      "type": "string",
+      "title": "Output CSV",
+      "description": "Output CSV file to save histograms."
+    },
+    "brain_bundle_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Brain Bundle Flag",
+      "description": "Brain Bundle flag."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "parcellation",
+    "number_of_bundles",
+    "vtk_bundle_list",
+    "output_csv"
+  ]
+}

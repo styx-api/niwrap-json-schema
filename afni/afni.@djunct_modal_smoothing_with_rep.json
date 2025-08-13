@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A script to perform modal smoothing of ROI maps and check for eliminated ROIs. If any ROIs are eliminated during smoothing, they are restored, potentially in a degraded form.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.@djunct_modal_smoothing_with_rep"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input dataset (assumes < 10^5 subbricks)"
+    },
+    "output_prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Prefix for output dataset"
+    },
+    "modesmooth": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Modesmooth value",
+      "description": "Fill in X in: 3dLocalstat -nbhd \"SPHERE(-X)\" ..."
+    },
+    "help_view": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help view flag",
+      "description": "Display help in a viewable format"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Display help information"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version flag",
+      "description": "Display version information"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "default": false,
+      "title": "Overwrite flag",
+      "description": "Overwrite existing output files"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "No clean flag",
+      "description": "Do not clean up intermediate files"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "output_prefix"
+  ]
+}

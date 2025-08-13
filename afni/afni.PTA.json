@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Program for Profile Tracking Analysis - estimates nonlinear trajectories through smoothing splines.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.PTA"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Prefix for output files"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input data file in table format (data frame structure of long format in R)"
+    },
+    "model_formula": {
+      "type": "string",
+      "title": "Model formula",
+      "description": "Model formulation through multilevel smoothing splines"
+    },
+    "vt_formulation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Varying terms formulation",
+      "description": "Specify varying smoothing terms. Two components are required: the first one 'var' indicates the variable (e.g., subject) around which the smoothing will vary while the second component specifies the smoothing formulation (e.g., s(age,subject))."
+    },
+    "prediction_table": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prediction table",
+      "description": "Data table to generate predicted values for graphical illustration"
+    },
+    "verbosity_level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbosity level",
+      "description": "Verbosity level (0 for quiet, 1 or more for talkative)"
+    },
+    "response_var": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Response variable",
+      "description": "Column name designated as the response/outcome variable (default is 'Y')"
+    },
+    "dbg_args": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Args",
+      "description": "Enable R to save parameters for debugging"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix",
+    "input_file",
+    "model_formula"
+  ]
+}

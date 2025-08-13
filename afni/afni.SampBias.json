@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "SampBias is a tool for sampling bias resultant segments between paired nodes on anatomical surfaces.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.SampBias"
+    },
+    "specfile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Spec File",
+      "description": "Spec file containing input surfaces."
+    },
+    "surfname": {
+      "type": "string",
+      "title": "Surface Name",
+      "description": "Name of input surface."
+    },
+    "plimit": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Path Limit",
+      "description": "Maximum length of path along surface in mm. Default is 50 mm."
+    },
+    "dlimit": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Euclidean Distance Limit",
+      "description": "Maximum length of euclidean distance in mm. Default is 1000 mm."
+    },
+    "outfile": {
+      "type": "string",
+      "title": "Output File",
+      "description": "Output results in .1D format."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Output results into a proper surface-based dataset."
+    },
+    "segdo": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segment Display Object",
+      "description": "Output a displayable object file that contains segments between paired nodes."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "specfile",
+    "surfname",
+    "outfile"
+  ]
+}

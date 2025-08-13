@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Computes the correlation coefficient between each voxel time series in the input 3D+time dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dTcorr1D"
+    },
+    "ktaub": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ktaub",
+      "description": "Correlation is the kendall's tau_b correlation coefficient."
+    },
+    "num_threads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Num threads",
+      "description": "Set number of threads."
+    },
+    "outputtype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outputtype",
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype."
+    },
+    "pearson": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pearson",
+      "description": "Correlation is the normal pearson correlation coefficient."
+    },
+    "quadrant": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quadrant",
+      "description": "Correlation is the quadrant correlation coefficient."
+    },
+    "spearman": {
+      "type": "boolean",
+      "default": false,
+      "title": "Spearman",
+      "description": "Correlation is the spearman (rank) correlation coefficient."
+    },
+    "xset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Xset",
+      "description": "3d+time dataset input."
+    },
+    "y_1d": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Y 1d",
+      "description": "1d time series file input."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "xset",
+    "y_1d"
+  ]
+}

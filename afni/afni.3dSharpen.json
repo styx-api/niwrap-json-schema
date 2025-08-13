@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Applies a simple 3D sharpening filter to the positive values in the #0 volume of the input dataset, and writes out a new dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dSharpen"
+    },
+    "sharpening_factor": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 0.9
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sharpening factor",
+      "description": "Sharpening factor, between 0.1 and 0.9 (inclusive). Larger values mean more sharpening."
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input dataset",
+      "description": "Input dataset (e.g., input.nii.gz)"
+    },
+    "output_prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Name of the output dataset (e.g., output.nii.gz) which will be in floating point format."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_dataset",
+    "output_prefix"
+  ]
+}

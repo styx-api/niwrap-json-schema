@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Exclude brainordinates from a cifti file.\n\nWrites a modified version of <cifti-in>, where all brainordinates outside the specified roi(s) are removed from the file.  The direction can be either an integer starting from 1, or the strings 'ROW' or 'COLUMN'.  If -cifti-roi is specified, no other -*-roi option may be specified.  If not using -cifti-roi, any -*-roi options not present will discard the relevant structure, if present in the input file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.cifti-restrict-dense-map"
+    },
+    "cifti_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "cifti_in",
+      "description": "the input cifti"
+    },
+    "direction": {
+      "type": "string",
+      "title": "direction",
+      "description": "which dimension to change the mapping on (integer, 'ROW', or 'COLUMN')"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "the output cifti"
+    },
+    "opt_cifti_roi_roi_cifti": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_cifti_roi_roi_cifti",
+      "description": "cifti file containing combined rois: the rois as a cifti file"
+    },
+    "opt_left_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_left_roi_roi_metric",
+      "description": "vertices to use from left hemisphere: the left roi as a metric file"
+    },
+    "opt_right_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_right_roi_roi_metric",
+      "description": "vertices to use from right hemisphere: the right roi as a metric file"
+    },
+    "opt_cerebellum_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_cerebellum_roi_roi_metric",
+      "description": "vertices to use from cerebellum: the cerebellum roi as a metric file"
+    },
+    "opt_vol_roi_roi_vol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_vol_roi_roi_vol",
+      "description": "voxels to use: the roi volume file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti_in",
+    "direction",
+    "cifti_out"
+  ]
+}

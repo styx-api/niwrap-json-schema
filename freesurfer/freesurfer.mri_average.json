@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Averages multiple volumes with various options for alignment, interpolation, and transformations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_average"
+    },
+    "input_volumes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Volumes",
+      "description": "Input volumes to average."
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume file."
+    },
+    "rigid_alignment": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rigid Alignment",
+      "description": "Rigid alignment of input volumes before averaging."
+    },
+    "read_from_file": {
+      "type": "boolean",
+      "default": false,
+      "title": "Read from File",
+      "description": "Read volumes from an input file (first argument is the input filename)."
+    },
+    "dt": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delta T",
+      "description": "Set dt to n (default=1e-6)."
+    },
+    "tol": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tolerance",
+      "description": "Set tolerance to n (default=1e-5)."
+    },
+    "conform": {
+      "type": "boolean",
+      "default": false,
+      "title": "Conform",
+      "description": "Interpolate volume to be isotropic 1mm^3 (on by default)."
+    },
+    "noconform": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Conform",
+      "description": "Inhibit isotropic volume interpolation."
+    },
+    "reduce": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reduce",
+      "description": "Reduce input images n (default=2) times."
+    },
+    "sinc_interpolation": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sinc Interpolation",
+      "description": "Using sinc interpolation with window width of 2*n (default=3)."
+    },
+    "trilinear": {
+      "type": "boolean",
+      "default": false,
+      "title": "Trilinear Interpolation",
+      "description": "Use trilinear interpolation."
+    },
+    "window": {
+      "type": "boolean",
+      "default": false,
+      "title": "Window",
+      "description": "Apply hanning window to volumes."
+    },
+    "snapshots": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Snapshots",
+      "description": "Write snapshots every n iterations."
+    },
+    "translation": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Translation",
+      "description": "Translation of second volume."
+    },
+    "rotation": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rotation",
+      "description": "Rotation of second volume around each axis in degrees."
+    },
+    "momentum": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Momentum",
+      "description": "Use momentum n (default=0)."
+    },
+    "rms": {
+      "type": "boolean",
+      "default": false,
+      "title": "Root Mean Square",
+      "description": "Compute sqrt of average of sum of squares (RMS, same as -rms)."
+    },
+    "rms_alt": {
+      "type": "boolean",
+      "default": false,
+      "title": "Root Mean Square Alt",
+      "description": "Compute sqrt of average of sum of squares (RMS, same as -sqr)."
+    },
+    "percent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Percentage",
+      "description": "Compute percentage."
+    },
+    "binarize": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Binarize",
+      "description": "Binarize the input volumes using threshold th."
+    },
+    "absolute": {
+      "type": "boolean",
+      "default": false,
+      "title": "Absolute Value",
+      "description": "Take absolute value of volume."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volumes",
+    "output_volume"
+  ]
+}

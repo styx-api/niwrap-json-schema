@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool for exporting GCAM (Geodesic Coordinate-based Anatomic Mapping) morphs.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.exportGcam"
+    },
+    "fixed": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Fixed Volume",
+      "description": "Fixed volume."
+    },
+    "moving": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Moving Volume",
+      "description": "Moving volume."
+    },
+    "morph": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Morph",
+      "description": "Morph."
+    },
+    "out_gcam": {
+      "type": "string",
+      "title": "Output GCAM",
+      "description": "Output GCAM (Geodesic Coordinate-based Anatomic Mapping)."
+    },
+    "zlib_buffer": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Zlib Buffer",
+      "description": "Zlib buffer pre-allocation multiplier."
+    },
+    "bbox_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bounding Box Threshold",
+      "description": "Threshold for bounding box. If absent, no bbox will be used."
+    },
+    "interp_method": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "linear",
+      "title": "Interpolation Method",
+      "description": "Interpolation method. Choices: linear, nearest. Default is linear."
+    },
+    "test": {
+      "type": "boolean",
+      "default": false,
+      "title": "Test Flag",
+      "description": "Write out test files to verify the equivalence of tm3d and gcam morphs."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "fixed",
+    "moving",
+    "morph",
+    "out_gcam"
+  ]
+}

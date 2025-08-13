@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "MRI log likelihood calculation tool for brain images.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_log_likelihood"
+    },
+    "input_brain_images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Brain Images",
+      "description": "List of input brain images"
+    },
+    "atlas_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Atlas File",
+      "description": "Atlas image file"
+    },
+    "transform_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Transform File",
+      "description": "Transform file for registration"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_brain_images",
+    "atlas_file",
+    "transform_file"
+  ]
+}

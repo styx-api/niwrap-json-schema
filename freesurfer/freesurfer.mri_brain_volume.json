@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool to calculate brain volume from MRI scans",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_brain_volume"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input MRI file"
+    },
+    "output_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output file",
+      "description": "Output file for brain volume"
+    },
+    "force_param": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pushout force",
+      "description": "Change pushout force (default 1.0)"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version flag",
+      "description": "Show the current version"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file"
+  ]
+}

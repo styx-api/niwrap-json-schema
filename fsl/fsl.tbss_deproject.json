@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tool to deproject images from skeleton space to final space",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.tbss_deproject"
+    },
+    "skeleton_space_input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Skeleton space input image",
+      "description": "Skeleton space input image."
+    },
+    "final_space_option": {
+      "type": "integer",
+      "title": "Final space option",
+      "description": "Final space option."
+    },
+    "index_image_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Index image flag",
+      "description": "Assume that the skeleton space input image contains one or more integer index numbers and ensure that those exact values are deprojected without being changed by interpolations."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "skeleton_space_input_image",
+    "final_space_option"
+  ]
+}

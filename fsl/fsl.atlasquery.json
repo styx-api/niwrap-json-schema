@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Structural lookup tool for FSL atlases.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.atlasquery"
+    },
+    "dumpatlases_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dump atlases flag",
+      "description": "Dump a list of available atlases"
+    },
+    "atlas": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlas name",
+      "description": "Name of atlas to use"
+    },
+    "coord": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Coordinate",
+      "description": "Coordinate to query in the format X,Y,Z"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask image",
+      "description": "A mask image to use during structural lookups"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Show help message and exit"
+    }
+  },
+  "additionalProperties": false
+}

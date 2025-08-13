@@ -1,0 +1,313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Generates a pulse sequence matrix for a given digital brain image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.pulse"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input digital brain file",
+      "description": "4D digital brain, resolution can be any."
+    },
+    "output_base": {
+      "type": "string",
+      "title": "Output base name",
+      "description": "Output base name"
+    },
+    "seq": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "epi",
+      "title": "Pulse sequence",
+      "description": "Type of pulse sequence; default=epi (epi OR ge)"
+    },
+    "angle": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 90,
+      "title": "Flip angle",
+      "description": "Flip angle in degrees; default=90"
+    },
+    "te": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.03,
+      "title": "Echo time",
+      "description": "The time from the first RF to the first echo; default=0.03s"
+    },
+    "tr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 3,
+      "title": "Repetition time",
+      "description": "The time between the two RF pulses applied on the same part of the object; default=3s"
+    },
+    "trslc": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.12,
+      "title": "Slice acquisition time",
+      "description": "The time that takes for the acquisition of one slice; default=0.12s"
+    },
+    "nx": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 64,
+      "title": "X resolution",
+      "description": "Resolution in x of the output image; default=64"
+    },
+    "ny": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 64,
+      "title": "Y resolution",
+      "description": "Resolution in y of the output image; default=64"
+    },
+    "dx": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.004,
+      "title": "Voxel x-dimension",
+      "description": "Image voxel x-dimension; default=0.004m"
+    },
+    "dy": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.004,
+      "title": "Voxel y-dimension",
+      "description": "Image voxel y-dimension; default=0.004m"
+    },
+    "maxG": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.055,
+      "title": "Maximum gradient strength",
+      "description": "Maximum gradient strength; default=0.055 T/m"
+    },
+    "riset": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.00022,
+      "title": "Gradient rise time",
+      "description": "Time it takes for the gradient to reach its max value; default=0.00022s"
+    },
+    "bw": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 100000,
+      "title": "Receiving bandwidth",
+      "description": "Receiving bandwidth; default=100000Hz"
+    },
+    "numvol": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Number of volumes",
+      "description": "Number of volumes; default=1"
+    },
+    "numslc": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Number of slices",
+      "description": "Number of slices; default=1"
+    },
+    "slcthk": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.006,
+      "title": "Slice thickness",
+      "description": "Slice thickness; default=0.006m"
+    },
+    "gap": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0,
+      "title": "Slice gap",
+      "description": "Gap between the slices in meters; default=0m"
+    },
+    "zstart": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0,
+      "title": "Slice start position",
+      "description": "The lowest position in the slice direction in meters; default=0m"
+    },
+    "slcdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "z-",
+      "title": "Slice acquisition direction",
+      "description": "Slice acquisition direction/orientation; default=z- (x+,x-, y+,y- or z+,or z-)"
+    },
+    "phasedir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "y+",
+      "title": "Phase encode direction",
+      "description": "Phase encode direction/orientation; default=y+ (x+,x-, y+,y- or z+,or z-)"
+    },
+    "readdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "x+",
+      "title": "Read-out direction",
+      "description": "Read-out direction/orientation; default=x+ (x+,x-, y+,y- or z+,or z-)"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "kcoord_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "K-space coordinates flag",
+      "description": "Save k-space coordinates; default=no"
+    },
+    "cover": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 50,
+          "maximum": 100
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fourier coverage",
+      "description": "Phase partial Fourier coverage in percentage; default=100 (min=50, max=100)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "output_base"
+  ]
+}

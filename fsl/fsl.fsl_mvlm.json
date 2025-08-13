@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Multivariate Linear Model regression on time courses and/or 3D/4D images using SVD (PCA), PLS, normalised PLS, CVA, SVD-CVA or MLM",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.fsl_mvlm"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input file (text matrix or 3D/4D image file)"
+    },
+    "basename_output_files": {
+      "type": "string",
+      "title": "Output basename",
+      "description": "Basename for output files"
+    },
+    "algorithm": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Algorithm",
+      "description": "Algorithm for decomposition: PCA (or SVD; default), PLS, orthoPLS, CVA, SVD-CVA, MLM, NMF"
+    },
+    "design_matrix": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Design matrix file",
+      "description": "File name of the GLM design matrix (time courses or spatial maps)"
+    },
+    "mask_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask image file",
+      "description": "Mask image file name if input is an image"
+    },
+    "design_normalization": {
+      "type": "boolean",
+      "default": false,
+      "title": "Design normalization flag",
+      "description": "Switch on normalisation of the design matrix columns to unit standard deviation"
+    },
+    "variance_normalisation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Variance normalisation flag",
+      "description": "Perform MELODIC variance-normalisation on data"
+    },
+    "demean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Demean flag",
+      "description": "Switch on de-meaning of design and data"
+    },
+    "nmf_dim": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "NMF dimension",
+      "description": "Number of underlying factors for NMF"
+    },
+    "nmf_iterations": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "NMF iterations",
+      "description": "Number of NMF iterations (default 100)"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Switch on verbose output"
+    },
+    "out_data": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output data file",
+      "description": "Output file name for pre-processed data"
+    },
+    "out_vnscales": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Variance normalisation scales file",
+      "description": "Output file name for scaling factors for variance normalisation"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "basename_output_files"
+  ]
+}

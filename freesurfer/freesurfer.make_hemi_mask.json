@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Generates a hemisphere mask by registering input to the left/right reversed version using mri_robust_register, then keeps only the selected hemisphere.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.make_hemi_mask"
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere to keep ('lh' for left hemisphere, 'rh' for right hemisphere)"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input File",
+      "description": "Input MRI volume file (e.g. input.mgz)"
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output File",
+      "description": "Output masked MRI volume file (e.g. output.mgz)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "hemi",
+    "input_file",
+    "output_file"
+  ]
+}

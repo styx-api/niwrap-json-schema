@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Align MR modalities to a common within-subject (and optional template) space.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.antsNeuroimagingBattery"
+    },
+    "input_directory": {
+      "type": "string",
+      "title": "Input Directory",
+      "description": "Directory where to look for modality images."
+    },
+    "output_directory": {
+      "type": "string",
+      "title": "Output Directory",
+      "description": "Directory where output goes (where antsCorticalThickness output lives)."
+    },
+    "output_name": {
+      "type": "string",
+      "title": "Output Name",
+      "description": "File prefix for outputs."
+    },
+    "anatomical_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Anatomical Image",
+      "description": "Reference subject image (usually T1)."
+    },
+    "anatomical_mask": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Anatomical Mask",
+      "description": "Mask of anatomical image, should contain cerebrum, cerebellum, and brainstem."
+    },
+    "template": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template Image",
+      "description": "Template image."
+    },
+    "template_transform_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template Transform Name",
+      "description": "Basename of transforms from anatomical to template space (must be in output base dir)."
+    },
+    "template_labels": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template Labels",
+      "description": "Labels in template space."
+    },
+    "dti_flag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DTI Flag",
+      "description": "DTI flag in DIRNAME/fileflag/outid format."
+    },
+    "pcasl_flag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "pCASL Flag",
+      "description": "pCASL flag in DIRNAME/fileflag/outid format."
+    },
+    "pasl_flag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "PASL Flag",
+      "description": "PASL flag in DIRNAME/fileflag/outid format."
+    },
+    "pasl_m0_flag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "PASL M0 Flag",
+      "description": "PASL M0 flag in DIRNAME/fileflag/outid format."
+    },
+    "bold_flag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "BOLD Flag",
+      "description": "BOLD flag in DIRNAME/fileflag/outid format."
+    },
+    "rsbold_flag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "RSBOLD Flag",
+      "description": "RSBOLD flag in DIRNAME/fileflag/outid format."
+    },
+    "mt_flag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "MT Flag",
+      "description": "MT flag in DIRNAME/fileflag/outid format."
+    },
+    "no_mt_flag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "No MT Flag",
+      "description": "No MT flag in DIRNAME/fileflag/outid format."
+    },
+    "temp_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Temporary Directory",
+      "description": "Temporary directory."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Display help information."
+    },
+    "info_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Info Only",
+      "description": "Look for inputs, output what is there, but don't process any data."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_directory",
+    "output_directory",
+    "output_name",
+    "anatomical_image",
+    "anatomical_mask"
+  ]
+}

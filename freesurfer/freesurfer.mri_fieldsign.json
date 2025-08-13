@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Field Sign Mapping Tool from FreeSurfer",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_fieldsign"
+    },
+    "fieldsign_file": {
+      "type": "string",
+      "title": "Field Sign File",
+      "description": "Output field sign file"
+    },
+    "eccen_values": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "title": "Eccentricity Values",
+      "description": "Eccentricity values (real and imaginary)"
+    },
+    "polar_values": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "title": "Polar Values",
+      "description": "Polar values (real and imaginary)"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject identifier"
+    },
+    "hemisphere": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere to process"
+    },
+    "patch_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Patch File",
+      "description": "Patch file, without hemi"
+    },
+    "occip_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Occipital Flag",
+      "description": "Use occipital patch (patchfile = occip.patch.flat)"
+    },
+    "sphere_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sphere Flag",
+      "description": "Use spherical surface instead of patch"
+    },
+    "fwhm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM",
+      "description": "Full-width at half-maximum (mm)"
+    },
+    "nsmooth": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Smooth Steps",
+      "description": "Number of smoothing steps"
+    },
+    "reverse_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Reverse Flag",
+      "description": "Reverse sign"
+    },
+    "old_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Old Estimation Flag",
+      "description": "Use old FS estimation code"
+    },
+    "eccen_rotation": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Eccentricity Rotation",
+      "description": "Rotate eccentricity by rotangle degrees"
+    },
+    "polar_rotation": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Polar Rotation",
+      "description": "Rotate polar by rotangle degrees"
+    },
+    "eccen_output": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Eccentricity Output Angle",
+      "description": "Output eccentricity angle"
+    },
+    "polar_output": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Polar Output Angle",
+      "description": "Output polar angle"
+    },
+    "eccen_sfa_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Eccentricity SFA File",
+      "description": "Eccentricity self-frequency average file"
+    },
+    "polar_sfa_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Polar SFA File",
+      "description": "Polar self-frequency average file"
+    },
+    "sfa_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "SFA Directory",
+      "description": "SFA directory"
+    },
+    "sfa_true_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "SFA True Flag",
+      "description": "Use true real and imaginary (affects small smoothing)"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Turn on debugging"
+    },
+    "checkopts_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Options Flag",
+      "description": "Check options and exit"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Display help information"
+    },
+    "version_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Print version and exit"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "fieldsign_file",
+    "eccen_values",
+    "polar_values",
+    "subject",
+    "hemisphere"
+  ]
+}

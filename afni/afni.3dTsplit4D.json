@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Convert a 3D+time dataset into multiple 3D single-brick files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dTsplit4D"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Prefix of the output datasets (e.g., out/epi)"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input 3D+time dataset (e.g., epi_r1+orig)"
+    },
+    "keep_datum": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep datum flag",
+      "description": "Output uses original datum (no conversion to float)"
+    },
+    "digits": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of digits",
+      "description": "Number of digits to use for output filenames"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix",
+    "infile"
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Computes voxelwise weighted and binary degree centrality and stores the result in a new 3D bucket dataset as floats to preserve their values. Degree centrality reflects the strength and extent of the correlation of a voxel with every other voxel in the brain. ",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dDegreeCentrality"
+    },
+    "autoclip": {
+      "type": "boolean",
+      "default": false,
+      "title": "Autoclip",
+      "description": "Clip off low-intensity regions in the dataset."
+    },
+    "automask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automask",
+      "description": "Mask the dataset to target brain-only voxels."
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "In file",
+      "description": "Input file to 3ddegreecentrality."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask",
+      "description": "Mask file to mask input data."
+    },
+    "oned_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Oned file",
+      "description": "Output filepath to text dump of correlation matrix."
+    },
+    "polort": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Polort",
+      "description": "No description provided."
+    },
+    "sparsity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sparsity",
+      "description": "Only take the top percent of connections."
+    },
+    "thresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Thresh",
+      "description": "Threshold to exclude connections where corr <= thresh."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in_file"
+  ]
+}

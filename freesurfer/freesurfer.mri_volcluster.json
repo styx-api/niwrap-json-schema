@@ -1,0 +1,575 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A tool for finding clusters in a volume, useful for analyzing MRI data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_volcluster"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input File",
+      "description": "Source of volume values."
+    },
+    "summary_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Summary File",
+      "description": "Text summary file."
+    },
+    "output_volid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output VolID",
+      "description": "Output volume ID after clustering."
+    },
+    "output_cluster_num_volid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Cluster Number VolID",
+      "description": "Output volume ID with cluster number values."
+    },
+    "cwsig_volid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Clusterwise Sig VolID",
+      "description": "Volume ID for clusterwise significance."
+    },
+    "pointset_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pointset File",
+      "description": "Create a freeview pointset of the clusters."
+    },
+    "min_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Threshold",
+      "description": "Minimum intensity threshold."
+    },
+    "max_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Threshold",
+      "description": "Maximum intensity threshold."
+    },
+    "sign": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sign",
+      "description": "Sign for one-sided tests (<abs>, pos, neg)."
+    },
+    "no_adjust_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Adjust Flag",
+      "description": "Do not adjust threshold for one-tailed tests."
+    },
+    "match_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Match Value",
+      "description": "Set thmin=matchval-0.5 and thmax=matchval+0.5."
+    },
+    "cwpval_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CWP Value Threshold",
+      "description": "Require clusters to have cwp < threshold."
+    },
+    "registration_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Registration File",
+      "description": "For reporting Talairach coordinates."
+    },
+    "mni152reg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "MNI152 Space Flag",
+      "description": "Input is in MNI152 space."
+    },
+    "regheader_subject": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Regheader Subject",
+      "description": "Use header registration with subject."
+    },
+    "fsaverage_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "FSaverage Space Flag",
+      "description": "Assume input is in fsaverage space."
+    },
+    "frame_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Frame Number",
+      "description": "Perform cluster analysis on the nth frame (0-based)."
+    },
+    "csd_files": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CSD Files",
+      "description": "Cluster simulation data files."
+    },
+    "cwsig_map": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CWSig Map",
+      "description": "Map of corrected cluster-wise significances."
+    },
+    "vwsig_map": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "VWSig Map",
+      "description": "Map of corrected voxel-wise significances."
+    },
+    "max_cwpval_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max CWPVal File",
+      "description": "Save p-value of the largest cluster."
+    },
+    "csdpdf_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CSD PDF File",
+      "description": "PDF/CDF of cluster and max significance."
+    },
+    "csdpdf_only_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "CSD PDF Only Flag",
+      "description": "Write CSD PDF file and exit."
+    },
+    "fwhm_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM Value",
+      "description": "FWHM in mm^3, forces GRF analysis."
+    },
+    "fwhm_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM File",
+      "description": "Text file with FWHM in mm^3 for GRF."
+    },
+    "min_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Size",
+      "description": "Minimum volume (mm^3) for a cluster."
+    },
+    "min_size_vox": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Size Voxels",
+      "description": "Minimum number of contiguous voxels for a cluster."
+    },
+    "min_distance": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Distance",
+      "description": "Minimum distance between peak clusters."
+    },
+    "allow_diag_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Allow Diagonal Flag",
+      "description": "Allow diagonal adjacency for contiguity."
+    },
+    "bonferroni_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bonferroni Number",
+      "description": "Bonferroni correction across spaces."
+    },
+    "bonferroni_max_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bonferroni Max Number",
+      "description": "Bonferroni correction applied to maximum."
+    },
+    "sig2p_max_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sig to P Max Flag",
+      "description": "Convert maximum significance to p-value."
+    },
+    "gte_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "GTE Flag",
+      "description": "Use >= when computing p-value from CSD."
+    },
+    "mask_volid": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask VolID",
+      "description": "Mask volume ID."
+    },
+    "mask_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Type",
+      "description": "File type of mask volume."
+    },
+    "mask_frame": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Frame",
+      "description": "Nth frame of mask to use."
+    },
+    "mask_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Threshold",
+      "description": "Upper threshold for the mask."
+    },
+    "mask_sign": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Sign",
+      "description": "Sign in mask thresholding (<abs>, neg, pos)."
+    },
+    "mask_invert_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mask Invert Flag",
+      "description": "Invert mask after thresholding."
+    },
+    "out_mask_volid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Mask VolID",
+      "description": "Path for final binary mask."
+    },
+    "out_mask_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Mask Type",
+      "description": "File type for output mask."
+    },
+    "label_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label File",
+      "description": "File to save nth cluster as a label."
+    },
+    "nlabel_cluster": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Nth Label Cluster",
+      "description": "Save the nth cluster as a label."
+    },
+    "label_base": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Base",
+      "description": "Base name for saving clusters as labels."
+    },
+    "synth_func": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Synthesis Function",
+      "description": "Function for synthetic data (uniform, loguniform, gaussian)."
+    },
+    "diagnostic_level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Diagnostic Level",
+      "description": "Set diagnostic level."
+    },
+    "fill_params": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fill Parameters",
+      "description": "Parameters for fill operation (invol outvol matchval)."
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Display help message and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file"
+  ]
+}

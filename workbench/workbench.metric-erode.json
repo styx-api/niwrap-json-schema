@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Erode a metric file.\n\nAround each vertex with a value of zero, set surrounding vertices to zero.  The surrounding vertices are all immediate neighbors and all vertices within the specified distance.\n\nNote that the -corrected-areas option uses an approximate correction for distance along the surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.metric-erode"
+    },
+    "metric": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "metric",
+      "description": "the metric file to erode"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface",
+      "description": "the surface to compute on"
+    },
+    "distance": {
+      "type": "number",
+      "title": "distance",
+      "description": "distance in mm to erode"
+    },
+    "metric_out": {
+      "type": "string",
+      "title": "metric_out",
+      "description": "the output metric"
+    },
+    "opt_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_roi_roi_metric",
+      "description": "assume values outside this roi are nonzero: metric file, positive values denote vertices that have data"
+    },
+    "opt_column_column": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_column_column",
+      "description": "select a single column to erode: the column number or name"
+    },
+    "opt_corrected_areas_area_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_corrected_areas_area_metric",
+      "description": "vertex areas to use instead of computing them from the surface: the corrected vertex areas, as a metric"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "metric",
+    "surface",
+    "distance",
+    "metric_out"
+  ]
+}

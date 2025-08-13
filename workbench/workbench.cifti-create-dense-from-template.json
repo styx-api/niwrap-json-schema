@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Create cifti with matching dense map.\n\nThis command helps you make a new dscalar, dtseries, or dlabel cifti file that matches the brainordinate space used in another cifti file.  The template file must have the desired brainordinate space in the mapping along the column direction (for dtseries, dscalar, dlabel, and symmetric dconn this is always the case).  All input cifti files must have a brain models mapping along column and use the same volume space and/or surface vertex count as the template for structures that they contain.  If any input files contain label data, then input files with non-label data are not allowed, and the -series option may not be used.\n\nAny structure that isn't covered by an input is filled with zeros or the unlabeled key.\n\nThe <structure> argument of -metric, -label or -volume must be one of the following:\n\nCORTEX_LEFT\nCORTEX_RIGHT\nCEREBELLUM\nACCUMBENS_LEFT\nACCUMBENS_RIGHT\nALL_GREY_MATTER\nALL_WHITE_MATTER\nAMYGDALA_LEFT\nAMYGDALA_RIGHT\nBRAIN_STEM\nCAUDATE_LEFT\nCAUDATE_RIGHT\nCEREBELLAR_WHITE_MATTER_LEFT\nCEREBELLAR_WHITE_MATTER_RIGHT\nCEREBELLUM_LEFT\nCEREBELLUM_RIGHT\nCEREBRAL_WHITE_MATTER_LEFT\nCEREBRAL_WHITE_MATTER_RIGHT\nCORTEX\nDIENCEPHALON_VENTRAL_LEFT\nDIENCEPHALON_VENTRAL_RIGHT\nHIPPOCAMPUS_LEFT\nHIPPOCAMPUS_RIGHT\nINVALID\nOTHER\nOTHER_GREY_MATTER\nOTHER_WHITE_MATTER\nPALLIDUM_LEFT\nPALLIDUM_RIGHT\nPUTAMEN_LEFT\nPUTAMEN_RIGHT\nTHALAMUS_LEFT\nTHALAMUS_RIGHT\n\nThe argument to -unit must be one of the following:\n\nSECOND\nHERTZ\nMETER\nRADIAN",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.cifti-create-dense-from-template"
+    },
+    "template_cifti": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "template_cifti",
+      "description": "file to match brainordinates of"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "the output cifti file"
+    },
+    "series": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "series"
+            },
+            "step": {
+              "type": "number",
+              "title": "step",
+              "description": "increment between series points"
+            },
+            "start": {
+              "type": "number",
+              "title": "start",
+              "description": "start value of the series"
+            },
+            "opt_unit_unit": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_unit_unit",
+              "description": "select unit for series (default SECOND): unit identifier"
+            }
+          },
+          "additionalProperties": false,
+          "description": "make a dtseries file instead of a dscalar",
+          "required": [
+            "step",
+            "start"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "make a dtseries file instead of a dscalar"
+    },
+    "volume_all": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "volume_all"
+            },
+            "volume_in": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "volume_in",
+              "description": "the input volume file"
+            },
+            "opt_from_cropped": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_from_cropped",
+              "description": "the input is cropped to the size of the voxel data in the template file"
+            }
+          },
+          "additionalProperties": false,
+          "description": "specify an input volume file for all voxel data",
+          "required": [
+            "volume_in"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify an input volume file for all voxel data"
+    },
+    "opt_label_collision_action": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_label_collision_action",
+      "description": "how to handle conflicts between label keys: 'ERROR', 'SURFACES_FIRST', or 'LEGACY', default 'ERROR', use 'LEGACY' to match v1.4.2 and earlier"
+    },
+    "cifti": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "cifti"
+              },
+              "cifti_in": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "cifti_in",
+                "description": "cifti file containing input data"
+              }
+            },
+            "additionalProperties": false,
+            "description": "use input data from a cifti file",
+            "required": [
+              "cifti_in"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "use input data from a cifti file"
+    },
+    "metric": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "metric"
+              },
+              "structure": {
+                "type": "string",
+                "title": "structure",
+                "description": "which structure to put the metric file into"
+              },
+              "metric_in": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "metric_in",
+                "description": "input metric file"
+              }
+            },
+            "additionalProperties": false,
+            "description": "use input data from a metric file",
+            "required": [
+              "structure",
+              "metric_in"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "use input data from a metric file"
+    },
+    "label": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "label"
+              },
+              "structure": {
+                "type": "string",
+                "title": "structure",
+                "description": "which structure to put the label file into"
+              },
+              "label_in": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "label_in",
+                "description": "input label file"
+              }
+            },
+            "additionalProperties": false,
+            "description": "use input data from surface label files",
+            "required": [
+              "structure",
+              "label_in"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "use input data from surface label files"
+    },
+    "volume": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "volume"
+              },
+              "structure": {
+                "type": "string",
+                "title": "structure",
+                "description": "which structure to put the volume file into"
+              },
+              "volume_in": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "volume_in",
+                "description": "the input volume file"
+              },
+              "opt_from_cropped": {
+                "type": "boolean",
+                "default": false,
+                "title": "opt_from_cropped",
+                "description": "the input is cropped to the size of the volume structure"
+              }
+            },
+            "additionalProperties": false,
+            "description": "use a volume file for a single volume structure's data",
+            "required": [
+              "structure",
+              "volume_in"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "use a volume file for a single volume structure's data"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "template_cifti",
+    "cifti_out"
+  ]
+}
