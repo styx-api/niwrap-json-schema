@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dCRUISEtoAFNI",
+  "description": "Converts a CRUISE dataset defined by a header in OpenDX format.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dCRUISEtoAFNI"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input CRUISE header file in OpenDX format"
+    },
+    "novolreg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore VolReg transformations",
+      "description": "Ignore any Rotate, Volreg, Tagalign, or WarpDrive transformations present in the Surface Volume."
+    },
+    "noxform": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Transformations",
+      "description": "Same as -novolreg."
+    },
+    "setenv": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Set Environment Variable",
+      "description": "Set environment variable ENVname to be ENVvalue. Quotes are necessary. Example: suma -setenv \"'SUMA_BackgroundColor = 1 0 1'\""
+    },
+    "trace": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "trace"
+            },
+            "trace": {
+              "type": "boolean",
+              "default": false,
+              "title": "Trace Debugging",
+              "description": "Turns on In/Out debug and Memory tracing. It's recommended to redirect stdout to a file when using this option."
+            },
+            "TRACE": {
+              "type": "boolean",
+              "default": false,
+              "title": "Extreme Tracing",
+              "description": "Turns on extreme tracing."
+            }
+          },
+          "additionalProperties": false,
+          "description": "Turns on In/Out debug and Memory tracing. It's recommended to redirect stdout to a file when using this option."
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Turns on In/Out debug and Memory tracing. It's recommended to redirect stdout to a file when using this option."
+    },
+    "nomall": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Memory Tracing",
+      "description": "Turn off memory tracing."
+    },
+    "yesmall": {
+      "type": "boolean",
+      "default": false,
+      "title": "Memory Tracing",
+      "description": "Turn on memory tracing (default)."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "The entire help output."
+    },
+    "h": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mini Help",
+      "description": "Displays mini help; in many cases, it's the same as -help."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input"
+  ]
+}

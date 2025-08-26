@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "metric-find-clusters",
+  "description": "Filter clusters by surface area.\n\nOutputs a metric with nonzero integers for all vertices within a large enough cluster, and zeros elsewhere.  The integers denote cluster membership (by default, first cluster found will use value 1, second cluster 2, etc).  Cluster values are not reused across maps of the output, but instead keep counting up.  By default, values greater than <value-threshold> are considered to be in a cluster, use -less-than to test for values less than the threshold.  To apply this as a mask to the data, or to do more complicated thresholding, see -metric-math.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.metric-find-clusters"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface",
+      "description": "the surface to compute on"
+    },
+    "metric_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "metric_in",
+      "description": "the input metric"
+    },
+    "value_threshold": {
+      "type": "number",
+      "title": "value_threshold",
+      "description": "threshold for data values"
+    },
+    "minimum_area": {
+      "type": "number",
+      "title": "minimum_area",
+      "description": "threshold for cluster area, in mm^2"
+    },
+    "metric_out": {
+      "type": "string",
+      "title": "metric_out",
+      "description": "the output metric"
+    },
+    "opt_less_than": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_less_than",
+      "description": "find values less than <value-threshold>, rather than greater"
+    },
+    "opt_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_roi_roi_metric",
+      "description": "select a region of interest: the roi, as a metric"
+    },
+    "opt_corrected_areas_area_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_corrected_areas_area_metric",
+      "description": "vertex areas to use instead of computing them from the surface: the corrected vertex areas, as a metric"
+    },
+    "opt_column_column": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_column_column",
+      "description": "select a single column: the column number or name"
+    },
+    "opt_size_ratio_ratio": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_size_ratio_ratio",
+      "description": "ignore clusters smaller than a given fraction of the largest cluster in map: fraction of the largest cluster's area"
+    },
+    "opt_distance_distance": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_distance_distance",
+      "description": "ignore clusters further than a given distance from the largest cluster: how far from the largest cluster a cluster can be, edge to edge, in mm"
+    },
+    "opt_start_startval": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_start_startval",
+      "description": "start labeling clusters from a value other than 1: the value to give the first cluster found"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface",
+    "metric_in",
+    "value_threshold",
+    "minimum_area",
+    "metric_out"
+  ]
+}

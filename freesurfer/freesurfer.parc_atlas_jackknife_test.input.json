@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "parc_atlas_jackknife_test",
+  "description": "Tool for conducting a jackknife accuracy test using FreeSurfer atlases.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.parc_atlas_jackknife_test"
+    },
+    "register": {
+      "type": "boolean",
+      "default": false,
+      "title": "Register Flag",
+      "description": "Run mris_register: creates .sphere.reg files"
+    },
+    "reg_dist": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Register Distance",
+      "description": "Run mris_register with '-dist <arg>' flag"
+    },
+    "reg_append": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Register Append",
+      "description": "Append <string> to end of ?h.sphere.reg"
+    },
+    "reg_copy": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Register Copy",
+      "description": "Copy ?h.sphere.reg<string> ?h.sphere.reg"
+    },
+    "train": {
+      "type": "boolean",
+      "default": false,
+      "title": "Train Flag",
+      "description": "Run mris_ca_train: creates .gcs files"
+    },
+    "classify": {
+      "type": "boolean",
+      "default": false,
+      "title": "Classify Flag",
+      "description": "Run mris_ca_label: creates .annot files"
+    },
+    "test": {
+      "type": "boolean",
+      "default": false,
+      "title": "Test Flag",
+      "description": "Run mris_compute_parc_overlap"
+    },
+    "all": {
+      "type": "boolean",
+      "default": false,
+      "title": "All Flag",
+      "description": "Run train, classify, and test"
+    },
+    "subjects_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Override default subjects directory"
+    },
+    "freesurfer_home": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FreeSurfer Home",
+      "description": "Source a new FREESURFER_HOME"
+    },
+    "binaries_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Binaries Path",
+      "description": "Specify override path to binaries"
+    },
+    "dontrun": {
+      "type": "boolean",
+      "default": false,
+      "title": "Don\u2019t Run Flag",
+      "description": "Don't execute the commands"
+    }
+  },
+  "additionalProperties": false
+}

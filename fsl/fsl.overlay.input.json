@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "overlay",
+  "description": "Use FSL's overlay command to combine background and statistical images into one volume",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.overlay"
+    },
+    "auto_thresh_bg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Auto thresh bg",
+      "description": "Automatically threshold the background image."
+    },
+    "background_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Background image",
+      "description": "Image to use as background."
+    },
+    "bg_thresh": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "title": "Bg thresh",
+      "description": "(a float, a float). Min and max values for background intensity."
+    },
+    "full_bg_range": {
+      "type": "boolean",
+      "default": false,
+      "title": "Full bg range",
+      "description": "Use full range of background image."
+    },
+    "out_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Out file",
+      "description": "Combined image volume."
+    },
+    "out_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "float",
+      "title": "Out type",
+      "description": "'float' or 'int'. Write output with float or int."
+    },
+    "output_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output type",
+      "description": "'nifti' or 'nifti_pair' or 'nifti_gz' or 'nifti_pair_gz'. Fsl output type."
+    },
+    "stat_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Stat image",
+      "description": "Statistical image to overlay in color."
+    },
+    "stat_image2": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stat image2",
+      "description": "Second statistical image to overlay in color."
+    },
+    "stat_thresh": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "title": "Stat thresh",
+      "description": "(a float, a float). Min and max values for the statistical overlay."
+    },
+    "stat_thresh2": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stat thresh2",
+      "description": "(a float, a float). Min and max values for second statistical overlay."
+    },
+    "use_checkerboard": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use checkerboard",
+      "description": "Use checkerboard mask for overlay."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "background_image",
+    "bg_thresh",
+    "stat_image",
+    "stat_thresh"
+  ]
+}

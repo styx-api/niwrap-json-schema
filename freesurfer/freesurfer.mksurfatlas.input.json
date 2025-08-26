@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mksurfatlas",
+  "description": "Creates an atlas using mris_make_template. The atlas can then be used to create the surface registration for each subject based on this atlas.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mksurfatlas"
+    },
+    "atlas": {
+      "type": "string",
+      "title": "Atlas file",
+      "description": "Save results to this file (tif file)."
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere to process."
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Subjects",
+      "description": "Subject(s) to process. Multiple subjects can be specified by repeating the flag."
+    },
+    "surfval": {
+      "type": "string",
+      "title": "Surface values file",
+      "description": "Surface values file. Looks for subject/surfvaldir/hemi.surfval."
+    },
+    "surfvaldir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "label",
+      "title": "Surface values directory",
+      "description": "Directory for surface values; default is 'label'."
+    },
+    "regsurf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "sphere",
+      "title": "Registration surface",
+      "description": "Registration surface; default is 'sphere'."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Turn on debugging."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version flag",
+      "description": "Print version and exit."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Print help and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "atlas",
+    "hemi",
+    "subjects",
+    "surfval"
+  ]
+}

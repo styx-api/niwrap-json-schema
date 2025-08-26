@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_exvivo_strip",
+  "description": "Tool for processing MRI volumes for ex vivo data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_exvivo_strip"
+    },
+    "invol": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input MRI volume"
+    },
+    "outvol": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output MRI volume"
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemi",
+      "description": "Hemi to process"
+    },
+    "pred": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prediction Volume",
+      "description": "Write prediction volume"
+    },
+    "norm": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Normalized Volume",
+      "description": "Write normalized volume"
+    },
+    "fv": {
+      "type": "boolean",
+      "default": false,
+      "title": "FreeView Flag",
+      "description": "Bring up freeview to show results"
+    },
+    "uthresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold",
+      "description": "Specify threshold to erase above"
+    },
+    "border": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Border",
+      "description": "Number of border voxels to set threshold at"
+    },
+    "multichannel": {
+      "type": "boolean",
+      "default": false,
+      "title": "Multichannel Flag",
+      "description": "Specify that data has multiple channels"
+    },
+    "model": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model File",
+      "description": "Use alternative model file"
+    },
+    "wts": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Weights File",
+      "description": "Weight filename"
+    },
+    "gpu": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GPU Number",
+      "description": "GPU number - if not supplied, CPU is used"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "invol",
+    "outvol",
+    "hemi"
+  ]
+}

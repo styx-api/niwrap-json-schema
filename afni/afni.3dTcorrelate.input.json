@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTcorrelate",
+  "description": "3dTcorrelate. Computes the correlation coefficient between corresponding voxel time series in two input 3D+time datasets 'xset' and 'yset'.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dTcorrelate"
+    },
+    "xset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Xset",
+      "description": "Input xset."
+    },
+    "yset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Yset",
+      "description": "Input yset."
+    },
+    "pearson": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pearson",
+      "description": "Correlation is the normal pearson correlation coefficient."
+    },
+    "spearman": {
+      "type": "boolean",
+      "default": false,
+      "title": "Spearman",
+      "description": "Correlation is the Spearman (rank) correlation coefficient."
+    },
+    "quadrant": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quadrant",
+      "description": "Correlation is the quadrant coefficient."
+    },
+    "ktaub": {
+      "type": "boolean",
+      "default": false,
+      "title": "KendallTau",
+      "description": "Correlation is Kendall's tau_b coefficient. For continuous or finely discretized data, tau_b and rank correlation are nearly equivalent."
+    },
+    "covariance": {
+      "type": "boolean",
+      "default": false,
+      "title": "Covariance",
+      "description": "Covariance instead of correlation. That would be Pearson correlation without scaling by the product of the standard deviations."
+    },
+    "partial": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Partial",
+      "description": "Partial Pearson's correlation of X & Y, adjusting for Z (the dataset provided here)."
+    },
+    "ycoef": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ycoef",
+      "description": "Least squares coefficient that best fits y(t) to x(t), after detrending. That is, if yd(t) is the detrended y(t) and xd(t) is the detrended x(t), then the ycoef value is from the OLSQ fit to xd(t) = ycoef & y(t) + error."
+    },
+    "fisher": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fisher",
+      "description": "Apply the Fisher (inverse hyperbolic tangent) transformation to correlation results. Does not make sense with ktaub, covariance, or ycoef."
+    },
+    "polort": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": -1,
+          "maximum": 9
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Polort",
+      "description": "Remove polynomial trend of order m. Using m=-1 mean no detrending; this is only useful fro data that has been preprocessed."
+    },
+    "ort": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ort",
+      "description": "A 1D file. Also detrend using the columbs of the 1D file provided here. Only one -ort option can be given, so if you would like to use more than one, create a temporary file using 1dcat."
+    },
+    "autoclip": {
+      "type": "boolean",
+      "default": false,
+      "title": "Autoclip",
+      "description": "Clip off low-intensity regions in the two datasets, so that the correlation is only computed between high-intensity (presumably brain) voxels. The intensity level is determined the same way that 3dClipLevel works."
+    },
+    "automask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automask",
+      "description": "Clip off low-intensity regions in the two datasets, so that the correlation is only computed between high-intensity (presumably brain) voxels. The intensity level is determined the same way that 3dClipLevel works."
+    },
+    "zcensor": {
+      "type": "boolean",
+      "default": false,
+      "title": "Zcensor",
+      "description": "Omit (censor out) any time points where the xset volume is all zero OR where the yset volume is all zero (in mask). Please note that using -zcensor with any detrending is unlikely to be useful."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Save output into a dataset with this prefix."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "xset",
+    "yset"
+  ]
+}

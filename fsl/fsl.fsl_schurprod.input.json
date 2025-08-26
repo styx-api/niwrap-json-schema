@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_schurprod",
+  "description": "Generates element-wise matrix products or product of matrices against vectors from 4D data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.fsl_schurprod"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input file name (4D image file)"
+    },
+    "design_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Design file",
+      "description": "ASCII text matrix of time series to be correlated"
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output file base name"
+    },
+    "regression_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Regression flag",
+      "description": "Use regression rather than correlation"
+    },
+    "index": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Index",
+      "description": "Index of column in the design to be used for matrix product calculation"
+    },
+    "mask_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Mask image file name"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Display this help text"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "design_file",
+    "output_file"
+  ]
+}

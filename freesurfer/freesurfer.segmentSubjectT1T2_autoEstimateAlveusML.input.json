@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "segmentSubjectT1T2_autoEstimateAlveusML",
+  "description": "Tool for automatic estimation of the alveus in MR images using T1 and T2 contrast.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.segmentSubjectT1T2_autoEstimateAlveusML"
+    },
+    "input_t1": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input T1 Image",
+      "description": "Input T1-weighted MR image."
+    },
+    "input_t2": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input T2 Image",
+      "description": "Input T2-weighted MR image."
+    },
+    "output_directory": {
+      "type": "string",
+      "title": "Output Directory",
+      "description": "Directory to save the output files."
+    },
+    "other_options": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Other Options",
+      "description": "Additional command-line options."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_t1",
+    "input_t2",
+    "output_directory"
+  ]
+}

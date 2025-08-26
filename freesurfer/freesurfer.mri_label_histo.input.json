@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_label_histo",
+  "description": "Tool for creating a histogram of voxel values within a specified label.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_label_histo"
+    },
+    "t1_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "T1 Volume",
+      "description": "Input T1-weighted anatomical volume."
+    },
+    "labeled_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Labeled Volume",
+      "description": "Input volume with labeled regions."
+    },
+    "label": {
+      "type": "number",
+      "title": "Label",
+      "description": "Label of the region of interest."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output",
+      "description": "Output file for histogram."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "t1_volume",
+    "labeled_volume",
+    "label",
+    "output"
+  ]
+}

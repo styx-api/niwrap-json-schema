@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_make_uchar",
+  "description": "Tool to adjust intensity of brain MRI images using a Talairach transformation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_make_uchar"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input volume file."
+    },
+    "talairach_xform": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Talairach Xform",
+      "description": "Talairach transformation file."
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume file."
+    },
+    "first_percentile": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.01,
+      "title": "First Percentile",
+      "description": "First percentile for histogram calculation (default 0.01)."
+    },
+    "wm_percentile": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.9,
+      "title": "White Matter Percentile",
+      "description": "White matter percentile for histogram calculation (default 0.9)."
+    },
+    "max_radius": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 50,
+      "title": "Max Radius",
+      "description": "Maximum radius for voxel consideration (default 50)."
+    },
+    "cumulative_histo": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cumulative Histogram",
+      "description": "Cumulative histogram file."
+    },
+    "vradvol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "VRad Volume",
+      "description": "Volume file where everything outside MAX_R is set to 0."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume",
+    "talairach_xform",
+    "output_volume"
+  ]
+}

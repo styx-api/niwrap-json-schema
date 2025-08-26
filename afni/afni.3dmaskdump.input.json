@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dmaskdump",
+  "description": "Outputs voxel values from AFNI datasets satisfying mask criteria to an ASCII file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dmaskdump"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input datasets",
+      "description": "Input datasets to dump voxel values"
+    },
+    "mask_dataset": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask dataset",
+      "description": "Use the dataset as a mask. Only voxels with nonzero values in the mask will be printed from the input dataset."
+    },
+    "mask_range": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask range",
+      "description": "Further restrict the voxels from mask dataset to those mask values between 'a' and 'b' (inclusive)."
+    },
+    "output_index": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output index values",
+      "description": "Write out the dataset index values."
+    },
+    "output_noijk": {
+      "type": "boolean",
+      "default": false,
+      "title": "Exclude i,j,k values",
+      "description": "Do not write out the i,j,k values."
+    },
+    "output_xyz": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output x,y,z coordinates",
+      "description": "Write the x,y,z coordinates from the first input dataset at the start of each output line."
+    },
+    "output_filename": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output filename",
+      "description": "Write output to specified file."
+    },
+    "calc_mask_opts": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "3dcalc-like mask options",
+      "description": "Execute options enclosed as a 3dcalc-like program to produce a mask from the resulting 3D brick."
+    },
+    "xbox_coords": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset coordinates for mask",
+      "description": "Put a 'mask' at dataset coordinates 'x y z' mm."
+    },
+    "dbox_coords": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "RAI/DICOM coordinates for mask",
+      "description": "Put a 'mask' at RAI/DICOM coordinates of 'x y z' mm."
+    },
+    "nbox_coords": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "LPI/SPM coordinates for mask",
+      "description": "Put a 'mask' at LPI/SPM coordinates of 'x y z' mm."
+    },
+    "ibox_coords": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel indexes for mask",
+      "description": "Put a 'mask' at voxel indexes 'i j k'."
+    },
+    "xball_coords": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Coordinates and radius for ball mask",
+      "description": "Put a ball (sphere) mask at dataset coordinates (x,y,z) with radius r."
+    },
+    "dball_coords": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "RAI/DICOM Coordinates and radius for ball mask",
+      "description": "Put a ball (sphere) mask at RAI/DICOM coordinates (x,y,z) with radius r."
+    },
+    "nball_coords": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "LPI/SPM Coordinates and radius for ball mask",
+      "description": "Put a ball (sphere) mask at LPI/SPM coordinates (x,y,z) with radius r."
+    },
+    "nozero_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "Exclude zero values",
+      "description": "Skip output of any voxel where all the data values are zero."
+    },
+    "random_voxels": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of random voxels",
+      "description": "Keep only N_RAND randomly selected voxels from what would have been the output."
+    },
+    "random_seed": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random seed",
+      "description": "Seed the random number generator with SEED."
+    },
+    "output_niml": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "NIML format output",
+      "description": "Output data in the XML/NIML format compatible with input back to AFNI via the READ_NIML_FILE command."
+    },
+    "quiet_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet mode",
+      "description": "Do not print progress messages to stderr."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files"
+  ]
+}

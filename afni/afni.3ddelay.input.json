@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3ddelay",
+  "description": "Estimates the time delay between each voxel time series in a 3D+time dataset and a reference time series.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3ddelay"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Filename of the input 3D+time dataset"
+    },
+    "reference_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Reference file",
+      "description": "Input ideal time series file name"
+    },
+    "sampling_freq": {
+      "type": "number",
+      "title": "Sampling frequency",
+      "description": "Sampling frequency in Hz. of data time series (1/TR)"
+    },
+    "stim_period": {
+      "type": "number",
+      "title": "Stimulus period",
+      "description": "Stimulus period in seconds. Set to 0 if stimulus is not periodic"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "The prefix for the results Brick"
+    },
+    "polort": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Polynomial order",
+      "description": "Detrend input time series with polynomial of specified order. Default is -1 for auto selection"
+    },
+    "nodtrnd": {
+      "type": "boolean",
+      "default": false,
+      "title": "No detrending",
+      "description": "Remove only the mean (equivalent to polort 0)"
+    },
+    "units_seconds": {
+      "type": "boolean",
+      "default": false,
+      "title": "Units in seconds",
+      "description": "Units for delay estimates in seconds"
+    },
+    "units_degrees": {
+      "type": "boolean",
+      "default": false,
+      "title": "Units in degrees",
+      "description": "Units for delay estimates in degrees. Requires Tstim > 0"
+    },
+    "units_radians": {
+      "type": "boolean",
+      "default": false,
+      "title": "Units in radians",
+      "description": "Units for delay estimates in radians. Requires Tstim > 0"
+    },
+    "phzwrp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Phase wrap",
+      "description": "Wrap delay (or phase) values"
+    },
+    "nophzwrp": {
+      "type": "boolean",
+      "default": false,
+      "title": "No phase wrap",
+      "description": "Do not wrap phase (default)"
+    },
+    "phzreverse": {
+      "type": "boolean",
+      "default": false,
+      "title": "Phase reverse",
+      "description": "Reverse phase such that phase -> (T-phase)"
+    },
+    "phzscale": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Phase scale",
+      "description": "Scale phase: phase -> phase*SC (default no scaling)"
+    },
+    "bias": {
+      "type": "boolean",
+      "default": false,
+      "title": "Bias correction disabled",
+      "description": "Do not correct for the bias in the estimates"
+    },
+    "nobias": {
+      "type": "boolean",
+      "default": false,
+      "title": "Bias correction enabled",
+      "description": "Correct for the bias in the estimates (default)"
+    },
+    "dsamp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Slice timing correction enabled",
+      "description": "Correct for slice timing differences (default)"
+    },
+    "nodsamp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Slice timing correction disabled",
+      "description": "Do not correct for slice timing differences"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Filename of mask dataset. Only voxels with non-zero values in the mask will be considered"
+    },
+    "nfirst": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First image",
+      "description": "Number of first dataset image to use in the delay estimate"
+    },
+    "nlast": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last image",
+      "description": "Number of last dataset image to use in the delay estimate"
+    },
+    "co": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cross Correlation Coefficient threshold",
+      "description": "Cross Correlation Coefficient threshold value to limit ascii output"
+    },
+    "asc": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output ASCII file",
+      "description": "Write the results to an ascii file for voxels with cross correlation coefficients larger than CCT"
+    },
+    "ascts": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output ASCII file with time series",
+      "description": "Write the results and time series to an ascii file for voxels with cross correlation coefficients larger than CCT"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "reference_file",
+    "sampling_freq",
+    "stim_period"
+  ]
+}

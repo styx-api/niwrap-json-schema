@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_wm_volume",
+  "description": "Computes the volume of the enclosed hemisphere white matter surface, ignoring non-white matter voxels in the aseg.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_wm_volume"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject identifier"
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere to compute volume for (e.g., lh or rh)"
+    },
+    "subjects_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects directory",
+      "description": "The SUBJECTS_DIR where the subject data is stored"
+    },
+    "whitesurfname": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "White surface name",
+      "description": "Name of the white surface file"
+    },
+    "asegname": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Aseg name",
+      "description": "Name of the aseg file"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Output more messages"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject",
+    "hemi"
+  ]
+}

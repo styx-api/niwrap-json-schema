@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslreorient2std",
+  "description": "A tool for reorienting an image to match the approximate orientation of standard template images (MNI152).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.fslreorient2std"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input image",
+      "description": "Input image to be reoriented (NIfTI format, e.g. img.nii.gz)"
+    },
+    "output_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "output",
+      "title": "Output image",
+      "description": "Output image with the reoriented result (NIfTI format, e.g. reoriented_img.nii.gz). If not provided, transformation matrix is output to standard output."
+    },
+    "matrix_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Matrix file",
+      "description": "File to save the transformation matrix"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "siena_diff",
+  "description": "SIENA_diff: Analysis of longitudinal brain image differences.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.siena_diff"
+    },
+    "input1_basename": {
+      "type": "string",
+      "title": "Input1 basename",
+      "description": "Input image 1 basename"
+    },
+    "input2_basename": {
+      "type": "string",
+      "title": "Input2 basename",
+      "description": "Input image 2 basename"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Debug - generate edge images and don't remove temporary images"
+    },
+    "no_seg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No segmentation flag",
+      "description": "Don't segment grey+white separately (because there is poor grey-white contrast)"
+    },
+    "self_corr_factor": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Self-calibrating correction factor",
+      "description": "Apply self-calibrating correction factor"
+    },
+    "ignore_z_flow_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore Z flow flag",
+      "description": "Ignore flow in z (may be beneficial if top of brain is missing)"
+    },
+    "apply_std_mask_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Apply standard mask flag",
+      "description": "Apply <input1_basename>_stdmask to brain edge points"
+    },
+    "segment_options": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation options",
+      "description": "Options to be passed to segmentation (type 'fast' to get these)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input1_basename",
+    "input2_basename"
+  ]
+}

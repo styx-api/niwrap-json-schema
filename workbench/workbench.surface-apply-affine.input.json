@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surface-apply-affine",
+  "description": "Apply affine transform to surface file.\n\nFor flirt matrices, you must use the -flirt option, because flirt matrices are not a complete description of the coordinate transform they represent.  If the -flirt option is not present, the affine must be a nifti 'world' affine, which can be obtained with the -convert-affine command, or aff_conv from the 4dfp suite.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.surface-apply-affine"
+    },
+    "in_surf": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "in_surf",
+      "description": "the surface to transform"
+    },
+    "affine": {
+      "type": "string",
+      "title": "affine",
+      "description": "the affine file"
+    },
+    "out_surf": {
+      "type": "string",
+      "title": "out_surf",
+      "description": "the output transformed surface"
+    },
+    "flirt": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "flirt"
+            },
+            "source_volume": {
+              "type": "string",
+              "title": "source_volume",
+              "description": "the source volume used when generating the affine"
+            },
+            "target_volume": {
+              "type": "string",
+              "title": "target_volume",
+              "description": "the target volume used when generating the affine"
+            }
+          },
+          "additionalProperties": false,
+          "title": "flirt",
+          "description": "MUST be used if affine is a flirt affine",
+          "required": [
+            "source_volume",
+            "target_volume"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "flirt",
+      "description": "MUST be used if affine is a flirt affine"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in_surf",
+    "affine",
+    "out_surf"
+  ]
+}

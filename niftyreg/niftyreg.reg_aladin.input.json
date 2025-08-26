@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "reg_aladin",
+  "description": "Block Matching algorithm for global registration based on \"Reconstructing a 3D structure from serial histological sections\", Image and Vision Computing, 2001",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "niftyreg.reg_aladin"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Reference Image",
+      "description": "Filename of the reference (target) image"
+    },
+    "floating_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Floating Image",
+      "description": "Filename of the floating (source) image"
+    },
+    "symmetric": {
+      "type": "boolean",
+      "default": false,
+      "title": "Symmetric Version",
+      "description": "Uses symmetric version of the algorithm"
+    },
+    "output_affine": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Affine Transformation",
+      "description": "Filename which contains the output affine transformation"
+    },
+    "rigid_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rigid Registration Only",
+      "description": "To perform a rigid registration only"
+    },
+    "direct_affine": {
+      "type": "boolean",
+      "default": false,
+      "title": "Direct Affine Optimization",
+      "description": "Directly optimize 12 DoF affine"
+    },
+    "smooth_ref": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smooth Reference Image",
+      "description": "Smooth the reference image using the specified sigma (mm)"
+    },
+    "smooth_float": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smooth Floating Image",
+      "description": "Smooth the floating image using the specified sigma (mm)"
+    },
+    "num_levels": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Levels",
+      "description": "Number of levels to perform"
+    },
+    "first_levels": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First Levels",
+      "description": "Only perform the first levels"
+    },
+    "use_nifti_origin": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use NIFTI Origins",
+      "description": "Use the NIFTI header origins to initialize the translation"
+    },
+    "percent_block": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Percentage of Block",
+      "description": "Percentage of block to use"
+    },
+    "percent_inlier": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Percentage of Inlier",
+      "description": "Percentage of inlier for the LTS"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "reference_image",
+    "floating_image"
+  ]
+}

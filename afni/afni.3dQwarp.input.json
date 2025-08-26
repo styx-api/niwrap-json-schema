@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dQwarp",
+  "description": "Computes a nonlinearly warped version of source_dataset to match base_dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dQwarp"
+    },
+    "base_dataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Base Dataset",
+      "description": "Base dataset"
+    },
+    "source_dataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Source Dataset",
+      "description": "Source dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Prefix for the output datasets"
+    },
+    "no_warp": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Warp",
+      "description": "Do not save the _WARP file"
+    },
+    "inverse_warp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Inverse Warp",
+      "description": "Compute and save the _WARPINV file"
+    },
+    "no_dataset": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Dataset",
+      "description": "Do not save the warped source dataset"
+    },
+    "a_warp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Affine Warp",
+      "description": "Output the nonlinear warp when -allineate is used"
+    },
+    "pcl": {
+      "type": "boolean",
+      "default": false,
+      "title": "Clipped Pearson Correlation",
+      "description": "Clipped Pearson correlation (default method)"
+    },
+    "pear": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pearson Correlation",
+      "description": "Use strict Pearson correlation for matching"
+    },
+    "hel": {
+      "type": "boolean",
+      "default": false,
+      "title": "Hellinger Metric",
+      "description": "Use Hellinger metric for matching"
+    },
+    "mi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mutual Information",
+      "description": "Use Mutual Information for matching"
+    },
+    "nmi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normalized Mutual Information",
+      "description": "Use Normalized Mutual Information for matching"
+    },
+    "lpc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Local Pearson Correlation (Signed)",
+      "description": "Use Local Pearson correlation (signed) for matching"
+    },
+    "lpa": {
+      "type": "boolean",
+      "default": false,
+      "title": "Local Pearson Correlation (Absolute Value)",
+      "description": "Use Local Pearson correlation (absolute value) for matching"
+    },
+    "noneg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Replace Negative Values",
+      "description": "Replace negative values in either input volume with 0"
+    },
+    "nopenalty": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Penalty",
+      "description": "Don't use a penalty on the cost functional"
+    },
+    "minpatch": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Patch Size",
+      "description": "Set the minimum patch size for warp searching"
+    },
+    "maxlev": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Refinement Level",
+      "description": "Set the maximum refinement level"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose",
+      "description": "Print out very verbose progress messages"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet",
+      "description": "Cut out most progress messages"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "base_dataset",
+    "source_dataset",
+    "prefix"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ConvertTransformFile",
+  "description": "Utility to read in a transform file (presumed to be in binary format) and output it in various formats. Default output is legacy human-readable text format. Without any options, the output filename extension must be .txt or .tfm to signify a text-formatted transform file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.ConvertTransformFile"
+    },
+    "dimensions": {
+      "type": "integer",
+      "title": "Dimensions",
+      "description": "Dimensionality of the transform file."
+    },
+    "input_transform_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Transform File",
+      "description": "Path to the input transform file."
+    },
+    "output_transform_file": {
+      "type": "string",
+      "title": "Output Transform File",
+      "description": "Path for the output transform file."
+    },
+    "matrix": {
+      "type": "boolean",
+      "default": false,
+      "title": "Matrix",
+      "description": "Output only the transform matrix to a text file, one row per line with space-delimited values. Only works for specific transform types."
+    },
+    "homogeneous_matrix": {
+      "type": "boolean",
+      "default": false,
+      "title": "Homogeneous Matrix",
+      "description": "Output an N+1 square homogeneous matrix from the transform matrix and offset. Only works for specific transform types."
+    },
+    "RAS": {
+      "type": "boolean",
+      "default": false,
+      "title": "RAS Coordinate System",
+      "description": "Convert the output into the RAS coordinate system if combined with 'matrix' or 'homogeneousMatrix'."
+    },
+    "convert_to_affine_type": {
+      "type": "boolean",
+      "default": false,
+      "title": "Convert to Affine Type",
+      "description": "Convert the input transform type to AffineTransform and output again as a binary transform file."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dimensions",
+    "input_transform_file",
+    "output_transform_file"
+  ]
+}

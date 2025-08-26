@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "scene-file-merge",
+  "description": "Rearrange scenes into a new file.\n\nTakes one or more scene files and constructs a new scene file by concatenating specified scenes from them.\n\nExample: wb_command -scene-file-merge out.scene -scene-file first.scene -scene 1 -scene-file second.scene\n\nThis example would take the first scene from first.scene, followed by all scenes from second.scene, and write these scenes to out.scene.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.scene-file-merge"
+    },
+    "scene_file_out": {
+      "type": "string",
+      "title": "scene_file_out",
+      "description": "output - the output scene file"
+    },
+    "scene_file": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "scene_file"
+              },
+              "scene_file": {
+                "type": "string",
+                "title": "scene_file",
+                "description": "the input scene file"
+              },
+              "scene": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "@type": {
+                          "const": "scene"
+                        },
+                        "scene": {
+                          "type": "string",
+                          "title": "scene",
+                          "description": "the scene number or name"
+                        },
+                        "up_to": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "@type": {
+                                  "const": "up_to"
+                                },
+                                "last_column": {
+                                  "type": "string",
+                                  "title": "last_column",
+                                  "description": "the number or name of the last scene to include"
+                                },
+                                "opt_reverse": {
+                                  "type": "boolean",
+                                  "default": false,
+                                  "title": "opt_reverse",
+                                  "description": "use the range in reverse order"
+                                }
+                              },
+                              "additionalProperties": false,
+                              "title": "up_to",
+                              "description": "use an inclusive range of scenes",
+                              "required": [
+                                "last_column"
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "default": null,
+                          "title": "up_to",
+                          "description": "use an inclusive range of scenes"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "title": "scene",
+                      "description": "specify a scene to use",
+                      "required": [
+                        "scene"
+                      ]
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "scene",
+                "description": "specify a scene to use"
+              }
+            },
+            "additionalProperties": false,
+            "title": "scene_file",
+            "description": "specify a scene file to use scenes from",
+            "required": [
+              "scene_file"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "scene_file",
+      "description": "specify a scene file to use scenes from"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "scene_file_out"
+  ]
+}

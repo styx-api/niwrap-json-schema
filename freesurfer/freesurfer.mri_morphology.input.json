@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_morphology",
+  "description": "MRI Morphology Tool - performs various morphological operations on a volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_morphology"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input volume file on which operations are to be applied."
+    },
+    "operation": {
+      "type": "string",
+      "title": "Operation",
+      "description": "Morphological operation to be performed. Options include: open, close, dilate, erode, mode, fill_holes, erode_bottom, dilate_thresh, erode_thresh."
+    },
+    "number_iter": {
+      "type": "integer",
+      "title": "Number of Iterations",
+      "description": "Number of iterations to apply the operation."
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume file to store the results of the operation."
+    },
+    "label_option": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Option",
+      "description": "Only apply operations to the specified label instead of all nonzero voxels."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume",
+    "operation",
+    "number_iter",
+    "output_volume"
+  ]
+}

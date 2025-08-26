@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsLandmarkBasedTransformInitializer",
+  "description": "This tool initializes a transform between two images based on corresponding landmarks.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.antsLandmarkBasedTransformInitializer"
+    },
+    "dimension": {
+      "type": "integer",
+      "title": "Dimension",
+      "description": "The dimensionality of the registration problem (e.g., 2 for 2D, 3 for 3D)."
+    },
+    "fixed_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Fixed Image",
+      "description": "The fixed image in the registration process."
+    },
+    "moving_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Moving Image",
+      "description": "The moving image in the registration process."
+    },
+    "transform_type": {
+      "type": "string",
+      "title": "Transform Type",
+      "description": "The type of transform to initialize. Options are 'rigid', 'affine', or 'bspline'."
+    },
+    "output_transform": {
+      "type": "string",
+      "title": "Output Transform",
+      "description": "The output transform file that will be created."
+    },
+    "mesh_size": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mesh Size",
+      "description": "The mesh size for the B-spline transform, specified as 'meshSize[0]xmeshSize[1]x...'. Default is '1x1x1'."
+    },
+    "number_of_levels": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Levels",
+      "description": "Number of levels for multi-resolution fitting. Default is 4."
+    },
+    "order": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Order",
+      "description": "The polynomial order of the B-spline transform. Default is 3."
+    },
+    "enforce_stationary_boundaries": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Enforce Stationary Boundaries",
+      "description": "Enforces stationary boundaries for the B-spline transform. Default is 1 (true)."
+    },
+    "landmark_weights": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Landmark Weights",
+      "description": "File containing landmark weights. Each row is either 'label,labelWeight' or 'labelWeight'."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dimension",
+    "fixed_image",
+    "moving_image",
+    "transform_type",
+    "output_transform"
+  ]
+}

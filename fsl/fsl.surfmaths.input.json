@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surfmaths",
+  "description": "A command-line tool for performing various mathematical operations on surface files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.surfmaths"
+    },
+    "first_input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "First Input",
+      "description": "First input surface file."
+    },
+    "operations_inputs": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Operations and Inputs",
+      "description": "Mathematical operations and additional inputs."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output",
+      "description": "Output surface file."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "first_input",
+    "output"
+  ]
+}

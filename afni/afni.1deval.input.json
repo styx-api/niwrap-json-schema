@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1deval",
+  "description": "Evaluates an expression that may include columns of data from one or more text files and writes the result to stdout.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.1deval"
+    },
+    "del": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Step for undetermined variable",
+      "description": "Use 'd' as the step for a single undetermined variable in the expression."
+    },
+    "start": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Start value",
+      "description": "Start at value 's' for a single undetermined variable in the expression."
+    },
+    "num": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of evaluations",
+      "description": "Evaluate the expression 'n' times."
+    },
+    "index": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Index column file",
+      "description": "Read index column from file i.1D and write it out as 1st column of output."
+    },
+    "1D": {
+      "type": "boolean",
+      "default": false,
+      "title": "1D formatted output",
+      "description": "Write output in the form of a single '1D:' string suitable for input on the command line of another program."
+    },
+    "symbols": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Symbols assignment",
+      "description": "Read time series file and assign it to the symbol 'a'. Letters 'a' to 'z' may be used as symbols."
+    },
+    "symbol_values": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Symbols fixed values",
+      "description": "Assign a fixed numerical value to the symbol 'a'. Letters 'a' to 'z' may be used as symbols."
+    },
+    "expression": {
+      "type": "string",
+      "title": "Expression",
+      "description": "Expression to evaluate."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "expression"
+  ]
+}

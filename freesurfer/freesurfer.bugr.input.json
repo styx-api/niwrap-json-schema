@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bugr",
+  "description": "Utility for generating and reporting FreeSurfer bugs",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.bugr"
+    },
+    "subject_name": {
+      "type": "string",
+      "title": "Subject Name",
+      "description": "Subject name to include in the bug report"
+    },
+    "command_line": {
+      "type": "string",
+      "title": "Command Line",
+      "description": "The entire command-line executed"
+    },
+    "error_message": {
+      "type": "string",
+      "title": "Error Message",
+      "description": "The error message generated"
+    },
+    "log_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log File",
+      "description": "Log file path of the subject's recon-all process"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_name",
+    "command_line",
+    "error_message"
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_maps2csd",
+  "description": "Tool to create CSD files and PDFs from input maps and apply them.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_maps2csd"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Files",
+      "description": "Input file(s) or specify them directly on the command line"
+    },
+    "csd_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CSD File",
+      "description": "Output CSD file"
+    },
+    "pdf_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "PDF File",
+      "description": "PDF file created from CSD"
+    },
+    "subject_hemi_surf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject Hemisphere Surface",
+      "description": "Subject name, hemisphere, and surface specification"
+    },
+    "thresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold",
+      "description": "Threshold for cluster-forming (-log10 scale)"
+    },
+    "sign": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sign Adjustment",
+      "description": "Sign adjustment for threshold (+1, -1 or 0)"
+    },
+    "csd_apply_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CSD Apply File",
+      "description": "Apply a CSD file to inputs, return p-value of max cluster"
+    },
+    "apply_out": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Apply Output"
+    },
+    "subjects_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Subjects directory"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Turn on debugging"
+    },
+    "checkopts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Options Flag",
+      "description": "Don't run, just check options then exit"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files"
+  ]
+}

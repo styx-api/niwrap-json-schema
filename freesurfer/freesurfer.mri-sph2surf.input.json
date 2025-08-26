@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri-sph2surf",
+  "description": "Converts spherical functional data to surface data in the FreeSurfer processing pipeline.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri-sph2surf"
+    },
+    "instem": {
+      "type": "string",
+      "title": "Input stem",
+      "description": "Input stem of a bfloat file. The full input file name must take the form instem-lh_000.bfloat (or rh)."
+    },
+    "outstem": {
+      "type": "string",
+      "title": "Output stem",
+      "description": "Output stem for the resulting file. The output file will have the name outstem-lh.w (or rh)."
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Specifies the hemisphere for processing. Acceptable values are 'lh' or 'rh'."
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Specifies the subject identifier for the FreeSurfer processing pipeline."
+    },
+    "offset": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0,
+      "title": "Offset",
+      "description": "Zero-based plane/frame number. Default is 0."
+    },
+    "svitdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "/usr/local/freesurfer/subjects/subject/svit",
+      "title": "SVIT directory",
+      "description": "Directory for svit. Default is '/usr/local/freesurfer/subjects/subject/svit'."
+    },
+    "umask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "User mask",
+      "description": "Specifies a new user mask."
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Enable verbose output."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version flag",
+      "description": "Show version information."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "instem",
+    "outstem",
+    "hemi",
+    "subject"
+  ]
+}

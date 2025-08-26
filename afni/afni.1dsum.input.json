@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dsum",
+  "description": "Sum or average columns of ASCII files with numbers arranged in rows and columns.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.1dsum"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input files",
+      "description": "Input ASCII files with numbers arranged in rows and columns."
+    },
+    "ignore_rows": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ignore rows",
+      "description": "Skip the first nn rows of each file"
+    },
+    "use_rows": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use rows",
+      "description": "Use only mm rows from each file"
+    },
+    "mean_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mean flag",
+      "description": "Compute the average instead of the sum"
+    },
+    "nocomment_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No comment flag",
+      "description": "Do not reproduce comments from the header of the first input file to the output."
+    },
+    "okempty_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "OK empty flag",
+      "description": "If encountering an empty 1D file, print 0 and exit quietly instead of exiting with an error message."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files"
+  ]
+}

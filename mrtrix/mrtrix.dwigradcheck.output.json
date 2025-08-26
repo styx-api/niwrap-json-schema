@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dwigradcheck",
+  "description": "Check the orientation of the diffusion gradient table",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "root": {
+      "type": "string",
+      "title": "Root",
+      "description": "Output root directory"
+    },
+    "export_grad_mrtrix": {
+      "type": "string",
+      "title": "export_grad_mrtrix",
+      "description": "export the diffusion-weighted gradient table to file in MRtrix format "
+    },
+    "export_grad_fsl": {
+      "type": "string",
+      "title": "export_grad_fsl",
+      "description": "export the diffusion-weighted gradient table to file in FSL format "
+    },
+    "dwigradcheck": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "root": {
+              "type": "string",
+              "title": "Root",
+              "description": "Output root directory"
+            },
+            "bvecs_path": {
+              "type": "string",
+              "title": "bvecs_path",
+              "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+            },
+            "bvals_path": {
+              "type": "string",
+              "title": "bvals_path",
+              "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

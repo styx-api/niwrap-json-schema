@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ptoz",
+  "description": "Convert p-values to z-values",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.ptoz"
+    },
+    "p_value": {
+      "type": "number",
+      "title": "P-value",
+      "description": "p-value to convert"
+    },
+    "tail_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "2-tailed flag",
+      "description": "Use 2-tailed conversion"
+    },
+    "grf_flag": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GRF flag",
+      "description": "Use GRF maximum-height theory instead of Gaussian pdf"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "p_value"
+  ]
+}

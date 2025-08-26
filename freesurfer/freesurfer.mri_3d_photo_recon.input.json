@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_3d_photo_recon",
+  "description": "Code for 3D photo reconstruction (Tregidgo, et al., MICCAI 2020)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_3d_photo_recon"
+    },
+    "input_photo_dir": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Photo Directory",
+      "description": "Directory with input photos (required)"
+    },
+    "input_segmentation_dir": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Segmentation Directory",
+      "description": "Directory with input slab masks / segmentations (required)"
+    },
+    "slice_thickness": {
+      "type": "number",
+      "title": "Slice Thickness",
+      "description": "Slice thickness in mm"
+    },
+    "photo_resolution": {
+      "type": "number",
+      "title": "Photo Resolution",
+      "description": "Resolution of the photos in mm"
+    },
+    "output_directory": {
+      "type": "string",
+      "title": "Output Directory",
+      "description": "Output directory with reconstructed photo volume and reference"
+    },
+    "ref_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference Mask",
+      "description": "Reference binary mask"
+    },
+    "ref_surface": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference Surface",
+      "description": "Reference surface file"
+    },
+    "ref_soft_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference Soft Mask",
+      "description": "Reference soft mask"
+    },
+    "mesh_reorient_with_indices": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mesh Reorient Indices",
+      "description": "Vertex indices of frontal pole, occipital pole, and top of central sulcus, separated with commas, for mesh alignment"
+    },
+    "photos_posterior_side": {
+      "type": "boolean",
+      "default": false,
+      "title": "Photos Posterior Side Flag",
+      "description": "Use when photos are taken of posterior side of slabs (default is anterior side)"
+    },
+    "order_posterior_to_anterior": {
+      "type": "boolean",
+      "default": false,
+      "title": "Order Posterior to Anterior Flag",
+      "description": "Use when photos are ordered from posterior to anterior (default is anterior to posterior)"
+    },
+    "allow_z_stretch": {
+      "type": "boolean",
+      "default": false,
+      "title": "Allow Z Stretch Flag",
+      "description": "Use to adjust the slice thickness to best match the reference. You should probably *never* use this with soft references (ref_soft_mask)"
+    },
+    "rigid_only_for_photos": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rigid Only for Photos Flag",
+      "description": "Switch on if you want photos to deform only rigidly (not affine)"
+    },
+    "gpu_index": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GPU Index",
+      "description": "Index of GPU to use"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_photo_dir",
+    "input_segmentation_dir",
+    "slice_thickness",
+    "photo_resolution",
+    "output_directory"
+  ]
+}

@@ -1,0 +1,306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_watershed",
+  "description": "A tool for stripping skull and other non-brain tissues to produce brain volume from T1 volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_watershed"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input volume (e.g., T1 volume)"
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume (e.g., skull stripped brain volume)"
+    },
+    "weight": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Weight",
+      "description": "Preweight the input image using atlas information"
+    },
+    "no_wta_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No WTA Flag",
+      "description": "Don't use the preweighting for the template deformation"
+    },
+    "proba_merging": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Proba Merging",
+      "description": "Use the basins merging using atlas information"
+    },
+    "preflooding_height": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Preflooding Height",
+      "description": "Pre-size the preflooding height (in percent)"
+    },
+    "no_seedpt_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Seedpoint Flag",
+      "description": "Don't use seedpoints using atlas information"
+    },
+    "no_ta_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No TA Flag",
+      "description": "Don't use template deformation using atlas information"
+    },
+    "copy_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Copy Flag",
+      "description": "Just copy input to output, ignore other options"
+    },
+    "atlas_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Atlas Flag",
+      "description": "Use the atlas information to correct the segmentation"
+    },
+    "surf_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Name",
+      "description": "Save the BEM surfaces; use consistent coordinates with tkmedit"
+    },
+    "usesurf_ras_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Surface RAS Flag",
+      "description": "Use the surface RAS coordinates for surfaces"
+    },
+    "no_t1_analysis_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No T1 Analysis Flag",
+      "description": "Don't do T1 analysis, useful when running out of memory"
+    },
+    "shrink_surface_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Shrink Surface Flag",
+      "description": "Shrink the surface"
+    },
+    "expand_surface_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Expand Surface Flag",
+      "description": "Expand the surface"
+    },
+    "use_watershed_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Watershed Flag",
+      "description": "Use only the watershed algorithm"
+    },
+    "t1_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T1 Volume",
+      "description": "Specify T1 input volume"
+    },
+    "wat_temp_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Watershed and Template Flag",
+      "description": "Use watershed algorithm and first template smoothing"
+    },
+    "first_temp_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "First Template Flag",
+      "description": "Use only the first template smoothing + local matching"
+    },
+    "surf_debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Surface Debug Flag",
+      "description": "Visualize the surfaces onto the output volume"
+    },
+    "brain_surf_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brain Surface Name",
+      "description": "Save the brain surface"
+    },
+    "shrink_brain_surf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Shrink Brain Surface",
+      "description": "Save the brain surface shrank inward by a specified mm"
+    },
+    "seed_point": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Seed Point",
+      "description": "Add a seed point as a 3D coordinate"
+    },
+    "center_brain": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Center Brain",
+      "description": "Specify the center of the brain (voxel coordinates)"
+    },
+    "brain_radius": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brain Radius",
+      "description": "Specify the radius of the brain (voxel units)"
+    },
+    "watershed_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Watershed Threshold",
+      "description": "Change the threshold in the watershed process"
+    },
+    "no_watershed_analysis_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Watershed Analysis Flag",
+      "description": "Don't use the watershed analysis process"
+    },
+    "label_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Label Flag",
+      "description": "Labelize the output volume into scalp, skull, csf, gray, and white matter"
+    },
+    "manual_params": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Manual Params",
+      "description": "Change parameters csf_max, transition intensity, and GM_intensity"
+    },
+    "xthresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "X Threshold",
+      "description": "Remove voxels whose intensity exceeds the specified threshold"
+    },
+    "mask_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mask Flag",
+      "description": "Mask a volume with the brain mask"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume",
+    "output_volume"
+  ]
+}

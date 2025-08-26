@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "topup",
+  "description": "topup is part of FSL and is used to estimate and correct for susceptibility-induced distortions in echo planar imaging (EPI) data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.topup"
+    },
+    "imain": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input main file",
+      "description": "Name of 4D file with images"
+    },
+    "datain": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Data file",
+      "description": "Name of text file with PE directions/times"
+    },
+    "out": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output basename",
+      "description": "Base-name of output files (spline coefficients (Hz) and movement parameters)"
+    },
+    "fout": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Field output file",
+      "description": "Name of image file with field (Hz)"
+    },
+    "iout": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unwarped images file",
+      "description": "Name of 4D image file with unwarped images"
+    },
+    "logout": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log file",
+      "description": "Name of log-file"
+    },
+    "warpres": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Warp resolution",
+      "description": "(Approximate) resolution (in mm) of warp basis for the different sub-sampling levels, default 10"
+    },
+    "subsamp": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sub-sampling scheme",
+      "description": "Sub-sampling scheme, default 1"
+    },
+    "fwhm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gaussian smoothing kernel",
+      "description": "FWHM (in mm) of gaussian smoothing kernel, default 8"
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Config file",
+      "description": "Name of config file specifying command line arguments"
+    },
+    "miter": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max non-linear iterations",
+      "description": "Max # of non-linear iterations, default 5"
+    },
+    "lambda": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Regularisation weight",
+      "description": "Weight of regularisation, default depending on --ssqlambda and --regmod switches. See user documentation."
+    },
+    "ssqlambda": {
+      "type": "boolean",
+      "default": false,
+      "title": "Weighted lambda flag",
+      "description": "If set (=1), lambda is weighted by current ssq, default 1"
+    },
+    "regmod": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Regularisation model",
+      "description": "Model for regularisation of warp-field [membrane_energy bending_energy], default bending_energy"
+    },
+    "estmov": {
+      "type": "boolean",
+      "default": false,
+      "title": "Estimate movements",
+      "description": "Estimate movements if set, default 1 (true)"
+    },
+    "minmet": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimisation method",
+      "description": "Minimisation method 0=Levenberg-Marquardt, 1=Scaled Conjugate Gradient, default 0 (LM)"
+    },
+    "splineorder": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spline order",
+      "description": "Order of spline, 2=Quadratic spline, 3=Cubic spline. Default=3"
+    },
+    "numprec": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Numerical precision",
+      "description": "Precision for representing Hessian, double or float. Default double"
+    },
+    "interp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolation model",
+      "description": "Image interpolation model, linear or spline. Default spline"
+    },
+    "scale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Scale images",
+      "description": "If set (=1), the images are individually scaled to a common mean, default 0 (false)"
+    },
+    "regrid": {
+      "type": "boolean",
+      "default": false,
+      "title": "Regrid calculations",
+      "description": "If set (=1), the calculations are done in a different grid, default 1 (true)"
+    },
+    "nthr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of threads",
+      "description": "Number of threads to use (cannot be greater than numbers of hardware cores), default 1"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Print diagnostic information while running"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "imain",
+    "datain"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslvbm_1_bet",
+  "description": "Brain extraction for VBM using FSL BET",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.fslvbm_1_bet"
+    },
+    "default_bet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Default BET brain extraction",
+      "description": "Default BET brain extraction with -f 0.4"
+    },
+    "increased_robustness": {
+      "type": "boolean",
+      "default": false,
+      "title": "Increased robustness for neck presence",
+      "description": "Increased robustness in the brain extraction when a lot of neck is present"
+    },
+    "bet_parameters": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "BET parameters",
+      "description": "Additional options to be passed on to BET"
+    }
+  },
+  "additionalProperties": false
+}

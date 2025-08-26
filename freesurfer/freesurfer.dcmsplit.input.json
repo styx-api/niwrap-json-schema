@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dcmsplit",
+  "description": "Splits DICOM files into separate folders based on a unique identifier (UID).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.dcmsplit"
+    },
+    "dcm_dir": {
+      "type": "string",
+      "title": "DICOM Directory",
+      "description": "Directory containing the DICOM files"
+    },
+    "out_dir": {
+      "type": "string",
+      "title": "Output Directory",
+      "description": "Output directory for split DICOM files"
+    },
+    "copy": {
+      "type": "boolean",
+      "default": false,
+      "title": "Copy Flag",
+      "description": "Copy files instead of creating symbolic links"
+    },
+    "link": {
+      "type": "boolean",
+      "default": false,
+      "title": "Link Flag",
+      "description": "Link files instead of copying (default behavior)"
+    },
+    "split_name": {
+      "type": "boolean",
+      "default": false,
+      "title": "Split by Name Flag",
+      "description": "Split files by patient name instead of UID"
+    },
+    "split_uid": {
+      "type": "boolean",
+      "default": false,
+      "title": "Split by UID Flag",
+      "description": "Split files by Study UID instead of name (default behavior)"
+    },
+    "series_no": {
+      "type": "boolean",
+      "default": false,
+      "title": "Split by Series Number Flag",
+      "description": "Split files by series number"
+    },
+    "series_plus": {
+      "type": "boolean",
+      "default": false,
+      "title": "Split by Series and Name/UID Flag",
+      "description": "Split files by series number and either name or UID"
+    },
+    "dicom_tag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DICOM Tag",
+      "description": "Split files by given DICOM tag (group element)"
+    },
+    "study_description": {
+      "type": "boolean",
+      "default": false,
+      "title": "Split by Study Description Flag",
+      "description": "Split files by Study Description"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dcm_dir",
+    "out_dir"
+  ]
+}

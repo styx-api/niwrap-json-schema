@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fixelconvert",
+  "description": "Convert between the old format fixel image (.msf / .msh) and the new fixel directory format.\n\n\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix.fixelconvert"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "name",
+      "description": "assign a different name to the value field output (Default: value). Do not include the file extension."
+    },
+    "nii": {
+      "type": "boolean",
+      "default": false,
+      "title": "nii",
+      "description": "output the index, directions and data file in NIfTI format instead of .mif"
+    },
+    "out_size": {
+      "type": "boolean",
+      "default": false,
+      "title": "out_size",
+      "description": "also output the 'size' field from the old format"
+    },
+    "template": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "template",
+      "description": "specify an existing fixel directory (in the new format) to which the new output should conform"
+    },
+    "value": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "value",
+      "description": "nominate the data file to import to the 'value' field in the old format"
+    },
+    "in_size": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "in_size",
+      "description": "import data for the 'size' field in the old format"
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "title": "config",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "config",
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "fixel_in": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousString"
+            },
+            "obj": {
+              "type": "string",
+              "title": "Object",
+              "description": "String object."
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "obj"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousFile"
+            },
+            "obj": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Object",
+              "description": "File object."
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "obj"
+          ]
+        }
+      ],
+      "title": "fixel_in",
+      "description": "the input fixel file / directory."
+    },
+    "fixel_out": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousString_1"
+            },
+            "obj": {
+              "type": "string",
+              "title": "Object",
+              "description": "String object."
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "obj"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousFile_1"
+            },
+            "obj": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Object",
+              "description": "File object."
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "obj"
+          ]
+        }
+      ],
+      "title": "fixel_out",
+      "description": "the output fixel file / directory."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "fixel_in",
+    "fixel_out"
+  ]
+}

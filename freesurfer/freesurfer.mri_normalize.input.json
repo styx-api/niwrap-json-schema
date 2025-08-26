@@ -1,0 +1,381 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_normalize",
+  "description": "Normalize the white-matter, optionally based on control points. The input volume is converted into a new volume where white matter image values all range around 110.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_normalize"
+    },
+    "input_vol": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input MRI volume file"
+    },
+    "output_vol": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output MRI volume file"
+    },
+    "norm_iters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "3D Normalization Iterations",
+      "description": "Use n 3D normalization iterations (default=2)"
+    },
+    "disable_1d": {
+      "type": "boolean",
+      "default": false,
+      "title": "Disable 1D Normalization",
+      "description": "Disable 1D normalization"
+    },
+    "nonmax_suppress": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Non-Maximum Suppression",
+      "description": "Turn non-maximum suppression on (1) or off (0) when using interior of surfaces"
+    },
+    "conform": {
+      "type": "boolean",
+      "default": false,
+      "title": "Conform Volume",
+      "description": "Interpolate and embed volume to be 256^3"
+    },
+    "nonconform": {
+      "type": "boolean",
+      "default": false,
+      "title": "Non-Conform Volume",
+      "description": "Do not conform the volume"
+    },
+    "gentle": {
+      "type": "boolean",
+      "default": false,
+      "title": "Gentle Normalization",
+      "description": "Perform kinder gentler normalization"
+    },
+    "control_points": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Control Points File",
+      "description": "Use control points file (usually control.dat)"
+    },
+    "fonly_control_points": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Only Use Control Points File",
+      "description": "Use only control points file"
+    },
+    "lonly_labels": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Only Use Labels",
+      "description": "Use only control points in label file"
+    },
+    "labels": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label File",
+      "description": "Use control points in label file"
+    },
+    "write_volumes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Write Control Point and Bias Field Volumes",
+      "description": "Write control point (c) and bias field (b) volumes"
+    },
+    "intensity_above": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Control Point Intensity Above",
+      "description": "Use control point with intensity above target (default=25.0)"
+    },
+    "intensity_below": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Control Point Intensity Below",
+      "description": "Use control point with intensity below target (default=10.0)"
+    },
+    "intensity_gradient": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Intensity Gradient",
+      "description": "Use max intensity/mm gradient (default=1.000)"
+    },
+    "prune": {
+      "type": "boolean",
+      "default": false,
+      "title": "Prune Control Points",
+      "description": "Turn pruning of control points on/off (default=off)"
+    },
+    "no_gentle_cp": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Gentle Control Points",
+      "description": "Do not use gentle normalization with control points file"
+    },
+    "mask_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask File",
+      "description": "Mask file to use"
+    },
+    "atlas_transform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlas Transform",
+      "description": "Use atlas to exclude control points from being in non-brain regions"
+    },
+    "noskull": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Skull",
+      "description": "Do not consider skull regions"
+    },
+    "monkey": {
+      "type": "boolean",
+      "default": false,
+      "title": "Monkey Mode",
+      "description": "Turns off 1D, sets num_3d_iter=1"
+    },
+    "nosnr": {
+      "type": "boolean",
+      "default": false,
+      "title": "Disable SNR Normalization",
+      "description": "Disable SNR normalization"
+    },
+    "sigma_smooth": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sigma Smooth",
+      "description": "Smooth bias field with given sigma"
+    },
+    "aseg_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Aseg File",
+      "description": "Aseg file for processing"
+    },
+    "debug_v": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Vectors",
+      "description": "For debugging"
+    },
+    "debug_d": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Gradients",
+      "description": "For debugging"
+    },
+    "renorm_vol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Renormalization Volume",
+      "description": "Load volume and use all points in it that are exactly 110 as control points"
+    },
+    "checknorm_vol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Check Normalization",
+      "description": "Load volume and remove all control points that aren't in [min max]"
+    },
+    "load_read_cp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Read Control Points",
+      "description": "For reading control points and bias field"
+    },
+    "cp_output_vol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Control Points Output Volume",
+      "description": "Output final control points as a volume (only with -aseg)"
+    },
+    "surface_transform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface and Transform",
+      "description": "Normalize based on the skeleton of the interior of the transformed surface"
+    },
+    "seed_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random Seed Value",
+      "description": "Set random number generator to seed N"
+    },
+    "print_help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Print Help",
+      "description": "Print usage"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_vol",
+    "output_vol"
+  ]
+}

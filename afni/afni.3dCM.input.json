@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dCM",
+  "description": "Tool for computing the center of mass of a dataset",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dCM"
+    },
+    "dset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input dataset."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Use the specified dataset as a mask. Only voxels with nonzero values in 'mset' will be averaged from 'dataset'. Both datasets must have the same number of voxels."
+    },
+    "automask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automask flag",
+      "description": "Generate the mask automatically."
+    },
+    "set_origin": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Set origin",
+      "description": "After computing the CM of the dataset, set the origin fields in the header so that the CM will be at (x,y,z) in DICOM coordinates."
+    },
+    "local_ijk": {
+      "type": "boolean",
+      "default": false,
+      "title": "Local IJK flag",
+      "description": "Output values as (i,j,k) in local orientation."
+    },
+    "roi_vals": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ROI values",
+      "description": "Compute center of mass for each blob with specified voxel values."
+    },
+    "all_rois": {
+      "type": "boolean",
+      "default": false,
+      "title": "All ROIs flag",
+      "description": "Automatically find all ROI values and compute their centers of mass."
+    },
+    "icent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Internal Center flag",
+      "description": "Compute Internal Center, which finds the center voxel closest to the center of mass."
+    },
+    "dcent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Distance Center flag",
+      "description": "Compute Distance Center, the center voxel with the shortest average distance to all other voxels. This is computationally expensive."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dset"
+  ]
+}

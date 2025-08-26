@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ConvertScalarImageToRGB",
+  "description": "Converts a scalar image to an RGB image using specified parameters. Supports multiple colormap options and customization.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.ConvertScalarImageToRGB"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "title": "Image Dimension",
+      "description": "The dimensionality of the image (e.g., 2D or 3D)."
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "The input scalar image to be converted to RGB."
+    },
+    "output_image": {
+      "type": "string",
+      "title": "Output Image",
+      "description": "The output RGB image file."
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask",
+      "description": "The mask image to apply during conversion."
+    },
+    "colormap": {
+      "type": "string",
+      "title": "Colormap",
+      "description": "The colormap to use for RGB conversion."
+    },
+    "custom_colormap_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Custom Colormap File",
+      "description": "The file specifying the custom colormap (only used if colormap is 'custom')."
+    },
+    "minimum_input": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Input",
+      "description": "The minimum input value for scaling."
+    },
+    "maximum_input": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Input",
+      "description": "The maximum input value for scaling."
+    },
+    "minimum_rgb_output": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0,
+      "title": "Minimum RGB Output",
+      "description": "The minimum output value for the RGB image. Defaults to 0."
+    },
+    "maximum_rgb_output": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 255,
+      "title": "Maximum RGB Output",
+      "description": "The maximum output value for the RGB image. Defaults to 255."
+    },
+    "vtk_lookup_table": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "VTK Lookup Table",
+      "description": "The VTK lookup table to apply for additional customization."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "input_image",
+    "output_image",
+    "mask",
+    "colormap"
+  ]
+}

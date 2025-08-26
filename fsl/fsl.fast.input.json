@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fast",
+  "description": "FAST (FMRIB's Automated Segmentation Tool) segments a 3D image of the brain into different tissue types (Grey Matter, White Matter, CSF, etc.), whilst also correcting for spatial intensity variations (also known as bias field or RF inhomogeneities). The underlying method is based on a hidden Markov random field model and an associated Expectation-Maximization algorithm. The whole process is fully automated and can also produce a bias field-corrected input image and a probabilistic and/or partial volume tissue segmentation. It is robust and reliable, compared to most finite mixture model-based methods, which are sensitive to noise.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.fast"
+    },
+    "number_classes": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number classes",
+      "description": "number of tissue-type classes; default=3"
+    },
+    "bias_iters": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bias iters",
+      "description": "number of main-loop iterations during bias-field removal; default=4"
+    },
+    "bias_lowpass": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bias lowpass",
+      "description": "bias field smoothing extent (FWHM) in mm; default=20"
+    },
+    "img_type": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Img type",
+      "description": "type of image 1=T1, 2=T2, 3=PD; default=T1"
+    },
+    "init_seg_smooth": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Init seg smooth",
+      "description": "initial segmentation spatial smoothness (during bias field estimation); default=0.02"
+    },
+    "segments": {
+      "type": "boolean",
+      "default": false,
+      "title": "Segments",
+      "description": "outputs a separate binary image for each tissue type"
+    },
+    "init_transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Init transform",
+      "description": "initialise using priors; you must supply a FLIRT transform"
+    },
+    "other_priors": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Other priors",
+      "description": "Alternative prior images."
+    },
+    "output_biasfield": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output biasfield",
+      "description": "Output estimated bias field."
+    },
+    "output_biascorrected": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output biascorrected",
+      "description": "Output restored image (bias-corrected image)."
+    },
+    "no_bias": {
+      "type": "boolean",
+      "default": false,
+      "title": "No bias",
+      "description": "Do not remove bias field."
+    },
+    "channels": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Channels",
+      "description": "number of input images (channels); default 1"
+    },
+    "out_basename": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "fast_out",
+      "title": "Out basename",
+      "description": "Base name of output files."
+    },
+    "use_priors": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use priors",
+      "description": "Use priors throughout."
+    },
+    "no_pve": {
+      "type": "boolean",
+      "default": false,
+      "title": "No pve",
+      "description": "Turn off pve (partial volume estimation)."
+    },
+    "segment_iters": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segment iters",
+      "description": "number of segmentation-initialisation iterations; default=15"
+    },
+    "mixel_smooth": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mixel smooth",
+      "description": "spatial smoothness for mixeltype; default=0.3"
+    },
+    "hyper": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hyper",
+      "description": "0.0 <= a floating point number <= 1.0. segmentation spatial smoothness; default=0.1"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose",
+      "description": "Switch on diagnostic messages."
+    },
+    "manual_seg": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Manual seg",
+      "description": "Filename containing intensities."
+    },
+    "iters_afterbias": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Iters afterbias",
+      "description": "number of main-loop iterations after bias-field removal; default=4"
+    },
+    "in_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "In files",
+      "description": "Image, or multi-channel set of images, to be segmented."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in_files"
+  ]
+}

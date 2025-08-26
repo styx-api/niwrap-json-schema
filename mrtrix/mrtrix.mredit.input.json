@@ -1,0 +1,262 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mredit",
+  "description": "Directly edit the intensities within an image from the command-line.\n\nA range of options are provided to enable direct editing of voxel intensities based on voxel / real-space coordinates. If only one image path is provided, the image will be edited in-place (use at own risk); if input and output image paths are provided, the output will contain the edited image, and the original image will not be modified in any way.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix.mredit"
+    },
+    "plane": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "plane"
+              },
+              "axis": {
+                "type": "integer",
+                "title": "axis",
+                "description": "fill one or more planes on a particular image axis"
+              },
+              "coord": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "title": "coord",
+                "description": "fill one or more planes on a particular image axis"
+              },
+              "value": {
+                "type": "number",
+                "title": "value",
+                "description": "fill one or more planes on a particular image axis"
+              }
+            },
+            "additionalProperties": false,
+            "title": "plane",
+            "description": "fill one or more planes on a particular image axis",
+            "required": [
+              "axis",
+              "coord",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "plane",
+      "description": "fill one or more planes on a particular image axis"
+    },
+    "sphere": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "sphere"
+              },
+              "position": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "title": "position",
+                "description": "draw a sphere with radius in mm"
+              },
+              "radius": {
+                "type": "number",
+                "title": "radius",
+                "description": "draw a sphere with radius in mm"
+              },
+              "value": {
+                "type": "number",
+                "title": "value",
+                "description": "draw a sphere with radius in mm"
+              }
+            },
+            "additionalProperties": false,
+            "title": "sphere",
+            "description": "draw a sphere with radius in mm",
+            "required": [
+              "position",
+              "radius",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "sphere",
+      "description": "draw a sphere with radius in mm"
+    },
+    "voxel": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "voxel"
+              },
+              "position": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "title": "position",
+                "description": "change the image value within a single voxel"
+              },
+              "value": {
+                "type": "number",
+                "title": "value",
+                "description": "change the image value within a single voxel"
+              }
+            },
+            "additionalProperties": false,
+            "title": "voxel",
+            "description": "change the image value within a single voxel",
+            "required": [
+              "position",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "voxel",
+      "description": "change the image value within a single voxel"
+    },
+    "scanner": {
+      "type": "boolean",
+      "default": false,
+      "title": "scanner",
+      "description": "indicate that coordinates are specified in scanner space, rather than as voxel coordinates"
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "title": "config",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "config",
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "input",
+      "description": "the input image"
+    },
+    "output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "output",
+      "description": "the (optional) output image"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input"
+  ]
+}

@@ -1,0 +1,389 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "reg_transform",
+  "description": "Tool for performing various transformation operations on medical images including control point to deformation conversion, composition of transformations, and converting between deformation and displacement fields.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "niftyreg.reg_transform"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Reference Image",
+      "description": "Filename of the reference image"
+    },
+    "cpp2def_input": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CPP to DEF Input",
+      "description": "Conversion from control point position to deformation field. Filename of input lattice of control point positions (CPP)."
+    },
+    "cpp2def_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CPP to DEF Output",
+      "description": "Filename of the output deformation field image (DEF)."
+    },
+    "comp1_cpp2": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second CPP for Composition 1",
+      "description": "Composition of two lattices of control points. CPP2(CPP1(x)). Filename of lattice of control point that contains the second deformation (CPP2)."
+    },
+    "comp1_cpp1": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First CPP for Composition 1",
+      "description": "Filename of lattice of control point that contains the initial deformation (CPP1)."
+    },
+    "comp1_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output for Composition 1",
+      "description": "Filename of the output deformation field."
+    },
+    "comp2_cpp": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CPP for Composition 2",
+      "description": "Composition of a deformation field with a lattice of control points. CPP(DEF(x)). Filename of lattice of control point that contains the second deformation (CPP)."
+    },
+    "comp2_def": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DEF for Composition 2",
+      "description": "Filename of the deformation field to be used as initial deformation (DEF)."
+    },
+    "comp2_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output for Composition 2",
+      "description": "Filename of the output deformation field."
+    },
+    "comp3_def2": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second DEF for Composition 3",
+      "description": "Composition of two deformation fields. DEF2(DEF1(x)). Filename of the second deformation field (DEF2)."
+    },
+    "comp3_def1": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First DEF for Composition 3",
+      "description": "Filename of the first deformation field (DEF1)."
+    },
+    "comp3_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output for Composition 3",
+      "description": "Filename of the output deformation field."
+    },
+    "def2disp_input": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DEF to DISP Input",
+      "description": "Convert a deformation field into a displacement field. Filename of deformation field x'=T(x)."
+    },
+    "def2disp_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DEF to DISP Output",
+      "description": "Filename of displacement field x'=x+T(x)."
+    },
+    "disp2def_input": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DISP to DEF Input",
+      "description": "Convert a displacement field into a deformation field. Filename of displacement field x'=x+T(x)."
+    },
+    "disp2def_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DISP to DEF Output",
+      "description": "Filename of deformation field x'=T(x)."
+    },
+    "upd_sform_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Update Sform Image",
+      "description": "Update the sform of a floating (source) image using an affine transformation. Filename of image to be updated."
+    },
+    "upd_sform_affine": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Update Sform Affine",
+      "description": "Affine transformation defined as Affine x Reference = Floating. Filename of affine transformation."
+    },
+    "upd_sform_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Update Sform Output",
+      "description": "Updated image filename."
+    },
+    "aff2def_affine": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Affine for Aff2Def",
+      "description": "Compose a non-rigid with an affine. Filename of affine transformation."
+    },
+    "aff2def_target": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target for Aff2Def",
+      "description": "Image used as a target for the non-rigid step."
+    },
+    "aff2def_cpp_or_def": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CPP or DEF for Aff2Def",
+      "description": "Reference image (B). Filename of control point position or deformation field."
+    },
+    "aff2def_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output for Aff2Def",
+      "description": "Output deformation field filename."
+    },
+    "inv_affine_input": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Affine for Inversion",
+      "description": "Invert an affine transformation matrix. Filename of input affine matrix."
+    },
+    "inv_affine_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Affine for Inversion",
+      "description": "Filename of inverted affine matrix."
+    },
+    "comp_aff_1st": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First Affine for Composition",
+      "description": "Compose two affine transformation matrices. Filename of first affine matrix."
+    },
+    "comp_aff_2nd": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second Affine for Composition",
+      "description": "Filename of second affine matrix."
+    },
+    "comp_aff_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Affine for Composition",
+      "description": "Filename of composed affine matrix result."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "reference_image"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "xfmrot",
+  "description": "Tool to apply a transformation defined in a transform file to an input vector file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.xfmrot"
+    },
+    "transform_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Transform file",
+      "description": "Transform file, can be an eddy_correct/eddy log file or a .mat file."
+    },
+    "input_vector_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input vector file",
+      "description": "Input vector file which can be formatted in 3 rows or 3 columns."
+    },
+    "output_vector_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output vector file",
+      "description": "Output vector file will have the same format as input."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "transform_file",
+    "input_vector_file"
+  ]
+}

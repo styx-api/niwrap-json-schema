@@ -1,0 +1,363 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dwiextract",
+  "description": "Extract diffusion-weighted volumes, b=0 volumes, or certain shells from a DWI dataset.\n\n\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix.dwiextract"
+    },
+    "bzero": {
+      "type": "boolean",
+      "default": false,
+      "title": "bzero",
+      "description": "Output b=0 volumes (instead of the diffusion weighted volumes, if -singleshell is not specified)."
+    },
+    "no_bzero": {
+      "type": "boolean",
+      "default": false,
+      "title": "no_bzero",
+      "description": "Output only non b=0 volumes (default, if -singleshell is not specified)."
+    },
+    "singleshell": {
+      "type": "boolean",
+      "default": false,
+      "title": "singleshell",
+      "description": "Force a single-shell (single non b=0 shell) output. This will include b=0 volumes, if present. Use with -bzero to enforce presence of b=0 volumes (error if not present) or with -no_bzero to exclude them."
+    },
+    "grad": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "grad",
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in a text file. This should be supplied as a 4xN text file with each line is in the format [ X Y Z b ], where [ X Y Z ] describe the direction of the applied gradient, and b gives the b-value in units of s/mm^2. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used."
+    },
+    "fslgrad": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "fslgrad"
+            },
+            "bvecs": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "bvecs",
+              "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used."
+            },
+            "bvals": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "bvals",
+              "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used."
+            }
+          },
+          "additionalProperties": false,
+          "title": "fslgrad",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "required": [
+            "bvecs",
+            "bvals"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "fslgrad",
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used."
+    },
+    "shells": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "shells",
+      "description": "specify one or more b-values to use during processing, as a comma-separated list of the desired approximate b-values (b-values are clustered to allow for small deviations). Note that some commands are incompatible with multiple b-values, and will report an error if more than one b-value is provided. \nWARNING: note that, even though the b=0 volumes are never referred to as shells in the literature, they still have to be explicitly included in the list of b-values as provided to the -shell option! Several algorithms which include the b=0 volumes in their computations may otherwise return an undesired result."
+    },
+    "export_grad_mrtrix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "export_grad_mrtrix",
+      "description": "export the diffusion-weighted gradient table to file in MRtrix format"
+    },
+    "export_grad_fsl": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "export_grad_fsl"
+            },
+            "bvecs_path": {
+              "type": "string",
+              "title": "bvecs_path",
+              "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+            },
+            "bvals_path": {
+              "type": "string",
+              "title": "bvals_path",
+              "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+            }
+          },
+          "additionalProperties": false,
+          "title": "export_grad_fsl",
+          "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format",
+          "required": [
+            "bvecs_path",
+            "bvals_path"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "export_grad_fsl",
+      "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+    },
+    "import_pe_table": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "import_pe_table",
+      "description": "import a phase-encoding table from file"
+    },
+    "import_pe_eddy": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "import_pe_eddy"
+            },
+            "config": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "config",
+              "description": "import phase-encoding information from an EDDY-style config / index file pair"
+            },
+            "indices": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "indices",
+              "description": "import phase-encoding information from an EDDY-style config / index file pair"
+            }
+          },
+          "additionalProperties": false,
+          "title": "import_pe_eddy",
+          "description": "import phase-encoding information from an EDDY-style config / index file pair",
+          "required": [
+            "config",
+            "indices"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "import_pe_eddy",
+      "description": "import phase-encoding information from an EDDY-style config / index file pair"
+    },
+    "pe": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "pe",
+      "description": "select volumes with a particular phase encoding; this can be three comma-separated values (for i,j,k components of vector direction) or four (direction & total readout time)"
+    },
+    "strides": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "VariousString"
+                },
+                "obj": {
+                  "type": "string",
+                  "title": "Object",
+                  "description": "String object."
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "obj"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "VariousFile"
+                },
+                "obj": {
+                  "type": "string",
+                  "x-styx-type": "file",
+                  "title": "Object",
+                  "description": "File object."
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "obj"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "strides",
+      "description": "specify the strides of the output data in memory; either as a comma-separated list of (signed) integers, or as a template image from which the strides shall be extracted and used. The actual strides produced will depend on whether the output image format can support it."
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "title": "config",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "config",
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "input",
+      "description": "the input DW image."
+    },
+    "output": {
+      "type": "string",
+      "title": "output",
+      "description": "the output image (diffusion-weighted volumes by default)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input",
+    "output"
+  ]
+}

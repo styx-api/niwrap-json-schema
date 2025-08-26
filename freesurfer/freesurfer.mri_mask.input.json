@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_mask",
+  "description": "Applies a mask volume (typically skull stripped)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_mask"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input volume file"
+    },
+    "mask_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask Volume",
+      "description": "Mask volume file"
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume file"
+    },
+    "xform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transformation",
+      "description": "Apply M3Z/LTA to transform mask to the space of input volume (identity.nofile possible, will invert if needed)"
+    },
+    "lta_src": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "LTA Source",
+      "description": "Source volume for -xform (if not available from the xform file)"
+    },
+    "lta_dst": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "LTA Destination",
+      "description": "Destination volume for -xform (if not available from the xform file)"
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold",
+      "description": "Threshold mask volume at a given threshold (values <= threshold considered zero)"
+    },
+    "npad": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bounding Box Padding",
+      "description": "Create a bounding box around the mask expanded by npad voxels in each direction"
+    },
+    "npad_vector": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bounding Box Padding Vector",
+      "description": "Create a bounding box around the mask expanded by npad1 npad2 npad3 voxels in each direction"
+    },
+    "npad_multi_vector": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bounding Box Full Padding Vector",
+      "description": "Create a bounding box around the mask, expanded by npad1a npad1b npad2a npad2b npad3a npad3b in each direction"
+    },
+    "abs": {
+      "type": "boolean",
+      "default": false,
+      "title": "Absolute Flag",
+      "description": "Take absolute value before applying threshold"
+    },
+    "invert": {
+      "type": "boolean",
+      "default": false,
+      "title": "Invert Mask Flag",
+      "description": "Invert mask"
+    },
+    "no_invert": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Invert Mask Flag",
+      "description": "Turn off inversion of mask"
+    },
+    "rh_labels": {
+      "type": "boolean",
+      "default": false,
+      "title": "Right Hemisphere Label Flag",
+      "description": "Set mask in right hemisphere labels to 1 (assumes input mask is an aseg)"
+    },
+    "lh_labels": {
+      "type": "boolean",
+      "default": false,
+      "title": "Left Hemisphere Label Flag",
+      "description": "Set mask in left hemisphere labels to 1 (assumes input mask is an aseg)"
+    },
+    "dilate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dilate Mask",
+      "description": "Dilate mask N times before applying"
+    },
+    "no_cerebellum": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cerebellum Flag",
+      "description": "Remove cerebellum from aseg mask (assumes input mask is an aseg)"
+    },
+    "oval_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Oval Value",
+      "description": "Use specified oval value as output instead of 0"
+    },
+    "transfer_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transfer Value",
+      "description": "Transfer only the specified voxel value from mask to output"
+    },
+    "keep_mask_deletion_edits": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep Mask Deletion Edits Flag",
+      "description": "Transfer voxel-deletion edits (voxels=1) from mask to output volume"
+    },
+    "samseg": {
+      "type": "boolean",
+      "default": false,
+      "title": "SAMSEG Segmentation Flag",
+      "description": "Assume mask is a SAMSEG segmentation and mask all non-brain labels"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume",
+    "mask_volume",
+    "output_volume"
+  ]
+}

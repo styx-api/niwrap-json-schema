@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_profileClustering",
+  "description": "A tool from Freesurfer for clustering based on profile data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_profileClustering"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input file required for clustering."
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output file to store clustering results."
+    },
+    "other_options": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Other options",
+      "description": "Other various options for tuning the clustering process."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "output_file"
+  ]
+}

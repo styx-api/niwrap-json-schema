@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dmri_forrest",
+  "description": "dmri_forrest is a tool for processing diffusion MRI data using a random forest-based method.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.dmri_forrest"
+    },
+    "test_dir": {
+      "type": "string",
+      "title": "Test subject directory",
+      "description": "Directory containing the test subject data"
+    },
+    "train_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Training file",
+      "description": "File listing training subject directories, one per line"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Brain mask file",
+      "description": "Input brain mask volume name, relative to subject directory"
+    },
+    "tract_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Tract label volumes",
+      "description": "Input tract label volume(s), relative to subject directory"
+    },
+    "seg_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation file",
+      "description": "Input aparc+aseg volume name, relative to subject directory"
+    },
+    "diff_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Diffusion orientation file",
+      "description": "Input diffusion orientation volume name, relative to subject directory"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Turn on debugging mode"
+    },
+    "checkopts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check options flag",
+      "description": "Only check options and exit"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Display help information"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "test_dir",
+    "train_file",
+    "mask_file",
+    "tract_files"
+  ]
+}

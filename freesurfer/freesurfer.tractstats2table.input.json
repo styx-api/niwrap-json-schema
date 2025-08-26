@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tractstats2table",
+  "description": "Converts a track overall stats file created by tracula into a table used for group statistics.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.tractstats2table"
+    },
+    "inputs": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input stat files",
+      "description": "Specify input stat files."
+    },
+    "load_pathstats_from_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Load pathstats from file",
+      "description": "Name of the file which has the list of subjects (one subject per line)."
+    },
+    "overall": {
+      "type": "boolean",
+      "default": false,
+      "title": "Overall flag",
+      "description": "Operate on the overall path statistics."
+    },
+    "byvoxel": {
+      "type": "boolean",
+      "default": false,
+      "title": "Byvoxel flag",
+      "description": "Operate on the byvoxel path statistics."
+    },
+    "byvoxel_measure": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Byvoxel measure",
+      "description": "Specify byvoxel measure. One of [AD, RD, MD, FA]. Required with --byvoxel option."
+    },
+    "tablefile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Output table file",
+      "description": "The output table file."
+    },
+    "delimiter": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "tab",
+      "title": "Delimiter",
+      "description": "Delimiter between measures in the table. Default is tab (alt comma, space, semicolon)."
+    },
+    "transpose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Transpose flag",
+      "description": "Transpose the table (default is subject in rows and measures/count in cols)."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Increase verbosity."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "tablefile"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_proc_convert_dcm_dwis",
+  "description": "Convert sets of DWIs in DICOM format into 'nicer' volume+grad format, reorient volumetric data, and glue together multiple sessions/directories of data.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "root": {
+      "type": "string",
+      "title": "Root",
+      "description": "Output root directory"
+    },
+    "output_nifti": {
+      "type": "string",
+      "title": "Output NIFTI",
+      "description": "A NIFTI file with N volumes."
+    },
+    "output_rvec": {
+      "type": "string",
+      "title": "Output rvec",
+      "description": "A row-wise (3xN) bvec file of the (unit-magnitude) gradient orientations."
+    },
+    "output_bval": {
+      "type": "string",
+      "title": "Output bval",
+      "description": "A row-wise (1xN) bval file of the gradient magnitudes."
+    },
+    "output_matA": {
+      "type": "string",
+      "title": "Output matA",
+      "description": "A column-wise (Nx6) AFNI-style matrix file of the (scaled) b-matrix values."
+    },
+    "output_matT": {
+      "type": "string",
+      "title": "Output matT",
+      "description": "A column-wise (Nx6) TORTOISE-style matrix file of the (scaled) b-matrix values."
+    },
+    "output_cvec": {
+      "type": "string",
+      "title": "Output cvec",
+      "description": "A column-wise (Nx3) bvec file of the (b-magn scaled) gradient orientations."
+    }
+  }
+}

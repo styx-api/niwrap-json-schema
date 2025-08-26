@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dAFNIto3D",
+  "description": "Reads in an AFNI dataset, and writes it out as a 3D file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dAFNIto3D"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Dataset",
+      "description": "AFNI dataset to be converted"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Write result into file with specified prefix"
+    },
+    "binary": {
+      "type": "boolean",
+      "default": false,
+      "title": "Binary Format Flag",
+      "description": "Write data in binary format"
+    },
+    "text": {
+      "type": "boolean",
+      "default": false,
+      "title": "Text Format Flag",
+      "description": "Write data in text format"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset"
+  ]
+}

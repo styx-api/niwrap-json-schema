@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "foci-resample",
+  "description": "Project foci to a different surface.\n\nUnprojects foci from the <current-surf> for the structure, then projects them to <new-surf>.  If the foci have meaningful distances above or below the surface, use anatomical surfaces.  If the foci should be on the surface, use registered spheres and the options -discard-distance-from-surface and -restore-xyz.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.foci-resample"
+    },
+    "foci_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "foci_in",
+      "description": "the input foci file"
+    },
+    "foci_out": {
+      "type": "string",
+      "title": "foci_out",
+      "description": "the output foci file"
+    },
+    "left_surfaces": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "left_surfaces"
+            },
+            "current_surf": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "current_surf",
+              "description": "the surface the foci are currently projected on"
+            },
+            "new_surf": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "new_surf",
+              "description": "the surface to project the foci onto"
+            }
+          },
+          "additionalProperties": false,
+          "title": "left_surfaces",
+          "description": "the left surfaces for resampling",
+          "required": [
+            "current_surf",
+            "new_surf"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "left_surfaces",
+      "description": "the left surfaces for resampling"
+    },
+    "right_surfaces": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "right_surfaces"
+            },
+            "current_surf": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "current_surf",
+              "description": "the surface the foci are currently projected on"
+            },
+            "new_surf": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "new_surf",
+              "description": "the surface to project the foci onto"
+            }
+          },
+          "additionalProperties": false,
+          "title": "right_surfaces",
+          "description": "the right surfaces for resampling",
+          "required": [
+            "current_surf",
+            "new_surf"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "right_surfaces",
+      "description": "the right surfaces for resampling"
+    },
+    "cerebellum_surfaces": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "cerebellum_surfaces"
+            },
+            "current_surf": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "current_surf",
+              "description": "the surface the foci are currently projected on"
+            },
+            "new_surf": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "new_surf",
+              "description": "the surface to project the foci onto"
+            }
+          },
+          "additionalProperties": false,
+          "title": "cerebellum_surfaces",
+          "description": "the cerebellum surfaces for resampling",
+          "required": [
+            "current_surf",
+            "new_surf"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "cerebellum_surfaces",
+      "description": "the cerebellum surfaces for resampling"
+    },
+    "opt_discard_distance_from_surface": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_discard_distance_from_surface",
+      "description": "ignore the distance the foci are above or below the current surface"
+    },
+    "opt_restore_xyz": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_restore_xyz",
+      "description": "put the original xyz coordinates into the foci, rather than the coordinates obtained from unprojection"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "foci_in",
+    "foci_out"
+  ]
+}

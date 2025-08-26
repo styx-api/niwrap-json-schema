@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslpspec",
+  "description": "Estimate the power spectrum of 4D fMRI time series data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.fslpspec"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input 4D fMRI time series image (e.g. fMRI_data.nii.gz)"
+    },
+    "outfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output file",
+      "description": "Output power spectrum image (e.g. pspec_data.nii.gz)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "infile"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cifti-estimate-fwhm",
+  "description": "Estimate fwhm smoothness of a cifti file.\n\nEstimate the smoothness of the components of the cifti file, printing the estimates to standard output.  If -merged-volume is used, all voxels are used as a single component, rather than separated by structure.\n\n<structure> must be one of the following:\n\nCORTEX_LEFT\nCORTEX_RIGHT\nCEREBELLUM\nACCUMBENS_LEFT\nACCUMBENS_RIGHT\nALL_GREY_MATTER\nALL_WHITE_MATTER\nAMYGDALA_LEFT\nAMYGDALA_RIGHT\nBRAIN_STEM\nCAUDATE_LEFT\nCAUDATE_RIGHT\nCEREBELLAR_WHITE_MATTER_LEFT\nCEREBELLAR_WHITE_MATTER_RIGHT\nCEREBELLUM_LEFT\nCEREBELLUM_RIGHT\nCEREBRAL_WHITE_MATTER_LEFT\nCEREBRAL_WHITE_MATTER_RIGHT\nCORTEX\nDIENCEPHALON_VENTRAL_LEFT\nDIENCEPHALON_VENTRAL_RIGHT\nHIPPOCAMPUS_LEFT\nHIPPOCAMPUS_RIGHT\nINVALID\nOTHER\nOTHER_GREY_MATTER\nOTHER_WHITE_MATTER\nPALLIDUM_LEFT\nPALLIDUM_RIGHT\nPUTAMEN_LEFT\nPUTAMEN_RIGHT\nTHALAMUS_LEFT\nTHALAMUS_RIGHT",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.cifti-estimate-fwhm"
+    },
+    "cifti": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "cifti",
+      "description": "the input cifti file"
+    },
+    "opt_merged_volume": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_merged_volume",
+      "description": "treat volume components as if they were a single component"
+    },
+    "opt_column_column": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_column_column",
+      "description": "only output estimates for one column: the column number"
+    },
+    "whole_file": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "whole_file"
+            },
+            "opt_demean": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_demean",
+              "description": "subtract the mean image before estimating smoothness"
+            }
+          },
+          "additionalProperties": false,
+          "title": "whole_file",
+          "description": "estimate for the whole file at once, not each column separately"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "whole_file",
+      "description": "estimate for the whole file at once, not each column separately"
+    },
+    "surface": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "surface"
+              },
+              "structure": {
+                "type": "string",
+                "title": "structure",
+                "description": "what structure to use this surface for"
+              },
+              "surface": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "surface",
+                "description": "the surface file"
+              }
+            },
+            "additionalProperties": false,
+            "title": "surface",
+            "description": "specify an input surface",
+            "required": [
+              "structure",
+              "surface"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "surface",
+      "description": "specify an input surface"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti"
+  ]
+}

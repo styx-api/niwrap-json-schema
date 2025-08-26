@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surface-resample",
+  "description": "Resample a surface to a different mesh.\n\nResamples a surface file, given two spherical surfaces that are in register.  If ADAP_BARY_AREA is used, exactly one of -area-surfs or -area-metrics must be specified.  This method is not generally recommended for surface resampling, but is provided for completeness.\n\nThe BARYCENTRIC method is generally recommended for anatomical surfaces, in order to minimize smoothing.\n\nFor cut surfaces (including flatmaps), use -surface-cut-resample.\n\nInstead of resampling a spherical surface, the -surface-sphere-project-unproject command is recommended.\n\nThe <method> argument must be one of the following:\n\nADAP_BARY_AREA\nBARYCENTRIC\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.surface-resample"
+    },
+    "surface_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface_in",
+      "description": "the surface file to resample"
+    },
+    "current_sphere": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "current_sphere",
+      "description": "a sphere surface with the mesh that the input surface is currently on"
+    },
+    "new_sphere": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "new_sphere",
+      "description": "a sphere surface that is in register with <current-sphere> and has the desired output mesh"
+    },
+    "method": {
+      "type": "string",
+      "title": "method",
+      "description": "the method name"
+    },
+    "surface_out": {
+      "type": "string",
+      "title": "surface_out",
+      "description": "the output surface file"
+    },
+    "area_surfs": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "area_surfs"
+            },
+            "current_area": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "current_area",
+              "description": "a relevant surface with <current-sphere> mesh"
+            },
+            "new_area": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "new_area",
+              "description": "a relevant surface with <new-sphere> mesh"
+            }
+          },
+          "additionalProperties": false,
+          "title": "area_surfs",
+          "description": "specify surfaces to do vertex area correction based on",
+          "required": [
+            "current_area",
+            "new_area"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "area_surfs",
+      "description": "specify surfaces to do vertex area correction based on"
+    },
+    "area_metrics": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "area_metrics"
+            },
+            "current_area": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "current_area",
+              "description": "a metric file with vertex areas for <current-sphere> mesh"
+            },
+            "new_area": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "new_area",
+              "description": "a metric file with vertex areas for <new-sphere> mesh"
+            }
+          },
+          "additionalProperties": false,
+          "title": "area_metrics",
+          "description": "specify vertex area metrics to do area correction based on",
+          "required": [
+            "current_area",
+            "new_area"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "area_metrics",
+      "description": "specify vertex area metrics to do area correction based on"
+    },
+    "opt_bypass_sphere_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_bypass_sphere_check",
+      "description": "ADVANCED: allow the current and new 'spheres' to have arbitrary shape as long as they follow the same contour"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface_in",
+    "current_sphere",
+    "new_sphere",
+    "method",
+    "surface_out"
+  ]
+}

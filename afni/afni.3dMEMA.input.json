@@ -1,0 +1,277 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dMEMA",
+  "description": "3dMEMA is a program for performing Mixed Effects Meta Analysis at group level that models both within- and across-subjects variability.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dMEMA"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Output prefix (just prefix, no view+suffix needed)"
+    },
+    "jobs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of jobs",
+      "description": "Number of jobs for parallel computing"
+    },
+    "set": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Set data",
+      "description": "Set data for one of the test variables"
+    },
+    "covariates": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Covariates file",
+      "description": "Specify the name of a text file containing a table for the covariate(s)."
+    },
+    "covariates_center": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Covariates center",
+      "description": "Specify the center values for covariates."
+    },
+    "covariates_model": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Covariates model",
+      "description": "Specify how covariates should be modeled."
+    },
+    "covariates_name": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Covariates name",
+      "description": "Specify the name of each covariate."
+    },
+    "groups": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Groups",
+      "description": "Label of groups, used for output naming."
+    },
+    "cio": {
+      "type": "boolean",
+      "default": false,
+      "title": "C IO functions flag",
+      "description": "Use AFNI's C io functions."
+    },
+    "HKtest": {
+      "type": "boolean",
+      "default": false,
+      "title": "H-K test flag",
+      "description": "Perform Hartung-Knapp adjustment for the output t-statistic."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Only process voxels inside the specified mask."
+    },
+    "max_zeros": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum zeros allowed",
+      "description": "Specify how many beta/t-statistics can be zero."
+    },
+    "missing_data": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Missing data",
+      "description": "Specify missing data handling."
+    },
+    "model_outliers": {
+      "type": "boolean",
+      "default": false,
+      "title": "Model outliers flag",
+      "description": "Model outliers with a Laplace distribution."
+    },
+    "n_nonzero": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum non-zero betas",
+      "description": "Number of non-zero beta values required."
+    },
+    "no_HKtest": {
+      "type": "boolean",
+      "default": false,
+      "title": "No H-K test flag",
+      "description": "Specify not to use Hartung-Knapp adjustment."
+    },
+    "no_model_outliers": {
+      "type": "boolean",
+      "default": false,
+      "title": "No model outliers flag",
+      "description": "Specify not to model outliers."
+    },
+    "no_residual_Z": {
+      "type": "boolean",
+      "default": false,
+      "title": "No residual Z flag",
+      "description": "Do not output residuals and their Z values."
+    },
+    "residual_Z": {
+      "type": "boolean",
+      "default": false,
+      "title": "Residual Z flag",
+      "description": "Output residuals and their Z values."
+    },
+    "Rio": {
+      "type": "boolean",
+      "default": false,
+      "title": "R IO functions flag",
+      "description": "Use R's io functions."
+    },
+    "equal_variance": {
+      "type": "boolean",
+      "default": false,
+      "title": "Equal variance flag",
+      "description": "Assume same cross-subjects variability between groups."
+    },
+    "unequal_variance": {
+      "type": "boolean",
+      "default": false,
+      "title": "Unequal variance flag",
+      "description": "Model cross-subject variability difference between groups."
+    },
+    "verb": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbosity level",
+      "description": "Specify verbosity level"
+    },
+    "dbgArgs": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug arguments flag",
+      "description": "Output missing data debug file."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Show help message"
+    },
+    "conditions": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Conditions",
+      "description": "Name of 1 or 2 conditions, tasks, or GLTs"
+    },
+    "no_tstat": {
+      "type": "boolean",
+      "default": false,
+      "title": "No t-stat flag",
+      "description": "Do not compute t-statistics"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix",
+    "set"
+  ]
+}

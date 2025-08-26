@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "label_elderly_subject",
+  "description": "Tool for labeling brain structures in MRI images of elderly subjects using Freesurfer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.label_elderly_subject"
+    },
+    "norm_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Norm Volume",
+      "description": "Normalized input volume (e.g. norm.mgz)"
+    },
+    "transform_lta": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Transform LTA",
+      "description": "Transformation file (e.g. talairach.lta)"
+    },
+    "classifier_array": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Classifier Array",
+      "description": "Classifier array file (e.g. mixed.gca)"
+    },
+    "aseg_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Aseg Volume",
+      "description": "Asegmentation volume file (e.g. aseg.mgz)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "norm_volume",
+    "transform_lta",
+    "aseg_volume"
+  ]
+}

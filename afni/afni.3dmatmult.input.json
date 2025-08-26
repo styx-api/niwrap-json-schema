@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dmatmult",
+  "description": "Multiply AFNI datasets slice-by-slice as matrices.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dmatmult"
+    },
+    "inputA": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input dataset A",
+      "description": "Specify first (matrix) dataset"
+    },
+    "inputB": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input dataset B",
+      "description": "Specify second (matrix) dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Prefix for output dataset",
+      "description": "Specify output dataset prefix"
+    },
+    "datum": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output data type",
+      "description": "Specify output data type ('byte', 'short', 'float')"
+    },
+    "verb": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbosity level",
+      "description": "Specify verbosity level"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "inputA",
+    "inputB",
+    "prefix"
+  ]
+}

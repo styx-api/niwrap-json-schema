@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@measure_erosion_thick",
+  "description": "Compute thickness of mask using erosion method.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.@measure_erosion_thick"
+    },
+    "maskset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Maskset",
+      "description": "Mask dataset for input."
+    },
+    "surfset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Surfset",
+      "description": "Surface dataset onto which to map thickness (probably a pial/gray matter surface)."
+    },
+    "outdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Directory",
+      "description": "Output directory. If not specified, erosion_thickdir is used."
+    },
+    "resample": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resample",
+      "description": "Resample input to mm in millimeters (put a number here). Recommended for most 1mm data."
+    },
+    "surfsmooth": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Smooth",
+      "description": "Smooth surface map of thickness by mm millimeters. Default is 8 mm."
+    },
+    "smoothmm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volume Smooth",
+      "description": "Smooth volume by mm FWHM in mask. Default is 2*voxelsize of mask or resampled mask."
+    },
+    "maxthick": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Thickness",
+      "description": "Search for maximum thickness value of mm millimeters. Default is 6 mm."
+    },
+    "depthsearch": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Depth Search",
+      "description": "Map to surface by looking for max along mm millimeter normal vectors. Default is 3 mm."
+    },
+    "keep_temp_files": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep Temporary Files",
+      "description": "Do not delete the intermediate files (for testing)."
+    },
+    "surfsmooth_method": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Smooth Method",
+      "description": "Heat method used for smoothing surfaces. Default is HEAT_07 but HEAT_05 is also useful for models."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "maskset",
+    "surfset"
+  ]
+}

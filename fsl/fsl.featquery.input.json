@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "featquery",
+  "description": "Tool to extract statistics and/or time series from FEAT directories",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.featquery"
+    },
+    "n_featdirs": {
+      "type": "number",
+      "title": "Number of feat directories",
+      "description": "Number of feat directories"
+    },
+    "featdirs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Feat directories",
+      "description": "List of feat directories"
+    },
+    "n_stats": {
+      "type": "number",
+      "title": "Number of statistics",
+      "description": "Number of stats to query"
+    },
+    "stats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Statistics",
+      "description": "List of stats"
+    },
+    "output_rootname": {
+      "type": "string",
+      "title": "Output root name",
+      "description": "Root name for output files"
+    },
+    "atlas_flag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlas flag",
+      "description": "Use selected atlas to generate label (etc.) information"
+    },
+    "percent_convert_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Percent convert flag",
+      "description": "Convert PE / COPE values into percentages"
+    },
+    "thresh_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Threshold flag",
+      "description": "Threshold stats images"
+    },
+    "interp_thresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.5,
+      "title": "Interpolation threshold",
+      "description": "Affect size of resampled masks by changing post-interpolation thresholding (default 0.5)"
+    },
+    "timeseries_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Time-series flag",
+      "description": "Create time-series plots"
+    },
+    "weight_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Weight flag",
+      "description": "Do not binarise mask (allow weighting)"
+    },
+    "browser_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Browser flag",
+      "description": "Popup results in browser when finished"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask file",
+      "description": "Mask file used as a reference for coordinates; if relative, searched within each FEAT directory"
+    },
+    "coords": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel coordinates",
+      "description": "Coordinates specified in voxels (X Y Z)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "n_featdirs",
+    "featdirs",
+    "n_stats",
+    "stats",
+    "output_rootname",
+    "mask_file"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_brainvol_stats",
+  "description": "Tool for computing brain volume statistics with FreeSurfer",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_brainvol_stats"
+    },
+    "subject_id": {
+      "type": "string",
+      "title": "Subject",
+      "description": "The subject ID for which brain volume statistics are computed"
+    },
+    "xml_string": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "XML String Input",
+      "description": "XML string containing input data. The XML is used to define additional parameters for computation."
+    },
+    "no_surface": {
+      "type": "boolean",
+      "default": false,
+      "title": "Exclude Surface Calculations",
+      "description": "Flag to specify that surface-based measurements should not be included in the output."
+    },
+    "include_segmentation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Include Segmentation",
+      "description": "Flag to include segmentation information in the brain volume calculations."
+    },
+    "output_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output File",
+      "description": "Output file path to write the brain volume statistics."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_id"
+  ]
+}

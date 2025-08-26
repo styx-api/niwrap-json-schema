@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dwiextract",
+  "description": "Extract diffusion-weighted volumes, b=0 volumes, or certain shells from a DWI dataset.\n\n\n\nReferences:\n\n",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "root": {
+      "type": "string",
+      "title": "Root",
+      "description": "Output root directory"
+    },
+    "output": {
+      "type": "string",
+      "title": "output",
+      "description": "the output image (diffusion-weighted volumes by default)."
+    },
+    "export_grad_mrtrix": {
+      "type": "string",
+      "title": "export_grad_mrtrix",
+      "description": "export the diffusion-weighted gradient table to file in MRtrix format "
+    },
+    "dwiextract": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "root": {
+              "type": "string",
+              "title": "Root",
+              "description": "Output root directory"
+            },
+            "bvecs_path": {
+              "type": "string",
+              "title": "bvecs_path",
+              "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+            },
+            "bvals_path": {
+              "type": "string",
+              "title": "bvals_path",
+              "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@SSwarper",
+  "description": "Dual purposes for processing a given subject's anatomical volume: skull-strip the brain and calculate the warp to a reference template/standard space.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "root": {
+      "type": "string",
+      "title": "Root",
+      "description": "Output root directory"
+    },
+    "anatDO": {
+      "type": "string",
+      "title": "Deobliqued Dataset",
+      "description": "Deobliqued version of original dataset"
+    },
+    "anatU": {
+      "type": "string",
+      "title": "Uniformized Dataset",
+      "description": "Intensity uniform-ized original dataset"
+    },
+    "anatUA": {
+      "type": "string",
+      "title": "Anisotropically Smoothed Dataset",
+      "description": "Anisotropically smoothed version of the uniformized dataset"
+    },
+    "anatUAC": {
+      "type": "string",
+      "title": "Ceiling-capped Dataset",
+      "description": "Ceiling-capped version of the anisotropically smoothed dataset"
+    },
+    "anatS": {
+      "type": "string",
+      "title": "First Pass Skull-stripped Dataset",
+      "description": "First pass skull-stripped original dataset"
+    },
+    "anatSS": {
+      "type": "string",
+      "title": "Second Pass Skull-stripped Dataset",
+      "description": "Second pass skull-stripped original dataset"
+    },
+    "anatQQ": {
+      "type": "string",
+      "title": "Nonlinearly Warped Dataset",
+      "description": "Skull-stripped dataset nonlinearly warped to the base template space"
+    },
+    "anatQQ_affine": {
+      "type": "string",
+      "title": "Affine Transformation Matrix",
+      "description": "Affine matrix to transform original dataset to base template space"
+    },
+    "anatQQ_warp": {
+      "type": "string",
+      "title": "Incremental Warp",
+      "description": "Incremental warp from affine transformation to nonlinearly aligned dataset"
+    },
+    "AM_snapshot": {
+      "type": "string",
+      "title": "AM Snapshot",
+      "description": "3x3 snapshot image of the nonlinearly warped dataset with edges from the base template overlaid"
+    },
+    "MA_snapshot": {
+      "type": "string",
+      "title": "MA Snapshot",
+      "description": "Similar to AM_snapshot, but with roles of the template and anatomical dataset reversed"
+    },
+    "QC_anatQQ": {
+      "type": "string",
+      "title": "QC anatQQ Snapshot",
+      "description": "3 rows of 8 slices snapshot image for checking alignment"
+    },
+    "QC_anatSS": {
+      "type": "string",
+      "title": "QC anatSS Snapshot",
+      "description": "Snapshot image to check skullstripping in original space"
+    },
+    "init_overlap_qc": {
+      "type": "string",
+      "title": "Initial Overlap QC",
+      "description": "Montage to check initial overlap of source and base datasets"
+    }
+  }
+}

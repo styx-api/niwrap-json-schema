@@ -1,0 +1,660 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mrconvert",
+  "description": "Perform conversion between different file types and optionally extract a subset of the input image.\n\nIf used correctly, this program can be a very useful workhorse. In addition to converting images between different formats, it can be used to extract specific studies from a data set, extract a specific region of interest, or flip the images. Some of the possible operations are described in more detail below.\n\nNote that for both the -coord and -axes options, indexing starts from 0 rather than 1. E.g. -coord 3 <#> selects volumes (the fourth dimension) from the series; -axes 0,1,2 includes only the three spatial axes in the output image.\n\nAdditionally, for the second input to the -coord option and the -axes option, you can use any valid number sequence in the selection, as well as the 'end' keyword (see the main documentation for details); this can be particularly useful to select multiple coordinates.\n\nThe -vox option is used to change the size of the voxels in the output image as reported in the image header; note however that this does not re-sample the image based on a new voxel size (that is done using the mrgrid command).\n\nBy default, the intensity scaling parameters in the input image header are passed through to the output image header when writing to an integer image, and reset to 0,1 (i.e. no scaling) for floating-point and binary images. Note that the -scaling option will therefore have no effect for floating-point or binary output images.\n\nThe -axes option specifies which axes from the input image will be used to form the output image. This allows the permutation, omission, or addition of axes into the output image. The axes should be supplied as a comma-separated list of axis indices. If an axis from the input image is to be omitted from the output image, it must either already have a size of 1, or a single coordinate along that axis must be selected by the user by using the -coord option. Examples are provided further below.\n\nThe -bvalue_scaling option controls an aspect of the import of diffusion gradient tables. When the input diffusion-weighting direction vectors have norms that differ substantially from unity, the b-values will be scaled by the square of their corresponding vector norm (this is how multi-shell acquisitions are frequently achieved on scanner platforms). However in some rare instances, the b-values may be correct, despite the vectors not being of unit norm (or conversely, the b-values may need to be rescaled even though the vectors are close to unit norm). This option allows the user to control this operation and override MRrtix3's automatic detection.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix.mrconvert"
+    },
+    "coord": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "coord"
+              },
+              "axis": {
+                "type": "integer",
+                "title": "axis",
+                "description": "retain data from the input image only at the coordinates specified in the selection along the specified axis. The selection argument expects a number sequence, which can also include the 'end' keyword."
+              },
+              "selection": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                },
+                "title": "selection",
+                "description": "retain data from the input image only at the coordinates specified in the selection along the specified axis. The selection argument expects a number sequence, which can also include the 'end' keyword."
+              }
+            },
+            "additionalProperties": false,
+            "title": "coord",
+            "description": "retain data from the input image only at the coordinates specified in the selection along the specified axis. The selection argument expects a number sequence, which can also include the 'end' keyword.",
+            "required": [
+              "axis",
+              "selection"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "coord",
+      "description": "retain data from the input image only at the coordinates specified in the selection along the specified axis. The selection argument expects a number sequence, which can also include the 'end' keyword."
+    },
+    "vox": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "vox",
+      "description": "change the voxel dimensions reported in the output image header"
+    },
+    "axes": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "axes",
+      "description": "specify the axes from the input image that will be used to form the output image"
+    },
+    "scaling": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "scaling",
+      "description": "specify the data scaling parameters used to rescale the intensity values"
+    },
+    "json_import": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "json_import",
+      "description": "import data from a JSON file into header key-value pairs"
+    },
+    "json_export": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "json_export",
+      "description": "export data from an image header key-value pairs into a JSON file"
+    },
+    "clear_property": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "clear_property"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "remove the specified key from the image header altogether."
+              }
+            },
+            "additionalProperties": false,
+            "title": "clear_property",
+            "description": "remove the specified key from the image header altogether.",
+            "required": [
+              "key"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "clear_property",
+      "description": "remove the specified key from the image header altogether."
+    },
+    "set_property": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "set_property"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "set the value of the specified key in the image header."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "set the value of the specified key in the image header."
+              }
+            },
+            "additionalProperties": false,
+            "title": "set_property",
+            "description": "set the value of the specified key in the image header.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "set_property",
+      "description": "set the value of the specified key in the image header."
+    },
+    "append_property": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "append_property"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "append the given value to the specified key in the image header (this adds the value specified as a new line in the header value)."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "append the given value to the specified key in the image header (this adds the value specified as a new line in the header value)."
+              }
+            },
+            "additionalProperties": false,
+            "title": "append_property",
+            "description": "append the given value to the specified key in the image header (this adds the value specified as a new line in the header value).",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "append_property",
+      "description": "append the given value to the specified key in the image header (this adds the value specified as a new line in the header value)."
+    },
+    "copy_properties": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "VariousString"
+                },
+                "obj": {
+                  "type": "string",
+                  "title": "Object",
+                  "description": "String object."
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "obj"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "VariousFile"
+                },
+                "obj": {
+                  "type": "string",
+                  "x-styx-type": "file",
+                  "title": "Object",
+                  "description": "File object."
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "obj"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "copy_properties",
+      "description": "clear all generic properties and replace with the properties from the image / file specified."
+    },
+    "strides": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "VariousString_1"
+                },
+                "obj": {
+                  "type": "string",
+                  "title": "Object",
+                  "description": "String object."
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "obj"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "VariousFile_1"
+                },
+                "obj": {
+                  "type": "string",
+                  "x-styx-type": "file",
+                  "title": "Object",
+                  "description": "File object."
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "obj"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "strides",
+      "description": "specify the strides of the output data in memory; either as a comma-separated list of (signed) integers, or as a template image from which the strides shall be extracted and used. The actual strides produced will depend on whether the output image format can support it."
+    },
+    "datatype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "datatype",
+      "description": "specify output image data type. Valid choices are: float32, float32le, float32be, float64, float64le, float64be, int64, uint64, int64le, uint64le, int64be, uint64be, int32, uint32, int32le, uint32le, int32be, uint32be, int16, uint16, int16le, uint16le, int16be, uint16be, cfloat32, cfloat32le, cfloat32be, cfloat64, cfloat64le, cfloat64be, int8, uint8, bit."
+    },
+    "grad": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "grad",
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in a text file. This should be supplied as a 4xN text file with each line is in the format [ X Y Z b ], where [ X Y Z ] describe the direction of the applied gradient, and b gives the b-value in units of s/mm^2. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used."
+    },
+    "fslgrad": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "fslgrad"
+            },
+            "bvecs": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "bvecs",
+              "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used."
+            },
+            "bvals": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "bvals",
+              "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used."
+            }
+          },
+          "additionalProperties": false,
+          "title": "fslgrad",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "required": [
+            "bvecs",
+            "bvals"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "fslgrad",
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used."
+    },
+    "bvalue_scaling": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "bvalue_scaling",
+      "description": "enable or disable scaling of diffusion b-values by the square of the corresponding DW gradient norm (see Desciption). Valid choices are yes/no, true/false, 0/1 (default: automatic)."
+    },
+    "export_grad_mrtrix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "export_grad_mrtrix",
+      "description": "export the diffusion-weighted gradient table to file in MRtrix format"
+    },
+    "export_grad_fsl": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "export_grad_fsl"
+            },
+            "bvecs_path": {
+              "type": "string",
+              "title": "bvecs_path",
+              "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+            },
+            "bvals_path": {
+              "type": "string",
+              "title": "bvals_path",
+              "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+            }
+          },
+          "additionalProperties": false,
+          "title": "export_grad_fsl",
+          "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format",
+          "required": [
+            "bvecs_path",
+            "bvals_path"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "export_grad_fsl",
+      "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+    },
+    "import_pe_table": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "import_pe_table",
+      "description": "import a phase-encoding table from file"
+    },
+    "import_pe_eddy": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "import_pe_eddy"
+            },
+            "config": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "config",
+              "description": "import phase-encoding information from an EDDY-style config / index file pair"
+            },
+            "indices": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "indices",
+              "description": "import phase-encoding information from an EDDY-style config / index file pair"
+            }
+          },
+          "additionalProperties": false,
+          "title": "import_pe_eddy",
+          "description": "import phase-encoding information from an EDDY-style config / index file pair",
+          "required": [
+            "config",
+            "indices"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "import_pe_eddy",
+      "description": "import phase-encoding information from an EDDY-style config / index file pair"
+    },
+    "export_pe_table": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "export_pe_table",
+      "description": "export phase-encoding table to file"
+    },
+    "export_pe_eddy": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "export_pe_eddy"
+            },
+            "config": {
+              "type": "string",
+              "title": "config",
+              "description": "export phase-encoding information to an EDDY-style config / index file pair"
+            },
+            "indices": {
+              "type": "string",
+              "title": "indices",
+              "description": "export phase-encoding information to an EDDY-style config / index file pair"
+            }
+          },
+          "additionalProperties": false,
+          "title": "export_pe_eddy",
+          "description": "export phase-encoding information to an EDDY-style config / index file pair",
+          "required": [
+            "config",
+            "indices"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "export_pe_eddy",
+      "description": "export phase-encoding information to an EDDY-style config / index file pair"
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "title": "config",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "config",
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "input",
+      "description": "the input image."
+    },
+    "output": {
+      "type": "string",
+      "title": "output",
+      "description": "the output image."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input",
+    "output"
+  ]
+}

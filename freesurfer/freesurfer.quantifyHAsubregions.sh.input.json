@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "quantifyHAsubregions.sh",
+  "description": "Tool to quantify hippocampal subregions using FreeSurfer",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.quantifyHAsubregions.sh"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Prefix",
+      "description": "Prefix for the files to be processed."
+    },
+    "suffix": {
+      "type": "string",
+      "title": "Suffix",
+      "description": "Suffix for the files to be processed."
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output File",
+      "description": "Output file name to store the results."
+    },
+    "subjects_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Directory containing the subject data. If not provided, the current directory is used."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix",
+    "suffix",
+    "output_file"
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfToSurf",
+  "description": "Interpolate data from one surface to another",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.SurfToSurf"
+    },
+    "input_surface_1": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Surface 1",
+      "description": "First input surface file (S1)"
+    },
+    "input_surface_2": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Surface 2",
+      "description": "Second input surface file (S2)"
+    },
+    "surface_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Volume",
+      "description": "Specify the surface volume (SV1)"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Specify prefix for the output file"
+    },
+    "output_params": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Parameters",
+      "description": "List of mapping parameters to include in output"
+    },
+    "node_indices": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Node Indices",
+      "description": "1D file containing node indices of S1 to consider"
+    },
+    "proj_dir": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Projection Directions",
+      "description": "1D file containing projection directions"
+    },
+    "data": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Data",
+      "description": "1D file containing data to be interpolated"
+    },
+    "node_debug": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Node Debug",
+      "description": "Node index for debugging purposes"
+    },
+    "debug_level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Level",
+      "description": "Debugging level"
+    },
+    "make_consistent": {
+      "type": "boolean",
+      "default": false,
+      "title": "Make Consistent",
+      "description": "Force a consistency check and correct triangle orientation"
+    },
+    "dset": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset",
+      "description": "Dataset file for data interpolation; mutually exclusive with -data"
+    },
+    "mapfile": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mapfile",
+      "description": "File containing mapping parameters between surfaces S2 and S1"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_surface_1",
+    "input_surface_2"
+  ]
+}

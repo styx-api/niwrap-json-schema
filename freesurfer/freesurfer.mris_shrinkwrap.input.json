@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_shrinkwrap",
+  "description": "Generate shrink-wrapped tessellations of the input volume",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_shrinkwrap"
+    },
+    "volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input image volume for shrink wrap."
+    },
+    "output_name": {
+      "type": "string",
+      "title": "Output Base Name",
+      "description": "Base name for output surface files."
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold",
+      "description": "Apply threshold to image before deforming on distance transform."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "volume",
+    "output_name"
+  ]
+}

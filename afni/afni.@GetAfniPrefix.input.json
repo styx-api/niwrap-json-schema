@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@GetAfniPrefix",
+  "description": "A tool to extract AFNI prefix from a given file path",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.@GetAfniPrefix"
+    },
+    "name": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file path",
+      "description": "Input file path for which the AFNI prefix will be extracted"
+    },
+    "suffix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Suffix",
+      "description": "Suffix string to append to the returned prefix"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name"
+  ]
+}

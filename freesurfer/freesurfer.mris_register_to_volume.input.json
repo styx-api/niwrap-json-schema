@@ -1,0 +1,353 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_register_to_volume",
+  "description": "Aligns cortical surfaces to a volumetric template.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_register_to_volume"
+    },
+    "surface": {
+      "type": "string",
+      "title": "Surface",
+      "description": "The main surface file."
+    },
+    "pial": {
+      "type": "string",
+      "title": "Pial Surface",
+      "description": "Pial surface name."
+    },
+    "pial_only": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pial Surface Only",
+      "description": "Pial surface name (only)."
+    },
+    "reg": {
+      "type": "string",
+      "title": "Register File",
+      "description": "Registration file."
+    },
+    "noglobal": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Global",
+      "description": "Do not use global optimization."
+    },
+    "median": {
+      "type": "boolean",
+      "default": false,
+      "title": "Median Filtering",
+      "description": "Use median filtering."
+    },
+    "mri_reg": {
+      "type": "string",
+      "title": "MRI Register",
+      "description": "MRI volume registration file."
+    },
+    "tx_mmd": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Translation X",
+      "description": "Translation in x (min, max, delta)."
+    },
+    "ty_mmd": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Translation Y",
+      "description": "Translation in y (min, max, delta)."
+    },
+    "tz_mmd": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Translation Z",
+      "description": "Translation in z (min, max, delta)."
+    },
+    "ax_mmd": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rotation X",
+      "description": "Rotation about x (min, max, delta)."
+    },
+    "ay_mmd": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rotation Y",
+      "description": "Rotation about y (min, max, delta)."
+    },
+    "az_mmd": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rotation Z",
+      "description": "Rotation about z (min, max, delta)."
+    },
+    "cost": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cost File",
+      "description": "Cost file."
+    },
+    "interp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolation Type",
+      "description": "Interpolation type: trilinear or nearest."
+    },
+    "noise": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Noise Standard Deviation",
+      "description": "Add noise with stddev for testing sensitivity."
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random Seed",
+      "description": "Random seed for use with noise."
+    },
+    "skip": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Vertices Skip",
+      "description": "Number of vertices to skip."
+    },
+    "sigma": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Blurring Kernel Size",
+      "description": "Size of blurring kernels to use."
+    },
+    "cnr": {
+      "type": "boolean",
+      "default": false,
+      "title": "CNR Similarity Function",
+      "description": "Use CNR-based similarity function."
+    },
+    "max_rot": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Rotation",
+      "description": "Max angle (degrees) to search over."
+    },
+    "max_trans": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Translation",
+      "description": "Max translation (mm) to search over."
+    },
+    "border": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Border Size",
+      "description": "Size of the border region to ignore."
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject Name",
+      "description": "Specify name of subject (for register.dat file)."
+    },
+    "dilate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dilate Ripflags",
+      "description": "Dilate ripflags ndil times."
+    },
+    "patch": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Load Patch",
+      "description": "Load patch and limit calculations."
+    },
+    "label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Load Label",
+      "description": "Load label and limit calculations."
+    },
+    "out_reg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Registration",
+      "description": "Output registration at lowest cost."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface",
+    "pial",
+    "reg",
+    "mri_reg"
+  ]
+}

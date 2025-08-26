@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dBrickStat",
+  "description": "Compute voxel statistics of an input dataset",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dBrickStat"
+    },
+    "dataset": {
+      "type": "string",
+      "title": "Input dataset",
+      "description": "Input dataset"
+    },
+    "quick": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quick flag",
+      "description": "Get the information from the header only (default)"
+    },
+    "slow": {
+      "type": "boolean",
+      "default": false,
+      "title": "Slow flag",
+      "description": "Read the whole dataset to find the min and max values"
+    },
+    "min": {
+      "type": "boolean",
+      "default": false,
+      "title": "Minimum value flag",
+      "description": "Print the minimum value in dataset"
+    },
+    "max": {
+      "type": "boolean",
+      "default": false,
+      "title": "Maximum value flag",
+      "description": "Print the maximum value in dataset (default)"
+    },
+    "mean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mean value flag",
+      "description": "Print the mean value in dataset"
+    },
+    "sum": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sum value flag",
+      "description": "Print the sum of values in the dataset"
+    },
+    "var": {
+      "type": "boolean",
+      "default": false,
+      "title": "Variance value flag",
+      "description": "Print the variance in the dataset"
+    },
+    "stdev": {
+      "type": "boolean",
+      "default": false,
+      "title": "Standard deviation flag",
+      "description": "Print the standard deviation in the dataset"
+    },
+    "count": {
+      "type": "boolean",
+      "default": false,
+      "title": "Count flag",
+      "description": "Print the number of voxels included"
+    },
+    "volume": {
+      "type": "boolean",
+      "default": false,
+      "title": "Volume flag",
+      "description": "Print the volume of voxels included in microliters"
+    },
+    "positive": {
+      "type": "boolean",
+      "default": false,
+      "title": "Positive flag",
+      "description": "Include only positive voxel values"
+    },
+    "negative": {
+      "type": "boolean",
+      "default": false,
+      "title": "Negative flag",
+      "description": "Include only negative voxel values"
+    },
+    "zero": {
+      "type": "boolean",
+      "default": false,
+      "title": "Zero flag",
+      "description": "Include only zero voxel values"
+    },
+    "non_positive": {
+      "type": "boolean",
+      "default": false,
+      "title": "Non-positive flag",
+      "description": "Include only voxel values 0 or negative"
+    },
+    "non_negative": {
+      "type": "boolean",
+      "default": false,
+      "title": "Non-negative flag",
+      "description": "Include only voxel values 0 or greater"
+    },
+    "non_zero": {
+      "type": "boolean",
+      "default": false,
+      "title": "Non-zero flag",
+      "description": "Include only voxel values not equal to 0"
+    },
+    "absolute": {
+      "type": "boolean",
+      "default": false,
+      "title": "Absolute value flag",
+      "description": "Use absolute value of voxel values for all calculations"
+    },
+    "nan": {
+      "type": "boolean",
+      "default": false,
+      "title": "NaN value flag",
+      "description": "Include only voxel values that are NaN or inf. Forces -slow mode."
+    },
+    "nonan": {
+      "type": "boolean",
+      "default": false,
+      "title": "Exclude NaN value flag",
+      "description": "Exclude voxel values that are NaN or inf."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask dataset",
+      "description": "Use the specified dataset as mask to include/exclude voxels"
+    },
+    "mrange": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask range",
+      "description": "Only accept values between MIN and MAX (inclusive) from the mask"
+    },
+    "mvalue": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask value",
+      "description": "Only accept values equal to VAL from the mask"
+    },
+    "automask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automask flag",
+      "description": "Automatically compute mask for dataset. Cannot be combined with -mask."
+    },
+    "percentile": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Percentile values",
+      "description": "Compute and print percentile values from p0% to p1% at a step of ps%. Only one sub-brick is accepted as input with this option."
+    },
+    "perclist": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Percentile list",
+      "description": "Like -percentile, but output the given percentiles"
+    },
+    "median": {
+      "type": "boolean",
+      "default": false,
+      "title": "Median value flag",
+      "description": "Shortcut for -percentile 50 1 50 (or -perclist 1 50)"
+    },
+    "perc_quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Percentile quiet flag",
+      "description": "Only print percentile results, not input percentile cutoffs"
+    },
+    "ver": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version info flag",
+      "description": "Print author and version info"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Print help screen"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset"
+  ]
+}

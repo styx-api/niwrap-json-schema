@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_annot_to_segmentation",
+  "description": "Converts annotation files to segmentation volumes in FreeSurfer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_annot_to_segmentation"
+    },
+    "subject_name": {
+      "type": "string",
+      "title": "Subject Name",
+      "description": "Subject name."
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere (e.g., lh or rh)."
+    },
+    "surface": {
+      "type": "string",
+      "title": "Surface",
+      "description": "Surface file."
+    },
+    "annot_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Annotation File",
+      "description": "Annotation file."
+    },
+    "color_table": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Color Table",
+      "description": "Color table file."
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume file."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_name",
+    "hemi",
+    "surface",
+    "annot_file",
+    "color_table",
+    "output_volume"
+  ]
+}

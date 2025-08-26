@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cifti-average-roi-correlation",
+  "description": "Correlate roi average with all rows then average across subjects.\n\nAverages rows for each map of the ROI(s), takes the correlation of each ROI average to the rest of the rows in the same file, applies the fisher small z transform, then averages the results across all files.  ROIs are always treated as weighting functions, including negative values.  For efficiency, ensure that everything that is not intended to be used is zero in the ROI map.  If -cifti-roi is specified, -left-roi, -right-roi, -cerebellum-roi, and -vol-roi must not be specified.  If multiple non-cifti ROI files are specified, they must have the same number of columns.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.cifti-average-roi-correlation"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "output cifti file"
+    },
+    "cifti_roi": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "cifti_roi"
+            },
+            "roi_cifti": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "roi_cifti",
+              "description": "the roi cifti file"
+            },
+            "opt_in_memory": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_in_memory",
+              "description": "cache the roi in memory so that it isn't re-read for each input cifti"
+            }
+          },
+          "additionalProperties": false,
+          "title": "cifti_roi",
+          "description": "cifti file containing combined weights",
+          "required": [
+            "roi_cifti"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "cifti_roi",
+      "description": "cifti file containing combined weights"
+    },
+    "opt_left_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_left_roi_roi_metric",
+      "description": "weights to use for left hempsphere: the left roi as a metric file"
+    },
+    "opt_right_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_right_roi_roi_metric",
+      "description": "weights to use for right hempsphere: the right roi as a metric file"
+    },
+    "opt_cerebellum_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_cerebellum_roi_roi_metric",
+      "description": "weights to use for cerebellum surface: the cerebellum roi as a metric file"
+    },
+    "opt_vol_roi_roi_vol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_vol_roi_roi_vol",
+      "description": "voxel weights to use: the roi volume file"
+    },
+    "opt_left_area_surf_left_surf": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_left_area_surf_left_surf",
+      "description": "specify the left surface for vertex area correction: the left surface file"
+    },
+    "opt_right_area_surf_right_surf": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_right_area_surf_right_surf",
+      "description": "specify the right surface for vertex area correction: the right surface file"
+    },
+    "opt_cerebellum_area_surf_cerebellum_surf": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_cerebellum_area_surf_cerebellum_surf",
+      "description": "specify the cerebellum surface for vertex area correction: the cerebellum surface file"
+    },
+    "cifti": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "cifti"
+              },
+              "cifti_in": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "cifti_in",
+                "description": "a cifti file to average across"
+              }
+            },
+            "additionalProperties": false,
+            "title": "cifti",
+            "description": "specify an input cifti file",
+            "required": [
+              "cifti_in"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "cifti",
+      "description": "specify an input cifti file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti_out"
+  ]
+}

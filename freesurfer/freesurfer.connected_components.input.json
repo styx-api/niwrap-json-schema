@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "connected_components",
+  "description": "A tool for identifying connected components in an image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.connected_components"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "Input image file."
+    },
+    "output_image": {
+      "type": "string",
+      "default": "output_labelled_image",
+      "title": "Output Image",
+      "description": "Output labeled connected components image."
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold",
+      "description": "Threshold for binarizing the input image."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image"
+  ]
+}

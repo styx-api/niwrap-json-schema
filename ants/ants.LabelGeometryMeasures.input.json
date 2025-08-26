@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LabelGeometryMeasures",
+  "description": "This tool computes various geometry measures on a label image, optionally using an intensity image, and outputs the results to a CSV file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.LabelGeometryMeasures"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "title": "Image Dimension",
+      "description": "The dimensionality of the input images (e.g., 2 for 2D, 3 for 3D)."
+    },
+    "label_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Label Image",
+      "description": "The label image on which geometry measures are computed."
+    },
+    "intensity_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intensity Image",
+      "description": "An optional intensity image for computing intensity-weighted measures. Use \"none\" or \"na\" if not provided."
+    },
+    "csv_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CSV File",
+      "description": "The output file where the geometry measures are written in CSV format."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "label_image"
+  ]
+}

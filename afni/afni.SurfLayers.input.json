@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfLayers",
+  "description": "Compute intermediate equi-distant surfaces between two boundary surfaces.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.SurfLayers"
+    },
+    "spec_dset": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Specification dataset",
+      "description": "Dataset that is the SUMA specification file describing input surfaces"
+    },
+    "outdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output directory",
+      "description": "New directory for output (default: surflayers)"
+    },
+    "states": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "States",
+      "description": "Typically smoothwm, pial states to describe inner and outer surfaces (default: 'smoothwm pial')"
+    },
+    "hemi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hemisphere",
+      "description": "Choose hemisphere: 'lh', 'rh', or 'lh rh' (for both)"
+    },
+    "n_intermed_surfs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of intermediate surfaces",
+      "description": "Total number of intermediate surfaces to create"
+    },
+    "surf_a": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inner boundary surface",
+      "description": "Inner boundary surface by filename (e.g., smoothwm.gii)"
+    },
+    "surf_b": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outer boundary surface",
+      "description": "Outer boundary surface by filename (e.g., pial.gii)"
+    },
+    "surf_intermed_pref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolated surfaces prefix",
+      "description": "Name for interpolated surfaces (default: isurf)"
+    },
+    "echo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Echo flag",
+      "description": "Run script with 'set echo' (i.e., verbosely)"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "No clean flag",
+      "description": "Do not remove temp files (probably just for testing)"
+    }
+  },
+  "additionalProperties": false
+}

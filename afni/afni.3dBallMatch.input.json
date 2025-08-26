@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dBallMatch",
+  "description": "A tool to find a good match between a ball (filled sphere) of the given radius and a dataset to determine a crude approximate center of the brain quickly.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dBallMatch"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Dataset",
+      "description": "Input dataset (e.g., Fred.nii)"
+    },
+    "radius": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Radius",
+      "description": "Radius of the 3D ball to match (in mm)"
+    },
+    "dataset_option": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset option",
+      "description": "Specifies the input dataset"
+    },
+    "ball_radius": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ball Radius",
+      "description": "Set the radius of the 3D ball to match (mm)"
+    },
+    "spheroid_axes": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spheroid Axes",
+      "description": "Match with a spheroid of revolution, with principal axis radius 'a' and secondary axes radii 'b'"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_dataset"
+  ]
+}

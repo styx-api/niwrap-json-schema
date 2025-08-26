@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "t4imgs_4dfp",
+  "description": "Freesurfer tool for transforming images according to a specified T4 file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.t4imgs_4dfp"
+    },
+    "sqrt_normalize": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sqrt Normalize Flag",
+      "description": "Normalize by sqrt(n) rather than n (for z images)."
+    },
+    "cubic_spline": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cubic Spline Interpolation Flag",
+      "description": "Interpolate by 3D cubic spline (default is 3D linear)."
+    },
+    "output_nan": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output NaN Flag",
+      "description": "Output NaN (default 0.0) for undefined values."
+    },
+    "convert_t4": {
+      "type": "boolean",
+      "default": false,
+      "title": "Convert T4 Flag",
+      "description": "Internally convert to_711-2A_t4->to_711-2B_t4."
+    },
+    "nearest_neighbor": {
+      "type": "boolean",
+      "default": false,
+      "title": "Nearest Neighbor Interpolation Flag",
+      "description": "Use nearest neighbor interpolation."
+    },
+    "output_111_space": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output 111 Space Flag",
+      "description": "Output in 111 space instead of default 333.0 space."
+    },
+    "output_222_space": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output 222 Space Flag",
+      "description": "Output in 222 space instead of default 333.0 space."
+    },
+    "output_333n_space": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output 333.n Space",
+      "description": "Output in 333.n space (y shifted up by n pixels)."
+    },
+    "duplicate_dimensions": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Duplicate Dimensions Image",
+      "description": "Duplicate dimensions of specified image."
+    },
+    "big_endian": {
+      "type": "boolean",
+      "default": false,
+      "title": "Big Endian Flag",
+      "description": "Output in big endian format."
+    },
+    "little_endian": {
+      "type": "boolean",
+      "default": false,
+      "title": "Little Endian Flag",
+      "description": "Output in little endian format."
+    },
+    "input_images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Images",
+      "description": "Input list of 4dfp images."
+    },
+    "output_image": {
+      "type": "string",
+      "title": "Output Image",
+      "description": "Output file name for the transformed image."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_images",
+    "output_image"
+  ]
+}

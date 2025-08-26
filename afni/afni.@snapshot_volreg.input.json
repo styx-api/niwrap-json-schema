@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@snapshot_volreg",
+  "description": "Create a JPEG image showing the edges of an EPI dataset overlayed on an anatomical dataset to judge 3D registration quality.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.@snapshot_volreg"
+    },
+    "anatdataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Anatomical Dataset",
+      "description": "Anatomical dataset file"
+    },
+    "epidataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "EPI Dataset",
+      "description": "EPI dataset file"
+    },
+    "jname": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "JPEG Filename",
+      "description": "Name for the output JPEG file"
+    },
+    "xdisplay": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "X Display Number",
+      "description": "Display number of an already running Xvfb instance"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "anatdataset",
+    "epidataset"
+  ]
+}

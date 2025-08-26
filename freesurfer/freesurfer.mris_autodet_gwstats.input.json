@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_autodet_gwstats",
+  "description": "Manages the computation of the gray/white statistics used to place the white and pial surfaces.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_autodet_gwstats"
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output text file with stats"
+    },
+    "t1w_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "T1 weighted volume",
+      "description": "T1 weighted volume (usually brain.finalsurfs.mgz)"
+    },
+    "wm_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "White matter volume",
+      "description": "White matter volume (usually wm.mgz)"
+    },
+    "surf": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Surface",
+      "description": "Surface (usually ?h.orig)"
+    },
+    "lhsurf": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Left hemisphere surface",
+      "description": "Left hemisphere surface"
+    },
+    "rhsurf": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Right hemisphere surface",
+      "description": "Right hemisphere surface"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject: reads in brain.finalsurfs.mgz, wm.mgz, lh.orig and rh.orig"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "title": "Subjects directory",
+      "description": "SUBJECTS_DIR"
+    },
+    "min_border_white": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Min border white",
+      "description": "Minimum border white (MinBW)"
+    },
+    "max_border_white": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max border white",
+      "description": "Maximum border white (MaxBW)"
+    },
+    "min_gray_at_white_border": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Min gray at white border",
+      "description": "Minimum gray at white border (MinGWB)"
+    },
+    "max_gray": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max gray",
+      "description": "Maximum gray (MaxG)"
+    },
+    "max_gray_at_csf_border": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max gray at CSF border",
+      "description": "Maximum gray at CSF border (MaxGCSFB)"
+    },
+    "min_gray_at_csf_border": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Min gray at CSF border",
+      "description": "Minimum gray at CSF border (MinGCSFB)"
+    },
+    "max_csf": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max CSF",
+      "description": "Maximum CSF (MaxCSF)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "output_file",
+    "t1w_volume",
+    "wm_volume",
+    "surf",
+    "subject",
+    "subjects_dir"
+  ]
+}

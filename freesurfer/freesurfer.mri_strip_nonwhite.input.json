@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_strip_nonwhite",
+  "description": "Tool for processing MRI images, transforming volumetric data using provided transformation and template files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_strip_nonwhite"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input MRI volume file"
+    },
+    "transform": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Transform",
+      "description": "Transformation file to be applied to the input volume"
+    },
+    "template_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Template Volume",
+      "description": "Template volume file used in conjunction with the transform"
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Name of the output volume file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume",
+    "transform",
+    "template_volume",
+    "output_volume"
+  ]
+}

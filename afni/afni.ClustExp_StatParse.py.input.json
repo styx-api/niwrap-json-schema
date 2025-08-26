@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ClustExp_StatParse.py",
+  "description": "Parser for statistical data sets and subject data sets, generating several outputs for further analysis.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.ClustExp_StatParse.py"
+    },
+    "statdset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Statistics dataset",
+      "description": "Statistics dataset."
+    },
+    "meanbrik": {
+      "type": "number",
+      "title": "Mean subbrik",
+      "description": "Mean subbrik (integer >= 0)."
+    },
+    "threshbrik": {
+      "type": "number",
+      "title": "Threshold subbrik",
+      "description": "Threshold subbrik. Might be the same as MeanBrik (integer >= 0)."
+    },
+    "subjdset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Labeled dataset with all subjects",
+      "description": "Labeled dataset with all subjects (from @ClustExp_CatLab)."
+    },
+    "subjtable": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Table with subject labels and input datasets",
+      "description": "Table with subject labels and input datasets."
+    },
+    "master": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Master data set for underlay",
+      "description": "Master data set for underlay."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Name for output (no path)."
+    },
+    "pval": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Uncorrected p value for thresholding",
+      "description": "Uncorrected p value for thresholding."
+    },
+    "minvox": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum voxels in cluster",
+      "description": "Minimum voxels in cluster."
+    },
+    "atlas": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlas name for lookup",
+      "description": "Atlas name for lookup (list at: whereami -help)."
+    },
+    "session": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output parent folder",
+      "description": "Output parent folder if you don't want the current working directory."
+    },
+    "noshiny": {
+      "type": "boolean",
+      "default": false,
+      "title": "Do not create shiny app",
+      "description": "Do not create shiny app."
+    },
+    "overwrite": {
+      "type": "boolean",
+      "default": false,
+      "title": "Remove previous folder with same PREFIX",
+      "description": "Remove previous folder with same PREFIX."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "statdset",
+    "meanbrik",
+    "threshbrik",
+    "subjdset",
+    "subjtable",
+    "master"
+  ]
+}

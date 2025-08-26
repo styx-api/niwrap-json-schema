@@ -1,0 +1,334 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "run_fastsurfer.sh",
+  "description": "run_fastsurfer.sh takes a T1 full head image and creates segmentation using FastSurferVINN and surfaces using recon-surf",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fastsurfer.run_fastsurfer.sh"
+    },
+    "sid": {
+      "type": "string",
+      "title": "Subject ID",
+      "description": "Subject ID to create directory inside SUBJECTS_DIR"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "title": "Subjects Directory",
+      "description": "Output directory SUBJECTS_DIR"
+    },
+    "t1_input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "T1 Input",
+      "description": "T1 full head input (not bias corrected). Requires an ABSOLUTE Path!"
+    },
+    "fs_license": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FreeSurfer License",
+      "description": "Path to FreeSurfer license key file"
+    },
+    "asegdkt_segfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation File",
+      "description": "Name of the segmentation file including aparc+DKTatlas-aseg segmentations"
+    },
+    "vox_size": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel Size",
+      "description": "Forces processing at a specific voxel size (0.7-1 or 'min')"
+    },
+    "seg_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Segmentation Only",
+      "description": "Run only FastSurferVINN"
+    },
+    "seg_log": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation Log",
+      "description": "Log-file for the segmentation"
+    },
+    "conformed_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Conformed Image Name",
+      "description": "Name of the file for the conformed input image"
+    },
+    "norm_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Normalized Image Name",
+      "description": "Name of the biasfield corrected image"
+    },
+    "t2_input": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T2 Input",
+      "description": "Optional T2 full head input"
+    },
+    "reg_mode": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Registration Mode",
+      "description": "Registration method for T1 and T2 images"
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Threads",
+      "description": "Set openMP and ITK threads"
+    },
+    "device": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Processing Device",
+      "description": "Device for inference (cpu/cuda)"
+    },
+    "viewagg_device": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "View Aggregation Device",
+      "description": "Device for view aggregation"
+    },
+    "batch_size": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Batch Size",
+      "description": "Batch size for inference"
+    },
+    "python_cmd": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "python3.10 -s",
+      "title": "Python Command",
+      "description": "Command for python"
+    },
+    "surf_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Surface Only",
+      "description": "Run surface pipeline only"
+    },
+    "no_biasfield": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Biasfield",
+      "description": "Deactivate bias field correction and partial volume-corrected stats"
+    },
+    "tal_reg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Talairach Registration",
+      "description": "Perform talairach registration for eTIV estimates"
+    },
+    "no_asegdkt": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip ASEGDKT",
+      "description": "Skip the asegdkt segmentation"
+    },
+    "no_cereb": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip Cerebellum",
+      "description": "Skip the cerebellum segmentation"
+    },
+    "cereb_segfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cerebellum Segmentation File",
+      "description": "Name of DL-based segmentation file of the cerebellum"
+    },
+    "no_hypothal": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip Hypothalamus",
+      "description": "Skip the hypothalamus segmentation"
+    },
+    "qc_snap": {
+      "type": "boolean",
+      "default": false,
+      "title": "QC Snapshots",
+      "description": "Create QC snapshots in subjects directory"
+    },
+    "three_t": {
+      "type": "boolean",
+      "default": false,
+      "title": "3T Atlas",
+      "description": "Use the 3T atlas for talairach registration"
+    },
+    "parallel": {
+      "type": "boolean",
+      "default": false,
+      "title": "Parallel Processing",
+      "description": "Run both hemispheres in parallel"
+    },
+    "ignore_fs_version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore FreeSurfer Version",
+      "description": "Switch on to avoid check for FreeSurfer version"
+    },
+    "fstess": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use mri_tesselate",
+      "description": "Switch on mri_tesselate for surface creation"
+    },
+    "fsqsphere": {
+      "type": "boolean",
+      "default": false,
+      "title": "FreeSurfer Iterative Inflation",
+      "description": "Use FreeSurfer iterative inflation for qsphere"
+    },
+    "fsaparc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Create FS aparc",
+      "description": "Additionally create FS aparc segmentations and ribbon"
+    },
+    "no_fs_t1": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip T1.mgz",
+      "description": "Do not generate T1.mgz"
+    },
+    "no_surfreg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip Surface Registration",
+      "description": "Do not run Surface registration with FreeSurfer"
+    },
+    "allow_root": {
+      "type": "boolean",
+      "default": false,
+      "title": "Allow Root",
+      "description": "Allow execution as root user"
+    },
+    "version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Version Information",
+      "description": "Print version information"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "sid",
+    "subjects_dir",
+    "t1_input"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "unconfound",
+  "description": "Removing confounds from 4D fMRI data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.unconfound"
+    },
+    "in4d": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input 4D file",
+      "description": "Input 4D fMRI data (e.g., in4d.nii.gz)"
+    },
+    "out4d": {
+      "type": "string",
+      "title": "Output 4D file",
+      "description": "Output 4D fMRI data after removing confounds (e.g., out4d.nii.gz)"
+    },
+    "confound_mat": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Confound matrix file",
+      "description": "Confound matrix file (e.g., confound.mat)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in4d",
+    "out4d",
+    "confound_mat"
+  ]
+}

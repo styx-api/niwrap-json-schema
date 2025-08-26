@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslmeants",
+  "description": "Prints average timeseries (intensities) to the screen (or saves to a file).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.fslmeants"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "Input 4D image"
+    },
+    "output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output File",
+      "description": "Output text matrix"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask",
+      "description": "Input 3D mask"
+    },
+    "coordinates": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Coordinates",
+      "description": "Requested spatial coordinate (instead of mask). Must have exactly three numerical entries in the list (3-vector)."
+    },
+    "usemm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use mm flag",
+      "description": "Use mm instead of voxel coordinates (for -c option)"
+    },
+    "showall_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Showall flag",
+      "description": "Show all voxel time series (within mask) instead of averaging"
+    },
+    "eigenv_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Eigenvariate(s) flag",
+      "description": "Calculate Eigenvariate(s) instead of mean (output will have 0 mean)"
+    },
+    "eigenvariates_order": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Eigenvariates Order",
+      "description": "Select number of Eigenvariates (default 1)"
+    },
+    "no_bin_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No binarisation flag",
+      "description": "Do not binarise the mask for calculation of Eigenvariates"
+    },
+    "label_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Image",
+      "description": "Input 3D label image (generate separate mean for each integer label value - cannot be used with showall)"
+    },
+    "transpose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Transpose flag",
+      "description": "Output results in transpose format (one row per voxel/mean)"
+    },
+    "weighted_mean_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Weighted mean flag",
+      "description": "Output weighted mean, using mask values as weights, and exit."
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Display the help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image"
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "pvmfit",
+  "description": "Fits diffusion models to multishell DWI data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.pvmfit"
+    },
+    "data_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Data file",
+      "description": "Data file"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask file",
+      "description": "Mask file"
+    },
+    "bvec_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "B vectors file",
+      "description": "B vectors file"
+    },
+    "bval_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "B values file",
+      "description": "B values file"
+    },
+    "output_basename": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "pvm",
+      "title": "Output basename",
+      "description": "Output basename - default='pvm'"
+    },
+    "number_of_fibres": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Number of fibres",
+      "description": "Number of fibres to fit - default=1"
+    },
+    "model_type": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model type",
+      "description": "Model type: 1 for Ball-Sticks (single-shell), 2 for Ball-Sticks (multi-shells), 4 for Ball-Binghams"
+    },
+    "fit_all_models": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fit all models using BIC",
+      "description": "Fit all models from 1 up to N fibres and choose the best using BIC"
+    },
+    "constrained_nonlinear": {
+      "type": "boolean",
+      "default": false,
+      "title": "Constrained nonlinear optimization",
+      "description": "Model1: Apply constrained nonlinear optimization on the diffusivity, volume fractions and their sum"
+    },
+    "constrained_nonlinear_f": {
+      "type": "boolean",
+      "default": false,
+      "title": "Constrained nonlinear optimization with fanning",
+      "description": "Model1: Apply constrained nonlinear optimization on the diffusivity, volume fractions and their sum. Return n fanning angle estimates, using the Hessian of the cost function"
+    },
+    "grid_search": {
+      "type": "boolean",
+      "default": false,
+      "title": "Grid search",
+      "description": "Use grid search (on the fanning eigenvalues). Default=off"
+    },
+    "include_noise_floor": {
+      "type": "boolean",
+      "default": false,
+      "title": "Include noise floor",
+      "description": "Include noise floor parameter in the model"
+    },
+    "save_bic": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save BIC",
+      "description": "Save BIC for certain models"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose",
+      "description": "Switch on diagnostic messages"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Display help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "data_file",
+    "mask_file",
+    "bvec_file",
+    "bval_file"
+  ]
+}

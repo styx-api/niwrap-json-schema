@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DenoiseImage",
+  "description": "Denoise an image using a spatially adaptive filter originally described in J. V. Manjon, P. Coupe, Luis Marti-Bonmati, D. L. Collins, and M. Robles. Adaptive Non-Local Means Denoising of MR Images With Spatially Varying Noise Levels, Journal of Magnetic Resonance Imaging, 31:192-203, June 2010.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "root": {
+      "type": "string",
+      "title": "Root",
+      "description": "Output root directory"
+    },
+    "DenoiseImage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "root": {
+          "type": "string",
+          "title": "Root",
+          "description": "Output root directory"
+        },
+        "output": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "root": {
+                  "type": "string",
+                  "title": "Root",
+                  "description": "Output root directory"
+                },
+                "output_image_outfile": {
+                  "type": "string",
+                  "title": "Output image",
+                  "description": "Denoised image."
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "root": {
+                  "type": "string",
+                  "title": "Root",
+                  "description": "Output root directory"
+                },
+                "output_image_outfile": {
+                  "type": "string",
+                  "title": "Output image",
+                  "description": "Denoised output image."
+                },
+                "output_bias_image": {
+                  "type": "string",
+                  "title": "Noise map image",
+                  "description": "Noise map image."
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dEdu_01_scale",
+  "description": "Educational program to create a new AFNI program. Scales and masks dataset volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dEdu_01_scale"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input dataset",
+      "description": "Input dataset"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask dataset",
+      "description": "Mask dataset on same grid/data structure as the input dataset"
+    },
+    "mult_factors": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Multiplicative factors",
+      "description": "Numerical factors for multiplying each voxel; each voxel is multiplied by both A and B"
+    },
+    "option_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Option flag",
+      "description": "Option flag to do something"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input"
+  ]
+}

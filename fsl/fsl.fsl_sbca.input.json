@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_sbca",
+  "description": "Performs seed-based correlation analysis on FMRI data using either a single seed coordinate or a seed mask",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.fsl_sbca"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input File",
+      "description": "Input file name (4D image file)"
+    },
+    "seed": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Seed File",
+      "description": "Seed voxel coordinate or file name of seed mask (3D/4D file)"
+    },
+    "target": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Target File",
+      "description": "File name of target mask(s) (3D or 4D file)"
+    },
+    "out": {
+      "type": "string",
+      "title": "Output Basename",
+      "description": "Output file base name"
+    },
+    "reg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Time Series Regression Flag",
+      "description": "Perform time series regression rather than classification to targets"
+    },
+    "conf_files": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Confound Files",
+      "description": "File name (or comma-separated list of file names) for confound ASCII text files"
+    },
+    "seed_data": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Seed Data File",
+      "description": "File name of 4D data file for the seed"
+    },
+    "binarise_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Binarise Spatial Maps Flag",
+      "description": "Binarise spatial maps prior to calculation of time courses"
+    },
+    "mean_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Mean for Time Courses Flag",
+      "description": "Use mean instead of Eigenvariates for calculation of time courses"
+    },
+    "abs_cc_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Absolute Cross-Correlation Flag",
+      "description": "Use maximum absolute value instead of maximum value of the cross-correlations"
+    },
+    "order": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Eigenvariates",
+      "description": "Number of Eigenvariates (default 1)"
+    },
+    "out_seeds_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output Seed Mask Image Flag",
+      "description": "Output seed mask image as <basename>_seeds"
+    },
+    "out_seedmask_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output Seed Mask Image Flag",
+      "description": "Output seed mask image as <basename>_seedmask"
+    },
+    "out_ttcs_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output Target Time Courses Flag",
+      "description": "Output target time courses as <basename>_ttc<X>.txt"
+    },
+    "out_conf_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output Confound Time Courses Flag",
+      "description": "Output confound time courses as <basename>_confounds.txt"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Display help text"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "infile",
+    "seed",
+    "target",
+    "out"
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "conf2hires",
+  "description": "Places the surfaces on high resolution T1 (and maybe T2) volumes based on an initial placement on a conformed volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.conf2hires"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject identifier"
+    },
+    "t2": {
+      "type": "boolean",
+      "default": false,
+      "title": "T2 Flag",
+      "description": "Enable T2 processing"
+    },
+    "no_t2": {
+      "type": "boolean",
+      "default": false,
+      "title": "No T2 Flag",
+      "description": "Disable T2 processing (default)"
+    },
+    "mm_norm_sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 8,
+      "title": "MM Norm Sigma",
+      "description": "Smoothing level for T2 mri_normalize (default is 8)"
+    },
+    "flair": {
+      "type": "boolean",
+      "default": false,
+      "title": "FLAIR Flag",
+      "description": "Enable FLAIR processing"
+    },
+    "no_flair": {
+      "type": "boolean",
+      "default": false,
+      "title": "No FLAIR Flag",
+      "description": "Disable FLAIR processing (default)"
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "Number of threads to use"
+    },
+    "copy_bias_from_conf": {
+      "type": "boolean",
+      "default": false,
+      "title": "Copy Bias From Conf",
+      "description": "Copy bias field from conformed instead of computing directly"
+    },
+    "norm_opts_rca": {
+      "type": "boolean",
+      "default": false,
+      "title": "Norm Opts RCA Flag",
+      "description": "Compute bias directly using recon-all opts to mri_normalize"
+    },
+    "cubic": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cubic Flag",
+      "description": "Use cubic normalization (applies with --copy-bias-from-conf)"
+    },
+    "trilin": {
+      "type": "boolean",
+      "default": false,
+      "title": "Trilin Flag",
+      "description": "Use trilinear normalization (default, applies with --copy-bias-from-conf)"
+    },
+    "dev": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dev Flag",
+      "description": "Use mris_make_surfaces.dev"
+    },
+    "no_dev": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Dev Flag",
+      "description": "Do not use mris_make_surfaces.dev (default)"
+    },
+    "bbr_con": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "BBR Contrast Type",
+      "description": "Set BBR contrast type (default t2)"
+    },
+    "bbr_t1": {
+      "type": "boolean",
+      "default": false,
+      "title": "BBR T1 Flag",
+      "description": "Set BBR contrast type to t1"
+    },
+    "bbr_t2": {
+      "type": "boolean",
+      "default": false,
+      "title": "BBR T2 Flag",
+      "description": "Set BBR contrast type to t2"
+    },
+    "first_peak_d1": {
+      "type": "boolean",
+      "default": false,
+      "title": "First Peak D1 Flag",
+      "description": "Refine surface targets in MRIScomputeBorderValues() using first peak method D1"
+    },
+    "first_peak_d2": {
+      "type": "boolean",
+      "default": false,
+      "title": "First Peak D2 Flag",
+      "description": "Refine surface targets in MRIScomputeBorderValues() using first peak method D2"
+    },
+    "stopmask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stop Mask",
+      "description": "Specify stop mask"
+    },
+    "expert": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expert Options",
+      "description": "Use expert options"
+    },
+    "force_update": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force Update Flag",
+      "description": "Force update of final surfaces"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject"
+  ]
+}

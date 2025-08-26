@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "eddy_correct",
+  "description": "Eddy current correction tool for FSL",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.eddy_correct"
+    },
+    "4d_input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "4D Input file",
+      "description": "Input 4D image file (e.g., dti.nii.gz)"
+    },
+    "4d_output": {
+      "type": "string",
+      "title": "4D Output file",
+      "description": "Output 4D image file (e.g., dti_corrected.nii.gz)"
+    },
+    "reference_no": {
+      "type": "integer",
+      "title": "Reference number",
+      "description": "Reference number"
+    },
+    "interp_method": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "trilinear",
+      "title": "Interpolation Method",
+      "description": "Interpolation method to use: 'trilinear' or 'spline'"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "4d_input",
+    "4d_output",
+    "reference_no"
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "volume-label-to-surface-mapping",
+  "description": "Map a label volume to a surface label file.\n\nMap label volume data to a surface.  If -ribbon-constrained is not specified, uses the enclosing voxel method.  The ribbon mapping method constructs a polyhedron from the vertex's neighbors on each surface, and estimates the amount of this polyhedron's volume that falls inside any nearby voxels, to use as the weights for a popularity comparison.  If -thin-columns is specified, the polyhedron uses the edge midpoints and triangle centroids, so that neighboring vertices do not have overlapping polyhedra.  This may require increasing -voxel-subdiv to get enough samples in each voxel to reliably land inside these smaller polyhedra.  The volume ROI is useful to exclude partial volume effects of voxels the surfaces pass through, and will cause the mapping to ignore voxels that don't have a positive value in the mask.  The subdivision number specifies how it approximates the amount of the volume the polyhedron intersects, by splitting each voxel into NxNxN pieces, and checking whether the center of each piece is inside the polyhedron.  If you have very large voxels, consider increasing this if you get unexpected unlabeled vertices in your output.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.volume-label-to-surface-mapping"
+    },
+    "volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "volume",
+      "description": "the volume to map data from"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface",
+      "description": "the surface to map the data onto"
+    },
+    "label_out": {
+      "type": "string",
+      "title": "label_out",
+      "description": "the output gifti label file"
+    },
+    "ribbon_constrained": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "ribbon_constrained"
+            },
+            "inner_surf": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "inner_surf",
+              "description": "the inner surface of the ribbon"
+            },
+            "outer_surf": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "outer_surf",
+              "description": "the outer surface of the ribbon"
+            },
+            "opt_volume_roi_roi_volume": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_volume_roi_roi_volume",
+              "description": "use a volume roi: the volume file"
+            },
+            "opt_voxel_subdiv_subdiv_num": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_voxel_subdiv_subdiv_num",
+              "description": "voxel divisions while estimating voxel weights: number of subdivisions, default 3"
+            },
+            "opt_thin_columns": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_thin_columns",
+              "description": "use non-overlapping polyhedra"
+            }
+          },
+          "additionalProperties": false,
+          "title": "ribbon_constrained",
+          "description": "use ribbon constrained mapping algorithm",
+          "required": [
+            "inner_surf",
+            "outer_surf"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ribbon_constrained",
+      "description": "use ribbon constrained mapping algorithm"
+    },
+    "opt_subvol_select_subvol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_subvol_select_subvol",
+      "description": "select a single subvolume to map: the subvolume number or name"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "volume",
+    "surface",
+    "label_out"
+  ]
+}

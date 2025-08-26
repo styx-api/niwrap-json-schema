@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_cvs_register",
+  "description": "Combined Volume and Surface Registration",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_cvs_register"
+    },
+    "mov_subjid": {
+      "type": "string",
+      "title": "Moving subject",
+      "description": "FreeSurfer subject name as found in $SUBJECTS_DIR. This identifies the subject that is to be moved / registered to the target."
+    },
+    "template_subjid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template subject",
+      "description": "FreeSurfer subject name as found in $SUBJECTS_DIR (or --templatedir). This identifies the subject that is to be kept fixed (template)."
+    },
+    "templatedir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template directory",
+      "description": "Directory of the template subject's SUBJECTS_DIR if different from that of the moving subject."
+    },
+    "mni_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "MNI flag",
+      "description": "Use the CVS atlas in MNI152 space as a target for registration."
+    },
+    "outdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output directory",
+      "description": "Name of the output directory where all the registration results are written."
+    },
+    "asegfname": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation volume name",
+      "description": "Name of the segmentation volume used in volumetric registration step. Do not use the file extension."
+    },
+    "voltype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volume type",
+      "description": "Changes the input from norm.mgz to voltype.mgz."
+    },
+    "step1_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Step 1 flag",
+      "description": "Only do step 1 (spherical registration)."
+    },
+    "step2_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Step 2 flag",
+      "description": "Only do step 2 (elastic registration)."
+    },
+    "step3_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Step 3 flag",
+      "description": "Only do step 3 (volumetric registration)."
+    },
+    "noaseg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No aseg flag",
+      "description": "Do not use aseg volumes in the volumetric registration pipeline."
+    },
+    "nointensity_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No intensity flag",
+      "description": "Do not use intensity volumes in the volumetric registration pipeline."
+    },
+    "hemi_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Hemisphere flag",
+      "description": "Run CVS registration only on one hemisphere."
+    },
+    "masktargethemi_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mask target hemisphere flag",
+      "description": "Use with --hemi when hemi is registered to full brain target."
+    },
+    "maskmovinghemi_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mask moving hemisphere flag",
+      "description": "Use with --hemi when full brain is registered to single hemi target."
+    },
+    "nocleanup_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No cleanup flag",
+      "description": "Do not delete temporary files."
+    },
+    "keepelreg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep elastic registration flag",
+      "description": "Do not delete elastic registration outcomes."
+    },
+    "keepallm3z_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep all m3z flag",
+      "description": "Do not delete m3z morph files computed during CVS."
+    },
+    "cleanall_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Clean all flag",
+      "description": "Overwrite / recompute all CVS-related morphs."
+    },
+    "cleansurfreg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Clean surface registration flag",
+      "description": "Overwrite/recompute CVS-related surface registration morphs."
+    },
+    "cleanelreg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Clean elastic registration flag",
+      "description": "Overwrite / recompute CVS-related elastic registration morph."
+    },
+    "cleanvolreg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Clean volumetric registration flag",
+      "description": "Overwrite / recompute CVS-related volumetric morphs."
+    },
+    "m3d_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use m3d flag",
+      "description": "Use m3d instead of m3z for registration morphs."
+    },
+    "openmp": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "OpenMP Nodes",
+      "description": "Assign the number of nodes for openmp runs."
+    },
+    "nolog_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No log flag",
+      "description": "Do not produce a log file."
+    },
+    "version_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version flag",
+      "description": "Print version and exit."
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Print help and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "mov_subjid"
+  ]
+}

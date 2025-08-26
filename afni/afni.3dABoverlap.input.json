@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dABoverlap",
+  "description": "Counts various metrics about how the automasks of datasets A and B overlap or don't overlap",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dABoverlap"
+    },
+    "dataset_a": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Dataset A",
+      "description": "First input dataset"
+    },
+    "dataset_b": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Dataset B",
+      "description": "Second input dataset"
+    },
+    "no_automask": {
+      "type": "boolean",
+      "default": false,
+      "title": "No automask",
+      "description": "Consider input datasets as masks (automask does not work on mask datasets)"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet mode",
+      "description": "Be as quiet as possible (without being entirely mute)"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose mode",
+      "description": "Print out some progress reports (to stderr)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset_a",
+    "dataset_b"
+  ]
+}

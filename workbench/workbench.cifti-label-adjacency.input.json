@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cifti-label-adjacency",
+  "description": "Make adjacency matrix of a cifti label file.\n\nFind face-adjacent voxels and connected vertices that have different label values, and count them for each pair.  Put the resulting counts into a parcellated connectivity file, with the diagonal being zero.  This gives a rough estimate of how long or expansive the border between two labels is.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.cifti-label-adjacency"
+    },
+    "label_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "label_in",
+      "description": "the input cifti label file"
+    },
+    "adjacency_out": {
+      "type": "string",
+      "title": "adjacency_out",
+      "description": "the output cifti pconn adjacency matrix"
+    },
+    "opt_left_surface_surface": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_left_surface_surface",
+      "description": "specify the left surface to use: the left surface file"
+    },
+    "opt_right_surface_surface": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_right_surface_surface",
+      "description": "specify the right surface to use: the right surface file"
+    },
+    "opt_cerebellum_surface_surface": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_cerebellum_surface_surface",
+      "description": "specify the cerebellum surface to use: the cerebellum surface file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "label_in",
+    "adjacency_out"
+  ]
+}

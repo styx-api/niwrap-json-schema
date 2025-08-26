@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "slices_summary",
+  "description": "Generate summary PNG images for 4D neuroimaging data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.slices_summary"
+    },
+    "4d_input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "4D Input File",
+      "description": "4D input image (e.g., melodic_IC)"
+    },
+    "threshold": {
+      "type": "number",
+      "title": "Threshold",
+      "description": "Threshold value for the slices"
+    },
+    "background_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Background Image",
+      "description": "Background image file (e.g., standard/MNI152_T1_2mm)"
+    },
+    "pictures_sum": {
+      "type": "string",
+      "title": "Pictures Summar",
+      "description": "Output directory for summary images"
+    },
+    "single_slice_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Single Slice Flag",
+      "description": "Generate single-slice summary images instead of 3-slice"
+    },
+    "darker_background_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Darker Background Flag",
+      "description": "Make background darker and colour brighter, for greater colour visibility"
+    },
+    "dumb_rule_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dumb Rule Flag",
+      "description": "Use dumber rule for choosing optimal slice"
+    },
+    "pictures_sum_second": {
+      "type": "string",
+      "title": "Pictures Summary Second",
+      "description": "Path to summary images directory"
+    },
+    "output_png": {
+      "type": "string",
+      "title": "Output PNG",
+      "description": "Output PNG file"
+    },
+    "timepoints": {
+      "type": "string",
+      "title": "Timepoints",
+      "description": "Space-separated list of timepoints to use; first timepoint is 0"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "4d_input_file",
+    "threshold",
+    "background_image",
+    "pictures_sum",
+    "pictures_sum_second",
+    "output_png",
+    "timepoints"
+  ]
+}

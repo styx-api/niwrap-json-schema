@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLocalACF",
+  "description": "Estimate the spatial AutoCorrelation Function (ACF) locally in a neighborhood around each voxel",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dLocalACF"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Prefix for output dataset"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input File",
+      "description": "Input time series dataset"
+    },
+    "neighborhood": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Neighborhood",
+      "description": "Neighborhood specification (e.g., SPHERE(25))"
+    },
+    "mask_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Dataset",
+      "description": "Dataset to mask the analysis"
+    },
+    "auto_mask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Auto Mask Flag",
+      "description": "Automatically generate brain mask from input dataset"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix",
+    "input_file"
+  ]
+}

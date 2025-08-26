@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ElectroGrid",
+  "description": "Creates a mesh representation of an electrode grid for use with SUMA",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.@ElectroGrid"
+    },
+    "strip": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Strip Nx",
+      "description": "Make an Nx strip (array) of electrodes."
+    },
+    "grid": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Grid Nx Ny",
+      "description": "Make an Nx by Ny grid of electrodes. A node at (i,j) has a node ID = i+Nx*j with 0<=i<Nx and 0<=j<=Ny"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Use PREFIX for the output surface."
+    },
+    "coords": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Coordinates",
+      "description": "Specify the coordinates of the nodes on the grid, or the array. XYZ.1D should have three columns, with each row specifying the coordinates of one node."
+    },
+    "with_markers": {
+      "type": "boolean",
+      "default": false,
+      "title": "With markers",
+      "description": "Add markers to the surface at each electrode."
+    },
+    "echo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Echo",
+      "description": "Set echo."
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_thickness",
+  "description": "Measures the thickness of the cortical surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_thickness"
+    },
+    "subject_name": {
+      "type": "string",
+      "title": "Subject Name",
+      "description": "The subject name for processing."
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "The hemisphere to process (e.g., lh or rh)."
+    },
+    "thickness_file": {
+      "type": "string",
+      "title": "Thickness File",
+      "description": "Output file for thickness measurements."
+    },
+    "max_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Threshold",
+      "description": "Use a maximum threshold for thickness (default is 5mm)."
+    },
+    "fill_holes": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fill Holes",
+      "description": "Fill in thickness in holes in the cortex label using fsaverage cortex label."
+    },
+    "thickness_from_seg": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Thickness From Seg",
+      "description": "Compute thickness from segmentation. Requires the following parameters: surf label, seg.mgz, dmaxmm, ddeltamm, and output.mgz."
+    },
+    "vector": {
+      "type": "boolean",
+      "default": false,
+      "title": "Vector Flag",
+      "description": "Compute the thickness using a variationally derived vector field."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_name",
+    "hemi",
+    "thickness_file"
+  ]
+}

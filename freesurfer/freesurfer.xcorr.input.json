@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "xcorr",
+  "description": "Computes the voxel-for-voxel correlation coefficient between two volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.xcorr"
+    },
+    "input1": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file 1",
+      "description": "First input volume file"
+    },
+    "input2": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file 2",
+      "description": "Second input volume file"
+    },
+    "output": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output xcorr file"
+    },
+    "log_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log file",
+      "description": "Log file"
+    },
+    "tmp_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Temporary directory",
+      "description": "Temporary directory"
+    },
+    "no_cleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "No cleanup flag",
+      "description": "Prevent cleanup of temporary files"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input1",
+    "input2",
+    "output"
+  ]
+}

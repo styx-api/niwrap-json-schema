@@ -1,0 +1,501 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_robust_register",
+  "description": "Inverse consistent registration of two volumes using robust and standard cost functions.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_robust_register"
+    },
+    "movable_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Movable Volume",
+      "description": "Input movable volume to be aligned to target."
+    },
+    "target_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Target Volume",
+      "description": "Input target volume."
+    },
+    "output_registration": {
+      "type": "string",
+      "title": "Output Registration",
+      "description": "Output registration (transform from mov to dst)."
+    },
+    "outlier_sensitivity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outlier Sensitivity",
+      "description": "Set outlier sensitivity manually for robust cost functions. Higher values mean less sensitivity."
+    },
+    "satit": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automatic Sensitivity Detection",
+      "description": "Auto-detect good sensitivity for robust cost functions."
+    },
+    "mapped_movable": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mapped Movable",
+      "description": "Output image: movable mapped and resampled at destination."
+    },
+    "mapped_movable_hdr": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mapped Movable Header",
+      "description": "Output image: movable aligned to destination (no resampling, only adjusting header vox2ras)."
+    },
+    "weights": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Weights Output",
+      "description": "Output weights (outlier probabilities) in destination space (0=regular,1=outlier)."
+    },
+    "oneminus_w": {
+      "type": "boolean",
+      "default": false,
+      "title": "Invert Weights Map",
+      "description": "Weights (outlier) map will be inverted (0=outlier), as in earlier versions."
+    },
+    "iscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Intensity Scale",
+      "description": "Estimate intensity scale factor."
+    },
+    "iscale_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Intensity Scale Only",
+      "description": "Only perform intensity scaling (no transformation)."
+    },
+    "iscale_out": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intensity Scale Output File",
+      "description": "Output text file for iscale value."
+    },
+    "iscale_in": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intensity Scale Input File",
+      "description": "Initial input text file for iscale value."
+    },
+    "trans_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Translation Only",
+      "description": "Find 3 parameter translation only."
+    },
+    "affine": {
+      "type": "boolean",
+      "default": false,
+      "title": "Affine Transform",
+      "description": "Find 12 parameter affine transform."
+    },
+    "ixform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Transform File",
+      "description": "Use initial transform LTA on source."
+    },
+    "init_orient": {
+      "type": "boolean",
+      "default": false,
+      "title": "Initialize Orientation",
+      "description": "Use moments for orientation initialization."
+    },
+    "no_init": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Initial Transform",
+      "description": "Skip automatic transform initialization."
+    },
+    "vox2vox": {
+      "type": "boolean",
+      "default": false,
+      "title": "Vox2Vox Output",
+      "description": "Output VOX2VOX LTA file."
+    },
+    "cost": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cost Function",
+      "description": "Set cost function for registration."
+    },
+    "ent_radius": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Entropy Radius",
+      "description": "With ROBENT: specify box radius for entropy computation."
+    },
+    "ent_correction": {
+      "type": "boolean",
+      "default": false,
+      "title": "Entropy Correction",
+      "description": "With ROBENT: use better entropy computation that works on smaller boxes."
+    },
+    "ent_ball": {
+      "type": "boolean",
+      "default": false,
+      "title": "Entropy Ball",
+      "description": "With ROBENT: use ball around voxel instead of box."
+    },
+    "ent_mov": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Entropy Movable File",
+      "description": "With ROBENT: write movable entropy image."
+    },
+    "powell_tolerance": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Powell Tolerance",
+      "description": "With MI, NMI etc: set Powell tolerance."
+    },
+    "sobel": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sobel Image Registration",
+      "description": "Register Sobel magnitude images."
+    },
+    "no_sym": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Symmetry Mapping",
+      "description": "Do not map to half way space."
+    },
+    "maximum_iterations": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Iterations",
+      "description": "Maximum number of iterations on each resolution."
+    },
+    "ent_dst": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Entropy Destination File",
+      "description": "With ROBENT: write target entropy image."
+    },
+    "high_iter": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "High Iterations Max",
+      "description": "Maximum number of iterations on highest resolution."
+    },
+    "eps_iteration": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "EPS Iterations",
+      "description": "Stop iterations when transform update falls below specified RMS distance."
+    },
+    "no_multiscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Multiscale",
+      "description": "Process highest resolution only (no multiscale)."
+    },
+    "max_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Size",
+      "description": "Specify largest voxel dimension for gaussian pyramid."
+    },
+    "min_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Min Size",
+      "description": "Specify smallest voxel dimension for gaussian pyramid."
+    },
+    "w_limit": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Weight Limit",
+      "description": "(Expert) sets maximal outlier limit for --satit."
+    },
+    "sub_sample": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subsample Dimension Limit",
+      "description": "Subsample if dimension is greater than the specified value on all axes."
+    },
+    "float_type": {
+      "type": "boolean",
+      "default": false,
+      "title": "Convert to Float",
+      "description": "Convert images to float internally."
+    },
+    "white_bg_mov": {
+      "type": "boolean",
+      "default": false,
+      "title": "White Background Movable",
+      "description": "Assume white background in MOV for padding."
+    },
+    "white_bg_dst": {
+      "type": "boolean",
+      "default": false,
+      "title": "White Background Destination",
+      "description": "Assume white background in DST for padding."
+    },
+    "uchar": {
+      "type": "boolean",
+      "default": false,
+      "title": "Convert to UCHAR",
+      "description": "Convert inputs to UCHAR with rescale and histogram cropping."
+    },
+    "mask_mov": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Movable",
+      "description": "Mask movable image with mask file."
+    },
+    "mask_dst": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Destination",
+      "description": "Mask destination image with mask file."
+    },
+    "half_mov": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Half Movable",
+      "description": "Outputs half-way movable (resampled in halfway space)."
+    },
+    "half_dst": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Half Destination",
+      "description": "Outputs half-way destination (resampled in halfway space)."
+    },
+    "half_weights": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Half Weights",
+      "description": "Outputs half-way weights (resampled in halfway space)."
+    },
+    "half_mov_lta": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Half Movable LTA",
+      "description": "Outputs transform from movable to half-way space."
+    },
+    "half_dst_lta": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Half Destination LTA",
+      "description": "Outputs transform from destination to half-way space."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Mode",
+      "description": "Show debug output."
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbosity Level",
+      "description": "Verbosity level: 0 (quiet), 1 (normal), 2 (detail)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "movable_volume",
+    "target_volume",
+    "output_registration"
+  ]
+}

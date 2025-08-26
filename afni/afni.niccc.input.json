@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "niccc",
+  "description": "A program for conducting certain NIML tests on input from streamspec and write the results to stderr",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.niccc"
+    },
+    "streamspec": {
+      "type": "string",
+      "title": "Stream specification",
+      "description": "A string defining a NIML stream"
+    },
+    "duplicate": {
+      "type": "boolean",
+      "default": false,
+      "title": "Duplicate Flag",
+      "description": "Duplicate the element before showing it. This is to test NI_duplicate function."
+    },
+    "nodata": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Data Flag",
+      "description": "Show header parts only in output"
+    },
+    "attribute": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Attribute",
+      "description": "Dump the value of attribute ATTR"
+    },
+    "match": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Match",
+      "description": "Match attribute: If MATCH is exact, then attribute name is matched exactly. If MATCH is partial, then a match of all the characters in ATTR is enough."
+    },
+    "file": {
+      "type": "boolean",
+      "default": false,
+      "title": "File Flag",
+      "description": "Streamspec is a filename."
+    },
+    "string": {
+      "type": "boolean",
+      "default": false,
+      "title": "String Flag",
+      "description": "Streamspec is an element string like: '<T font=9 coords=\"2.3 23 2\"/>'"
+    },
+    "stdout": {
+      "type": "boolean",
+      "default": false,
+      "title": "Stdout Flag",
+      "description": "Write elements to stdout, instead of stderr"
+    },
+    "hash": {
+      "type": "boolean",
+      "default": false,
+      "title": "Hash Flag",
+      "description": "Put the # at the beginning of lines with no data"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet Flag",
+      "description": "Quiet stderr messages, and don't echo attribute name with -attribute option"
+    },
+    "find_attr": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Find Attribute",
+      "description": "Only output elements that have an attribute ATTR of value ATTRVAL."
+    },
+    "skip_attr": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Skip Attribute",
+      "description": "Do not output elements that have an attribute ATTR of value ATTRVAL."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "streamspec"
+  ]
+}

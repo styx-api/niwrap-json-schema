@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsBrainExtraction.sh",
+  "description": "antsBrainExtraction.sh performs template-based brain extraction.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.antsBrainExtraction.sh"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "default": 3,
+      "title": "Image Dimension",
+      "description": "Image dimension (2 or 3)"
+    },
+    "anatomical_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Anatomical Image",
+      "description": "Anatomical image (Structural image, typically T1)"
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Brain Extraction Template",
+      "description": "Brain extraction template (Anatomical template)"
+    },
+    "probability_mask": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Brain Extraction Probability Mask",
+      "description": "Brain extraction probability mask"
+    },
+    "tissue_classification": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tissue Classification",
+      "description": "Tissue classification"
+    },
+    "brain_extraction_registration_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brain Extraction Registration Mask",
+      "description": "Brain extraction registration mask"
+    },
+    "keep_temporary_files": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep Temporary Files",
+      "description": "Keep temporary files"
+    },
+    "single_floating_point_precision": {
+      "type": "boolean",
+      "default": false,
+      "title": "Single Floating Point Precision",
+      "description": "Use single floating point precision"
+    },
+    "initial_moving_transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Moving Transform",
+      "description": "Initial moving transform"
+    },
+    "rotation_search_params": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rotation Search Parameters",
+      "description": "Rotation search parameters"
+    },
+    "image_file_suffix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Image File Suffix",
+      "description": "Image file suffix"
+    },
+    "translation_search_params": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Translation Search Parameters",
+      "description": "Translation search parameters"
+    },
+    "random_seeding": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Random Seeding",
+      "description": "Use random seeding"
+    },
+    "debug_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Mode",
+      "description": "Test / debug mode"
+    },
+    "output_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "output",
+      "title": "Output Prefix",
+      "description": "Output prefix"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "anatomical_image",
+    "template",
+    "probability_mask"
+  ]
+}

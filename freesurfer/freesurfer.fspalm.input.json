@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fspalm",
+  "description": "Prepares and analyzes the output of mri_glmfit for Permutation Analysis of Linear Models (PALM) to correct for multiple comparisons.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.fspalm"
+    },
+    "glmdir": {
+      "type": "string",
+      "title": "GLM directory",
+      "description": "The mri_glmfit directory to prepare"
+    },
+    "cft": {
+      "type": "number",
+      "title": "Cluster forming threshold",
+      "description": "Voxel-wise cluster forming threshold (CFT), -log10(p)"
+    },
+    "cwp": {
+      "type": "number",
+      "title": "Clusterwise p-value threshold",
+      "description": "Clusterwise p-value threshold"
+    },
+    "onetail": {
+      "type": "boolean",
+      "default": false,
+      "title": "One-tailed test",
+      "description": "Perform a one-tailed test"
+    },
+    "twotail": {
+      "type": "boolean",
+      "default": false,
+      "title": "Two-tailed test",
+      "description": "Perform a two-tailed test. NOTE: changes CFT"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Name of palm subdirectory",
+      "description": "Name of palm subdirectory (default=\"palm\")"
+    },
+    "iters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of iterations",
+      "description": "Number of iterations"
+    },
+    "monly": {
+      "type": "boolean",
+      "default": false,
+      "title": "Matlab only",
+      "description": "Only create matlab file, do not run"
+    },
+    "pponly": {
+      "type": "boolean",
+      "default": false,
+      "title": "Post-processing only",
+      "description": "Only perform post-processing"
+    },
+    "octave": {
+      "type": "boolean",
+      "default": false,
+      "title": "Run with Octave",
+      "description": "Run with octave, not matlab"
+    },
+    "centroid": {
+      "type": "boolean",
+      "default": false,
+      "title": "Centroid flag",
+      "description": "Add --centroid flag to mri_surfcluster post-processing"
+    },
+    "2spaces": {
+      "type": "boolean",
+      "default": false,
+      "title": "Bonferroni correction for 2 spaces",
+      "description": "Bonferroni-correct for 2 spaces"
+    },
+    "3spaces": {
+      "type": "boolean",
+      "default": false,
+      "title": "Bonferroni correction for 3 spaces",
+      "description": "Bonferroni-correct for 3 spaces"
+    },
+    "pargs": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Additional palm arguments",
+      "description": "Supply additional args to be passed to the palm function"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "glmdir",
+    "cft",
+    "cwp"
+  ]
+}

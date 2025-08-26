@@ -1,0 +1,372 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "probtrackx",
+  "description": "Streamlines tracking algorithm for probabilistic tractography",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.probtrackx"
+    },
+    "samples": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Samples file basename",
+      "description": "Basename for samples files"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask file",
+      "description": "Bet binary mask file in diffusion space"
+    },
+    "seed": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Seed file",
+      "description": "Seed volume, or voxel, or ascii file with multiple volumes, or freesurfer label file"
+    },
+    "out": {
+      "type": "string",
+      "default": "fdt_paths",
+      "title": "Output file",
+      "description": "Output file (default='fdt_paths')"
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose level",
+      "description": "Verbose level, [0-2]"
+    },
+    "targetmasks": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target masks list file",
+      "description": "File containing a list of target masks - required for seeds_to_targets classification"
+    },
+    "mask2": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second mask file",
+      "description": "Second mask in twomask_symm mode."
+    },
+    "waypoints": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Waypoints mask file",
+      "description": "Waypoint mask or ascii list of waypoint masks - only keep paths going through ALL the masks"
+    },
+    "network": {
+      "type": "boolean",
+      "default": false,
+      "title": "Network mode flag",
+      "description": "Activate network mode - only keep paths going through at least one seed mask (required if multiple seed masks)"
+    },
+    "mesh": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mesh descriptor file",
+      "description": "Freesurfer-type surface descriptor (in ascii format)"
+    },
+    "seedref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Seed reference volume",
+      "description": "Reference vol to define seed space in simple mode - diffusion space assumed if absent"
+    },
+    "dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "logdir",
+      "title": "Output directory",
+      "description": "Directory to put the final volumes in - code makes this directory - default='logdir'"
+    },
+    "forcedir": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force directory name flag",
+      "description": "Use the actual directory name given - i.e. don't add + to make a new directory"
+    },
+    "opd": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output path distribution flag",
+      "description": "Output path distribution"
+    },
+    "pd": {
+      "type": "boolean",
+      "default": false,
+      "title": "Correct path distribution flag",
+      "description": "Correct path distribution for the length of the pathways"
+    },
+    "os2t": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output seeds to targets flag",
+      "description": "Output seeds to targets"
+    },
+    "avoid": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Avoid mask file",
+      "description": "Reject pathways passing through locations given by this mask"
+    },
+    "stop": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stop mask file",
+      "description": "Stop tracking at locations given by this mask file"
+    },
+    "xfm": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Seed-to-DTI transform",
+      "description": "Transform taking seed space to DTI space (either FLIRT matrix or FNIRT warpfield) - default is identity"
+    },
+    "invxfm": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DTI-to-seed transform",
+      "description": "Transform taking DTI space to seed space (compulsory when using a warpfield for seeds_to_dti)"
+    },
+    "nsamples": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 5000,
+      "title": "Number of samples",
+      "description": "Number of samples - default=5000"
+    },
+    "nsteps": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 2000,
+      "title": "Number of steps per sample",
+      "description": "Number of steps per sample - default=2000"
+    },
+    "distthresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0,
+      "title": "Distance threshold",
+      "description": "Discards samples shorter than this threshold (in mm - default=0)"
+    },
+    "cthr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.2,
+      "title": "Curvature threshold",
+      "description": "Curvature threshold - default=0.2"
+    },
+    "fibthresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.01,
+      "title": "Fibre volume fraction threshold",
+      "description": "Volume fraction before subsidary fibre orientations are considered - default=0.01"
+    },
+    "sampvox": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sample voxels flag",
+      "description": "Sample random points within seed voxels"
+    },
+    "steplength": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0.5,
+      "title": "Step length",
+      "description": "Steplength in mm - default=0.5"
+    },
+    "loopcheck": {
+      "type": "boolean",
+      "default": false,
+      "title": "Loop check flag",
+      "description": "Perform loopchecks on paths - slower, but allows lower curvature threshold"
+    },
+    "usef": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use anisotropy flag",
+      "description": "Use anisotropy to constrain tracking"
+    },
+    "randfib": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0,
+      "title": "Random fibres sampling mode",
+      "description": "Default 0. Set to 1 to randomly sample initial fibres (with f > fibthresh). Set to 2 to sample in proportion fibres (with f>fibthresh) to f. Set to 3 to sample ALL populations at random (even if f<fibthresh)"
+    },
+    "fibst": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Starting fibre",
+      "description": "Force a starting fibre for tracking - default=1, i.e. first fibre orientation. Only works if randfib==0"
+    },
+    "modeuler": {
+      "type": "boolean",
+      "default": false,
+      "title": "Modified euler streamlining flag",
+      "description": "Use modified euler streamlining"
+    },
+    "rseed": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random seed",
+      "description": "Random seed"
+    },
+    "s2tastext": {
+      "type": "boolean",
+      "default": false,
+      "title": "Seed-to-target text output flag",
+      "description": "Output seed-to-target counts as a text file (useful when seeding from a mesh)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "samples",
+    "mask",
+    "seed"
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@diff.tree",
+  "description": "Show file differences between 2 directories",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.@diff.tree"
+    },
+    "new_dir": {
+      "type": "string",
+      "title": "New Directory",
+      "description": "New directory to compare"
+    },
+    "old_dir": {
+      "type": "string",
+      "title": "Old Directory",
+      "description": "Old directory to compare"
+    },
+    "diff_opts": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Diff Options",
+      "description": "Apply OPTS as options in diff commands"
+    },
+    "ignore_append": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ignore Append",
+      "description": "Append to ignore_list (list in quotes)"
+    },
+    "ia": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "IA",
+      "description": "Short for -ignore_append"
+    },
+    "ignore_list": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ignore List",
+      "description": "Create new ignore_list (list in quotes)"
+    },
+    "il": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "IL",
+      "description": "Short for -ignore_list"
+    },
+    "ignore_missing": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore Missing Files",
+      "description": "Only compare overlapping files, if different files, fail."
+    },
+    "no_diffs": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Diffs",
+      "description": "Only compare existence of files"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet",
+      "description": "Only list files with diffs"
+    },
+    "save": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Diffs",
+      "description": "Save actual file differences (txt and pdf)"
+    },
+    "show": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Diffs",
+      "description": "Show actual file differences"
+    },
+    "show_list_comp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show List Comparison",
+      "description": "Show any pairwise differences in file lists (terminate after showing comparison)"
+    },
+    "skip_data": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip Data",
+      "description": "Skip binary diff of select data files (.BRIK, .dcm, .BRIK.gz)"
+    },
+    "verb": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbosity",
+      "description": "Set verbosity level (0,1,2) (default 1)"
+    },
+    "diff_prog": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Diff Program",
+      "description": "Use PROG to show diffs (e.g. xxdiff, meld)"
+    },
+    "xxdiff": {
+      "type": "boolean",
+      "default": false,
+      "title": "XXDiff",
+      "description": "Use xxdiff to show diffs"
+    },
+    "X_option": {
+      "type": "boolean",
+      "default": false,
+      "title": "X Option",
+      "description": "Implies -xxdiff -ignore_missing"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "new_dir",
+    "old_dir"
+  ]
+}

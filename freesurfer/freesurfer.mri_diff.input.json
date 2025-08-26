@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_diff",
+  "description": "Determines whether two volumes differ based on dimensions, resolutions, acquisition parameters, geometry, precision, and pixel data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_diff"
+    },
+    "vol1file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Volume 1 File",
+      "description": "First volume to compare (e.g., vol1.mgz)"
+    },
+    "vol2file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Volume 2 File",
+      "description": "Second volume to compare (e.g., vol2.mgz)"
+    },
+    "resolution_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Resolution",
+      "description": "Do not check for resolution differences."
+    },
+    "acquisition_param_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Acquisition Parameters",
+      "description": "Do not check for acquisition parameter differences."
+    },
+    "geometry_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Geometry",
+      "description": "Do not check for geometry differences."
+    },
+    "precision_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Precision",
+      "description": "Do not check for precision differences."
+    },
+    "pixel_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Pixel",
+      "description": "Do not check for pixel differences."
+    },
+    "orientation_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Orientation",
+      "description": "Do not check for orientation differences."
+    },
+    "file_type_diff_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check File Type",
+      "description": "Do not check for file type differences."
+    },
+    "no_exit_on_diff": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Exit on Difference",
+      "description": "Do not exit on difference; run through everything."
+    },
+    "quality_assurance": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quality Assurance",
+      "description": "Check resolution, acquisition, precision, and orientation only."
+    },
+    "pixel_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pixel Only",
+      "description": "Only check pixel data."
+    },
+    "abs_difference": {
+      "type": "boolean",
+      "default": false,
+      "title": "Absolute Difference",
+      "description": "Take absolute value of difference (default)."
+    },
+    "no_abs_difference": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Absolute Difference",
+      "description": "Do not take absolute value of difference."
+    },
+    "difference_abs": {
+      "type": "boolean",
+      "default": false,
+      "title": "Difference Absolute Value",
+      "description": "Take absolute value before computing difference."
+    },
+    "percentage_difference": {
+      "type": "boolean",
+      "default": false,
+      "title": "Percentage Difference",
+      "description": "Compute percentage difference: 100*(v1-v2)/((v1+v2)/2)."
+    },
+    "rss_save": {
+      "type": "boolean",
+      "default": false,
+      "title": "RSS Save",
+      "description": "Save square root sum squares with --diff."
+    },
+    "ssd_print": {
+      "type": "boolean",
+      "default": false,
+      "title": "SSD Print",
+      "description": "Print sum squared differences over all voxels."
+    },
+    "rms_print": {
+      "type": "boolean",
+      "default": false,
+      "title": "RMS Print",
+      "description": "Print root mean squared difference over all non-zero voxels."
+    },
+    "count_diff_voxels": {
+      "type": "boolean",
+      "default": false,
+      "title": "Count Differing Voxels",
+      "description": "Print number of differing voxels."
+    },
+    "pixel_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pixel Threshold",
+      "description": "Pixel differences must be greater than this value to be considered different."
+    },
+    "count_thresh_voxels": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Count Threshold Voxels",
+      "description": "There must be at least this many voxels that are different."
+    },
+    "log_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log File",
+      "description": "Store difference information in this log file."
+    },
+    "difference_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Difference Image",
+      "description": "Save difference image to specified volume."
+    },
+    "suspicious_diff_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Suspicious Difference Volume",
+      "description": "Differing voxels replaced with label SUSPICIOUS in the specified volume."
+    },
+    "segmentation_diff": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation Difference",
+      "description": "Perform diff on voxels with specific label index."
+    },
+    "merge_edits": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Merge Edits",
+      "description": "Merge edits from newauto, oldauto, and manedit volumes into merged volume."
+    },
+    "average_difference": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Average Difference",
+      "description": "Save average difference to specified file."
+    },
+    "debug_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Mode",
+      "description": "Enable debugging mode."
+    },
+    "verbose_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Mode",
+      "description": "Print information on all differences found."
+    },
+    "check_options": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Options",
+      "description": "Check options and exit without running anything."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "vol1file",
+    "vol2file"
+  ]
+}

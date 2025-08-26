@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_reg",
+  "description": "Image registration using FSL tools",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.fsl_reg"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input image file"
+    },
+    "reference_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Reference file",
+      "description": "Reference image file"
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output transformation file"
+    },
+    "estimate_only_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Estimate only flag",
+      "description": "Estimate transformation but don't apply it"
+    },
+    "affine_only_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Affine-only flag",
+      "description": "Affine-only registration"
+    },
+    "fnirt_fa_config_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "FNIRT FA config flag",
+      "description": "Use FNIRT config file optimised for FA data"
+    },
+    "flirt_options": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FLIRT options",
+      "description": "Options to be passed onto flirt (inside double-quotes)"
+    },
+    "fnirt_options": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FNIRT options",
+      "description": "Options to be passed onto fnirt (inside double-quotes)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "reference_file",
+    "output_file"
+  ]
+}

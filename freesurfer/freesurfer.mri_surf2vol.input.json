@@ -1,0 +1,353 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_surf2vol",
+  "description": "Resamples a surface into a volume using one of two methods.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_surf2vol"
+    },
+    "surface_overlay": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Overlay",
+      "description": "Specify path to a surface and matching overlay"
+    },
+    "ltafile": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "LTA File",
+      "description": "Specify registration file"
+    },
+    "outfile": {
+      "type": "string",
+      "title": "Output File",
+      "description": "Path to output volume"
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject",
+      "description": "Specify subject name"
+    },
+    "ribbonfile": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ribbon File",
+      "description": "Specify path to ribbon file"
+    },
+    "merge_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Merge Volume",
+      "description": "Merge with this volume, replacing surface values"
+    },
+    "surface_values": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Values",
+      "description": "Source of surface values, optionally with format"
+    },
+    "mkmask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Make Mask",
+      "description": "Create a binary mask instead of loading surfval"
+    },
+    "hemi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hemisphere",
+      "description": "Hemisphere for the surface values (lh or rh)"
+    },
+    "surfname": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Name",
+      "description": "Surface name in surf directory (default is white)"
+    },
+    "projfrac": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Projection Fraction",
+      "description": "Fraction for thickness projection"
+    },
+    "fill_ribbon": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fill Ribbon",
+      "description": "Fill the entire ribbon"
+    },
+    "fill_projfrac": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fill Projection Fraction",
+      "description": "Fill ribbon by iterating projfrac"
+    },
+    "reg_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reg Volume",
+      "description": "Volume registration file"
+    },
+    "identity": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Identity Subject ID",
+      "description": "Use identity matrix for volume registration (requires subject name)"
+    },
+    "template_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template Volume",
+      "description": "Template volume for output configuration"
+    },
+    "fstal_res": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FSTAL Resolution",
+      "description": "Use fs Talairach registration with specified resolution"
+    },
+    "vtxvol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Vertex Volume",
+      "description": "Vertex map volume path"
+    },
+    "flat2mri": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Flat2MRI Mapping",
+      "description": "Options for flat surface to MRI mapping"
+    },
+    "sphpvf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "SPHPVF Options",
+      "description": "Spherical point to voxel function options"
+    },
+    "mask_to_cortex": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mask to Cortex",
+      "description": "Mask to cortex label"
+    },
+    "mask_to_label": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask to Label",
+      "description": "Mask to specified label file"
+    },
+    "surface_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Mask",
+      "description": "Mask to specified surface mask"
+    },
+    "add_const": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Add Constant",
+      "description": "Add constant value to each non-zero output voxel"
+    },
+    "copy_ctab": {
+      "type": "boolean",
+      "default": false,
+      "title": "Copy CTAB",
+      "description": "Copy color table header"
+    },
+    "subjects_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "FreeSurfer subjects directory"
+    },
+    "gdiagno": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Diagnostic Level",
+      "description": "Set diagnostic level"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Print version and exit"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Display help information"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "outfile"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dUpsample",
+  "description": "Upsamples a 1D time series to a finer time grid.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.1dUpsample"
+    },
+    "upsample_factor": {
+      "type": "number",
+      "minimum": 2,
+      "maximum": 32,
+      "title": "Upsample Factor",
+      "description": "Upsample factor (integer from 2..32)"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input File",
+      "description": "Input 1D time series file"
+    },
+    "linear_interpolation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Linear Interpolation Flag",
+      "description": "Use 1st order polynomials (i.e., linear interpolation) instead of 7th order polynomials"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "upsample_factor",
+    "input_file"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ROI_decluster",
+  "description": "Script to remove small clusters or standalone voxels from an ROI/atlas dataset",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.@ROI_decluster"
+    },
+    "input_dset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Dataset",
+      "description": "Required input dataset. This dataset should be set of integer values. The program mostly assumes approximate isotropic voxels."
+    },
+    "output_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Directory",
+      "description": "Directory name for output. All output goes to this directory."
+    },
+    "nvox_thresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel Threshold",
+      "description": "Number of voxels in a cluster to keep"
+    },
+    "frac_thresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fraction Threshold",
+      "description": "Fraction of voxels in a cluster to keep [0.0-1.0]"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Base name of final output dataset, i.e. baseprefix.nii.gz"
+    },
+    "neighborhood_type": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Neighborhood Type",
+      "description": "Neighborhood type using in finding mode: 1 - facing neighbors, 2 - edges, 3 - corners"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_dset"
+  ]
+}

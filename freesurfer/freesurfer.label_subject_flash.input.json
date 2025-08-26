@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "label_subject_flash",
+  "description": "A tool for labeling brain structures in an MRI dataset using FLASH sequences and the FreeSurfer software",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.label_subject_flash"
+    },
+    "tissue_params": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Tissue Parameters File",
+      "description": "Path to the tissue parameter file for FLASH sequences."
+    },
+    "norm_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Normalized Volume File",
+      "description": "Path to the normalized T1 volume."
+    },
+    "transform_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Transform File",
+      "description": "Talairach linear transform file."
+    },
+    "classifier_array": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Classifier Array File",
+      "description": "Path to the classifier array in GCA format."
+    },
+    "aseg_output": {
+      "type": "string",
+      "title": "Aseg Output",
+      "description": "Output path for the automatic segmentation (aseg) file."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "tissue_params",
+    "norm_volume",
+    "transform_file",
+    "classifier_array",
+    "aseg_output"
+  ]
+}

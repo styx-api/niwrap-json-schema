@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "volume-vector-operation",
+  "description": "Do a vector operation on volume files.\n\nDoes a vector operation on two volume files (that must have a multiple of 3 subvolumes).  Either of the inputs may have multiple vectors (more than 3 subvolumes), but not both (at least one must have exactly 3 subvolumes).  The -magnitude and -normalize-output options may not be specified together, or with the DOT operation.  The <operation> parameter must be one of the following:\n\nDOT\nCROSS\nADD\nSUBTRACT",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.volume-vector-operation"
+    },
+    "vectors_a": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "vectors_a",
+      "description": "first vector input file"
+    },
+    "vectors_b": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "vectors_b",
+      "description": "second vector input file"
+    },
+    "operation": {
+      "type": "string",
+      "title": "operation",
+      "description": "what vector operation to do"
+    },
+    "volume_out": {
+      "type": "string",
+      "title": "volume_out",
+      "description": "the output file"
+    },
+    "opt_normalize_a": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_normalize_a",
+      "description": "normalize vectors of first input"
+    },
+    "opt_normalize_b": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_normalize_b",
+      "description": "normalize vectors of second input"
+    },
+    "opt_normalize_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_normalize_output",
+      "description": "normalize output vectors (not valid for dot product)"
+    },
+    "opt_magnitude": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_magnitude",
+      "description": "output the magnitude of the result (not valid for dot product)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "vectors_a",
+    "vectors_b",
+    "operation",
+    "volume_out"
+  ]
+}

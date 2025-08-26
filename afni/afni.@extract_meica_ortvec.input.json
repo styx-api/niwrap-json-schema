@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@extract_meica_ortvec",
+  "description": "Project good MEICA components out of bad ones",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.@extract_meica_ortvec"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output 1D ortvec file prefix",
+      "description": "Name for output 1D ortvec file"
+    },
+    "meica_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "MEICA directory",
+      "description": "Directory for MEICA files"
+    },
+    "reject_ignored": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reject ignored components",
+      "description": "Do we reject ignored components (0=keep, 1=reject), default is 0"
+    },
+    "reject_midk": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reject midk components",
+      "description": "Do we reject midk components (0=keep, 1=reject), default is 1"
+    },
+    "work_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Work directory",
+      "description": "Sub-directory for work"
+    },
+    "verbosity": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbosity level",
+      "description": "Set verbosity level"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix"
+  ]
+}

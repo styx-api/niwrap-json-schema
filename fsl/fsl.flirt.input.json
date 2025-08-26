@@ -1,0 +1,534 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "flirt",
+  "description": "FLIRT (FMRIB's Linear Image Registration Tool) is a fully automated robust and accurate tool for linear (affine) intra- and inter-modal brain image registration.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.flirt"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "In file",
+      "description": "Input file."
+    },
+    "reference": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Reference",
+      "description": "Reference file."
+    },
+    "out_file": {
+      "type": "string",
+      "title": "Out file",
+      "description": "Registered output file."
+    },
+    "out_matrix_file": {
+      "type": "string",
+      "title": "Out matrix file",
+      "description": "Output affine matrix in 4x4 asciii format."
+    },
+    "angle_rep": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Angle rep",
+      "description": "'quaternion' or 'euler'. Representation of rotation angles."
+    },
+    "apply_isoxfm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Apply isoxfm",
+      "description": "As applyxfm but forces isotropic resampling."
+    },
+    "apply_xfm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Apply xfm",
+      "description": "Apply transformation supplied by in_matrix_file or uses_qform to use the affine matrix stored in the reference header."
+    },
+    "bbrslope": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bbrslope",
+      "description": "Value of bbr slope."
+    },
+    "bbrtype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bbrtype",
+      "description": "'signed' or 'global_abs' or 'local_abs'. Type of bbr cost function: signed [default], global_abs, local_abs."
+    },
+    "bgvalue": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bgvalue",
+      "description": "Use specified background value for points outside fov."
+    },
+    "bins": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bins",
+      "description": "Number of histogram bins."
+    },
+    "coarse_search": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Coarse search",
+      "description": "Coarse search delta angle."
+    },
+    "cost": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "corratio",
+      "title": "Cost",
+      "description": "'mutualinfo' or 'corratio' or 'normcorr' or 'normmi' or 'leastsq' or 'labeldiff' or 'bbr'. Cost function."
+    },
+    "cost_func": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "corratio",
+      "title": "Cost func",
+      "description": "'mutualinfo' or 'corratio' or 'normcorr' or 'normmi' or 'leastsq' or 'labeldiff' or 'bbr'. Cost function."
+    },
+    "datatype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Datatype",
+      "description": "'char' or 'short' or 'int' or 'float' or 'double'. Force output data type."
+    },
+    "display_init": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display init",
+      "description": "Display initial matrix."
+    },
+    "dof": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 12,
+      "title": "Dof",
+      "description": "Number of transform degrees of freedom."
+    },
+    "echospacing": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Echospacing",
+      "description": "Value of epi echo spacing - units of seconds."
+    },
+    "fieldmap": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fieldmap",
+      "description": "Fieldmap image in rads/s - must be already registered to the reference image."
+    },
+    "fieldmapmask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fieldmapmask",
+      "description": "Mask for fieldmap image."
+    },
+    "fine_search": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fine search",
+      "description": "Fine search delta angle."
+    },
+    "force_scaling": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force scaling",
+      "description": "Force rescaling even for low-res images."
+    },
+    "in_matrix_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "In matrix file",
+      "description": "Input 4x4 affine matrix."
+    },
+    "in_weight": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "In weight",
+      "description": "File for input weighting volume."
+    },
+    "interp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "trilinear",
+      "title": "Interp",
+      "description": "'trilinear' or 'nearestneighbour' or 'sinc' or 'spline'. Final interpolation method used in reslicing."
+    },
+    "min_sampling": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Min sampling",
+      "description": "Set minimum voxel dimension for sampling."
+    },
+    "no_clamp": {
+      "type": "boolean",
+      "default": false,
+      "title": "No clamp",
+      "description": "Do not use intensity clamping."
+    },
+    "no_resample": {
+      "type": "boolean",
+      "default": false,
+      "title": "No resample",
+      "description": "Do not change input sampling."
+    },
+    "no_resample_blur": {
+      "type": "boolean",
+      "default": false,
+      "title": "No resample blur",
+      "description": "Do not use blurring on downsampling."
+    },
+    "no_search": {
+      "type": "boolean",
+      "default": false,
+      "title": "No search",
+      "description": "Set all angular searches to ranges 0 to 0."
+    },
+    "padding_size": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Padding size",
+      "description": "For applyxfm: interpolates outside image by size."
+    },
+    "pedir": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pedir",
+      "description": "Phase encode direction of epi - 1/2/3=x/y/z & -1/-2/-3=-x/-y/-z."
+    },
+    "ref_weight": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ref weight",
+      "description": "File for reference weighting volume."
+    },
+    "rigid2D": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rigid2d",
+      "description": "Use 2d rigid body mode - ignores dof."
+    },
+    "schedule": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Schedule",
+      "description": "Replaces default schedule."
+    },
+    "searchr_x": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Searchr x",
+      "description": "Search angles along x-axis, in degrees."
+    },
+    "searchr_y": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Searchr y",
+      "description": "Search angles along y-axis, in degrees."
+    },
+    "searchr_z": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Searchr z",
+      "description": "Search angles along z-axis, in degrees."
+    },
+    "sinc_width": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sinc width",
+      "description": "Full-width in voxels."
+    },
+    "sinc_window": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sinc window",
+      "description": "'rectangular' or 'hanning' or 'blackman'. Sinc window."
+    },
+    "uses_qform": {
+      "type": "boolean",
+      "default": false,
+      "title": "Uses qform",
+      "description": "Initialize using sform or qform."
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose",
+      "description": "Verbose mode, 0 is least."
+    },
+    "wm_seg": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Wm seg",
+      "description": "White matter segmentation volume needed by bbr cost function."
+    },
+    "wmcoords": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Wmcoords",
+      "description": "White matter boundary coordinates for bbr cost function."
+    },
+    "wmnorms": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Wmnorms",
+      "description": "White matter boundary normals for bbr cost function."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in_file",
+    "reference",
+    "out_file",
+    "out_matrix_file"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ResampleImage",
+  "description": "ResampleImage is a tool used to resample images to specified sizes and spacings, using various interpolation methods and pixel types.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.ResampleImage"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "title": "Image Dimension",
+      "description": "Dimension of the image to be resampled."
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "The image file to be resampled."
+    },
+    "output_image": {
+      "type": "string",
+      "title": "Output Image",
+      "description": "The output image file after resampling."
+    },
+    "size_spacing": {
+      "type": "string",
+      "title": "Size and Spacing",
+      "description": "Resampling size and spacing specification, e.g., 'MxNxO'."
+    },
+    "interpolate_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolation Type",
+      "description": "Specifies the interpolation type. 0: linear (default), 1: nearest-neighbor, 2: gaussian, 3: windowedSinc, 4: B-Spline."
+    },
+    "pixeltype": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pixel Type",
+      "description": "Specifies the pixel type of the output image. 0: char, 1: unsigned char, 2: short, 3: unsigned short, 4: int, 5: unsigned int, 6: float (default), 7: double."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "input_image",
+    "output_image",
+    "size_spacing"
+  ]
+}

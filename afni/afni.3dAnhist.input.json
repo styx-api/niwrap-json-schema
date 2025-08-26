@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dAnhist",
+  "description": "Tool to analyze histogram peaks in a T1-weighted high-res brain image dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dAnhist"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Dataset",
+      "description": "Input dataset, should be T1-weighted high-res brain image (shorts only)."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet Flag",
+      "description": "Suppress progress reports."
+    },
+    "dump_histogram": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dump Histogram Flag",
+      "description": "Dump histogram data to Anhist.1D and plot to Anhist.ps."
+    },
+    "no_scurve": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Scurve Flag",
+      "description": "Do not fit histogram with curves."
+    },
+    "winsorize": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Winsorize",
+      "description": "Apply Winsorizing filter prior to histogram scan. Can specify number of times (e.g., -w7)."
+    },
+    "top_2peaks": {
+      "type": "boolean",
+      "default": false,
+      "title": "Analyze Top 2 Peaks Flag",
+      "description": "Analyze top 2 peaks only, for overlap, etc."
+    },
+    "label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label",
+      "description": "Use specified label for Anhist.ps plot file instead of the input dataset filename."
+    },
+    "filename": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filename",
+      "description": "Use specified filename instead of 'Anhist'."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset"
+  ]
+}

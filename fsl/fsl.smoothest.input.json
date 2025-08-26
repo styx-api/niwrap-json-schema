@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "smoothest",
+  "description": "Tool to estimate smoothness of data from FSL",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.smoothest"
+    },
+    "dof": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Degrees of Freedom",
+      "description": "Number of degrees of freedom"
+    },
+    "residual_fit_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Residual Fit Image",
+      "description": "Filename of `residual-fit` image (use -d)"
+    },
+    "zstat_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Zstat Image",
+      "description": "Filename of zstat image (not with -d)"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Brain Mask",
+      "description": "Brain mask volume"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Switch on diagnostic messages"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "mask"
+  ]
+}

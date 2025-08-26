@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsIntroduction.sh",
+  "description": "Script for registration using ANTS with compulsory and optional arguments.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.antsIntroduction.sh"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "title": "Image Dimension",
+      "description": "Image dimension for registration: 2 or 3."
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Reference Image",
+      "description": "Reference image for registration."
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "Input image to be registered."
+    },
+    "force": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Force",
+      "description": "Force script to proceed even if headers may be incompatible."
+    },
+    "labels_in_fixed_image_space": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Labels In Fixed Image Space",
+      "description": "Labels in fixed image space to deform to moving image."
+    },
+    "max_iterations": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Iterations",
+      "description": "Maximum number of iterations."
+    },
+    "n4_bias_field_correction": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0,
+      "title": "N4 Bias Field Correction",
+      "description": "N4 Bias Field Correction of moving image: 0 for off, 1 for on."
+    },
+    "outprefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "A prefix that is prepended to all output files."
+    },
+    "quality_check": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0,
+      "title": "Quality Check",
+      "description": "Perform a Quality Check (QC) of the result: 0 for off, 1 for on."
+    },
+    "similarity_metric": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Similarity Metric",
+      "description": "Type of similarity metric used for registration."
+    },
+    "transformation_model": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transformation Model",
+      "description": "Type of transformation model used for registration."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "reference_image",
+    "input_image"
+  ]
+}

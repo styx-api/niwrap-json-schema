@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfaceCurvature",
+  "description": "The Shape Operator for Differential Analysis of Images. It can operate on binary or gray scale images with various modes to see different effects.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.SurfaceCurvature"
+    },
+    "filename_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "The input image file in .nii format."
+    },
+    "filename_out": {
+      "type": "string",
+      "title": "Output Image",
+      "description": "The output image file in .nii format."
+    },
+    "sigma": {
+      "type": "number",
+      "title": "Sigma",
+      "description": "The sigma value for analysis."
+    },
+    "option": {
+      "type": "number",
+      "title": "Operation Option",
+      "description": "The operation mode: 0 for mean curvature, 5 for surface characterization, 6 for Gaussian curvature, and 7 for surface area."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "filename_in",
+    "filename_out",
+    "sigma",
+    "option"
+  ]
+}

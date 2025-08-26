@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_thickness_comparison",
+  "description": "Tool to compare cortical thickness measurements between two or more specified labels.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_thickness_comparison"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject identifier."
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere (e.g., lh or rh)."
+    },
+    "thickness_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Thickness File",
+      "description": "File containing thickness measurements."
+    },
+    "w_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "W File",
+      "description": "W file for cortical thickness comparison."
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Labels",
+      "description": "List of labels to compare, separated by spaces."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject",
+    "hemi",
+    "thickness_file",
+    "w_file",
+    "labels"
+  ]
+}

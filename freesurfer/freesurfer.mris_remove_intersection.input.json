@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_remove_intersection",
+  "description": "Tool to remove intersections in surface files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mris_remove_intersection"
+    },
+    "surface_in_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Surface In File",
+      "description": "Input surface file."
+    },
+    "corrected_surface_out_file": {
+      "type": "string",
+      "title": "Corrected Surface Out File",
+      "description": "Corrected output surface file."
+    },
+    "fill_holes": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fill Holes Flag",
+      "description": "Fill any holes in the intersection mark map and include them in the fix."
+    },
+    "map_option": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Map File",
+      "description": "Create a binary map of intersections."
+    },
+    "projdistmm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Projection Distance (mm)",
+      "description": "Projection distance in mm when using -map option."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface_in_file",
+    "corrected_surface_out_file"
+  ]
+}

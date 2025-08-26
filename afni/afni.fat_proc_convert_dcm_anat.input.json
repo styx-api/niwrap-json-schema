@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_proc_convert_dcm_anat",
+  "description": "Converts an anatomical dataset from DICOM files into a volume, specifically designed to fit in line with other processing such as DTI analysis.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.fat_proc_convert_dcm_anat"
+    },
+    "dicom_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DICOM Directory",
+      "description": "Input as DICOM directory; DIR_IN should contain only DICOM files; all will be selected."
+    },
+    "nifti_input": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "NIFTI Input",
+      "description": "Input as NIFTI file (zipped or unzipped fine). Alternative to '-indir ..'."
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Prefix",
+      "description": "Set prefix (and path) for output data."
+    },
+    "workdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Working Directory",
+      "description": "Specify a working directory, which can be removed (default name = '__WORKING_convert_dcm_anat')."
+    },
+    "orient": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Orientation",
+      "description": "Optional chance to reset orientation of the volume files (default is currently 'RAI')."
+    },
+    "no_clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Clean Flag",
+      "description": "Prevents removal of working directory."
+    },
+    "reorig_reorient_off": {
+      "type": "boolean",
+      "default": false,
+      "title": "Reorient/Reorigin Off Flag",
+      "description": "Turns off the nicety of putting (0, 0, 0) at brain's center of mass (-> 'reorigin' calc) and reorienting data (-> 'reorient' calc)."
+    },
+    "qc_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "QC Prefix",
+      "description": "Set the prefix of the QC image files separately (default is '')."
+    },
+    "no_cmd_out": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Command Output Flag",
+      "description": "Don't save the command line call and the location where it was run."
+    },
+    "no_qc_view": {
+      "type": "boolean",
+      "default": false,
+      "title": "No QC View Flag",
+      "description": "Turn off generating QC image files."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix"
+  ]
+}

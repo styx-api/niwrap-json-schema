@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "rtfeedme",
+  "description": "Test the real-time plugin by sending all the bricks in 'dataset' to AFNI.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.rtfeedme"
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Datasets",
+      "description": "List of datasets to send to AFNI, specified as paths to dataset files. Multiple datasets can be specified."
+    },
+    "host": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Host",
+      "description": "Send data via TCP/IP to AFNI running on the specified computer system 'sname'. Default is the current system using shared memory. Use 'localhost' to send on the current system using TCP/IP."
+    },
+    "interval_ms": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inter-transmit interval",
+      "description": "Inter-transmit interval in milliseconds. Default is to send data as fast as possible."
+    },
+    "send_3d": {
+      "type": "boolean",
+      "default": false,
+      "title": "Send in 3D",
+      "description": "Send data in 3D bricks. Default is 2D slices."
+    },
+    "buffer_mb": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Buffer size (MB)",
+      "description": "Set the interprocess communications buffer size in megabytes when using shared memory. Has no effect if using TCP/IP. Default is 1 MB; if set to 0, a 50 KB buffer is used."
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose",
+      "description": "Be talkative about actions."
+    },
+    "swap_bytes": {
+      "type": "boolean",
+      "default": false,
+      "title": "Swap byte pairs",
+      "description": "Swap byte pairs before sending data."
+    },
+    "nz_fake": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "NZ Fake",
+      "description": "Send 'nz' as the value of nzz for debugging purposes."
+    },
+    "drive_cmd": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Drive commands",
+      "description": "Send 'cmd' as a DRIVE_AFNI command. If 'cmd' contains spaces, it must be quoted. Multiple -drive options can be used."
+    },
+    "note": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Notes",
+      "description": "Send 'sss' as a NOTE to the realtime plugin. Multiple -note options can be used."
+    },
+    "yrange": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Y-range for motion estimation graphing",
+      "description": "Send value 'v' as the y-range for realtime motion estimation graphing."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "datasets"
+  ]
+}

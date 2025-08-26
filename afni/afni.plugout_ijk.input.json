@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "plugout_ijk",
+  "description": "Connects to AFNI and sends (i,j,k) dataset indices to control the viewpoint.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.plugout_ijk"
+    },
+    "host": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Host name",
+      "description": "Connect to AFNI running on the specified computer using TCP/IP."
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Verbose mode."
+    },
+    "port": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Port number",
+      "description": "Use TCP/IP port number 'pp'."
+    },
+    "name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Plugout name",
+      "description": "Use the string 'sss' for the name that AFNI assigns to this plugout."
+    },
+    "port_offset": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 1025,
+          "maximum": 65500
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Port offset",
+      "description": "Provide a port offset to allow multiple instances of communicating programs to operate on the same machine."
+    },
+    "port_quiet": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Port offset quiet",
+      "description": "Provide a port offset like -np, but more quiet in the face of adversity."
+    },
+    "port_bloc_offset": {
+      "anyOf": [
+        {
+          "type": "number",
+          "maximum": 4000
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Port bloc offset",
+      "description": "Provide a port offset block for easier port management."
+    },
+    "max_bloc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Max port bloc",
+      "description": "Print the current value of MAX_BLOC and exit."
+    },
+    "max_bloc_quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Max port bloc quiet",
+      "description": "Print MAX_BLOC value only and exit."
+    },
+    "num_assigned_ports": {
+      "type": "boolean",
+      "default": false,
+      "title": "Number of assigned ports",
+      "description": "Print the number of assigned ports used by AFNI then quit."
+    },
+    "num_assigned_ports_quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Number of assigned ports quiet",
+      "description": "Prints the number of assigned ports quietly."
+    }
+  },
+  "additionalProperties": false
+}

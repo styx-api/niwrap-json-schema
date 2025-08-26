@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLocalstat",
+  "description": "This program computes statistics at each voxel, based on a local neighborhood of that voxel",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dLocalstat"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input dataset",
+      "description": "Input dataset"
+    },
+    "nbhd": {
+      "type": "string",
+      "title": "Neighborhood definition",
+      "description": "The region around each voxel that will be extracted for the statistics calculation"
+    },
+    "stat": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Statistic",
+      "description": "Compute the specified statistic on the values extracted from the neighborhood"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask dataset",
+      "description": "Read in dataset 'mset' and use the nonzero voxels therein as a mask"
+    },
+    "automask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automask",
+      "description": "Compute the mask as in program 3dAutomask (mutually exclusive with -mask)"
+    },
+    "use_nonmask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use nonmask",
+      "description": "Compute local statistics from all voxels in the neighborhood that are in the mask, even if the central voxel is not in the mask"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Use the given string as the prefix for the output dataset"
+    },
+    "datum": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Datum type",
+      "description": "Coerce the output data to be stored as the given type (byte, short, float)"
+    },
+    "label_ext": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label extension",
+      "description": "Append given label to each sub-brick label"
+    },
+    "reduce_grid": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reduce grid",
+      "description": "Compute output on a grid that is reduced by the given factor in X, Y, and Z directions of the input dataset"
+    },
+    "reduce_restore_grid": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reduce restore grid",
+      "description": "Resample the output back to input grid after reducing the grid"
+    },
+    "reduce_max_vox": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reduce max voxels",
+      "description": "Automatically set Rx Ry Rz so that the computation grid is at a resolution of nbhd/MAX_VOX voxels"
+    },
+    "grid_rmode": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Grid resample mode",
+      "description": "Interpolant to use when resampling the output with reduce_restore_grid option"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet mode",
+      "description": "Stop the highly informative progress reports"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose mode",
+      "description": "A little more verbose output"
+    },
+    "proceed_small_N": {
+      "type": "boolean",
+      "default": false,
+      "title": "Proceed with small neighborhood",
+      "description": "Do not crash if neighborhood is too small for certain estimates"
+    },
+    "fillvalue": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fill value",
+      "description": "Value used for filled statistic, default=1"
+    },
+    "unfillvalue": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unfill value",
+      "description": "Value used for unfilled statistic, default=1"
+    },
+    "maskvalue": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask value",
+      "description": "Value searched for with has_mask option"
+    },
+    "maskvalue2": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask value 2",
+      "description": "Alternate value for has_mask2 option"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset",
+    "nbhd"
+  ]
+}

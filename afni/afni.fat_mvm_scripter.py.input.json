@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_mvm_scripter.py",
+  "description": "Automated tool to create command scripts for 3dMVM statistical modeling.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.fat_mvm_scripter.py"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Output prefix for the script file, which will ultimately create a PREFIX_MVM.txt file of statistical results from 3dMVM."
+    },
+    "table": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Data Table File",
+      "description": "Text file containing columns of subject data, one subject per row, formatted as a *_MVMtbl.txt output by fat_mvm_prep.py."
+    },
+    "log": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Log File",
+      "description": "File formatted according to fat_mvm_prep.py containing commented headings and lists of cross-group ROIs and parameters."
+    },
+    "vars": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Variables List",
+      "description": "List of variables for the 3dMVM model. Names must be separated with whitespace. Categorical variables will be detected automatically by the presence of nonnumeric characters in their columns."
+    },
+    "file_vars": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Variables File",
+      "description": "Second method for supplying a list of variables for 3dMVM. VAR_FILE is a text file with a single column of variable names."
+    },
+    "Pars": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parameters",
+      "description": "List of parameters (names of matrices) to run in distinct 3dMVM models. Names must be separated with whitespace."
+    },
+    "file_Pars": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parameters File",
+      "description": "Second method for supplying a list of parameters for 3dMVM runs. PAR_FILE is a text file with a single column of parameter names."
+    },
+    "rois": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ROIs",
+      "description": "Optional command to select a subset of available network ROIs. Names must be separated with whitespace."
+    },
+    "file_rois": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ROIs File",
+      "description": "Second method for supplying a subset of ROIs for 3dMVM runs. ROI_FILE is a text file with a single column of variable names."
+    },
+    "no_posthoc": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Posthoc Flag",
+      "description": "Switch to turn off the automatic generation of per-ROI post hoc tests."
+    },
+    "NA_warn_off": {
+      "type": "boolean",
+      "default": false,
+      "title": "NA Warning Off Flag",
+      "description": "Switch to turn off the automatic warnings as the data table is created. 3dMVM will excise subjects with NA values, so there shouldn't be NA values in columns you want to model."
+    },
+    "subnet_pref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subnetwork Prefix",
+      "description": "Name SUBPR for the new table file that is created when a subnetwork list of ROIs is used."
+    },
+    "cat_pair_off": {
+      "type": "boolean",
+      "default": false,
+      "title": "Categorical Pair Off Flag",
+      "description": "Switch to turn off the test for categorical variables undergoing posthoc testing."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "prefix",
+    "table",
+    "log"
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "make_average_volume",
+  "description": "Creates average volumes from a set of subjects.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.make_average_volume"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Subjects",
+      "description": "List of subjects to include in the average."
+    },
+    "fsgd": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FSGD file",
+      "description": "File containing subject list for averaging."
+    },
+    "out": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output average subject name",
+      "description": "Output average subject name. Default is 'average'."
+    },
+    "topdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Top directory",
+      "description": "Directory to put data and link to SUBJECTS_DIR."
+    },
+    "xform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transformation name",
+      "description": "Transformation name to use, default is talairach.xfm."
+    },
+    "sdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects directory",
+      "description": "Use specified SUBJECTS_DIR instead of the environment's one."
+    },
+    "sd_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "SDIR flag",
+      "description": "Same as --sdir."
+    },
+    "force_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force overwrite flag",
+      "description": "Overwrite existing average subject data."
+    },
+    "keep_all_orig_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep all original volumes flag",
+      "description": "Concatenate all original volumes into mri/orig.all.mgz."
+    },
+    "no_aseg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No aseg flag",
+      "description": "Do not create 'average' aseg."
+    },
+    "ctab": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Color table",
+      "description": "Embed colortable into segmentations."
+    },
+    "ctab_default_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Default color table flag",
+      "description": "Embed FreeSurferColorLUT.txt into segmentations."
+    },
+    "echo_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Echo flag",
+      "description": "Enable command echo for debugging."
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Same as --echo for debugging."
+    },
+    "nocleanup_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No cleanup flag",
+      "description": "Do not delete temporary files."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subjects"
+  ]
+}

@@ -1,0 +1,379 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "connectomestats",
+  "description": "Connectome group-wise statistics at the edge level using non-parametric permutation testing.\n\nFor the TFNBS algorithm, default parameters for statistical enhancement have been set based on the work in: \nVinokur, L.; Zalesky, A.; Raffelt, D.; Smith, R.E. & Connelly, A. A Novel Threshold-Free Network-Based Statistics Method: Demonstration using Simulated Pathology. OHBM, 2015, 4144; \nand: \nVinokur, L.; Zalesky, A.; Raffelt, D.; Smith, R.E. & Connelly, A. A novel threshold-free network-based statistical method: Demonstration and parameter optimisation using in vivo simulated pathology. In Proc ISMRM, 2015, 2846. \nNote however that not only was the optimisation of these parameters not very precise, but the outcomes of statistical inference (for both this algorithm and the NBS method) can vary markedly for even small changes to enhancement parameters. Therefore the specificity of results obtained using either of these methods should be interpreted with caution.\n\nIn some software packages, a column of ones is automatically added to the GLM design matrix; the purpose of this column is to estimate the \"global intercept\", which is the predicted value of the observed variable if all explanatory variables were to be zero. However there are rare situations where including such a column would not be appropriate for a particular experimental design. Hence, in MRtrix3 statistical inference commands, it is up to the user to determine whether or not this column of ones should be included in their design matrix, and add it explicitly if necessary. The contrast matrix must also reflect the presence of this additional column.\n\nReferences:\n\n* If using the NBS algorithm: \nZalesky, A.; Fornito, A. & Bullmore, E. T. Network-based statistic: Identifying differences in brain networks. \nNeuroImage, 2010, 53, 1197-1207\n\n* If using the TFNBS algorithm: \nBaggio, H.C.; Abos, A.; Segura, B.; Campabadal, A.; Garcia-Diaz, A.; Uribe, C.; Compta, Y.; Marti, M.J.; Valldeoriola, F.; Junque, C. Statistical inference in brain graphs using threshold-free network-based statistics.HBM, 2018, 39, 2289-2302\n\n* If using the -nonstationary option: \nSalimi-Khorshidi, G.; Smith, S.M. & Nichols, T.E. Adjusting the effect of nonstationarity in cluster-based and TFCE inference. \nNeuroimage, 2011, 54(3), 2006-19",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix.connectomestats"
+    },
+    "notest": {
+      "type": "boolean",
+      "default": false,
+      "title": "notest",
+      "description": "don't perform statistical inference; only output population statistics (effect size, stdev etc)"
+    },
+    "errors": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "errors",
+      "description": "specify nature of errors for shuffling; options are: ee,ise,both (default: ee)"
+    },
+    "exchange_within": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "exchange_within",
+      "description": "specify blocks of observations within each of which data may undergo restricted exchange"
+    },
+    "exchange_whole": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "exchange_whole",
+      "description": "specify blocks of observations that may be exchanged with one another (for independent and symmetric errors, sign-flipping will occur block-wise)"
+    },
+    "strong": {
+      "type": "boolean",
+      "default": false,
+      "title": "strong",
+      "description": "use strong familywise error control across multiple hypotheses"
+    },
+    "nshuffles": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nshuffles",
+      "description": "the number of shuffles (default: 5000)"
+    },
+    "permutations": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "permutations",
+      "description": "manually define the permutations (relabelling). The input should be a text file defining a m x n matrix, where each relabelling is defined as a column vector of size m, and the number of columns, n, defines the number of permutations. Can be generated with the palm_quickperms function in PALM (http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/PALM). Overrides the -nshuffles option."
+    },
+    "nonstationarity": {
+      "type": "boolean",
+      "default": false,
+      "title": "nonstationarity",
+      "description": "perform non-stationarity correction"
+    },
+    "skew_nonstationarity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "skew_nonstationarity",
+      "description": "specify the skew parameter for empirical statistic calculation (default for this command is 1)"
+    },
+    "nshuffles_nonstationarity": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nshuffles_nonstationarity",
+      "description": "the number of shuffles to use when precomputing the empirical statistic image for non-stationarity correction (default: 5000)"
+    },
+    "permutations_nonstationarity": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "permutations_nonstationarity",
+      "description": "manually define the permutations (relabelling) for computing the emprical statistics for non-stationarity correction. The input should be a text file defining a m x n matrix, where each relabelling is defined as a column vector of size m, and the number of columns, n, defines the number of permutations. Can be generated with the palm_quickperms function in PALM (http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/PALM) Overrides the -nshuffles_nonstationarity option."
+    },
+    "tfce_dh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "tfce_dh",
+      "description": "the height increment used in the tfce integration (default: 0.1)"
+    },
+    "tfce_e": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "tfce_e",
+      "description": "tfce extent exponent (default: 0.4)"
+    },
+    "tfce_h": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "tfce_h",
+      "description": "tfce height exponent (default: 3)"
+    },
+    "variance": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "variance",
+      "description": "define variance groups for the G-statistic; measurements for which the expected variance is equivalent should contain the same index"
+    },
+    "ftests": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ftests",
+      "description": "perform F-tests; input text file should contain, for each F-test, a row containing ones and zeros, where ones indicate the rows of the contrast matrix to be included in the F-test."
+    },
+    "fonly": {
+      "type": "boolean",
+      "default": false,
+      "title": "fonly",
+      "description": "only assess F-tests; do not perform statistical inference on entries in the contrast matrix"
+    },
+    "column": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "column"
+              },
+              "path": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "path",
+                "description": "add a column to the design matrix corresponding to subject edge-wise values (note that the contrast matrix must include an additional column for each use of this option); the text file provided via this option should contain a file name for each subject"
+              }
+            },
+            "additionalProperties": false,
+            "title": "column",
+            "description": "add a column to the design matrix corresponding to subject edge-wise values (note that the contrast matrix must include an additional column for each use of this option); the text file provided via this option should contain a file name for each subject",
+            "required": [
+              "path"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "column",
+      "description": "add a column to the design matrix corresponding to subject edge-wise values (note that the contrast matrix must include an additional column for each use of this option); the text file provided via this option should contain a file name for each subject"
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "threshold",
+      "description": "the t-statistic value to use in threshold-based clustering algorithms"
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "info",
+      "description": "display information messages."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "quiet",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "debug",
+      "description": "display debugging messages."
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "force",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour)."
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "nthreads",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)."
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "config"
+              },
+              "key": {
+                "type": "string",
+                "title": "key",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              },
+              "value": {
+                "type": "string",
+                "title": "value",
+                "description": "temporarily set the value of an MRtrix config file entry."
+              }
+            },
+            "additionalProperties": false,
+            "title": "config",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "config",
+      "description": "temporarily set the value of an MRtrix config file entry."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "help",
+      "description": "display this information page and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "version",
+      "description": "display version information and exit."
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "input",
+      "description": "a text file listing the file names of the input connectomes"
+    },
+    "algorithm": {
+      "type": "string",
+      "title": "algorithm",
+      "description": "the algorithm to use in network-based clustering/enhancement. Options are: nbs, tfnbs, none"
+    },
+    "design": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "design",
+      "description": "the design matrix"
+    },
+    "contrast": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "contrast",
+      "description": "the contrast matrix"
+    },
+    "output": {
+      "type": "string",
+      "title": "output",
+      "description": "the filename prefix for all output."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input",
+    "algorithm",
+    "design",
+    "contrast",
+    "output"
+  ]
+}

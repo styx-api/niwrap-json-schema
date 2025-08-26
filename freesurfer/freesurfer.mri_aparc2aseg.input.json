@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_aparc2aseg",
+  "description": "Maps the cortical labels from the automatic cortical parcellation to the automatic segmentation volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_aparc2aseg"
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject name",
+      "description": "Name of the subject as found in the SUBJECTS_DIR."
+    },
+    "output_volfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Volume File",
+      "description": "Full path of file to save the output segmentation in. Default is mri/aparc+aseg.mgz"
+    },
+    "old_ribbon": {
+      "type": "boolean",
+      "default": false,
+      "title": "Old Ribbon Flag",
+      "description": "Use mri/hemi.ribbon.mgz as a mask for the cortex"
+    },
+    "new_ribbon": {
+      "type": "boolean",
+      "default": false,
+      "title": "New Ribbon Flag",
+      "description": "Mask cortical voxels with mri/ribbon.mgz. Same as --volmask"
+    },
+    "a2005s": {
+      "type": "boolean",
+      "default": false,
+      "title": "A2005s Flag",
+      "description": "Use ?h.aparc.a2005s.annot. Output will be aparc.a2005s+aseg.mgz."
+    },
+    "a2009s": {
+      "type": "boolean",
+      "default": false,
+      "title": "A2009s Flag",
+      "description": "Use ?h.aparc.a2009s.annot. Output will be aparc.a2009s+aseg.mgz."
+    },
+    "annot_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Annotation Name",
+      "description": "Use annotname surface annotation. By default, uses ?h.aparc.annot."
+    },
+    "annot_table": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Annotation Table",
+      "description": "Annotation table file. Default is $FREESURFER_HOME/Simple_surface_labels2009.txt"
+    },
+    "base_offset": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Base Offset",
+      "description": "Add offset to all segmentation ids."
+    },
+    "label_wm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Label WM Flag",
+      "description": "Re-assign white matter voxel labels to the closest cortical point if within distance."
+    },
+    "wmparc_dmax": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "WM Parc DM",
+      "description": "Max distance (mm) from cortex to be labeled as gyral WM (default 5mm)"
+    },
+    "rip_unknown": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rip Unknown Flag",
+      "description": "Do not label WM based on 'unknown' cortical label"
+    },
+    "hypo_as_wm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Hypo as WM Flag",
+      "description": "Label hypointensities as WM"
+    },
+    "no_fix_parahip": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Fix Parahip Flag",
+      "description": "Do not remove unconnected regions from WM parahip"
+    },
+    "smooth_normals": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smooth Normals",
+      "description": "Change number of surface normal smoothing steps (default is 10)."
+    },
+    "crs_test": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CRS Test",
+      "description": "Test mapping of column, row, slice"
+    },
+    "left_hemisphere": {
+      "type": "boolean",
+      "default": false,
+      "title": "Left Hemisphere Flag",
+      "description": "Only process the left hemisphere"
+    },
+    "right_hemisphere": {
+      "type": "boolean",
+      "default": false,
+      "title": "Right Hemisphere Flag",
+      "description": "Only process the right hemisphere"
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "Run in parallel with the specified number of threads"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Print out information on how to use this program"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Print out version and exit"
+    }
+  },
+  "additionalProperties": false
+}

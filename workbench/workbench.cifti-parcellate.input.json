@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cifti-parcellate",
+  "description": "Parcellate a cifti file.\n\nEach label (other than the unlabeled key) in the cifti label file will be treated as a parcel, and all rows or columns of data within the parcel are averaged together to form the parcel's output row or column.  If -legacy-mode is specified, parcels will be defined as the overlap between a label and the data, with no errors for missing data vertices or voxels, and empty parcels discarded.  The direction can be either an integer starting from 1, or the strings 'ROW' or 'COLUMN'.  For dtseries or dscalar, use COLUMN.  If you are parcellating a dconn in both directions, parcellating by ROW first will use much less memory.\n\nNOTE: the parcels in the output file are sorted by the numeric label keys, in ascending order.\n\nThe parameter to the -method option must be one of the following:\n\nMAX: the maximum value\nMIN: the minimum value\nINDEXMAX: the 1-based index of the maximum value\nINDEXMIN: the 1-based index of the minimum value\nSUM: add all values\nPRODUCT: multiply all values\nMEAN: the mean of the data\nSTDEV: the standard deviation (N denominator)\nSAMPSTDEV: the sample standard deviation (N-1 denominator)\nVARIANCE: the variance of the data\nTSNR: mean divided by sample standard deviation (N-1 denominator)\nCOV: sample standard deviation (N-1 denominator) divided by mean\nL2NORM: square root of sum of squares\nMEDIAN: the median of the data\nMODE: the mode of the data\nCOUNT_NONZERO: the number of nonzero elements in the data\n\nThe -*-weights options are mutually exclusive and may only be used with MEAN (default), SUM, STDEV, SAMPSTDEV, VARIANCE, MEDIAN, or MODE (default for label data).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench.cifti-parcellate"
+    },
+    "cifti_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "cifti_in",
+      "description": "the cifti file to parcellate"
+    },
+    "cifti_label": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "cifti_label",
+      "description": "a cifti label file to use for the parcellation"
+    },
+    "direction": {
+      "type": "string",
+      "title": "direction",
+      "description": "which mapping to parcellate (integer, ROW, or COLUMN)"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "output cifti file"
+    },
+    "spatial_weights": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "spatial_weights"
+            },
+            "opt_left_area_surf_left_surf": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_left_area_surf_left_surf",
+              "description": "use a surface for left vertex areas: the left surface to use, areas are in mm^2"
+            },
+            "opt_right_area_surf_right_surf": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_right_area_surf_right_surf",
+              "description": "use a surface for right vertex areas: the right surface to use, areas are in mm^2"
+            },
+            "opt_cerebellum_area_surf_cerebellum_surf": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_cerebellum_area_surf_cerebellum_surf",
+              "description": "use a surface for cerebellum vertex areas: the cerebellum surface to use, areas are in mm^2"
+            },
+            "opt_left_area_metric_left_metric": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_left_area_metric_left_metric",
+              "description": "use a metric file for left vertex weights: metric file containing left vertex weights"
+            },
+            "opt_right_area_metric_right_metric": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_right_area_metric_right_metric",
+              "description": "use a metric file for right vertex weights: metric file containing right vertex weights"
+            },
+            "opt_cerebellum_area_metric_cerebellum_metric": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_cerebellum_area_metric_cerebellum_metric",
+              "description": "use a metric file for cerebellum vertex weights: metric file containing cerebellum vertex weights"
+            }
+          },
+          "additionalProperties": false,
+          "title": "spatial_weights",
+          "description": "use voxel volume and either vertex areas or metric files as weights"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "spatial_weights",
+      "description": "use voxel volume and either vertex areas or metric files as weights"
+    },
+    "opt_cifti_weights_weight_cifti": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_cifti_weights_weight_cifti",
+      "description": "use a cifti file containing weights: the weights to use, as a cifti file"
+    },
+    "opt_method_method": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_method_method",
+      "description": "specify method of parcellation (default MEAN, or MODE if label data): the method to use to assign parcel values from the values of member brainordinates"
+    },
+    "exclude_outliers": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "exclude_outliers"
+            },
+            "sigma_below": {
+              "type": "number",
+              "title": "sigma_below",
+              "description": "number of standard deviations below the mean to include"
+            },
+            "sigma_above": {
+              "type": "number",
+              "title": "sigma_above",
+              "description": "number of standard deviations above the mean to include"
+            }
+          },
+          "additionalProperties": false,
+          "title": "exclude_outliers",
+          "description": "exclude non-numeric values and outliers from each parcel by standard deviation",
+          "required": [
+            "sigma_below",
+            "sigma_above"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "exclude_outliers",
+      "description": "exclude non-numeric values and outliers from each parcel by standard deviation"
+    },
+    "opt_only_numeric": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_only_numeric",
+      "description": "exclude non-numeric values"
+    },
+    "opt_fill_value_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_fill_value_value",
+      "description": "specify value to use in empty parcels (default 0): the value to fill empty parcels with"
+    },
+    "opt_nonempty_mask_out_mask_out": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_nonempty_mask_out_mask_out",
+      "description": "output a matching pscalar file that has 0s in empty parcels, and 1s elsewhere: the output mask file"
+    },
+    "opt_legacy_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_legacy_mode",
+      "description": "use the old behavior, parcels are defined by the intersection between labels and valid data, and empty parcels are discarded"
+    },
+    "opt_include_empty": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_include_empty",
+      "description": "deprecated: now the default behavior"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti_in",
+    "cifti_label",
+    "direction",
+    "cifti_out"
+  ]
+}

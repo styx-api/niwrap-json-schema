@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fscalc",
+  "description": "A frontend tool to perform mathematical operations on volumes/surfaces of data using mris_calc.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.fscalc"
+    },
+    "input1": {
+      "type": "string",
+      "title": "Input file 1",
+      "description": "First input image or constant."
+    },
+    "operation": {
+      "type": "string",
+      "title": "Operation",
+      "description": "Operation to perform between input volumes."
+    },
+    "input2": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input file 2",
+      "description": "Second input image or constant. Optional for some unary operations."
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output volume file."
+    },
+    "output_data_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output data type",
+      "description": "Specify output data type (uchar, short, int, float)."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Enable debug mode."
+    },
+    "tmpdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Temporary directory",
+      "description": "Temporary directory for processing."
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "No cleanup flag",
+      "description": "Prevent cleanup of temporary files."
+    },
+    "log_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log file",
+      "description": "Specify a log file for operation log."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input1",
+    "operation",
+    "output_file"
+  ]
+}

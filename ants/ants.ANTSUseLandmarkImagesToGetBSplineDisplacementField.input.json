@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ANTSUseLandmarkImagesToGetBSplineDisplacementField",
+  "description": "We expect the input images to be (1) N-ary (2) in the same physical space as the images you want to register and (3) to have the same landmark points defined within them. Landmarks will be defined from the center of mass of the labels in the input images. You can use ITK-snap to generate the label images. The optional landmarks weights are read from a text file where each row is either: \"label,labelWeight\" or \"labelWeight\". If the latter format is used, the label weights are assumed to be arranged in ascending order by label.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants.ANTSUseLandmarkImagesToGetBSplineDisplacementField"
+    },
+    "fixed_image_with_labeled_landmarks": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Fixed Image With Labeled Landmarks",
+      "description": "The fixed image with labeled landmarks."
+    },
+    "moving_image_with_labeled_landmarks": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Moving Image With Labeled Landmarks",
+      "description": "The moving image with labeled landmarks."
+    },
+    "output_displacement_field": {
+      "type": "string",
+      "title": "Output Displacement Field",
+      "description": "The output displacement field file."
+    },
+    "mesh_size": {
+      "type": "string",
+      "title": "Mesh Size",
+      "description": "The mesh size specified as meshSize[0]xmeshSize[1]x..."
+    },
+    "number_of_levels": {
+      "type": "integer",
+      "title": "Number of Levels",
+      "description": "The number of levels in the B-spline hierarchy."
+    },
+    "order": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 3,
+      "title": "Polynomial Order",
+      "description": "The order of the B-spline (default is 3)."
+    },
+    "enforce_stationary_boundaries": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 1,
+      "title": "Enforce Stationary Boundaries",
+      "description": "Whether to enforce stationary boundaries (default is 1)."
+    },
+    "landmark_weights": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Landmark Weights",
+      "description": "Optional text file containing landmark weights. Each row is either \"label,labelWeight\" or \"labelWeight\". If the latter format is used, the weights are assumed to be arranged in ascending order by label."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "fixed_image_with_labeled_landmarks",
+    "moving_image_with_labeled_landmarks",
+    "output_displacement_field",
+    "mesh_size",
+    "number_of_levels"
+  ]
+}

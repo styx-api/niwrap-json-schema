@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ap_run_simple_rest",
+  "description": "Run a quick afni_proc.py analysis for QC",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.ap_run_simple_rest"
+    },
+    "anat": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Anatomical Dataset",
+      "description": "Single anatomical dataset"
+    },
+    "epi": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "EPI Datasets",
+      "description": "EPI datasets"
+    },
+    "nt_rm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Time Points to Remove",
+      "description": "Number of time points to remove from starts of runs"
+    },
+    "run_ap": {
+      "type": "boolean",
+      "default": false,
+      "title": "Run afni_proc.py Command",
+      "description": "Run the afni_proc.py command"
+    },
+    "run_proc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Run Proc Script",
+      "description": "Run the proc script from afni_proc.py command"
+    },
+    "subjid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject ID",
+      "description": "Specify subject ID for file names"
+    },
+    "template": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template File",
+      "description": "Specify template for standard space"
+    },
+    "compressor": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Compressor",
+      "description": "Control automatic compression of *.BRIK files"
+    },
+    "verb": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbosity Level",
+      "description": "Specify verbosity level"
+    },
+    "echo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Echo Flag",
+      "description": "Same as verbosity level 3"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "epi"
+  ]
+}

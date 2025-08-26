@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_motion_correct2",
+  "description": "Aligns and averages two or more volumes using minctracc for alignment and mincresample and mincaverage for resampling.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.mri_motion_correct2"
+    },
+    "output_spec": {
+      "type": "string",
+      "title": "Output Specification",
+      "description": "Output file or directory (for COR format)"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Files",
+      "description": "Input volume files, specified multiple times for multiple files"
+    },
+    "target": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target File",
+      "description": "Use the specified target instead of the first input file"
+    },
+    "wild": {
+      "type": "boolean",
+      "default": false,
+      "title": "Wild Flag",
+      "description": "Assume unmatched arguments are input files"
+    },
+    "tmp_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Temporary Directory",
+      "description": "Directory for temporary files"
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cleanup Flag",
+      "description": "Do not delete temporary files"
+    },
+    "umask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "UMask",
+      "description": "Set UNIX file permission mask"
+    },
+    "cm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Conform to Min Voxel Size Flag",
+      "description": "Make COR volumes conform to minimum voxel size"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Print version information and exit"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Print detailed debug information to screen"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "output_spec",
+    "input_files"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "register.csh",
+  "description": "A script for registering MRI images",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.register.csh"
+    },
+    "base_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Base image",
+      "description": "The base image for registration"
+    },
+    "new_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "New image",
+      "description": "The new image to be registered to the base image"
+    },
+    "options": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Options",
+      "description": "Additional options for the register.csh command"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "base_image",
+    "new_image"
+  ]
+}

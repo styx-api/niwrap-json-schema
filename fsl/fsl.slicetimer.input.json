@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "slicetimer",
+  "description": "FMRIB's Interpolation for Slice Timing",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.slicetimer"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Filename of input timeseries"
+    },
+    "outfile": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output file",
+      "description": "Filename of output timeseries"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "down_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Reverse slice indexing",
+      "description": "Reverse slice indexing (default is: slices were acquired bottom-up)"
+    },
+    "tr_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "TR value",
+      "description": "Specify TR of data - default is 3s"
+    },
+    "direction": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Acquisition direction",
+      "description": "Direction of slice acquisition (x=1,y=2,z=3) - default is z"
+    },
+    "odd_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Interleaved acquisition",
+      "description": "Use interleaved acquisition"
+    },
+    "tcustom_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Custom slice timings file",
+      "description": "Filename of single-column slice timings, in fractions of TR, +ve values shift slices forward in time"
+    },
+    "tglobal_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Global shift in TR fraction",
+      "description": "Global shift in fraction of TR, (default is 0)"
+    },
+    "ocustom_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Custom interleave order file",
+      "description": "Filename of single-column custom interleave order file (first slice is referred to as 1 not 0)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "infile"
+  ]
+}

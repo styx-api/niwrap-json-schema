@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AnatomicalAverage",
+  "description": "Tool to create an anatomical average of input brain images",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl.AnatomicalAverage"
+    },
+    "output_basename": {
+      "type": "string",
+      "title": "Output Basename",
+      "description": "Output basename"
+    },
+    "input_images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Images",
+      "description": "List of input images"
+    },
+    "standard_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Standard Image",
+      "description": "Standard image (default is MNI152_T1_2mm)"
+    },
+    "standard_brain_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Standard Brain Mask",
+      "description": "Standard brain mask (default is MNI152_T1_2mm_brain_mask_dil)"
+    },
+    "no_crop_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Crop Flag",
+      "description": "Do not crop images"
+    },
+    "work_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Working Directory",
+      "description": "Local, temporary working directory (to be cleaned up - i.e. deleted)"
+    },
+    "brainsize": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brainsize",
+      "description": "Specify brainsize in mm for internal ROI (via robustfov)"
+    },
+    "noclean_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cleanup Flag",
+      "description": "Do not run the cleanup"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Verbose output"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "output_basename",
+    "input_images"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "segmentHA_T1.sh",
+  "description": "Tool for hippocampal/amygdalar subfield segmentation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.segmentHA_T1.sh"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "The input T1-weighted MRI image for hippocampal/amygdalar segmentation."
+    },
+    "output_directory": {
+      "type": "string",
+      "title": "Output Directory",
+      "description": "The directory where the output will be saved."
+    },
+    "brain_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brain Mask",
+      "description": "Use a specific brain mask for segmentation."
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Increase the verbosity of the output."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Enable debugging mode."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image",
+    "output_directory"
+  ]
+}

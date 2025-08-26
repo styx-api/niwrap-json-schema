@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dSpatNorm",
+  "description": "An obsolete tool for spatial normalization",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.3dSpatNorm"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Dataset",
+      "description": "Input dataset"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Write output dataset using 'ppp' for the prefix"
+    },
+    "orig_space": {
+      "type": "boolean",
+      "default": false,
+      "title": "Orig Space Flag",
+      "description": "Write output dataset using the same grid as dataset"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Write out progress reports"
+    },
+    "monkey": {
+      "type": "boolean",
+      "default": false,
+      "title": "Monkey Flag",
+      "description": "Monkey business"
+    },
+    "marmot": {
+      "type": "boolean",
+      "default": false,
+      "title": "Marmoset Flag",
+      "description": "Marmoset head"
+    },
+    "rat": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rat Flag",
+      "description": "Rat head"
+    },
+    "human": {
+      "type": "boolean",
+      "default": false,
+      "title": "Human Flag",
+      "description": "Bone head (default)"
+    },
+    "bottom_cuts": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bottom Cuts",
+      "description": "Make approximate cuts at the bottom to shave non-brain areas. CUTFLAGS is a string of characters indicating which sides to cut: 'A' for anterior, 'P' for posterior, 'R' for right, 'L' for left. Example: -bottom_cuts APLR"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset"
+  ]
+}

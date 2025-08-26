@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gca-apply",
+  "description": "Applies a GCA, performing the steps of mri_em_register, mri_ca_normalize, mri_ca_register, and mri_ca_label. This script replicates the stages in recon-all without overwriting files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer.gca-apply"
+    },
+    "gcafile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "GCA file",
+      "description": "GCA file"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject"
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of threads",
+      "description": "Number of OMP threads"
+    },
+    "base": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output file base",
+      "description": "Use gcabase for naming output files (default is basename gcafile)"
+    },
+    "no_segstats": {
+      "type": "boolean",
+      "default": false,
+      "title": "No segstats flag",
+      "description": "Do not compute segstats"
+    },
+    "subjects_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Subjects directory"
+    },
+    "dice_seg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dice Segmentation",
+      "description": "Specify dice coefficient computation parameters"
+    },
+    "dice_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dice File",
+      "description": "Specify dice coefficient computation file"
+    },
+    "lta": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "LTA File",
+      "description": "Use SrcLTA instead of running mri_em_register"
+    },
+    "norm": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Normalization File",
+      "description": "Use SrcNorm instead of running mri_ca_normalize"
+    },
+    "input_mgz": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input File",
+      "description": "Input file, default is nu.mgz"
+    },
+    "brainmask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brainmask File",
+      "description": "Brainmask file, default is brainmask.mgz"
+    },
+    "output_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Directory",
+      "description": "Output directory (default: SUBJECTS_DIR/subject)"
+    },
+    "no_v6labopts": {
+      "type": "boolean",
+      "default": false,
+      "title": "No v6labopts flag",
+      "description": "Do not include v6 command line options"
+    },
+    "m3z_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "M3Z File",
+      "description": "M3Z file"
+    },
+    "gca_rb_2016": {
+      "type": "boolean",
+      "default": false,
+      "title": "GCA RB 2016 Flag",
+      "description": "Use RB_all_2016-05-10.vc700.gca"
+    },
+    "force_update": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force Update Flag",
+      "description": "Force recreation of a file even if it is younger than its parents"
+    },
+    "gcareg_iters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GCA Register Iterations",
+      "description": "Set to 1, only for testing"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "gcafile",
+    "subject"
+  ]
+}
