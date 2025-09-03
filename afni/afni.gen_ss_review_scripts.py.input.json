@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gen_ss_review_scripts.py",
+  "description": "Generate single subject analysis review scripts",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni.gen_ss_review_scripts.py"
+    },
+    "subject_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject ID",
+      "description": "Subject ID"
+    },
+    "rm_trs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of TRs removed",
+      "description": "Number of TRs removed per run"
+    },
+    "num_stim": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of stimuli",
+      "description": "Number of main stimulus classes"
+    },
+    "mb_level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Multiband level",
+      "description": "Multiband slice acquisition level (>= 1)"
+    },
+    "slice_pattern": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Slice timing pattern",
+      "description": "Slice timing pattern"
+    },
+    "motion_dset": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Motion dataset",
+      "description": "Motion parameters dataset"
+    },
+    "outlier_dset": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outlier fraction dataset",
+      "description": "Outlier fraction time series dataset"
+    },
+    "enorm_dset": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Enorm dataset",
+      "description": "Euclidean norm of motion parameters dataset"
+    },
+    "mot_limit": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Motion limit",
+      "description": "Motion limit"
+    },
+    "out_limit": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outlier limit",
+      "description": "Outlier fraction limit"
+    },
+    "xmat_regress": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "X matrix file",
+      "description": "X-matrix file used in regression"
+    },
+    "xmat_uncensored": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Uncensored X matrix file",
+      "description": "Un-censored X-matrix file"
+    },
+    "stats_dset": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stats dataset",
+      "description": "Output from 3dDeconvolve"
+    },
+    "final_anat": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Final anatomical dataset",
+      "description": "Final anatomical dataset"
+    },
+    "final_view": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Final view",
+      "description": "Final view of data (e.g. 'orig' or 'tlrc')"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output prefix",
+      "description": "Set the prefix for script names"
+    },
+    "verbosity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbosity level",
+      "description": "Set the verbosity level"
+    },
+    "uvars_json": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Uvars JSON file",
+      "description": "Write JSON file of user variables dict"
+    },
+    "init_uvars_json": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initialize uvars JSON file",
+      "description": "Initialize user variables from the given JSON file"
+    }
+  },
+  "additionalProperties": false
+}
