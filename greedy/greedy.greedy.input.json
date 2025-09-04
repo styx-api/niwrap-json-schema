@@ -827,7 +827,48 @@
     "interpolation": {
       "anyOf": [
         {
-          "type": "string"
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "greedy.greedy.nn"
+                }
+              },
+              "additionalProperties": false,
+              "title": "Nearest neighbor",
+              "description": "rarely recommended, results in the most aliasing"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "greedy.greedy.linear"
+                }
+              },
+              "additionalProperties": false,
+              "title": "Bilinear/trilinear interpolation",
+              "description": "default interpolation mode, fast and less aliasing"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "greedy.greedy.label"
+                },
+                "sigma_spec": {
+                  "type": "string",
+                  "description": "The <sigma_spec> parameter to the -ri LABEL command specifies the standard deviation of the Gaussian kernel used to smooth the labels. It can be provided in voxel units (e.g., 0.2vox) or millimeter units (e.g., 0.2mm). Value of 0.2vox works well in most situations"
+                }
+              },
+              "additionalProperties": false,
+              "title": "Label interpolation",
+              "description": "this special mode is used for warping/reslicing multi-label segmentations. This mode applies a little bit of smoothing to each label in your segmentation (including the background), warps this smoothed segmentation, and then performs voting among warped smoothed binary segmentations to assign each voxel in reference space a label. This works better than nearest neighbor interpolation (less aliasing).",
+              "required": [
+                "sigma_spec"
+              ]
+            }
+          ]
         },
         {
           "type": "null"
