@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "img2stdcoord",
+  "description": "Transforms image coordinates using standard space transformations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/img2stdcoord"
+    },
+    "coordinate_file": {
+      "type": "string",
+      "title": "Coordinate File",
+      "description": "Filename containing coordinates. If '-' is used, coordinates are read from standard input."
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "Filename of input image."
+    },
+    "standard_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Standard Image",
+      "description": "Filename of standard image."
+    },
+    "affine_transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Affine Transform",
+      "description": "Filename of affine transform (e.g., example_func2standard.mat)."
+    },
+    "warp_field": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Warp Field",
+      "description": "Filename of warp field (e.g., highres2standard_warp.nii.gz)."
+    },
+    "prewarp_affine_transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pre-warp Affine Transform",
+      "description": "Filename of pre-warp affine transform (e.g., example_func2highres.mat). Default is identity."
+    },
+    "voxel_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Voxel Flag",
+      "description": "Input coordinates in voxels (default)."
+    },
+    "mm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Millimeter Flag",
+      "description": "Input coordinates in mm."
+    },
+    "verbose_flag_1": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Verbose output."
+    },
+    "verbose_flag_2": {
+      "type": "boolean",
+      "default": false,
+      "title": "More Verbose Flag",
+      "description": "More verbose output."
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Display help message."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "coordinate_file",
+    "input_image"
+  ]
+}

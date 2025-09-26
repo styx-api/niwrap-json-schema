@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SpharmDeco",
+  "description": "Spherical Harmonics Decomposition of a surface's coordinates or data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SpharmDeco"
+    },
+    "i_type_s": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input type S",
+      "description": "Unit sphere, isotopic to the surface domain over which the data to be decomposed is defined."
+    },
+    "unit_sph_label": {
+      "type": "string",
+      "title": "Unit sphere label",
+      "description": "Label of the unit sphere."
+    },
+    "order_l": {
+      "type": "number",
+      "title": "Decomposition order L",
+      "description": "Decomposition order."
+    },
+    "i_type_sd": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input type SD",
+      "description": "A surface whose node coordinates provide data vectors (X, Y, Z) to be decomposed or a dataset whose columns are to be individually decomposed. You can specify multiple surfaces to be processed."
+    },
+    "data_d": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input data D",
+      "description": "Data vectors to be decomposed."
+    },
+    "bases_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bases prefix",
+      "description": "Save the basis functions under the prefix BASES_PREFIX."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output prefix",
+      "description": "Write out the reconstructed data into dataset PREFIX and write the beta coefficients for each processed data column."
+    },
+    "o_type_sdr": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output type SDR",
+      "description": "Write out a new surface with reconstructed coordinates."
+    },
+    "debug": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug level",
+      "description": "Debug levels (1-3)"
+    },
+    "sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smoothing sigma",
+      "description": "Smoothing parameter (0 .. 0.001) which weighs down the contribution of higher order harmonics."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "i_type_s",
+    "unit_sph_label",
+    "order_l"
+  ]
+}

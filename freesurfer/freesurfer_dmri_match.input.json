@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dmri_match",
+  "description": "Tool for matching diffusion MRI parcellations",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dmri_match"
+    },
+    "parcellation1": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Parcellation 1",
+      "description": "First parcellation input file"
+    },
+    "parcellation2": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Parcellation 2",
+      "description": "Second parcellation input file"
+    },
+    "num_clusters": {
+      "type": "number",
+      "title": "Number of Clusters",
+      "description": "Number of clusters"
+    },
+    "clustering_path1": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Clustering Path 1",
+      "description": "First clustering path"
+    },
+    "clustering_path2": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Clustering Path 2",
+      "description": "Second clustering path"
+    },
+    "labels": {
+      "type": "boolean",
+      "default": false,
+      "title": "Labels",
+      "description": "Use labels (no additional input expected)"
+    },
+    "euclidean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Euclidean flag",
+      "description": "Use Euclidean distance for matching"
+    },
+    "bounding_box": {
+      "type": "boolean",
+      "default": false,
+      "title": "Bounding Box flag",
+      "description": "Use bounding box constraint (no additional input expected)"
+    },
+    "symmetry": {
+      "type": "boolean",
+      "default": false,
+      "title": "Symmetry flag",
+      "description": "Use symmetry constraint (no additional input expected)"
+    },
+    "inter_hemi_ratio_removal": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "InterHemi Ratio Removal",
+      "description": "Inter-hemispheric ratio cluster removal constraint"
+    },
+    "output": {
+      "type": "string",
+      "title": "Output File",
+      "description": "Output file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "parcellation1",
+    "parcellation2",
+    "num_clusters",
+    "clustering_path1",
+    "clustering_path2",
+    "output"
+  ]
+}

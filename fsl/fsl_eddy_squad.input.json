@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "eddy_squad",
+  "description": "Study-wise QC for dMRI data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/eddy_squad"
+    },
+    "grouping": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Grouping of studies",
+      "description": "Specifies the grouping of studies."
+    },
+    "group_db": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Group database",
+      "description": "Path to the group database."
+    },
+    "update": {
+      "type": "boolean",
+      "default": false,
+      "title": "Update QC results flag",
+      "description": "Option to update the QC results."
+    },
+    "output_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output directory",
+      "description": "Output directory for the QC results."
+    },
+    "subject_list": {
+      "type": "string",
+      "title": "Subject ID list",
+      "description": "List of subject IDs for the QC."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_list"
+  ]
+}

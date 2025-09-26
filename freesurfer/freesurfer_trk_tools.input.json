@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "trk_tools",
+  "description": "Tool for processing TRK files",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/trk_tools"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Reference Image",
+      "description": "Reference image for TRK processing"
+    },
+    "input_trk": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input TRK File",
+      "description": "Input TRK file to be processed"
+    },
+    "output_trk": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output TRK File",
+      "description": "Output TRK file"
+    },
+    "output_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Image File",
+      "description": "Export TRK into an image"
+    },
+    "update_header": {
+      "type": "boolean",
+      "default": false,
+      "title": "Update TRK Header",
+      "description": "Update TRK header with reference image"
+    },
+    "output_vtk": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output VTK File",
+      "description": "Output streamlines in VTK format"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "reference_image",
+    "input_trk"
+  ]
+}

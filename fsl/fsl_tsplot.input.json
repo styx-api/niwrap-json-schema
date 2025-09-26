@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tsplot",
+  "description": "Time series plotting tool for FSL",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/tsplot"
+    },
+    "input_directory": {
+      "type": "string",
+      "title": "FEAT directory",
+      "description": "Input FEAT directory (e.g. feat_directory.feat)"
+    },
+    "main_filtered_data": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Main filtered data",
+      "description": "Input main filtered data, in case it's not <feat_directory.feat>/filtered_func_data"
+    },
+    "coordinates": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Coordinates",
+      "description": "Use X, Y, Z instead of max Z stat position"
+    },
+    "coordinates_output": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Coordinates output",
+      "description": "Use X,Y,Z to output time series only - no stats or modelling"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask",
+      "description": "Use mask image instead of thresholded activation images"
+    },
+    "output_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output directory",
+      "description": "Change output directory from default of input FEAT directory"
+    },
+    "no_weight_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No weight flag",
+      "description": "Don't weight cluster averaging with Z stats"
+    },
+    "prewhiten_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Prewhiten flag",
+      "description": "Prewhiten data and model timeseries before plotting"
+    },
+    "no_raw_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No raw flag",
+      "description": "Don't keep raw data text files"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_directory"
+  ]
+}

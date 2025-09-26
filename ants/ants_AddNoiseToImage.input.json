@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AddNoiseToImage",
+  "description": "Add various types of noise to an image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/AddNoiseToImage"
+    },
+    "image_dimensionality": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Image Dimensionality",
+      "description": "This option forces the image to be treated as a specified-dimensional image. If not specified, the program tries to infer the dimensionality from the input image."
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "A scalar image is expected as input for noise correction."
+    },
+    "noise_model": {
+      "type": "string",
+      "enum": [
+        "AdditiveGaussian",
+        "SaltAndPepper",
+        "Shot",
+        "Speckle"
+      ],
+      "title": "Noise Model",
+      "description": "Use different noise models each with its own (default) parameters."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output",
+      "description": "The output consists of the noise corrupted version of the input image."
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose",
+      "description": "Verbose output."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image",
+    "noise_model",
+    "output"
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "aparc_stats_aseg",
+  "description": "This program runs mris_ca_label, mris_anatomical_stats and mri_aparc2aseg.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/aparc_stats_aseg"
+    },
+    "subject_name": {
+      "type": "string",
+      "title": "Subject Name",
+      "description": "Subject name"
+    },
+    "gcs_name": {
+      "type": "string",
+      "title": "GCS File Name",
+      "description": "GCS file name"
+    },
+    "subject_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject Directory",
+      "description": "Specify a subjects directory (default=/usr/local/freesurfer/subjects)"
+    },
+    "gcs_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GCS Directory",
+      "description": "GCS file directory (default=/usr/local/freesurfer/average)"
+    },
+    "parc_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parcellation Name",
+      "description": "Specify the parcellation name (default=gcs name)"
+    },
+    "output_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Directory",
+      "description": "Specify the output directory"
+    },
+    "log_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log File",
+      "description": "Specify the log file"
+    },
+    "lh_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Left Hemisphere Flag",
+      "description": "Left hemisphere only"
+    },
+    "rh_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Right Hemisphere Flag",
+      "description": "Right hemisphere only"
+    },
+    "a2009s_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use A2009S",
+      "description": "Use Christophe Destrieux cortical parcellation atlas"
+    },
+    "no_aseg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Aseg Flag",
+      "description": "Do not use aseg"
+    },
+    "no_cortparc_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cortical Parcellation Flag",
+      "description": "Do not do cortical parcellation"
+    },
+    "no_parcstats_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Parcellation Stats Flag",
+      "description": "Do not do surface anatomical statistics"
+    },
+    "no_aparc2aseg_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Aparc2Aseg Flag",
+      "description": "Do not do aparc2aseg"
+    },
+    "random_seed": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random Seed",
+      "description": "Random seed (default=1234)"
+    },
+    "th3_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "TH3 Flag",
+      "description": "Use -th3 flag, turn on new volume calculation for mris_anatomical_stats"
+    },
+    "no_th3_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "No TH3 Flag",
+      "description": "Use -no-th3 flag for mris_anatomical_stats"
+    },
+    "longitudinal": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Longitudinal Processing IDs",
+      "description": "Longitudinal Processing"
+    },
+    "expert_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expert Options File",
+      "description": "Read-in expert options file"
+    },
+    "expert_use_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Expert Options",
+      "description": "Use pre-existing expert options file"
+    },
+    "expert_clean_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Clean Expert Options",
+      "description": "Delete pre-existing expert options file"
+    },
+    "expert_overwrite_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Overwrite Expert Options",
+      "description": "Overwrite pre-existing expert options file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_name",
+    "gcs_name"
+  ]
+}

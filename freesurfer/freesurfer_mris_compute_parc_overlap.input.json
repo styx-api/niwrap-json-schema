@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_compute_parc_overlap",
+  "description": "Compares two parcellated (annotated or labeled) surfaces and computes an overall Dice coefficient and mean minimum distances (mm).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_compute_parc_overlap"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject to check"
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere: rh or lh"
+    },
+    "annot1": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First Annot File",
+      "description": "First .annot file"
+    },
+    "annot2": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second Annot File",
+      "description": "Second .annot file"
+    },
+    "label1": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First Label File",
+      "description": "First .label file"
+    },
+    "label2": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second Label File",
+      "description": "Second .label file"
+    },
+    "subj_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Set SUBJECTS_DIR"
+    },
+    "log_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log Filename",
+      "description": "Output the overall DICE and minimum distance to filename"
+    },
+    "label_list": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label List",
+      "description": "File containing labels to check, one per line"
+    },
+    "nocheck_label1_xyz": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Check Label1 XYZ",
+      "description": "When loading label1 file, don't check x,y,z coords to surface"
+    },
+    "nocheck_label2_xyz": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Check Label2 XYZ",
+      "description": "When loading label2 file, don't check x,y,z coords to surface"
+    },
+    "nocheck_label_xyz": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Check Label XYZ",
+      "description": "Do not check label1 and label2"
+    },
+    "use_label1_xyz": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Label1 XYZ",
+      "description": "Replace surface x,y,z coords with those in label1 file"
+    },
+    "use_label2_xyz": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Label2 XYZ",
+      "description": "Replace surface x,y,z coords with those in label2 file"
+    },
+    "use_label_xyz": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Label XYZ",
+      "description": "Use label1 and label2 coords"
+    },
+    "debug_overlap": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Overlap",
+      "description": "Generate ?h.overlap.annot"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject",
+    "hemi"
+  ]
+}

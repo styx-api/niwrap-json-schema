@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ClustExp_HistTable.py",
+  "description": "Script to extract the data table from history of datasets from 3dttest++, 3dMVM, or 3dLME.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/ClustExp_HistTable.py"
+    },
+    "stat_dset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "StatDSET",
+      "description": "Statistics dataset."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Name for output (no path). Default is GroupOut."
+    },
+    "session": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Session",
+      "description": "Output parent folder if you don't want the current working directory. Default is ./"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "default": false,
+      "title": "Overwrite",
+      "description": "Remove previous folder with same PREFIX"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "stat_dset"
+  ]
+}

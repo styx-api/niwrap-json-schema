@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ImageMath",
+  "description": "A versatile tool for performing various mathematical and manipulation operations on images.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/ImageMath"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "enum": [
+        2,
+        3,
+        4
+      ],
+      "title": "Image Dimension",
+      "description": "The dimensionality of the image. Use 2 or 3 for spatial images, and 4 for 4D images like time-series data."
+    },
+    "output_image": {
+      "type": "string",
+      "title": "Output Image",
+      "description": "The output image file resulting from the operations."
+    },
+    "operations_and_inputs": {
+      "type": "string",
+      "title": "Operations and Inputs",
+      "description": "Mathematical operations and inputs to be applied on the images."
+    },
+    "image1": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Image 1",
+      "description": "The first input image for the operation."
+    },
+    "image2": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Image 2",
+      "description": "The second input image for the operation, if required."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "output_image",
+    "operations_and_inputs",
+    "image1"
+  ]
+}

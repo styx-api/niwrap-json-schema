@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "std2imgcoord",
+  "description": "Convert standard space coordinates to image space coordinates",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/std2imgcoord"
+    },
+    "filename_coordinates": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Coordinate file",
+      "description": "Path to the filename containing coordinates or '-' to read from standard input"
+    },
+    "standard_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Standard Image",
+      "description": "Filename of standard image"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "Filename of input image"
+    },
+    "affine_transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Affine Transform",
+      "description": "Filename of affine transform (e.g. example_func2standard.mat)"
+    },
+    "warp_field": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Warp Field",
+      "description": "Filename of warpfield (e.g. highres2standard_warp.nii.gz)"
+    },
+    "prewarp_affine_transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pre-warp Affine Transform",
+      "description": "Filename of pre-warp affine transform (e.g. example_func2highres.mat). Defaults to identity matrix."
+    },
+    "output_mm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output in mm",
+      "description": "Outputs coordinates in mm (default)"
+    },
+    "output_vox": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output in voxels",
+      "description": "Outputs coordinates in voxels"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose output",
+      "description": "Verbose output"
+    },
+    "more_verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "More verbose output",
+      "description": "More verbose output"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "filename_coordinates",
+    "input_image"
+  ]
+}

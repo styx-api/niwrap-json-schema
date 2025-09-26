@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dBRAIN_VOYAGERtoAFNI",
+  "description": "Converts a BrainVoyager vmr dataset to AFNI's BRIK format based on information from BrainVoyager's website.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dBRAIN_VOYAGERtoAFNI"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input File",
+      "description": "Input BrainVoyager VMR file"
+    },
+    "force_byte_swap": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force Byte Swap",
+      "description": "Force byte swapping"
+    },
+    "brainvoyager_qx": {
+      "type": "boolean",
+      "default": false,
+      "title": "BrainVoyager QX",
+      "description": ".vmr file is from BrainVoyager QX"
+    },
+    "tlrc_space": {
+      "type": "boolean",
+      "default": false,
+      "title": "TLRC Space",
+      "description": "Dset in tlrc space"
+    },
+    "acpc_space": {
+      "type": "boolean",
+      "default": false,
+      "title": "ACPC Space",
+      "description": "Dset in acpc-aligned space"
+    },
+    "orig_space": {
+      "type": "boolean",
+      "default": false,
+      "title": "Orig Space",
+      "description": "Dset in orig space"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Prefix for output files"
+    },
+    "novolreg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore Volreg Transformations",
+      "description": "Ignore any Rotate, Volreg, Tagalign, or WarpDrive transformations present in the Surface Volume."
+    },
+    "noxform": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore Transformations",
+      "description": "Same as -novolreg"
+    },
+    "set_environment": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Set Environment Variable",
+      "description": "Set environment variable ENVname to be ENVvalue. Quotes are necessary."
+    },
+    "trace_debugging": {
+      "type": "boolean",
+      "default": false,
+      "title": "Trace Debugging",
+      "description": "Turns on In/Out debug and Memory tracing."
+    },
+    "trace_extreme_debugging": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extreme Trace Debugging",
+      "description": "Turns on extreme tracing."
+    },
+    "turn_off_memory_tracing": {
+      "type": "boolean",
+      "default": false,
+      "title": "Turn Off Memory Tracing",
+      "description": "Turn off memory tracing."
+    },
+    "turn_on_memory_tracing": {
+      "type": "boolean",
+      "default": false,
+      "title": "Turn On Memory Tracing",
+      "description": "Turn on memory tracing (default)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dEigsToDT",
+  "description": "Convert set of DTI eigenvectors and eigenvalues to a diffusion tensor, with optional value-scaling and vector-flipping.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dEigsToDT"
+    },
+    "eig_vals": {
+      "type": "string",
+      "title": "Eigenvalue Files Descriptor",
+      "description": "Searchable descriptor for finding all three required eigenvalue files. It should list all three eigenvalue files in descending order of magnitude."
+    },
+    "eig_vecs": {
+      "type": "string",
+      "title": "Eigenvector Files Descriptor",
+      "description": "Searchable descriptor for finding all three required eigenvector files. It should list all three eigenvector files in order matching the eigenvalue files."
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output File Prefix",
+      "description": "Prefix for the output file name. It is recommended to include a 'DT' label in it."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask File",
+      "description": "Optional mask within which to calculate uncertainty. If not provided, the data should be masked already."
+    },
+    "flip_x": {
+      "type": "boolean",
+      "default": false,
+      "title": "Flip X",
+      "description": "Change sign of the first element of eigenvectors."
+    },
+    "flip_y": {
+      "type": "boolean",
+      "default": false,
+      "title": "Flip Y",
+      "description": "Change sign of the second element of eigenvectors."
+    },
+    "flip_z": {
+      "type": "boolean",
+      "default": false,
+      "title": "Flip Z",
+      "description": "Change sign of the third element of eigenvectors."
+    },
+    "scale_eigs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale Eigenvalues",
+      "description": "Rescale the eigenvalues by dividing by a number X > 0."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "eig_vals",
+    "eig_vecs",
+    "prefix"
+  ]
+}

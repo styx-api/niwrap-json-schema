@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_synthsr_hyperfine",
+  "description": "Implementation of SynthSR that generates a synthetic 1mm MP-RAGE from a pair of T1-T2 standard Hyperfine scans (1.5x1.5x5mm axial)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_synthsr_hyperfine"
+    },
+    "t1_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "T1 Image",
+      "description": "T1 image(s) to super-resolve, at native 1.5x1.5x5 axial resolution. Can be a path to an image or to a folder."
+    },
+    "t2_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "T2 Image",
+      "description": "T2 image(s). Must be a folder if --t1 designates a folder. These must be registered to the T1s, in physical coordinates (i.e., with the headers, do NOT resample when registering; see instructions on FreeSurfer wiki)"
+    },
+    "output": {
+      "type": "string",
+      "title": "Output",
+      "description": "Output(s), i.e. synthetic 1mm MP-RAGE(s). Must be a folder if --t1 designates a folder."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "(optional) Number of cores to be used. Default is 1."
+    },
+    "cpu": {
+      "type": "boolean",
+      "default": false,
+      "title": "CPU Flag",
+      "description": "(optional) Enforce running with CPU rather than GPU."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "t1_image",
+    "t2_image",
+    "output"
+  ]
+}

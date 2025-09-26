@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_curvature",
+  "description": "Compute the second fundamental form of a cortical surface to generate mean and Gaussian curvature.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_curvature"
+    },
+    "save_curvature_files": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Curvature Files",
+      "description": "Save curvature files (will only generate screen output without this option)"
+    },
+    "max_principal_curvature": {
+      "type": "boolean",
+      "default": false,
+      "title": "Max Principal Curvature",
+      "description": "Save 1st (max) principal curvature in ?h.<surface>.max file"
+    },
+    "mgh_output_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "MGH Output Format",
+      "description": "Save outputs in .mgz format"
+    },
+    "min_principal_curvature": {
+      "type": "boolean",
+      "default": false,
+      "title": "Min Principal Curvature",
+      "description": "Save 2nd (min) principal curvature in ?h.<surface>.min file"
+    },
+    "iterative_averages": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Iterative Averages",
+      "description": "Perform <avgs> iterative averages of curvature measure before saving"
+    },
+    "neighborhood_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Neighborhood Size",
+      "description": "Set neighborhood size to nbrs"
+    },
+    "random_seed": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random Seed",
+      "description": "Set random number generator to seed N"
+    },
+    "curvatures": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Curvatures",
+      "description": "Stand-alone option to save H (mean), K (gaussian), k1, and k2 curvatures to stem.{curvname}.mgz"
+    },
+    "H_curvature": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "H Curvature",
+      "description": "Stand-alone option to save H mean curvature to stem.H.mgz"
+    },
+    "K_curvature": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "K Curvature",
+      "description": "Stand-alone option to save K gaussian curvature to stem.K.mgz"
+    },
+    "k1_curvature": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "K1 Curvature",
+      "description": "Stand-alone option to save k1 (primary principle) curvature to stem.k1.mgz"
+    },
+    "k2_curvature": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "K2 Curvature",
+      "description": "Stand-alone option to save k2 (secondary principle) curvature to stem.k2.mgz"
+    },
+    "k1k2_curvature": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "K1 and K2 Curvatures",
+      "description": "Stand-alone option to save k1 and k2 curvature to stem.{k1,k2}.mgz"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Surface",
+      "description": "Input surface file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_surface"
+  ]
+}

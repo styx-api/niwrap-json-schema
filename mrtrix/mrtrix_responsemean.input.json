@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "responsemean",
+  "description": "Calculate the mean response function from a set of text files",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/responsemean"
+    },
+    "input_response": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input response functions",
+      "description": "Input response functions"
+    },
+    "output_response": {
+      "type": "string",
+      "title": "Output response function",
+      "description": "Output mean response function"
+    },
+    "legacy": {
+      "type": "boolean",
+      "default": false,
+      "title": "Legacy",
+      "description": "Calculate the mean response function from a set of text files"
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cleanup",
+      "description": "Do not delete intermediate files during script execution, and do not delete scratch directory at script completion"
+    },
+    "scratch_dir": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scratch Directory",
+      "description": "Manually specify the path in which to generate the scratch directory"
+    },
+    "continue_scratch_dir": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Continue Scratch Directory",
+      "description": "Continue the script from a previous execution; must provide the scratch directory path"
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Information Messages",
+      "description": "Display information messages"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet Mode",
+      "description": "Do not display information messages or progress status"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Mode",
+      "description": "Display debugging messages"
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force Overwrite",
+      "description": "Force overwrite of output files"
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Threads",
+      "description": "Use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)"
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Config Key Value",
+      "description": "Temporarily set the value of an MRtrix config file entry"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Help",
+      "description": "Display help information and exit"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Version",
+      "description": "Display version information and exit"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_response",
+    "output_response"
+  ]
+}

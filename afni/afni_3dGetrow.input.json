@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dGetrow",
+  "description": "Program to extract 1 row from a dataset and write it as a .1D file",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dGetrow"
+    },
+    "xrow": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "X direction row extraction",
+      "description": "Extract row along the x-direction at fixed y-index of j and fixed z-index of k"
+    },
+    "yrow": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Y direction row extraction",
+      "description": "Extract row along the y-direction at fixed x-index of i and fixed z-index of k"
+    },
+    "zrow": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Z direction row extraction",
+      "description": "Extract row along the z-direction at fixed x-index of i and fixed y-index of j"
+    },
+    "input_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input File",
+      "description": "Read input from dataset 'ddd' (instead of putting dataset name at end of command line)"
+    },
+    "output_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output File",
+      "description": "Filename for output .1D ASCII file will be 'ff' (if 'ff' is '-', then output is to stdout, the default)"
+    }
+  },
+  "additionalProperties": false
+}

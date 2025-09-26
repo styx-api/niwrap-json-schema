@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dtigen",
+  "description": "Generate diffusion data using tensor model",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/dtigen"
+    },
+    "tensor": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input tensor",
+      "description": "Input tensor file"
+    },
+    "s0": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input S0",
+      "description": "Input S0 file"
+    },
+    "output_data": {
+      "type": "string",
+      "title": "Output data",
+      "description": "Output data file"
+    },
+    "bvecs": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Bvecs file",
+      "description": "bvecs ASCII text file"
+    },
+    "bvals": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Bvals file",
+      "description": "bvals ASCII text file"
+    },
+    "brainmask": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Brain mask",
+      "description": "Brain mask file"
+    },
+    "kurtosis": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Kurtosis map",
+      "description": "Mean kurtosis map"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Display help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "tensor",
+    "s0",
+    "output_data",
+    "bvecs",
+    "bvals",
+    "brainmask"
+  ]
+}

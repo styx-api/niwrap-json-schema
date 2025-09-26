@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "metric-rois-to-border",
+  "description": "Draw borders around metric rois.\n\nFor each ROI column, finds all edges on the mesh that cross the boundary of the ROI, and draws borders through them.  By default, this is done on all columns in the input file, using the map name as the name for the border.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric-rois-to-border"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface",
+      "description": "the surface to use for neighbor information"
+    },
+    "metric": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "metric",
+      "description": "the input metric containing ROIs"
+    },
+    "class_name": {
+      "type": "string",
+      "title": "class_name",
+      "description": "the name to use for the class of the output borders"
+    },
+    "border_out": {
+      "type": "string",
+      "title": "border_out",
+      "description": "the output border file"
+    },
+    "opt_placement_fraction": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_placement_fraction",
+      "description": "set how far along the edge border points are drawn: fraction along edge from inside vertex (default 0.33)"
+    },
+    "opt_column_column": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_column_column",
+      "description": "select a single column: the column number or name"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface",
+    "metric",
+    "class_name",
+    "border_out"
+  ]
+}

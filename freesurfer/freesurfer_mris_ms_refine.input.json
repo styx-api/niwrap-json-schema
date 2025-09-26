@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_ms_refine",
+  "description": "This program positions the tessellation of the cortical surface at the white matter surface, then the gray matter surface. It generates surface files for these surfaces as well as a 'curvature' file for the cortical thickness, and a surface file which approximates layer IV of the cortical sheet.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_ms_refine"
+    },
+    "subject_name": {
+      "type": "string",
+      "title": "Subject name",
+      "description": "The name of the subject"
+    },
+    "hemisphere": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "The hemisphere to process ('lh' or 'rh')"
+    },
+    "xform": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Transform file",
+      "description": "The transform file"
+    },
+    "flash_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Flash files",
+      "description": "Flash images"
+    },
+    "residuals": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Residuals file",
+      "description": "Residuals file"
+    },
+    "omit_self_intersection": {
+      "type": "boolean",
+      "default": false,
+      "title": "Omit self-intersection flag",
+      "description": "Omit self-intersection and only generate gray/white surface."
+    },
+    "create_curvature_files": {
+      "type": "boolean",
+      "default": false,
+      "title": "Create curvature files flag",
+      "description": "Create curvature and area files from white matter surface."
+    },
+    "average_curvature": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Average curvature values",
+      "description": "Average curvature values a specified number of times."
+    },
+    "white_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "White only flag",
+      "description": "Only generate white matter surface."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_name",
+    "hemisphere",
+    "xform",
+    "flash_files",
+    "residuals"
+  ]
+}

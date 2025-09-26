@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "first_flirt",
+  "description": "FLIRT-based image registration tool with additional options for brain extraction and weighting masks",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/first_flirt"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "Input image (e.g. subject10rawT1.nii.gz)"
+    },
+    "output_basename": {
+      "type": "string",
+      "title": "Output Basename",
+      "description": "Output basename for the results (e.g. subject10rawT1_to_std_sub)"
+    },
+    "already_brain_extracted_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Already Brain Extracted",
+      "description": "Input is already brain extracted"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Debug mode: don't delete intermediate files"
+    },
+    "inweight_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Inweight Mask",
+      "description": "Use a weighting mask on the first registration"
+    },
+    "strucweight_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Structure Weighting Mask",
+      "description": "Use a specific structure weighting mask (in standard space) for an optional third-stage registration step (e.g. maskimage.nii.gz)"
+    },
+    "cort_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cortical Weighting Mask",
+      "description": "Use a weighting mask of the whole brain on the first registration for specific models"
+    },
+    "cost_function": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cost Function",
+      "description": "Specify the cost function to be used by all FLIRT calls"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image",
+    "output_basename"
+  ]
+}

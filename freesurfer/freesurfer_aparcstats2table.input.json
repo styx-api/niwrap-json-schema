@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "aparcstats2table",
+  "description": "Converts a cortical stats file into a table format with subjects as rows and parcellations as columns.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/aparcstats2table"
+    },
+    "subjects": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects",
+      "description": "List of subject IDs."
+    },
+    "subjectsfile": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects File",
+      "description": "File containing list of subjects (one per line)."
+    },
+    "qdec": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "QDEC Table",
+      "description": "QDEC table file with subject IDs."
+    },
+    "qdec_long": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Longitudinal QDEC Table",
+      "description": "Longitudinal QDEC table with subject templates."
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere being analyzed (lh or rh required)."
+    },
+    "tablefile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Output Table File",
+      "description": "Output table file."
+    },
+    "parcellation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parcellation Atlas",
+      "description": "Parcellation atlas (default: aparc)."
+    },
+    "measure": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Measurement Type",
+      "description": "Measure type (e.g., area, volume, thickness)."
+    },
+    "delimiter": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Delimiter",
+      "description": "Delimiter between measures in the table (default: tab)."
+    },
+    "skip_missing": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip Missing Subjects",
+      "description": "Skip subjects if input is not found."
+    },
+    "parcid_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Parcellation ID Only",
+      "description": "Write only ROI names without pre/appended hemi/measure."
+    },
+    "common_parcs": {
+      "type": "boolean",
+      "default": false,
+      "title": "Common Parcellations",
+      "description": "Output only common parcellations across all subjects."
+    },
+    "parcs_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parcellations File",
+      "description": "File specifying which parcellations to output."
+    },
+    "report_rois": {
+      "type": "boolean",
+      "default": false,
+      "title": "Report ROIs",
+      "description": "Print ROI information for each subject."
+    },
+    "transpose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Transpose Table",
+      "description": "Transpose the table (subjects in columns)."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Mode",
+      "description": "Increase verbosity."
+    },
+    "etiv": {
+      "type": "boolean",
+      "default": false,
+      "title": "Estimated Total Intracranial Volume",
+      "description": "Report volume as percent estimated total intracranial volume."
+    },
+    "scale": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale Factor",
+      "description": "Scale factor for output values."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "hemi",
+    "tablefile"
+  ]
+}

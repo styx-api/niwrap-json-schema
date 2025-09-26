@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dcat",
+  "description": "Concatenates columns of multiple 1D or TSV/CSV files",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dcat"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input files",
+      "description": "Input 1D or TSV/CSV files to concatenate"
+    },
+    "tsv_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "TSV format output",
+      "description": "Output in TSV format with tabs as separators and a header line"
+    },
+    "csv_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "CSV format output",
+      "description": "Output in CSV format with commas as separators and a header line"
+    },
+    "nonconst_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "Non-constant columns output",
+      "description": "Omit columns that are identically constant from the output"
+    },
+    "nonfixed_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "Non-fixed columns output",
+      "description": "Keep only columns marked as 'free' in the 3dAllineate header"
+    },
+    "number_format": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number format",
+      "description": "Specify the format of the numbers to be output"
+    },
+    "stack_output": {
+      "type": "boolean",
+      "default": false,
+      "title": "Stack columns output",
+      "description": "Stack the columns of the resulting matrix in the output"
+    },
+    "column_row_selection": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Column/Row selection",
+      "description": "Apply the same column/row selection string to all filenames on the command line"
+    },
+    "ok_empty": {
+      "type": "boolean",
+      "default": false,
+      "title": "OK empty files",
+      "description": "Exit quietly when encountering an empty file on disk"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files"
+  ]
+}

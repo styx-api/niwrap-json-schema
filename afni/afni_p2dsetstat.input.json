@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "p2dsetstat",
+  "description": "Convert a p-value to a statistic of choice with reference to a specific dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/p2dsetstat"
+    },
+    "dataset": {
+      "type": "string",
+      "title": "Dataset",
+      "description": "Specify a dataset DDD and, if it has multiple sub-bricks, the [i]th subbrick with the statistic of interest MUST be selected explicitly; note the use of quotation marks around the brick selector (because of the square-brackets). 'i' can be either a number or a string label selector."
+    },
+    "pvalue": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "title": "P-Value",
+      "description": "Input p-value P, which MUST be in the interval [0,1]."
+    },
+    "bisided": {
+      "type": "boolean",
+      "default": false,
+      "title": "Two-sided",
+      "description": "Two-sided test."
+    },
+    "twosided": {
+      "type": "boolean",
+      "default": false,
+      "title": "Two-sided",
+      "description": "Two-sided test."
+    },
+    "onesided": {
+      "type": "boolean",
+      "default": false,
+      "title": "One-sided",
+      "description": "One-sided test."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet",
+      "description": "Output only the final statistic value."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset",
+    "pvalue"
+  ]
+}

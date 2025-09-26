@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dvolreg.afni",
+  "description": "AFNI program for volume registration",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/3dvolreg.afni"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input dataset to be registered"
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output dataset with applied registration"
+    },
+    "options": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Options",
+      "description": "Options for 3dvolreg (consult AFNI documentation for details)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "output_file"
+  ]
+}

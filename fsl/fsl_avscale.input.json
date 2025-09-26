@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "avscale",
+  "description": "A command line tool for computing affine transformations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/avscale"
+    },
+    "allparams_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "All parameters flag",
+      "description": "Flag for all parameters."
+    },
+    "inverteddies_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Inverted eddies flag",
+      "description": "Flag for inverted eddies."
+    },
+    "matrix_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Matrix file",
+      "description": "The path to the matrix file."
+    },
+    "non_reference_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Non-reference volume",
+      "description": "The path to the non-reference volume."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "matrix_file"
+  ]
+}

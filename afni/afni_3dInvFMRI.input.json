@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dInvFMRI",
+  "description": "Program to compute stimulus time series, given a 3D+time dataset and an activation map (the inverse of the usual FMRI analysis problem).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dInvFMRI"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input 3D+time dataset."
+    },
+    "activation_map": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Activation map",
+      "description": "Defines activation map; should be a bucket dataset where each sub-brick defines the beta weight map for an unknown stimulus time series."
+    },
+    "map_weight": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Map weight",
+      "description": "Defines a weighting factor for the map. Dataset can have either 1 sub-brick or the same number as in the -map dataset."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask dataset",
+      "description": "Defines a mask dataset to restrict input voxels from -data and -map."
+    },
+    "baseline_file": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Baseline file",
+      "description": "Baseline time series file. Each column of the file defines a baseline time series."
+    },
+    "polynom_order": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Polynomial order",
+      "description": "Adds polynomials of specified order to the baseline collection."
+    },
+    "output_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output file",
+      "description": "Name of the 1D output file."
+    },
+    "method": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Method",
+      "description": "Determines the method to use: C for least squares fit to data matrix (default) or K for least squares fit to activation matrix."
+    },
+    "alpha": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Alpha factor",
+      "description": "Set the alpha factor to penalize large values of the output vectors."
+    },
+    "smooth_fir": {
+      "type": "boolean",
+      "default": false,
+      "title": "5 point FIR filter",
+      "description": "Smooth the results with a 5 point lowpass FIR filter."
+    },
+    "smooth_median": {
+      "type": "boolean",
+      "default": false,
+      "title": "5 point median filter",
+      "description": "Smooth the results with a 5 point median filter."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "activation_map"
+  ]
+}

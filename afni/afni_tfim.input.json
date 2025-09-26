@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tfim",
+  "description": "MCW TFIM: t-tests on sets of functional images",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/tfim"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output prefix",
+      "description": "Prefix for output filenames. Default is 'tfim'."
+    },
+    "pthresh": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "p-threshold",
+      "description": "Significance level (per voxel) to threshold the output with. Voxels with t-statistic less significant than this will have their diff output zeroed. Default is no threshold."
+    },
+    "eqcorr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Equivalent correlation statistic",
+      "description": "Write out the equivalent correlation statistic. The number 'dval' is the value to use for 'dof'. Default is not to write this file."
+    },
+    "paired": {
+      "type": "boolean",
+      "default": false,
+      "title": "Paired sample t-test",
+      "description": "Compare -set1 and -set2 using a paired sample t-test. Illegal with the -base1 option."
+    },
+    "set1_images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Set 1 Images",
+      "description": "First set of image files."
+    },
+    "set2_images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Set 2 Images",
+      "description": "Second set of image files."
+    },
+    "base1_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Base value",
+      "description": "Base value for the first set of images. Used for Usage 2."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "set1_images",
+    "set2_images"
+  ]
+}

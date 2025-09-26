@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "adjunct_aw_tableize_roi_info.py",
+  "description": "A simple helper function for the fat_proc scripts that generates a text file containing ROI count/size information based on provided atlases and masks.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/adjunct_aw_tableize_roi_info.py"
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output file name"
+    },
+    "warped_atlas": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Warped atlas",
+      "description": "Warped atlas of interest, with subbrick selector if necessary"
+    },
+    "warped_mask": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Warped atlas mask",
+      "description": "Mask for the warped atlas (same grid)"
+    },
+    "reference_atlas": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Reference atlas",
+      "description": "Reference atlas (unwarped), with subbrick selector if necessary"
+    },
+    "reference_mask": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Reference atlas mask",
+      "description": "Mask for the reference atlas (same grid)"
+    },
+    "modesmooth_value": {
+      "type": "number",
+      "title": "Modesmooth value",
+      "description": "Modesmooth value, from modal smoothing used after warping"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "output_file",
+    "warped_atlas",
+    "warped_mask",
+    "reference_atlas",
+    "reference_mask",
+    "modesmooth_value"
+  ]
+}

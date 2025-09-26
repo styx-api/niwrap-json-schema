@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Surf2VolCoord",
+  "description": "Relates node indices to coordinates given x y z coordinates and returns the nodes closest to them.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/Surf2VolCoord"
+    },
+    "surface": {
+      "type": "string",
+      "title": "Surface",
+      "description": "Specify input surface."
+    },
+    "grid_vol": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Grid Volume",
+      "description": "Specifies the grid for the output volume."
+    },
+    "grid_subbrick": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Grid Subbrick",
+      "description": "Sub-brick from which data are taken."
+    },
+    "sv": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Volume",
+      "description": "Surface Volume file aligning with the surface."
+    },
+    "one_node": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "One Node",
+      "description": "Specify a single node's coordinates."
+    },
+    "closest_nodes": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Closest Nodes",
+      "description": "A coordinate file specifying coordinates for which the closest nodes will be found."
+    },
+    "qual": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Qual string",
+      "description": "A string of characters that qualify the surface in which the closest node was found."
+    },
+    "lpi": {
+      "type": "boolean",
+      "default": false,
+      "title": "LPI Flag",
+      "description": "Coordinate axis direction for values in XYZ.1D are in LPI."
+    },
+    "rai": {
+      "type": "boolean",
+      "default": false,
+      "title": "RAI Flag",
+      "description": "Coordinate axis direction for values in XYZ.1D are in RAI (default)."
+    },
+    "verb_level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbosity Level",
+      "description": "Verbosity level, default is 0."
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Prefix",
+      "description": "Output results to file PREFIX (will overwrite). Default is stdout."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface",
+    "grid_vol",
+    "closest_nodes",
+    "prefix"
+  ]
+}

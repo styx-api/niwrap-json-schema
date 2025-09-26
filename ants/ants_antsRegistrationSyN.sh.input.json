@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsRegistrationSyN.sh",
+  "description": "Script for simplified symmetric image registration using ANTs.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsRegistrationSyN.sh"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "enum": [
+        2,
+        3
+      ],
+      "title": "Image Dimension",
+      "description": "Image dimension: 2 or 3 (for 2 or 3-dimensional registration of a single volume)"
+    },
+    "fixed_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Fixed Image",
+      "description": "Fixed image(s) or source image(s) or reference image(s)"
+    },
+    "moving_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Moving Image",
+      "description": "Moving image(s) or target image(s)"
+    },
+    "output_prefix": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "A prefix that is prepended to all output files"
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Threads",
+      "description": "Number of threads (default = ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS if defined, otherwise 1)"
+    },
+    "initial_transform": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Transform",
+      "description": "Initial transform(s) --- order specified on the command line matters"
+    },
+    "transform_type": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "t",
+            "r",
+            "a",
+            "s",
+            "sr",
+            "so",
+            "b",
+            "br",
+            "bo"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform Type",
+      "description": "Transform type (default = 's'). Options:\n - t: translation (1 stage)\n - r: rigid (1 stage)\n - a: rigid + affine (2 stages)\n - s: rigid + affine + deformable syn (3 stages)\n - sr: rigid + deformable syn (2 stages)\n - so: deformable syn only (1 stage)\n - b: rigid + affine + deformable b-spline syn (3 stages)\n - br: rigid + deformable b-spline syn (2 stages)\n - bo: deformable b-spline syn only (1 stage)"
+    },
+    "radius": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Radius for Cross Correlation Metric",
+      "description": "Radius for cross correlation metric used during SyN stage (default = 4)"
+    },
+    "spline_distance": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spline Distance for Deformable B-spline SyN Transform",
+      "description": "Spline distance for deformable B-spline SyN transform (default = 26)"
+    },
+    "gradient_step": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gradient Step Size for SyN and B-spline SyN",
+      "description": "Gradient step size for SyN and B-spline SyN (default = 0.1)"
+    },
+    "masks": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Masks",
+      "description": "Mask(s) for the fixed image space, or for the fixed and moving image space in the format 'fixedMask,MovingMask'. Use -x once to specify mask(s) to be used for all stages or use -x for each 'stage' (cf -t option). If no mask is to be used for a particular stage, the keyword 'NULL' should be used in place of file names."
+    },
+    "precision_type": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "f",
+            "d"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Precision Type",
+      "description": "Precision type (default = 'd'). Options:\n - f: float\n - d: double"
+    },
+    "use_histogram_matching": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use Histogram Matching",
+      "description": "Use histogram matching (default = 0). Options:\n - 0: false\n - 1: true"
+    },
+    "use_repro_mode": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Use 'Repro' Mode for Exact Reproducibility",
+      "description": "Use 'repro' mode for exact reproducibility of output. Uses GC metric for linear stages and a fixed random seed (default = 0). Options:\n - 0: false\n - 1: true"
+    },
+    "collapse_output_transforms": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Collapse Output Transforms",
+      "description": "Collapse output transforms (default = 1). Options:\n - 0: false\n - 1: true"
+    },
+    "random_seed": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random Seed",
+      "description": "Fix random seed to an int value"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "fixed_image",
+    "moving_image",
+    "output_prefix"
+  ]
+}

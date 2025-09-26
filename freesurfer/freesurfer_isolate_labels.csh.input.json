@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "isolate_labels.csh",
+  "description": "Tool to separate out a particular or all labels into individual binary files for subsequent shape analysis.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/isolate_labels.csh"
+    },
+    "label_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Label Volume",
+      "description": "Label volume to be analyzed"
+    },
+    "output_prefix": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Prefix of binary label file(s)"
+    },
+    "label_option": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Option",
+      "description": "The particular label to be analyzed; default is all labels."
+    },
+    "lowercase_label_option": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lowercase Label Option",
+      "description": "The particular label to be analyzed; default is all labels."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Print version and exit"
+    },
+    "keepval": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep Values Flag",
+      "description": "Keeps original label values"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Print help and exit"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "label_volume",
+    "output_prefix"
+  ]
+}

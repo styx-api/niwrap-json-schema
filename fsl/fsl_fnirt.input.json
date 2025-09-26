@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fnirt",
+  "description": "FSL non-linear registration",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fnirt"
+    },
+    "affine_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Affine file",
+      "description": "Name of file containing affine transform."
+    },
+    "config_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "T1_2_MNI152_2mm",
+            "FA_2_FMRIB58_1mm"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Config file",
+      "description": "'t1_2_mni152_2mm' or 'fa_2_fmrib58_1mm' or file or string. Name of config file specifying command line arguments."
+    },
+    "field_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Field file",
+      "description": "file. Name of output file with field."
+    },
+    "fieldcoeff_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fieldcoeff file",
+      "description": "string representing a file. Name of output file with field coefficients."
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "In file",
+      "description": "Name of input image."
+    },
+    "jacobian_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Jacobian file",
+      "description": "A file. Name of file for writing out the jacobian of the field (for diagnostic or vbm purposes)."
+    },
+    "log_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log file",
+      "description": "Name of log-file."
+    },
+    "modulatedref_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Modulatedref file",
+      "description": "string representing a file. Name of file for writing out intensity modulated --ref (for diagnostic purposes)."
+    },
+    "ref_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Ref file",
+      "description": "Name of reference image."
+    },
+    "refmask_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Refmask file",
+      "description": "Name of file with mask in reference space."
+    },
+    "warped_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Warped file",
+      "description": "Name of output-file containing the --in image after it has been warped to the --ref image"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in_file",
+    "ref_file"
+  ]
+}

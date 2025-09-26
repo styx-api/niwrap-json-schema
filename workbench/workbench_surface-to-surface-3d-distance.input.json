@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surface-to-surface-3d-distance",
+  "description": "Compute distance between corresponding vertices.\n\nComputes the vector difference between the vertices of each surface with the same index, as (comp - ref), and output the magnitudes, and optionally the displacement vectors.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/surface-to-surface-3d-distance"
+    },
+    "surface_comp": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface_comp",
+      "description": "the surface to compare to the reference"
+    },
+    "surface_ref": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface_ref",
+      "description": "the surface to use as the reference"
+    },
+    "dists_out": {
+      "type": "string",
+      "title": "dists_out",
+      "description": "the output distances"
+    },
+    "opt_vectors_vectors_out": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_vectors_vectors_out",
+      "description": "output the displacement vectors: the output vectors"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface_comp",
+    "surface_ref",
+    "dists_out"
+  ]
+}

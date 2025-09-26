@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "vsm-smooth",
+  "description": "Implements a masked smoothing in which the input (vsm) is unchanged in voxels that have a non-zero value. In voxels with a zero value, the value is replaced with vsm smoothed by the given amount. This will likely only change the voxels that are near the edge of the non-zero voxels. This is a simple way to extrapolate the non-zero voxels beyond their range. This works well for a B0 distortion correction voxel shift map (vsm), but it can be applied to other maps.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/vsm-smooth"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input VSM file",
+      "description": "Input voxel shift map (vsm)."
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output VSM file",
+      "description": "Output smoothed voxel shift map."
+    },
+    "fwhm_value": {
+      "type": "number",
+      "title": "FWHM value",
+      "description": "Full width at half maximum for smoothing."
+    },
+    "temp_dir": {
+      "type": "string",
+      "title": "Temporary directory",
+      "description": "Directory for temporary files."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "output_file",
+    "fwhm_value",
+    "temp_dir"
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fnirtfileutils",
+  "description": "FNIRT file utilities for FSL - Converts FNIRT warp field coefficients to other formats",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fnirtfileutils"
+    },
+    "input_coefs": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Coefficients",
+      "description": "Filename of input coefficient volume to be converted"
+    },
+    "ref_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference Volume",
+      "description": "Filename for reference volume"
+    },
+    "out_field": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Field",
+      "description": "Filename for output field/coef volume - uses relative warp convention"
+    },
+    "output_format": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Format",
+      "description": "Output format [field, spline], default=field"
+    },
+    "warp_res": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Warp Resolution",
+      "description": "Warp resolution (mm), only relevant when --outformat=spline"
+    },
+    "knot_space": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Knot Spacing",
+      "description": "Knot-spacing (voxels), only relevant when --outformat=spline"
+    },
+    "jacobian_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Jacobian Determinant Map Output",
+      "description": "Filename for output jacobian determinant map volume"
+    },
+    "jacobian_matrix_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Full Jacobian Matrix Output",
+      "description": "Filename for output full jacobian matrix 4D-map volume"
+    },
+    "with_aff": {
+      "type": "boolean",
+      "default": false,
+      "title": "Include Affine Transform",
+      "description": "If set, the affine transform is included in the field/jacobian"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Display this help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_coefs"
+  ]
+}

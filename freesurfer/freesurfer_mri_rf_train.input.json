@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_rf_train",
+  "description": "Trains GCA data with multiple subjects using MRI data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_rf_train"
+    },
+    "seg_volume": {
+      "type": "string",
+      "title": "Segmentation Volume",
+      "description": "Segmentation volume (path relative to $subject/mri)."
+    },
+    "atlas_transform": {
+      "type": "string",
+      "title": "Atlas Transform",
+      "description": "Atlas transform (path relative to $subject/mri/transforms)."
+    },
+    "mask_volume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Volume",
+      "description": "Use volname as a mask (path relative to $subject/mri)."
+    },
+    "node_spacing": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Node Spacing",
+      "description": "Spacing of classifiers in canonical space."
+    },
+    "prior_spacing": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prior Spacing",
+      "description": "Spacing of class priors in canonical space."
+    },
+    "input_training_data": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Training Data",
+      "description": "Specifying training data (path relative to $subject/mri). Can specify multiple inputs. If not specified, 'orig' is used."
+    },
+    "sanity_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Sanity Check",
+      "description": "Conduct sanity-check of labels for obvious edit errors."
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Subjects",
+      "description": "Input subjects."
+    },
+    "output_rfa": {
+      "type": "string",
+      "title": "Output RFA Filename",
+      "description": "Output RFA filename."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "seg_volume",
+    "atlas_transform",
+    "subjects",
+    "output_rfa"
+  ]
+}

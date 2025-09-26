@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "strblast",
+  "description": "Finds exact copies of the target string in each of the input files, and replaces all characters with some junk string.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/strblast"
+    },
+    "targetstring": {
+      "type": "string",
+      "title": "Target String",
+      "description": "Target string to search for in the input files."
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Files",
+      "description": "Input files to search for the target string."
+    },
+    "new_char": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "New Character",
+      "description": "Replace TARGETSTRING with CHAR (repeated)"
+    },
+    "new_string": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "New String",
+      "description": "Replace TARGETSTRING with STRING"
+    },
+    "unescape": {
+      "type": "boolean",
+      "default": false,
+      "title": "Unescape Flag",
+      "description": "Parse TARGETSTRING for escaped characters (includes '\\t', '\\n', '\\r')"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet Flag",
+      "description": "Do not report files with no strings found. Use -quiet -quiet to avoid any reporting."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Show help message and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "targetstring",
+    "input_files"
+  ]
+}

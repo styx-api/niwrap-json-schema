@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "scene-capture-image",
+  "description": "Offscreen rendering of scene to an image file.\n\n----------------------------------------------------------------------\n\nRender content of browser windows displayed in a scene into image file(s).\n\nIf none of the \"-size\" options are specified, the default is \"-size-window\" (Output image is size of the window that was saved in the scene).\n\nFor the \"-size\" options that accept a width and/or height, the values default to number of pixels.  To express the width and/or height in physical units (inches, centimeters, etc.), use the \"-units\" option.  When physical units are used, the pixel width and height are derived using the physical width/height and the image resolution (see the \"-resolution\" option).\n\nNote that scenes created prior to version 1.2 (May 2016) do not contain information about the size of the window.  Therefore, one must use the \"-size-width-height\" option.\n\nExamples:\n\nGenerate an image of the second scene.  Width and height of image is width and height of window saved in the scene.  \n   wb_command -scene-capture-image myscene.scene 2 image2.jpg\n\nGenerate an image of the second scene with a margin around sides of the image. Width and height of image is width and height of window saved in the scene.  \n   wb_command -scene-capture-image myscene.scene 2 image2.jpg  -margin 10\n\nGenerate an image of the second scene that is 6 inches width with 300 pixels per inch.  The resulting width is 1800 pixels.  The resulting height of the image is a function of the width and the aspect ratio (height divided by width) of the window size saved in the scene.\n   wb_command -scene-capture-image myscene.scene 2 image21.jpg \\ \n   -size-width 6 -units INCHES -resolution 300 PIXELS_PER_INCH\n\nPrint information about the size of the output image for the second scene (no image file is created) using a width of 4.5 centimeters. \n   wb_command -scene-capture-image myscene.scene 2 test.jpg \\ \n   -size-width 4.5 -units CENTIMETERS -print-image-info\n\n\n\n\nNO OFF SCREEN RENDERERS AVAILABLE ON THIS SYSTEM.  COMMAND WILL FAIL !!!!\n\n\nERROR: -scene-capture-image is not available !\nA required library for this command, Mesa3D (software version of OpenGL), was not available when this software was created.  This command is not available for the Windows version of this software but should always be available in the Linux and MacOS versions.\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/scene-capture-image"
+    },
+    "scene_file": {
+      "type": "string",
+      "title": "scene_file",
+      "description": "scene file"
+    },
+    "scene_name_or_number": {
+      "type": "string",
+      "title": "scene_name_or_number",
+      "description": "name or number (starting at one) of the scene in the scene file"
+    },
+    "image_file_name": {
+      "type": "string",
+      "title": "image_file_name",
+      "description": "output - image file name\n   The file name must end with a valid extension that identifies the image file format.  Valid extensions on this system are: (.bmp .jpeg .jpg .png .ppm).\n\n   If there is more than one window in the scene, multiple image files are output with the window's number inserted into the name of the image file immediately before the image file's extension."
+    },
+    "opt_size_window": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_size_window",
+      "description": "Output image is size of window's graphics region from when scene was created."
+    },
+    "opt_size_capture": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_size_capture",
+      "description": "Output image uses size from Capture Dialog when scene was created"
+    },
+    "size_width_height": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "size_width_height"
+            },
+            "width": {
+              "type": "number",
+              "title": "width",
+              "description": "Width for output image"
+            },
+            "height": {
+              "type": "number",
+              "title": "height",
+              "description": "Height for output image"
+            }
+          },
+          "additionalProperties": false,
+          "title": "size_width_height",
+          "description": "Width and height for output image",
+          "required": [
+            "width",
+            "height"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "size_width_height",
+      "description": "Width and height for output image"
+    },
+    "opt_size_width_width": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_size_width_width",
+      "description": "Width for output image.  Height is computed using the aspect ratio from the window's width and height saved in the scene.: Width for output image"
+    },
+    "opt_size_height_height": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_size_height_height",
+      "description": "Height for output image.  Width is computed using the aspect ratio from the window's width and height saved in the scene.: Height for output image"
+    },
+    "opt_units_units": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_units_units",
+      "description": "Units for image width/height\n      Default is PIXELS: Name of units for image width/height.  Valid units are:\n   INCHES\n   CENTIMETERS\n   MILLIMETERS\n   METERS\n   PIXELS\n"
+    },
+    "resolution": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "resolution"
+            },
+            "number_of_pixels": {
+              "type": "number",
+              "title": "number_of_pixels",
+              "description": "number of pixels"
+            },
+            "units_name": {
+              "type": "string",
+              "title": "units_name",
+              "description": "Name of resolution units.  Valid resolution unit names are:\n   PIXELS_PER_INCH\n   PIXELS_PER_CENTIMETER\n   PIXELS_PER_METER\n   PIXELS_PER_MILLIMETER\n"
+            }
+          },
+          "additionalProperties": false,
+          "title": "resolution",
+          "description": "Image resolution (number pixels per size unit)\n      Default is 300 PIXELS_PER_INCH",
+          "required": [
+            "number_of_pixels",
+            "units_name"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "resolution",
+      "description": "Image resolution (number pixels per size unit)\n      Default is 300 PIXELS_PER_INCH"
+    },
+    "opt_margin_size": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_margin_size",
+      "description": "Add a margin to sides of the image using the window's background color.: size of margin, in pixels, added to all sides of output image"
+    },
+    "opt_no_scene_colors": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_no_scene_colors",
+      "description": "Do not use background and foreground colors in scene"
+    },
+    "set_map_yoke": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "set_map_yoke"
+            },
+            "map_yoking_roman_numeral": {
+              "type": "string",
+              "title": "map_yoking_roman_numeral",
+              "description": "Roman numeral identifying the map yoking group (I, II, III, IV, V, VI, VII, VIII, IX, X)"
+            },
+            "map_undex": {
+              "type": "integer",
+              "title": "map_undex",
+              "description": "Map index for yoking group.  Indices start at 1 (one)"
+            }
+          },
+          "additionalProperties": false,
+          "title": "set_map_yoke",
+          "description": "Override selected map index for a map yoking group.",
+          "required": [
+            "map_yoking_roman_numeral",
+            "map_undex"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "set_map_yoke",
+      "description": "Override selected map index for a map yoking group."
+    },
+    "conn_db_login": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "conn_db_login"
+            },
+            "username": {
+              "type": "string",
+              "title": "username",
+              "description": "Connectome DB Username"
+            },
+            "password": {
+              "type": "string",
+              "title": "password",
+              "description": "Connectome DB Password"
+            }
+          },
+          "additionalProperties": false,
+          "title": "conn_db_login",
+          "description": "Login for scenes with files in Connectome Database.  If this option is not specified, the login and password stored in the user's preferences is used.",
+          "required": [
+            "username",
+            "password"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "conn_db_login",
+      "description": "Login for scenes with files in Connectome Database.  If this option is not specified, the login and password stored in the user's preferences is used."
+    },
+    "opt_show_capture_settings": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_show_capture_settings",
+      "description": "Print settings from Capture Dialog only, DO NOT create image file(s)"
+    },
+    "opt_renderer_renderer": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_renderer_renderer",
+      "description": "Select renderer for drawing image: Name of renderer to use for drawing image"
+    },
+    "opt_print_image_info": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_print_image_info",
+      "description": "Print the size and other information about output images only and DO NOT create any output images"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "scene_file",
+    "scene_name_or_number",
+    "image_file_name"
+  ]
+}

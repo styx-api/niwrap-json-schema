@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dual_regression",
+  "description": "Dual regression algorithm to investigate group-ICA results",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/dual_regression"
+    },
+    "group_ic_maps": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Group IC Maps 4D",
+      "description": "4D image containing spatial IC maps (melodic_IC) from the whole-group ICA analysis"
+    },
+    "des_norm": {
+      "type": "number",
+      "title": "Des Norm",
+      "description": "0 or 1 (1 is recommended). Whether to variance-normalise the timecourses used as the stage-2 regressors"
+    },
+    "design_mat": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Design Matrix",
+      "description": "Design matrix for final cross-subject modelling with randomise"
+    },
+    "design_con": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Design Contrasts",
+      "description": "Design contrasts for final cross-subject modelling with randomise"
+    },
+    "n_perm": {
+      "type": "number",
+      "title": "Number of Permutations",
+      "description": "Number of permutations for randomise; set to 1 for just raw tstat output, set to 0 to not run randomise at all."
+    },
+    "thr_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Thresholded Dual Regression",
+      "description": "Perform thresholded dual regression to obtain unbiased timeseries for connectomics analyses (e.g., with FSLnets)"
+    },
+    "output_directory": {
+      "type": "string",
+      "title": "Output Directory",
+      "description": "This directory will be created to hold all output and logfiles"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Files",
+      "description": "List of all subjects' preprocessed, standard-space 4D datasets"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "group_ic_maps",
+    "des_norm",
+    "design_mat",
+    "design_con",
+    "n_perm",
+    "output_directory",
+    "input_files"
+  ]
+}

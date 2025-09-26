@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "whirlgif",
+  "description": "A quick program that reads a series of GIF files and produces a single GIF file composed of those images.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/whirlgif"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Verbose mode"
+    },
+    "loop": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Loop Flag",
+      "description": "Add the Netscape 'loop' extension. Optionally specify a loop count."
+    },
+    "transparency_index": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transparency Index",
+      "description": "Set the colormap index 'index' to be transparent."
+    },
+    "inter_frame_delay": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inter-frame Delay",
+      "description": "Inter-frame timing delay."
+    },
+    "outfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output File",
+      "description": "Specify the output file to write the results to."
+    },
+    "infile": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input File List",
+      "description": "Read a list of filenames from a file."
+    },
+    "gif_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input GIF Files",
+      "description": "Input GIF files to be combined into a single GIF file."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "gif_files"
+  ]
+}

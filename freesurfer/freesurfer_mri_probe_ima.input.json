@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_probe_ima",
+  "description": "Query Siemens IMA files to extract header information",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_probe_ima"
+    },
+    "ima_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "IMA File",
+      "description": "Path to the IMA file to be probed."
+    },
+    "key_string": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Key String",
+      "description": "String from dictionary to query the IMA file."
+    },
+    "offset_type_len": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Offset Type and Length",
+      "description": "Offset, type, and string length for querying. Type can be short, int, long, float, double, or string."
+    },
+    "attribute_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Attribute Name",
+      "description": "Name of the file information attribute to query."
+    },
+    "fileinfo": {
+      "type": "boolean",
+      "default": false,
+      "title": "File Info Flag",
+      "description": "Dump the interpreted file information."
+    },
+    "dictionary": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dictionary Flag",
+      "description": "Dump the dictionary without the need of an IMA file."
+    },
+    "ob_stem": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Binary Stem",
+      "description": "Dump binary pixel data into bshort with stem prefix."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Show help message and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Print version and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ima_file"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surface-create-sphere",
+  "description": "Generate a sphere with consistent vertex areas.\n\nGenerates a sphere by regularly dividing the triangles of an icosahedron, to come as close to the desired number of vertices as possible, and modifying it to have very similar vertex areas for all vertices.  To generate a pair of vertex-matched left and right spheres, use this command, then -surface-flip-lr to generate the other sphere, then -set-structure on each.  For example:\n\n$ wb_command -surface-create-sphere 6000 Sphere.6k.R.surf.gii\n$ wb_command -surface-flip-lr Sphere.6k.R.surf.gii Sphere.6k.L.surf.gii\n$ wb_command -set-structure Sphere.6k.R.surf.gii CORTEX_RIGHT\n$ wb_command -set-structure Sphere.6k.L.surf.gii CORTEX_LEFT",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/surface-create-sphere"
+    },
+    "num_vertices": {
+      "type": "integer",
+      "title": "num_vertices",
+      "description": "desired number of vertices"
+    },
+    "sphere_out": {
+      "type": "string",
+      "title": "sphere_out",
+      "description": "the output sphere"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "num_vertices",
+    "sphere_out"
+  ]
+}

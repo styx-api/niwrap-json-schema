@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "volume-set-space",
+  "description": "Change volume space information.\n\nWrites a copy of the volume file, with the spacing information changed as specified.  No reordering of the voxel data occurs, see -volume-reorient to change the volume indexing order and reorder the voxels to match.  Exactly one of -plumb, -sform, or -file must be specified.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume-set-space"
+    },
+    "volume_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "volume_in",
+      "description": "the input volume"
+    },
+    "volume_out": {
+      "type": "string",
+      "title": "volume_out",
+      "description": "output - the output volume"
+    },
+    "plumb": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "plumb"
+            },
+            "axis_order": {
+              "type": "string",
+              "title": "axis_order",
+              "description": "a string like 'XYZ' that specifies which index is along which spatial dimension"
+            },
+            "x_spacing": {
+              "type": "number",
+              "title": "x_spacing",
+              "description": "change in x-coordinate from incrementing the relevant index"
+            },
+            "y_spacing": {
+              "type": "number",
+              "title": "y_spacing",
+              "description": "change in y-coordinate from incrementing the relevant index"
+            },
+            "z_spacing": {
+              "type": "number",
+              "title": "z_spacing",
+              "description": "change in z-coordinate from incrementing the relevant index"
+            },
+            "x_offset": {
+              "type": "number",
+              "title": "x_offset",
+              "description": "the x-coordinate of the first voxel"
+            },
+            "y_offset": {
+              "type": "number",
+              "title": "y_offset",
+              "description": "the y-coordinate of the first voxel"
+            },
+            "z_offset": {
+              "type": "number",
+              "title": "z_offset",
+              "description": "the z-coordinate of the first voxel"
+            }
+          },
+          "additionalProperties": false,
+          "title": "plumb",
+          "description": "set via axis order and spacing/offset",
+          "required": [
+            "axis_order",
+            "x_spacing",
+            "y_spacing",
+            "z_spacing",
+            "x_offset",
+            "y_offset",
+            "z_offset"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "plumb",
+      "description": "set via axis order and spacing/offset"
+    },
+    "sform": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "sform"
+            },
+            "xi_spacing": {
+              "type": "number",
+              "title": "xi_spacing",
+              "description": "increase in x coordinate from incrementing the i index"
+            },
+            "xj_spacing": {
+              "type": "number",
+              "title": "xj_spacing",
+              "description": "increase in x coordinate from incrementing the j index"
+            },
+            "xk_spacing": {
+              "type": "number",
+              "title": "xk_spacing",
+              "description": "increase in x coordinate from incrementing the k index"
+            },
+            "x_offset": {
+              "type": "number",
+              "title": "x_offset",
+              "description": "x coordinate of first voxel"
+            },
+            "yi_spacing": {
+              "type": "number",
+              "title": "yi_spacing",
+              "description": "increase in y coordinate from incrementing the i index"
+            },
+            "yj_spacing": {
+              "type": "number",
+              "title": "yj_spacing",
+              "description": "increase in y coordinate from incrementing the j index"
+            },
+            "yk_spacing": {
+              "type": "number",
+              "title": "yk_spacing",
+              "description": "increase in y coordinate from incrementing the k index"
+            },
+            "y_offset": {
+              "type": "number",
+              "title": "y_offset",
+              "description": "y coordinate of first voxel"
+            },
+            "zi_spacing": {
+              "type": "number",
+              "title": "zi_spacing",
+              "description": "increase in z coordinate from incrementing the i index"
+            },
+            "zj_spacing": {
+              "type": "number",
+              "title": "zj_spacing",
+              "description": "increase in z coordinate from incrementing the j index"
+            },
+            "zk_spacing": {
+              "type": "number",
+              "title": "zk_spacing",
+              "description": "increase in z coordinate from incrementing the k index"
+            },
+            "z_offset": {
+              "type": "number",
+              "title": "z_offset",
+              "description": "z coordinate of first voxel"
+            }
+          },
+          "additionalProperties": false,
+          "title": "sform",
+          "description": "set via a nifti sform",
+          "required": [
+            "xi_spacing",
+            "xj_spacing",
+            "xk_spacing",
+            "x_offset",
+            "yi_spacing",
+            "yj_spacing",
+            "yk_spacing",
+            "y_offset",
+            "zi_spacing",
+            "zj_spacing",
+            "zk_spacing",
+            "z_offset"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "sform",
+      "description": "set via a nifti sform"
+    },
+    "file": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "file"
+            },
+            "volume_ref": {
+              "type": "string",
+              "title": "volume_ref",
+              "description": "volume file to use for reference space"
+            },
+            "opt_ignore_dims": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_ignore_dims",
+              "description": "copy the spacing info even if the dimensions don't match"
+            }
+          },
+          "additionalProperties": false,
+          "title": "file",
+          "description": "copy spacing info from volume file with matching dimensions",
+          "required": [
+            "volume_ref"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "file",
+      "description": "copy spacing info from volume file with matching dimensions"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "volume_in",
+    "volume_out"
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@simulate_motion",
+  "description": "Create simulated motion time series in an EPI dataset based on the provided motion parameters and an input volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@simulate_motion"
+    },
+    "epi": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "EPI dataset",
+      "description": "Input EPI volume or time series (only a volreg base is needed, though more is okay)."
+    },
+    "motion_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Motion parameters file",
+      "description": "Motion parameter file (as output by 3dvolreg)."
+    },
+    "epi_timing": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "EPI timing dataset",
+      "description": "Provide EPI dataset with slice timing."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix for results",
+      "description": "Prefix for data results (default = motion_sim.NUM_TRS)."
+    },
+    "save_workdir": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save work directory",
+      "description": "Do not remove the 'work' directory."
+    },
+    "test": {
+      "type": "boolean",
+      "default": false,
+      "title": "Test mode",
+      "description": "Only test running the program, do not create a simulated motion dataset."
+    },
+    "verb_level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose level",
+      "description": "Specify a verbose level (default = 1)."
+    },
+    "vr_base": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Volreg base index",
+      "description": "0-based index of volreg base in EPI dataset."
+    },
+    "warp_method": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Warp method",
+      "description": "Specify a method for forward alignment/transform."
+    },
+    "warp_1D": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Affine transformation file",
+      "description": "Specify a 12 parameter affine transformation."
+    },
+    "warp_master": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Warp master dataset",
+      "description": "Specify a grid master dataset for the -warp_1D transform."
+    },
+    "wsinc5": {
+      "type": "boolean",
+      "default": false,
+      "title": "wsinc5 interpolation",
+      "description": "Use wsinc5 interpolation in 3dAllineate."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Show help message."
+    },
+    "hist": {
+      "type": "boolean",
+      "default": false,
+      "title": "History",
+      "description": "Show program modification history."
+    },
+    "todo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Todo list",
+      "description": "Show current todo list."
+    },
+    "ver": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Show program version."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "epi",
+    "motion_file"
+  ]
+}

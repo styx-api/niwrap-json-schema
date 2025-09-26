@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_mark_temporal_lobe",
+  "description": "A tool for marking the temporal lobe in MRI images.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_mark_temporal_lobe"
+    },
+    "spacing": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spacing",
+      "description": "The spacing of classifiers in canonical space"
+    },
+    "use_gradient": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Intensity Gradient Flag",
+      "description": "Flag to use intensity gradient as input to classifier"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Subject Files",
+      "description": "Subject MRI images"
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output File",
+      "description": "Output file for marked temporal lobes"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subjects",
+    "output_file"
+  ]
+}

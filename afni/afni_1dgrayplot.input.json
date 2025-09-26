@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dgrayplot",
+  "description": "Graphs the columns of a *.1D type time series file to the screen in grayscale.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dgrayplot"
+    },
+    "tsfile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input time series file",
+      "description": "Input time series file (*.1D format)"
+    },
+    "install": {
+      "type": "boolean",
+      "default": false,
+      "title": "Install new X11 colormap flag",
+      "description": "Install a new X11 colormap (for X11 PseudoColor)"
+    },
+    "ignore": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ignore rows",
+      "description": "Skip first 'nn' rows in the input file [default = 0]"
+    },
+    "flip": {
+      "type": "boolean",
+      "default": false,
+      "title": "Flip axes flag",
+      "description": "Plot x and y axes interchanged [default: data columns plotted DOWN the screen]"
+    },
+    "sep": {
+      "type": "boolean",
+      "default": false,
+      "title": "Separate scales flag",
+      "description": "Separate scales for each column"
+    },
+    "use": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Points to plot",
+      "description": "Plot 'mm' points [default: all of them]"
+    },
+    "ps": {
+      "type": "boolean",
+      "default": false,
+      "title": "PostScript format flag",
+      "description": "Don't draw plot in a window; write it to stdout in PostScript format."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "tsfile"
+  ]
+}

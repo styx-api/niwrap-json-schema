@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@thickness_master",
+  "description": "Compute cortical thickness using mask and surface datasets",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@thickness_master"
+    },
+    "maskset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask set",
+      "description": "Mask dataset to find thickness"
+    },
+    "surfset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Surface set",
+      "description": "Surface dataset to use for normals into the volume"
+    },
+    "outdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output directory base",
+      "description": "Output directory base name. The output will be placed in a directory with thick_base in its name (e.g., mmmm_bb, mmmm_erode, mmmm_in2out)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "maskset",
+    "surfset"
+  ]
+}

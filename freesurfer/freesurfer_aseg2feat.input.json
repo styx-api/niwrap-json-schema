@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "aseg2feat",
+  "description": "Resamples the FreeSurfer automatic subcortical segmentation (aseg) to the FEAT functional space.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/aseg2feat"
+    },
+    "feat": {
+      "type": "string",
+      "title": "FEAT directory",
+      "description": "FEAT output directory. Multiple --feat arguments can be supplied."
+    },
+    "featdirfile": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FEAT directory file",
+      "description": "File with a list of FEAT directories. Can be used in conjunction with --feat."
+    },
+    "seg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation volume",
+      "description": "Change segmentation volume, default is aseg."
+    },
+    "aparc_aseg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Aparc + aseg flag",
+      "description": "Use aparc+aseg.mgz. Same as --seg aparc+aseg.mgz."
+    },
+    "svstats": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save stats flag",
+      "description": "Save result in featdir/stats instead of featdir/reg/freesurfer"
+    },
+    "standard": {
+      "type": "boolean",
+      "default": false,
+      "title": "Standard space flag",
+      "description": "Map results to standard space instead of native functional space. Implies --svstats."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Turn on debugging."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Print help and exit."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version flag",
+      "description": "Print version and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "feat"
+  ]
+}

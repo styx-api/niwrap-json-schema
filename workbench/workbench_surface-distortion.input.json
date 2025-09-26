@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surface-distortion",
+  "description": "Measure distortion between surfaces.\n\nThis command, when not using -caret5-method, -edge-method, or -local-affine-method, is equivalent to using -surface-vertex-areas on each surface, smoothing both output metrics with the GEO_GAUSS_EQUAL method on the surface they came from if -smooth is specified, and then using the formula 'ln(distorted/reference)/ln(2)' on the smoothed results.\n\nWhen using -caret5-method, it uses the surface distortion method from caret5, which takes the base 2 log of the ratio of tile areas, then averages those results at each vertex, and then smooths the result on the reference surface.\n\nWhen using -edge-method, the -smooth option is ignored, and the output at each vertex is the average of 'abs(ln(refEdge/distortEdge)/ln(2))' over all edges connected to the vertex.\n\nWhen using -local-affine-method, the -smooth option is ignored.  The output is two columns, the first is the area distortion ratio, and the second is anisotropic strain.  These are calculated by an affine transform between matching triangles, and then averaged across the triangles of a vertex.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/surface-distortion"
+    },
+    "surface_reference": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface_reference",
+      "description": "the reference surface"
+    },
+    "surface_distorted": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface_distorted",
+      "description": "the distorted surface"
+    },
+    "metric_out": {
+      "type": "string",
+      "title": "metric_out",
+      "description": "the output distortion metric"
+    },
+    "smooth": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "smooth"
+            },
+            "sigma": {
+              "type": "number",
+              "title": "sigma",
+              "description": "the size of the smoothing kernel in mm, as sigma by default"
+            },
+            "opt_fwhm": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_fwhm",
+              "description": "kernel size is FWHM, not sigma"
+            }
+          },
+          "additionalProperties": false,
+          "title": "smooth",
+          "description": "smooth the area data",
+          "required": [
+            "sigma"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "smooth",
+      "description": "smooth the area data"
+    },
+    "opt_caret5_method": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_caret5_method",
+      "description": "use the surface distortion method from caret5"
+    },
+    "opt_edge_method": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_edge_method",
+      "description": "calculate distortion of edge lengths rather than areas"
+    },
+    "local_affine_method": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "local_affine_method"
+            },
+            "opt_log2": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_log2",
+              "description": "apply base-2 log transform"
+            }
+          },
+          "additionalProperties": false,
+          "title": "local_affine_method",
+          "description": "calculate distortion by the local affines between triangles"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "local_affine_method",
+      "description": "calculate distortion by the local affines between triangles"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface_reference",
+    "surface_distorted",
+    "metric_out"
+  ]
+}

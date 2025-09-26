@@ -1,0 +1,1148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "greedy",
+  "description": "Paul's greedy diffeomorphic registration implementation",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "greedy/greedy"
+    },
+    "dimensions": {
+      "type": "integer",
+      "title": "Dimensions",
+      "description": "Number of image dimensions"
+    },
+    "input_images": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "input_images"
+            },
+            "fixed": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Fixed Image",
+              "description": "The fixed image"
+            },
+            "moving": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Moving Image",
+              "description": "The moving image"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Image pair (may be repeated)",
+          "required": [
+            "fixed",
+            "moving"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Image pair (may be repeated)"
+    },
+    "output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output",
+      "description": "Output file (matrix in affine mode; image in deformable mode, metric computation mode; ignored in reslicing mode)"
+    },
+    "affine": {
+      "type": "boolean",
+      "default": false,
+      "title": "Affine",
+      "description": "Perform affine registration and save to output (-o)"
+    },
+    "brute": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brute Force Search",
+      "description": "Perform a brute force search around each voxel"
+    },
+    "moments": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Moments of Inertia",
+      "description": "Perform moments of inertia rigid alignment of given order (1 or 2)"
+    },
+    "reslice": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reslice",
+      "description": "Reslice images instead of doing registration"
+    },
+    "invert": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "invert"
+            },
+            "inwarp": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Input Warp",
+              "description": "The input warp to be inverted"
+            },
+            "outwarp": {
+              "type": "string",
+              "title": "Output Warp",
+              "description": "The filename for the inverted warp output"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Invert previously computed warp",
+          "required": [
+            "inwarp",
+            "outwarp"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Invert previously computed warp"
+    },
+    "root": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "root"
+            },
+            "inwarp": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Input Warp",
+              "description": "The input warp"
+            },
+            "outwarp": {
+              "type": "string",
+              "title": "Output Warp",
+              "description": "The filename for the root warp output"
+            },
+            "n": {
+              "type": "integer",
+              "title": "N",
+              "description": "The value of N for 2^N-th root"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Convert 2^N-th root of a warp",
+          "required": [
+            "inwarp",
+            "outwarp",
+            "n"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Convert 2^N-th root of a warp"
+    },
+    "jacobian": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "jacobian"
+            },
+            "inwarp": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Input Warp",
+              "description": "The input warp"
+            },
+            "outjac": {
+              "type": "string",
+              "title": "Output Jacobian",
+              "description": "The filename for the Jacobian determinant output"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Compute the Jacobian determinant of the warp",
+          "required": [
+            "inwarp",
+            "outjac"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Compute the Jacobian determinant of the warp"
+    },
+    "metric_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "Metric Computation Mode",
+      "description": "Compute metric between images"
+    },
+    "defopt": {
+      "type": "boolean",
+      "default": false,
+      "title": "Deformable Optimization Mode",
+      "description": "Deformable optimization mode (experimental)"
+    },
+    "weight": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Weight",
+      "description": "Weight of the next -i pair"
+    },
+    "metric": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "metric"
+            },
+            "metric_type": {
+              "type": "string",
+              "enum": [
+                "SSD",
+                "MI",
+                "NMI",
+                "NCC",
+                "MAHAL"
+              ],
+              "title": "Metric Type",
+              "description": "Type of metric to use"
+            },
+            "metric_param": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Metric Parameter",
+              "description": "Parameter for the metric (e.g., radius for NCC)"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Metric for the entire registration",
+          "required": [
+            "metric_type"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Metric for the entire registration"
+    },
+    "step_size": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Step Size",
+      "description": "Step size for optimization (default = 1.0), may also be specified per level (e.g. 0.3x0.1)"
+    },
+    "iterations": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Iterations",
+      "description": "Number of iterations per level of multi-res"
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "Number of allowed concurrent threads"
+    },
+    "fixed_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fixed Image Mask",
+      "description": "Fixed image mask (metric gradients computed only over the mask)"
+    },
+    "gm_trim": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Generate Fixed Image Mask",
+      "description": "Generate the fixed image mask by trimming the extent of the fixed image by given radius"
+    },
+    "moving_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Moving Image Mask",
+      "description": "Moving image mask (pixels outside are excluded from metric computation)"
+    },
+    "wncc_mask_dilate": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dilate WNCC Masks",
+      "description": "Specifies that fixed and moving masks should be dilated by the radius of the WNCC metric during registration"
+    },
+    "reference_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference Image",
+      "description": "Use supplied image, rather than fixed image to define the reference space"
+    },
+    "ref_pad": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference Padding",
+      "description": "Define the reference space by padding the fixed image by radius"
+    },
+    "background": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Background Value",
+      "description": "Value to fill missing values when mapping fixed and moving images to reference space"
+    },
+    "input_transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Transform",
+      "description": "Specify transforms (matrices, warps) that map moving image to reference space"
+    },
+    "zero_last_dimension": {
+      "type": "boolean",
+      "default": false,
+      "title": "Zero Last Dimension",
+      "description": "Sets sigmas and NCC radius to zero in the last dimension for 2D/3D registration"
+    },
+    "time_step_mode": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "CONST",
+            "SCALE",
+            "SCALEDOWN"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time Step Mode",
+      "description": "Time step behavior mode"
+    },
+    "smoothing": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smoothing",
+      "description": "Smoothing for the greedy update step (e.g., '1.732vox 0.7071vox')"
+    },
+    "inverse_warp": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inverse Warp Output",
+      "description": "Compute and write the inverse of the warp field"
+    },
+    "root_warp": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Root Warp Output",
+      "description": "Compute and write the (2^N-th) root of the warp field"
+    },
+    "warp_precision": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Warp Precision",
+      "description": "Saved warp precision in voxels (default=0.1; 0 for no compression)"
+    },
+    "noise": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Noise",
+      "description": "Standard deviation of white noise added to moving/fixed images when using NCC metric"
+    },
+    "exponent": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Exponent",
+      "description": "The exponent used for warp inversion, root computation, and in stationary velocity field mode"
+    },
+    "svf_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "Stationary Velocity Field Mode",
+      "description": "Perform registration using the stationary velocity model"
+    },
+    "svlb": {
+      "type": "boolean",
+      "default": false,
+      "title": "Stationary Velocity Field Mode (SVLB)",
+      "description": "Use more accurate but expensive update of v in stationary velocity field mode"
+    },
+    "sv_incompr": {
+      "type": "boolean",
+      "default": false,
+      "title": "Incompressibility Mode",
+      "description": "Incompressibility mode, implements Mansi et al. 2011 iLogDemons"
+    },
+    "initial_warp": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Warp",
+      "description": "Specifies the initial warp to start iteration from"
+    },
+    "tjr": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "tjr"
+            },
+            "mesh": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Mesh",
+              "description": "The tetrahedral mesh file"
+            },
+            "weight": {
+              "type": "number",
+              "title": "Weight",
+              "description": "The weight of the penalty term"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Apply a regularization penalty based on the Jacobian of a tetrahedral mesh",
+          "required": [
+            "mesh",
+            "weight"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Apply a regularization penalty based on the Jacobian of a tetrahedral mesh"
+    },
+    "wr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "SVF Smoothness Regularization Weight",
+      "description": "Weight of SVF smoothness regularization term (default: 1000)"
+    },
+    "initial_affine": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Affine Transform",
+      "description": "Initial affine matrix for optimization"
+    },
+    "ia_identity": {
+      "type": "boolean",
+      "default": false,
+      "title": "Nifti Header Affine initialization",
+      "description": "Initialize affine matrix based on NIFTI headers"
+    },
+    "ia_voxel_grid": {
+      "type": "boolean",
+      "default": false,
+      "title": "Voxel Grid Affine Initialization",
+      "description": "Initialize affine matrix so that voxels with corresponding indices align"
+    },
+    "ia_image_centers": {
+      "type": "boolean",
+      "default": false,
+      "title": "Image Centers Affine Initialization",
+      "description": "Initialize affine matrix based on matching image centers"
+    },
+    "ia_image_side": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Image Side Affine Initialization",
+      "description": "Initialize affine matrix based on matching center of one image side"
+    },
+    "ia_moments": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Moments Affine Initialization",
+      "description": "Initialize affine matrix based on matching moments of inertia"
+    },
+    "affine_dof": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            6,
+            7,
+            12
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Affine Degrees of Freedom",
+      "description": "Degrees of freedom for affine registration. 6=rigid, 7=similarity, 12=affine"
+    },
+    "jitter": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Jitter",
+      "description": "Jitter (in voxel units) applied to sample points (default: 0.5)"
+    },
+    "search": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "search"
+            },
+            "n": {
+              "type": "integer",
+              "title": "Number of Iterations",
+              "description": "Number of iterations for random search"
+            },
+            "rot": {
+              "type": "string",
+              "title": "Rotation",
+              "description": "Standard deviation of random rotation angle (degrees) or 'any' or 'flip'"
+            },
+            "tran": {
+              "type": "number",
+              "title": "Translation",
+              "description": "Standard deviation of random offset in physical units"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Random search over rigid transforms before starting optimization",
+          "required": [
+            "n",
+            "rot",
+            "tran"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Random search over rigid transforms before starting optimization"
+    },
+    "det": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            -1,
+            1
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Force Determinant",
+      "description": "Force the determinant of transform to be either 1 (no flip) or -1 (flip)"
+    },
+    "cov_id": {
+      "type": "boolean",
+      "default": false,
+      "title": "Assume Identity Covariance",
+      "description": "Assume identity covariance (match centers and do flips only, no rotation)"
+    },
+    "fixed_reslicing_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reslice Fixed Image",
+      "description": "Fixed image for reslicing"
+    },
+    "reslice_moving_image": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "reslice_moving_image"
+            },
+            "moving": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Moving Image",
+              "description": "The moving image to be resliced"
+            },
+            "output": {
+              "type": "string",
+              "title": "Output Image",
+              "description": "The filename for the resliced output image"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Moving/output image pair for reslicing",
+          "required": [
+            "moving",
+            "output"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Moving/output image pair for reslicing"
+    },
+    "reslice_surface": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "reslice_surface"
+            },
+            "inmesh": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Input Mesh",
+              "description": "The input mesh file"
+            },
+            "outmesh": {
+              "type": "string",
+              "title": "Output Mesh",
+              "description": "The filename for the output warped mesh"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Fixed/output surface pair (vertices are warped from fixed space to moving)",
+          "required": [
+            "inmesh",
+            "outmesh"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Fixed/output surface pair (vertices are warped from fixed space to moving)"
+    },
+    "interpolation": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "nn"
+                }
+              },
+              "additionalProperties": false,
+              "title": "Nearest neighbor",
+              "description": "rarely recommended, results in the most aliasing",
+              "required": [
+                "@type"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "linear"
+                }
+              },
+              "additionalProperties": false,
+              "title": "Bilinear/trilinear interpolation",
+              "description": "default interpolation mode, fast and less aliasing",
+              "required": [
+                "@type"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "label"
+                },
+                "sigma_spec": {
+                  "type": "string",
+                  "description": "The <sigma_spec> parameter to the -ri LABEL command specifies the standard deviation of the Gaussian kernel used to smooth the labels. It can be provided in voxel units (e.g., 0.2vox) or millimeter units (e.g., 0.2mm). Value of 0.2vox works well in most situations"
+                }
+              },
+              "additionalProperties": false,
+              "title": "Label interpolation",
+              "description": "this special mode is used for warping/reslicing multi-label segmentations. This mode applies a little bit of smoothing to each label in your segmentation (including the background), warps this smoothed segmentation, and then performs voting among warped smoothed binary segmentations to assign each voxel in reference space a label. This works better than nearest neighbor interpolation (less aliasing).",
+              "required": [
+                "@type",
+                "sigma_spec"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolation Mode",
+      "description": "Interpolation for the next pair (NN, LINEAR*, LABEL sigma)"
+    },
+    "reslice_background": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reslice Background",
+      "description": "Background (i.e. outside) intensity for the next pair (default 0)"
+    },
+    "reslice_datatype": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "auto",
+            "double",
+            "float",
+            "uint",
+            "int",
+            "ushort",
+            "short",
+            "uchar",
+            "char"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reslice Data Type",
+      "description": "Data type for the next pair"
+    },
+    "reslice_composite": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reslice Composite",
+      "description": "Write composed transforms to outwarp"
+    },
+    "reslice_jacobian": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reslice Jacobian",
+      "description": "Write Jacobian determinant image to outjacobian"
+    },
+    "reslice_simplex_jacobian": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "reslice_simplex_jacobian"
+            },
+            "inmesh": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Input Mesh",
+              "description": "The input simplex mesh file"
+            },
+            "outmesh": {
+              "type": "string",
+              "title": "Output Mesh",
+              "description": "The filename for the output mesh with Jacobian determinants"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Compute Jacobian determinant for a simplex mesh in fixed space",
+          "required": [
+            "inmesh",
+            "outmesh"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Compute Jacobian determinant for a simplex mesh in fixed space"
+    },
+    "reslice_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reslice Mask",
+      "description": "A binary mask for the fixed image; zero values will be overwritten with background"
+    },
+    "metric_gradient": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Metric Gradient Output",
+      "description": "Write the gradient of the metric to file"
+    },
+    "debug_deriv": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Derivatives",
+      "description": "Enable periodic checks of derivatives (debug)"
+    },
+    "debug_deriv_eps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Derivative Epsilon",
+      "description": "Epsilon for derivative debugging"
+    },
+    "debug_aff_obj": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Affine Objective",
+      "description": "Plot affine objective in neighborhood of -ia matrix"
+    },
+    "dump_pyramid": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dump Pyramid",
+      "description": "Dump the image pyramid at the start of the registration"
+    },
+    "dump_moving": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dump Moving",
+      "description": "Dump moving image at each iter"
+    },
+    "dump_frequency": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dump Frequency",
+      "description": "Dump frequency"
+    },
+    "dump_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dump Prefix",
+      "description": "Prefix for dump files (may be a path)"
+    },
+    "powell": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Powell's Method",
+      "description": "Use Powell's method instead of LGBFS"
+    },
+    "float": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Single Precision",
+      "description": "Use single precision floating point (off by default)"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Print version info"
+    },
+    "verbosity": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbosity",
+      "description": "Verbosity level (0: none, 1: default, 2: verbose)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dimensions"
+  ]
+}

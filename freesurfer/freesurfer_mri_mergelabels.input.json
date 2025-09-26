@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_mergelabels",
+  "description": "A tool to merge two or more label files by concatenating them together.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_mergelabels"
+    },
+    "input_labels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Labels",
+      "description": "Input label files to be merged."
+    },
+    "output_label": {
+      "type": "string",
+      "title": "Output Label",
+      "description": "Output file for the merged label."
+    },
+    "input_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Directory",
+      "description": "Directory containing label files to be merged."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_labels",
+    "output_label"
+  ]
+}

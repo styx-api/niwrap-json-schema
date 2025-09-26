@@ -1,0 +1,389 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_curvature_stats",
+  "description": "Tool for calculating statistics on surface curvature values.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_curvature_stats"
+    },
+    "subject_name": {
+      "type": "string",
+      "title": "Subject Name",
+      "description": "Subject name defined in the SUBJECTS_DIR"
+    },
+    "hemisphere": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere, can be 'lh' or 'rh'"
+    },
+    "curvature_files": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Curvature Files",
+      "description": "Optional list of curvature files to process"
+    },
+    "number_of_averages": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Averages",
+      "description": "Average the curvature number of times."
+    },
+    "principal_curvatures": {
+      "type": "boolean",
+      "default": false,
+      "title": "Principal Curvatures Flag",
+      "description": "Calculate principal curvatures and derived maps."
+    },
+    "discrete_method": {
+      "type": "boolean",
+      "default": false,
+      "title": "Discrete Method Flag",
+      "description": "Use discrete calculation method for principal curvatures."
+    },
+    "continuous_method": {
+      "type": "boolean",
+      "default": false,
+      "title": "Continuous Method Flag",
+      "description": "Use continuous calculation method for principal curvatures."
+    },
+    "signed_principals": {
+      "type": "boolean",
+      "default": false,
+      "title": "Signed Principals Flag",
+      "description": "Assign signed max and min to principal curvature K1 and K2."
+    },
+    "vertex_area_weigh": {
+      "type": "boolean",
+      "default": false,
+      "title": "Vertex Area Weigh Flag",
+      "description": "Multiply curvature value by the area of its vertex."
+    },
+    "vertex_area_normalize": {
+      "type": "boolean",
+      "default": false,
+      "title": "Vertex Area Normalize Flag",
+      "description": "Divide curvature value by the area of its vertex."
+    },
+    "vertex_area_weigh_frac": {
+      "type": "boolean",
+      "default": false,
+      "title": "Vertex Area Weigh Fractional Flag",
+      "description": "Weigh curvature by the fractional vertex area."
+    },
+    "vertex_area_normalize_frac": {
+      "type": "boolean",
+      "default": false,
+      "title": "Vertex Area Normalize Fractional Flag",
+      "description": "Normalize curvature by the fractional vertex area."
+    },
+    "post_scale": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Post Scale Factor",
+      "description": "Scale the mean and areaNorm integrals by a factor."
+    },
+    "write_curvature_files": {
+      "type": "boolean",
+      "default": false,
+      "title": "Write Curvature Files Flag",
+      "description": "Write the calculated curvature values to files in FreeSurfer format."
+    },
+    "shape_index": {
+      "type": "boolean",
+      "default": false,
+      "title": "Shape Index Flag",
+      "description": "Calculate shape index despite potential atan issues."
+    },
+    "output_file_stem": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output File Stem",
+      "description": "Output file stem for results."
+    },
+    "histogram_bins": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Histogram Bins",
+      "description": "Number of bins for curvature histogram."
+    },
+    "percentage_histogram_bins": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Percentage Histogram Bins",
+      "description": "Number of bins for percentage-based curvature histogram."
+    },
+    "bin_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Histogram Bin Size",
+      "description": "Size of each histogram bin."
+    },
+    "bin_start_curvature": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Histogram Bin Start",
+      "description": "Histogram bin start value."
+    },
+    "bin_end_curvature": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Histogram Bin End",
+      "description": "Histogram bin end value."
+    },
+    "label_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label File",
+      "description": "Label file to constrain statistics to a region."
+    },
+    "regional_percentages": {
+      "type": "boolean",
+      "default": false,
+      "title": "Regional Percentages Flag",
+      "description": "Report integral percentages relative to the region."
+    },
+    "high_pass_filter": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "High Pass Filter",
+      "description": "High pass filter for curvature values."
+    },
+    "low_pass_filter": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Low Pass Filter",
+      "description": "Low pass filter for curvature values."
+    },
+    "high_pass_filter_gaussian": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "High Pass Filter Gaussian",
+      "description": "High pass filter for Gaussian curvature values."
+    },
+    "low_pass_filter_gaussian": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Low Pass Filter Gaussian",
+      "description": "Low pass filter for Gaussian curvature values."
+    },
+    "filter_label": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filter Label File",
+      "description": "Store processed surface vertices in a label file."
+    },
+    "min_max_info": {
+      "type": "boolean",
+      "default": false,
+      "title": "Min/Max Info Flag",
+      "description": "Output min/max information for the processed curvature."
+    },
+    "normalize_curvature": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normalize Curvature Flag",
+      "description": "Normalize the curvature before computation."
+    },
+    "summary_condition": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Summary Condition",
+      "description": "Write out stats as a summary condition."
+    },
+    "min_curvature_scale": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Min Curvature Scale",
+      "description": "Scale curvature values between min and max curvature."
+    },
+    "max_curvature_scale": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Curvature Scale",
+      "description": "End value for curvature scaling."
+    },
+    "scale_factor": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale Factor",
+      "description": "Scale curvature values with a factor."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Print out version number."
+    },
+    "set_zero_vertex": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Set Zero Vertex",
+      "description": "Sets the curvature values at that index to zero."
+    },
+    "max_ulps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Ulps",
+      "description": "Toggle a more rigorous floating point comparison operation."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_name",
+    "hemisphere"
+  ]
+}

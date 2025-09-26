@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "vertexvol",
+  "description": "Computes vertex-wise volume (and mid.area)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/vertexvol"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject identifier"
+    },
+    "left_hemisphere": {
+      "type": "boolean",
+      "default": false,
+      "title": "Left Hemisphere",
+      "description": "Select left hemisphere"
+    },
+    "right_hemisphere": {
+      "type": "boolean",
+      "default": false,
+      "title": "Right Hemisphere",
+      "description": "Select right hemisphere"
+    },
+    "output_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output File",
+      "description": "Output file name, default is ?h.volume"
+    },
+    "use_th3": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use TH3",
+      "description": "Use TH3 method for computation"
+    },
+    "no_th3": {
+      "type": "boolean",
+      "default": false,
+      "title": "No TH3",
+      "description": "Don't use TH3 method for computation"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject"
+  ]
+}

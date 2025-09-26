@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_ribbon",
+  "description": "MRI Ribbon tool to create ribbon volumes from surface files",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_ribbon"
+    },
+    "label_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label File",
+      "description": "Label file specifying regions of interest (optional)"
+    },
+    "inner_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Inner Surface",
+      "description": "File name of the inner surface"
+    },
+    "outer_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Outer Surface",
+      "description": "File name of the outer surface"
+    },
+    "input_volume": {
+      "type": "string",
+      "title": "Input Volume Prefix",
+      "description": "Prefix for the input volume file"
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume Prefix",
+      "description": "Prefix for the output volume file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "inner_surface",
+    "outer_surface",
+    "input_volume",
+    "output_volume"
+  ]
+}

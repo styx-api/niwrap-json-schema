@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dhistog",
+  "description": "Compute histogram of a 3D dataset",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dhistog"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Dataset",
+      "description": "Input dataset"
+    },
+    "nbin": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Bins",
+      "description": "Use specified number of bins"
+    },
+    "dind": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sub-brick Index",
+      "description": "Use data from specified sub-brick index"
+    },
+    "omit": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 100
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Omit Value",
+      "description": "Omit specified value from the count"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Dataset",
+      "description": "Use mask dataset to determine which voxels to use"
+    },
+    "roi_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ROI Mask",
+      "description": "Create histogram for each non-zero value in 'r' dataset"
+    },
+    "doall": {
+      "type": "boolean",
+      "default": false,
+      "title": "Do All",
+      "description": "Include all sub-bricks in the calculation"
+    },
+    "noempty": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Empty Bins",
+      "description": "Only output bins that are not empty"
+    },
+    "notitle": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Title",
+      "description": "Leave the title line off the output"
+    },
+    "log10": {
+      "type": "boolean",
+      "default": false,
+      "title": "Log10 Output",
+      "description": "Output log10() of the counts"
+    },
+    "pdf": {
+      "type": "boolean",
+      "default": false,
+      "title": "PDF Output",
+      "description": "Output the counts divided by the number of samples"
+    },
+    "min": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Value",
+      "description": "Specify minimum (inclusive) of histogram"
+    },
+    "max": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Value",
+      "description": "Specify maximum (inclusive) of histogram"
+    },
+    "igfac": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore Scale Factors",
+      "description": "Ignore sub-brick scale factors and histogram-ize the 'raw' data"
+    },
+    "int": {
+      "type": "boolean",
+      "default": false,
+      "title": "Integer Data",
+      "description": "Treat data and output as integers"
+    },
+    "float": {
+      "type": "boolean",
+      "default": false,
+      "title": "Float Data",
+      "description": "Treat data and output as floats"
+    },
+    "unq": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unique Values File",
+      "description": "Writes out the sorted unique values to file"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Write a copy of the histogram into specified file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset"
+  ]
+}

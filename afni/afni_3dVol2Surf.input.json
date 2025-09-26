@@ -1,0 +1,409 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dVol2Surf",
+  "description": "Map data from a volume domain to a surface domain",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dVol2Surf"
+    },
+    "spec_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Spec file",
+      "description": "SUMA spec file"
+    },
+    "sv": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Surface volume",
+      "description": "AFNI volume dataset mapped by the surface"
+    },
+    "grid_parent": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Grid parent",
+      "description": "AFNI volume dataset used as a grid and orientation master for output"
+    },
+    "map_func": {
+      "type": "string",
+      "title": "Map function",
+      "description": "Filter for values along the segment"
+    },
+    "surf_A": {
+      "type": "string",
+      "title": "Surface A",
+      "description": "Name of surface A from the spec file"
+    },
+    "surf_B": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface B",
+      "description": "Name of surface B from the spec file"
+    },
+    "out_1D": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output 1D file",
+      "description": "Specify a 1D file for the output"
+    },
+    "out_niml": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output niml file",
+      "description": "Specify a niml file for the output"
+    },
+    "use_norms": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use norms",
+      "description": "Use normals for second surface"
+    },
+    "norm_len": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Normal length",
+      "description": "Length for node normals"
+    },
+    "first_node": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First node",
+      "description": "Skip all previous nodes"
+    },
+    "last_node": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last node",
+      "description": "Skip all following nodes"
+    },
+    "debug_level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug level",
+      "description": "Verbose output level"
+    },
+    "dnode": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug node",
+      "description": "Node for debug"
+    },
+    "f_steps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of steps",
+      "description": "Number of steps along each segment (defines the number of evenly spaced points along each segment)"
+    },
+    "f_index": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Index type",
+      "description": "Whether to use all segment point values or only those corresponding to unique volume voxels"
+    },
+    "f_p1_mm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First point distance in mm",
+      "description": "Distance in millimeters to add to the first point of each line segment"
+    },
+    "f_pn_mm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second point distance in mm",
+      "description": "Distance in millimeters to add to the second point of each line segment"
+    },
+    "f_p1_fr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First point fractional distance",
+      "description": "Fractional distance to add to the first point of each line segment"
+    },
+    "f_pn_fr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second point fractional distance",
+      "description": "Fractional distance to add to the second point of each line segment"
+    },
+    "skip_col_nodes": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip nodes column",
+      "description": "Do not output node column"
+    },
+    "skip_col_1dindex": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip 1dindex column",
+      "description": "Do not output 1dindex column"
+    },
+    "skip_col_i": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip i column",
+      "description": "Do not output i column"
+    },
+    "skip_col_j": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip j column",
+      "description": "Do not output j column"
+    },
+    "skip_col_k": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip k column",
+      "description": "Do not output k column"
+    },
+    "skip_col_vals": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skip vals column",
+      "description": "Do not output vals column"
+    },
+    "no_headers": {
+      "type": "boolean",
+      "default": false,
+      "title": "No headers",
+      "description": "Do not output column headers"
+    },
+    "save_seg_coords": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Save segment coordinates",
+      "description": "Save segment coordinates to a file"
+    },
+    "cmask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "CMASK",
+      "description": "Command for dataset mask"
+    },
+    "gp_index": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GP index",
+      "description": "Choose grid_parent sub-brick"
+    },
+    "oob_index": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Out of bounds index",
+      "description": "Specify default index for out of bounds nodes"
+    },
+    "oob_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Out of bounds value",
+      "description": "Specify default value for out of bounds nodes"
+    },
+    "oom_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Out of mask value",
+      "description": "Specify default value for out of mask nodes"
+    },
+    "outcols_afni_nsd": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output AFNI NSD",
+      "description": "Output nodes and one result column"
+    },
+    "outcols_1_result": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output one result column",
+      "description": "Output only one result column"
+    },
+    "outcols_results": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output all result columns",
+      "description": "Output only all result columns"
+    },
+    "outcols_nsd_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output NSD format",
+      "description": "Output nodes and all results (NI_SURF_DSET format)"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Show this help"
+    },
+    "hist": {
+      "type": "boolean",
+      "default": false,
+      "title": "History",
+      "description": "Show revision history"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Show version information"
+    },
+    "keep_norm_dir": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep normals direction",
+      "description": "Keep the direction of the normals"
+    },
+    "reverse_norm_dir": {
+      "type": "boolean",
+      "default": false,
+      "title": "Reverse normals direction",
+      "description": "Reverse the normal directions"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "spec_file",
+    "sv",
+    "grid_parent",
+    "map_func",
+    "surf_A"
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "samseg2recon",
+  "description": "Creates and populates a subjects directory for use with recon-all from SAMSEG outputs.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/samseg2recon"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject identifier"
+    },
+    "samseg_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Samseg Directory",
+      "description": "Output directory from samseg or samseg-long. Defaults to subject/mri/samseg if not supplied"
+    },
+    "no_cc": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Corpus Callosum Segmentation",
+      "description": "Do not do corpus callosum segmentation"
+    },
+    "fill": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Samseg Fill",
+      "description": "Use samseg to create the filled.mgz used for tessellation"
+    },
+    "normalization2": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normalization to Norm",
+      "description": "Seg brain.mgz to norm.mgz"
+    },
+    "uchar": {
+      "type": "boolean",
+      "default": false,
+      "title": "Convert to Uchar",
+      "description": "Convert to uchar"
+    },
+    "no_keep_exc": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Extracerebral Kept",
+      "description": "Do not keep extracerebral segmentations"
+    },
+    "long_tp": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Longitudinal Time Point",
+      "description": "Process specific time point (TP) number from samsegdir"
+    },
+    "base": {
+      "type": "boolean",
+      "default": false,
+      "title": "Process Base",
+      "description": "Process base, will find folder called base in samsegdir"
+    },
+    "mask_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brain Mask File",
+      "description": "Use provided mask as brainmask instead of computing from seg"
+    },
+    "from_recon_all": {
+      "type": "boolean",
+      "default": false,
+      "title": "Execution from Recon-all",
+      "description": "Indicates execution from recon-all, preventing overwrite of rawavg.mgz and orig.mgz"
+    },
+    "force_update": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force Update",
+      "description": "Force update of the subject directory"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject"
+  ]
+}

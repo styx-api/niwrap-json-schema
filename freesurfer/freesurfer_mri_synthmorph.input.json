@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_synthmorph",
+  "description": "SynthMorph is a deep-learning tool for brain-specific MRI image registration without preprocessing.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_synthmorph"
+    },
+    "moving_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Moving Image",
+      "description": "The moving input image, which will be registered to the fixed image."
+    },
+    "fixed_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Fixed Image",
+      "description": "The fixed input image, which is used as the reference for registration."
+    },
+    "moved_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Moved Output Image",
+      "description": "The resulting image after registration."
+    },
+    "transform_output": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Transform",
+      "description": "Output transform file for registration. Can be a text file for linear or an image file for deformable registration."
+    },
+    "header_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Header Only Flag",
+      "description": "Adjust the voxel-to-world matrix instead of resampling. Linear registration only."
+    },
+    "transformation_model": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "deform",
+            "affine",
+            "rigid"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transformation Model",
+      "description": "Specifies the registration transformation model. Options include 'deform', 'affine', and 'rigid'."
+    },
+    "init_transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Transform",
+      "description": "Initial linear transform for registration."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Threads",
+      "description": "Number of TensorFlow threads to utilize. Defaults to the number of cores."
+    },
+    "gpu_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use GPU",
+      "description": "Utilize the GPU specified by CUDA_VISIBLE_DEVICES or GPU 0 if unset or empty."
+    },
+    "smooth": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smoothness",
+      "description": "Regularization parameter for deformable registration. Higher values indicate smoother displacement fields."
+    },
+    "extent": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Extent",
+      "description": "Isotropic extent of the registration space in unit voxels."
+    },
+    "model_weights": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model Weights",
+      "description": "Alternative model weights as an H5 file."
+    },
+    "inspect_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inspect Directory",
+      "description": "Save model inputs resampled into network space for inspection."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "moving_image",
+    "fixed_image"
+  ]
+}

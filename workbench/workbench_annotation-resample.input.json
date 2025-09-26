@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "annotation-resample",
+  "description": "Resample an annotation file to different meshes.\n\nResample an annotation file from the source mesh to the target mesh.\n\nOnly annotations in surface space are modified, no changes are made to annotations in other spaces.  The -surface-pair option may be repeated for additional structures used by surface space annotations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/annotation-resample"
+    },
+    "annotation_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "annotation_in",
+      "description": "the annotation file to resample"
+    },
+    "annotation_out": {
+      "type": "string",
+      "title": "annotation_out",
+      "description": "name of resampled annotation file"
+    },
+    "surface_pair": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "surface_pair"
+              },
+              "source_surface": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "source_surface",
+                "description": "the midthickness surface of the current mesh the annotations use"
+              },
+              "target_surface": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "target_surface",
+                "description": "the midthickness surface of the mesh the annotations should be transferred to"
+              }
+            },
+            "additionalProperties": false,
+            "title": "surface_pair",
+            "description": "pair of surfaces for resampling surface annotations for one structure",
+            "required": [
+              "source_surface",
+              "target_surface"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "surface_pair",
+      "description": "pair of surfaces for resampling surface annotations for one structure"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "annotation_in",
+    "annotation_out"
+  ]
+}

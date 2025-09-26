@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_gcut",
+  "description": "Skull stripping algorithm based on graph cuts.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_gcut"
+    },
+    "wmmask_110": {
+      "type": "boolean",
+      "default": false,
+      "title": "White matter mask flag",
+      "description": "Use voxels with intensity 110 as white matter mask (when applied on T1.mgz, FreeSurfer only)"
+    },
+    "mult_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mult filename",
+      "description": "Intersect the skull-stripped 'in_filename' and an existing skull-stripped volume specified by 'filename', storing the result in 'out_filename'."
+    },
+    "threshold_value": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold value",
+      "description": "Set threshold to value (%) of WM intensity, where the value should be >0 and <1; defaults to 0.40."
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input brain volume file, e.g. T1.mgz"
+    },
+    "outfile": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output file name, e.g. brainmask.auto.mgz"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "infile",
+    "outfile"
+  ]
+}

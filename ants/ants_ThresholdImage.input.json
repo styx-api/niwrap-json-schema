@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ThresholdImage",
+  "description": "Image thresholding utility that applies different thresholding techniques to an input image. It can use fixed thresholds, Otsu method, or K-means for thresholding.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/ThresholdImage"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "title": "Image Dimension",
+      "description": "The dimension of the input image."
+    },
+    "image_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "The input image file to be thresholded."
+    },
+    "out_image": {
+      "type": "string",
+      "title": "Output Image",
+      "description": "The output image file after thresholding."
+    },
+    "threshlo": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold Low",
+      "description": "The lower threshold value for fixed thresholding."
+    },
+    "threshhi": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold High",
+      "description": "The upper threshold value for fixed thresholding."
+    },
+    "inside_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inside Value",
+      "description": "The pixel value to be used inside the threshold range."
+    },
+    "outside_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outside Value",
+      "description": "The pixel value to be used outside the threshold range."
+    },
+    "otsu_number_of_thresholds": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Otsu Number of Thresholds",
+      "description": "Number of thresholds to use when applying the Otsu method."
+    },
+    "kmeans_number_of_thresholds": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "K-means Number of Thresholds",
+      "description": "Number of thresholds to use when applying the K-means method."
+    },
+    "mask_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Image",
+      "description": "Optional mask image for the thresholding operation."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "image_in",
+    "out_image"
+  ]
+}

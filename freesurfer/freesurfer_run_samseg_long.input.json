@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "run_samseg_long",
+  "description": "Longitudinal image segmentation using SAMSEG.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/run_samseg_long"
+    },
+    "timepoint": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Timepoint",
+      "description": "Configure a timepoint with multiple inputs."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output Directory",
+      "description": "Output directory."
+    },
+    "lesion": {
+      "type": "boolean",
+      "default": false,
+      "title": "Lesion Segmentation Flag",
+      "description": "Enable lesion segmentation (requires tensorflow)."
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lesion Threshold",
+      "description": "Lesion threshold for final segmentation. Requires lesion segmentation."
+    },
+    "samples": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Samples",
+      "description": "Number of samples for lesion segmentation. Requires lesion segmentation."
+    },
+    "burnin": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Burn-in Samples",
+      "description": "Number of burn-in samples for lesion segmentation. Requires lesion segmentation."
+    },
+    "lesion_mask_structure": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lesion Mask Structure",
+      "description": "Intensity mask brain structure. Requires lesion segmentation."
+    },
+    "lesion_mask_pattern": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lesion Mask Pattern",
+      "description": "Lesion mask list: -1 below lesion mask structure mean, +1 above, 0 no mask. Requires lesion segmentation."
+    },
+    "mode": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mode",
+      "description": "Output basenames for the input image mode."
+    },
+    "atlas": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atlas Directory",
+      "description": "Point to an alternative atlas directory."
+    },
+    "deformation_hyperprior": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Deformation Hyperprior",
+      "description": "Strength of the latent deformation hyperprior."
+    },
+    "gmm_hyperprior": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GMM Hyperprior",
+      "description": "Strength of the latent GMM hyperprior."
+    },
+    "save_warp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Warp Flag",
+      "description": "Save the image->template warp fields."
+    },
+    "save_mesh": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Mesh Flag",
+      "description": "Save the final mesh of each timepoint in template space."
+    },
+    "save_posteriors": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Save Posteriors",
+      "description": "Save posterior volumes to the 'posteriors' subdirectory."
+    },
+    "pallidum_separate": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pallidum Separate Flag",
+      "description": "Move pallidum outside of global white matter class. Use with T2/flair."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "Number of threads to use. Defaults to OMP_NUM_THREADS or 1."
+    },
+    "tp_to_base_transform": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "TP to Base Transform",
+      "description": "Transformation file for each time point to base."
+    },
+    "force_different_resolutions": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force Different Resolutions Flag",
+      "description": "Force run even if time points have different resolutions."
+    },
+    "history": {
+      "type": "boolean",
+      "default": false,
+      "title": "History Flag",
+      "description": "Save history."
+    },
+    "showfigs": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Figures Flag",
+      "description": "Show figures during run."
+    },
+    "movie": {
+      "type": "boolean",
+      "default": false,
+      "title": "Movie Flag",
+      "description": "Show history as arrow key controlled time sequence."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "timepoint",
+    "output"
+  ]
+}

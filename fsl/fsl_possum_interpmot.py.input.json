@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "possum_interpmot.py",
+  "description": "Position Interpolation for Movers and Shakers",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/possum_interpmot.py"
+    },
+    "motion_type": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2,
+      "title": "Motion type",
+      "description": "Type of motion: 0 for continuous, 1 for between slices, 2 for between volumes"
+    },
+    "tr": {
+      "type": "number",
+      "title": "Repetition time (TR)",
+      "description": "Repetition time in seconds"
+    },
+    "tr_slice": {
+      "type": "number",
+      "title": "Slice repetition time (TR Slice)",
+      "description": "Slice repetition time in seconds"
+    },
+    "nslices": {
+      "type": "integer",
+      "title": "Number of slices",
+      "description": "Number of slices"
+    },
+    "nvols": {
+      "type": "integer",
+      "title": "Number of volumes",
+      "description": "Number of volumes"
+    },
+    "custom_motion_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Custom motion file",
+      "description": "Custom motion file"
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Output file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "motion_type",
+    "tr",
+    "tr_slice",
+    "nslices",
+    "nvols",
+    "custom_motion_file",
+    "output_file"
+  ]
+}

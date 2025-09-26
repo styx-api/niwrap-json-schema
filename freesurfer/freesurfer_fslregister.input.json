@@ -1,0 +1,299 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslregister",
+  "description": "Registers a volume to its FreeSurfer anatomical using FSL's FLIRT and creates a FreeSurfer register.dat file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/fslregister"
+    },
+    "subjid": {
+      "type": "string",
+      "title": "Subject ID",
+      "description": "Id of the subject as found in SUBJECTS_DIR."
+    },
+    "mov_vol": {
+      "type": "string",
+      "title": "Movable Volume",
+      "description": "Volume identifier of the movable volume."
+    },
+    "reg_file": {
+      "type": "string",
+      "title": "Registration File",
+      "description": "Output registration file."
+    },
+    "fsl_matrix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FSL Matrix",
+      "description": "Output registration matrix in FSL format."
+    },
+    "init_fsl_matrix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial FSL Matrix",
+      "description": "Supply initial FSL matrix file."
+    },
+    "no_init_xfm": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Init XFM",
+      "description": "Do not initialize based on header geometry."
+    },
+    "niters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FLIRT Iterations",
+      "description": "Number of iterations for FLIRT."
+    },
+    "dof": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Degrees of Freedom",
+      "description": "Degrees of freedom in the FLIRT registration."
+    },
+    "bins": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FLIRT Bins",
+      "description": "Number of bins for FLIRT."
+    },
+    "cost": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FLIRT Cost",
+      "description": "Cost function for FLIRT."
+    },
+    "max_angle": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FLIRT Max Angle",
+      "description": "Maximum search angle for FLIRT."
+    },
+    "no_new_schedule": {
+      "type": "boolean",
+      "default": false,
+      "title": "No New Schedule",
+      "description": "Disable new schedule in FLIRT."
+    },
+    "no_allow_swap": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Allow Swap",
+      "description": "Do not allow swap dimension of positive determinant input volumes."
+    },
+    "no_trans": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Translation",
+      "description": "Do not perform translation-only registration prior to full."
+    },
+    "bet_mov": {
+      "type": "boolean",
+      "default": false,
+      "title": "BET Mov",
+      "description": "Perform brain extraction on movable volume."
+    },
+    "bet_fvalue": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "BET f Value",
+      "description": "f value for BET."
+    },
+    "bet_func": {
+      "type": "boolean",
+      "default": false,
+      "title": "BET Function",
+      "description": "Run betfunc instead of bet."
+    },
+    "bet_ref": {
+      "type": "boolean",
+      "default": false,
+      "title": "BET Ref",
+      "description": "Perform brain extraction on reference volume."
+    },
+    "frame": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Frame Number",
+      "description": "Frame number for registration."
+    },
+    "mid_frame": {
+      "type": "boolean",
+      "default": false,
+      "title": "Middle Frame",
+      "description": "Use the middle frame of the volume."
+    },
+    "freesurfer_volume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FreeSurfer Volume",
+      "description": "Use FreeSurfer volid as reference volume."
+    },
+    "template_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template Output",
+      "description": "Save template."
+    },
+    "output_volume": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Volume",
+      "description": "Have FLIRT reslice movable volume to target."
+    },
+    "verbose": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbose Level",
+      "description": "FLIRT verbosity level."
+    },
+    "tmp_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Temporary Directory",
+      "description": "Temporary directory to use."
+    },
+    "no_cleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cleanup",
+      "description": "Do not delete temporary files."
+    },
+    "no_log": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Log",
+      "description": "Do not produce a log file."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Print version and exit."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Print help and exit."
+    },
+    "lta_format": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "LTA Format",
+      "description": "Output registration in LTA format."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subjid",
+    "mov_vol",
+    "reg_file"
+  ]
+}

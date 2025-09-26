@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dsetstat2p",
+  "description": "Converts a statistic to a p-value with reference to a particular dataset",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/dsetstat2p"
+    },
+    "dataset": {
+      "type": "string",
+      "title": "Input dataset",
+      "description": "Specify a dataset DDD and, if it has multiple sub-bricks, the [i]th subbrick with the statistic of interest MUST be selected explicitly; note the use of quotation marks around the brick selector (because of the square-brackets). Note that 'i' can be either a number of a string label selector."
+    },
+    "statval": {
+      "type": "number",
+      "minimum": 0,
+      "title": "Stat value",
+      "description": "Input stat-value S, which MUST be in the interval [0, infinity)."
+    },
+    "bisided": {
+      "type": "boolean",
+      "default": false,
+      "title": "Bisided flag",
+      "description": "Choose one-sided or bi-sided/two-sided testing"
+    },
+    "two_sided": {
+      "type": "boolean",
+      "default": false,
+      "title": "Two-sided flag",
+      "description": "Choose one-sided or bi-sided/two-sided testing"
+    },
+    "one_sided": {
+      "type": "boolean",
+      "default": false,
+      "title": "One-sided flag",
+      "description": "Choose one-sided or bi-sided/two-sided testing"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet flag",
+      "description": "An optional flag so that output ONLY the final statistic value output to standard output; this can be then be viewed, redirected to a text file or saved as a shell variable. (Default: display supplementary text.)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset",
+    "statval"
+  ]
+}

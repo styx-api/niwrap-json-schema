@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsMotionCorrStats",
+  "description": "Create summary measures of the parameters that are output by antsMotionCorr. Currently only works for linear transforms. Outputs the mean and max displacements for the voxels within a provided mask, at each time point. By default the displacements are relative to the reference space, but the framewise option may be used to provide displacements between consecutive time points.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsMotionCorrStats"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask image",
+      "description": "Mask image - compute displacements within mask."
+    },
+    "moco_params": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Motion correction parameters",
+      "description": "Motion correction parameters from antsMotionCorr."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Specify the output file."
+    },
+    "transform_index": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform index",
+      "description": "Specify the index for a 3D transform to output."
+    },
+    "framewise": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Framewise stats",
+      "description": "Do framewise summary stats."
+    },
+    "spatial_map": {
+      "type": "boolean",
+      "default": false,
+      "title": "Spatial map",
+      "description": "Output image of displacement magnitude."
+    },
+    "timeseries_displacement": {
+      "type": "boolean",
+      "default": false,
+      "title": "Timeseries displacement",
+      "description": "Output 4d time-series image of displacement magnitude."
+    },
+    "help": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Help",
+      "description": "Print the help menu. Short version with -h."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "mask",
+    "moco_params",
+    "output"
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_spherical_average",
+  "description": "This tool adds a template into an average surface in FreeSurfer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_spherical_average"
+    },
+    "which": {
+      "type": "string",
+      "enum": [
+        "coords",
+        "label",
+        "vals",
+        "curv",
+        "area"
+      ],
+      "title": "Which type",
+      "description": "Specifies the type, one of: coords, label, vals, curv, or area."
+    },
+    "fname": {
+      "type": "string",
+      "title": "File name",
+      "description": "Input file name."
+    },
+    "hemi": {
+      "type": "string",
+      "enum": [
+        "lh",
+        "rh"
+      ],
+      "title": "Hemisphere",
+      "description": "Hemisphere: one of lh or rh."
+    },
+    "spherical_surf": {
+      "type": "string",
+      "title": "Spherical Surface",
+      "description": "The spherical surface file."
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Subjects",
+      "description": "List of subjects."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output",
+      "description": "Output file or directory."
+    },
+    "segment": {
+      "type": "boolean",
+      "default": false,
+      "title": "Segment Flag",
+      "description": "Only use largest connected component of label."
+    },
+    "normalize": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normalize Flag",
+      "description": "Normalize output so it can be interpreted as a probability."
+    },
+    "orig": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Original Surface Name",
+      "description": "Use <name> as original surface position; default=orig."
+    },
+    "output_subject_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Subject Name",
+      "description": "Use <output subject name> as the space to write the results in instead of the last subject given."
+    },
+    "output_subject_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Subject Directory",
+      "description": "Use <output subject dir> as the subjects dir for the output subject."
+    },
+    "subjects_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Set the subjects directory."
+    },
+    "average_area": {
+      "type": "boolean",
+      "default": false,
+      "title": "Average Area Flag",
+      "description": "Compute threshold for label that will give the average label approximately the average surface area."
+    },
+    "summary_statistics": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Summary Statistics",
+      "description": "Generate summary statistics and write them into sigavg<cond #>-<hemi>.w and sigvar<cond #>-<hemi>.w."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "which",
+    "fname",
+    "hemi",
+    "spherical_surf",
+    "subjects",
+    "output"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SetSpacing",
+  "description": "A tool to set the spacing of an image in each dimension.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/SetSpacing"
+    },
+    "dimension": {
+      "type": "integer",
+      "title": "Dimension",
+      "description": "The dimensionality of the image (e.g., 2 or 3)."
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "The input image file in HDR format."
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "The output image file in NII format."
+    },
+    "spacing": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 3,
+      "title": "Spacing",
+      "description": "Spacing values for each dimension. Requires SpacingX, SpacingY, and optionally SpacingZ."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dimension",
+    "input_file",
+    "output_file",
+    "spacing"
+  ]
+}

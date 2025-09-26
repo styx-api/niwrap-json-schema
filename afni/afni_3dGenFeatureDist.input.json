@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dGenFeatureDist",
+  "description": "3dGenFeatureDist produces histogram volume (hives) from input data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dGenFeatureDist"
+    },
+    "features_string": {
+      "type": "string",
+      "title": "Features String",
+      "description": "FEATURES_STRING is a semicolon delimited string of features."
+    },
+    "class_string": {
+      "type": "string",
+      "title": "Class String",
+      "description": "CLASS_STRING is a semicolon delimited string of class labels."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "PREF is the prefix for all output volumes that are not debugging related."
+    },
+    "overwrite": {
+      "type": "boolean",
+      "default": false,
+      "title": "Overwrite Flag",
+      "description": "Automatically overwrite existing output."
+    },
+    "debug_level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Level",
+      "description": "Debugging level."
+    },
+    "other": {
+      "type": "boolean",
+      "default": false,
+      "title": "Other Flag",
+      "description": "Add histograms for an 'OTHER' class that has a uniform pdf."
+    },
+    "no_other": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Other Flag",
+      "description": "Opposite of -OTHER."
+    },
+    "samp": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sample Voxels",
+      "description": "Specify which voxels belong to each class of interest."
+    },
+    "sig": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Signal Volumes",
+      "description": "Specify volumes that define the features."
+    },
+    "hspec": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Histogram Specifications",
+      "description": "Set histogram parameters for a specific feature."
+    },
+    "labeltable": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Table",
+      "description": "Specify the label table."
+    },
+    "show_histograms": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Show Histograms",
+      "description": "Show specified histograms and quit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "features_string",
+    "class_string"
+  ]
+}

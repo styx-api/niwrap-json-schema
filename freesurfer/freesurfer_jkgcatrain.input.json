@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "jkgcatrain",
+  "description": "Jackknife training of GCA using existing output from gcatrain.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/jkgcatrain"
+    },
+    "gca_directory": {
+      "type": "string",
+      "title": "GCA Directory",
+      "description": "Output directory from gcatrain."
+    },
+    "iteration_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Iteration Number",
+      "description": "Iteration number (usually 2)."
+    },
+    "num_threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Threads",
+      "description": "Number of threads to use."
+    },
+    "no_submit": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Submit Flag",
+      "description": "Run serially, do not use pbsubmit."
+    },
+    "mail_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mail Flag",
+      "description": "Mail to user when jobs are pbsubmitted or finished."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "gca_directory"
+  ]
+}

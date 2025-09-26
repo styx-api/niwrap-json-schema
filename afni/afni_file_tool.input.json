@@ -1,0 +1,326 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "file_tool",
+  "description": "Program to display or modify sections of a file",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/file_tool"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Show help information"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Show version information"
+    },
+    "hist": {
+      "type": "boolean",
+      "default": false,
+      "title": "Modification History",
+      "description": "Show the program's modification history"
+    },
+    "debug": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Level",
+      "description": "Print extra info along the way, default is 0, max is 2"
+    },
+    "infiles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Files",
+      "description": "Specify input files to display or modify"
+    },
+    "ge_all": {
+      "type": "boolean",
+      "default": false,
+      "title": "GE All",
+      "description": "Display GE header and extras info"
+    },
+    "ge_header": {
+      "type": "boolean",
+      "default": false,
+      "title": "GE Header",
+      "description": "Display GE header info"
+    },
+    "ge_extras": {
+      "type": "boolean",
+      "default": false,
+      "title": "GE Extras",
+      "description": "Display extra GE image info"
+    },
+    "ge_uv17": {
+      "type": "boolean",
+      "default": false,
+      "title": "GE UV17",
+      "description": "Display the value of uv17 (the run #)"
+    },
+    "ge_run": {
+      "type": "boolean",
+      "default": false,
+      "title": "GE Run",
+      "description": "Display the value of uv17 (the run #)"
+    },
+    "ge_off": {
+      "type": "boolean",
+      "default": false,
+      "title": "GE Offsets",
+      "description": "Display file offsets for various fields"
+    },
+    "ge4_all": {
+      "type": "boolean",
+      "default": false,
+      "title": "GEMS 4.x All",
+      "description": "Display GEMS 4.x series and image headers"
+    },
+    "ge4_image": {
+      "type": "boolean",
+      "default": false,
+      "title": "GEMS 4.x Image Header",
+      "description": "Display GEMS 4.x image header"
+    },
+    "ge4_series": {
+      "type": "boolean",
+      "default": false,
+      "title": "GEMS 4.x Series Header",
+      "description": "Display GEMS 4.x series header"
+    },
+    "ge4_study": {
+      "type": "boolean",
+      "default": false,
+      "title": "GEMS 4.x Study Header",
+      "description": "Display GEMS 4.x study header"
+    },
+    "def_ana_hdr": {
+      "type": "boolean",
+      "default": false,
+      "title": "Define ANALYZE Header",
+      "description": "Display the definition of an ANALYZE header"
+    },
+    "diff_ana_hdrs": {
+      "type": "boolean",
+      "default": false,
+      "title": "Diff ANALYZE Headers",
+      "description": "Display field differences between 2 headers"
+    },
+    "disp_ana_hdr": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display ANALYZE Header",
+      "description": "Display ANALYZE headers"
+    },
+    "hex": {
+      "type": "boolean",
+      "default": false,
+      "title": "Hexadecimal Display",
+      "description": "Display field values in hexadecimal"
+    },
+    "mod_ana_hdr": {
+      "type": "boolean",
+      "default": false,
+      "title": "Modify ANALYZE Header",
+      "description": "Modify ANALYZE headers"
+    },
+    "mod_field": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Modify Field",
+      "description": "Specify a field and value(s) to modify"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Specify an output filename"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "default": false,
+      "title": "Overwrite",
+      "description": "Specify to overwrite the input file(s)"
+    },
+    "show_bad_all": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Bad All",
+      "description": "Show lines with whitespace after '\\'"
+    },
+    "show_bad_backslash": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Bad Backslash",
+      "description": "Show lines with whitespace after '\\'"
+    },
+    "show_bad_char": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Bad Characters",
+      "description": "Show any non-printable characters"
+    },
+    "show_file_type": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show File Type",
+      "description": "Print file type of UNIX, Mac or DOS"
+    },
+    "fix_rich_quotes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fix Rich Quotes",
+      "description": "Replace rich-text quotes with ASCII"
+    },
+    "test": {
+      "type": "boolean",
+      "default": false,
+      "title": "Test",
+      "description": "Short for -show_bad_all. Check script files for known issues"
+    },
+    "length": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Length",
+      "description": "Specify the number of bytes to print/modify"
+    },
+    "mod_data": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Modify Data",
+      "description": "Specify a string to modify the data to"
+    },
+    "mod_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Modify Type",
+      "description": "Specify the data type to write to the file"
+    },
+    "offset": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Offset",
+      "description": "Specify the offset into each file"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet",
+      "description": "Do not output header information"
+    },
+    "disp_hex": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Hex",
+      "description": "Display bytes in hex"
+    },
+    "disp_hex1": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Hex 1",
+      "description": "Display bytes in hex"
+    },
+    "disp_hex2": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Hex 2",
+      "description": "Display 2-byte integers in hex"
+    },
+    "disp_hex4": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Hex 4",
+      "description": "Display 4-byte integers in hex"
+    },
+    "disp_int2": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Int 2",
+      "description": "Display 2-byte integers"
+    },
+    "disp_int4": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Int 4",
+      "description": "Display 4-byte integers"
+    },
+    "disp_real4": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Real 4",
+      "description": "Display 4-byte real numbers"
+    },
+    "swap_bytes": {
+      "type": "boolean",
+      "default": false,
+      "title": "Swap Bytes",
+      "description": "Use byte-swapping on numbers"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "infiles"
+  ]
+}

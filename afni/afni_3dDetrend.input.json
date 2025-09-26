@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dDetrend",
+  "description": "This program removes components from voxel time series using linear least squares",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dDetrend"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "In file",
+      "description": "Input file to 3ddetrend."
+    },
+    "outputtype": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "NIFTI",
+            "AFNI",
+            "NIFTI_GZ"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outputtype",
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in_file"
+  ]
+}

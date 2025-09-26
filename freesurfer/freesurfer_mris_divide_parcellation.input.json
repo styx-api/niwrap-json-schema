@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_divide_parcellation",
+  "description": "Divides one or more parcellations into divisions perpendicular to the long axis of the label.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_divide_parcellation"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "The subject identifier."
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "The hemisphere identifier, e.g., left (lh) or right (rh)."
+    },
+    "sourceannot": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Source Annotation",
+      "description": "The source annotation file."
+    },
+    "splitfile_or_areathresh": {
+      "type": "string",
+      "title": "Splitfile or Area Threshold",
+      "description": "Either a splitfile specifying divisions or an area threshold in mm^2."
+    },
+    "outannot": {
+      "type": "string",
+      "title": "Output Annotation",
+      "description": "The output annotation file name."
+    },
+    "scale": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale",
+      "description": "Specify offset scaling for rgb values (default=20)."
+    },
+    "label_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Name",
+      "description": "Only process the label <label name> (not implemented yet)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject",
+    "hemi",
+    "sourceannot",
+    "splitfile_or_areathresh",
+    "outannot"
+  ]
+}

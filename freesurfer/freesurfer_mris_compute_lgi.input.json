@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_compute_lgi",
+  "description": "Computes local measurements of gyrification at thousands of points over the entire cortical surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_compute_lgi"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input surface file",
+      "description": "Input surface file, typically lh.pial or rh.pial"
+    },
+    "close_sphere_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Close sphere size",
+      "description": "Use sphere of specified size in mm for morph closing operation (default: 15mm)"
+    },
+    "smooth_iters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smooth iterations",
+      "description": "Smooth outer-surface specified number of iterations (default: 30)"
+    },
+    "step_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Step size",
+      "description": "Skip every specified number of vertices when computing lGI (default: 100)"
+    },
+    "echo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Echo flag",
+      "description": "Enable command echo, for debug"
+    },
+    "dontrun": {
+      "type": "boolean",
+      "default": false,
+      "title": "Don't run flag",
+      "description": "Just show commands (don't run them)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_surface"
+  ]
+}

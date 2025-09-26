@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cifti-merge",
+  "description": "Merge or split on series, scalar, or label dimensions.\n\nGiven input CIFTI files for which mappings along the selected direction are the same type, all either series, scalars, or labels, and the other dimensions are index-compatible, this command concatenates the data in the specified indices/ranges along the selected direction (by default, on typical 2D cifti, concatenate horizontally, so rows become longer).  The direction can be either an integer starting from 1, or the strings 'ROW' or 'COLUMN'.\n\nExample: wb_command -cifti-merge out.dtseries.nii -cifti first.dtseries.nii -index 1 -cifti second.dtseries.nii\n\nThis example would take the first column from first.dtseries.nii, followed by all columns from second.dtseries.nii, and write these columns to out.dtseries.nii.  ",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti-merge"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "output cifti file"
+    },
+    "opt_direction_direction": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_direction_direction",
+      "description": "merge in a direction other than along rows: the dimension to split/concatenate along, default ROW"
+    },
+    "opt_mem_limit_limit_gb": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_mem_limit_limit_gb",
+      "description": "restrict memory used for file reading efficiency: memory limit in gigabytes"
+    },
+    "cifti": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "cifti"
+              },
+              "cifti_in": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "cifti_in",
+                "description": "a cifti file to use data from"
+              },
+              "index": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "@type": {
+                          "const": "index"
+                        },
+                        "index": {
+                          "type": "string",
+                          "title": "index",
+                          "description": "the index number (starting from 1), or name"
+                        },
+                        "up_to": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "@type": {
+                                  "const": "up_to"
+                                },
+                                "last_index": {
+                                  "type": "string",
+                                  "title": "last_index",
+                                  "description": "the number or name of the last index to include"
+                                },
+                                "opt_reverse": {
+                                  "type": "boolean",
+                                  "default": false,
+                                  "title": "opt_reverse",
+                                  "description": "use the range in reverse order"
+                                }
+                              },
+                              "additionalProperties": false,
+                              "title": "up_to",
+                              "description": "use an inclusive range of indices",
+                              "required": [
+                                "last_index"
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "default": null,
+                          "title": "up_to",
+                          "description": "use an inclusive range of indices"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "title": "index",
+                      "description": "select a single index to use",
+                      "required": [
+                        "index"
+                      ]
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "index",
+                "description": "select a single index to use"
+              }
+            },
+            "additionalProperties": false,
+            "title": "cifti",
+            "description": "specify an input cifti file",
+            "required": [
+              "cifti_in"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "cifti",
+      "description": "specify an input cifti file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti_out"
+  ]
+}

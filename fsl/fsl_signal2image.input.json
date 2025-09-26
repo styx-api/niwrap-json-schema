@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "signal2image",
+  "description": "A tool for converting MR signal data to images using specified k-space coordinates and pulse sequences.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/signal2image"
+    },
+    "pulse_sequence": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Pulse Sequence File",
+      "description": "8-column pulse_sequence matrix. Expects to find all other pulse sequence files in the same directory."
+    },
+    "input_signal": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Signal File",
+      "description": "Input signal file."
+    },
+    "output_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Image File",
+      "description": "Output image file."
+    },
+    "kspace_coordinates": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "K-space Coordinates File",
+      "description": "K-space coordinates file."
+    },
+    "output_kspace": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output K-space File",
+      "description": "Output k-space file."
+    },
+    "abs_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Absolute Magnitude and Phase Flag",
+      "description": "Save absolute magnitude and phase."
+    },
+    "homodyne_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Homodyne Reconstruction Flag",
+      "description": "Do the homodyne reconstruction."
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Switch on diagnostic messages."
+    },
+    "apodize_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Apodization Flag",
+      "description": "Do apodization."
+    },
+    "cutoff": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Apodization Cutoff",
+      "description": "Apodization with this cutoff; default 100."
+    },
+    "rolloff": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Apodization Rolloff",
+      "description": "Apodization with this rolloff; default 10."
+    },
+    "save_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save Window as ASCII Matrix Flag",
+      "description": "Save window as ASCII matrix (DEBUG!)"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Display help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "pulse_sequence"
+  ]
+}

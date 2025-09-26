@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_z2p",
+  "description": "Converts Z-statistic volumes to P-value volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_z2p"
+    },
+    "z_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Z Volume",
+      "description": "Z volume file"
+    },
+    "p_volume": {
+      "type": "string",
+      "title": "P Volume",
+      "description": "P volume file"
+    },
+    "sig_volume": {
+      "type": "string",
+      "title": "Significance Volume",
+      "description": "Significance volume file"
+    },
+    "mask_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Volume",
+      "description": "Mask volume file"
+    },
+    "two_sided": {
+      "type": "boolean",
+      "default": false,
+      "title": "Two-sided Flag",
+      "description": "Assume a two-sided, unsigned test (keeps sign of input)."
+    },
+    "one_sided": {
+      "type": "boolean",
+      "default": false,
+      "title": "One-sided Flag",
+      "description": "Assume a one-sided, signed test."
+    },
+    "signed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Signed Flag",
+      "description": "Two-sided/signed p-value (p = 2*(1-p))."
+    },
+    "feat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Feat Directory",
+      "description": "Convert all z-stats and zf-stats to sigs in the specified directory."
+    },
+    "feat_format": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Feat Format",
+      "description": "Use specified format for output (e.g., nii, nii.gz, mgh)."
+    },
+    "nii_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "NIfTI Format Flag",
+      "description": "Use NIfTI output format."
+    },
+    "niigz_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "NIfTI GZ Format Flag",
+      "description": "Use compressed NIfTI output format."
+    },
+    "mgh_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "MGH Format Flag",
+      "description": "Use MGH output format."
+    },
+    "mgz_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "MGZ Format Flag",
+      "description": "Use MGZ output format."
+    },
+    "img_format": {
+      "type": "boolean",
+      "default": false,
+      "title": "IMG Format Flag",
+      "description": "Use Analyze output format."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Turn on debugging."
+    },
+    "check_opts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Options Flag",
+      "description": "Don't run anything, just check options and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "z_volume",
+    "p_volume",
+    "sig_volume"
+  ]
+}

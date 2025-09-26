@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "apas2aseg",
+  "description": "Converts aparc+aseg.mgz into aseg.mgz-like format by replacing specific cortical segmentations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/apas2aseg"
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject ID",
+      "description": "Subject identifier specifying the directory where the subject's data is stored."
+    },
+    "input_aparc_aseg": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input aparc+aseg file",
+      "description": "Input aparc+aseg.mgz file to be converted."
+    },
+    "output_seg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output segmentation file",
+      "description": "Output file for the new segmentation (e.g., apas-aseg.mgz)."
+    }
+  },
+  "additionalProperties": false
+}

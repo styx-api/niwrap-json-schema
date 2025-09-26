@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surface-flip-normals",
+  "description": "Flip all tiles on a surface.\n\nFlips all triangles on a surface, resulting in surface normals being flipped the other direction (inward vs outward).  If you transform a surface with an affine that has negative determinant, or a warpfield that similarly flips the surface, you may end up with a surface that has normals pointing inwards, which may have display problems.  Using this command will solve that problem.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/surface-flip-normals"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface",
+      "description": "the surface to flip the normals of"
+    },
+    "surface_out": {
+      "type": "string",
+      "title": "surface_out",
+      "description": "the output surface"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface",
+    "surface_out"
+  ]
+}

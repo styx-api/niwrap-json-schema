@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "orientLAS",
+  "description": "Convert image to LAS orientation",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/orientLAS"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "Input image in NIfTI format"
+    },
+    "output_image": {
+      "type": "string",
+      "title": "Output Image",
+      "description": "Output image in NIfTI format with LAS orientation"
+    },
+    "check": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Flag",
+      "description": "Check the match of input and output images using tkregister, and for diffusion data, run dtifit and show tensors with fslview"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image",
+    "output_image"
+  ]
+}

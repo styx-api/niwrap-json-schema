@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TileImages",
+  "description": "TileImages allows assembling images into a multi-dimensional array, producing a single output image. The input images must have a dimension less than or equal to the specified output image dimension.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/TileImages"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "title": "Image Dimension",
+      "description": "Dimensionality of the output image."
+    },
+    "output_image": {
+      "type": "string",
+      "title": "Output Image",
+      "description": "The path for the output tiled image."
+    },
+    "layout": {
+      "type": "string",
+      "title": "Layout",
+      "description": "Defines the structure of the tiled output image. The layout dictates the number and arrangement of input images in the output image."
+    },
+    "input_images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "minItems": 1,
+      "title": "Input Images",
+      "description": "Input images to be tiled into the output image. The number of input images should match the layout specification."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "output_image",
+    "layout",
+    "input_images"
+  ]
+}

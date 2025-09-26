@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_transform",
+  "description": "A tool to transform surfaces from one space to another using image transforms.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_transform"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Surface",
+      "description": "Input surface file, e.g., lh.pial."
+    },
+    "transform": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Transform",
+      "description": "Image-to-image transform file, e.g., LTA or M3Z."
+    },
+    "output_surface": {
+      "type": "string",
+      "title": "Output Surface",
+      "description": "Output surface file, e.g., lh.out.pial."
+    },
+    "trx_src": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform Source Image",
+      "description": "Specify the source geometry if the transform was created by MNI/mritotal or FSL/flirt."
+    },
+    "trx_dst": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform Destination Image",
+      "description": "Specify the destination geometry if the transform does not include this information or the path in the M3Z is invalid."
+    },
+    "is_inverse": {
+      "type": "boolean",
+      "default": false,
+      "title": "Inverse Flag",
+      "description": "Use this option when using a transform from destination to source space."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_surface",
+    "transform",
+    "output_surface"
+  ]
+}

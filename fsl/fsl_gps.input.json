@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gps",
+  "description": "Generate set of diffusion gradient directions",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/gps"
+    },
+    "ndir": {
+      "type": "number",
+      "title": "Number of directions",
+      "description": "Number of directions"
+    },
+    "optws": {
+      "type": "boolean",
+      "default": false,
+      "title": "Whole sphere optimization flag",
+      "description": "Perform additional optimisation on the whole sphere (needed for eddy)"
+    },
+    "output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output file name",
+      "description": "Name of output file (default: bvecs#.txt)"
+    },
+    "ranseed": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random seed",
+      "description": "Seed random generator with supplied number"
+    },
+    "init": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initialisation file",
+      "description": "File with bvecs to use as initialisation"
+    },
+    "report": {
+      "type": "boolean",
+      "default": false,
+      "title": "Report initial configuration flag",
+      "description": "Report coulomb forces for initial configuration"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help flag",
+      "description": "Display help message"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ndir"
+  ]
+}

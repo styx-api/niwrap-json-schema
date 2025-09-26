@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_reposition_surface",
+  "description": "Reposition a surface based on the given control points (in JSON format)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_reposition_surface"
+    },
+    "surf": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input surface",
+      "description": "Input surface"
+    },
+    "volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input volume",
+      "description": "Input volume"
+    },
+    "points": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input points",
+      "description": "Input points"
+    },
+    "output": {
+      "type": "string",
+      "title": "Output surface",
+      "description": "Output surface filename"
+    },
+    "size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Size",
+      "description": "Size parameter for repositioning. Default is 1."
+    },
+    "sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sigma",
+      "description": "Sigma. Default is 2.0."
+    },
+    "iterations": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Iterations",
+      "description": "Number of iterations. Default is 1."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surf",
+    "volume",
+    "points",
+    "output"
+  ]
+}

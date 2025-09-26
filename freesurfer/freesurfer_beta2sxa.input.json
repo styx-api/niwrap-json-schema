@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "beta2sxa",
+  "description": "A script to create files for plotting in tkmedit or tksurfer based on tabular data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/beta2sxa"
+    },
+    "beta_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Beta Files",
+      "description": "Input beta files, e.g., data.nii"
+    },
+    "number_of_conditions": {
+      "type": "number",
+      "title": "Number of Conditions",
+      "description": "Number of groups or conditions"
+    },
+    "number_of_per_subjects": {
+      "type": "number",
+      "title": "Number of Per Subjects",
+      "description": "Number of subjects per group"
+    },
+    "sxa_output": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sxa Output",
+      "description": "Output sxa file. Default is h.beta"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "beta_files",
+    "number_of_conditions",
+    "number_of_per_subjects"
+  ]
+}

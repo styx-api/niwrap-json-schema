@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dwigradcheck",
+  "description": "Check the orientation of the diffusion gradient table",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/dwigradcheck"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "The input DWI series to be checked"
+    },
+    "grad": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gradient Table (MRtrix format)",
+      "description": "Provide the diffusion gradient table in MRtrix format"
+    },
+    "fslgrad": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "fslgrad"
+            },
+            "bvecs": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "bvecs",
+              "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used."
+            },
+            "bvals": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "bvals",
+              "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used."
+            }
+          },
+          "additionalProperties": false,
+          "title": "fslgrad",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "required": [
+            "bvecs",
+            "bvals"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "fslgrad",
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used."
+    },
+    "mask_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Image",
+      "description": "Provide a brain mask image"
+    },
+    "number": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "number",
+      "description": "Set the number of tracks to generate for each test"
+    },
+    "export_grad_mrtrix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "export_grad_mrtrix",
+      "description": "export the diffusion-weighted gradient table to file in MRtrix format"
+    },
+    "export_grad_fsl": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "export_grad_fsl"
+            },
+            "bvecs_path": {
+              "type": "string",
+              "title": "bvecs_path",
+              "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+            },
+            "bvals_path": {
+              "type": "string",
+              "title": "bvals_path",
+              "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+            }
+          },
+          "additionalProperties": false,
+          "title": "export_grad_fsl",
+          "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format",
+          "required": [
+            "bvecs_path",
+            "bvals_path"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "export_grad_fsl",
+      "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format"
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cleanup",
+      "description": "Do not delete intermediate files during script execution, and do not delete scratch directory at script completion"
+    },
+    "scratch_dir": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scratch Directory",
+      "description": "Manually specify the path in which to generate the scratch directory"
+    },
+    "continue_scratch_dir": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Continue Scratch Directory",
+      "description": "Continue the script from a previous execution; must provide the scratch directory path"
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Information Messages",
+      "description": "Display information messages"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet Mode",
+      "description": "Do not display information messages or progress status"
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Mode",
+      "description": "Display debugging messages"
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force Overwrite",
+      "description": "Force overwrite of output files"
+    },
+    "nthreads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Threads",
+      "description": "Use this number of threads in multi-threaded applications (set to 0 to disable multi-threading)"
+    },
+    "config": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Config Key Value",
+      "description": "Temporarily set the value of an MRtrix config file entry"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Help",
+      "description": "Display help information and exit"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Display Version",
+      "description": "Display version information and exit"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image"
+  ]
+}

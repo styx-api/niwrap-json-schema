@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "concat_bvars",
+  "description": "Concatenate multiple .bvars files into a single .bvars file",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/concat_bvars"
+    },
+    "output_bvars": {
+      "type": "string",
+      "title": "Output BVARS file",
+      "description": "Output .bvars file"
+    },
+    "input_bvars": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input BVARS files",
+      "description": "List of input .bvars files"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "output_bvars",
+    "input_bvars"
+  ]
+}

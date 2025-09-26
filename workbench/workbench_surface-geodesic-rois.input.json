@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surface-geodesic-rois",
+  "description": "Draw geodesic limited rois at vertices.\n\nFor each vertex in the list file, a column in the output metric is created, and an ROI around that vertex is drawn in that column.  Each metric column will have zeros outside the geodesic distance spacified by <limit>, and by default will have a value of 1.0 inside it.  If the -gaussian option is specified, the values inside the ROI will instead form a gaussian with the specified value of sigma, normalized so that the sum of the nonzero values in the metric column is 1.0.  The <method> argument to -overlap-logic must be one of ALLOW, CLOSEST, or EXCLUDE.  ALLOW is the default, and means that ROIs are treated independently and may overlap.  CLOSEST means that ROIs may not overlap, and that no ROI contains vertices that are closer to a different seed vertex.  EXCLUDE means that ROIs may not overlap, and that any vertex within range of more than one ROI does not belong to any ROI.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/surface-geodesic-rois"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface",
+      "description": "the surface to draw on"
+    },
+    "limit": {
+      "type": "number",
+      "title": "limit",
+      "description": "geodesic distance limit from vertex, in mm"
+    },
+    "vertex_list_file": {
+      "type": "string",
+      "title": "vertex_list_file",
+      "description": "a text file containing the vertices to draw ROIs around"
+    },
+    "metric_out": {
+      "type": "string",
+      "title": "metric_out",
+      "description": "the output metric"
+    },
+    "opt_gaussian_sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_gaussian_sigma",
+      "description": "generate a gaussian kernel instead of a flat ROI: the sigma for the gaussian kernel, in mm"
+    },
+    "opt_overlap_logic_method": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_overlap_logic_method",
+      "description": "how to handle overlapping ROIs, default ALLOW: the method of resolving overlaps"
+    },
+    "opt_names_name_list_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_names_name_list_file",
+      "description": "name the columns from text file: a text file containing column names, one per line"
+    },
+    "opt_corrected_areas_area_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_corrected_areas_area_metric",
+      "description": "vertex areas to use instead of computing them from the surface: the corrected vertex areas, as a metric"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface",
+    "limit",
+    "vertex_list_file",
+    "metric_out"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "imstack",
+  "description": "Stacks up a set of 2D images into one big file (a la MGH).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/imstack"
+    },
+    "image_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Image files",
+      "description": "Input image filenames"
+    },
+    "data_type": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "short",
+            "float"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output data type",
+      "description": "Converts the output data file to be 'type', which is either 'short' or 'float'. The default type is the type of the first image."
+    },
+    "output_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output prefix",
+      "description": "Names the output files to be 'name'.b'type' and 'name'.hdr. The default name is 'obi-wan-kenobi'."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_files"
+  ]
+}

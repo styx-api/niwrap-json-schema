@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cifti-roi-average",
+  "description": "Average rows in a single cifti file.\n\nAverage the rows that are within the specified ROIs, and write the resulting average row to a text file, separated by newlines.  If -cifti-roi is specified, -left-roi, -right-roi, -cerebellum-roi, and -vol-roi must not be specified.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti-roi-average"
+    },
+    "cifti_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "cifti_in",
+      "description": "the cifti file to average rows from"
+    },
+    "text_out": {
+      "type": "string",
+      "title": "text_out",
+      "description": "output text file of the average values"
+    },
+    "opt_cifti_roi_roi_cifti": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_cifti_roi_roi_cifti",
+      "description": "cifti file containing combined rois: the rois as a cifti file"
+    },
+    "opt_left_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_left_roi_roi_metric",
+      "description": "vertices to use from left hemisphere: the left roi as a metric file"
+    },
+    "opt_right_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_right_roi_roi_metric",
+      "description": "vertices to use from right hemisphere: the right roi as a metric file"
+    },
+    "opt_cerebellum_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_cerebellum_roi_roi_metric",
+      "description": "vertices to use from cerebellum: the cerebellum roi as a metric file"
+    },
+    "opt_vol_roi_roi_vol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_vol_roi_roi_vol",
+      "description": "voxels to use: the roi volume file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti_in",
+    "text_out"
+  ]
+}

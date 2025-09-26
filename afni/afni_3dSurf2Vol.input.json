@@ -1,0 +1,282 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dSurf2Vol",
+  "description": "Map data from a surface domain to an AFNI volume domain",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dSurf2Vol"
+    },
+    "spec": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Spec file",
+      "description": "SUMA spec file"
+    },
+    "surface_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Surface volume",
+      "description": "AFNI surface volume dataset"
+    },
+    "surf_a": {
+      "type": "string",
+      "title": "Surface A",
+      "description": "Specify surface A from spec file"
+    },
+    "surf_b": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface B",
+      "description": "Specify surface B from spec file"
+    },
+    "grid_parent": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Grid parent",
+      "description": "AFNI grid parent dataset"
+    },
+    "map_func": {
+      "type": "string",
+      "title": "Map function",
+      "description": "Surface to dataset function"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Prefix for the output dataset"
+    },
+    "surf_xyz_1d": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface XYZ 1D",
+      "description": "1D coordinate file"
+    },
+    "sdata_1d": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface data 1D",
+      "description": "1D sub-surface data file"
+    },
+    "sdata": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface data",
+      "description": "NIML or GIFTI formatted dataset"
+    },
+    "f_steps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filter steps",
+      "description": "Partition segments into this many steps"
+    },
+    "f_index": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filter index type",
+      "description": "Index by points or voxels"
+    },
+    "f_p1_fr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filter p1 fraction",
+      "description": "Offset p1 by a fraction of the length"
+    },
+    "f_pn_fr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filter pn fraction",
+      "description": "Offset pn by a fraction of the length"
+    },
+    "f_p1_mm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filter p1 millimeter",
+      "description": "Offset p1 by a distance in mm"
+    },
+    "f_pn_mm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Filter pn millimeter",
+      "description": "Offset pn by a distance in mm"
+    },
+    "stop_gap": {
+      "type": "boolean",
+      "default": false,
+      "title": "Stop gap flag",
+      "description": "Stop when a zero gap has been hit"
+    },
+    "cmask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset mask",
+      "description": "Command for dataset mask"
+    },
+    "data_expr": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Data expression",
+      "description": "Apply expression to surface input"
+    },
+    "datum": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Data type",
+      "description": "Set data type in output dataset"
+    },
+    "debug": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug level",
+      "description": "Verbose output level"
+    },
+    "dnode": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug node",
+      "description": "Extra output for specified node"
+    },
+    "dvoxel": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug voxel",
+      "description": "Extra output for specified voxel"
+    },
+    "noscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Scale Flag",
+      "description": "No scale factor in output dataset"
+    },
+    "sxyz_orient_as_gpar": {
+      "type": "boolean",
+      "default": false,
+      "title": "Surface XYZ orientation flag",
+      "description": "Assume grid parent orientation for surface xyz"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "spec",
+    "surface_volume",
+    "surf_a",
+    "grid_parent",
+    "map_func",
+    "prefix"
+  ]
+}

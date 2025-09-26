@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surface-modify-sphere",
+  "description": "Change radius and optionally recenter a sphere.\n\nThis command may be useful if you have used -surface-resample to resample a sphere, which can suffer from problems generally not present in -surface-sphere-project-unproject.  If the sphere should already be centered around the origin, using -recenter may still shift it slightly before changing the radius, which is likely to be undesireable.\n\nIf <sphere-in> is not close to spherical, or not centered around the origin and -recenter is not used, a warning is printed.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/surface-modify-sphere"
+    },
+    "sphere_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "sphere_in",
+      "description": "the sphere to modify"
+    },
+    "radius": {
+      "type": "number",
+      "title": "radius",
+      "description": "the radius the output sphere should have"
+    },
+    "sphere_out": {
+      "type": "string",
+      "title": "sphere_out",
+      "description": "the output sphere"
+    },
+    "opt_recenter": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_recenter",
+      "description": "recenter the sphere by means of the bounding box"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "sphere_in",
+    "radius",
+    "sphere_out"
+  ]
+}

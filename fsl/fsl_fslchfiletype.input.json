@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslchfiletype",
+  "description": "Tool to change the file type of an image file or copy it to a new file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fslchfiletype"
+    },
+    "filetype": {
+      "type": "string",
+      "title": "File type",
+      "description": "The type of the file to convert to. Valid values include: ANALYZE, ANALYZE_GZ, NIFTI, NIFTI_GZ, NIFTI_PAIR, NIFTI_PAIR_GZ, NIFTI2, NIFTI2_GZ, NIFTI2_PAIR, NIFTI2_PAIR_GZ."
+    },
+    "filename": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "The name of the input image file."
+    },
+    "filename2": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output file",
+      "description": "The name of the output image file (optional)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "filetype",
+    "filename"
+  ]
+}

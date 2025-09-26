@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dICC",
+  "description": "AFNI Program for IntraClass Correlatin (ICC) Analysis",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dICC"
+    },
+    "model": {
+      "type": "string",
+      "title": "Model structure",
+      "description": "Model structure for all the variables. The expression FORMULA with more than one variable has to be surrounded within quotes. Variable names should be consistent with the ones used in the header of -dataTable."
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output file name",
+      "description": "Name of output file. For AFNI format, provide prefix only, with no view+suffix needed. Filename for NIfTI format should have .nii attached, while file name for surface data is expected to end with .niml.dset."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Path to mask file. Only process voxels inside this mask."
+    },
+    "data_table": {
+      "type": "string",
+      "title": "Data table",
+      "description": "List the data structure with a header as the first line. The first column is reserved with label 'Subj', and the last is reserved for 'InputFile'."
+    },
+    "bounds": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outlier bounds",
+      "description": "Bounds for outlier removal. Provide two numbers: the lower bound (lb) and the upper bound (ub). Input data will be confined within [lb, ub]. Any values beyond the bounds will be treated as missing."
+    },
+    "jobs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of jobs",
+      "description": "Number of jobs for parallel computing. Choose 1 for a single-processor computer."
+    },
+    "qVars": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quantitative variables",
+      "description": "Identify quantitative variables with this option. List should be separated with comma and surrounded within quotes."
+    },
+    "qVarCenters": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quantitative variable centers",
+      "description": "Specify centering values for quantitative variables identified under -qVars. Multiple centers are separated by commas and should be surrounded within quotes."
+    },
+    "subj": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject column name",
+      "description": "Specify the column name that is designated as the measuring entity variable (usually subject)."
+    },
+    "input_file_column": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input file column name",
+      "description": "Specify the last column name that is designated for input files of effect estimate."
+    },
+    "tStat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "t-Statistic column name",
+      "description": "Specify the column name that is designated as the t-statistic."
+    },
+    "dbgArgs": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Args Flag",
+      "description": "Enable R to save the parameters in a file called .3dICC.dbg.AFNI.args in the current directory for debugging."
+    },
+    "cio": {
+      "type": "boolean",
+      "default": false,
+      "title": "C IO Flag",
+      "description": "Use AFNI's C io functions. Default is -cio."
+    },
+    "rio": {
+      "type": "boolean",
+      "default": false,
+      "title": "R IO Flag",
+      "description": "Use R's io functions."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "model",
+    "prefix",
+    "data_table"
+  ]
+}

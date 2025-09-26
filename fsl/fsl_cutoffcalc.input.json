@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cutoffcalc",
+  "description": "Calculates the minimal period for the highpass filter that still preserves a specified amount of variance in all the design matrix regressors.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/cutoffcalc"
+    },
+    "input_design": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input design matrix",
+      "description": "Input design matrix (e.g. design.mat)"
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold for retained variance",
+      "description": "Threshold for retained variance (default=0.9)"
+    },
+    "tr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time between data points",
+      "description": "Time between successive data points (default=3.0s)"
+    },
+    "lower_limit": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lower limit on period",
+      "description": "Lower limit on period due to autocorr estimation (default=90s)"
+    },
+    "example_sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Example sigma for output",
+      "description": "Example sigma (in sec) to produce output called example_filt.mtx"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Switch on diagnostic messages"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug flag",
+      "description": "Switch on debugging messages"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_design"
+  ]
+}

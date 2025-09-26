@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "reg_jacobian",
+  "description": "Tool to compute the Jacobian determinant map from a deformation field or control point lattice.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "niftyreg/reg_jacobian"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Reference Image",
+      "description": "Filename of the reference image"
+    },
+    "deformation_field": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Deformation Field",
+      "description": "Filename of the deformation field (from reg_transform)"
+    },
+    "control_point_lattice": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Control Point Lattice",
+      "description": "Filename of the control point position lattice (from reg_f3d)"
+    },
+    "output_jacobian": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Jacobian Determinant Map",
+      "description": "Filename of the Jacobian determinant map"
+    },
+    "output_jacobian_matrix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Jacobian Matrix Map",
+      "description": "Filename of the Jacobian matrix map (9 or 4 values stored as a 5D nifti)"
+    },
+    "output_log_jacobian": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log of the Jacobian Determinant Map",
+      "description": "Filename of the Log of the Jacobian determinant map"
+    },
+    "affine_matrix": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Affine Matrix",
+      "description": "Filename of the affine matrix to modulate the Jacobian determinant map"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "reference_image"
+  ]
+}

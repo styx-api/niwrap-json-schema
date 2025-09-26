@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "reg_resample",
+  "description": "Tool for resampling floating images to the reference image space using different transformations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "niftyreg/reg_resample"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Reference Image",
+      "description": "Filename of the reference image"
+    },
+    "floating_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Floating Image",
+      "description": "Filename of the floating image"
+    },
+    "affine_transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Affine Transformation",
+      "description": "Filename which contains an affine transformation (Affine*Reference=Floating)"
+    },
+    "flirt_affine_transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Flirt Affine Transformation",
+      "description": "Filename which contains a radiological flirt affine transformation"
+    },
+    "control_point_grid": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Control Point Grid",
+      "description": "Filename of the control point grid image (from reg_f3d)"
+    },
+    "deformation_field": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Deformation Field",
+      "description": "Filename of the deformation field image (from reg_transform)"
+    },
+    "resampled_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resampled Image",
+      "description": "Filename of the resampled image"
+    },
+    "resampled_blank": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resampled Blank Grid",
+      "description": "Filename of the resampled blank grid"
+    },
+    "nearest_neighbor": {
+      "type": "boolean",
+      "default": false,
+      "title": "Nearest Neighbor Interpolation",
+      "description": "Use a Nearest Neighbor interpolation for the source resampling (cubic spline by default)"
+    },
+    "linear_interpolation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Linear Interpolation",
+      "description": "Use a Linear interpolation for the source resampling (cubic spline by default)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "reference_image",
+    "floating_image"
+  ]
+}

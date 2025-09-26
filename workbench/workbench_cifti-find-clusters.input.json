@@ -1,0 +1,298 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cifti-find-clusters",
+  "description": "Filter clusters by area/volume.\n\nOutputs a cifti file with nonzero integers for all brainordinates within a large enough cluster, and zeros elsewhere.  The integers denote cluster membership (by default, first cluster found will use value 1, second cluster 2, etc).  Cluster values are not reused across maps of the output, but instead keep counting up.  The input cifti file must have a brain models mapping on the chosen dimension, columns for .dtseries, and either for .dconn.  The ROI should have a brain models mapping along columns, exactly matching the mapping of the chosen direction in the input file.  Data outside the ROI is ignored.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti-find-clusters"
+    },
+    "cifti": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "cifti",
+      "description": "the input cifti"
+    },
+    "surface_value_threshold": {
+      "type": "number",
+      "title": "surface_value_threshold",
+      "description": "threshold for surface data values"
+    },
+    "surface_minimum_area": {
+      "type": "number",
+      "title": "surface_minimum_area",
+      "description": "threshold for surface cluster area, in mm^2"
+    },
+    "volume_value_threshold": {
+      "type": "number",
+      "title": "volume_value_threshold",
+      "description": "threshold for volume data values"
+    },
+    "volume_minimum_size": {
+      "type": "number",
+      "title": "volume_minimum_size",
+      "description": "threshold for volume cluster size, in mm^3"
+    },
+    "direction": {
+      "type": "string",
+      "title": "direction",
+      "description": "which dimension to use for spatial information, ROW or COLUMN"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "the output cifti"
+    },
+    "opt_less_than": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_less_than",
+      "description": "find values less than <value-threshold>, rather than greater"
+    },
+    "left_surface": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "left_surface"
+            },
+            "surface": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "surface",
+              "description": "the left surface file"
+            },
+            "opt_corrected_areas_area_metric": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_corrected_areas_area_metric",
+              "description": "vertex areas to use instead of computing them from the surface: the corrected vertex areas, as a metric"
+            }
+          },
+          "additionalProperties": false,
+          "title": "left_surface",
+          "description": "specify the left surface to use",
+          "required": [
+            "surface"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "left_surface",
+      "description": "specify the left surface to use"
+    },
+    "right_surface": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "right_surface"
+            },
+            "surface": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "surface",
+              "description": "the right surface file"
+            },
+            "opt_corrected_areas_area_metric": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_corrected_areas_area_metric",
+              "description": "vertex areas to use instead of computing them from the surface: the corrected vertex areas, as a metric"
+            }
+          },
+          "additionalProperties": false,
+          "title": "right_surface",
+          "description": "specify the right surface to use",
+          "required": [
+            "surface"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "right_surface",
+      "description": "specify the right surface to use"
+    },
+    "cerebellum_surface": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "cerebellum_surface"
+            },
+            "surface": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "surface",
+              "description": "the cerebellum surface file"
+            },
+            "opt_corrected_areas_area_metric": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_corrected_areas_area_metric",
+              "description": "vertex areas to use instead of computing them from the surface: the corrected vertex areas, as a metric"
+            }
+          },
+          "additionalProperties": false,
+          "title": "cerebellum_surface",
+          "description": "specify the cerebellum surface to use",
+          "required": [
+            "surface"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "cerebellum_surface",
+      "description": "specify the cerebellum surface to use"
+    },
+    "opt_cifti_roi_roi_cifti": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_cifti_roi_roi_cifti",
+      "description": "search only within regions of interest: the regions to search within, as a cifti file"
+    },
+    "opt_merged_volume": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_merged_volume",
+      "description": "treat volume components as if they were a single component"
+    },
+    "size_ratio": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "size_ratio"
+            },
+            "surface_ratio": {
+              "type": "number",
+              "title": "surface_ratio",
+              "description": "fraction of the structure's largest cluster area"
+            },
+            "volume_ratio": {
+              "type": "number",
+              "title": "volume_ratio",
+              "description": "fraction of the structure's largest cluster volume"
+            }
+          },
+          "additionalProperties": false,
+          "title": "size_ratio",
+          "description": "ignore clusters smaller than a given fraction of the largest cluster in the structure",
+          "required": [
+            "surface_ratio",
+            "volume_ratio"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "size_ratio",
+      "description": "ignore clusters smaller than a given fraction of the largest cluster in the structure"
+    },
+    "distance": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "distance"
+            },
+            "surface_distance": {
+              "type": "number",
+              "title": "surface_distance",
+              "description": "how far from the largest cluster a cluster can be, edge to edge, in mm"
+            },
+            "volume_distance": {
+              "type": "number",
+              "title": "volume_distance",
+              "description": "how far from the largest cluster a cluster can be, edge to edge, in mm"
+            }
+          },
+          "additionalProperties": false,
+          "title": "distance",
+          "description": "ignore clusters further than a given distance from the largest cluster in the structure",
+          "required": [
+            "surface_distance",
+            "volume_distance"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "distance",
+      "description": "ignore clusters further than a given distance from the largest cluster in the structure"
+    },
+    "opt_start_startval": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_start_startval",
+      "description": "start labeling clusters from a value other than 1: the value to give the first cluster found"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti",
+    "surface_value_threshold",
+    "surface_minimum_area",
+    "volume_value_threshold",
+    "volume_minimum_size",
+    "direction",
+    "cifti_out"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "rca-config",
+  "description": "A command-line tool that processes configuration files and arguments.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/rca-config"
+    },
+    "source_config": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Source configuration file",
+      "description": "Path to the source configuration file"
+    },
+    "updated_config": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Updated configuration file",
+      "description": "Path to the updated configuration file"
+    },
+    "unknown_args_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Unknown arguments file",
+      "description": "Path to the file where unknown arguments are recorded"
+    },
+    "args": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Arguments",
+      "description": "Additional arguments to be processed"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "source_config",
+    "updated_config",
+    "unknown_args_file"
+  ]
+}

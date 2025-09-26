@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dicom-rename",
+  "description": "Copies dicom file(s) to new path with more meaningful names",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dicom-rename"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input DICOM Files",
+      "description": "Input DICOM files to be renamed."
+    },
+    "output_base": {
+      "type": "string",
+      "title": "Output Base Name",
+      "description": "Base name for output files that includes series and image numbers."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version",
+      "description": "Print version and exit."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Print help and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files",
+    "output_base"
+  ]
+}

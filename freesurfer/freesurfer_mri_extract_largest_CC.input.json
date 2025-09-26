@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_extract_largest_CC",
+  "description": "This program extracts the largest connected component of the input volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_extract_largest_CC"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input volume."
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume."
+    },
+    "threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threshold",
+      "description": "Threshold for object."
+    },
+    "hemisphere": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "lh",
+            "rh"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hemisphere",
+      "description": "Set the target value corresponding to lh (255) or rh (127)."
+    },
+    "largest_cc_in_bg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Largest CC in Background Flag",
+      "description": "Find the largest CC in the background."
+    },
+    "original_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Original Volume",
+      "description": "Clone values from original volume into output (used with -I)."
+    },
+    "label_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Value",
+      "description": "Perform connected components on voxels with specified label value."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume",
+    "output_volume"
+  ]
+}

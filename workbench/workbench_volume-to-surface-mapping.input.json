@@ -1,0 +1,293 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "volume-to-surface-mapping",
+  "description": "Map volume to surface.\n\nYou must specify exactly one mapping method.  Enclosing voxel uses the value from the voxel the vertex lies inside, while trilinear does a 3D linear interpolation based on the voxels immediately on each side of the vertex's position.\n\nThe ribbon mapping method constructs a polyhedron from the vertex's neighbors on each surface, and estimates the amount of this polyhedron's volume that falls inside any nearby voxels, to use as the weights for sampling.  If -thin-columns is specified, the polyhedron uses the edge midpoints and triangle centroids, so that neighboring vertices do not have overlapping polyhedra.  This may require increasing -voxel-subdiv to get enough samples in each voxel to reliably land inside these smaller polyhedra.  The volume ROI is useful to exclude partial volume effects of voxels the surfaces pass through, and will cause the mapping to ignore voxels that don't have a positive value in the mask.  The subdivision number specifies how it approximates the amount of the volume the polyhedron intersects, by splitting each voxel into NxNxN pieces, and checking whether the center of each piece is inside the polyhedron.  If you have very large voxels, consider increasing this if you get zeros in your output.  The -gaussian option makes it act more like the myelin method, where the distance of a voxel from <surface> is used to downweight the voxel.  The -interpolate suboption, instead of doing a weighted average of voxels, interpolates from the volume at the subdivided points inside the ribbon.  If using both -interpolate and the -weighted suboption to -volume-roi, the roi volume weights are linearly interpolated, unless the -interpolate method is ENCLOSING_VOXEL, in which case ENCLOSING_VOXEL is also used for sampling the roi volume weights.\n\nThe myelin style method uses part of the caret5 myelin mapping command to do the mapping: for each surface vertex, take all voxels that are in a cylinder with radius and height equal to cortical thickness, centered on the vertex and aligned with the surface normal, and that are also within the ribbon ROI, and apply a gaussian kernel with the specified sigma to them to get the weights to use.  The -legacy-bug flag reverts to the unintended behavior present from the initial implementation up to and including v1.2.3, which had only the tangential cutoff and a bounding box intended to be larger than where the cylinder cutoff should have been.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume-to-surface-mapping"
+    },
+    "volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "volume",
+      "description": "the volume to map data from"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface",
+      "description": "the surface to map the data onto"
+    },
+    "metric_out": {
+      "type": "string",
+      "title": "metric_out",
+      "description": "the output metric file"
+    },
+    "opt_trilinear": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_trilinear",
+      "description": "use trilinear volume interpolation"
+    },
+    "opt_enclosing": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_enclosing",
+      "description": "use value of the enclosing voxel"
+    },
+    "opt_cubic": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_cubic",
+      "description": "use cubic splines"
+    },
+    "ribbon_constrained": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "ribbon_constrained"
+            },
+            "inner_surf": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "inner_surf",
+              "description": "the inner surface of the ribbon"
+            },
+            "outer_surf": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "outer_surf",
+              "description": "the outer surface of the ribbon"
+            },
+            "volume_roi": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "volume_roi"
+                    },
+                    "roi_volume": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "roi_volume",
+                      "description": "the roi volume file"
+                    },
+                    "opt_weighted": {
+                      "type": "boolean",
+                      "default": false,
+                      "title": "opt_weighted",
+                      "description": "treat the roi values as weightings rather than binary"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "title": "volume_roi",
+                  "description": "use a volume roi",
+                  "required": [
+                    "roi_volume"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "volume_roi",
+              "description": "use a volume roi"
+            },
+            "opt_voxel_subdiv_subdiv_num": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_voxel_subdiv_subdiv_num",
+              "description": "voxel divisions while estimating voxel weights: number of subdivisions, default 3"
+            },
+            "opt_thin_columns": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_thin_columns",
+              "description": "use non-overlapping polyhedra"
+            },
+            "opt_gaussian_scale": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_gaussian_scale",
+              "description": "reduce weight to voxels that aren't near <surface>: value to multiply the local thickness by, to get the gaussian sigma"
+            },
+            "opt_interpolate_method": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_interpolate_method",
+              "description": "instead of a weighted average of voxels, interpolate at subpoints inside the ribbon: interpolation method, must be CUBIC, ENCLOSING_VOXEL, or TRILINEAR"
+            },
+            "opt_bad_vertices_out_roi_out": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_bad_vertices_out_roi_out",
+              "description": "output an ROI of which vertices didn't intersect any valid voxels: the output metric file of vertices that have no data"
+            },
+            "output_weights": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "output_weights"
+                    },
+                    "vertex": {
+                      "type": "integer",
+                      "title": "vertex",
+                      "description": "the vertex number to get the voxel weights for, 0-based"
+                    },
+                    "weights_out": {
+                      "type": "string",
+                      "title": "weights_out",
+                      "description": "volume to write the weights to"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "title": "output_weights",
+                  "description": "write the voxel weights for a vertex to a volume file",
+                  "required": [
+                    "vertex",
+                    "weights_out"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "output_weights",
+              "description": "write the voxel weights for a vertex to a volume file"
+            },
+            "opt_output_weights_text_text_out": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "opt_output_weights_text_text_out",
+              "description": "write the voxel weights for all vertices to a text file: output - the output text filename"
+            }
+          },
+          "additionalProperties": false,
+          "title": "ribbon_constrained",
+          "description": "use ribbon constrained mapping algorithm",
+          "required": [
+            "inner_surf",
+            "outer_surf"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ribbon_constrained",
+      "description": "use ribbon constrained mapping algorithm"
+    },
+    "myelin_style": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "myelin_style"
+            },
+            "ribbon_roi": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "ribbon_roi",
+              "description": "an roi volume of the cortical ribbon for this hemisphere"
+            },
+            "thickness": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "thickness",
+              "description": "a metric file of cortical thickness"
+            },
+            "sigma": {
+              "type": "number",
+              "title": "sigma",
+              "description": "gaussian kernel in mm for weighting voxels within range"
+            },
+            "opt_legacy_bug": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_legacy_bug",
+              "description": "emulate old v1.2.3 and earlier code that didn't follow a cylinder cutoff"
+            }
+          },
+          "additionalProperties": false,
+          "title": "myelin_style",
+          "description": "use the method from myelin mapping",
+          "required": [
+            "ribbon_roi",
+            "thickness",
+            "sigma"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "myelin_style",
+      "description": "use the method from myelin mapping"
+    },
+    "opt_subvol_select_subvol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_subvol_select_subvol",
+      "description": "select a single subvolume to map: the subvolume number or name"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "volume",
+    "surface",
+    "metric_out"
+  ]
+}

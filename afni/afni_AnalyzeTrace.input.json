@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AnalyzeTrace",
+  "description": "A program to analyze SUMA (and AFNI's perhaps) stack output for functions that return with RETURN without bothering to go on the stack.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/AnalyzeTrace"
+    },
+    "tracefile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Trace output file",
+      "description": "Trace output file obtained by redirecting the program\u2019s trace output."
+    },
+    "max_func_lines": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum function lines",
+      "description": "Set the maximum number of code lines before a function returns. Default is no limit."
+    },
+    "suma_c": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "SUMA C file",
+      "description": "FILE is a SUMA_*.c file. It is analyzed for functions that use SUMA_RETURN without ENTRY."
+    },
+    "max_err": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum errors",
+      "description": "Stop after encountering MAX_ERR errors reported in log. Default is 5. Error key terms are: 'Error', 'error', 'corruption'."
+    },
+    "novolreg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore volume registration",
+      "description": "Ignore any Rotate, Volreg, Tagalign, or WarpDrive transformations present in the Surface Volume."
+    },
+    "noxform": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ignore transform",
+      "description": "Same as -novolreg"
+    },
+    "setenv": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Set environment variable",
+      "description": "Set environment variable ENVname to be ENVvalue. Quotes are necessary."
+    },
+    "trace": {
+      "type": "boolean",
+      "default": false,
+      "title": "Trace flag",
+      "description": "Turns on In/Out debug and Memory tracing."
+    },
+    "extreme_trace": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extreme trace flag",
+      "description": "Turns on extreme tracing."
+    },
+    "nomall": {
+      "type": "boolean",
+      "default": false,
+      "title": "Disable memory tracing",
+      "description": "Turn off memory tracing."
+    },
+    "yesmall": {
+      "type": "boolean",
+      "default": false,
+      "title": "Enable memory tracing",
+      "description": "Turn on memory tracing (default)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "tracefile"
+  ]
+}

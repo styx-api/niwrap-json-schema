@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "metric-merge",
+  "description": "Merge metric files into a new file.\n\nTakes one or more metric files and constructs a new metric file by concatenating columns from them.  The input metric files must have the same number of vertices and same structure.\n\nExample: wb_command -metric-merge out.func.gii -metric first.func.gii -column 1 -metric second.func.gii\n\nThis example would take the first column from first.func.gii, followed by all columns from second.func.gii, and write these columns to out.func.gii.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric-merge"
+    },
+    "metric_out": {
+      "type": "string",
+      "title": "metric_out",
+      "description": "the output metric"
+    },
+    "metric": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "metric"
+              },
+              "metric_in": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "metric_in",
+                "description": "a metric file to use columns from"
+              },
+              "column": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "@type": {
+                          "const": "column"
+                        },
+                        "column": {
+                          "type": "string",
+                          "title": "column",
+                          "description": "the column number or name"
+                        },
+                        "up_to": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "@type": {
+                                  "const": "up_to"
+                                },
+                                "last_column": {
+                                  "type": "string",
+                                  "title": "last_column",
+                                  "description": "the number or name of the last column to include"
+                                },
+                                "opt_reverse": {
+                                  "type": "boolean",
+                                  "default": false,
+                                  "title": "opt_reverse",
+                                  "description": "use the range in reverse order"
+                                }
+                              },
+                              "additionalProperties": false,
+                              "title": "up_to",
+                              "description": "use an inclusive range of columns",
+                              "required": [
+                                "last_column"
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "default": null,
+                          "title": "up_to",
+                          "description": "use an inclusive range of columns"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "title": "column",
+                      "description": "select a single column to use",
+                      "required": [
+                        "column"
+                      ]
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "column",
+                "description": "select a single column to use"
+              }
+            },
+            "additionalProperties": false,
+            "title": "metric",
+            "description": "specify an input metric",
+            "required": [
+              "metric_in"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "metric",
+      "description": "specify an input metric"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "metric_out"
+  ]
+}

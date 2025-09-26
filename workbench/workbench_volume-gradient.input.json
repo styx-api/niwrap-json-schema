@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "volume-gradient",
+  "description": "Gradient of a volume file.\n\nComputes the gradient of the volume by doing linear regressions for each voxel, considering only its face neighbors unless too few face neighbors exist.  The gradient vector is constructed from the partial derivatives of the resulting linear function, and the magnitude of this vector is the output.  If specified, the volume vector output is arranged with the x, y, and z components from a subvolume as consecutive subvolumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume-gradient"
+    },
+    "volume_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "volume_in",
+      "description": "the input volume"
+    },
+    "volume_out": {
+      "type": "string",
+      "title": "volume_out",
+      "description": "the output gradient magnitude volume"
+    },
+    "presmooth": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "presmooth"
+            },
+            "kernel": {
+              "type": "number",
+              "title": "kernel",
+              "description": "the size of the gaussian smoothing kernel in mm, as sigma by default"
+            },
+            "opt_fwhm": {
+              "type": "boolean",
+              "default": false,
+              "title": "opt_fwhm",
+              "description": "kernel size is FWHM, not sigma"
+            }
+          },
+          "additionalProperties": false,
+          "title": "presmooth",
+          "description": "smooth the volume before computing the gradient",
+          "required": [
+            "kernel"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "presmooth",
+      "description": "smooth the volume before computing the gradient"
+    },
+    "opt_roi_roi_volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_roi_roi_volume",
+      "description": "select a region of interest to take the gradient of: the region to take the gradient within"
+    },
+    "opt_vectors_vector_volume_out": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_vectors_vector_volume_out",
+      "description": "output vectors: the vectors as a volume file"
+    },
+    "opt_subvolume_subvol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_subvolume_subvol",
+      "description": "select a single subvolume to take the gradient of: the subvolume number or name"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "volume_in",
+    "volume_out"
+  ]
+}

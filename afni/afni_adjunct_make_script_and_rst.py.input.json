@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "adjunct_make_script_and_rst.py",
+  "description": "Program to take a script with some special markup and turn it into both an RST page and a script for the online Sphinx documentation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/adjunct_make_script_and_rst.py"
+    },
+    "input_script": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input script",
+      "description": "Input script file with special markup"
+    },
+    "prefix_rst": {
+      "type": "string",
+      "title": "RST file prefix",
+      "description": "Output filename including any path of the RST/Sphinx file. Must include file extension '.rst'."
+    },
+    "prefix_script": {
+      "type": "string",
+      "title": "Script file prefix",
+      "description": "Output filename of the script file. Should include file extension such as '.tcsh'."
+    },
+    "reflink": {
+      "type": "string",
+      "title": "Reference link",
+      "description": "A string tag that will serve as the subdirectory name holding images for the given demo, and the RST internal reference label."
+    },
+    "execute_script": {
+      "type": "boolean",
+      "default": false,
+      "title": "Execute script flag",
+      "description": "Flag to create the RST and script files, and also execute the script."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_script",
+    "prefix_rst",
+    "prefix_script",
+    "reflink"
+  ]
+}

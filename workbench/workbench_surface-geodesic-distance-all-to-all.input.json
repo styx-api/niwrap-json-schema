@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surface-geodesic-distance-all-to-all",
+  "description": "Compute geodesic distances from all vertices.\n\nComputes geodesic distance from every vertex to every vertex, outputting a single-hemisphere dconn file.  If you are only interested in a few vertices, see -surface-geodesic-distance.  When -limit is specified, any vertex beyond the limit is assigned the value -1.\n\nThe -roi option makes the output file smaller by not outputting distances to or from vertices outside the ROI, but paths are still allowed to go outside the ROI when finding distances to other vertices.\n\nThe -corrected-areas option should be used when the input is a group average surface - group average surfaces have significantly less surface area than individual surfaces do, and therefore distances measured on them would be smaller than measuring them on individual surfaces.  In this case, the input to this option should be a group average of the output of -surface-vertex-areas for each subject.\n\nIf -naive is not specified, the algorithm uses not just immediate neighbors, but also neighbors derived from crawling across pairs of triangles that share an edge.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/surface-geodesic-distance-all-to-all"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "surface",
+      "description": "the surface to compute on"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "single-hemisphere dconn containing the distances"
+    },
+    "opt_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_roi_roi_metric",
+      "description": "only output distances for vertices inside an ROI: the ROI as a metric file"
+    },
+    "opt_limit_limit_mm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_limit_limit_mm",
+      "description": "stop at a specified distance: distance in mm to stop at"
+    },
+    "opt_corrected_areas_area_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_corrected_areas_area_metric",
+      "description": "vertex areas to use instead of computing them from the surface: the corrected vertex areas, as a metric"
+    },
+    "opt_naive": {
+      "type": "boolean",
+      "default": false,
+      "title": "opt_naive",
+      "description": "use only neighbors, don't crawl triangles (not recommended)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface",
+    "cifti_out"
+  ]
+}

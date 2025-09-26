@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "siena_flow2std",
+  "description": "Convert edge flow to standard space",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/siena_flow2std"
+    },
+    "fileroot1": {
+      "type": "string",
+      "title": "Input file root 1",
+      "description": "Input file root 1"
+    },
+    "fileroot2": {
+      "type": "string",
+      "title": "Input file root 2",
+      "description": "Input file root 2"
+    },
+    "sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spatial smoothing sigma",
+      "description": "Spatial smoothing of standard-space edge-flow image, sigma (HWHM) in mm (default=5)"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Debug (don't delete intermediate files)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "fileroot1",
+    "fileroot2"
+  ]
+}

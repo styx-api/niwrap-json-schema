@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dPFM",
+  "description": "Program for identifying brief BOLD events in fMRI time series using Paradigm Free Mapping",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dPFM"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input dataset",
+      "description": "Specify the dataset to analyze (e.g., epi.nii)."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask dataset",
+      "description": "Process voxels inside this mask only. Default is no masking."
+    },
+    "algorithm": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Deconvolution Algorithm",
+      "description": "Regularization function used for HRF deconvolution (dantzig or lasso)."
+    },
+    "criteria": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model Selection Criteria",
+      "description": "Model selection criterion for HRF deconvolution (BIC or AIC)."
+    },
+    "nonzeros": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Non-zero coefficients",
+      "description": "Choose estimate with a fixed number of nonzero coefficients."
+    },
+    "maxiter": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Iterations",
+      "description": "Maximum number of iterations in the homotopy procedure (absolute value)."
+    },
+    "maxiterfactor": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Iterations Factor",
+      "description": "Maximum number of iterations relative to the number of volumes."
+    },
+    "tr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Repetition Time (TR)",
+      "description": "Repetition time or sampling period of the input data."
+    },
+    "hrf": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "HRF Model",
+      "description": "Haemodynamic response function used for deconvolution."
+    },
+    "hrf_vol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel-dependent HRF Dataset",
+      "description": "3D+time dataset with voxel/nodes/vertex -dependent HRFs."
+    },
+    "idx_hrf": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "HRF Index Dataset",
+      "description": "3D dataset with voxel-dependent indexes for HRF."
+    },
+    "LHS": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Additional Regressors",
+      "description": "Additional regressors to be fitted to the dataset."
+    },
+    "jobs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parallel Jobs",
+      "description": "Number of parallel jobs to use in processing."
+    },
+    "nSeg": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segmentation for Progress Reporting",
+      "description": "Divide into segments to report progress."
+    },
+    "verb": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verbosity Level",
+      "description": "Verbosity level (0 for quiet, 1 for talkative)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input"
+  ]
+}

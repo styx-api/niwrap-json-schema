@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_relabel_nonwm_hypos",
+  "description": "Relabels non-WM hypointensities based on proximity to a nearby label.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_relabel_nonwm_hypos"
+    },
+    "inputseg": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Segmentation",
+      "description": "Input segmentation file with non-wm-hypos labeled as 80, 81, or 82."
+    },
+    "outputseg": {
+      "type": "string",
+      "title": "Output Segmentation",
+      "description": "Output segmentation file with non-wm-hypos relabeled."
+    },
+    "segments": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Segments",
+      "description": "Label hypos adjacent to specified segment as a new segment (can be used multiple times)."
+    },
+    "seg_default": {
+      "type": "boolean",
+      "default": false,
+      "title": "Segment Default",
+      "description": "Use the default relabeling scheme."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Turn on debugging."
+    },
+    "checkopts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Options Flag",
+      "description": "Don't run anything, just check options and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "inputseg",
+    "outputseg"
+  ]
+}

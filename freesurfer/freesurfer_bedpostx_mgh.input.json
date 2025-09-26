@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bedpostx_mgh",
+  "description": "A modified version of FSL's bedpostx compatible with PBS queueing system for parallel computation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/bedpostx_mgh"
+    },
+    "subject_directory": {
+      "type": "string",
+      "title": "Subject Directory",
+      "description": "Subject directory containing necessary files such as bvals, bvecs, data, and nodif_brain_mask."
+    },
+    "fibres": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Fibres",
+      "description": "Number of fibres per voxel, default is 3"
+    },
+    "ard_weight": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ARD Weight",
+      "description": "ARD weight, more weight means fewer secondary fibres per voxel, default is 1"
+    },
+    "burnin": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Burnin Period",
+      "description": "Burnin period, default is 1000"
+    },
+    "jumps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Jumps",
+      "description": "Number of jumps, default is 1250"
+    },
+    "sample_every": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sample Every",
+      "description": "Sample every n steps, default is 25"
+    },
+    "deconv_model": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Deconvolution Model",
+      "description": "Deconvolution model selection. 1: with sticks, 2: with sticks with a range of diffusivities (default), 3: with zeppelins"
+    },
+    "gradient_nonlin": {
+      "type": "boolean",
+      "default": false,
+      "title": "Gradient Nonlinearities",
+      "description": "Consider gradient nonlinearities, default is off"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_directory"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_watershed",
+  "description": "This program computes the watershed transform on the surface of an intensity gradient and writes the resulting measurement into a .annot file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_watershed"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Surface File",
+      "description": "Input surface file"
+    },
+    "input_gradient_field": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Gradient Field File",
+      "description": "Input gradient field file"
+    },
+    "output_annotation": {
+      "type": "string",
+      "title": "Output Annotation File",
+      "description": "Output annotation file"
+    },
+    "max_clusters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Clusters",
+      "description": "Set the number of maximum clusters"
+    },
+    "mask_label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Label",
+      "description": "Read in and mask the input volume that is not in the specified label"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_surface",
+    "input_gradient_field",
+    "output_annotation"
+  ]
+}

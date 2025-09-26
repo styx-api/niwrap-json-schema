@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bayes_view",
+  "description": "Launch a shiny app to visualize RBA output files. The files must have the .RData extension.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/bayes_view"
+    },
+    "input_folder": {
+      "type": "string",
+      "title": "Input Folder",
+      "description": "Path to a folder containing .RData files"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Show help message"
+    },
+    "shiny_folder": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Shiny Folder",
+      "description": "Use a custom shiny folder (for testing purposes)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_folder"
+  ]
+}

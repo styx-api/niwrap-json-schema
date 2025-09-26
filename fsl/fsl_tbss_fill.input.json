@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tbss_fill",
+  "description": "Tool for filling skeletonized FA images in TBSS",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/tbss_fill"
+    },
+    "stats_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Statistics image",
+      "description": "Stats image"
+    },
+    "threshold": {
+      "type": "number",
+      "title": "Threshold",
+      "description": "Threshold value"
+    },
+    "mean_fa": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mean FA image",
+      "description": "Mean FA image"
+    },
+    "output": {
+      "type": "string",
+      "title": "Output image",
+      "description": "Output image"
+    },
+    "include_negative_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Include negative flag",
+      "description": "Include negative stat values (below -threshold)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "stats_image",
+    "threshold",
+    "mean_fa",
+    "output"
+  ]
+}

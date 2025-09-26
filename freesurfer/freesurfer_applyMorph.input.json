@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "applyMorph",
+  "description": "A tool for applying a morph to a volume using a template and a transform",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/applyMorph"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Inputs",
+      "description": "Input files."
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Template",
+      "description": "Template volume."
+    },
+    "transform": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Transform",
+      "description": "Transform file."
+    },
+    "zlib_buffer": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Zlib Buffer Multiplier",
+      "description": "Zlib buffer pre-allocation multiplier."
+    },
+    "dbg_coords": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debugging Coordinates",
+      "description": "Debugging coordinates."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "inputs",
+    "template",
+    "transform"
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_seg_diff",
+  "description": "This program computes and merges differences in segmentation volumes, primarily for managing manual edits in FreeSurfer's aseg.mgz.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_seg_diff"
+    },
+    "seg1": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First Segmentation",
+      "description": "First segmentation file (e.g., unedited)."
+    },
+    "seg2": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Second Segmentation",
+      "description": "Second segmentation file (e.g., edited)."
+    },
+    "seg": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Segmentation",
+      "description": "Source segmentation file (e.g., unedited)."
+    },
+    "diff": {
+      "type": "string",
+      "title": "Diff Segmentation",
+      "description": "Output diff segmentation volume."
+    },
+    "diff_in": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Diff Segmentation",
+      "description": "Input diff segmentation volume."
+    },
+    "merged": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Merged Output",
+      "description": "Merged output, combining unedited with diff."
+    },
+    "diff_force": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force Diff Creation",
+      "description": "Force creation of a diff even if no diff is detected."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Mode",
+      "description": "Turn on debugging."
+    },
+    "checkopts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Options",
+      "description": "Check options and exit without running."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Print Version",
+      "description": "Print out version and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "diff"
+  ]
+}

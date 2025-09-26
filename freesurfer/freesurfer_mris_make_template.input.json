@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_make_template",
+  "description": "This program will add a template into an average surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_make_template"
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere (e.g., 'lh' or 'rh')"
+    },
+    "surface_name": {
+      "type": "string",
+      "title": "Surface Name",
+      "description": "Surface name (e.g., 'white', 'pial')"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Subjects",
+      "description": "List of subjects to be averaged"
+    },
+    "output_name": {
+      "type": "string",
+      "title": "Output Name",
+      "description": "Output name for the template"
+    },
+    "addframe_parameters": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Add Frame",
+      "description": "Add a frame with specific field and location in atlas"
+    },
+    "vector": {
+      "type": "boolean",
+      "default": false,
+      "title": "Vector Flag",
+      "description": "Print additional information for addframe"
+    },
+    "norot": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Rotation Flag",
+      "description": "Not aligning hemispheres before averaging (default)"
+    },
+    "rot": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rotation Flag",
+      "description": "Rough rigid alignment of hemispheres before averaging"
+    },
+    "annot": {
+      "type": "boolean",
+      "default": false,
+      "title": "Annotate Flag",
+      "description": "Zero medial wall"
+    },
+    "overlay_parameters": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Overlay",
+      "description": "Read overlay from file, specify number of averages"
+    },
+    "overlay_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Overlay Directory",
+      "description": "Use directory for overlay hemi"
+    },
+    "scale": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale",
+      "description": "Scale value for transformation"
+    },
+    "surf_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Directory",
+      "description": "Use custom subdirectory instead of 'surf'"
+    },
+    "smooth_iterations": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smooth Iterations",
+      "description": "Number of iterations to smooth curvature"
+    },
+    "subjects_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Specify SUBJECTS_DIR"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "hemi",
+    "surface_name",
+    "subjects",
+    "output_name"
+  ]
+}

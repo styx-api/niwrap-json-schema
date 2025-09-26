@@ -1,0 +1,357 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@auto_tlrc",
+  "description": "A script to transform an anatomical dataset to align with some standard space template and to apply the same TLRC transform obtained with @auto_tlrc in Usage 1 mode to other datasets.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@auto_tlrc"
+    },
+    "base_template": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Base Template",
+      "description": "Reference anatomical volume. Usually this volume is in some standard space like TLRC or MNI space."
+    },
+    "input_anat": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Anatomical Volume",
+      "description": "Original anatomical volume (+orig). The skull is removed by this script unless instructed otherwise (-no_ss)."
+    },
+    "no_ss": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Skull Stripping",
+      "description": "Do not strip skull of input data set because the skull has already been removed or because the template still has the skull."
+    },
+    "warp_orig_vol": {
+      "type": "boolean",
+      "default": false,
+      "title": "Warp Original Volume",
+      "description": "Produce a TLRC version of the input volume, rather than a TLRC version of the skull-stripped input."
+    },
+    "dxyz": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cubic Voxel Size",
+      "description": "Cubic voxel size of output DSET in TLRC space. Default is the resolution of the template."
+    },
+    "dx": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel Size in X Direction",
+      "description": "Size of voxel in the x direction (Right-Left). Default is 1mm."
+    },
+    "dy": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel Size in Y Direction",
+      "description": "Size of voxel in the y direction (Anterior-Posterior). Default is 1mm."
+    },
+    "dz": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel Size in Z Direction",
+      "description": "Size of voxel in the z direction (Inferior-Superior). Default is 1mm."
+    },
+    "pad_base": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pad Base Dataset",
+      "description": "Pad the base dataset by MM mm in each direction. Default is 15 mm."
+    },
+    "keep_tmp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep Temporary Files",
+      "description": "Keep temporary files."
+    },
+    "clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Clean Temporary Files",
+      "description": "Clean all temporary files, likely left from -keep_tmp option then exit."
+    },
+    "xform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform for Warping",
+      "description": "Transform to use for warping: Choose from affine_general or shift_rotate_scale. Default is affine_general."
+    },
+    "no_avoid_eyes": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Avoid Eyes",
+      "description": "An option that gets passed to 3dSkullStrip. Use it when parts of the frontal lobes get clipped."
+    },
+    "ncr": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Coarse Rotation",
+      "description": "Do not use -coarserot option for 3dWarpDrive, which is a default."
+    },
+    "onepass": {
+      "type": "boolean",
+      "default": false,
+      "title": "Single Pass Registration",
+      "description": "Turns off -twopass option for 3dWarpDrive. This will speed up the registration but might fail if the datasets are far apart."
+    },
+    "twopass": {
+      "type": "boolean",
+      "default": false,
+      "title": "Two Pass Registration",
+      "description": "Opposite of -onepass, default."
+    },
+    "maxite": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Maximum Number of Iterations",
+      "description": "Maximum number of iterations for 3dWarpDrive. Default is 50 for first pass and then doubled to 100 in second pass."
+    },
+    "not_OK_maxite": {
+      "type": "boolean",
+      "default": false,
+      "title": "Not OK Maximum Iterations",
+      "description": "Continue running even if maximum iterations is reached."
+    },
+    "inweight": {
+      "type": "boolean",
+      "default": false,
+      "title": "Input Weight",
+      "description": "Apply -weight INPUT (in 3dWarpDrive). By default, 3dWarpDrive uses the BASE dataset to weight the alignment cost."
+    },
+    "rigid_equiv": {
+      "type": "boolean",
+      "default": false,
+      "title": "Rigid Body Alignment",
+      "description": "Output the rigid-body version of the alignment. Resultant volume is NOT in TLRC space."
+    },
+    "init_xform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Transform",
+      "description": "Apply affine transform in XFORM0.1D before beginning registration and then include XFORM0.1D in the final transform."
+    },
+    "no_pre": {
+      "type": "boolean",
+      "default": false,
+      "title": "Delete Temporary Dataset",
+      "description": "Delete temporary dataset created by -init_xform"
+    },
+    "out_space": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Space",
+      "description": "Set the output to a particular space."
+    },
+    "3dAllineate": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use 3dAllineate",
+      "description": "Use 3dAllineate with the lpa+ZZ cost function instead of 3dWarpDrive."
+    },
+    "3dAlcost": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cost function for 3dAllineate",
+      "description": "Use another cost function like nmi for 3dAllineate."
+    },
+    "overwrite": {
+      "type": "boolean",
+      "default": false,
+      "title": "Overwrite Output",
+      "description": "Overwrite existing output."
+    },
+    "apar": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Anatomical Dataset Parent",
+      "description": "An anatomical dataset in TLRC space created using Usage 1 of @auto_tlrc."
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Dataset",
+      "description": "Dataset (typically EPI time series or statistical dataset) to transform to TLRC space per the transform in TLRC_parent"
+    },
+    "pad_input": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pad Input Dataset",
+      "description": "Pad the input dataset by MM mm in each direction."
+    },
+    "onewarp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Single Interpolation Step",
+      "description": "Create follower data with one interpolation step, instead of two. This option reduces blurring of the output data."
+    },
+    "twowarp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Two Interpolation Steps",
+      "description": "Create follower data with two interpolations step, instead of one. This option is for backward compatibility."
+    },
+    "rmode": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resampling Mode",
+      "description": "Resampling mode. Choose from: linear, cubic, NN or quintic. Default for 'Usage 1' is cubic."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Name of the output dataset."
+    },
+    "suffix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Suffix",
+      "description": "Name the output dataset by appending this suffix to the prefix of the input data."
+    },
+    "keep_view": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep Output View",
+      "description": "Do not mark output dataset as +tlrc."
+    },
+    "base_copy": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Copy Base Dataset",
+      "description": "Copy base (template) dataset into COPY_PREFIX."
+    },
+    "base_list": {
+      "type": "boolean",
+      "default": false,
+      "title": "List Base Dataset Path",
+      "description": "List the full path of the base dataset."
+    },
+    "use_gz": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use GZIP Compression",
+      "description": "When using '-suffix ..', behave as if you had provided a prefix with '*.gz' at the end."
+    },
+    "verb": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose",
+      "description": "Increase verbosity of the script."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "base_template",
+    "input_anat",
+    "apar",
+    "input_dataset"
+  ]
+}

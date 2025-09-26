@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_twoclass",
+  "description": "Compute cross-subject statistics of two sets of labels",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_twoclass"
+    },
+    "segmentation_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Segmentation Volume",
+      "description": "Input segmentation volume"
+    },
+    "output_subject": {
+      "type": "string",
+      "title": "Output Subject",
+      "description": "Output subject name"
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume"
+    },
+    "c1_subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Class 1 Subjects",
+      "description": "List of subjects from class 1"
+    },
+    "c2_subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Class 2 Subjects",
+      "description": "List of subjects from class 2"
+    },
+    "f_threshold": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "F Threshold",
+      "description": "Specify F threshold"
+    },
+    "bonferroni_correction": {
+      "type": "boolean",
+      "default": false,
+      "title": "Bonferroni Correction Flag",
+      "description": "Perform Bonferroni correction"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "segmentation_volume",
+    "output_subject",
+    "output_volume",
+    "c1_subjects",
+    "c2_subjects"
+  ]
+}

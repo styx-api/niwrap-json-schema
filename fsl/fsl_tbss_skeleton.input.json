@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tbss_skeleton",
+  "description": "A tool for defining a 'skeleton' of white matter tracts in the brain to help compare them across subjects.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/tbss_skeleton"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "Input image"
+    },
+    "output_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Image",
+      "description": "Output skeleton image"
+    },
+    "skeleton_params": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Skeleton Parameters",
+      "description": "Skeletonization parameters: <skel_thresh> <distancemap> <search_rule_mask> <4Ddata> <projected_4Ddata>"
+    },
+    "alt_4d": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Alternative 4D Data",
+      "description": "Alternative 4D data (e.g., L1)"
+    },
+    "alt_skeleton": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Alternative Skeleton",
+      "description": "Alternative skeleton"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Switch on debugging image outputs"
+    },
+    "debug2_flag": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug2 Points File",
+      "description": "De-project skelpoints points on skeleton back to all_FA space"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_image"
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "trac-all",
+  "description": "Reconstruct white-matter pathways using an atlas of the underlying anatomy.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/trac-all"
+    },
+    "config_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Configuration File",
+      "description": "Configuration file to set analysis options (dmrirc file)"
+    },
+    "subject_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject Name",
+      "description": "Subject name (if not defined in dmrirc)"
+    },
+    "dicom_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DICOM File",
+      "description": "Input DWI DICOM (if not defined in dmrirc)"
+    },
+    "pre_processing": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pre-processing",
+      "description": "Perform pre-processing (step 1, all substeps)"
+    },
+    "bedpost": {
+      "type": "boolean",
+      "default": false,
+      "title": "Bedpost",
+      "description": "Perform bedpost (step 2)"
+    },
+    "pathway_reconstruction": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pathway Reconstruction",
+      "description": "Perform pathway reconstruction (step 3)"
+    },
+    "assemble_measures": {
+      "type": "boolean",
+      "default": false,
+      "title": "Assemble Pathway Measures",
+      "description": "Assemble pathway measures from multiple subjects (step 4)"
+    },
+    "image_corrections": {
+      "type": "boolean",
+      "default": false,
+      "title": "Image Corrections",
+      "description": "Perform image corrections (step 1.1)"
+    },
+    "no_image_corrections": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Image Corrections",
+      "description": "Skip image corrections (step 1.1)"
+    },
+    "image_quality_assessment": {
+      "type": "boolean",
+      "default": false,
+      "title": "Image Quality Assessment",
+      "description": "Perform image quality assessment (step 1.2)"
+    },
+    "no_image_quality_assessment": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Image Quality Assessment",
+      "description": "Skip image quality assessment (step 1.2)"
+    },
+    "intra_registration": {
+      "type": "boolean",
+      "default": false,
+      "title": "Intra-subject Registration",
+      "description": "Perform intra-subject registration (step 1.3)"
+    },
+    "no_intra_registration": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Intra-subject Registration",
+      "description": "Skip intra-subject registration (step 1.3)"
+    },
+    "tensor_fit": {
+      "type": "boolean",
+      "default": false,
+      "title": "Tensor Fit",
+      "description": "Perform tensor fit (step 1.4)"
+    },
+    "no_tensor_fit": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Tensor Fit",
+      "description": "Skip tensor fit (step 1.4)"
+    },
+    "inter_registration": {
+      "type": "boolean",
+      "default": false,
+      "title": "Inter-subject Registration",
+      "description": "Perform inter-subject registration (step 1.5)"
+    },
+    "no_inter_registration": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Inter-subject Registration",
+      "description": "Skip inter-subject registration (step 1.5)"
+    },
+    "pathway_priors": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pathway Priors",
+      "description": "Perform pathway priors (step 1.6)"
+    },
+    "no_pathway_priors": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Pathway Priors",
+      "description": "Skip pathway priors (step 1.6)"
+    },
+    "infant_options": {
+      "type": "boolean",
+      "default": false,
+      "title": "Infant Brain Processing",
+      "description": "Use infant brain processing options"
+    },
+    "job_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Jobs File",
+      "description": "Write a text file with command lines that can be run in parallel and do not run them"
+    },
+    "log_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log File",
+      "description": "Unique log file instead of the default scripts/trac-all.log"
+    },
+    "no_append_log": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Append Log",
+      "description": "Overwrite old log files instead of appending"
+    },
+    "cmd_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cmd File",
+      "description": "Unique cmd file instead of the default scripts/trac-all.cmd"
+    },
+    "no_is_running": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Isrunning Check",
+      "description": "Do not check whether subjects are currently being processed"
+    },
+    "subjects_directory": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Specify subjects directory (default environment SUBJECTS_DIR)"
+    },
+    "umask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unix File Permission Mask",
+      "description": "Set Unix file permission mask (default 002)"
+    },
+    "group_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Group ID",
+      "description": "Check that current group is alpha groupid"
+    },
+    "allow_core_dump": {
+      "type": "boolean",
+      "default": false,
+      "title": "Allow Core Dump",
+      "description": "Set coredump limit to unlimited"
+    },
+    "debug_mode": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Mode",
+      "description": "Generate much more output"
+    },
+    "dont_run": {
+      "type": "boolean",
+      "default": false,
+      "title": "Do Not Run",
+      "description": "Do everything but execute each command"
+    },
+    "only_versions": {
+      "type": "boolean",
+      "default": false,
+      "title": "Only Versions",
+      "description": "Print version of each binary and exit"
+    },
+    "version_info": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Info",
+      "description": "Print version of this script and exit"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help",
+      "description": "Print full contents of help"
+    }
+  },
+  "additionalProperties": false
+}

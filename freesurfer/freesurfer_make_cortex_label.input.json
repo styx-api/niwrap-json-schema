@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "make_cortex_label",
+  "description": "A tool to create cortical labels.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/make_cortex_label"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "The subject for which the cortex label is to be created."
+    },
+    "hemi": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hemisphere",
+      "description": "The hemisphere(s) on which to operate. Default is both hemispheres."
+    },
+    "use_a2009s": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use A2009S Flag",
+      "description": "Use aparc.a2009 instead of aparc."
+    },
+    "output_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Name",
+      "description": "Output name. The output will be ?h.outname.label. Default is 'cortex'."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject"
+  ]
+}

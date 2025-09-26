@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLocalSVD",
+  "description": "Computes the SVD of time series from a neighborhood of each voxel.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLocalSVD"
+    },
+    "auto_mask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Auto mask flag",
+      "description": "Create a mask from time series dataset"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input file",
+      "description": "Input time series dataset file"
+    },
+    "mask_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Restrict operations to this mask dataset"
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output file",
+      "description": "Prefix for the output SVD vector result dataset file"
+    },
+    "nbhd": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Neighborhood",
+      "description": "Neighborhood for SVD calculation, e.g., 'SPHERE(5)'"
+    },
+    "polort": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Polort",
+      "description": "Detrending option, ['+' means to add trend back]"
+    },
+    "vnorm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Normalize data vectors flag",
+      "description": "Normalize data vectors [strongly recommended]"
+    },
+    "vproj": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Project onto SVD subspace",
+      "description": "Project central data time series onto local SVD subspace of dimension 'ndim'"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "output_file"
+  ]
+}

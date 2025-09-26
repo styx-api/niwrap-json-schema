@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cifti-create-parcellated-from-template",
+  "description": "Match parcels to template by name.\n\nFor each parcel name in the template mapping, find that name in an input cifti file and use its data in the output file.  All input cifti files must have a parcels mapping along <modify-direction> and matching mappings along other dimensions.  The direction can be either an integer starting from 1, or the strings 'ROW' or 'COLUMN'.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti-create-parcellated-from-template"
+    },
+    "cifti_template": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "cifti_template",
+      "description": "a cifti file with the template parcel mapping along column"
+    },
+    "modify_direction": {
+      "type": "string",
+      "title": "modify_direction",
+      "description": "which dimension of the output file should match the template (integer, 'ROW', or 'COLUMN')"
+    },
+    "cifti_out": {
+      "type": "string",
+      "title": "cifti_out",
+      "description": "the output cifti file"
+    },
+    "opt_fill_value_value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_fill_value_value",
+      "description": "specify value to be used in parcels that don't match: value to use (default 0)"
+    },
+    "cifti": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "cifti"
+              },
+              "cifti_in": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "cifti_in",
+                "description": "the input parcellated cifti file"
+              }
+            },
+            "additionalProperties": false,
+            "title": "cifti",
+            "description": "specify an input cifti file",
+            "required": [
+              "cifti_in"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "cifti",
+      "description": "specify an input cifti file"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "cifti_template",
+    "modify_direction",
+    "cifti_out"
+  ]
+}

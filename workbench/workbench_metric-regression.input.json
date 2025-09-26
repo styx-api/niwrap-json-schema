@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "metric-regression",
+  "description": "Regress spatial map out of a metric file.\n\nFor each regressor, its mean across the surface is subtracted from its data.  Each input map is then regressed against these, and a constant term.  The resulting regressed slopes of all regressors specified with -remove are multiplied with their respective regressor maps, and these are subtracted from the input map.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric-regression"
+    },
+    "metric_in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "metric_in",
+      "description": "the metric to regress from"
+    },
+    "metric_out": {
+      "type": "string",
+      "title": "metric_out",
+      "description": "the output metric"
+    },
+    "opt_roi_roi_metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_roi_roi_metric",
+      "description": "only regress inside an roi: the area to use for regression, as a metric"
+    },
+    "opt_column_column": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "opt_column_column",
+      "description": "select a single column to regress from: the column number or name"
+    },
+    "remove": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "remove"
+              },
+              "metric": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "metric",
+                "description": "the metric file to use"
+              },
+              "opt_remove_column_column": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "opt_remove_column_column",
+                "description": "select a column to use, rather than all: the column number or name"
+              }
+            },
+            "additionalProperties": false,
+            "title": "remove",
+            "description": "specify a metric to regress out",
+            "required": [
+              "metric"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "remove",
+      "description": "specify a metric to regress out"
+    },
+    "keep": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "keep"
+              },
+              "metric": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "metric",
+                "description": "the metric file to use"
+              },
+              "opt_keep_column_column": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "opt_keep_column_column",
+                "description": "select a column to use, rather than all: the column number or name"
+              }
+            },
+            "additionalProperties": false,
+            "title": "keep",
+            "description": "specify a metric to include in regression, but not remove",
+            "required": [
+              "metric"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "keep",
+      "description": "specify a metric to include in regression, but not remove"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "metric_in",
+    "metric_out"
+  ]
+}

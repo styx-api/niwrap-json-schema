@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dBlurInMask",
+  "description": "Blurs a dataset spatially inside a mask",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dBlurInMask"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Dataset",
+      "description": "Dataset to be smoothed and output"
+    },
+    "output_prefix": {
+      "type": "string",
+      "title": "Output Dataset Prefix",
+      "description": "Prefix for output dataset"
+    },
+    "fwhm": {
+      "type": "number",
+      "title": "FWHM Smoothness",
+      "description": "Amount of smoothness to add to the dataset (in mm)"
+    },
+    "fwhm_dataset": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM Dataset",
+      "description": "Dataset containing the amount of smoothness for each voxel"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Dataset",
+      "description": "Mask dataset for blurring; voxels NOT in the mask will be zeroed in the output"
+    },
+    "multi_mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Multi-Mask Dataset",
+      "description": "Multi-mask dataset; each distinct nonzero value is treated as a separate mask"
+    },
+    "automask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automask Flag",
+      "description": "Create an automask from the input dataset"
+    },
+    "preserve": {
+      "type": "boolean",
+      "default": false,
+      "title": "Preserve Flag",
+      "description": "Preserve original values in the dataset outside the mask"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet Flag",
+      "description": "Don't be verbose with progress reports"
+    },
+    "float": {
+      "type": "boolean",
+      "default": false,
+      "title": "Float Flag",
+      "description": "Save dataset as floats"
+    },
+    "fwhm_xyz": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FWHM XYZ Smoothness",
+      "description": "Add different amounts of smoothness in the 3 spatial directions"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_file",
+    "output_prefix",
+    "fwhm"
+  ]
+}

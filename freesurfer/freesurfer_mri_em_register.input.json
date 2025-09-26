@@ -1,0 +1,677 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_em_register",
+  "description": "This program creates a transform in lta format",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_em_register"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input brain volume"
+    },
+    "template_gca": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Template GCA",
+      "description": "Template GCA file"
+    },
+    "output_transform": {
+      "type": "string",
+      "title": "Output Transform",
+      "description": "Output transform name"
+    },
+    "distance": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Distance",
+      "description": "Distance"
+    },
+    "nomap": {
+      "type": "boolean",
+      "default": false,
+      "title": "NoMap Flag",
+      "description": "No map"
+    },
+    "flash": {
+      "type": "boolean",
+      "default": false,
+      "title": "Flash Flag",
+      "description": "Use FLASH forward model to predict intensity values"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Volume",
+      "description": "Use volname as a mask"
+    },
+    "skull": {
+      "type": "boolean",
+      "default": false,
+      "title": "Skull Flag",
+      "description": "Align to atlas containing skull (uns=5)"
+    },
+    "uns": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unknown Neighbor Spacing",
+      "description": "Align to atlas containing skull setting unknown_nbr_spacing = nbrspacing"
+    },
+    "diag": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Diag File",
+      "description": "Open diagfile for writing"
+    },
+    "debug_voxel": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Voxel",
+      "description": "Debug voxel (x, y, z)"
+    },
+    "debug_label": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Label",
+      "description": "Debug label (label)"
+    },
+    "tr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "TR",
+      "description": "Use TR msec"
+    },
+    "te": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "TE",
+      "description": "Use TE msec"
+    },
+    "alpha": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Alpha",
+      "description": "Use alpha degrees"
+    },
+    "example": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Example T1 and Seg",
+      "description": "Use T1 and seg as example T1 and segmentations respectively"
+    },
+    "samples": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Samples File",
+      "description": "Write control points to fname"
+    },
+    "fsamples": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Files Samples",
+      "description": "Write transformed control points to fname"
+    },
+    "nsamples": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Normalized Samples",
+      "description": "Write transformed normalization control points to fname"
+    },
+    "contrast": {
+      "type": "boolean",
+      "default": false,
+      "title": "Contrast Flag",
+      "description": "Use contrast to find labels"
+    },
+    "flash_parms": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Flash Parameters",
+      "description": "Use FLASH forward model and tissue parms in parameterfile to predict intensity values"
+    },
+    "transonly": {
+      "type": "boolean",
+      "default": false,
+      "title": "Translate Only Flag",
+      "description": "Only compute translation parameters"
+    },
+    "write_mean": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Write Mean",
+      "description": "Write GCA means to fname"
+    },
+    "prior": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prior Threshold",
+      "description": "Use prior threshold min_prior"
+    },
+    "spacing": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spacing",
+      "description": "Use max GCA spacing"
+    },
+    "scales": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scales",
+      "description": "Find optimal linear transform over int scales"
+    },
+    "novar": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Variance Estimates Flag",
+      "description": "Do not use variance estimates"
+    },
+    "dt": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "DT Parameter",
+      "description": "DT parameter"
+    },
+    "tol": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tolerance",
+      "description": "Tolerance"
+    },
+    "center": {
+      "type": "boolean",
+      "default": false,
+      "title": "Center Flag",
+      "description": "Use GCA centroid as origin of transform"
+    },
+    "noscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Scaling Flag",
+      "description": "Disable scaling"
+    },
+    "noiscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Intensity Scaling Flag",
+      "description": "Disable intensity scaling"
+    },
+    "num_transforms": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Transforms",
+      "description": "Find a total of num_xforms linear transforms"
+    },
+    "area": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Area",
+      "description": "Area"
+    },
+    "nlarea": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Non-linear Area",
+      "description": "Non-linear area"
+    },
+    "levels": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Levels",
+      "description": "Levels"
+    },
+    "intensity": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Intensity",
+      "description": "Intensity"
+    },
+    "reduce": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reduce Input Images",
+      "description": "Reduce input images nreductions times before aligning"
+    },
+    "n_samples": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of GCA Samples",
+      "description": "Using n samples of GCA"
+    },
+    "norm": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Normalize and Write",
+      "description": "Normalize intensity and write to fname"
+    },
+    "trans": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Translation Search Range",
+      "description": "Setting max translation search range to be max_trans"
+    },
+    "steps": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Angular Steps",
+      "description": "Taking max_angles angular steps"
+    },
+    "long_reg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Longitudinal Registration",
+      "description": "Longitudinal: read previously computed atlas xform and apply registration long_reg"
+    },
+    "cpfile": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Control Points File",
+      "description": "Read manually defined control points from cpfile"
+    },
+    "translation_vector": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Translation Vector",
+      "description": "Translation vector (tx, ty, tz)"
+    },
+    "rotation_vector": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rotation Vector",
+      "description": "Rotation vector (rx, ry, rz)"
+    },
+    "xform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Computed Transform",
+      "description": "Using previously computed transform xform"
+    },
+    "blur": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Blurring Sigma",
+      "description": "Blurring input image with sigma=blur_sigma"
+    },
+    "diagno": {
+      "type": "boolean",
+      "default": false,
+      "title": "Diago Flag",
+      "description": "Diago flag (unspecified function)"
+    },
+    "s": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Angles",
+      "description": "Max angles"
+    },
+    "max_angle": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Angle",
+      "description": "Max angle for rotational search in radians (def=15 deg)"
+    },
+    "niters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Iterations",
+      "description": "Niterations = niters"
+    },
+    "write_iters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Write Iterations",
+      "description": "Write iterations = write_iters"
+    },
+    "ctl_point_pct": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Control Point Percentage",
+      "description": "Use top pct percent wm points as control points"
+    },
+    "momentum": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Momentum",
+      "description": "Set momentum"
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Threads",
+      "description": "Number of threads (nompthreads)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume",
+    "template_gca",
+    "output_transform"
+  ]
+}

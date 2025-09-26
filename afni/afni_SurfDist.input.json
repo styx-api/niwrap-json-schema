@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfDist",
+  "description": "Calculate shortest distance between node pairs on a surface mesh.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SurfDist"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Surface",
+      "description": "Surface on which distances are computed."
+    },
+    "nodepairs": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Node pairs",
+      "description": "Specify node pairs for distance computation."
+    },
+    "node_path_do": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Node path display object",
+      "description": "Output the shortest path between each node pair as a SUMA Displayable object."
+    },
+    "euclidean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Euclidean distance flag",
+      "description": "Calculate Euclidean distance, rather than graph distance."
+    },
+    "euclidian": {
+      "type": "boolean",
+      "default": false,
+      "title": "Euclidian distance flag",
+      "description": "Synonym for '-Euclidean'."
+    },
+    "graph": {
+      "type": "boolean",
+      "default": false,
+      "title": "Graph distance flag",
+      "description": "Calculate distance along the mesh (default)."
+    },
+    "from_node": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "From node",
+      "description": "Specify one starting node for pair calculation."
+    },
+    "to_nodes": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "To nodes",
+      "description": "Specify nodes used for pair calculation when using -from_node."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surface",
+    "nodepairs"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "compute_label_volumes.csh",
+  "description": "Computes the number of voxels and the volumes of either all or a particular label in the input label volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/compute_label_volumes.csh"
+    },
+    "label_vol": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Label Volume",
+      "description": "Label volume to be analyzed"
+    },
+    "output_file": {
+      "type": "string",
+      "title": "Output File",
+      "description": "Text file where the results are written"
+    },
+    "label_L": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "label_L"
+            },
+            "upper_L": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Particular Label (L)",
+              "description": "The particular label to be analyzed (case-sensitive option)"
+            },
+            "lower_L": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Particular Label (l)",
+              "description": "The particular label to be analyzed (case-insensitive option)"
+            }
+          },
+          "additionalProperties": false,
+          "description": "The particular label to be analyzed"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The particular label to be analyzed"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Print version and exit"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Print help and exit"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "label_vol",
+    "output_file"
+  ]
+}

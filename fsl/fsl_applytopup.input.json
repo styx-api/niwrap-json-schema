@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "applytopup",
+  "description": "applytopup applies corrections to images using the field estimates produced by topup.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/applytopup"
+    },
+    "imain": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input images",
+      "description": "Comma separated list of names of input image (to be corrected)"
+    },
+    "datain": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "PE directions/times file",
+      "description": "Name of text file with PE directions/times"
+    },
+    "inindex": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input index",
+      "description": "Comma separated list of indices into --datain of the input image (to be corrected)"
+    },
+    "topup": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Topup prefix",
+      "description": "Name of field/movements (from topup)"
+    },
+    "out": {
+      "type": "string",
+      "title": "Output basename",
+      "description": "Basename for output (warped) image"
+    },
+    "method": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "jac",
+            "lsr"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Method",
+      "description": "Use jacobian modulation (jac) or least-squares resampling (lsr), default=lsr."
+    },
+    "interp": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "trilinear",
+            "spline"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Interpolation method",
+      "description": "Interpolation method {trilinear, spline}, default=spline"
+    },
+    "datatype": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "char",
+            "short",
+            "int",
+            "float",
+            "double"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output data type",
+      "description": "Force output data type [char short int float double]"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Switch on diagnostic messages"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "imain",
+    "datain",
+    "inindex",
+    "topup",
+    "out"
+  ]
+}

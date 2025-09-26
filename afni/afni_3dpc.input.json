@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dpc",
+  "description": "Principal Component Analysis of 3D Datasets",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dpc"
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input datasets",
+      "description": "Input dataset(s) with sub-brick selector list support"
+    },
+    "dmean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Demean across space flag",
+      "description": "Remove the mean from each input brick (across space)"
+    },
+    "vmean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Demean across bricks flag",
+      "description": "Remove the mean from each input voxel (across bricks)"
+    },
+    "vnorm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Voxel normalization flag",
+      "description": "L2 normalize each input voxel time series"
+    },
+    "normalize": {
+      "type": "boolean",
+      "default": false,
+      "title": "Brick normalization flag",
+      "description": "L2 normalize each input brick (after mean subtraction)"
+    },
+    "nscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Scale covariance matrix flag",
+      "description": "Scale the covariance matrix by the number of samples"
+    },
+    "pcsave": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Save components",
+      "description": "'sss' is the number of components to save in the output"
+    },
+    "reduce": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dimensionally reduced output",
+      "description": "Compute a dimensionally reduced dataset with top 'r' eigenvalues and write to disk in dataset 'pp'"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix for output dataset",
+      "description": "Name for the output dataset"
+    },
+    "dummy_lines": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of dummy lines",
+      "description": "Add 'ddd' dummy lines to the top of each *.1D file"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Print progress reports during the computations"
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet flag",
+      "description": "Don't print progress reports"
+    },
+    "eigonly": {
+      "type": "boolean",
+      "default": false,
+      "title": "Eigenvalues only flag",
+      "description": "Only compute eigenvalues, write them to 'pname'_eig.1D, then stop"
+    },
+    "float": {
+      "type": "boolean",
+      "default": false,
+      "title": "Store eigen-bricks as floats",
+      "description": "Save eigen-bricks as floats (default = shorts)"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask file",
+      "description": "Use the 0 sub-brick of dataset 'mset' as a mask indicating which voxels to analyze"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "datasets"
+  ]
+}

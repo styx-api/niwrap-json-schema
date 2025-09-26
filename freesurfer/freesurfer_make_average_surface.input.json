@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "make_average_surface",
+  "description": "Creates average surfaces and curvatures from a set of subjects.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/make_average_surface"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Subjects",
+      "description": "List of subject names"
+    },
+    "fsgd_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FSGD file",
+      "description": "File from which to get the subject list"
+    },
+    "average_subject_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output name",
+      "description": "Average subject name"
+    },
+    "subjects_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects directory",
+      "description": "Directory for SUBJECTS_DIR (if different from the environment variable)"
+    },
+    "sd_out_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "SD_out directory",
+      "description": "Directory to put output data"
+    },
+    "transform_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform file",
+      "description": "Filename of the transform file"
+    },
+    "icosahedron_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Icosahedron number",
+      "description": "Specify icosahedron number"
+    },
+    "surf_reg": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface registration",
+      "description": "Alternative registration surface name"
+    },
+    "left_hemi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Left hemisphere flag",
+      "description": "Only process the left hemisphere"
+    },
+    "right_hemi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Right hemisphere flag",
+      "description": "Only process the right hemisphere"
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force overwrite flag",
+      "description": "Overwrite existing average subject data"
+    },
+    "annot_template": {
+      "type": "boolean",
+      "default": false,
+      "title": "Annotation template flag",
+      "description": "Use annotation when making tif"
+    },
+    "template_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Template only flag",
+      "description": "Useful when creating iterative atlases"
+    },
+    "no_template_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "No template only flag",
+      "description": "Turns off --template-only"
+    },
+    "no_annot": {
+      "type": "boolean",
+      "default": false,
+      "title": "No annot flag",
+      "description": "Do not create average annotations"
+    },
+    "no_cortex_label": {
+      "type": "boolean",
+      "default": false,
+      "title": "No cortex label flag",
+      "description": "Do not create ?h.cortex.label"
+    },
+    "annot_list": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Annotations list",
+      "description": "List of annotations to use"
+    },
+    "meas_list": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Measurements list",
+      "description": "List of measurements to use"
+    },
+    "no_surf2surf": {
+      "type": "boolean",
+      "default": false,
+      "title": "No surf2surf flag",
+      "description": "Use old parametric surface method"
+    },
+    "no_symlink": {
+      "type": "boolean",
+      "default": false,
+      "title": "No symlink flag",
+      "description": "Do not use symbolic links, just copy files"
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version flag",
+      "description": "Script version information"
+    },
+    "echo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Echo flag",
+      "description": "Enable command echo for debugging"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subjects"
+  ]
+}

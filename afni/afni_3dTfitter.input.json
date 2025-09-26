@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTfitter",
+  "description": "* At each voxel, assembles and solves a set of linear equations.\n ++ The matrix at each voxel may be the same or may be different.\n ++ This flexibility (for voxel-wise regressors) is one feature\n    that makes 3dTfitter different from 3dDeconvolve.\n ++ Another distinguishing feature is that 3dTfitter allows for\n    L2, L1, and L2+L1 (LASSO) regression solvers, and allows you\n    to impose sign constraints on the solution parameters.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTfitter"
+    },
+    "RHS": {
+      "type": "string",
+      "title": "Right-Hand Side dataset",
+      "description": "Specifies the right-hand-side 3D+time dataset. ('rset' can also be a 1D file with 1 column)"
+    },
+    "LHS": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Left-Hand Side matrix",
+      "description": "Specifies a column (or columns) of the left-hand-side matrix. More than one 'lset' can follow the '-LHS' option."
+    },
+    "polort": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Polynomial Order",
+      "description": "Add 'p+1' Legendre polynomial columns to the LHS matrix."
+    },
+    "vthr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Vector Threshold",
+      "description": "The value 'v' (between 0.0 and 0.09, inclusive) defines the threshold below which LHS vectors will be omitted from the regression analysis."
+    },
+    "FALTUNG": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Convolution (FALTUNG) Model",
+      "description": "Specifies a convolution (German: Faltung) model to be added to the LHS matrix. Followed by four arguments: 'fset', 'fpre', 'pen', 'fac'."
+    },
+    "lsqfit": {
+      "type": "boolean",
+      "default": false,
+      "title": "Least Squares Fit",
+      "description": "Solve equations via least squares [the default method]."
+    },
+    "l1fit": {
+      "type": "boolean",
+      "default": false,
+      "title": "Least Sum of Absolute Errors",
+      "description": "Solve equations via least sum of absolute residuals."
+    },
+    "l2lasso": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "L2 LASSO Regression",
+      "description": "Solve equations via least squares with a LASSO (L1) penalty on the coefficients. Followed by 'lam' and optional 'i j k ...'"
+    },
+    "lasso_centro_block": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "LASSO Centro Block",
+      "description": "Defines a block of coefficients that will be penalized together."
+    },
+    "l2sqrtlasso": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Square Root LASSO",
+      "description": "Similar to '-l2lasso', but aims to minimize sqrt(Q2)+lam*L1."
+    },
+    "consign": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Constrain Sign of Parameters",
+      "description": "Indicates that the sign of some output LHS parameters should be constrained in the solution."
+    },
+    "consFAL": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Constrain FALTUNG",
+      "description": "Constrain the deconvolution time series from '-FALTUNG' to be positive if 'c' is '+' or to be negative if 'c' is '-'."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix for Output",
+      "description": "Prefix for the output dataset (LHS parameters) filename."
+    },
+    "label": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Labels",
+      "description": "Specifies sub-brick labels in the output LHS parameter dataset."
+    },
+    "fitts": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fitted Time Series Output",
+      "description": "Prefix filename for the output fitted time series dataset."
+    },
+    "errsum": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error Sums Output",
+      "description": "Prefix filename for the error sums dataset."
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Dataset",
+      "description": "Read in dataset 'ms' to use as a mask; only voxels with nonzero values in the mask will be processed."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet Mode",
+      "description": "Don't print progress report messages."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "RHS"
+  ]
+}

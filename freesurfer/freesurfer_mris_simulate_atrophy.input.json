@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_simulate_atrophy",
+  "description": "Simulate atrophy on brain structures.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_simulate_atrophy"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject identifier"
+    },
+    "hemi": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere (e.g. lh or rh)"
+    },
+    "label": {
+      "type": "string",
+      "title": "Label",
+      "description": "Label of the brain region"
+    },
+    "atrophy_fraction": {
+      "type": "number",
+      "title": "Atrophy Fraction",
+      "description": "Target atrophy fraction"
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume file"
+    },
+    "atrophy_percent": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Atrophy Percentage",
+      "description": "Percentage atrophy to simulate of structure"
+    },
+    "noise_level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Noise Level",
+      "description": "Gaussian noise level to add"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject",
+    "hemi",
+    "label",
+    "atrophy_fraction",
+    "output_volume"
+  ]
+}

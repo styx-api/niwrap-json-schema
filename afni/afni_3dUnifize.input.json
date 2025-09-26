@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dUnifize",
+  "description": "3dUnifize - for uniformizing image intensity\n* The input dataset is supposed to be a T1-weighted volume, possibly already skull-stripped (e.g., via 3dSkullStrip). However, this program can be a useful step to take BEFORE 3dSkullStrip, since the latter program can fail if the input volume is strongly shaded -- 3dUnifize will (mostly) remove such shading artifacts.\n* The output dataset has the white matter (WM) intensity approximately uniformized across space, and scaled to peak at about 1000.\n* The output dataset is always stored in float format!\n* If the input dataset has more than 1 sub-brick, only sub-brick #0 will be processed!\n* Want to correct EPI datasets for nonuniformity? You can try the new and experimental [Mar 2017] '-EPI' option.\n* The principal motive for this program is for use in an image registration script, and it may or may not be useful otherwise.\n* This program replaces the older (and very different) 3dUniformize, which is no longer maintained and may sublimate at any moment. (In other words, we do not recommend the use of 3dUniformize.)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dUnifize"
+    },
+    "cl_frac": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cl frac",
+      "description": "Option for afni experts only.set the automask 'clip level fraction'. must be between 0.1 and 0.9. a small fraction means to make the initial threshold for clipping (a la 3dcliplevel) smaller, which will tend to make the mask larger.  [default=0.1]."
+    },
+    "epi": {
+      "type": "boolean",
+      "default": false,
+      "title": "Epi",
+      "description": "Assume the input dataset is a t2 (or t2\\*) weighted epi time series. after computing the scaling, apply it to all volumes (trs) in the input dataset. that is, a given voxel will be scaled by the same factor at each tr. this option also implies '-noduplo' and '-t2'.this option turns off '-gm' if you turned it on."
+    },
+    "gm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Gm",
+      "description": "Also scale to unifize 'gray matter' = lower intensity voxels (to aid in registering images from different scanners)."
+    },
+    "no_duplo": {
+      "type": "boolean",
+      "default": false,
+      "title": "No duplo",
+      "description": "Do not use the 'duplo down' step; this can be useful for lower resolution datasets."
+    },
+    "num_threads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Num threads",
+      "description": "Set number of threads."
+    },
+    "outputtype": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "NIFTI",
+            "AFNI",
+            "NIFTI_GZ"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outputtype",
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype."
+    },
+    "quiet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiet",
+      "description": "Don't print the progress messages."
+    },
+    "rbt": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rbt",
+      "description": "(a float, a float, a float). Option for afni experts only.specify the 3 parameters for the algorithm:r = radius; same as given by option '-urad', [default=18.3]b = bottom percentile of normalizing data range, [default=70.0]r = top percentile of normalizing data range, [default=80.0]."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Output image file name."
+    },
+    "scale_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale file",
+      "description": "Output file name to save the scale factor used at each voxel ."
+    },
+    "t2": {
+      "type": "boolean",
+      "default": false,
+      "title": "T2",
+      "description": "Treat the input as if it were t2-weighted, rather than t1-weighted. this processing is done simply by inverting the image contrast, processing it as if that result were t1-weighted, and then re-inverting the results counts of voxel overlap, i.e., each voxel will contain the number of masks that it is set in."
+    },
+    "t2_up": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T2 up",
+      "description": "Option for afni experts only.set the upper percentile point used for t2-t1 inversion. allowed to be anything between 90 and 100 (inclusive), with default to 98.5  (for no good reason)."
+    },
+    "urad": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Urad",
+      "description": "Sets the radius (in voxels) of the ball used for the sneaky trick. default value is 18.3, and should be changed proportionally if the dataset voxel size differs significantly from 1 mm."
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "In file",
+      "description": "Input file to 3dunifize."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "in_file"
+  ]
+}

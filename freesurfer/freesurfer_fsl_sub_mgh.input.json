@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_sub_mgh",
+  "description": "Wrapper for job control system such as SGE, modified for compatibility with the PBS queueing system.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/fsl_sub_mgh"
+    },
+    "estimated_time": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimated job time",
+      "description": "Estimated job length in minutes, used to auto-set queue name"
+    },
+    "queue_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Queue name",
+      "description": "Queue name. Possible values are 'verylong.q', 'long.q' and 'short.q'. Default is 'long.q'."
+    },
+    "architecture": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Architecture",
+      "description": "Architecture [e.g., darwin or lx24-amd64]"
+    },
+    "job_priority": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Job priority",
+      "description": "Job priority [0:-1024]. Default is 0."
+    },
+    "email_address": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Email address",
+      "description": "Email address to send notifications. Default is root@fmrib.ox.ac.uk."
+    },
+    "hold_job": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hold job ID",
+      "description": "Job ID to place a hold on this task until completion."
+    },
+    "task_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Task file",
+      "description": "Task file of commands to execute in parallel."
+    },
+    "job_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Job name",
+      "description": "Specify job name as it will appear on the queue."
+    },
+    "log_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log directory",
+      "description": "Output directory for log files."
+    },
+    "mail_options": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mail options",
+      "description": "Change the SGE mail options."
+    },
+    "flags_in_scripts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Flags in scripts flag",
+      "description": "Use flags embedded in scripts to set SGE queuing options."
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose flag",
+      "description": "Verbose mode."
+    },
+    "shell_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Shell path",
+      "description": "Change the PBS shell option."
+    }
+  },
+  "additionalProperties": false
+}

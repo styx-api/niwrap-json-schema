@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_remesh",
+  "description": "Remeshes a surface to a desired edge length, number of vertices, or average face area.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_remesh"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Surface",
+      "description": "Input surface file"
+    },
+    "output": {
+      "type": "string",
+      "title": "Output Surface",
+      "description": "Output surface file"
+    },
+    "edge_length": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Edge Length",
+      "description": "Target average edge length in mm for remeshed surface"
+    },
+    "num_vertices": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Vertices",
+      "description": "Target number of vertices for remeshed surface"
+    },
+    "face_area": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Face Area",
+      "description": "Desired average face area in mm\u00b2"
+    },
+    "remesh": {
+      "type": "boolean",
+      "default": false,
+      "title": "Remesh",
+      "description": "Improve the quality while only reducing vertices by a small amount"
+    },
+    "iterations": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Iterations",
+      "description": "Number of remeshing iterations (default is 5)"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input",
+    "output"
+  ]
+}

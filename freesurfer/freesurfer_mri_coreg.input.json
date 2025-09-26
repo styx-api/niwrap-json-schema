@@ -1,0 +1,608 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_coreg",
+  "description": "mri_coreg performs a linear registration between two volumes using the method compatible with spm_coreg.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_coreg"
+    },
+    "movvol": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Moving Volume",
+      "description": "Source volume (mov)"
+    },
+    "refvol": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Reference Volume",
+      "description": "Target volume (ref or targ)"
+    },
+    "reg": {
+      "type": "string",
+      "title": "Registration File",
+      "description": "Output registration file"
+    },
+    "subject": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subject ID",
+      "description": "Subject ID, forces --ref-mask aparc+aseg.mgz"
+    },
+    "dof": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Degrees of Freedom",
+      "description": "Degrees of freedom. Default is 6."
+    },
+    "zscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Z-scale flag",
+      "description": "Enable 7 dof registration with scaling in Z."
+    },
+    "xztrans_yrot": {
+      "type": "boolean",
+      "default": false,
+      "title": "XZ Translation and Y Rotation flag",
+      "description": "For 2D images: uses shifts in x and z and rotation about y (no scale)."
+    },
+    "xytrans_zrot": {
+      "type": "boolean",
+      "default": false,
+      "title": "XY Translation and Z Rotation flag",
+      "description": "For 2D images: uses shifts in x and y and rotation about z (no scale)."
+    },
+    "xytrans_zrot_xyscale_xyshear": {
+      "type": "boolean",
+      "default": false,
+      "title": "XY Trans, Z Rot, XY Scale, XY Shear flag",
+      "description": "For 2D images: uses shifts in x and y, rotation about z, scale in xy, and xy shear."
+    },
+    "ref_maskvol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference Mask Volume",
+      "description": "Mask reference volume with specified mask volume."
+    },
+    "no_ref_mask": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Reference Mask flag",
+      "description": "Do not mask reference volume."
+    },
+    "mov_maskvol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Moving Mask Volume",
+      "description": "Mask moving volume with specified mask volume."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Threads",
+      "description": "Number of threads to use."
+    },
+    "subjects_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Freesurfer SUBJECTS_DIR."
+    },
+    "regdat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Registration Data File",
+      "description": "Specify registration data file."
+    },
+    "no_coord_dither": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Coordinate Dither flag",
+      "description": "Turn off coordinate dithering."
+    },
+    "no_intensity_dither": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Intensity Dither flag",
+      "description": "Turn off intensity dithering."
+    },
+    "spatial_scales": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Spatial Scales",
+      "description": "Set spatial scales."
+    },
+    "trans": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Translation Vector",
+      "description": "Initial translation in mm."
+    },
+    "rot": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rotation Vector",
+      "description": "Initial rotation in degrees."
+    },
+    "scale": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale Vector",
+      "description": "Initial scale."
+    },
+    "shear": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Shear Vector",
+      "description": "Initial shear."
+    },
+    "init_reg": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Registration File",
+      "description": "Initialize with given registration file."
+    },
+    "out_param_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Parameter File",
+      "description": "Save parameters in specified file."
+    },
+    "out_cost_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Cost File",
+      "description": "Save final cost value in specified file."
+    },
+    "no_cras0": {
+      "type": "boolean",
+      "default": false,
+      "title": "No CRAS0 flag",
+      "description": "Do not set translation parameters to align centers of mov and ref."
+    },
+    "centroid": {
+      "type": "boolean",
+      "default": false,
+      "title": "Centroid flag",
+      "description": "Initialize by aligning centroids of mov and ref."
+    },
+    "ras2ras": {
+      "type": "boolean",
+      "default": false,
+      "title": "RAS2RAS flag",
+      "description": "Save output LTA as RAS2RAS."
+    },
+    "nitersmax": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Iterations",
+      "description": "Set maximum number of iterations."
+    },
+    "ftol": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Function Tolerance",
+      "description": "Set function tolerance."
+    },
+    "linmintol": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Line Min Tolerance",
+      "description": "Set line minimum tolerance."
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random Seed",
+      "description": "Set random seed for dithering."
+    },
+    "sat": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Saturation Threshold",
+      "description": "Set saturation threshold."
+    },
+    "conf_ref": {
+      "type": "boolean",
+      "default": false,
+      "title": "Conform Reference flag",
+      "description": "Conform the reference without rescaling."
+    },
+    "no_bf": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Brute Force flag",
+      "description": "Do not perform brute force search."
+    },
+    "bf_lim": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brute Force Limit",
+      "description": "Set constraint limits for brute force search."
+    },
+    "bf_nsamp": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Brute Force Samples",
+      "description": "Set number of samples for brute force search."
+    },
+    "no_smooth": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Smoothing flag",
+      "description": "Do not apply smoothing to either ref or mov."
+    },
+    "ref_fwhm": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference FWHM",
+      "description": "Apply smoothing to ref with specified FWHM."
+    },
+    "mov_oob": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mov Out of Bounds flag",
+      "description": "Count mov voxels that are out-of-bounds as 0."
+    },
+    "init_reg_save": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Registration Save",
+      "description": "Save initial registration."
+    },
+    "init_reg_save_only": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Registration Save Only",
+      "description": "Save initial registration and exit."
+    },
+    "mat2par": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Extract Parameters File",
+      "description": "Extract parameters out of registration."
+    },
+    "mat2rot": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rotation Registration File",
+      "description": "Convert registration to a pure rotation."
+    },
+    "par2mat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parameters to Matrix",
+      "description": "Convert parameters to a registration."
+    },
+    "lrrev": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Left-Right Reversal Registration",
+      "description": "Approximate registration if you were to left-right reverse the pixels of the input image."
+    },
+    "landmarks": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 6
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Landmark Registration",
+      "description": "Convert landmarks to a registration."
+    },
+    "rms": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 4
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "RMS Computation",
+      "description": "Compute RMS difference between two registrations."
+    },
+    "movout": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Preprocessed Moving Volume",
+      "description": "Save the mov after all preprocessing steps."
+    },
+    "mov_idither": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Moving Intensity Dither Volume",
+      "description": "Save the mov intensity dither volume."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Flag",
+      "description": "Enable debugging mode."
+    },
+    "checkopts": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Options Flag",
+      "description": "Check options and exit without running."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Version Flag",
+      "description": "Print out version and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "movvol",
+    "refvol",
+    "reg"
+  ]
+}

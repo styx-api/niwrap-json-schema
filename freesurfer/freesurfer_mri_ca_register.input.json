@@ -1,0 +1,421 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_ca_register",
+  "description": "Generates a multi-dimensional talairach transform from a gca file and talairach.lta file",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_ca_register"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Volume",
+      "description": "Input volume"
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Template",
+      "description": "Template in GCA format"
+    },
+    "output_volume": {
+      "type": "string",
+      "title": "Output Volume",
+      "description": "Output volume in M3D format"
+    },
+    "tolerance": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tolerance",
+      "description": "Defines convergence of registration"
+    },
+    "mask": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask",
+      "description": "Specifies volume to use as a mask"
+    },
+    "transform_lta": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform LTA",
+      "description": "Transform in LTA format"
+    },
+    "level": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Level",
+      "description": "Defines how many surrounding voxels will be used in interpolations, default is 6"
+    },
+    "read_intensity": {
+      "type": "boolean",
+      "default": false,
+      "title": "Read Intensity",
+      "description": "Allows reading of multiple intensity normalization"
+    },
+    "align": {
+      "type": "boolean",
+      "default": false,
+      "title": "Align",
+      "description": "Enable alignment"
+    },
+    "invert_save_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Invert and Save File",
+      "description": "Invert and save as GCAM file"
+    },
+    "distance": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Distance",
+      "description": "Distance for registration"
+    },
+    "regularize": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Regularize",
+      "description": "Regularization parameter"
+    },
+    "regularize_mean": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Regularize Mean",
+      "description": "Mean regularization"
+    },
+    "scale_smoothness": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Scale Smoothness",
+      "description": "Smoothness scaling factor"
+    },
+    "nobright": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Brightness Adjustment",
+      "description": "Disable brightness adjustment"
+    },
+    "renormalize_map": {
+      "type": "boolean",
+      "default": false,
+      "title": "Renormalize Map",
+      "description": "Renormalize using map"
+    },
+    "renormalize": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Renormalize",
+      "description": "Renormalize with intensity file"
+    },
+    "read_lta": {
+      "type": "boolean",
+      "default": false,
+      "title": "Read LTA",
+      "description": "Use LTA file for registration"
+    },
+    "smoothness": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smoothness",
+      "description": "Smoothness parameter"
+    },
+    "samples": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Samples",
+      "description": "Sample points for registration"
+    },
+    "nsmall": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Small Features",
+      "description": "Number of small features"
+    },
+    "fixed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fixed Mode",
+      "description": "Fixed mode for registration"
+    },
+    "optimal": {
+      "type": "boolean",
+      "default": false,
+      "title": "Optimal Settings",
+      "description": "Optimal registration settings"
+    },
+    "noneg": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Negative Values",
+      "description": "Disallow negative values"
+    },
+    "wm": {
+      "type": "boolean",
+      "default": false,
+      "title": "White Matter Flag",
+      "description": "White matter flag"
+    },
+    "min_avgs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Minimum Averages",
+      "description": "Minimum number of averages"
+    },
+    "transform_limit": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform Limit",
+      "description": "Transform limit"
+    },
+    "relabel": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Relabel",
+      "description": "Relabel options"
+    },
+    "relabel_avgs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Relabel Averages",
+      "description": "Relabel averages"
+    },
+    "reset_avgs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reset Averages",
+      "description": "Reset averages"
+    },
+    "vf_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "VF File",
+      "description": "VF file name"
+    },
+    "diag_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Diag File",
+      "description": "Diagnostic file name"
+    },
+    "tr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "TR",
+      "description": "TR parameter"
+    },
+    "te": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "TE",
+      "description": "TE parameter"
+    },
+    "example": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Example",
+      "description": "Example file"
+    },
+    "bigventricles": {
+      "type": "boolean",
+      "default": false,
+      "title": "Big Ventricles",
+      "description": "Handle big ventricles"
+    },
+    "uncompress": {
+      "type": "boolean",
+      "default": false,
+      "title": "Uncompress",
+      "description": "Uncompress files"
+    },
+    "second_pass_renorm": {
+      "type": "boolean",
+      "default": false,
+      "title": "Second Pass Renorm",
+      "description": "Second pass renormalization"
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "Number of threads"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_volume",
+    "template",
+    "output_volume"
+  ]
+}

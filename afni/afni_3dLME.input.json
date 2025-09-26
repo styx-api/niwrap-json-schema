@@ -1,0 +1,326 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLME",
+  "description": "AFNI Group Analysis Program with Linear Mixed-Effects Modeling Approach",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLME"
+    },
+    "PREFIX": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Prefix for output files"
+    },
+    "MODEL": {
+      "type": "string",
+      "title": "Model Formula",
+      "description": "Model formula describing the fixed effects"
+    },
+    "DATA_TABLE": {
+      "type": "string",
+      "title": "Data Table",
+      "description": "Data table description"
+    },
+    "BOUNDS": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Outlier Bounds",
+      "description": "Lower and upper bounds for outlier removal"
+    },
+    "CIO_FLAG": {
+      "type": "boolean",
+      "default": false,
+      "title": "CIO Flag",
+      "description": "Use AFNI's C io functions (default) or R's io functions with -Rio"
+    },
+    "COR_STR": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Correlation Structure",
+      "description": "Specify the correlation structure of the residuals"
+    },
+    "CUTOFF": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cutoff Value",
+      "description": "Specify the cutoff value for accuracy in logistic regression analysis"
+    },
+    "DBG_ARGS_FLAG": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Args Flag",
+      "description": "Enable saving parameters for debugging"
+    },
+    "JOBS": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Jobs",
+      "description": "Number of jobs for parallel computing"
+    },
+    "GLT_CODE": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GLT Code",
+      "description": "General linear test coding"
+    },
+    "GLT_LABEL": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GLT Label",
+      "description": "Label for general linear test"
+    },
+    "GLF_LABEL": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GLF Label",
+      "description": "Label for general linear F-test"
+    },
+    "GLF_CODE": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GLF Code",
+      "description": "General linear F-test coding"
+    },
+    "ICC_FLAG": {
+      "type": "boolean",
+      "default": false,
+      "title": "ICC Flag",
+      "description": "Compute voxel-wise intra-class correlation"
+    },
+    "ICCB_FLAG": {
+      "type": "boolean",
+      "default": false,
+      "title": "ICCb Flag",
+      "description": "Compute voxel-wise intra-class correlation with Bayesian approach"
+    },
+    "LOG_LIK_FLAG": {
+      "type": "boolean",
+      "default": false,
+      "title": "Log Likelihood Flag",
+      "description": "Include voxel-wise log likelihood in the output"
+    },
+    "LOGIT_FLAG": {
+      "type": "boolean",
+      "default": false,
+      "title": "Logit Flag",
+      "description": "Perform voxel-wise logistic modeling"
+    },
+    "ML_FLAG": {
+      "type": "boolean",
+      "default": false,
+      "title": "ML Flag",
+      "description": "Use Maximum Likelihood estimation instead of REML"
+    },
+    "QVARS_CENTERS": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "QVars Centers",
+      "description": "Centering values for quantitative variables"
+    },
+    "QVARS": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quantitative Variables",
+      "description": "Identify quantitative variables (or covariates)"
+    },
+    "RANEFF": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random Effects",
+      "description": "Specify the random effects"
+    },
+    "MASK": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask File",
+      "description": "Mask file for voxel processing"
+    },
+    "NUM_GLF": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of GLFs",
+      "description": "Number of general linear F-tests"
+    },
+    "NUM_GLT": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of GLTs",
+      "description": "Number of general linear t-tests"
+    },
+    "RESID": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Residuals Prefix",
+      "description": "Prefix for residuals output file"
+    },
+    "RE": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random Effects Variables",
+      "description": "List of variables whose random effects are saved in the output"
+    },
+    "REPREFIX": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random Effects Prefix",
+      "description": "Prefix for random effects output file"
+    },
+    "RIO_FLAG": {
+      "type": "boolean",
+      "default": false,
+      "title": "RIO Flag",
+      "description": "Use R's io functions instead of AFNI's C io functions"
+    },
+    "SHOW_OPTIONS_FLAG": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Allowed Options Flag",
+      "description": "List of allowed options"
+    },
+    "SS_TYPE": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sums of Squares Type",
+      "description": "Specify the type for sums of squares in the F-statistics"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "PREFIX",
+    "MODEL",
+    "DATA_TABLE"
+  ]
+}

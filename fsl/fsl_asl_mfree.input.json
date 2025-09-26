@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "asl_mfree",
+  "description": "ASL model-free analysis tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/asl_mfree"
+    },
+    "datafile": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Data file",
+      "description": "ASL data file"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask file",
+      "description": "Mask file"
+    },
+    "out": {
+      "type": "string",
+      "title": "Output directory",
+      "description": "Output directory name"
+    },
+    "aif": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Arterial input functions",
+      "description": "Arterial input functions for deconvolution (4D volume, one aif for each voxel within mask)"
+    },
+    "dt": {
+      "type": "number",
+      "title": "Temporal spacing",
+      "description": "Temporal spacing in data (s)"
+    },
+    "metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Metric image",
+      "description": "Metric image file (optional)"
+    },
+    "mthresh": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Metric threshold",
+      "description": "Metric threshold (optional)"
+    },
+    "tcorrect": {
+      "type": "boolean",
+      "default": false,
+      "title": "Timing correction",
+      "description": "Apply correction for timing difference between AIF and tissue curve (optional)"
+    },
+    "bata": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Arterial BAT image",
+      "description": "Arterial BAT image (optional)"
+    },
+    "batt": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tissue BAT image",
+      "description": "Tissue BAT image (optional)"
+    },
+    "bat": {
+      "type": "boolean",
+      "default": false,
+      "title": "Estimate tissue BAT",
+      "description": "Estimate tissue BAT from data and save this image (optional)"
+    },
+    "bat_grad_thr": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "BAT gradient threshold",
+      "description": "Edge detection gradient threshold (default: 0.2, optional)"
+    },
+    "t1": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T1 value",
+      "description": "T1 (of blood) value (optional)"
+    },
+    "fa": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Flip angle",
+      "description": "Flip angle (if using LL readout, optional)"
+    },
+    "std": {
+      "type": "boolean",
+      "default": false,
+      "title": "Calculate standard deviations",
+      "description": "Calculate standard deviations on perfusion values using wild bootstrapping (optional)"
+    },
+    "nwb": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of permutations",
+      "description": "Number of permutations for wild bootstrapping (optional)"
+    },
+    "turbo_quasar": {
+      "type": "boolean",
+      "default": false,
+      "title": "Turbo QUASAR Sequence",
+      "description": "Specify this is a Turbo QUASAR Sequence (optional)"
+    },
+    "shift_factor": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Slice shifting factor",
+      "description": "Slice shifting factor in Turbo QUASAR (default value: 1, optional)"
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose mode",
+      "description": "Enable verbose mode"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "datafile",
+    "mask",
+    "out",
+    "aif",
+    "dt"
+  ]
+}

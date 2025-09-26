@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ROI_Corr_Mat",
+  "description": "Script to produce an NxN ROI correlation matrix of N ROIs",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@ROI_Corr_Mat"
+    },
+    "ts_vol": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "TimeSeriesVol",
+      "description": "Time series volume"
+    },
+    "roi_vol": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "ROIVol",
+      "description": "ROI volume"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Use output for a prefix"
+    },
+    "roisel": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ROISEL",
+      "description": "Force processing of ROI label (integers) listed in ROISEL 1D file"
+    },
+    "zval": {
+      "type": "boolean",
+      "default": false,
+      "title": "Z-Value Flag",
+      "description": "Output a zscore version of the correlation matrix"
+    },
+    "mat_opt": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Matrix Output Option",
+      "description": "Output matrix in different manners"
+    },
+    "dirty": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dirty Flag",
+      "description": "Keep temporary files"
+    },
+    "keep_tmp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep Temporary Files Flag",
+      "description": "Keep temporary files"
+    },
+    "echo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Echo Flag",
+      "description": "Set echo (echo all commands to screen)"
+    },
+    "verb": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Verbose flag"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ts_vol",
+    "roi_vol",
+    "prefix"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri-func2sph",
+  "description": "Maps functional data from volume space to spherical surface space.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri-func2sph"
+    },
+    "instem": {
+      "type": "string",
+      "title": "Input Stem",
+      "description": "Input file stem"
+    },
+    "outstem": {
+      "type": "string",
+      "title": "Output Stem",
+      "description": "Output file stem"
+    },
+    "hemisphere": {
+      "type": "string",
+      "enum": [
+        "lh",
+        "rh"
+      ],
+      "title": "Hemisphere",
+      "description": "Hemisphere to process, can be 'lh' or 'rh'"
+    },
+    "fvitdir": {
+      "type": "string",
+      "title": "Functional VIT Directory",
+      "description": "Functional vertex information directory"
+    },
+    "hole_filling_iters": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hole-Filling Iterations",
+      "description": "Number of hole-filling iterations"
+    },
+    "icosahedron_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Icosahedron Size",
+      "description": "Size of the icosahedron"
+    },
+    "input_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input Type",
+      "description": "Type of input data, will be auto-detected if not specified"
+    },
+    "umask": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "UMask",
+      "description": "New umask value"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "instem",
+    "outstem",
+    "hemisphere",
+    "fvitdir"
+  ]
+}

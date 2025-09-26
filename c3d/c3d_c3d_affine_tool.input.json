@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "c3d_affine_tool",
+  "description": "RAS affine transform tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "c3d/c3d_affine_tool"
+    },
+    "transform_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transform file",
+      "description": "file or string representing the transform."
+    },
+    "reference_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reference file",
+      "description": "Set reference (fixed) image - only for -fsl2ras and -ras2fsl."
+    },
+    "source_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source file",
+      "description": "Set source (moving) image - only for -fsl2ras and -ras2fsl."
+    },
+    "sform_file": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sform file",
+      "description": "Read matrix from NifTI sform."
+    },
+    "invert": {
+      "type": "boolean",
+      "default": false,
+      "title": "Invert",
+      "description": "Invert matrix."
+    },
+    "determinant": {
+      "type": "boolean",
+      "default": false,
+      "title": "Determinant",
+      "description": "Print the determinant."
+    },
+    "multiply": {
+      "type": "boolean",
+      "default": false,
+      "title": "Multiply",
+      "description": "Multiply matrices."
+    },
+    "sqrt": {
+      "type": "boolean",
+      "default": false,
+      "title": "Square root",
+      "description": "Matrix square root (i.e., Q s.t. A = Q * Q)."
+    },
+    "itk_transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "ITK transform",
+      "description": "Import ITK transform."
+    },
+    "irtk_transform": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "IRTK transform",
+      "description": "Import IRTK .dof format transform."
+    },
+    "fsl2ras": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fsl2ras",
+      "description": "Convert FSL to RAS."
+    },
+    "ras2fsl": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ras2fsl",
+      "description": "Convert RAS to FSL."
+    },
+    "out_itk_transform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output ITK transform",
+      "description": "Export ITK transform."
+    },
+    "out_irtk_transform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output IRTK transform",
+      "description": "Export IRTK .dof format transform."
+    },
+    "out_matfile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output matrix",
+      "description": "Write output matrix."
+    },
+    "info": {
+      "type": "boolean",
+      "default": false,
+      "title": "Info",
+      "description": "Print matrix."
+    },
+    "info_full": {
+      "type": "boolean",
+      "default": false,
+      "title": "Info full",
+      "description": "Print matrix and more detail about the transform."
+    }
+  },
+  "additionalProperties": false
+}

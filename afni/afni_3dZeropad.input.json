@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dZeropad",
+  "description": "Adds planes of zeros to a dataset (i.e., pads it out). Negative 'add' count means to cut a dataset down in size.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dZeropad"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input dataset",
+      "description": "Input dataset"
+    },
+    "I": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inferior padding",
+      "description": "Adds 'n' planes of zero at the Inferior edge"
+    },
+    "S": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Superior padding",
+      "description": "Adds 'n' planes of zero at the Superior edge"
+    },
+    "A": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Anterior padding",
+      "description": "Adds 'n' planes of zero at the Anterior edge"
+    },
+    "P": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Posterior padding",
+      "description": "Adds 'n' planes of zero at the Posterior edge"
+    },
+    "L": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Left padding",
+      "description": "Adds 'n' planes of zero at the Left edge"
+    },
+    "R": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Right padding",
+      "description": "Adds 'n' planes of zero at the Right edge"
+    },
+    "z": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "z-axis padding",
+      "description": "Adds 'n' planes of zeros on EACH of the dataset z-axis (slice-direction) faces"
+    },
+    "RL": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Right/Left symmetric padding",
+      "description": "Add/cut planes symmetrically to make the resulting volume have 'a' slices in the Right/Left direction"
+    },
+    "AP": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Anterior/Posterior symmetric padding",
+      "description": "Add/cut planes symmetrically to make the resulting volume have 'b' slices in the Anterior/Posterior direction"
+    },
+    "IS": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Inferior/Superior symmetric padding",
+      "description": "Add/cut planes symmetrically to make the resulting volume have 'c' slices in the Inferior/Superior direction"
+    },
+    "pad2even": {
+      "type": "boolean",
+      "default": false,
+      "title": "Pad to evens",
+      "description": "Add 0 or 1 plane in each of the R/A/S directions, giving each axis an even number of slices"
+    },
+    "mm_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Padding in mm",
+      "description": "Pad counts 'n' are in mm instead of slices."
+    },
+    "master_dataset": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Master dataset",
+      "description": "Match the volume described in dataset 'mset'. 'mset' must have the same orientation and grid spacing as dataset to be padded."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output prefix",
+      "description": "Write result into dataset with prefix 'ppp'. Default is 'zeropad'."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dataset"
+  ]
+}

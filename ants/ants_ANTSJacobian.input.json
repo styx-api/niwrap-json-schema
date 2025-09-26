@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ANTSJacobian",
+  "description": "Calculate the Jacobian determinant of a transformation using ANTs. WARNING: ANTSJacobian may not be working correctly; see CreateJacobianDeterminantImage for an alternative method.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/ANTSJacobian"
+    },
+    "imagedim": {
+      "type": "integer",
+      "title": "Image Dimension",
+      "description": "The dimensionality of the input image."
+    },
+    "gwarp": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Warp Image",
+      "description": "The input warp image."
+    },
+    "outfile": {
+      "type": "string",
+      "title": "Output File",
+      "description": "The prefix for the output files."
+    },
+    "uselog": {
+      "type": "integer",
+      "title": "Use Log",
+      "description": "Whether to use logarithm in computation."
+    },
+    "maskfn": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask File",
+      "description": "Mask file used in the computation."
+    },
+    "normbytotalbool": {
+      "type": "integer",
+      "title": "Normalize by Total",
+      "description": "Normalize the Jacobian by the total in the mask. Use this to adjust for head size."
+    },
+    "projectionvector": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Projection Vector",
+      "description": "Projects the warp along the specified direction. Do not add this option if no projection is desired."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "imagedim",
+    "gwarp",
+    "outfile",
+    "uselog",
+    "maskfn",
+    "normbytotalbool"
+  ]
+}

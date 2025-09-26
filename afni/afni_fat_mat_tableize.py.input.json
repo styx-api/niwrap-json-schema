@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_mat_tableize.py",
+  "description": "Make tables for AFNI group analysis programs from 3dNetCorr (*.netcc) and 3dTrackID (*.grid) outputs, with optional additional subject information from CSV files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_mat_tableize.py"
+    },
+    "input_matrices": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Matrices",
+      "description": "Names of *.netcc or *.grid files with matrices to be used to make table; can be provided using wildcard chars."
+    },
+    "input_csv": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input CSV",
+      "description": "Name of a CSV file to include in the table. The first column must have subject ID labels that match with the input matrix files."
+    },
+    "input_list": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Input List File",
+      "description": "File containing paths to subject matrices and optionally CSV IDs for matching."
+    },
+    "output_prefix": {
+      "type": "string",
+      "title": "Output Prefix",
+      "description": "Output basename for the table and log files. Suffix and file extensions will be added for the outputs."
+    },
+    "parameters": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "List of Parameters",
+      "description": "List of matrices to be included in the table, identified by their parameter name."
+    },
+    "version": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Version",
+      "description": "Display current version."
+    },
+    "date": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Date",
+      "description": "Display release/editing date of current version."
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Help",
+      "description": "Display help in terminal."
+    },
+    "help_short": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Help (Short Flag)",
+      "description": "Display help in terminal (short flag)."
+    },
+    "help_view": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show Help in Editor",
+      "description": "Display help in a separate text editor."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_matrices",
+    "output_prefix"
+  ]
+}

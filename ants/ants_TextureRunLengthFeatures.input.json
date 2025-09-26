@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TextureRunLengthFeatures",
+  "description": "A tool to calculate texture run length features on an input image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/TextureRunLengthFeatures"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "title": "Image Dimension",
+      "description": "The dimensionality of the input image."
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input Image",
+      "description": "The path to the input image file."
+    },
+    "number_of_bins_per_axis": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Bins Per Axis",
+      "description": "The number of bins per axis for the histogram."
+    },
+    "mask_image": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Image",
+      "description": "The path to the mask image file."
+    },
+    "mask_label": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Label",
+      "description": "The label value in the mask image to be used."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "image_dimension",
+    "input_image"
+  ]
+}

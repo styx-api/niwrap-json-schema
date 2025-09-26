@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "rca-fix-ento",
+  "description": "A tool to fix the entorhinal white matter in FreeSurfer using a deep learning network.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/rca-fix-ento"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "The subject identifier for processing."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "Number of threads to use for processing."
+    },
+    "submit": {
+      "type": "boolean",
+      "default": false,
+      "title": "Submit Flag",
+      "description": "Submit the task to sbatch with 1 thread and 14GB of memory."
+    },
+    "account": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Account",
+      "description": "Specify the account to use when submitting to sbatch; default is 'fhs'."
+    },
+    "brain_mask": {
+      "type": "boolean",
+      "default": false,
+      "title": "Brain Mask Flag",
+      "description": "Apply the ento fix to the brain.finalsurfs; this is turned off due to a conflict with 255."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject"
+  ]
+}

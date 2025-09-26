@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tedana_wrapper.py",
+  "description": "Internal wrapper to run tedana.py, typically used within afni_proc.py.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/tedana_wrapper.py"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Datasets",
+      "description": "4D dataset for each echo."
+    },
+    "echo_times": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "title": "Echo Times",
+      "description": "Echo time (ms) for each echo."
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Mask",
+      "description": "Mask in same space/grid as the input datasets."
+    },
+    "results_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Results Directory",
+      "description": "Folder to be created for all outputs. Default [./Bunnymen]."
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Prefix",
+      "description": "Prefix for dataset names. Default [Bunnymen]."
+    },
+    "save_all": {
+      "type": "boolean",
+      "default": false,
+      "title": "Save All Flag",
+      "description": "Save intermediate datasets. Default is to save only the 3dZcat stacked dataset (and tedana stuff)."
+    },
+    "prep_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Preparation Only Flag",
+      "description": "Do not run tedana.py, stop at 3dZcat."
+    },
+    "tedana_prog": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tedana Program",
+      "description": "Path and name of the version of tedana.py that will be run. Default is meica.libs/tedana.py in the afni binaries directory."
+    },
+    "tedana_is_exec": {
+      "type": "boolean",
+      "default": false,
+      "title": "Tedana Is Exec Flag",
+      "description": "Run 'tedana.py' rather than 'python tedana.py'."
+    },
+    "ted_label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tedana Label",
+      "description": "Suffix for output folder. Adds suffix like TED.LABEL (NOT A PATH)."
+    },
+    "tedana_opts": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tedana Options",
+      "description": "Additional options to pass to tedana.py. (In quotes) Example: '--initcost=tanh --conv=2.5e-5'"
+    },
+    "help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Flag",
+      "description": "Show help message and exit."
+    },
+    "detailed_help": {
+      "type": "boolean",
+      "default": false,
+      "title": "Detailed Help Flag",
+      "description": "Show detailed help and exit."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_files",
+    "echo_times",
+    "mask"
+  ]
+}

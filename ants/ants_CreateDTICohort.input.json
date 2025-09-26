@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateDTICohort",
+  "description": "CreateDTICohort implements the work of Van Hecke et al. to create simulated DTI data sets. The only difference is that all registrations (both for the input population and for the output population) are assumed to take place outside of this program.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/CreateDTICohort"
+    },
+    "image_dimensionality": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "enum": [
+            2,
+            3
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Image Dimensionality",
+      "description": "This option forces the image to be treated as a specified-dimensional image. If not specified, the program tries to infer the dimensionality from the input image."
+    },
+    "dti_atlas": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "DTI Atlas",
+      "description": "A diffusion tensor atlas image is required input for creating the cohort."
+    },
+    "label_mask_image": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Mask Image",
+      "description": "A mask image can be specified which determines the region(s) to which the simulated pathology operations are applied. If no mask is specified one is created by thresholding the atlas FA map at 0.2 unless a lower threshold is specified."
+    },
+    "noise_sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Noise Sigma",
+      "description": "This parameter characterizes the Rician noise in the original DWI images. Default value is 18."
+    },
+    "pathology": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pathology",
+      "description": "The user can specify the simulated pathology in a given area using a label mask. Pathology is simulated by changing the eigenvalues. One can specify the number of voxels affected in each region or the proportion of voxels affected. Change is specified as a proportion of the current eigenvalues."
+    },
+    "dwi_parameters": {
+      "type": "string",
+      "title": "DWI Parameters",
+      "description": "This option specifies the parameters of the output diffusion-weighted images, including the directions and b-values. Directions can be specified using a direction file or scheme file."
+    },
+    "registered_population": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Registered Population",
+      "description": "To introduce inter-subject variability, a registered DTI population to the DTI atlas is required. This is modeled by PCA decomposition."
+    },
+    "output": {
+      "type": "string",
+      "title": "Output",
+      "description": "The output consists of a set of diffusion-weighted images for each subject. Control and experimental subject numbers can be specified."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "dti_atlas",
+    "dwi_parameters",
+    "output"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "wmedits2surf",
+  "description": "Computes binary maps of surface locations where the wm.mgz has been edited. Creates files for each hemisphere for each type of edit.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/wmedits2surf"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "Subject identifier."
+    },
+    "self": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output on self",
+      "description": "Output will be on self instead of fsaverage."
+    },
+    "overwrite": {
+      "type": "boolean",
+      "default": false,
+      "title": "Overwrite",
+      "description": "Force overwriting of existing results."
+    },
+    "tmp_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Temporary directory",
+      "description": "Temporary directory."
+    },
+    "cleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cleanup",
+      "description": "Cleanup temporary files after execution."
+    },
+    "no_cleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cleanup",
+      "description": "Do not cleanup temporary files after execution."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug",
+      "description": "Debug mode."
+    },
+    "lh": {
+      "type": "boolean",
+      "default": false,
+      "title": "Left Hemisphere",
+      "description": "Only do left hemisphere."
+    },
+    "rh": {
+      "type": "boolean",
+      "default": false,
+      "title": "Right Hemisphere",
+      "description": "Only do right hemisphere."
+    },
+    "no_surfs": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Surfaces",
+      "description": "Do not compute surfaces, only count stats."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject"
+  ]
+}

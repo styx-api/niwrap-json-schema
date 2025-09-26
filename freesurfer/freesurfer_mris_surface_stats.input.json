@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_surface_stats",
+  "description": "Computes the group-wise mean and standard deviation of thickness differences at every vertex of the template surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_surface_stats"
+    },
+    "nsmooth": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number of Smoothing Steps",
+      "description": "Specify number of smoothing steps"
+    },
+    "surf_name": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Surface Filename",
+      "description": "Set the surface filename"
+    },
+    "mask_name": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mask Filename",
+      "description": "Set the filename for surface mask"
+    },
+    "out_name": {
+      "type": "string",
+      "title": "Output Filename",
+      "description": "Set the output filename (standard deviation of data)"
+    },
+    "mean": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mean Output Filename",
+      "description": "Set the output filename for mean"
+    },
+    "absmean": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Absolute Mean Output Filename",
+      "description": "Set the output filename for absolute mean"
+    },
+    "absstd": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Absolute Standard Deviation Output Filename",
+      "description": "Set the output filename for standard deviation of absolute mean"
+    },
+    "zscore": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Z-Score Output Filename",
+      "description": "Set the output filename for z-score (only if first_group_size > 0)"
+    },
+    "first_group_size": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First Group Size",
+      "description": "Specify how many subjects at the beginning belong to first group"
+    },
+    "src_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Type",
+      "description": "Input surface data format (default = paint)"
+    },
+    "trg_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Type",
+      "description": "Output format (default = paint)"
+    },
+    "debug": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Vertex Number",
+      "description": "Specify which surface vertex number to debug"
+    },
+    "data_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "title": "Input Data Files",
+      "description": "List of input data files for computation"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "surf_name",
+    "out_name",
+    "data_files"
+  ]
+}

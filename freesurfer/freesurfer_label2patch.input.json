@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "label2patch",
+  "description": "Utility to create patches from label files in Freesurfer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/label2patch"
+    },
+    "subject_name": {
+      "type": "string",
+      "title": "Subject Name",
+      "description": "Subject name"
+    },
+    "hemisphere": {
+      "type": "string",
+      "title": "Hemisphere",
+      "description": "Hemisphere (e.g. lh or rh)"
+    },
+    "label_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Label File",
+      "description": "Label file name"
+    },
+    "output_patch": {
+      "type": "string",
+      "title": "Output Patch File",
+      "description": "Output patch file"
+    },
+    "dilate": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dilate",
+      "description": "Dilate the label n times before creating the patch"
+    },
+    "erode": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Erode",
+      "description": "Erode the label n times before creating the patch"
+    },
+    "close": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Close",
+      "description": "Close the label n times before creating the patch"
+    },
+    "subjects_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Subjects Directory",
+      "description": "Use path as the SUBJECTS_DIR instead of environment"
+    },
+    "surface_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Surface Name",
+      "description": "Use name as the surface (default 'inflated')"
+    },
+    "write_surface": {
+      "type": "boolean",
+      "default": false,
+      "title": "Write Surface",
+      "description": "Write output to a surface file (not a patch). Use .stl in filename to only write the mesh covered by the label, saving it in FS format will save full surface"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject_name",
+    "hemisphere",
+    "label_file",
+    "output_patch"
+  ]
+}

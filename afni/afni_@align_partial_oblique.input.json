@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@align_partial_oblique",
+  "description": "A script to align a full coverage T1 weighted non-oblique dataset to match a partial coverage T1 weighted non-oblique dataset. Alignment is done with a rotation and shift (6 parameters) transform only.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@align_partial_oblique"
+    },
+    "base": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Base dataset",
+      "description": "Reference anatomical full coverage volume."
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Input dataset",
+      "description": "Partial coverage T1 weighted non-oblique dataset."
+    },
+    "suffix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Suffix",
+      "description": "Output dataset name is formed by adding SUF to the prefix of the base dataset. The default suffix is _alnd_PartialCoverageObliqueT1"
+    },
+    "keep_tmp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Keep temporary files flag",
+      "description": "Keep temporary files."
+    },
+    "clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "Clean temporary files flag",
+      "description": "Clean all temp files, likely left from -keep_tmp option then exit."
+    },
+    "dxyz": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cubic voxel size",
+      "description": "Cubic voxel size of output dataset in TLRC space Default MM is 1."
+    },
+    "dx": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel size in x direction",
+      "description": "Size of voxel in the x direction (Right-Left). Default is 1mm."
+    },
+    "dy": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel size in y direction",
+      "description": "Size of voxel in the y direction (Anterior-Posterior). Default is 1mm."
+    },
+    "dz": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Voxel size in z direction",
+      "description": "Size of voxel in the z direction (Inferior-Superior). Default is 1mm."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "base",
+    "input"
+  ]
+}

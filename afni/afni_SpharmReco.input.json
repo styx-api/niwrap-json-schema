@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SpharmReco",
+  "description": "Spherical Harmonics Reconstruction from a set of harmonics and their corresponding coefficients.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SpharmReco"
+    },
+    "input_surface": {
+      "type": "string",
+      "title": "Input Surface",
+      "description": "Surface that provides the topology of the mesh (nodes' connections). TYPE specifies the input surface type."
+    },
+    "decomposition_order": {
+      "type": "number",
+      "title": "Decomposition Order",
+      "description": "Decomposition order"
+    },
+    "bases_prefix": {
+      "type": "string",
+      "title": "Bases Prefix",
+      "description": "Prefix of files containing the bases functions (spherical harmonics). These files are generated with SpharmDeco."
+    },
+    "coefficients": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "file"
+      },
+      "minItems": 1,
+      "title": "Coefficient Files",
+      "description": "Coefficients files used to recompose data columns. Multiple coefficient files can be specified by repeating the option."
+    },
+    "output_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Prefix",
+      "description": "Write out the reconstructed data into dataset PREFIX. The output contains N columns; one for each COEF file."
+    },
+    "output_surface": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Surface",
+      "description": "Write out a new surface with reconstructed coordinates. Requires N to be a multiple of 3."
+    },
+    "debug": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Debug Level",
+      "description": "Debug levels (1-3)"
+    },
+    "smoothing": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.001
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Smoothing Parameter",
+      "description": "Smoothing parameter (0 .. 0.001) weighing the contribution of higher order harmonics"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "input_surface",
+    "decomposition_order",
+    "bases_prefix",
+    "coefficients"
+  ]
+}

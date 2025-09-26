@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "pctsurfcon",
+  "description": "Compute surface-wise gray/white matter contrast.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/pctsurfcon"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject",
+      "description": "FreeSurfer subject name"
+    },
+    "fsvol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "FSVol",
+      "description": "Use fsvol instead of rawavg"
+    },
+    "outbase": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Base",
+      "description": "Use outbase instead of w-g.pct (?h.w-g.pct.mgh)"
+    },
+    "lh_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Left Hemisphere Only",
+      "description": "Compute left hemisphere only"
+    },
+    "rh_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Right Hemisphere Only",
+      "description": "Compute right hemisphere only"
+    },
+    "gm_proj_frac": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GM Projection Fraction",
+      "description": "GM projection fraction (default 0.3)"
+    },
+    "gm_proj_abs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "GM Projection Distance",
+      "description": "GM projection distance (default is to use frac)"
+    },
+    "wm_proj_abs": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "WM Projection Distance",
+      "description": "WM projection distance (default is 1 mm)"
+    },
+    "neg": {
+      "type": "boolean",
+      "default": false,
+      "title": "Negate Contrast",
+      "description": "Compute G-W instead of W-G"
+    },
+    "no_mask": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Mask",
+      "description": "Do not mask out non-cortical regions"
+    },
+    "pial": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Pial Surface",
+      "description": "Use pial surface as base to compute gray/CSF contrast"
+    },
+    "tmp": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Temporary Directory",
+      "description": "Temporary directory (implies --nocleanup)"
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Cleanup",
+      "description": "Do not delete temporary files"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "subject"
+  ]
+}

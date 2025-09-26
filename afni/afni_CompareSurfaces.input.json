@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CompareSurfaces",
+  "description": "Calculates distance at each node in Surface 1 (S1) to Surface 2 (S2) along the local surface normal at each node in S1. Superseded by SurfToSurf.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/CompareSurfaces"
+    },
+    "spec_file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Spec file",
+      "description": "File containing surface specification."
+    },
+    "hemisphere": {
+      "type": "string",
+      "enum": [
+        "L",
+        "R"
+      ],
+      "title": "Hemisphere",
+      "description": "Specify the hemisphere being processed (left or right)."
+    },
+    "volume_parent_1": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Volume Parent 1",
+      "description": "Volume parent BRIK for first surface."
+    },
+    "volume_parent_2": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Volume Parent 2",
+      "description": "Volume parent BRIK for second surface."
+    },
+    "file_prefix": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "File prefix",
+      "description": "Prefix for distance and node color output files. Existing file will not be overwritten."
+    },
+    "one_node": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "One node",
+      "description": "Output results for node index only. This option is for debugging."
+    },
+    "node_range": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Node range",
+      "description": "Output results from node istart to node istop only. This option is for debugging."
+    },
+    "no_consistency_check": {
+      "type": "boolean",
+      "default": false,
+      "title": "No consistency check",
+      "description": "Skip mesh orientation consistency check. This speeds up the start time so it is useful for debugging runs."
+    },
+    "no_volreg": {
+      "type": "boolean",
+      "default": false,
+      "title": "No volume registration",
+      "description": "Ignore any Rotate, Volreg, Tagalign, or WarpDrive transformations present in the Surface Volume."
+    },
+    "no_transform": {
+      "type": "boolean",
+      "default": false,
+      "title": "No transform",
+      "description": "Same as -novolreg."
+    },
+    "set_environment_variable": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Set environment variable",
+      "description": "Set environment variable ENVname to be ENVvalue. Quotes are necessary."
+    },
+    "trace": {
+      "type": "boolean",
+      "default": false,
+      "title": "Trace",
+      "description": "Turns on In/Out debug and Memory tracing."
+    },
+    "extreme_trace": {
+      "type": "boolean",
+      "default": false,
+      "title": "Extreme trace",
+      "description": "Turns on extreme tracing."
+    },
+    "no_memory_trace": {
+      "type": "boolean",
+      "default": false,
+      "title": "No memory trace",
+      "description": "Turn off memory tracing."
+    },
+    "yes_memory_trace": {
+      "type": "boolean",
+      "default": false,
+      "title": "Yes memory trace",
+      "description": "Turn on memory tracing (default)."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "spec_file",
+    "hemisphere",
+    "volume_parent_1",
+    "volume_parent_2"
+  ]
+}

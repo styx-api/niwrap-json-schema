@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_proc_map_to_dti",
+  "description": "A program for mapping data sets into DWI space, suitable for aligning anatomical ROI maps or EPI data to a DWI reference volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_proc_map_to_dti"
+    },
+    "source": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Source file",
+      "description": "T1w volume file (source volume)"
+    },
+    "base": {
+      "type": "string",
+      "x-styx-type": "file",
+      "title": "Base file",
+      "description": "DWI reference volume file"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "Output prefix",
+      "description": "Output prefix for files and snapshots"
+    },
+    "followers_nn": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Followers NN",
+      "description": "Follower data sets with NN interpolation"
+    },
+    "followers_wsinc5": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Followers wsinc5",
+      "description": "Follower data sets with wsinc5 interpolation"
+    },
+    "followers_surf": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Followers surf",
+      "description": "Surface follower data sets"
+    },
+    "followers_ndset": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Followers NIML dset",
+      "description": "NIML follower data sets"
+    },
+    "followers_spec": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Followers spec",
+      "description": "Spec follower data sets"
+    },
+    "matrix": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Matrix file",
+      "description": "Pre-made matrix file for transformation"
+    },
+    "workdir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Working directory",
+      "description": "Specify a working directory"
+    },
+    "no_cmd_out": {
+      "type": "boolean",
+      "default": false,
+      "title": "No command output flag",
+      "description": "Don't save the command line call of this program"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "default": false,
+      "title": "No clean flag",
+      "description": "Do not delete temporary working directory"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "source",
+    "base",
+    "prefix"
+  ]
+}
