@@ -1,42 +1,37 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "cifti-average",
-  "description": "Average cifti files.\n\nAverages cifti files together.  Files without -weight specified are given a weight of 1.  If -exclude-outliers is specified, at each element, the data across all files is taken as a set, its unweighted mean and sample standard deviation are found, and values outside the specified number of standard deviations are excluded from the (potentially weighted) average at that element.",
+  "description": "AVERAGE CIFTI FILES.\n\nAverages cifti files together.  Files without -weight specified are given a weight of 1.  If -exclude-outliers is specified, at each element, the data across all files is taken as a set, its unweighted mean and sample standard deviation are found, and values outside the specified number of standard deviations are excluded from the (potentially weighted) average at that element.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/cifti-average"
     },
-    "cifti_out": {
+    "cifti-out": {
       "type": "string",
-      "title": "cifti_out",
       "description": "output cifti file"
     },
-    "exclude_outliers": {
+    "exclude-outliers": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "exclude_outliers"
+              "const": "exclude-outliers"
             },
-            "sigma_below": {
+            "sigma-below": {
               "type": "number",
-              "title": "sigma_below",
               "description": "number of standard deviations below the mean to include"
             },
-            "sigma_above": {
+            "sigma-above": {
               "type": "number",
-              "title": "sigma_above",
               "description": "number of standard deviations above the mean to include"
             }
           },
           "additionalProperties": false,
-          "title": "exclude_outliers",
           "description": "exclude outliers by standard deviation of each element across files",
           "required": [
-            "sigma_below",
-            "sigma_above"
+            "sigma-below",
+            "sigma-above"
           ]
         },
         {
@@ -44,10 +39,9 @@
         }
       ],
       "default": null,
-      "title": "exclude_outliers",
       "description": "exclude outliers by standard deviation of each element across files"
     },
-    "opt_mem_limit_limit_gb": {
+    "limit-GB": {
       "anyOf": [
         {
           "type": "number"
@@ -56,9 +50,7 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_mem_limit_limit_gb",
-      "description": "restrict memory used for file reading efficiency: memory limit in gigabytes"
+      "description": "restrict memory used for file reading efficiency\n\nmemory limit in gigabytes"
     },
     "cifti": {
       "anyOf": [
@@ -70,13 +62,12 @@
               "@type": {
                 "const": "cifti"
               },
-              "cifti_in": {
+              "cifti-in": {
                 "type": "string",
                 "x-styx-type": "file",
-                "title": "cifti_in",
                 "description": "the input cifti file"
               },
-              "opt_weight_weight": {
+              "weight": {
                 "anyOf": [
                   {
                     "type": "number"
@@ -85,16 +76,13 @@
                     "type": "null"
                   }
                 ],
-                "default": null,
-                "title": "opt_weight_weight",
-                "description": "give a weight for this file: the weight to use"
+                "description": "give a weight for this file\n\nthe weight to use"
               }
             },
             "additionalProperties": false,
-            "title": "cifti",
             "description": "specify an input file",
             "required": [
-              "cifti_in"
+              "cifti-in"
             ]
           }
         },
@@ -103,13 +91,12 @@
         }
       ],
       "default": null,
-      "title": "cifti",
       "description": "specify an input file"
     }
   },
   "additionalProperties": false,
   "required": [
-    "cifti_out",
+    "cifti-out",
     "@type"
   ]
 }

@@ -1,29 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "volume-erode",
-  "description": "Erode a volume file.\n\nAround each voxel with a value of zero, set surrounding voxels to zero.  The surrounding voxels are all face neighbors and all voxels within the specified distance (center to center).",
+  "description": "ERODE A VOLUME FILE.\n\nAround each voxel with a value of zero, set surrounding voxels to zero.  The surrounding voxels are all face neighbors and all voxels within the specified distance (center to center).",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/volume-erode"
     },
-    "volume": {
+    "volume-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "volume",
-      "description": "the volume to erode"
-    },
-    "distance": {
-      "type": "number",
-      "title": "distance",
-      "description": "distance in mm to erode"
-    },
-    "volume_out": {
-      "type": "string",
-      "title": "volume_out",
       "description": "the output volume"
     },
-    "opt_roi_roi_volume": {
+    "roi-volume": {
       "anyOf": [
         {
           "type": "string",
@@ -33,11 +20,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_roi_roi_volume",
-      "description": "assume voxels outside this roi are nonzero: volume file, positive values denote voxels that have data"
+      "description": "assume voxels outside this roi are nonzero\n\nvolume file, positive values denote voxels that have data"
     },
-    "opt_subvolume_subvol": {
+    "subvol": {
       "anyOf": [
         {
           "type": "string"
@@ -46,16 +31,23 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_subvolume_subvol",
-      "description": "select a single subvolume to dilate: the subvolume number or name"
+      "description": "select a single subvolume to dilate\n\nthe subvolume number or name"
+    },
+    "volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the volume to erode"
+    },
+    "distance": {
+      "type": "number",
+      "description": "distance in mm to erode"
     }
   },
   "additionalProperties": false,
   "required": [
+    "volume-out",
     "volume",
     "distance",
-    "volume_out",
     "@type"
   ]
 }

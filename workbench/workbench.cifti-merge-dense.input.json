@@ -1,23 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "cifti-merge-dense",
-  "description": "Merge cifti files along dense dimension.\n\nThe input cifti files must have matching mappings along the direction not specified, and the mapping along the specified direction must be brain models.",
+  "description": "MERGE CIFTI FILES ALONG DENSE DIMENSION.\n\nThe input cifti files must have matching mappings along the direction not specified, and the mapping along the specified direction must be brain models.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/cifti-merge-dense"
     },
-    "direction": {
+    "cifti-out": {
       "type": "string",
-      "title": "direction",
-      "description": "which dimension to merge along, ROW or COLUMN"
-    },
-    "cifti_out": {
-      "type": "string",
-      "title": "cifti_out",
       "description": "the output cifti file"
     },
-    "opt_label_collision_action": {
+    "action": {
       "anyOf": [
         {
           "type": "string"
@@ -26,9 +19,7 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_label_collision_action",
-      "description": "how to handle conflicts between label keys: 'ERROR', 'FIRST', or 'LEGACY', default 'ERROR', use 'LEGACY' to match v1.4.2 and earlier"
+      "description": "how to handle conflicts between label keys\n\n'ERROR', 'FIRST', or 'LEGACY', default 'ERROR', use 'LEGACY' to match v1.4.2 and earlier"
     },
     "cifti": {
       "anyOf": [
@@ -40,18 +31,16 @@
               "@type": {
                 "const": "cifti"
               },
-              "cifti_in": {
+              "cifti-in": {
                 "type": "string",
                 "x-styx-type": "file",
-                "title": "cifti_in",
                 "description": "a cifti file to merge"
               }
             },
             "additionalProperties": false,
-            "title": "cifti",
             "description": "specify an input cifti file",
             "required": [
-              "cifti_in"
+              "cifti-in"
             ]
           }
         },
@@ -60,14 +49,17 @@
         }
       ],
       "default": null,
-      "title": "cifti",
       "description": "specify an input cifti file"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which dimension to merge along, ROW or COLUMN"
     }
   },
   "additionalProperties": false,
   "required": [
+    "cifti-out",
     "direction",
-    "cifti_out",
     "@type"
   ]
 }

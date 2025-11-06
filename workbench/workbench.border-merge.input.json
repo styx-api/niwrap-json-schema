@@ -1,15 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "border-merge",
-  "description": "Merge border files into a new file.\n\nTakes one or more border files and makes a new border file from the borders in them.\n\nExample: wb_command -border-merge out.border -border first.border -select 1 -border second.border\n\nThis example would take the first border from first.border, followed by all borders from second.border, and write these to out.border.",
+  "description": "MERGE BORDER FILES INTO A NEW FILE.\n\nTakes one or more border files and makes a new border file from the borders in them.\n\nExample: wb_command -border-merge out.border -border first.border -select 1 -border second.border\n\nThis example would take the first border from first.border, followed by all borders from second.border, and write these to out.border.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/border-merge"
     },
-    "border_file_out": {
+    "border-file-out": {
       "type": "string",
-      "title": "border_file_out",
       "description": "the output border file"
     },
     "border": {
@@ -22,10 +20,9 @@
               "@type": {
                 "const": "border"
               },
-              "border_file_in": {
+              "border-file-in": {
                 "type": "string",
                 "x-styx-type": "file",
-                "title": "border_file_in",
                 "description": "a border file to use borders from"
               },
               "select": {
@@ -40,34 +37,30 @@
                         },
                         "border": {
                           "type": "string",
-                          "title": "border",
                           "description": "the border number or name"
                         },
-                        "up_to": {
+                        "up-to": {
                           "anyOf": [
                             {
                               "type": "object",
                               "properties": {
                                 "@type": {
-                                  "const": "up_to"
+                                  "const": "up-to"
                                 },
-                                "last_border": {
+                                "last-border": {
                                   "type": "string",
-                                  "title": "last_border",
                                   "description": "the number or name of the last column to include"
                                 },
-                                "opt_reverse": {
+                                "reverse": {
                                   "type": "boolean",
                                   "default": false,
-                                  "title": "opt_reverse",
                                   "description": "use the range in reverse order"
                                 }
                               },
                               "additionalProperties": false,
-                              "title": "up_to",
                               "description": "use an inclusive range of borders",
                               "required": [
-                                "last_border"
+                                "last-border"
                               ]
                             },
                             {
@@ -75,12 +68,10 @@
                             }
                           ],
                           "default": null,
-                          "title": "up_to",
                           "description": "use an inclusive range of borders"
                         }
                       },
                       "additionalProperties": false,
-                      "title": "select",
                       "description": "select a single border to use",
                       "required": [
                         "border"
@@ -92,15 +83,13 @@
                   }
                 ],
                 "default": null,
-                "title": "select",
                 "description": "select a single border to use"
               }
             },
             "additionalProperties": false,
-            "title": "border",
             "description": "specify an input border file",
             "required": [
-              "border_file_in"
+              "border-file-in"
             ]
           }
         },
@@ -109,13 +98,12 @@
         }
       ],
       "default": null,
-      "title": "border",
       "description": "specify an input border file"
     }
   },
   "additionalProperties": false,
   "required": [
-    "border_file_out",
+    "border-file-out",
     "@type"
   ]
 }

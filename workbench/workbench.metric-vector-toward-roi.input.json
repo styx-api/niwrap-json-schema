@@ -1,30 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "metric-vector-toward-roi",
-  "description": "Find if vectors point toward an roi.\n\nAt each vertex, compute the vector along the start of the shortest path to the ROI.",
+  "description": "FIND IF VECTORS POINT TOWARD AN ROI.\n\nAt each vertex, compute the vector along the start of the shortest path to the ROI.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/metric-vector-toward-roi"
     },
-    "surface": {
+    "metric-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "surface",
-      "description": "the surface to compute on"
-    },
-    "target_roi": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "target_roi",
-      "description": "the roi to find the shortest path to"
-    },
-    "metric_out": {
-      "type": "string",
-      "title": "metric_out",
       "description": "the output metric"
     },
-    "opt_roi_roi_metric": {
+    "roi-metric": {
       "anyOf": [
         {
           "type": "string",
@@ -34,16 +20,24 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_roi_roi_metric",
-      "description": "don't compute for vertices outside an roi: the region to compute inside, as a metric"
+      "description": "don't compute for vertices outside an roi\n\nthe region to compute inside, as a metric"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the surface to compute on"
+    },
+    "target-roi": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the roi to find the shortest path to"
     }
   },
   "additionalProperties": false,
   "required": [
+    "metric-out",
     "surface",
-    "target_roi",
-    "metric_out",
+    "target-roi",
     "@type"
   ]
 }

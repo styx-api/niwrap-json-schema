@@ -1,38 +1,29 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "cifti-correlation-gradient",
-  "description": "Correlate cifti rows and take gradient.\n\nFor each structure, compute the correlation of the rows in the structure, and take the gradients of the resulting rows, then average them.  Memory limit does not need to be an integer, you may also specify 0 to use as little memory as possible (this may be very slow).",
+  "description": "CORRELATE CIFTI ROWS AND TAKE GRADIENT.\n\nFor each structure, compute the correlation of the rows in the structure, and take the gradients of the resulting rows, then average them.  Memory limit does not need to be an integer, you may also specify 0 to use as little memory as possible (this may be very slow).",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/cifti-correlation-gradient"
     },
-    "cifti": {
+    "cifti-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "cifti",
-      "description": "the input cifti"
-    },
-    "cifti_out": {
-      "type": "string",
-      "title": "cifti_out",
       "description": "the output cifti"
     },
-    "left_surface": {
+    "left-surface": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "left_surface"
+              "const": "left-surface"
             },
             "surface": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "surface",
               "description": "the left surface file"
             },
-            "opt_left_corrected_areas_area_metric": {
+            "area-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -42,13 +33,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_left_corrected_areas_area_metric",
-              "description": "vertex areas to use instead of computing them from the left surface: the corrected vertex areas, as a metric"
+              "description": "vertex areas to use instead of computing them from the left surface\n\nthe corrected vertex areas, as a metric"
             }
           },
           "additionalProperties": false,
-          "title": "left_surface",
           "description": "specify the left surface to use",
           "required": [
             "surface"
@@ -59,24 +47,22 @@
         }
       ],
       "default": null,
-      "title": "left_surface",
       "description": "specify the left surface to use"
     },
-    "right_surface": {
+    "right-surface": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "right_surface"
+              "const": "right-surface"
             },
             "surface": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "surface",
               "description": "the right surface file"
             },
-            "opt_right_corrected_areas_area_metric": {
+            "area-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -86,13 +72,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_right_corrected_areas_area_metric",
-              "description": "vertex areas to use instead of computing them from the right surface: the corrected vertex areas, as a metric"
+              "description": "vertex areas to use instead of computing them from the right surface\n\nthe corrected vertex areas, as a metric"
             }
           },
           "additionalProperties": false,
-          "title": "right_surface",
           "description": "specify the right surface to use",
           "required": [
             "surface"
@@ -103,24 +86,22 @@
         }
       ],
       "default": null,
-      "title": "right_surface",
       "description": "specify the right surface to use"
     },
-    "cerebellum_surface": {
+    "cerebellum-surface": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "cerebellum_surface"
+              "const": "cerebellum-surface"
             },
             "surface": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "surface",
               "description": "the cerebellum surface file"
             },
-            "opt_cerebellum_corrected_areas_area_metric": {
+            "area-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -130,13 +111,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_cerebellum_corrected_areas_area_metric",
-              "description": "vertex areas to use instead of computing them from the cerebellum surface: the corrected vertex areas, as a metric"
+              "description": "vertex areas to use instead of computing them from the cerebellum surface\n\nthe corrected vertex areas, as a metric"
             }
           },
           "additionalProperties": false,
-          "title": "cerebellum_surface",
           "description": "specify the cerebellum surface to use",
           "required": [
             "surface"
@@ -147,10 +125,9 @@
         }
       ],
       "default": null,
-      "title": "cerebellum_surface",
       "description": "specify the cerebellum surface to use"
     },
-    "opt_surface_presmooth_surface_kernel": {
+    "surface-kernel": {
       "anyOf": [
         {
           "type": "number"
@@ -159,11 +136,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_surface_presmooth_surface_kernel",
-      "description": "smooth on the surface before computing the gradient: the size of the gaussian surface smoothing kernel in mm, as sigma by default"
+      "description": "smooth on the surface before computing the gradient\n\nthe size of the gaussian surface smoothing kernel in mm, as sigma by default"
     },
-    "opt_volume_presmooth_volume_kernel": {
+    "volume-kernel": {
       "anyOf": [
         {
           "type": "number"
@@ -172,29 +147,24 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_volume_presmooth_volume_kernel",
-      "description": "smooth the volume before computing the gradient: the size of the gaussian volume smoothing kernel in mm, as sigma by default"
+      "description": "smooth the volume before computing the gradient\n\nthe size of the gaussian volume smoothing kernel in mm, as sigma by default"
     },
-    "opt_presmooth_fwhm": {
+    "presmooth-fwhm": {
       "type": "boolean",
       "default": false,
-      "title": "opt_presmooth_fwhm",
       "description": "smoothing kernel sizes are FWHM, not sigma"
     },
-    "opt_undo_fisher_z": {
+    "undo-fisher-z": {
       "type": "boolean",
       "default": false,
-      "title": "opt_undo_fisher_z",
       "description": "apply the inverse fisher small z transform to the input"
     },
-    "opt_fisher_z": {
+    "fisher-z": {
       "type": "boolean",
       "default": false,
-      "title": "opt_fisher_z",
       "description": "apply the fisher small z transform to the correlations before taking the gradient"
     },
-    "opt_surface_exclude_distance": {
+    "distance": {
       "anyOf": [
         {
           "type": "number"
@@ -203,30 +173,14 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_surface_exclude_distance",
-      "description": "exclude vertices near each seed vertex from computation: geodesic distance from seed vertex for the exclusion zone, in mm"
+      "description": "exclude voxels near each seed voxel from computation\n\ndistance from seed voxel for the exclusion zone, in mm"
     },
-    "opt_volume_exclude_distance": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "opt_volume_exclude_distance",
-      "description": "exclude voxels near each seed voxel from computation: distance from seed voxel for the exclusion zone, in mm"
-    },
-    "opt_covariance": {
+    "covariance": {
       "type": "boolean",
       "default": false,
-      "title": "opt_covariance",
       "description": "compute covariance instead of correlation"
     },
-    "opt_mem_limit_limit_gb": {
+    "limit-GB": {
       "anyOf": [
         {
           "type": "number"
@@ -235,39 +189,33 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_mem_limit_limit_gb",
-      "description": "restrict memory usage: memory limit in gigabytes"
+      "description": "restrict memory usage\n\nmemory limit in gigabytes"
     },
-    "double_correlation": {
+    "double-correlation": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "double_correlation"
+              "const": "double-correlation"
             },
-            "opt_fisher_z_first": {
+            "fisher-z-first": {
               "type": "boolean",
               "default": false,
-              "title": "opt_fisher_z_first",
               "description": "after the FIRST correlation, apply fisher small z transform (ie, artanh)"
             },
-            "opt_no_demean_first": {
+            "no-demean-first": {
               "type": "boolean",
               "default": false,
-              "title": "opt_no_demean_first",
               "description": "instead of correlation for the FIRST operation, do dot product of rows, then normalize by diagonal"
             },
-            "opt_covariance_first": {
+            "covariance-first": {
               "type": "boolean",
               "default": false,
-              "title": "opt_covariance_first",
               "description": "instead of correlation for the FIRST operation, compute covariance"
             }
           },
           "additionalProperties": false,
-          "title": "double_correlation",
           "description": "do two correlations before taking the gradient"
         },
         {
@@ -275,14 +223,18 @@
         }
       ],
       "default": null,
-      "title": "double_correlation",
       "description": "do two correlations before taking the gradient"
+    },
+    "cifti": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input cifti"
     }
   },
   "additionalProperties": false,
   "required": [
+    "cifti-out",
     "cifti",
-    "cifti_out",
     "@type"
   ]
 }

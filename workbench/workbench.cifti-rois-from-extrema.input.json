@@ -1,39 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "cifti-rois-from-extrema",
-  "description": "Create cifti roi maps from extrema maps.\n\nFor each nonzero value in each map, make a map with an ROI around that location.  If the -gaussian option is specified, then normalized gaussian kernels are output instead of ROIs.  The <method> argument to -overlap-logic must be one of ALLOW, CLOSEST, or EXCLUDE.  ALLOW is the default, and means that ROIs are treated independently and may overlap.  CLOSEST means that ROIs may not overlap, and that no ROI contains vertices that are closer to a different seed vertex.  EXCLUDE means that ROIs may not overlap, and that any vertex within range of more than one ROI does not belong to any ROI.",
+  "description": "CREATE CIFTI ROI MAPS FROM EXTREMA MAPS.\n\nFor each nonzero value in each map, make a map with an ROI around that location.  If the -gaussian option is specified, then normalized gaussian kernels are output instead of ROIs.  The <method> argument to -overlap-logic must be one of ALLOW, CLOSEST, or EXCLUDE.  ALLOW is the default, and means that ROIs are treated independently and may overlap.  CLOSEST means that ROIs may not overlap, and that no ROI contains vertices that are closer to a different seed vertex.  EXCLUDE means that ROIs may not overlap, and that any vertex within range of more than one ROI does not belong to any ROI.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/cifti-rois-from-extrema"
     },
-    "cifti": {
+    "cifti-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "cifti",
-      "description": "the input cifti"
-    },
-    "surf_limit": {
-      "type": "number",
-      "title": "surf_limit",
-      "description": "geodesic distance limit from vertex, in mm"
-    },
-    "vol_limit": {
-      "type": "number",
-      "title": "vol_limit",
-      "description": "euclidean distance limit from voxel center, in mm"
-    },
-    "direction": {
-      "type": "string",
-      "title": "direction",
-      "description": "which dimension an extrema map is along, ROW or COLUMN"
-    },
-    "cifti_out": {
-      "type": "string",
-      "title": "cifti_out",
       "description": "the output cifti"
     },
-    "opt_left_surface_surface": {
+    "surface": {
       "anyOf": [
         {
           "type": "string",
@@ -43,37 +20,7 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_left_surface_surface",
-      "description": "specify the left surface to use: the left surface file"
-    },
-    "opt_right_surface_surface": {
-      "anyOf": [
-        {
-          "type": "string",
-          "x-styx-type": "file"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "opt_right_surface_surface",
-      "description": "specify the right surface to use: the right surface file"
-    },
-    "opt_cerebellum_surface_surface": {
-      "anyOf": [
-        {
-          "type": "string",
-          "x-styx-type": "file"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "opt_cerebellum_surface_surface",
-      "description": "specify the cerebellum surface to use: the cerebellum surface file"
+      "description": "specify the cerebellum surface to use\n\nthe cerebellum surface file"
     },
     "gaussian": {
       "anyOf": [
@@ -83,23 +30,20 @@
             "@type": {
               "const": "gaussian"
             },
-            "surf_sigma": {
+            "surf-sigma": {
               "type": "number",
-              "title": "surf_sigma",
               "description": "the sigma for the surface gaussian kernel, in mm"
             },
-            "vol_sigma": {
+            "vol-sigma": {
               "type": "number",
-              "title": "vol_sigma",
               "description": "the sigma for the volume gaussian kernel, in mm"
             }
           },
           "additionalProperties": false,
-          "title": "gaussian",
           "description": "generate gaussian kernels instead of flat ROIs",
           "required": [
-            "surf_sigma",
-            "vol_sigma"
+            "surf-sigma",
+            "vol-sigma"
           ]
         },
         {
@@ -107,10 +51,9 @@
         }
       ],
       "default": null,
-      "title": "gaussian",
       "description": "generate gaussian kernels instead of flat ROIs"
     },
-    "opt_overlap_logic_method": {
+    "method": {
       "anyOf": [
         {
           "type": "string"
@@ -119,24 +62,38 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_overlap_logic_method",
-      "description": "how to handle overlapping ROIs, default ALLOW: the method of resolving overlaps"
+      "description": "how to handle overlapping ROIs, default ALLOW\n\nthe method of resolving overlaps"
     },
-    "opt_merged_volume": {
+    "merged-volume": {
       "type": "boolean",
       "default": false,
-      "title": "opt_merged_volume",
       "description": "treat volume components as if they were a single component"
+    },
+    "cifti": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input cifti"
+    },
+    "surf-limit": {
+      "type": "number",
+      "description": "geodesic distance limit from vertex, in mm"
+    },
+    "vol-limit": {
+      "type": "number",
+      "description": "euclidean distance limit from voxel center, in mm"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which dimension an extrema map is along, ROW or COLUMN"
     }
   },
   "additionalProperties": false,
   "required": [
+    "cifti-out",
     "cifti",
-    "surf_limit",
-    "vol_limit",
+    "surf-limit",
+    "vol-limit",
     "direction",
-    "cifti_out",
     "@type"
   ]
 }

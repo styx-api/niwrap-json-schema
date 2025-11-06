@@ -1,21 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "wbsparse-merge-dense",
-  "description": "Merge wbsparse files along dense dimension.\n\nThe input wbsparse files must have matching mappings along the direction not specified, and the mapping along the specified direction must be brain models.",
+  "description": "MERGE WBSPARSE FILES ALONG DENSE DIMENSION.\n\nThe input wbsparse files must have matching mappings along the direction not specified, and the mapping along the specified direction must be brain models.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/wbsparse-merge-dense"
-    },
-    "direction": {
-      "type": "string",
-      "title": "direction",
-      "description": "which dimension to merge along, ROW or COLUMN"
-    },
-    "wbsparse_out": {
-      "type": "string",
-      "title": "wbsparse_out",
-      "description": "output - the output wbsparse file"
     },
     "wbsparse": {
       "anyOf": [
@@ -27,17 +16,15 @@
               "@type": {
                 "const": "wbsparse"
               },
-              "wbsparse_in": {
+              "wbsparse-in": {
                 "type": "string",
-                "title": "wbsparse_in",
                 "description": "a wbsparse file to merge"
               }
             },
             "additionalProperties": false,
-            "title": "wbsparse",
             "description": "specify an input wbsparse file",
             "required": [
-              "wbsparse_in"
+              "wbsparse-in"
             ]
           }
         },
@@ -46,14 +33,21 @@
         }
       ],
       "default": null,
-      "title": "wbsparse",
       "description": "specify an input wbsparse file"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which dimension to merge along, ROW or COLUMN"
+    },
+    "wbsparse-out": {
+      "type": "string",
+      "description": "output - the output wbsparse file"
     }
   },
   "additionalProperties": false,
   "required": [
     "direction",
-    "wbsparse_out",
+    "wbsparse-out",
     "@type"
   ]
 }

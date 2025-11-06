@@ -1,28 +1,25 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "volume-remove-islands",
-  "description": "Remove islands from an roi volume.\n\nFinds all face-connected parts of the ROI, and zeros out all but the largest one.",
+  "description": "REMOVE ISLANDS FROM AN ROI VOLUME.\n\nFinds all face-connected parts of the ROI, and zeros out all but the largest one.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/volume-remove-islands"
     },
-    "volume_in": {
+    "volume-out": {
+      "type": "string",
+      "description": "the output ROI volume"
+    },
+    "volume-in": {
       "type": "string",
       "x-styx-type": "file",
-      "title": "volume_in",
       "description": "the input ROI volume"
-    },
-    "volume_out": {
-      "type": "string",
-      "title": "volume_out",
-      "description": "the output ROI volume"
     }
   },
   "additionalProperties": false,
   "required": [
-    "volume_in",
-    "volume_out",
+    "volume-out",
+    "volume-in",
     "@type"
   ]
 }

@@ -1,53 +1,29 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "cifti-false-correlation",
-  "description": "Compare correlation locally and across/through sulci/gyri.\n\nFor each vertex, compute the average correlation within a range of geodesic distances that don't cross a sulcus/gyrus, and the correlation to the closest vertex crossing a sulcus/gyrus.  A vertex is considered to cross a sulcus/gyrus if the 3D distance is less than a third of the geodesic distance.  The output file contains the ratio between these correlations, and some additional maps to help explain the ratio.",
+  "description": "COMPARE CORRELATION LOCALLY AND ACROSS/THROUGH SULCI/GYRI.\n\nFor each vertex, compute the average correlation within a range of geodesic distances that don't cross a sulcus/gyrus, and the correlation to the closest vertex crossing a sulcus/gyrus.  A vertex is considered to cross a sulcus/gyrus if the 3D distance is less than a third of the geodesic distance.  The output file contains the ratio between these correlations, and some additional maps to help explain the ratio.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/cifti-false-correlation"
     },
-    "cifti_in": {
+    "cifti-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "cifti_in",
-      "description": "the cifti file to use for correlation"
-    },
-    "3d_dist": {
-      "type": "number",
-      "title": "3d_dist",
-      "description": "maximum 3D distance to check around each vertex"
-    },
-    "geo_outer": {
-      "type": "number",
-      "title": "geo_outer",
-      "description": "maximum geodesic distance to use for neighboring correlation"
-    },
-    "geo_inner": {
-      "type": "number",
-      "title": "geo_inner",
-      "description": "minimum geodesic distance to use for neighboring correlation"
-    },
-    "cifti_out": {
-      "type": "string",
-      "title": "cifti_out",
       "description": "the output cifti dscalar file"
     },
-    "left_surface": {
+    "left-surface": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "left_surface"
+              "const": "left-surface"
             },
             "surface": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "surface",
               "description": "the left surface file"
             },
-            "opt_dump_text_text_out": {
+            "text-out": {
               "anyOf": [
                 {
                   "type": "string"
@@ -56,13 +32,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_dump_text_text_out",
-              "description": "dump the raw measures used to a text file: the output text file"
+              "description": "dump the raw measures used to a text file\n\nthe output text file"
             }
           },
           "additionalProperties": false,
-          "title": "left_surface",
           "description": "specify the left surface to use",
           "required": [
             "surface"
@@ -73,24 +46,22 @@
         }
       ],
       "default": null,
-      "title": "left_surface",
       "description": "specify the left surface to use"
     },
-    "right_surface": {
+    "right-surface": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "right_surface"
+              "const": "right-surface"
             },
             "surface": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "surface",
               "description": "the right surface file"
             },
-            "opt_dump_text_text_out": {
+            "text-out": {
               "anyOf": [
                 {
                   "type": "string"
@@ -99,13 +70,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_dump_text_text_out",
-              "description": "dump the raw measures used to a text file: the output text file"
+              "description": "dump the raw measures used to a text file\n\nthe output text file"
             }
           },
           "additionalProperties": false,
-          "title": "right_surface",
           "description": "specify the right surface to use",
           "required": [
             "surface"
@@ -116,24 +84,22 @@
         }
       ],
       "default": null,
-      "title": "right_surface",
       "description": "specify the right surface to use"
     },
-    "cerebellum_surface": {
+    "cerebellum-surface": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "cerebellum_surface"
+              "const": "cerebellum-surface"
             },
             "surface": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "surface",
               "description": "the cerebellum surface file"
             },
-            "opt_dump_text_text_out": {
+            "text-out": {
               "anyOf": [
                 {
                   "type": "string"
@@ -142,13 +108,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_dump_text_text_out",
-              "description": "dump the raw measures used to a text file: the output text file"
+              "description": "dump the raw measures used to a text file\n\nthe output text file"
             }
           },
           "additionalProperties": false,
-          "title": "cerebellum_surface",
           "description": "specify the cerebellum surface to use",
           "required": [
             "surface"
@@ -159,17 +122,33 @@
         }
       ],
       "default": null,
-      "title": "cerebellum_surface",
       "description": "specify the cerebellum surface to use"
+    },
+    "cifti-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the cifti file to use for correlation"
+    },
+    "3D-dist": {
+      "type": "number",
+      "description": "maximum 3D distance to check around each vertex"
+    },
+    "geo-outer": {
+      "type": "number",
+      "description": "maximum geodesic distance to use for neighboring correlation"
+    },
+    "geo-inner": {
+      "type": "number",
+      "description": "minimum geodesic distance to use for neighboring correlation"
     }
   },
   "additionalProperties": false,
   "required": [
-    "cifti_in",
-    "3d_dist",
-    "geo_outer",
-    "geo_inner",
-    "cifti_out",
+    "cifti-out",
+    "cifti-in",
+    "3D-dist",
+    "geo-outer",
+    "geo-inner",
     "@type"
   ]
 }

@@ -1,25 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "metric-estimate-fwhm",
-  "description": "Estimate fwhm smoothness of a metric file.\n\nEstimates the smoothness of the metric columns, printing the estimates to standard output.  These estimates ignore variation in vertex spacing.",
+  "description": "ESTIMATE FWHM SMOOTHNESS OF A METRIC FILE.\n\nEstimates the smoothness of the metric columns, printing the estimates to standard output.  These estimates ignore variation in vertex spacing.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/metric-estimate-fwhm"
     },
-    "surface": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "surface",
-      "description": "the surface to use for distance and neighbor information"
-    },
-    "metric_in": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "metric_in",
-      "description": "the input metric"
-    },
-    "opt_roi_roi_metric": {
+    "roi-metric": {
       "anyOf": [
         {
           "type": "string",
@@ -29,11 +16,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_roi_roi_metric",
-      "description": "use only data within an ROI: the metric file to use as an ROI"
+      "description": "use only data within an ROI\n\nthe metric file to use as an ROI"
     },
-    "opt_column_column": {
+    "column": {
       "anyOf": [
         {
           "type": "string"
@@ -42,42 +27,35 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_column_column",
-      "description": "select a single column to estimate smoothness of: the column number or name"
+      "description": "select a single column to estimate smoothness of\n\nthe column number or name"
     },
-    "whole_file": {
+    "demean": {
       "anyOf": [
         {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "whole_file"
-            },
-            "opt_demean": {
-              "type": "boolean",
-              "default": false,
-              "title": "opt_demean",
-              "description": "subtract the mean image before estimating smoothness"
-            }
-          },
-          "additionalProperties": false,
-          "title": "whole_file",
-          "description": "estimate for the whole file at once, not each column separately"
+          "type": "boolean"
         },
         {
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "whole_file",
-      "description": "estimate for the whole file at once, not each column separately"
+      "default": false,
+      "description": "estimate for the whole file at once, not each column separately\n\nsubtract the mean image before estimating smoothness"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the surface to use for distance and neighbor information"
+    },
+    "metric-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input metric"
     }
   },
   "additionalProperties": false,
   "required": [
     "surface",
-    "metric_in",
+    "metric-in",
     "@type"
   ]
 }

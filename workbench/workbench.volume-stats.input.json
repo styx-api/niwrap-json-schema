@@ -1,19 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "volume-stats",
-  "description": "Spatial statistics on a volume file.\n\nFor each subvolume of the input, a line of text is printed, resulting from the specified reduction or percentile operation.  Use -subvolume to only give output for a single subvolume.  If the -roi option is used without -match-maps, then each line will contain as many numbers as there are maps in the ROI file, separated by tab characters.  Exactly one of -reduce or -percentile must be specified.\n\nThe argument to the -reduce option must be one of the following:\n\nMAX: the maximum value\nMIN: the minimum value\nINDEXMAX: the 1-based index of the maximum value\nINDEXMIN: the 1-based index of the minimum value\nSUM: add all values\nPRODUCT: multiply all values\nMEAN: the mean of the data\nSTDEV: the standard deviation (N denominator)\nSAMPSTDEV: the sample standard deviation (N-1 denominator)\nVARIANCE: the variance of the data\nTSNR: mean divided by sample standard deviation (N-1 denominator)\nCOV: sample standard deviation (N-1 denominator) divided by mean\nL2NORM: square root of sum of squares\nMEDIAN: the median of the data\nMODE: the mode of the data\nCOUNT_NONZERO: the number of nonzero elements in the data\n",
+  "description": "SPATIAL STATISTICS ON A VOLUME FILE.\n\nFor each subvolume of the input, a line of text is printed, resulting from the specified reduction or percentile operation.  Use -subvolume to only give output for a single subvolume.  If the -roi option is used without -match-maps, then each line will contain as many numbers as there are maps in the ROI file, separated by tab characters.  Exactly one of -reduce or -percentile must be specified.\n\nThe argument to the -reduce option must be one of the following:\n\nMAX: the maximum value\nMIN: the minimum value\nINDEXMAX: the 1-based index of the maximum value\nINDEXMIN: the 1-based index of the minimum value\nSUM: add all values\nPRODUCT: multiply all values\nMEAN: the mean of the data\nSTDEV: the standard deviation (N denominator)\nSAMPSTDEV: the sample standard deviation (N-1 denominator)\nVARIANCE: the variance of the data\nTSNR: mean divided by sample standard deviation (N-1 denominator)\nCOV: sample standard deviation (N-1 denominator) divided by mean\nL2NORM: square root of sum of squares\nMEDIAN: the median of the data\nMODE: the mode of the data\nCOUNT_NONZERO: the number of nonzero elements in the data\n",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/volume-stats"
     },
-    "volume_in": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "volume_in",
-      "description": "the input volume"
-    },
-    "opt_reduce_operation": {
+    "operation": {
       "anyOf": [
         {
           "type": "string"
@@ -22,11 +15,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_reduce_operation",
-      "description": "use a reduction operation: the reduction operation"
+      "description": "use a reduction operation\n\nthe reduction operation"
     },
-    "opt_percentile_percent": {
+    "percent": {
       "anyOf": [
         {
           "type": "number"
@@ -35,11 +26,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_percentile_percent",
-      "description": "give the value at a percentile: the percentile to find, must be between 0 and 100"
+      "description": "give the value at a percentile\n\nthe percentile to find, must be between 0 and 100"
     },
-    "opt_subvolume_subvolume": {
+    "subvolume": {
       "anyOf": [
         {
           "type": "string"
@@ -48,9 +37,7 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_subvolume_subvolume",
-      "description": "only display output for one subvolume: the subvolume number or name"
+      "description": "only display output for one subvolume\n\nthe subvolume number or name"
     },
     "roi": {
       "anyOf": [
@@ -60,24 +47,21 @@
             "@type": {
               "const": "roi"
             },
-            "roi_volume": {
+            "roi-volume": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "roi_volume",
               "description": "the roi, as a volume file"
             },
-            "opt_match_maps": {
+            "match-maps": {
               "type": "boolean",
               "default": false,
-              "title": "opt_match_maps",
               "description": "each subvolume of input uses the corresponding subvolume from the roi file"
             }
           },
           "additionalProperties": false,
-          "title": "roi",
           "description": "only consider data inside an roi",
           "required": [
-            "roi_volume"
+            "roi-volume"
           ]
         },
         {
@@ -85,19 +69,22 @@
         }
       ],
       "default": null,
-      "title": "roi",
       "description": "only consider data inside an roi"
     },
-    "opt_show_map_name": {
+    "show-map-name": {
       "type": "boolean",
       "default": false,
-      "title": "opt_show_map_name",
       "description": "print map index and name before each output"
+    },
+    "volume-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input volume"
     }
   },
   "additionalProperties": false,
   "required": [
-    "volume_in",
+    "volume-in",
     "@type"
   ]
 }

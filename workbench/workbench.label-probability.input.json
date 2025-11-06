@@ -1,34 +1,30 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "label-probability",
-  "description": "Find frequency of surface labels.\n\nThis command outputs a set of soft ROIs, one for each label in the input, where the value is how many of the input maps had that label at that vertex, divided by the number of input maps.",
+  "description": "FIND FREQUENCY OF SURFACE LABELS.\n\nThis command outputs a set of soft ROIs, one for each label in the input, where the value is how many of the input maps had that label at that vertex, divided by the number of input maps.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/label-probability"
     },
-    "label_maps": {
+    "probability-metric-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "label_maps",
-      "description": "label file containing individual label maps from many subjects"
-    },
-    "probability_metric_out": {
-      "type": "string",
-      "title": "probability_metric_out",
       "description": "the relative frequencies of each label at each vertex"
     },
-    "opt_exclude_unlabeled": {
+    "exclude-unlabeled": {
       "type": "boolean",
       "default": false,
-      "title": "opt_exclude_unlabeled",
       "description": "don't make a probability map of the unlabeled key"
+    },
+    "label-maps": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "label file containing individual label maps from many subjects"
     }
   },
   "additionalProperties": false,
   "required": [
-    "label_maps",
-    "probability_metric_out",
+    "probability-metric-out",
+    "label-maps",
     "@type"
   ]
 }

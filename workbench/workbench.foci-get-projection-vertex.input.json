@@ -1,30 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "foci-get-projection-vertex",
-  "description": "Get projection vertex for foci.\n\nFor each focus, a column is created in <metric-out>, and the vertex with the most influence on its projection is assigned a value of 1 in that column, with all other vertices 0.  If -name is used, only one focus will be used.",
+  "description": "GET PROJECTION VERTEX FOR FOCI.\n\nFor each focus, a column is created in <metric-out>, and the vertex with the most influence on its projection is assigned a value of 1 in that column, with all other vertices 0.  If -name is used, only one focus will be used.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/foci-get-projection-vertex"
     },
-    "foci": {
+    "metric-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "foci",
-      "description": "the foci file"
-    },
-    "surface": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "surface",
-      "description": "the surface related to the foci file"
-    },
-    "metric_out": {
-      "type": "string",
-      "title": "metric_out",
       "description": "the output metric file"
     },
-    "opt_name_name": {
+    "name": {
       "anyOf": [
         {
           "type": "string"
@@ -33,16 +19,24 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_name_name",
-      "description": "select a focus by name: the name of the focus"
+      "description": "select a focus by name\n\nthe name of the focus"
+    },
+    "foci": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the foci file"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the surface related to the foci file"
     }
   },
   "additionalProperties": false,
   "required": [
+    "metric-out",
     "foci",
     "surface",
-    "metric_out",
     "@type"
   ]
 }

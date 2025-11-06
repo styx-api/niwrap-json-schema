@@ -1,38 +1,34 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "cifti-convert",
-  "description": "Dump cifti matrix into other formats.\n\nThis command is used to convert a full CIFTI matrix to/from formats that can be used by programs that don't understand CIFTI.  You must specify exactly one of -to-gifti-ext, -from-gifti-ext, -to-nifti, -from-nifti, -to-text, or -from-text.\n\nIf you want to write an existing CIFTI file with a different CIFTI version, see -file-convert, and its -cifti-version-convert option.\n\nIf you want part of the CIFTI file as a metric, label, or volume file, see -cifti-separate.  If you want to create a CIFTI file from metric and/or volume files, see the -cifti-create-* commands.\n\nIf you want to import a matrix that is restricted to an ROI, first create a template CIFTI file matching that ROI using a -cifti-create-* command.  After importing to CIFTI, you can then expand the file into a standard brainordinates space with -cifti-create-dense-from-template.  If you want to export only part of a CIFTI file, first create an roi-restricted CIFTI file with -cifti-restrict-dense-mapping.\n\nThe -transpose option to -from-gifti-ext is needed if the replacement binary file is in column-major order.\n\nThe -unit options accept these values:\n\nSECOND\nHERTZ\nMETER\nRADIAN",
+  "description": "DUMP CIFTI MATRIX INTO OTHER FORMATS.\n\nThis command is used to convert a full CIFTI matrix to/from formats that can be used by programs that don't understand CIFTI.  You must specify exactly one of -to-gifti-ext, -from-gifti-ext, -to-nifti, -from-nifti, -to-text, or -from-text.\n\nThis command cannot map surface-based parts of the cifti file to a spatially-correct volume file, or map volume-based data to the surface, see -volume-to-surface-mapping and -metric-to-volume-mapping instead (other commands such as -cifti-separate are also required).\n\nIf you want to write an existing CIFTI file with a different CIFTI version, see -file-convert, and its -cifti-version-convert option.\n\nIf you want part of the CIFTI file as a metric, label, or volume file, see -cifti-separate.  If you want to create a CIFTI file from metric and/or volume files, see the -cifti-create-* commands.\n\nIf you want to import a matrix in non-CIFTI format that is restricted to an ROI, first obtain a template CIFTI file matching that ROI (you can use -cifti-create-dense-scalar if you don't have such a file).  Use -cifti-convert to import it to CIFTI format, and you can then expand the file into a standard brainordinates space with -cifti-create-dense-from-template.  If you want to export only part of a CIFTI file, first create an roi-restricted CIFTI file with -cifti-restrict-dense-mapping.\n\nThe -transpose option to -from-gifti-ext is needed if the replacement binary file is in column-major order.\n\nThe -unit options accept these values:\n\nSECOND\nHERTZ\nMETER\nRADIAN",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/cifti-convert"
     },
-    "to_gifti_ext": {
+    "to-gifti-ext": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "to_gifti_ext"
+              "const": "to-gifti-ext"
             },
-            "cifti_in": {
+            "cifti-in": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "cifti_in",
               "description": "the input cifti file"
             },
-            "gifti_out": {
+            "gifti-out": {
               "type": "string",
-              "title": "gifti_out",
               "description": "output - the output gifti file"
             }
           },
           "additionalProperties": false,
-          "title": "to_gifti_ext",
           "description": "convert to GIFTI external binary",
           "required": [
-            "cifti_in",
-            "gifti_out"
+            "cifti-in",
+            "gifti-out"
           ]
         },
         {
@@ -40,46 +36,41 @@
         }
       ],
       "default": null,
-      "title": "to_gifti_ext",
       "description": "convert to GIFTI external binary"
     },
-    "from_gifti_ext": {
+    "from-gifti-ext": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "from_gifti_ext"
+              "const": "from-gifti-ext"
             },
-            "gifti_in": {
+            "gifti-in": {
               "type": "string",
-              "title": "gifti_in",
               "description": "the input gifti file"
             },
-            "cifti_out": {
+            "cifti-out": {
               "type": "string",
-              "title": "cifti_out",
               "description": "the output cifti file"
             },
-            "reset_timepoints": {
+            "reset-timepoints": {
               "anyOf": [
                 {
                   "type": "object",
                   "properties": {
                     "@type": {
-                      "const": "reset_timepoints"
+                      "const": "reset-timepoints"
                     },
                     "timestep": {
                       "type": "number",
-                      "title": "timestep",
                       "description": "the desired time between frames"
                     },
                     "timestart": {
                       "type": "number",
-                      "title": "timestart",
                       "description": "the desired time offset of the initial frame"
                     },
-                    "opt_unit_unit": {
+                    "unit": {
                       "anyOf": [
                         {
                           "type": "string"
@@ -88,13 +79,10 @@
                           "type": "null"
                         }
                       ],
-                      "default": null,
-                      "title": "opt_unit_unit",
-                      "description": "use a unit other than time: unit identifier (default SECOND)"
+                      "description": "use a unit other than time\n\nunit identifier (default SECOND)"
                     }
                   },
                   "additionalProperties": false,
-                  "title": "reset_timepoints",
                   "description": "reset the mapping along rows to timepoints, taking length from the gifti file",
                   "required": [
                     "timestep",
@@ -106,52 +94,45 @@
                 }
               ],
               "default": null,
-              "title": "reset_timepoints",
               "description": "reset the mapping along rows to timepoints, taking length from the gifti file"
             },
-            "opt_reset_scalars": {
+            "reset-scalars": {
               "type": "boolean",
               "default": false,
-              "title": "opt_reset_scalars",
               "description": "reset mapping along rows to scalars, taking length from the gifti file"
             },
-            "opt_column_reset_scalars": {
+            "column-reset-scalars": {
               "type": "boolean",
               "default": false,
-              "title": "opt_column_reset_scalars",
               "description": "reset mapping along columns to scalar (useful for changing number of series in a sdseries file)"
             },
-            "replace_binary": {
+            "replace-binary": {
               "anyOf": [
                 {
                   "type": "object",
                   "properties": {
                     "@type": {
-                      "const": "replace_binary"
+                      "const": "replace-binary"
                     },
-                    "binary_in": {
+                    "binary-in": {
                       "type": "string",
-                      "title": "binary_in",
                       "description": "the binary file that contains replacement data"
                     },
-                    "opt_flip_endian": {
+                    "flip-endian": {
                       "type": "boolean",
                       "default": false,
-                      "title": "opt_flip_endian",
                       "description": "byteswap the binary file"
                     },
-                    "opt_transpose": {
+                    "transpose": {
                       "type": "boolean",
                       "default": false,
-                      "title": "opt_transpose",
                       "description": "transpose the binary file"
                     }
                   },
                   "additionalProperties": false,
-                  "title": "replace_binary",
                   "description": "replace data with a binary file",
                   "required": [
-                    "binary_in"
+                    "binary-in"
                   ]
                 },
                 {
@@ -159,16 +140,14 @@
                 }
               ],
               "default": null,
-              "title": "replace_binary",
               "description": "replace data with a binary file"
             }
           },
           "additionalProperties": false,
-          "title": "from_gifti_ext",
           "description": "convert a GIFTI made with this command back into a CIFTI",
           "required": [
-            "gifti_in",
-            "cifti_out"
+            "gifti-in",
+            "cifti-out"
           ]
         },
         {
@@ -176,47 +155,41 @@
         }
       ],
       "default": null,
-      "title": "from_gifti_ext",
       "description": "convert a GIFTI made with this command back into a CIFTI"
     },
-    "to_nifti": {
+    "to-nifti": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "to_nifti"
+              "const": "to-nifti"
             },
-            "cifti_in": {
+            "cifti-in": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "cifti_in",
               "description": "the input cifti file"
             },
-            "nifti_out": {
+            "nifti-out": {
               "type": "string",
-              "title": "nifti_out",
               "description": "the output nifti file"
             },
-            "opt_smaller_file": {
+            "smaller-file": {
               "type": "boolean",
               "default": false,
-              "title": "opt_smaller_file",
               "description": "use better-fitting dimension lengths"
             },
-            "opt_smaller_dims": {
+            "smaller-dims": {
               "type": "boolean",
               "default": false,
-              "title": "opt_smaller_dims",
               "description": "minimize the largest dimension, for tools that don't like large indices"
             }
           },
           "additionalProperties": false,
-          "title": "to_nifti",
           "description": "convert to NIFTI1",
           "required": [
-            "cifti_in",
-            "nifti_out"
+            "cifti-in",
+            "nifti-out"
           ]
         },
         {
@@ -224,53 +197,47 @@
         }
       ],
       "default": null,
-      "title": "to_nifti",
       "description": "convert to NIFTI1"
     },
-    "from_nifti": {
+    "from-nifti": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "from_nifti"
+              "const": "from-nifti"
             },
-            "nifti_in": {
+            "nifti-in": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "nifti_in",
               "description": "the input nifti file"
             },
-            "cifti_template": {
+            "cifti-template": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "cifti_template",
               "description": "a cifti file with the dimension(s) and mapping(s) that should be used"
             },
-            "cifti_out": {
+            "cifti-out": {
               "type": "string",
-              "title": "cifti_out",
               "description": "the output cifti file"
             },
-            "reset_timepoints": {
+            "reset-timepoints": {
               "anyOf": [
                 {
                   "type": "object",
                   "properties": {
                     "@type": {
-                      "const": "reset_timepoints_1"
+                      "const": "reset-timepoints"
                     },
                     "timestep": {
                       "type": "number",
-                      "title": "timestep",
                       "description": "the desired time between frames"
                     },
                     "timestart": {
                       "type": "number",
-                      "title": "timestart",
                       "description": "the desired time offset of the initial frame"
                     },
-                    "opt_unit_unit": {
+                    "unit": {
                       "anyOf": [
                         {
                           "type": "string"
@@ -279,13 +246,10 @@
                           "type": "null"
                         }
                       ],
-                      "default": null,
-                      "title": "opt_unit_unit",
-                      "description": "use a unit other than time: unit identifier (default SECOND)"
+                      "description": "use a unit other than time\n\nunit identifier (default SECOND)"
                     }
                   },
                   "additionalProperties": false,
-                  "title": "reset_timepoints",
                   "description": "reset the mapping along rows to timepoints, taking length from the nifti file",
                   "required": [
                     "timestep",
@@ -297,23 +261,20 @@
                 }
               ],
               "default": null,
-              "title": "reset_timepoints",
               "description": "reset the mapping along rows to timepoints, taking length from the nifti file"
             },
-            "opt_reset_scalars": {
+            "reset-scalars": {
               "type": "boolean",
               "default": false,
-              "title": "opt_reset_scalars",
               "description": "reset mapping along rows to scalars, taking length from the nifti file"
             }
           },
           "additionalProperties": false,
-          "title": "from_nifti",
           "description": "convert a NIFTI (1 or 2) file made with this command back into CIFTI",
           "required": [
-            "nifti_in",
-            "cifti_template",
-            "cifti_out"
+            "nifti-in",
+            "cifti-template",
+            "cifti-out"
           ]
         },
         {
@@ -321,29 +282,26 @@
         }
       ],
       "default": null,
-      "title": "from_nifti",
       "description": "convert a NIFTI (1 or 2) file made with this command back into CIFTI"
     },
-    "to_text": {
+    "to-text": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "to_text"
+              "const": "to-text"
             },
-            "cifti_in": {
+            "cifti-in": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "cifti_in",
               "description": "the input cifti file"
             },
-            "text_out": {
+            "text-out": {
               "type": "string",
-              "title": "text_out",
               "description": "output - the output text file"
             },
-            "opt_col_delim_delim_string": {
+            "delim-string": {
               "anyOf": [
                 {
                   "type": "string"
@@ -352,17 +310,14 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_col_delim_delim_string",
-              "description": "choose string to put between elements in a row: the string to use (default is a tab character)"
+              "description": "choose string to put between elements in a row\n\nthe string to use (default is a tab character)"
             }
           },
           "additionalProperties": false,
-          "title": "to_text",
           "description": "convert to a plain text file",
           "required": [
-            "cifti_in",
-            "text_out"
+            "cifti-in",
+            "text-out"
           ]
         },
         {
@@ -370,34 +325,30 @@
         }
       ],
       "default": null,
-      "title": "to_text",
       "description": "convert to a plain text file"
     },
-    "from_text": {
+    "from-text": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "from_text"
+              "const": "from-text"
             },
-            "text_in": {
+            "text-in": {
               "type": "string",
-              "title": "text_in",
               "description": "the input text file"
             },
-            "cifti_template": {
+            "cifti-template": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "cifti_template",
               "description": "a cifti file with the dimension(s) and mapping(s) that should be used"
             },
-            "cifti_out": {
+            "cifti-out": {
               "type": "string",
-              "title": "cifti_out",
               "description": "the output cifti file"
             },
-            "opt_col_delim_delim_string": {
+            "delim-string": {
               "anyOf": [
                 {
                   "type": "string"
@@ -406,29 +357,25 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_col_delim_delim_string",
-              "description": "specify string that is between elements in a row: the string to use (default is any whitespace)"
+              "description": "specify string that is between elements in a row\n\nthe string to use (default is any whitespace)"
             },
-            "reset_timepoints": {
+            "reset-timepoints": {
               "anyOf": [
                 {
                   "type": "object",
                   "properties": {
                     "@type": {
-                      "const": "reset_timepoints_2"
+                      "const": "reset-timepoints"
                     },
                     "timestep": {
                       "type": "number",
-                      "title": "timestep",
                       "description": "the desired time between frames"
                     },
                     "timestart": {
                       "type": "number",
-                      "title": "timestart",
                       "description": "the desired time offset of the initial frame"
                     },
-                    "opt_unit_unit": {
+                    "unit": {
                       "anyOf": [
                         {
                           "type": "string"
@@ -437,13 +384,10 @@
                           "type": "null"
                         }
                       ],
-                      "default": null,
-                      "title": "opt_unit_unit",
-                      "description": "use a unit other than time: unit identifier (default SECOND)"
+                      "description": "use a unit other than time\n\nunit identifier (default SECOND)"
                     }
                   },
                   "additionalProperties": false,
-                  "title": "reset_timepoints",
                   "description": "reset the mapping along rows to timepoints, taking length from the text file",
                   "required": [
                     "timestep",
@@ -455,23 +399,20 @@
                 }
               ],
               "default": null,
-              "title": "reset_timepoints",
               "description": "reset the mapping along rows to timepoints, taking length from the text file"
             },
-            "opt_reset_scalars": {
+            "reset-scalars": {
               "type": "boolean",
               "default": false,
-              "title": "opt_reset_scalars",
               "description": "reset mapping along rows to scalars, taking length from the text file"
             }
           },
           "additionalProperties": false,
-          "title": "from_text",
           "description": "convert from plain text to cifti",
           "required": [
-            "text_in",
-            "cifti_template",
-            "cifti_out"
+            "text-in",
+            "cifti-template",
+            "cifti-out"
           ]
         },
         {
@@ -479,7 +420,6 @@
         }
       ],
       "default": null,
-      "title": "from_text",
       "description": "convert from plain text to cifti"
     }
   },

@@ -1,35 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "label-dilate",
-  "description": "Dilate a label file.\n\nFills in label information for all vertices designated as bad, up to the specified distance away from other labels.  If -bad-vertex-roi is specified, all vertices, including those with the unlabeled key, are good, except for vertices with a positive value in the ROI.  If it is not specified, only vertices with the unlabeled key are bad.",
+  "description": "DILATE A LABEL FILE.\n\nFills in label information for all vertices designated as bad, up to the specified distance away from other labels.  If -bad-vertex-roi is specified, all vertices, including those with the unlabeled key, are good, except for vertices with a positive value in the ROI.  If it is not specified, only vertices with the unlabeled key are bad.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/label-dilate"
     },
-    "label": {
+    "label-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "label",
-      "description": "the input label"
-    },
-    "surface": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "surface",
-      "description": "the surface to dilate on"
-    },
-    "dilate_dist": {
-      "type": "number",
-      "title": "dilate_dist",
-      "description": "distance in mm to dilate the labels"
-    },
-    "label_out": {
-      "type": "string",
-      "title": "label_out",
       "description": "the output label file"
     },
-    "opt_bad_vertex_roi_roi_metric": {
+    "roi-metric": {
       "anyOf": [
         {
           "type": "string",
@@ -39,11 +20,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_bad_vertex_roi_roi_metric",
-      "description": "specify an roi of vertices to overwrite, rather than vertices with the unlabeled key: metric file, positive values denote vertices to have their values replaced"
+      "description": "specify an roi of vertices to overwrite, rather than vertices with the unlabeled key\n\nmetric file, positive values denote vertices to have their values replaced"
     },
-    "opt_column_column": {
+    "column": {
       "anyOf": [
         {
           "type": "string"
@@ -52,11 +31,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_column_column",
-      "description": "select a single column to dilate: the column number or name"
+      "description": "select a single column to dilate\n\nthe column number or name"
     },
-    "opt_corrected_areas_area_metric": {
+    "area-metric": {
       "anyOf": [
         {
           "type": "string",
@@ -66,17 +43,29 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_corrected_areas_area_metric",
-      "description": "vertex areas to use instead of computing them from the surface: the corrected vertex areas, as a metric"
+      "description": "vertex areas to use instead of computing them from the surface\n\nthe corrected vertex areas, as a metric"
+    },
+    "label": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input label"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the surface to dilate on"
+    },
+    "dilate-dist": {
+      "type": "number",
+      "description": "distance in mm to dilate the labels"
     }
   },
   "additionalProperties": false,
   "required": [
+    "label-out",
     "label",
     "surface",
-    "dilate_dist",
-    "label_out",
+    "dilate-dist",
     "@type"
   ]
 }

@@ -1,45 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "metric-false-correlation",
-  "description": "Compare correlation locally and across/through sulci/gyri.\n\nFor each vertex, compute the average correlation within a range of geodesic distances that don't cross a sulcus/gyrus, and the correlation to the closest vertex crossing a sulcus/gyrus.  A vertex is considered to cross a sulcus/gyrus if the 3D distance is less than a third of the geodesic distance.  The output file contains the ratio between these correlations, and some additional maps to help explain the ratio.",
+  "description": "COMPARE CORRELATION LOCALLY AND ACROSS/THROUGH SULCI/GYRI.\n\nFor each vertex, compute the average correlation within a range of geodesic distances that don't cross a sulcus/gyrus, and the correlation to the closest vertex crossing a sulcus/gyrus.  A vertex is considered to cross a sulcus/gyrus if the 3D distance is less than a third of the geodesic distance.  The output file contains the ratio between these correlations, and some additional maps to help explain the ratio.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/metric-false-correlation"
     },
-    "surface": {
+    "metric-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "surface",
-      "description": "the surface to compute geodesic and 3D distance with"
-    },
-    "metric_in": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "metric_in",
-      "description": "the metric to correlate"
-    },
-    "3d_dist": {
-      "type": "number",
-      "title": "3d_dist",
-      "description": "maximum 3D distance to check around each vertex"
-    },
-    "geo_outer": {
-      "type": "number",
-      "title": "geo_outer",
-      "description": "maximum geodesic distance to use for neighboring correlation"
-    },
-    "geo_inner": {
-      "type": "number",
-      "title": "geo_inner",
-      "description": "minimum geodesic distance to use for neighboring correlation"
-    },
-    "metric_out": {
-      "type": "string",
-      "title": "metric_out",
       "description": "the output metric"
     },
-    "opt_roi_roi_metric": {
+    "roi-metric": {
       "anyOf": [
         {
           "type": "string",
@@ -49,11 +20,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_roi_roi_metric",
-      "description": "select a region of interest that has data: the region, as a metric file"
+      "description": "select a region of interest that has data\n\nthe region, as a metric file"
     },
-    "opt_dump_text_text_out": {
+    "text-out": {
       "anyOf": [
         {
           "type": "string"
@@ -62,19 +31,39 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_dump_text_text_out",
-      "description": "dump the raw measures used to a text file: the output text file"
+      "description": "dump the raw measures used to a text file\n\nthe output text file"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the surface to compute geodesic and 3D distance with"
+    },
+    "metric-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the metric to correlate"
+    },
+    "3D-dist": {
+      "type": "number",
+      "description": "maximum 3D distance to check around each vertex"
+    },
+    "geo-outer": {
+      "type": "number",
+      "description": "maximum geodesic distance to use for neighboring correlation"
+    },
+    "geo-inner": {
+      "type": "number",
+      "description": "minimum geodesic distance to use for neighboring correlation"
     }
   },
   "additionalProperties": false,
   "required": [
+    "metric-out",
     "surface",
-    "metric_in",
-    "3d_dist",
-    "geo_outer",
-    "geo_inner",
-    "metric_out",
+    "metric-in",
+    "3D-dist",
+    "geo-outer",
+    "geo-inner",
     "@type"
   ]
 }

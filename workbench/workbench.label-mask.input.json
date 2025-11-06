@@ -1,30 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "label-mask",
-  "description": "Mask a label file.\n\nBy default, the output label is a copy of the input label, but with the 'unused' label wherever the mask metric is zero or negative.  if -column is specified, the output contains only one column, the masked version of the specified input column.",
+  "description": "MASK A LABEL FILE.\n\nBy default, the output label is a copy of the input label, but with the 'unused' label wherever the mask metric is zero or negative.  if -column is specified, the output contains only one column, the masked version of the specified input column.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/label-mask"
     },
-    "label": {
+    "label-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "label",
-      "description": "the label file to mask"
-    },
-    "mask": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "mask",
-      "description": "the mask metric"
-    },
-    "label_out": {
-      "type": "string",
-      "title": "label_out",
       "description": "the output label file"
     },
-    "opt_column_column": {
+    "column": {
       "anyOf": [
         {
           "type": "string"
@@ -33,16 +19,24 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_column_column",
-      "description": "select a single column: the column number or name"
+      "description": "select a single column\n\nthe column number or name"
+    },
+    "label": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the label file to mask"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the mask metric"
     }
   },
   "additionalProperties": false,
   "required": [
+    "label-out",
     "label",
     "mask",
-    "label_out",
     "@type"
   ]
 }

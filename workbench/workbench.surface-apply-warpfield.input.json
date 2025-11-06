@@ -1,29 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "surface-apply-warpfield",
-  "description": "Apply warpfield to surface file.\n\nNOTE: warping a surface requires the INVERSE of the warpfield used to warp the volume it lines up with.  The header of the forward warp is needed by the -fnirt option in order to correctly interpret the displacements in the fnirt warpfield.\n\nIf the -fnirt option is not present, the warpfield must be a nifti 'world' warpfield, which can be obtained with the -convert-warpfield command.",
+  "description": "APPLY WARPFIELD TO SURFACE FILE.\n\nNOTE: warping a surface requires the INVERSE of the warpfield used to warp the volume it lines up with.  The header of the forward warp is needed by the -fnirt option in order to correctly interpret the displacements in the fnirt warpfield.\n\nIf the -fnirt option is not present, the warpfield must be a nifti 'world' warpfield, which can be obtained with the -convert-warpfield command.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/surface-apply-warpfield"
     },
-    "in_surf": {
+    "out-surf": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "in_surf",
-      "description": "the surface to transform"
-    },
-    "warpfield": {
-      "type": "string",
-      "title": "warpfield",
-      "description": "the INVERSE warpfield"
-    },
-    "out_surf": {
-      "type": "string",
-      "title": "out_surf",
       "description": "the output transformed surface"
     },
-    "opt_fnirt_forward_warp": {
+    "forward-warp": {
       "anyOf": [
         {
           "type": "string"
@@ -32,16 +19,23 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_fnirt_forward_warp",
-      "description": "MUST be used if using a fnirt warpfield: the forward warpfield"
+      "description": "MUST be used if using a fnirt warpfield\n\nthe forward warpfield"
+    },
+    "in-surf": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the surface to transform"
+    },
+    "warpfield": {
+      "type": "string",
+      "description": "the INVERSE warpfield"
     }
   },
   "additionalProperties": false,
   "required": [
-    "in_surf",
+    "out-surf",
+    "in-surf",
     "warpfield",
-    "out_surf",
     "@type"
   ]
 }

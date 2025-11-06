@@ -1,34 +1,30 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "convert-warpfield",
-  "description": "Convert a warpfield between conventions.\n\nNIFTI world warpfields can be used directly on mm coordinates via sampling the three subvolumes at the coordinate and adding the sampled values to the coordinate vector.  They use the NIFTI coordinate system, that is, X is left to right, Y is posterior to anterior, and Z is inferior to superior.\n\nNOTE: this command does not invert the warpfield, and to warp a surface, you must use the inverse of the warpfield that warps the corresponding volume.\n\nThe ITK format is used by ANTS.\n\nYou must specify exactly one -from option, but you may specify multiple -to options, and -to-fnirt may be specified more than once.",
+  "description": "CONVERT A WARPFIELD BETWEEN CONVENTIONS.\n\nNIFTI world warpfields can be used directly on mm coordinates via sampling the three subvolumes at the coordinate and adding the sampled values to the coordinate vector.  They use the NIFTI coordinate system, that is, X is left to right, Y is posterior to anterior, and Z is inferior to superior.\n\nNOTE: this command does not invert the warpfield, and to warp a surface, you must use the inverse of the warpfield that warps the corresponding volume.\n\nThe ITK format is used by ANTS.\n\nYou must specify exactly one -from option, but you may specify multiple -to options, and -to-fnirt may be specified more than once.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/convert-warpfield"
     },
-    "from_world": {
+    "from-world": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "from_world"
+              "const": "from-world"
             },
             "input": {
               "type": "string",
-              "title": "input",
               "description": "the input warpfield"
             },
-            "opt_absolute": {
+            "absolute": {
               "type": "boolean",
               "default": false,
-              "title": "opt_absolute",
               "description": "warpfield was written in absolute convention, rather than relative"
             }
           },
           "additionalProperties": false,
-          "title": "from_world",
           "description": "input is a NIFTI 'world' warpfield",
           "required": [
             "input"
@@ -39,10 +35,9 @@
         }
       ],
       "default": null,
-      "title": "from_world",
       "description": "input is a NIFTI 'world' warpfield"
     },
-    "opt_from_itk_input": {
+    "input": {
       "anyOf": [
         {
           "type": "string"
@@ -51,41 +46,35 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_from_itk_input",
-      "description": "input is an ITK warpfield: the input warpfield"
+      "description": "input is an ITK warpfield\n\nthe input warpfield"
     },
-    "from_fnirt": {
+    "from-fnirt": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "from_fnirt"
+              "const": "from-fnirt"
             },
             "input": {
               "type": "string",
-              "title": "input",
               "description": "the input warpfield"
             },
-            "source_volume": {
+            "source-volume": {
               "type": "string",
-              "title": "source_volume",
               "description": "the source volume used when generating the input warpfield"
             },
-            "opt_absolute": {
+            "absolute": {
               "type": "boolean",
               "default": false,
-              "title": "opt_absolute",
               "description": "warpfield was written in absolute convention, rather than relative"
             }
           },
           "additionalProperties": false,
-          "title": "from_fnirt",
           "description": "input is a fnirt warpfield",
           "required": [
             "input",
-            "source_volume"
+            "source-volume"
           ]
         },
         {
@@ -93,10 +82,9 @@
         }
       ],
       "default": null,
-      "title": "from_fnirt",
       "description": "input is a fnirt warpfield"
     },
-    "opt_to_world_output": {
+    "output": {
       "anyOf": [
         {
           "type": "string"
@@ -105,24 +93,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_to_world_output",
-      "description": "write output as a NIFTI 'world' warpfield: output - the output warpfield"
+      "description": "write output as an ITK warpfield\n\noutput - the output warpfield"
     },
-    "opt_to_itk_output": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "opt_to_itk_output",
-      "description": "write output as an ITK warpfield: output - the output warpfield"
-    },
-    "to_fnirt": {
+    "to-fnirt": {
       "anyOf": [
         {
           "type": "array",
@@ -130,25 +103,22 @@
             "type": "object",
             "properties": {
               "@type": {
-                "const": "to_fnirt"
+                "const": "to-fnirt"
               },
               "output": {
                 "type": "string",
-                "title": "output",
                 "description": "output - the output warpfield"
               },
-              "source_volume": {
+              "source-volume": {
                 "type": "string",
-                "title": "source_volume",
                 "description": "the volume you want to apply the warpfield to"
               }
             },
             "additionalProperties": false,
-            "title": "to_fnirt",
             "description": "write output as a fnirt warpfield",
             "required": [
               "output",
-              "source_volume"
+              "source-volume"
             ]
           }
         },
@@ -157,7 +127,6 @@
         }
       ],
       "default": null,
-      "title": "to_fnirt",
       "description": "write output as a fnirt warpfield"
     }
   },

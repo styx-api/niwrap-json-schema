@@ -1,53 +1,29 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "cifti-erode",
-  "description": "Erode a cifti file.\n\nFor all data values that are empty (for label data, unlabeled, for other data, zero), set the surrounding values to empty.  The surrounding values are defined as the immediate neighbors and all values in the same structure within the specified distance (-merged-volume treats all voxels as one structure).\n\nThe -*-corrected-areas options are intended for eroding on group average surfaces, but it is only an approximate correction.",
+  "description": "ERODE A CIFTI FILE.\n\nFor all data values that are empty (for label data, unlabeled, for other data, zero), set the surrounding values to empty.  The surrounding values are defined as the immediate neighbors and all values in the same structure within the specified distance (-merged-volume treats all voxels as one structure).\n\nThe -*-corrected-areas options are intended for eroding on group average surfaces, but it is only an approximate correction.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/cifti-erode"
     },
-    "cifti_in": {
+    "cifti-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "cifti_in",
-      "description": "the input cifti file"
-    },
-    "direction": {
-      "type": "string",
-      "title": "direction",
-      "description": "which dimension to dilate along, ROW or COLUMN"
-    },
-    "surface_distance": {
-      "type": "number",
-      "title": "surface_distance",
-      "description": "the distance to dilate on surfaces, in mm"
-    },
-    "volume_distance": {
-      "type": "number",
-      "title": "volume_distance",
-      "description": "the distance to dilate in the volume, in mm"
-    },
-    "cifti_out": {
-      "type": "string",
-      "title": "cifti_out",
       "description": "the output cifti file"
     },
-    "left_surface": {
+    "left-surface": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "left_surface"
+              "const": "left-surface"
             },
             "surface": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "surface",
               "description": "the left surface file"
             },
-            "opt_left_corrected_areas_area_metric": {
+            "area-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -57,13 +33,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_left_corrected_areas_area_metric",
-              "description": "vertex areas to use instead of computing them from the left surface: the corrected vertex areas, as a metric"
+              "description": "vertex areas to use instead of computing them from the left surface\n\nthe corrected vertex areas, as a metric"
             }
           },
           "additionalProperties": false,
-          "title": "left_surface",
           "description": "specify the left surface to use",
           "required": [
             "surface"
@@ -74,24 +47,22 @@
         }
       ],
       "default": null,
-      "title": "left_surface",
       "description": "specify the left surface to use"
     },
-    "right_surface": {
+    "right-surface": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "right_surface"
+              "const": "right-surface"
             },
             "surface": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "surface",
               "description": "the right surface file"
             },
-            "opt_right_corrected_areas_area_metric": {
+            "area-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -101,13 +72,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_right_corrected_areas_area_metric",
-              "description": "vertex areas to use instead of computing them from the right surface: the corrected vertex areas, as a metric"
+              "description": "vertex areas to use instead of computing them from the right surface\n\nthe corrected vertex areas, as a metric"
             }
           },
           "additionalProperties": false,
-          "title": "right_surface",
           "description": "specify the right surface to use",
           "required": [
             "surface"
@@ -118,24 +86,22 @@
         }
       ],
       "default": null,
-      "title": "right_surface",
       "description": "specify the right surface to use"
     },
-    "cerebellum_surface": {
+    "cerebellum-surface": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "cerebellum_surface"
+              "const": "cerebellum-surface"
             },
             "surface": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "surface",
               "description": "the cerebellum surface file"
             },
-            "opt_cerebellum_corrected_areas_area_metric": {
+            "area-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -145,13 +111,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_cerebellum_corrected_areas_area_metric",
-              "description": "vertex areas to use instead of computing them from the cerebellum surface: the corrected vertex areas, as a metric"
+              "description": "vertex areas to use instead of computing them from the cerebellum surface\n\nthe corrected vertex areas, as a metric"
             }
           },
           "additionalProperties": false,
-          "title": "cerebellum_surface",
           "description": "specify the cerebellum surface to use",
           "required": [
             "surface"
@@ -162,23 +125,38 @@
         }
       ],
       "default": null,
-      "title": "cerebellum_surface",
       "description": "specify the cerebellum surface to use"
     },
-    "opt_merged_volume": {
+    "merged-volume": {
       "type": "boolean",
       "default": false,
-      "title": "opt_merged_volume",
       "description": "treat volume components as if they were a single component"
+    },
+    "cifti-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input cifti file"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which dimension to dilate along, ROW or COLUMN"
+    },
+    "surface-distance": {
+      "type": "number",
+      "description": "the distance to dilate on surfaces, in mm"
+    },
+    "volume-distance": {
+      "type": "number",
+      "description": "the distance to dilate in the volume, in mm"
     }
   },
   "additionalProperties": false,
   "required": [
-    "cifti_in",
+    "cifti-out",
+    "cifti-in",
     "direction",
-    "surface_distance",
-    "volume_distance",
-    "cifti_out",
+    "surface-distance",
+    "volume-distance",
     "@type"
   ]
 }

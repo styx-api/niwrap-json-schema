@@ -1,34 +1,30 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "convert-affine",
-  "description": "Convert an affine file between conventions.\n\nNIFTI world matrices can be used directly on mm coordinates via matrix multiplication, they use the NIFTI coordinate system, that is, positive X is right, positive Y is anterior, and positive Z is superior.  Note that wb_command assumes that world matrices transform source coordinates to target coordinates, while other tools may use affines that transform target coordinates to source coordinates.\n\nThe ITK format is used by ANTS.\n\nYou must specify exactly one -from option, but you may specify multiple -to options, and -to-flirt may be specified more than once.",
+  "description": "CONVERT AN AFFINE FILE BETWEEN CONVENTIONS.\n\nNIFTI world matrices can be used directly on mm coordinates via matrix multiplication, they use the NIFTI coordinate system, that is, positive X is right, positive Y is anterior, and positive Z is superior.  Note that wb_command assumes that world matrices transform source coordinates to target coordinates, while other tools may use affines that transform target coordinates to source coordinates.\n\nThe ITK format is used by ANTS.\n\nYou must specify exactly one -from option, but you may specify multiple -to options, and -to-flirt may be specified more than once.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/convert-affine"
     },
-    "from_world": {
+    "from-world": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "from_world"
+              "const": "from-world"
             },
             "input": {
               "type": "string",
-              "title": "input",
               "description": "the input affine"
             },
-            "opt_inverse": {
+            "inverse": {
               "type": "boolean",
               "default": false,
-              "title": "opt_inverse",
               "description": "for files that use 'target to source' convention"
             }
           },
           "additionalProperties": false,
-          "title": "from_world",
           "description": "input is a NIFTI 'world' affine",
           "required": [
             "input"
@@ -39,10 +35,9 @@
         }
       ],
       "default": null,
-      "title": "from_world",
       "description": "input is a NIFTI 'world' affine"
     },
-    "opt_from_itk_input": {
+    "input": {
       "anyOf": [
         {
           "type": "string"
@@ -51,41 +46,35 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_from_itk_input",
-      "description": "input is an ITK matrix: the input affine"
+      "description": "input is an ITK matrix\n\nthe input affine"
     },
-    "from_flirt": {
+    "from-flirt": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "from_flirt"
+              "const": "from-flirt"
             },
             "input": {
               "type": "string",
-              "title": "input",
               "description": "the input affine"
             },
-            "source_volume": {
+            "source-volume": {
               "type": "string",
-              "title": "source_volume",
               "description": "the source volume used when generating the input affine"
             },
-            "target_volume": {
+            "target-volume": {
               "type": "string",
-              "title": "target_volume",
               "description": "the target volume used when generating the input affine"
             }
           },
           "additionalProperties": false,
-          "title": "from_flirt",
           "description": "input is a flirt matrix",
           "required": [
             "input",
-            "source_volume",
-            "target_volume"
+            "source-volume",
+            "target-volume"
           ]
         },
         {
@@ -93,31 +82,27 @@
         }
       ],
       "default": null,
-      "title": "from_flirt",
       "description": "input is a flirt matrix"
     },
-    "to_world": {
+    "to-world": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "to_world"
+              "const": "to-world"
             },
             "output": {
               "type": "string",
-              "title": "output",
               "description": "output - the output affine"
             },
-            "opt_inverse": {
+            "inverse": {
               "type": "boolean",
               "default": false,
-              "title": "opt_inverse",
               "description": "write file using 'target to source' convention"
             }
           },
           "additionalProperties": false,
-          "title": "to_world",
           "description": "write output as a NIFTI 'world' affine",
           "required": [
             "output"
@@ -128,10 +113,9 @@
         }
       ],
       "default": null,
-      "title": "to_world",
       "description": "write output as a NIFTI 'world' affine"
     },
-    "opt_to_itk_output": {
+    "output": {
       "anyOf": [
         {
           "type": "string"
@@ -140,11 +124,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_to_itk_output",
-      "description": "write output as an ITK affine: output - the output affine"
+      "description": "write output as an ITK affine\n\noutput - the output affine"
     },
-    "to_flirt": {
+    "to-flirt": {
       "anyOf": [
         {
           "type": "array",
@@ -152,31 +134,27 @@
             "type": "object",
             "properties": {
               "@type": {
-                "const": "to_flirt"
+                "const": "to-flirt"
               },
               "output": {
                 "type": "string",
-                "title": "output",
                 "description": "output - the output affine"
               },
-              "source_volume": {
+              "source-volume": {
                 "type": "string",
-                "title": "source_volume",
                 "description": "the volume you want to apply the transform to"
               },
-              "target_volume": {
+              "target-volume": {
                 "type": "string",
-                "title": "target_volume",
                 "description": "the target space you want the transformed volume to match"
               }
             },
             "additionalProperties": false,
-            "title": "to_flirt",
             "description": "write output as a flirt matrix",
             "required": [
               "output",
-              "source_volume",
-              "target_volume"
+              "source-volume",
+              "target-volume"
             ]
           }
         },
@@ -185,7 +163,6 @@
         }
       ],
       "default": null,
-      "title": "to_flirt",
       "description": "write output as a flirt matrix"
     }
   },

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "ADD OR REMOVE FILES FROM SPEC FILE.\n\nThe input spec file is overwritten with the new version.  If the spec file does not exist, it is created with default metadata.\n\nRemovals are done before additions, so that you can remove files with a pattern, and then add new files even if they match that removal pattern.\n\nThe <structure> argument of -add must match one of the following strings (you can use INVALID for cifti or volume files):CORTEX_LEFT\nCORTEX_RIGHT\nCEREBELLUM\nACCUMBENS_LEFT\nACCUMBENS_RIGHT\nALL_GREY_MATTER\nALL_WHITE_MATTER\nAMYGDALA_LEFT\nAMYGDALA_RIGHT\nBRAIN_STEM\nCAUDATE_LEFT\nCAUDATE_RIGHT\nCEREBELLAR_WHITE_MATTER_LEFT\nCEREBELLAR_WHITE_MATTER_RIGHT\nCEREBELLUM_LEFT\nCEREBELLUM_RIGHT\nCEREBRAL_WHITE_MATTER_LEFT\nCEREBRAL_WHITE_MATTER_RIGHT\nCORTEX\nDIENCEPHALON_VENTRAL_LEFT\nDIENCEPHALON_VENTRAL_RIGHT\nHIPPOCAMPUS_LEFT\nHIPPOCAMPUS_RIGHT\nHIPPOCAMPUS_DENTATE_LEFT\nHIPPOCAMPUS_DENTATE_RIGHT\nINVALID\nOTHER\nOTHER_GREY_MATTER\nOTHER_WHITE_MATTER\nPALLIDUM_LEFT\nPALLIDUM_RIGHT\nPUTAMEN_LEFT\nPUTAMEN_RIGHT\nTHALAMUS_LEFT\nTHALAMUS_RIGHT\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/spec-file-modify"
+    },
+    "add": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "add"
+              },
+              "structure": {
+                "type": "string",
+                "description": "the structure of the data file"
+              },
+              "file": {
+                "type": "string",
+                "description": "the file to add"
+              }
+            },
+            "additionalProperties": false,
+            "description": "add a file to the spec",
+            "required": [
+              "structure",
+              "file"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "add a file to the spec"
+    },
+    "remove": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "remove"
+              },
+              "filename": {
+                "type": "string",
+                "description": "the filename to remove"
+              },
+              "recursive": {
+                "type": "boolean",
+                "default": false,
+                "description": "remove all files that match the string starting from any folder"
+              },
+              "suffix": {
+                "type": "boolean",
+                "default": false,
+                "description": "match any file that ends with the given string (if there are multiple matches, error unless -recursive was also specified)"
+              }
+            },
+            "additionalProperties": false,
+            "description": "remove a file from the spec file",
+            "required": [
+              "filename"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "remove a file from the spec file"
+    },
+    "spec-file": {
+      "type": "string",
+      "description": "the spec file to modify"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "spec-file",
+    "@type"
+  ]
+}

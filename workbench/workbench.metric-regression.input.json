@@ -1,24 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "metric-regression",
-  "description": "Regress spatial map out of a metric file.\n\nFor each regressor, its mean across the surface is subtracted from its data.  Each input map is then regressed against these, and a constant term.  The resulting regressed slopes of all regressors specified with -remove are multiplied with their respective regressor maps, and these are subtracted from the input map.",
+  "description": "REGRESS SPATIAL MAP OUT OF A METRIC FILE.\n\nFor each regressor, its mean across the surface is subtracted from its data.  Each input map is then regressed against these, and a constant term.  The resulting regressed slopes of all regressors specified with -remove are multiplied with their respective regressor maps, and these are subtracted from the input map.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/metric-regression"
     },
-    "metric_in": {
+    "metric-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "metric_in",
-      "description": "the metric to regress from"
-    },
-    "metric_out": {
-      "type": "string",
-      "title": "metric_out",
       "description": "the output metric"
     },
-    "opt_roi_roi_metric": {
+    "roi-metric": {
       "anyOf": [
         {
           "type": "string",
@@ -28,11 +20,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_roi_roi_metric",
-      "description": "only regress inside an roi: the area to use for regression, as a metric"
+      "description": "only regress inside an roi\n\nthe area to use for regression, as a metric"
     },
-    "opt_column_column": {
+    "column": {
       "anyOf": [
         {
           "type": "string"
@@ -41,9 +31,7 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_column_column",
-      "description": "select a single column to regress from: the column number or name"
+      "description": "select a single column to regress from\n\nthe column number or name"
     },
     "remove": {
       "anyOf": [
@@ -58,10 +46,9 @@
               "metric": {
                 "type": "string",
                 "x-styx-type": "file",
-                "title": "metric",
                 "description": "the metric file to use"
               },
-              "opt_remove_column_column": {
+              "column": {
                 "anyOf": [
                   {
                     "type": "string"
@@ -70,13 +57,10 @@
                     "type": "null"
                   }
                 ],
-                "default": null,
-                "title": "opt_remove_column_column",
-                "description": "select a column to use, rather than all: the column number or name"
+                "description": "select a column to use, rather than all\n\nthe column number or name"
               }
             },
             "additionalProperties": false,
-            "title": "remove",
             "description": "specify a metric to regress out",
             "required": [
               "metric"
@@ -88,7 +72,6 @@
         }
       ],
       "default": null,
-      "title": "remove",
       "description": "specify a metric to regress out"
     },
     "keep": {
@@ -104,10 +87,9 @@
               "metric": {
                 "type": "string",
                 "x-styx-type": "file",
-                "title": "metric",
                 "description": "the metric file to use"
               },
-              "opt_keep_column_column": {
+              "column": {
                 "anyOf": [
                   {
                     "type": "string"
@@ -116,13 +98,10 @@
                     "type": "null"
                   }
                 ],
-                "default": null,
-                "title": "opt_keep_column_column",
-                "description": "select a column to use, rather than all: the column number or name"
+                "description": "select a column to use, rather than all\n\nthe column number or name"
               }
             },
             "additionalProperties": false,
-            "title": "keep",
             "description": "specify a metric to include in regression, but not remove",
             "required": [
               "metric"
@@ -134,14 +113,18 @@
         }
       ],
       "default": null,
-      "title": "keep",
       "description": "specify a metric to include in regression, but not remove"
+    },
+    "metric-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the metric to regress from"
     }
   },
   "additionalProperties": false,
   "required": [
-    "metric_in",
-    "metric_out",
+    "metric-out",
+    "metric-in",
     "@type"
   ]
 }

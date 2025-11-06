@@ -1,24 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "foci-list-coords",
-  "description": "Output foci coordinates in a text file.\n\nOutput the coordinates for every focus in the foci file, and optionally the focus names in a second text file.",
+  "description": "OUTPUT FOCI COORDINATES IN A TEXT FILE.\n\nOutput the coordinates for every focus in the foci file, and optionally the focus names in a second text file.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/foci-list-coords"
     },
-    "foci_file": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "foci_file",
-      "description": "input foci file"
-    },
-    "coord_file_out": {
-      "type": "string",
-      "title": "coord_file_out",
-      "description": "output - the output coordinate text file"
-    },
-    "opt_names_out_names_file_out": {
+    "names-file-out": {
       "anyOf": [
         {
           "type": "string"
@@ -27,15 +15,22 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_names_out_names_file_out",
-      "description": "output the foci names: output - text file to put foci names in"
+      "description": "output the foci names\n\noutput - text file to put foci names in"
+    },
+    "foci-file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "input foci file"
+    },
+    "coord-file-out": {
+      "type": "string",
+      "description": "output - the output coordinate text file"
     }
   },
   "additionalProperties": false,
   "required": [
-    "foci_file",
-    "coord_file_out",
+    "foci-file",
+    "coord-file-out",
     "@type"
   ]
 }

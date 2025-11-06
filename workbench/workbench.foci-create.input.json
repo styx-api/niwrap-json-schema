@@ -1,7 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "foci-create",
-  "description": "Create a foci file.\n\nCreates a foci file from names, coordinates, and RGB values in a text file.  The text file must have the following format (2 lines per focus):\n\n<focus-name>\n<red> <green> <blue> <x> <y> <z> \n...\n\nFoci names are specified on a separate line from their coordinates and color, in order to let foci names contain spaces.  Whitespace is trimmed from both ends of the foci name, but is kept if it is in the middle of a name.  The values of <red>, <green>, <blue> and must be integers from 0 to 255, and will specify the color the foci is drawn as.\n\nFoci are grouped into classes and the name for the class is specified using the <class-name> parameter.\n\nAll foci within one text file must be associated with the structure contained in the <surface> parameter and are projected to that surface.",
+  "description": "CREATE A FOCI FILE.\n\nCreates a foci file from names, coordinates, and RGB values in a text file.  The text file must have the following format (2 lines per focus):\n\n<focus-name>\n<red> <green> <blue> <x> <y> <z> \n...\n\nFoci names are specified on a separate line from their coordinates and color, in order to let foci names contain spaces.  Whitespace is trimmed from both ends of the foci name, but is kept if it is in the middle of a name.  The values of <red>, <green>, <blue> and must be integers from 0 to 255, and will specify the color the foci is drawn as.\n\nFoci are grouped into classes and the name for the class is specified using the <class-name> parameter.\n\nAll foci within one text file must be associated with the structure contained in the <surface> parameter and are projected to that surface.",
   "type": "object",
   "properties": {
     "@type": {
@@ -9,7 +8,6 @@
     },
     "output": {
       "type": "string",
-      "title": "output",
       "description": "the output foci file"
     },
     "class": {
@@ -22,29 +20,25 @@
               "@type": {
                 "const": "class"
               },
-              "class_name": {
+              "class-name": {
                 "type": "string",
-                "title": "class_name",
                 "description": "name of class"
               },
-              "foci_list_file": {
+              "foci-list-file": {
                 "type": "string",
-                "title": "foci_list_file",
                 "description": "text file containing foci names, coordinates, and colors"
               },
               "surface": {
                 "type": "string",
                 "x-styx-type": "file",
-                "title": "surface",
                 "description": "surface file for projection of foci list file"
               }
             },
             "additionalProperties": false,
-            "title": "class",
             "description": "specify class input data",
             "required": [
-              "class_name",
-              "foci_list_file",
+              "class-name",
+              "foci-list-file",
               "surface"
             ]
           }
@@ -54,7 +48,6 @@
         }
       ],
       "default": null,
-      "title": "class",
       "description": "specify class input data"
     }
   },

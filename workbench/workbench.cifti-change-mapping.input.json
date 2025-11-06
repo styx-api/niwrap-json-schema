@@ -1,26 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "cifti-change-mapping",
-  "description": "Convert to scalar, copy mapping, etc.\n\nTake an existing cifti file and change one of the mappings.  Exactly one of -series, -scalar, or -from-cifti must be specified.  The direction can be either an integer starting from 1, or the strings 'ROW' or 'COLUMN'.\n\nThe argument to -unit must be one of the following:\n\nSECOND\nHERTZ\nMETER\nRADIAN",
+  "description": "CONVERT TO SCALAR, COPY MAPPING, ETC.\n\nTake an existing cifti file and change one of the mappings.  Exactly one of -series, -scalar, or -from-cifti must be specified.  The direction can be either an integer starting from 1, or the strings 'ROW' or 'COLUMN'.\n\nThe argument to -unit must be one of the following:\n\nSECOND\nHERTZ\nMETER\nRADIAN",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/cifti-change-mapping"
     },
-    "data_cifti": {
+    "cifti-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "data_cifti",
-      "description": "the cifti file to use the data from"
-    },
-    "direction": {
-      "type": "string",
-      "title": "direction",
-      "description": "which direction on <data-cifti> to replace the mapping"
-    },
-    "cifti_out": {
-      "type": "string",
-      "title": "cifti_out",
       "description": "the output cifti file"
     },
     "series": {
@@ -33,15 +20,13 @@
             },
             "step": {
               "type": "number",
-              "title": "step",
               "description": "increment between series points"
             },
             "start": {
               "type": "number",
-              "title": "start",
               "description": "start value of the series"
             },
-            "opt_unit_unit": {
+            "unit": {
               "anyOf": [
                 {
                   "type": "string"
@@ -50,13 +35,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_unit_unit",
-              "description": "select unit for series (default SECOND): unit identifier"
+              "description": "select unit for series (default SECOND)\n\nunit identifier"
             }
           },
           "additionalProperties": false,
-          "title": "series",
           "description": "set the mapping to series",
           "required": [
             "step",
@@ -68,7 +50,6 @@
         }
       ],
       "default": null,
-      "title": "series",
       "description": "set the mapping to series"
     },
     "scalar": {
@@ -79,7 +60,7 @@
             "@type": {
               "const": "scalar"
             },
-            "opt_name_file_file": {
+            "file": {
               "anyOf": [
                 {
                   "type": "string"
@@ -88,13 +69,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_name_file_file",
-              "description": "specify names for the maps: text file containing map names, one per line"
+              "description": "specify names for the maps\n\ntext file containing map names, one per line"
             }
           },
           "additionalProperties": false,
-          "title": "scalar",
           "description": "set the mapping to scalar"
         },
         {
@@ -102,34 +80,30 @@
         }
       ],
       "default": null,
-      "title": "scalar",
       "description": "set the mapping to scalar"
     },
-    "from_cifti": {
+    "from-cifti": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "from_cifti"
+              "const": "from-cifti"
             },
-            "template_cifti": {
+            "template-cifti": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "template_cifti",
               "description": "a cifti file containing the desired mapping"
             },
             "direction": {
               "type": "string",
-              "title": "direction",
               "description": "which direction to copy the mapping from"
             }
           },
           "additionalProperties": false,
-          "title": "from_cifti",
           "description": "copy mapping from another cifti file",
           "required": [
-            "template_cifti",
+            "template-cifti",
             "direction"
           ]
         },
@@ -138,15 +112,23 @@
         }
       ],
       "default": null,
-      "title": "from_cifti",
       "description": "copy mapping from another cifti file"
+    },
+    "data-cifti": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the cifti file to use the data from"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which direction on <data-cifti> to replace the mapping"
     }
   },
   "additionalProperties": false,
   "required": [
-    "data_cifti",
+    "cifti-out",
+    "data-cifti",
     "direction",
-    "cifti_out",
     "@type"
   ]
 }

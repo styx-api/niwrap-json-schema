@@ -1,29 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "volume-rois-from-extrema",
-  "description": "Create volume roi maps from extrema maps.\n\nFor each nonzero value in each map, make a map with an ROI around that location.  If the -gaussian option is specified, then normalized gaussian kernels are output instead of ROIs.  The <method> argument to -overlap-logic must be one of ALLOW, CLOSEST, or EXCLUDE.  ALLOW is the default, and means that ROIs are treated independently and may overlap.  CLOSEST means that ROIs may not overlap, and that no ROI contains vertices that are closer to a different seed vertex.  EXCLUDE means that ROIs may not overlap, and that any vertex within range of more than one ROI does not belong to any ROI.",
+  "description": "CREATE VOLUME ROI MAPS FROM EXTREMA MAPS.\n\nFor each nonzero value in each map, make a map with an ROI around that location.  If the -gaussian option is specified, then normalized gaussian kernels are output instead of ROIs.  The <method> argument to -overlap-logic must be one of ALLOW, CLOSEST, or EXCLUDE.  ALLOW is the default, and means that ROIs are treated independently and may overlap.  CLOSEST means that ROIs may not overlap, and that no ROI contains vertices that are closer to a different seed vertex.  EXCLUDE means that ROIs may not overlap, and that any vertex within range of more than one ROI does not belong to any ROI.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/volume-rois-from-extrema"
     },
-    "volume_in": {
+    "volume-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "volume_in",
-      "description": "the input volume"
-    },
-    "limit": {
-      "type": "number",
-      "title": "limit",
-      "description": "distance limit from voxel center, in mm"
-    },
-    "volume_out": {
-      "type": "string",
-      "title": "volume_out",
       "description": "the output volume"
     },
-    "opt_gaussian_sigma": {
+    "sigma": {
       "anyOf": [
         {
           "type": "number"
@@ -32,11 +19,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_gaussian_sigma",
-      "description": "generate a gaussian kernel instead of a flat ROI: the sigma for the gaussian kernel, in mm"
+      "description": "generate a gaussian kernel instead of a flat ROI\n\nthe sigma for the gaussian kernel, in mm"
     },
-    "opt_roi_roi_volume": {
+    "roi-volume": {
       "anyOf": [
         {
           "type": "string",
@@ -46,11 +31,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_roi_roi_volume",
-      "description": "select a region of interest to use: the region to use"
+      "description": "select a region of interest to use\n\nthe region to use"
     },
-    "opt_overlap_logic_method": {
+    "method": {
       "anyOf": [
         {
           "type": "string"
@@ -59,11 +42,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_overlap_logic_method",
-      "description": "how to handle overlapping ROIs, default ALLOW: the method of resolving overlaps"
+      "description": "how to handle overlapping ROIs, default ALLOW\n\nthe method of resolving overlaps"
     },
-    "opt_subvolume_subvol": {
+    "subvol": {
       "anyOf": [
         {
           "type": "string"
@@ -72,16 +53,23 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_subvolume_subvol",
-      "description": "select a single subvolume to take the gradient of: the subvolume number or name"
+      "description": "select a single subvolume to take the gradient of\n\nthe subvolume number or name"
+    },
+    "volume-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input volume"
+    },
+    "limit": {
+      "type": "number",
+      "description": "distance limit from voxel center, in mm"
     }
   },
   "additionalProperties": false,
   "required": [
-    "volume_in",
+    "volume-out",
+    "volume-in",
     "limit",
-    "volume_out",
     "@type"
   ]
 }

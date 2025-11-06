@@ -1,30 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "cifti-cross-correlation",
-  "description": "Correlate a cifti file with another cifti file.\n\nCorrelates every row in <cifti-a> with every row in <cifti-b>.  The mapping along columns in <cifti-b> becomes the mapping along rows in the output.\n\nWhen using the -fisher-z option, the output is NOT a Z-score, it is artanh(r), to do further math on this output, consider using -cifti-math.\n\nRestricting the memory usage will make it calculate the output in chunks, by reading through <cifti-b> multiple times.",
+  "description": "CORRELATE A CIFTI FILE WITH ANOTHER CIFTI FILE.\n\nCorrelates every row in <cifti-a> with every row in <cifti-b>.  The mapping along columns in <cifti-b> becomes the mapping along rows in the output.\n\nWhen using the -fisher-z option, the output is NOT a Z-score, it is artanh(r), to do further math on this output, consider using -cifti-math.\n\nRestricting the memory usage will make it calculate the output in chunks, by reading through <cifti-b> multiple times.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/cifti-cross-correlation"
     },
-    "cifti_a": {
+    "cifti-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "cifti_a",
-      "description": "first input cifti file"
-    },
-    "cifti_b": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "cifti_b",
-      "description": "second input cifti file"
-    },
-    "cifti_out": {
-      "type": "string",
-      "title": "cifti_out",
       "description": "output cifti file"
     },
-    "opt_weights_weight_file": {
+    "weight-file": {
       "anyOf": [
         {
           "type": "string"
@@ -33,17 +19,14 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_weights_weight_file",
-      "description": "specify column weights: text file containing one weight per column"
+      "description": "specify column weights\n\ntext file containing one weight per column"
     },
-    "opt_fisher_z": {
+    "fisher-z": {
       "type": "boolean",
       "default": false,
-      "title": "opt_fisher_z",
       "description": "apply fisher small z transform (ie, artanh) to correlation"
     },
-    "opt_mem_limit_limit_gb": {
+    "limit-GB": {
       "anyOf": [
         {
           "type": "number"
@@ -52,16 +35,24 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_mem_limit_limit_gb",
-      "description": "restrict memory usage: memory limit in gigabytes"
+      "description": "restrict memory usage\n\nmemory limit in gigabytes"
+    },
+    "cifti-a": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "first input cifti file"
+    },
+    "cifti-b": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "second input cifti file"
     }
   },
   "additionalProperties": false,
   "required": [
-    "cifti_a",
-    "cifti_b",
-    "cifti_out",
+    "cifti-out",
+    "cifti-a",
+    "cifti-b",
     "@type"
   ]
 }

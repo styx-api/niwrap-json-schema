@@ -1,67 +1,39 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "label-resample",
-  "description": "Resample a label file to a different mesh.\n\nResamples a label file, given two spherical surfaces that are in register.  If ADAP_BARY_AREA is used, exactly one of -area-surfs or -area-metrics must be specified.\n\nThe ADAP_BARY_AREA method is recommended for label data, because it should be better at resolving vertices that are near multiple labels, or in case of downsampling.  Midthickness surfaces are recommended for the vertex areas for most data.\n\nThe -largest option results in nearest vertex behavior when used with BARYCENTRIC, as it uses the value of the source vertex that has the largest weight.\n\nWhen -largest is not specified, the vertex weights are summed according to which label they correspond to, and the label with the largest sum is used.\n\nThe <method> argument must be one of the following:\n\nADAP_BARY_AREA\nBARYCENTRIC\n",
+  "description": "RESAMPLE A LABEL FILE TO A DIFFERENT MESH.\n\nResamples a label file, given two spherical surfaces that are in register.  If ADAP_BARY_AREA is used, exactly one of -area-surfs or -area-metrics must be specified.\n\nThe ADAP_BARY_AREA method is recommended for label data, because it should be better at resolving vertices that are near multiple labels, or in case of downsampling.  Midthickness surfaces are recommended for the vertex areas for most data.\n\nThe -largest option results in nearest vertex behavior when used with BARYCENTRIC, as it uses the value of the source vertex that has the largest weight.\n\nWhen -largest is not specified, the vertex weights are summed according to which label they correspond to, and the label with the largest sum is used.\n\nThe <method> argument must be one of the following:\n\nADAP_BARY_AREA\nBARYCENTRIC\n",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/label-resample"
     },
-    "label_in": {
+    "label-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "label_in",
-      "description": "the label file to resample"
-    },
-    "current_sphere": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "current_sphere",
-      "description": "a sphere surface with the mesh that the label file is currently on"
-    },
-    "new_sphere": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "new_sphere",
-      "description": "a sphere surface that is in register with <current-sphere> and has the desired output mesh"
-    },
-    "method": {
-      "type": "string",
-      "title": "method",
-      "description": "the method name"
-    },
-    "label_out": {
-      "type": "string",
-      "title": "label_out",
       "description": "the output label file"
     },
-    "area_surfs": {
+    "area-surfs": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "area_surfs"
+              "const": "area-surfs"
             },
-            "current_area": {
+            "current-area": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "current_area",
               "description": "a relevant anatomical surface with <current-sphere> mesh"
             },
-            "new_area": {
+            "new-area": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "new_area",
               "description": "a relevant anatomical surface with <new-sphere> mesh"
             }
           },
           "additionalProperties": false,
-          "title": "area_surfs",
           "description": "specify surfaces to do vertex area correction based on",
           "required": [
-            "current_area",
-            "new_area"
+            "current-area",
+            "new-area"
           ]
         },
         {
@@ -69,36 +41,32 @@
         }
       ],
       "default": null,
-      "title": "area_surfs",
       "description": "specify surfaces to do vertex area correction based on"
     },
-    "area_metrics": {
+    "area-metrics": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "area_metrics"
+              "const": "area-metrics"
             },
-            "current_area": {
+            "current-area": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "current_area",
               "description": "a metric file with vertex areas for <current-sphere> mesh"
             },
-            "new_area": {
+            "new-area": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "new_area",
               "description": "a metric file with vertex areas for <new-sphere> mesh"
             }
           },
           "additionalProperties": false,
-          "title": "area_metrics",
           "description": "specify vertex area metrics to do area correction based on",
           "required": [
-            "current_area",
-            "new_area"
+            "current-area",
+            "new-area"
           ]
         },
         {
@@ -106,10 +74,9 @@
         }
       ],
       "default": null,
-      "title": "area_metrics",
       "description": "specify vertex area metrics to do area correction based on"
     },
-    "opt_current_roi_roi_metric": {
+    "roi-metric": {
       "anyOf": [
         {
           "type": "string",
@@ -119,11 +86,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_current_roi_roi_metric",
-      "description": "use an input roi on the current mesh to exclude non-data vertices: the roi, as a metric file"
+      "description": "use an input roi on the current mesh to exclude non-data vertices\n\nthe roi, as a metric file"
     },
-    "opt_valid_roi_out_roi_out": {
+    "roi-out": {
       "anyOf": [
         {
           "type": "string"
@@ -132,30 +97,45 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_valid_roi_out_roi_out",
-      "description": "output the ROI of vertices that got data from valid source vertices: the output roi as a metric"
+      "description": "output the ROI of vertices that got data from valid source vertices\n\nthe output roi as a metric"
     },
-    "opt_largest": {
+    "largest": {
       "type": "boolean",
       "default": false,
-      "title": "opt_largest",
       "description": "use only the label of the vertex with the largest weight"
     },
-    "opt_bypass_sphere_check": {
+    "bypass-sphere-check": {
       "type": "boolean",
       "default": false,
-      "title": "opt_bypass_sphere_check",
       "description": "ADVANCED: allow the current and new 'spheres' to have arbitrary shape as long as they follow the same contour"
+    },
+    "label-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the label file to resample"
+    },
+    "current-sphere": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "a sphere surface with the mesh that the label file is currently on"
+    },
+    "new-sphere": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "a sphere surface that is in register with <current-sphere> and has the desired output mesh"
+    },
+    "method": {
+      "type": "string",
+      "description": "the method name"
     }
   },
   "additionalProperties": false,
   "required": [
-    "label_in",
-    "current_sphere",
-    "new_sphere",
+    "label-out",
+    "label-in",
+    "current-sphere",
+    "new-sphere",
     "method",
-    "label_out",
     "@type"
   ]
 }

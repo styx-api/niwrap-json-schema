@@ -1,41 +1,36 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "volume-copy-extensions",
-  "description": "Copy extended data to another volume file.\n\nThis command copies the information in a volume file that isn't a critical part of the standard header or data matrix, e.g. map names, palette settings, label tables.  If -drop-unknown is not specified, it also copies similar kinds of information set by other software.",
+  "description": "COPY EXTENDED DATA TO ANOTHER VOLUME FILE.\n\nThis command copies the information in a volume file that isn't a critical part of the standard header or data matrix, e.g. map names, palette settings, label tables.  If -drop-unknown is not specified, it also copies similar kinds of information set by other software.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/volume-copy-extensions"
     },
-    "data_volume": {
+    "volume-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "data_volume",
-      "description": "the volume file containing the voxel data to use"
-    },
-    "extension_volume": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "extension_volume",
-      "description": "the volume file containing the extensions to use"
-    },
-    "volume_out": {
-      "type": "string",
-      "title": "volume_out",
       "description": "the output volume"
     },
-    "opt_drop_unknown": {
+    "drop-unknown": {
       "type": "boolean",
       "default": false,
-      "title": "opt_drop_unknown",
       "description": "don't copy extensions that workbench doesn't understand"
+    },
+    "data-volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the volume file containing the voxel data to use"
+    },
+    "extension-volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the volume file containing the extensions to use"
     }
   },
   "additionalProperties": false,
   "required": [
-    "data_volume",
-    "extension_volume",
-    "volume_out",
+    "volume-out",
+    "data-volume",
+    "extension-volume",
     "@type"
   ]
 }

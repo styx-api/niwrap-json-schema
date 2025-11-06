@@ -1,32 +1,25 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "volume-resample",
-  "description": "Transform and resample a volume file.\n\nResample a volume file with an arbitrary list of transformations.  You may specify -affine, -warp, and -affine-series multiple times each, and they will be used in the order specified.  For instance, for rigid motion correction followed by nonlinear atlas registration, specify -affine-series first, then -warp.  The recommended methods are CUBIC (cubic spline) for most data, and ENCLOSING_VOXEL for label data.  The parameter <method> must be one of:\n\nCUBIC\nENCLOSING_VOXEL\nTRILINEAR",
+  "description": "TRANSFORM AND RESAMPLE A VOLUME FILE.\n\nResample a volume file with an arbitrary list of transformations.  You may specify -affine, -warp, and -affine-series multiple times each, and they will be used in the order specified.  For instance, for rigid motion correction followed by nonlinear atlas registration, specify -affine-series first, then -warp.  The recommended methods are CUBIC (cubic spline) for most data, and ENCLOSING_VOXEL for label data.  The parameter <method> must be one of:\n\nCUBIC\nENCLOSING_VOXEL\nTRILINEAR",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/volume-resample"
     },
-    "volume_in": {
+    "volume-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "volume_in",
-      "description": "volume to resample"
-    },
-    "volume_space": {
-      "type": "string",
-      "title": "volume_space",
-      "description": "a volume file in the volume space you want for the output"
-    },
-    "method": {
-      "type": "string",
-      "title": "method",
-      "description": "the resampling method"
-    },
-    "volume_out": {
-      "type": "string",
-      "title": "volume_out",
       "description": "the output volume"
+    },
+    "value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "use a specified value for locations outside the FoV of the input image or warpfield(s)\n\nthe value to use (default 0)"
     },
     "affine": {
       "anyOf": [
@@ -40,7 +33,6 @@
               },
               "affine": {
                 "type": "string",
-                "title": "affine",
                 "description": "the affine file to use"
               },
               "flirt": {
@@ -51,23 +43,20 @@
                       "@type": {
                         "const": "flirt"
                       },
-                      "source_volume": {
+                      "source-volume": {
                         "type": "string",
-                        "title": "source_volume",
                         "description": "the source volume used when generating the affine"
                       },
-                      "target_volume": {
+                      "target-volume": {
                         "type": "string",
-                        "title": "target_volume",
                         "description": "the target volume used when generating the affine"
                       }
                     },
                     "additionalProperties": false,
-                    "title": "flirt",
                     "description": "MUST be used if affine is a flirt affine",
                     "required": [
-                      "source_volume",
-                      "target_volume"
+                      "source-volume",
+                      "target-volume"
                     ]
                   },
                   {
@@ -75,12 +64,10 @@
                   }
                 ],
                 "default": null,
-                "title": "flirt",
                 "description": "MUST be used if affine is a flirt affine"
               }
             },
             "additionalProperties": false,
-            "title": "affine",
             "description": "add an affine transform",
             "required": [
               "affine"
@@ -92,10 +79,9 @@
         }
       ],
       "default": null,
-      "title": "affine",
       "description": "add an affine transform"
     },
-    "affine_series": {
+    "affine-series": {
       "anyOf": [
         {
           "type": "array",
@@ -103,11 +89,10 @@
             "type": "object",
             "properties": {
               "@type": {
-                "const": "affine_series"
+                "const": "affine-series"
               },
-              "affine_series": {
+              "affine-series": {
                 "type": "string",
-                "title": "affine_series",
                 "description": "text file containing 12 or 16 numbers per line, each being a row-major flattened affine"
               },
               "flirt": {
@@ -116,25 +101,22 @@
                     "type": "object",
                     "properties": {
                       "@type": {
-                        "const": "flirt_1"
+                        "const": "flirt"
                       },
-                      "source_volume": {
+                      "source-volume": {
                         "type": "string",
-                        "title": "source_volume",
                         "description": "the source volume used when generating the affine"
                       },
-                      "target_volume": {
+                      "target-volume": {
                         "type": "string",
-                        "title": "target_volume",
                         "description": "the target volume used when generating the affine"
                       }
                     },
                     "additionalProperties": false,
-                    "title": "flirt",
                     "description": "MUST be used if the affines are flirt affines",
                     "required": [
-                      "source_volume",
-                      "target_volume"
+                      "source-volume",
+                      "target-volume"
                     ]
                   },
                   {
@@ -142,15 +124,13 @@
                   }
                 ],
                 "default": null,
-                "title": "flirt",
                 "description": "MUST be used if the affines are flirt affines"
               }
             },
             "additionalProperties": false,
-            "title": "affine_series",
             "description": "add an independent affine per-frame",
             "required": [
-              "affine_series"
+              "affine-series"
             ]
           }
         },
@@ -159,7 +139,6 @@
         }
       ],
       "default": null,
-      "title": "affine_series",
       "description": "add an independent affine per-frame"
     },
     "warp": {
@@ -174,10 +153,9 @@
               },
               "warpfield": {
                 "type": "string",
-                "title": "warpfield",
                 "description": "the warpfield file"
               },
-              "opt_fnirt_source_volume": {
+              "source-volume": {
                 "anyOf": [
                   {
                     "type": "string"
@@ -186,13 +164,10 @@
                     "type": "null"
                   }
                 ],
-                "default": null,
-                "title": "opt_fnirt_source_volume",
-                "description": "MUST be used if using a fnirt warpfield: the source volume used when generating the warpfield"
+                "description": "MUST be used if using a fnirt warpfield\n\nthe source volume used when generating the warpfield"
               }
             },
             "additionalProperties": false,
-            "title": "warp",
             "description": "add a nonlinear warpfield transform",
             "required": [
               "warpfield"
@@ -204,16 +179,28 @@
         }
       ],
       "default": null,
-      "title": "warp",
       "description": "add a nonlinear warpfield transform"
+    },
+    "volume-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "volume to resample"
+    },
+    "volume-space": {
+      "type": "string",
+      "description": "a volume file in the volume space you want for the output"
+    },
+    "method": {
+      "type": "string",
+      "description": "the resampling method"
     }
   },
   "additionalProperties": false,
   "required": [
-    "volume_in",
-    "volume_space",
+    "volume-out",
+    "volume-in",
+    "volume-space",
     "method",
-    "volume_out",
     "@type"
   ]
 }

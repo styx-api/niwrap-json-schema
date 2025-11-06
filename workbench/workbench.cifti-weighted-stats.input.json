@@ -1,27 +1,20 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "cifti-weighted-stats",
-  "description": "Weighted statistics along cifti columns.\n\nIf the mapping along column is brain models, for each column of the input, the specified operation is done on each surface and across all voxels, and the results are printed on separate lines.  For other mapping types, the operation is done on each column, and one line per map is printed.  Exactly one of -spatial-weights or -cifti-weights must be specified.  Use -column to only give output for a single column.  If the -roi option is used without -match-maps, then each line will contain as many numbers as there are maps in the ROI file, separated by tab characters.  Exactly one of -mean, -stdev, -percentile or -sum must be specified.\n\nUsing -sum with -spatial-weights (or with -cifti-weights and a cifti containing weights of similar meaning) is equivalent to integrating with respect to area and volume.  When the input is binary ROIs, this will therefore output the area or volume of each ROI.",
+  "description": "WEIGHTED STATISTICS ALONG CIFTI COLUMNS.\n\nIf the mapping along column is brain models, for each column of the input, the specified operation is done on each surface and across all voxels, and the results are printed on separate lines.  For other mapping types, the operation is done on each column, and one line per map is printed.  Exactly one of -spatial-weights or -cifti-weights must be specified.  Use -column to only give output for a single column.  If the -roi option is used without -match-maps, then each line will contain as many numbers as there are maps in the ROI file, separated by tab characters.  Exactly one of -mean, -stdev, -percentile or -sum must be specified.\n\nUsing -sum with -spatial-weights (or with -cifti-weights and a cifti containing weights of similar meaning) is equivalent to integrating with respect to area and volume.  When the input is binary ROIs, this will therefore output the area or volume of each ROI.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/cifti-weighted-stats"
     },
-    "cifti_in": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "cifti_in",
-      "description": "the input cifti"
-    },
-    "spatial_weights": {
+    "spatial-weights": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "spatial_weights"
+              "const": "spatial-weights"
             },
-            "opt_left_area_surf_left_surf": {
+            "left-surf": {
               "anyOf": [
                 {
                   "type": "string",
@@ -31,11 +24,9 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_left_area_surf_left_surf",
-              "description": "use a surface for left vertex areas: the left surface to use, areas are in mm^2"
+              "description": "use a surface for left vertex areas\n\nthe left surface to use, areas are in mm^2"
             },
-            "opt_right_area_surf_right_surf": {
+            "right-surf": {
               "anyOf": [
                 {
                   "type": "string",
@@ -45,11 +36,9 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_right_area_surf_right_surf",
-              "description": "use a surface for right vertex areas: the right surface to use, areas are in mm^2"
+              "description": "use a surface for right vertex areas\n\nthe right surface to use, areas are in mm^2"
             },
-            "opt_cerebellum_area_surf_cerebellum_surf": {
+            "cerebellum-surf": {
               "anyOf": [
                 {
                   "type": "string",
@@ -59,11 +48,9 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_cerebellum_area_surf_cerebellum_surf",
-              "description": "use a surface for cerebellum vertex areas: the cerebellum surface to use, areas are in mm^2"
+              "description": "use a surface for cerebellum vertex areas\n\nthe cerebellum surface to use, areas are in mm^2"
             },
-            "opt_left_area_metric_left_metric": {
+            "left-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -73,11 +60,9 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_left_area_metric_left_metric",
-              "description": "use a metric file for left vertex areas: metric file containing left vertex areas"
+              "description": "use a metric file for left vertex areas\n\nmetric file containing left vertex areas"
             },
-            "opt_right_area_metric_right_metric": {
+            "right-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -87,11 +72,9 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_right_area_metric_right_metric",
-              "description": "use a metric file for right vertex areas: metric file containing right vertex areas"
+              "description": "use a metric file for right vertex areas\n\nmetric file containing right vertex areas"
             },
-            "opt_cerebellum_area_metric_cerebellum_metric": {
+            "cerebellum-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -101,13 +84,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_cerebellum_area_metric_cerebellum_metric",
-              "description": "use a metric file for cerebellum vertex areas: metric file containing cerebellum vertex areas"
+              "description": "use a metric file for cerebellum vertex areas\n\nmetric file containing cerebellum vertex areas"
             }
           },
           "additionalProperties": false,
-          "title": "spatial_weights",
           "description": "use vertex area and voxel volume as weights"
         },
         {
@@ -115,10 +95,9 @@
         }
       ],
       "default": null,
-      "title": "spatial_weights",
       "description": "use vertex area and voxel volume as weights"
     },
-    "opt_cifti_weights_weight_cifti": {
+    "weight-cifti": {
       "anyOf": [
         {
           "type": "string",
@@ -128,11 +107,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_cifti_weights_weight_cifti",
-      "description": "use a cifti file containing weights: the weights to use, as a cifti file"
+      "description": "use a cifti file containing weights\n\nthe weights to use, as a cifti file"
     },
-    "opt_column_column": {
+    "column": {
       "anyOf": [
         {
           "type": "integer"
@@ -141,9 +118,7 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_column_column",
-      "description": "only display output for one column: the column to use (1-based)"
+      "description": "only display output for one column\n\nthe column to use (1-based)"
     },
     "roi": {
       "anyOf": [
@@ -153,24 +128,21 @@
             "@type": {
               "const": "roi"
             },
-            "roi_cifti": {
+            "roi-cifti": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "roi_cifti",
               "description": "the roi, as a cifti file"
             },
-            "opt_match_maps": {
+            "match-maps": {
               "type": "boolean",
               "default": false,
-              "title": "opt_match_maps",
               "description": "each column of input uses the corresponding column from the roi file"
             }
           },
           "additionalProperties": false,
-          "title": "roi",
           "description": "only consider data inside an roi",
           "required": [
-            "roi_cifti"
+            "roi-cifti"
           ]
         },
         {
@@ -178,43 +150,26 @@
         }
       ],
       "default": null,
-      "title": "roi",
       "description": "only consider data inside an roi"
     },
-    "opt_mean": {
+    "mean": {
       "type": "boolean",
       "default": false,
-      "title": "opt_mean",
       "description": "compute weighted mean"
     },
-    "stdev": {
+    "sample": {
       "anyOf": [
         {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "stdev"
-            },
-            "opt_sample": {
-              "type": "boolean",
-              "default": false,
-              "title": "opt_sample",
-              "description": "estimate population stdev from the sample"
-            }
-          },
-          "additionalProperties": false,
-          "title": "stdev",
-          "description": "compute weighted standard deviation"
+          "type": "boolean"
         },
         {
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "stdev",
-      "description": "compute weighted standard deviation"
+      "default": false,
+      "description": "compute weighted standard deviation\n\nestimate population stdev from the sample"
     },
-    "opt_percentile_percent": {
+    "percent": {
       "anyOf": [
         {
           "type": "number"
@@ -223,26 +178,27 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_percentile_percent",
-      "description": "compute weighted percentile: the percentile to find, must be between 0 and 100"
+      "description": "compute weighted percentile\n\nthe percentile to find, must be between 0 and 100"
     },
-    "opt_sum": {
+    "sum": {
       "type": "boolean",
       "default": false,
-      "title": "opt_sum",
       "description": "compute weighted sum"
     },
-    "opt_show_map_name": {
+    "show-map-name": {
       "type": "boolean",
       "default": false,
-      "title": "opt_show_map_name",
       "description": "print map index and name before each output"
+    },
+    "cifti-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input cifti"
     }
   },
   "additionalProperties": false,
   "required": [
-    "cifti_in",
+    "cifti-in",
     "@type"
   ]
 }

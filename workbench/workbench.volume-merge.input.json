@@ -1,15 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "volume-merge",
-  "description": "Merge volume files into a new file.\n\nTakes one or more volume files and constructs a new volume file by concatenating subvolumes from them.  The input volume files must have the same volume space.\n\nExample: wb_command -volume-merge out.nii -volume first.nii -subvolume 1 -volume second.nii\n\nThis example would take the first subvolume from first.nii, followed by all subvolumes from second.nii, and write these to out.nii.",
+  "description": "MERGE VOLUME FILES INTO A NEW FILE.\n\nTakes one or more volume files and constructs a new volume file by concatenating subvolumes from them.  The input volume files must have the same volume space.\n\nExample: wb_command -volume-merge out.nii -volume first.nii -subvolume 1 -volume second.nii\n\nThis example would take the first subvolume from first.nii, followed by all subvolumes from second.nii, and write these to out.nii.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/volume-merge"
     },
-    "volume_out": {
+    "volume-out": {
       "type": "string",
-      "title": "volume_out",
       "description": "the output volume file"
     },
     "volume": {
@@ -22,10 +20,9 @@
               "@type": {
                 "const": "volume"
               },
-              "volume_in": {
+              "volume-in": {
                 "type": "string",
                 "x-styx-type": "file",
-                "title": "volume_in",
                 "description": "a volume file to use subvolumes from"
               },
               "subvolume": {
@@ -40,34 +37,30 @@
                         },
                         "subvol": {
                           "type": "string",
-                          "title": "subvol",
                           "description": "the subvolume number or name"
                         },
-                        "up_to": {
+                        "up-to": {
                           "anyOf": [
                             {
                               "type": "object",
                               "properties": {
                                 "@type": {
-                                  "const": "up_to"
+                                  "const": "up-to"
                                 },
-                                "last_subvol": {
+                                "last-subvol": {
                                   "type": "string",
-                                  "title": "last_subvol",
                                   "description": "the number or name of the last subvolume to include"
                                 },
-                                "opt_reverse": {
+                                "reverse": {
                                   "type": "boolean",
                                   "default": false,
-                                  "title": "opt_reverse",
                                   "description": "use the range in reverse order"
                                 }
                               },
                               "additionalProperties": false,
-                              "title": "up_to",
                               "description": "use an inclusive range of subvolumes",
                               "required": [
-                                "last_subvol"
+                                "last-subvol"
                               ]
                             },
                             {
@@ -75,12 +68,10 @@
                             }
                           ],
                           "default": null,
-                          "title": "up_to",
                           "description": "use an inclusive range of subvolumes"
                         }
                       },
                       "additionalProperties": false,
-                      "title": "subvolume",
                       "description": "select a single subvolume to use",
                       "required": [
                         "subvol"
@@ -92,15 +83,13 @@
                   }
                 ],
                 "default": null,
-                "title": "subvolume",
                 "description": "select a single subvolume to use"
               }
             },
             "additionalProperties": false,
-            "title": "volume",
             "description": "specify an input volume file",
             "required": [
-              "volume_in"
+              "volume-in"
             ]
           }
         },
@@ -109,13 +98,12 @@
         }
       ],
       "default": null,
-      "title": "volume",
       "description": "specify an input volume file"
     }
   },
   "additionalProperties": false,
   "required": [
-    "volume_out",
+    "volume-out",
     "@type"
   ]
 }

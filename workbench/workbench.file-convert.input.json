@@ -1,37 +1,33 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "file-convert",
-  "description": "Change version of file format.\n\nYou may only specify one top-level option.",
+  "description": "CHANGE VERSION OF FILE FORMAT.\n\nYou may only specify one top-level option.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/file-convert"
     },
-    "border_version_convert": {
+    "border-version-convert": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "border_version_convert"
+              "const": "border-version-convert"
             },
-            "border_in": {
+            "border-in": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "border_in",
               "description": "the input border file"
             },
-            "out_version": {
+            "out-version": {
               "type": "integer",
-              "title": "out_version",
               "description": "the format version to write as, 1 or 3 (2 doesn't exist)"
             },
-            "border_out": {
+            "border-out": {
               "type": "string",
-              "title": "border_out",
               "description": "output - the output border file"
             },
-            "opt_surface_surface": {
+            "surface": {
               "anyOf": [
                 {
                   "type": "string",
@@ -41,18 +37,15 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_surface_surface",
-              "description": "must be specified if the input is version 1: use this surface file for structure and number of vertices, ignore borders on other structures"
+              "description": "must be specified if the input is version 1\n\nuse this surface file for structure and number of vertices, ignore borders on other structures"
             }
           },
           "additionalProperties": false,
-          "title": "border_version_convert",
           "description": "write a border file with a different version",
           "required": [
-            "border_in",
-            "out_version",
-            "border_out"
+            "border-in",
+            "out-version",
+            "border-out"
           ]
         },
         {
@@ -60,35 +53,30 @@
         }
       ],
       "default": null,
-      "title": "border_version_convert",
       "description": "write a border file with a different version"
     },
-    "nifti_version_convert": {
+    "nifti-version-convert": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "nifti_version_convert"
+              "const": "nifti-version-convert"
             },
             "input": {
               "type": "string",
-              "title": "input",
               "description": "the input nifti file"
             },
             "version": {
               "type": "integer",
-              "title": "version",
               "description": "the nifti version to write as"
             },
             "output": {
               "type": "string",
-              "title": "output",
               "description": "output - the output nifti file"
             }
           },
           "additionalProperties": false,
-          "title": "nifti_version_convert",
           "description": "write a nifti file with a different version",
           "required": [
             "input",
@@ -101,41 +89,36 @@
         }
       ],
       "default": null,
-      "title": "nifti_version_convert",
       "description": "write a nifti file with a different version"
     },
-    "cifti_version_convert": {
+    "cifti-version-convert": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "cifti_version_convert"
+              "const": "cifti-version-convert"
             },
-            "cifti_in": {
+            "cifti-in": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "cifti_in",
               "description": "the input cifti file"
             },
             "version": {
               "type": "string",
-              "title": "version",
               "description": "the cifti version to write as"
             },
-            "cifti_out": {
+            "cifti-out": {
               "type": "string",
-              "title": "cifti_out",
               "description": "output - the output cifti file"
             }
           },
           "additionalProperties": false,
-          "title": "cifti_version_convert",
           "description": "write a cifti file with a different version",
           "required": [
-            "cifti_in",
+            "cifti-in",
             "version",
-            "cifti_out"
+            "cifti-out"
           ]
         },
         {
@@ -143,7 +126,6 @@
         }
       ],
       "default": null,
-      "title": "cifti_version_convert",
       "description": "write a cifti file with a different version"
     }
   },

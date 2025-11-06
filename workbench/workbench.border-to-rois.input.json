@@ -1,30 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "border-to-rois",
-  "description": "Make metric rois from borders.\n\nBy default, draws ROIs inside all borders in the border file, as separate metric columns.",
+  "description": "MAKE METRIC ROIS FROM BORDERS.\n\nBy default, draws ROIs inside all borders in the border file, as separate metric columns.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/border-to-rois"
     },
-    "surface": {
+    "metric-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "surface",
-      "description": "the surface the borders are drawn on"
-    },
-    "border_file": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "border_file",
-      "description": "the border file"
-    },
-    "metric_out": {
-      "type": "string",
-      "title": "metric_out",
       "description": "the output metric file"
     },
-    "opt_border_name": {
+    "name": {
       "anyOf": [
         {
           "type": "string"
@@ -33,28 +19,34 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_border_name",
-      "description": "create ROI for only one border: the name of the border"
+      "description": "create ROI for only one border\n\nthe name of the border"
     },
-    "opt_inverse": {
+    "inverse": {
       "type": "boolean",
       "default": false,
-      "title": "opt_inverse",
       "description": "use inverse selection (outside border)"
     },
-    "opt_include_border": {
+    "include-border": {
       "type": "boolean",
       "default": false,
-      "title": "opt_include_border",
       "description": "include vertices the border is closest to"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the surface the borders are drawn on"
+    },
+    "border-file": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the border file"
     }
   },
   "additionalProperties": false,
   "required": [
+    "metric-out",
     "surface",
-    "border_file",
-    "metric_out",
+    "border-file",
     "@type"
   ]
 }

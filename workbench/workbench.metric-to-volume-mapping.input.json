@@ -1,36 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "metric-to-volume-mapping",
-  "description": "Map metric file to volume.\n\nMaps values from a metric file into a volume file.  You must specify exactly one mapping method option.  The -nearest-vertex method uses the value from the vertex closest to the voxel center (useful for integer values).  The -ribbon-constrained method uses the same method as in -volume-to-surface-mapping, then uses the weights in reverse.  Mapping to lower resolutions than the mesh may require a larger -voxel-subdiv value in order to have all of the surface data participate.",
+  "description": "MAP METRIC FILE TO VOLUME.\n\nMaps values from a metric file into a volume file.  You must specify exactly one mapping method option.  The -nearest-vertex method uses the value from the vertex closest to the voxel center (useful for integer values).  The -ribbon-constrained method uses the same method as in -volume-to-surface-mapping, then uses the weights in reverse.  Mapping to lower resolutions than the mesh may require a larger -voxel-subdiv value in order to have all of the surface data participate.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/metric-to-volume-mapping"
     },
-    "metric": {
+    "volume-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "metric",
-      "description": "the input metric file"
-    },
-    "surface": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "surface",
-      "description": "the surface to use coordinates from"
-    },
-    "volume_space": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "volume_space",
-      "description": "a volume file in the desired output volume space"
-    },
-    "volume_out": {
-      "type": "string",
-      "title": "volume_out",
       "description": "the output volume file"
     },
-    "opt_nearest_vertex_distance": {
+    "distance": {
       "anyOf": [
         {
           "type": "number"
@@ -39,31 +19,27 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_nearest_vertex_distance",
-      "description": "use the value from the vertex closest to the voxel center: how far from the surface to map values to voxels, in mm"
+      "description": "use the value from the vertex closest to the voxel center\n\nhow far from the surface to map values to voxels, in mm"
     },
-    "ribbon_constrained": {
+    "ribbon-constrained": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "ribbon_constrained"
+              "const": "ribbon-constrained"
             },
-            "inner_surf": {
+            "inner-surf": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "inner_surf",
               "description": "the inner surface of the ribbon"
             },
-            "outer_surf": {
+            "outer-surf": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "outer_surf",
               "description": "the outer surface of the ribbon"
             },
-            "opt_voxel_subdiv_subdiv_num": {
+            "subdiv-num": {
               "anyOf": [
                 {
                   "type": "integer"
@@ -72,29 +48,24 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_voxel_subdiv_subdiv_num",
-              "description": "voxel divisions while estimating voxel weights: number of subdivisions, default 3"
+              "description": "voxel divisions while estimating voxel weights\n\nnumber of subdivisions, default 3"
             },
-            "opt_greedy": {
+            "greedy": {
               "type": "boolean",
               "default": false,
-              "title": "opt_greedy",
               "description": "instead of antialiasing partial-volumed voxels, put full metric values (legacy behavior)"
             },
-            "opt_thick_columns": {
+            "thick-columns": {
               "type": "boolean",
               "default": false,
-              "title": "opt_thick_columns",
               "description": "use overlapping columns (legacy method)"
             }
           },
           "additionalProperties": false,
-          "title": "ribbon_constrained",
           "description": "use ribbon constrained mapping algorithm",
           "required": [
-            "inner_surf",
-            "outer_surf"
+            "inner-surf",
+            "outer-surf"
           ]
         },
         {
@@ -102,16 +73,30 @@
         }
       ],
       "default": null,
-      "title": "ribbon_constrained",
       "description": "use ribbon constrained mapping algorithm"
+    },
+    "metric": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input metric file"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the surface to use coordinates from"
+    },
+    "volume-space": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "a volume file in the desired output volume space"
     }
   },
   "additionalProperties": false,
   "required": [
+    "volume-out",
     "metric",
     "surface",
-    "volume_space",
-    "volume_out",
+    "volume-space",
     "@type"
   ]
 }

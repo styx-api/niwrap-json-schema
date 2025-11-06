@@ -1,59 +1,37 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "nifti-information",
-  "description": "Display information about a nifti/cifti file.\n\nYou must specify at least one -print-* option.",
+  "description": "DISPLAY INFORMATION ABOUT A NIFTI/CIFTI FILE.\n\nYou must specify at least one -print-* option.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/nifti-information"
     },
-    "nifti_file": {
-      "type": "string",
-      "title": "nifti_file",
-      "description": "the nifti/cifti file to examine"
-    },
-    "print_header": {
+    "allow-truncated": {
       "anyOf": [
         {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "print_header"
-            },
-            "opt_allow_truncated": {
-              "type": "boolean",
-              "default": false,
-              "title": "opt_allow_truncated",
-              "description": "print the header even if the data is truncated"
-            }
-          },
-          "additionalProperties": false,
-          "title": "print_header",
-          "description": "display the header contents"
+          "type": "boolean"
         },
         {
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "print_header",
-      "description": "display the header contents"
+      "default": false,
+      "description": "display the header contents\n\nprint the header even if the data is truncated"
     },
-    "opt_print_matrix": {
+    "print-matrix": {
       "type": "boolean",
       "default": false,
-      "title": "opt_print_matrix",
       "description": "output the values in the matrix (cifti only)"
     },
-    "print_xml": {
+    "print-xml": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "print_xml"
+              "const": "print-xml"
             },
-            "opt_version_version": {
+            "version": {
               "anyOf": [
                 {
                   "type": "string"
@@ -62,13 +40,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_version_version",
-              "description": "convert the XML to a specific CIFTI version (default is the file's cifti version): the CIFTI version to use"
+              "description": "convert the XML to a specific CIFTI version (default is the file's cifti version)\n\nthe CIFTI version to use"
             }
           },
           "additionalProperties": false,
-          "title": "print_xml",
           "description": "print the cifti XML (cifti only)"
         },
         {
@@ -76,13 +51,16 @@
         }
       ],
       "default": null,
-      "title": "print_xml",
       "description": "print the cifti XML (cifti only)"
+    },
+    "nifti-file": {
+      "type": "string",
+      "description": "the nifti/cifti file to examine"
     }
   },
   "additionalProperties": false,
   "required": [
-    "nifti_file",
+    "nifti-file",
     "@type"
   ]
 }

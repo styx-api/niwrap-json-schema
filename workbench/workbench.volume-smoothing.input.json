@@ -1,35 +1,21 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "volume-smoothing",
-  "description": "Smooth a volume file.\n\nGaussian smoothing for volumes.  By default, smooths all subvolumes with no ROI, if ROI is given, only positive voxels in the ROI volume have their values used, and all other voxels are set to zero.  Smoothing a non-orthogonal volume will be significantly slower, because the operation cannot be separated into 1-dimensional smoothings without distorting the kernel shape.\n\nThe -fix-zeros option causes the smoothing to not use an input value if it is zero, but still write a smoothed value to the voxel.  This is useful for zeros that indicate lack of information, preventing them from pulling down the intensity of nearby voxels, while giving the zero an extrapolated value.",
+  "description": "SMOOTH A VOLUME FILE.\n\nGaussian smoothing for volumes.  By default, smooths all subvolumes with no ROI, if ROI is given, only positive voxels in the ROI volume have their values used, and all other voxels are set to zero.  Smoothing a non-orthogonal volume will be significantly slower, because the operation cannot be separated into 1-dimensional smoothings without distorting the kernel shape.\n\nThe -fix-zeros option causes the smoothing to not use an input value if it is zero, but still write a smoothed value to the voxel.  This is useful for zeros that indicate lack of information, preventing them from pulling down the intensity of nearby voxels, while giving the zero an extrapolated value.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/volume-smoothing"
     },
-    "volume_in": {
+    "volume-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "volume_in",
-      "description": "the volume to smooth"
-    },
-    "kernel": {
-      "type": "number",
-      "title": "kernel",
-      "description": "the size of the gaussian smoothing kernel in mm, as sigma by default"
-    },
-    "volume_out": {
-      "type": "string",
-      "title": "volume_out",
       "description": "the output volume"
     },
-    "opt_fwhm": {
+    "fwhm": {
       "type": "boolean",
       "default": false,
-      "title": "opt_fwhm",
       "description": "kernel size is FWHM, not sigma"
     },
-    "opt_roi_roivol": {
+    "roivol": {
       "anyOf": [
         {
           "type": "string",
@@ -39,17 +25,14 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_roi_roivol",
-      "description": "smooth only from data within an ROI: the volume to use as an ROI"
+      "description": "smooth only from data within an ROI\n\nthe volume to use as an ROI"
     },
-    "opt_fix_zeros": {
+    "fix-zeros": {
       "type": "boolean",
       "default": false,
-      "title": "opt_fix_zeros",
       "description": "treat zero values as not being data"
     },
-    "opt_subvolume_subvol": {
+    "subvol": {
       "anyOf": [
         {
           "type": "string"
@@ -58,16 +41,23 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_subvolume_subvol",
-      "description": "select a single subvolume to smooth: the subvolume number or name"
+      "description": "select a single subvolume to smooth\n\nthe subvolume number or name"
+    },
+    "volume-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the volume to smooth"
+    },
+    "kernel": {
+      "type": "number",
+      "description": "the size of the gaussian smoothing kernel in mm, as sigma by default"
     }
   },
   "additionalProperties": false,
   "required": [
-    "volume_in",
+    "volume-out",
+    "volume-in",
     "kernel",
-    "volume_out",
     "@type"
   ]
 }

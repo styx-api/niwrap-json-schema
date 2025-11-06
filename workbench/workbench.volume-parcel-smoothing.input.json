@@ -1,47 +1,26 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "volume-parcel-smoothing",
-  "description": "Smooth parcels in a volume separately.\n\nThe volume is smoothed within each label in the label volume using data only from within the label.  Equivalent to running volume smoothing with ROIs matching each label separately, then adding the resulting volumes, but faster.",
+  "description": "SMOOTH PARCELS IN A VOLUME SEPARATELY.\n\nThe volume is smoothed within each label in the label volume using data only from within the label.  Equivalent to running volume smoothing with ROIs matching each label separately, then adding the resulting volumes, but faster.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/volume-parcel-smoothing"
     },
-    "data_volume": {
+    "volume-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "data_volume",
-      "description": "the volume to smooth"
-    },
-    "label_volume": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "label_volume",
-      "description": "a label volume containing the parcels to smooth"
-    },
-    "kernel": {
-      "type": "number",
-      "title": "kernel",
-      "description": "the size of the gaussian smoothing kernel in mm, as sigma by default"
-    },
-    "volume_out": {
-      "type": "string",
-      "title": "volume_out",
       "description": "the output volume"
     },
-    "opt_fwhm": {
+    "fwhm": {
       "type": "boolean",
       "default": false,
-      "title": "opt_fwhm",
       "description": "smoothing kernel size is FWHM, not sigma"
     },
-    "opt_fix_zeros": {
+    "fix-zeros": {
       "type": "boolean",
       "default": false,
-      "title": "opt_fix_zeros",
       "description": "treat zero values as not being data"
     },
-    "opt_subvolume_subvol": {
+    "subvol": {
       "anyOf": [
         {
           "type": "string"
@@ -50,17 +29,29 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_subvolume_subvol",
-      "description": "select a single subvolume to smooth: the subvolume number or name"
+      "description": "select a single subvolume to smooth\n\nthe subvolume number or name"
+    },
+    "data-volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the volume to smooth"
+    },
+    "label-volume": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "a label volume containing the parcels to smooth"
+    },
+    "kernel": {
+      "type": "number",
+      "description": "the size of the gaussian smoothing kernel in mm, as sigma by default"
     }
   },
   "additionalProperties": false,
   "required": [
-    "data_volume",
-    "label_volume",
+    "volume-out",
+    "data-volume",
+    "label-volume",
     "kernel",
-    "volume_out",
     "@type"
   ]
 }

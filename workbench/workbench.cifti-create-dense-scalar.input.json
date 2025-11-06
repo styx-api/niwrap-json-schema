@@ -1,15 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "cifti-create-dense-scalar",
-  "description": "Create a cifti dense scalar file.\n\nAll input files must have the same number of columns/subvolumes.  Only the specified components will be in the output cifti file.  Map names will be taken from one of the input files.  At least one component must be specified.\n\nSee -volume-label-import and -volume-help for format details of label volume files.  The structure-label-volume should have some of the label names from this list, all other label names will be ignored:\n\nCORTEX_LEFT\nCORTEX_RIGHT\nCEREBELLUM\nACCUMBENS_LEFT\nACCUMBENS_RIGHT\nALL_GREY_MATTER\nALL_WHITE_MATTER\nAMYGDALA_LEFT\nAMYGDALA_RIGHT\nBRAIN_STEM\nCAUDATE_LEFT\nCAUDATE_RIGHT\nCEREBELLAR_WHITE_MATTER_LEFT\nCEREBELLAR_WHITE_MATTER_RIGHT\nCEREBELLUM_LEFT\nCEREBELLUM_RIGHT\nCEREBRAL_WHITE_MATTER_LEFT\nCEREBRAL_WHITE_MATTER_RIGHT\nCORTEX\nDIENCEPHALON_VENTRAL_LEFT\nDIENCEPHALON_VENTRAL_RIGHT\nHIPPOCAMPUS_LEFT\nHIPPOCAMPUS_RIGHT\nINVALID\nOTHER\nOTHER_GREY_MATTER\nOTHER_WHITE_MATTER\nPALLIDUM_LEFT\nPALLIDUM_RIGHT\nPUTAMEN_LEFT\nPUTAMEN_RIGHT\nTHALAMUS_LEFT\nTHALAMUS_RIGHT",
+  "description": "CREATE A CIFTI DENSE SCALAR FILE.\n\nAll input files must have the same number of columns/subvolumes.  Only the specified components will be in the output cifti file.  Map names will be taken from one of the input files.  At least one component must be specified.\n\nSee -volume-label-import and -volume-help for format details of label volume files.  The -metric structure argument and labels in the structure-label-volume must use names from the below list (labels with other names are ignored, -metric arguments with other strings are an error):\n\nCORTEX_LEFT\nCORTEX_RIGHT\nCEREBELLUM\nACCUMBENS_LEFT\nACCUMBENS_RIGHT\nALL_GREY_MATTER\nALL_WHITE_MATTER\nAMYGDALA_LEFT\nAMYGDALA_RIGHT\nBRAIN_STEM\nCAUDATE_LEFT\nCAUDATE_RIGHT\nCEREBELLAR_WHITE_MATTER_LEFT\nCEREBELLAR_WHITE_MATTER_RIGHT\nCEREBELLUM_LEFT\nCEREBELLUM_RIGHT\nCEREBRAL_WHITE_MATTER_LEFT\nCEREBRAL_WHITE_MATTER_RIGHT\nCORTEX\nDIENCEPHALON_VENTRAL_LEFT\nDIENCEPHALON_VENTRAL_RIGHT\nHIPPOCAMPUS_LEFT\nHIPPOCAMPUS_RIGHT\nHIPPOCAMPUS_DENTATE_LEFT\nHIPPOCAMPUS_DENTATE_RIGHT\nINVALID\nOTHER\nOTHER_GREY_MATTER\nOTHER_WHITE_MATTER\nPALLIDUM_LEFT\nPALLIDUM_RIGHT\nPUTAMEN_LEFT\nPUTAMEN_RIGHT\nTHALAMUS_LEFT\nTHALAMUS_RIGHT",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/cifti-create-dense-scalar"
     },
-    "cifti_out": {
+    "cifti-out": {
       "type": "string",
-      "title": "cifti_out",
       "description": "the output cifti file"
     },
     "volume": {
@@ -20,25 +18,22 @@
             "@type": {
               "const": "volume"
             },
-            "volume_data": {
+            "volume-data": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "volume_data",
               "description": "volume file containing all voxel data for all volume structures"
             },
-            "structure_label_volume": {
+            "structure-label-volume": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "structure_label_volume",
               "description": "label volume file containing labels for cifti structures"
             }
           },
           "additionalProperties": false,
-          "title": "volume",
           "description": "volume component",
           "required": [
-            "volume_data",
-            "structure_label_volume"
+            "volume-data",
+            "structure-label-volume"
           ]
         },
         {
@@ -46,24 +41,22 @@
         }
       ],
       "default": null,
-      "title": "volume",
       "description": "volume component"
     },
-    "left_metric": {
+    "left-metric": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "left_metric"
+              "const": "left-metric"
             },
             "metric": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "metric",
               "description": "the metric file"
             },
-            "opt_roi_left_roi_metric": {
+            "roi-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -73,14 +66,11 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_roi_left_roi_metric",
-              "description": "roi of vertices to use from left surface: the ROI as a metric file"
+              "description": "roi of vertices to use from left surface\n\nthe ROI as a metric file"
             }
           },
           "additionalProperties": false,
-          "title": "left_metric",
-          "description": "metric for left surface",
+          "description": "metric for the left cortical surface",
           "required": [
             "metric"
           ]
@@ -90,24 +80,22 @@
         }
       ],
       "default": null,
-      "title": "left_metric",
-      "description": "metric for left surface"
+      "description": "metric for the left cortical surface"
     },
-    "right_metric": {
+    "right-metric": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "right_metric"
+              "const": "right-metric"
             },
             "metric": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "metric",
               "description": "the metric file"
             },
-            "opt_roi_right_roi_metric": {
+            "roi-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -117,14 +105,11 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_roi_right_roi_metric",
-              "description": "roi of vertices to use from right surface: the ROI as a metric file"
+              "description": "roi of vertices to use from right surface\n\nthe ROI as a metric file"
             }
           },
           "additionalProperties": false,
-          "title": "right_metric",
-          "description": "metric for right surface",
+          "description": "metric for the right cortical surface",
           "required": [
             "metric"
           ]
@@ -134,24 +119,22 @@
         }
       ],
       "default": null,
-      "title": "right_metric",
-      "description": "metric for right surface"
+      "description": "metric for the right cortical surface"
     },
-    "cerebellum_metric": {
+    "cerebellum-metric": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "cerebellum_metric"
+              "const": "cerebellum-metric"
             },
             "metric": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "metric",
               "description": "the metric file"
             },
-            "opt_roi_cerebellum_roi_metric": {
+            "roi-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -161,13 +144,10 @@
                   "type": "null"
                 }
               ],
-              "default": null,
-              "title": "opt_roi_cerebellum_roi_metric",
-              "description": "roi of vertices to use from right surface: the ROI as a metric file"
+              "description": "roi of vertices to use from right surface\n\nthe ROI as a metric file"
             }
           },
           "additionalProperties": false,
-          "title": "cerebellum_metric",
           "description": "metric for the cerebellum",
           "required": [
             "metric"
@@ -178,10 +158,9 @@
         }
       ],
       "default": null,
-      "title": "cerebellum_metric",
       "description": "metric for the cerebellum"
     },
-    "opt_name_file_file": {
+    "file": {
       "anyOf": [
         {
           "type": "string"
@@ -190,14 +169,59 @@
           "type": "null"
         }
       ],
+      "description": "use a text file to set all map names\n\ntext file containing map names, one per line"
+    },
+    "metric": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "metric"
+              },
+              "structure": {
+                "type": "string",
+                "description": "the structure name"
+              },
+              "metric": {
+                "type": "string",
+                "x-styx-type": "file",
+                "description": "the metric file"
+              },
+              "roi-metric": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "x-styx-type": "file"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "roi of vertices to use from this structure\n\nthe ROI as a metric file"
+              }
+            },
+            "additionalProperties": false,
+            "description": "metric for a specified surface structure",
+            "required": [
+              "structure",
+              "metric"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
       "default": null,
-      "title": "opt_name_file_file",
-      "description": "use a text file to set all map names: text file containing map names, one per line"
+      "description": "metric for a specified surface structure"
     }
   },
   "additionalProperties": false,
   "required": [
-    "cifti_out",
+    "cifti-out",
     "@type"
   ]
 }

@@ -1,65 +1,56 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "metric-vector-operation",
-  "description": "Do a vector operation on metric files.\n\nDoes a vector operation on two metric files (that must have a multiple of 3 columns).  Either of the inputs may have multiple vectors (more than 3 columns), but not both (at least one must have exactly 3 columns).  The -magnitude and -normalize-output options may not be specified together, or with an operation that returns a scalar (dot product).  The <operation> parameter must be one of the following:\n\nDOT\nCROSS\nADD\nSUBTRACT",
+  "description": "DO A VECTOR OPERATION ON METRIC FILES.\n\nDoes a vector operation on two metric files (that must have a multiple of 3 columns).  Either of the inputs may have multiple vectors (more than 3 columns), but not both (at least one must have exactly 3 columns).  The -magnitude and -normalize-output options may not be specified together, or with an operation that returns a scalar (dot product).  The <operation> parameter must be one of the following:\n\nDOT\nCROSS\nADD\nSUBTRACT",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/metric-vector-operation"
     },
-    "vectors_a": {
+    "metric-out": {
+      "type": "string",
+      "description": "the output file"
+    },
+    "normalize-a": {
+      "type": "boolean",
+      "default": false,
+      "description": "normalize vectors of first input"
+    },
+    "normalize-b": {
+      "type": "boolean",
+      "default": false,
+      "description": "normalize vectors of second input"
+    },
+    "normalize-output": {
+      "type": "boolean",
+      "default": false,
+      "description": "normalize output vectors (not valid for dot product)"
+    },
+    "magnitude": {
+      "type": "boolean",
+      "default": false,
+      "description": "output the magnitude of the result (not valid for dot product)"
+    },
+    "vectors-a": {
       "type": "string",
       "x-styx-type": "file",
-      "title": "vectors_a",
       "description": "first vector input file"
     },
-    "vectors_b": {
+    "vectors-b": {
       "type": "string",
       "x-styx-type": "file",
-      "title": "vectors_b",
       "description": "second vector input file"
     },
     "operation": {
       "type": "string",
-      "title": "operation",
       "description": "what vector operation to do"
-    },
-    "metric_out": {
-      "type": "string",
-      "title": "metric_out",
-      "description": "the output file"
-    },
-    "opt_normalize_a": {
-      "type": "boolean",
-      "default": false,
-      "title": "opt_normalize_a",
-      "description": "normalize vectors of first input"
-    },
-    "opt_normalize_b": {
-      "type": "boolean",
-      "default": false,
-      "title": "opt_normalize_b",
-      "description": "normalize vectors of second input"
-    },
-    "opt_normalize_output": {
-      "type": "boolean",
-      "default": false,
-      "title": "opt_normalize_output",
-      "description": "normalize output vectors (not valid for dot product)"
-    },
-    "opt_magnitude": {
-      "type": "boolean",
-      "default": false,
-      "title": "opt_magnitude",
-      "description": "output the magnitude of the result (not valid for dot product)"
     }
   },
   "additionalProperties": false,
   "required": [
-    "vectors_a",
-    "vectors_b",
+    "metric-out",
+    "vectors-a",
+    "vectors-b",
     "operation",
-    "metric_out",
     "@type"
   ]
 }

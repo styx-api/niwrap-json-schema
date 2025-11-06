@@ -1,23 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "convert-matrix4-to-matrix2",
-  "description": "Generates a matrix2 cifti from matrix4 wbsparse.\n\nThis command makes a cifti file from the fiber counts in a matrix4 wbsparse file, and optionally a second cifti file from the distances.  Note that while the total count is stored exactly, the per-fiber counts are stored as approximate fractions, so the output of -individual-fibers will contain nonintegers.",
+  "description": "GENERATES A MATRIX2 CIFTI FROM MATRIX4 WBSPARSE.\n\nThis command makes a cifti file from the fiber counts in a matrix4 wbsparse file, and optionally a second cifti file from the distances.  Note that while the total count is stored exactly, the per-fiber counts are stored as approximate fractions, so the output of -individual-fibers will contain nonintegers.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/convert-matrix4-to-matrix2"
     },
-    "matrix4_wbsparse": {
+    "counts-out": {
       "type": "string",
-      "title": "matrix4_wbsparse",
-      "description": "a wbsparse matrix4 file"
-    },
-    "counts_out": {
-      "type": "string",
-      "title": "counts_out",
       "description": "the total fiber counts, as a cifti file"
     },
-    "opt_distances_distance_out": {
+    "distance-out": {
       "anyOf": [
         {
           "type": "string"
@@ -26,41 +19,35 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_distances_distance_out",
-      "description": "output average trajectory distance: the distances, as a cifti file"
+      "description": "output average trajectory distance\n\nthe distances, as a cifti file"
     },
-    "individual_fibers": {
+    "individual-fibers": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "individual_fibers"
+              "const": "individual-fibers"
             },
-            "fiber_1": {
+            "fiber-1": {
               "type": "string",
-              "title": "fiber_1",
               "description": "output file for first fiber"
             },
-            "fiber_2": {
+            "fiber-2": {
               "type": "string",
-              "title": "fiber_2",
               "description": "output file for second fiber"
             },
-            "fiber_3": {
+            "fiber-3": {
               "type": "string",
-              "title": "fiber_3",
               "description": "output file for third fiber"
             }
           },
           "additionalProperties": false,
-          "title": "individual_fibers",
           "description": "output files for each fiber direction",
           "required": [
-            "fiber_1",
-            "fiber_2",
-            "fiber_3"
+            "fiber-1",
+            "fiber-2",
+            "fiber-3"
           ]
         },
         {
@@ -68,14 +55,17 @@
         }
       ],
       "default": null,
-      "title": "individual_fibers",
       "description": "output files for each fiber direction"
+    },
+    "matrix4-wbsparse": {
+      "type": "string",
+      "description": "a wbsparse matrix4 file"
     }
   },
   "additionalProperties": false,
   "required": [
-    "matrix4_wbsparse",
-    "counts_out",
+    "counts-out",
+    "matrix4-wbsparse",
     "@type"
   ]
 }

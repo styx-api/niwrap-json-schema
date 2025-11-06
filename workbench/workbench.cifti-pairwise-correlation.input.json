@@ -1,47 +1,41 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "cifti-pairwise-correlation",
-  "description": "Correlate paired rows between two cifti files.\n\nFor each row in <cifti-a>, correlate it with the same row in <cifti-b>, and put the result in the same row of <cifti-out>, which has only one column.",
+  "description": "CORRELATE PAIRED ROWS BETWEEN TWO CIFTI FILES.\n\nFor each row in <cifti-a>, correlate it with the same row in <cifti-b>, and put the result in the same row of <cifti-out>, which has only one column.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/cifti-pairwise-correlation"
     },
-    "cifti_a": {
+    "cifti-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "cifti_a",
-      "description": "first input cifti file"
-    },
-    "cifti_b": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "cifti_b",
-      "description": "second input cifti file"
-    },
-    "cifti_out": {
-      "type": "string",
-      "title": "cifti_out",
       "description": "output cifti file"
     },
-    "opt_fisher_z": {
+    "fisher-z": {
       "type": "boolean",
       "default": false,
-      "title": "opt_fisher_z",
       "description": "apply fisher small z transform (ie, artanh) to correlation"
     },
-    "opt_override_mapping_check": {
+    "override-mapping-check": {
       "type": "boolean",
       "default": false,
-      "title": "opt_override_mapping_check",
       "description": "don't check the mappings for compatibility, only check length"
+    },
+    "cifti-a": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "first input cifti file"
+    },
+    "cifti-b": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "second input cifti file"
     }
   },
   "additionalProperties": false,
   "required": [
-    "cifti_a",
-    "cifti_b",
-    "cifti_out",
+    "cifti-out",
+    "cifti-a",
+    "cifti-b",
     "@type"
   ]
 }

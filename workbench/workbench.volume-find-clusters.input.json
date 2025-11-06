@@ -1,40 +1,21 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "volume-find-clusters",
-  "description": "Filter clusters by volume.\n\nOutputs a volume with nonzero integers for all voxels within a large enough cluster, and zeros elsewhere.  The integers denote cluster membership (by default, first cluster found will use value 1, second cluster 2, etc).  Cluster values are not reused across frames of the output, but instead keep counting up.  By default, values greater than <value-threshold> are considered to be in a cluster, use -less-than to test for values less than the threshold.  To apply this as a mask to the data, or to do more complicated thresholding, see -volume-math.",
+  "description": "FILTER CLUSTERS BY VOLUME.\n\nOutputs a volume with nonzero integers for all voxels within a large enough cluster, and zeros elsewhere.  The integers denote cluster membership (by default, first cluster found will use value 1, second cluster 2, etc).  Cluster values are not reused across frames of the output, but instead keep counting up.  By default, values greater than <value-threshold> are considered to be in a cluster, use -less-than to test for values less than the threshold.  To apply this as a mask to the data, or to do more complicated thresholding, see -volume-math.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/volume-find-clusters"
     },
-    "volume_in": {
+    "volume-out": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "volume_in",
-      "description": "the input volume"
-    },
-    "value_threshold": {
-      "type": "number",
-      "title": "value_threshold",
-      "description": "threshold for data values"
-    },
-    "minimum_volume": {
-      "type": "number",
-      "title": "minimum_volume",
-      "description": "threshold for cluster volume, in mm^3"
-    },
-    "volume_out": {
-      "type": "string",
-      "title": "volume_out",
       "description": "the output volume"
     },
-    "opt_less_than": {
+    "less-than": {
       "type": "boolean",
       "default": false,
-      "title": "opt_less_than",
       "description": "find values less than <value-threshold>, rather than greater"
     },
-    "opt_roi_roi_volume": {
+    "roi-volume": {
       "anyOf": [
         {
           "type": "string",
@@ -44,11 +25,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_roi_roi_volume",
-      "description": "select a region of interest: the roi, as a volume file"
+      "description": "select a region of interest\n\nthe roi, as a volume file"
     },
-    "opt_subvolume_subvol": {
+    "subvol": {
       "anyOf": [
         {
           "type": "string"
@@ -57,11 +36,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_subvolume_subvol",
-      "description": "select a single subvolume: the subvolume number or name"
+      "description": "select a single subvolume\n\nthe subvolume number or name"
     },
-    "opt_size_ratio_ratio": {
+    "ratio": {
       "anyOf": [
         {
           "type": "number"
@@ -70,11 +47,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_size_ratio_ratio",
-      "description": "ignore clusters smaller than a given fraction of the largest cluster in map: fraction of the largest cluster's volume"
+      "description": "ignore clusters smaller than a given fraction of the largest cluster in map\n\nfraction of the largest cluster's volume"
     },
-    "opt_distance_distance": {
+    "distance": {
       "anyOf": [
         {
           "type": "number"
@@ -83,11 +58,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_distance_distance",
-      "description": "ignore clusters further than a given distance from the largest cluster: how far from the largest cluster a cluster can be, edge to edge, in mm"
+      "description": "ignore clusters further than a given distance from the largest cluster\n\nhow far from the largest cluster a cluster can be, edge to edge, in mm"
     },
-    "opt_start_startval": {
+    "startval": {
       "anyOf": [
         {
           "type": "integer"
@@ -96,17 +69,28 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_start_startval",
-      "description": "start labeling clusters from a value other than 1: the value to give the first cluster found"
+      "description": "start labeling clusters from a value other than 1\n\nthe value to give the first cluster found"
+    },
+    "volume-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input volume"
+    },
+    "value-threshold": {
+      "type": "number",
+      "description": "threshold for data values"
+    },
+    "minimum-volume": {
+      "type": "number",
+      "description": "threshold for cluster volume, in mm^3"
     }
   },
   "additionalProperties": false,
   "required": [
-    "volume_in",
-    "value_threshold",
-    "minimum_volume",
-    "volume_out",
+    "volume-out",
+    "volume-in",
+    "value-threshold",
+    "minimum-volume",
     "@type"
   ]
 }

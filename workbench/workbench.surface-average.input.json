@@ -1,18 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "surface-average",
-  "description": "Average surface files together.\n\nThe 3D sample standard deviation is computed as 'sqrt(sum(squaredlength(xyz - mean(xyz)))/(n - 1))'.\n\nUncertainty is a legacy measure used in caret5, and is computed as 'sum(length(xyz - mean(xyz)))/n'.\n\nWhen weights are used, the 3D sample standard deviation treats them as reliability weights.",
+  "description": "AVERAGE SURFACE FILES TOGETHER.\n\nThe 3D sample standard deviation is computed as 'sqrt(sum(squaredlength(xyz - mean(xyz)))/(n - 1))'.\n\nUncertainty is a legacy measure used in caret5, and is computed as 'sum(length(xyz - mean(xyz)))/n'.\n\nWhen weights are used, the 3D sample standard deviation treats them as reliability weights.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/surface-average"
     },
-    "surface_out": {
+    "surface-out": {
       "type": "string",
-      "title": "surface_out",
       "description": "the output averaged surface"
     },
-    "opt_stddev_stddev_metric_out": {
+    "stddev-metric-out": {
       "anyOf": [
         {
           "type": "string"
@@ -21,11 +19,9 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_stddev_stddev_metric_out",
-      "description": "compute 3D sample standard deviation: the output metric for 3D sample standard deviation"
+      "description": "compute 3D sample standard deviation\n\nthe output metric for 3D sample standard deviation"
     },
-    "opt_uncertainty_uncert_metric_out": {
+    "uncert-metric-out": {
       "anyOf": [
         {
           "type": "string"
@@ -34,9 +30,7 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_uncertainty_uncert_metric_out",
-      "description": "compute caret5 'uncertainty': the output metric for uncertainty"
+      "description": "compute caret5 'uncertainty'\n\nthe output metric for uncertainty"
     },
     "surf": {
       "anyOf": [
@@ -51,10 +45,9 @@
               "surface": {
                 "type": "string",
                 "x-styx-type": "file",
-                "title": "surface",
                 "description": "a surface file to average"
               },
-              "opt_weight_weight": {
+              "weight": {
                 "anyOf": [
                   {
                     "type": "number"
@@ -63,13 +56,10 @@
                     "type": "null"
                   }
                 ],
-                "default": null,
-                "title": "opt_weight_weight",
-                "description": "specify a weighted average: the weight to use (default 1)"
+                "description": "specify a weighted average\n\nthe weight to use (default 1)"
               }
             },
             "additionalProperties": false,
-            "title": "surf",
             "description": "specify a surface to include in the average",
             "required": [
               "surface"
@@ -81,13 +71,12 @@
         }
       ],
       "default": null,
-      "title": "surf",
       "description": "specify a surface to include in the average"
     }
   },
   "additionalProperties": false,
   "required": [
-    "surface_out",
+    "surface-out",
     "@type"
   ]
 }

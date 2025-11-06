@@ -1,44 +1,34 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "volume-weighted-stats",
-  "description": "Weighted spatial statistics on a volume file.\n\nFor each subvolume of the input, a line of text is printed, resulting from the specified operation.  If -weight-volume is not specified, each voxel's volume is used.  Use -subvolume to only give output for a single subvolume.  If the -roi option is used without -match-maps, then each line will contain as many numbers as there are maps in the ROI file, separated by tab characters.  Exactly one of -mean, -stdev, -percentile or -sum must be specified.\n\nUsing -sum without -weight-volume is equivalent to integrating with respect to volume.",
+  "description": "WEIGHTED SPATIAL STATISTICS ON A VOLUME FILE.\n\nFor each subvolume of the input, a line of text is printed, resulting from the specified operation.  If -weight-volume is not specified, each voxel's volume is used.  Use -subvolume to only give output for a single subvolume.  If the -roi option is used without -match-maps, then each line will contain as many numbers as there are maps in the ROI file, separated by tab characters.  Exactly one of -mean, -stdev, -percentile or -sum must be specified.\n\nUsing -sum without -weight-volume is equivalent to integrating with respect to volume.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "workbench/volume-weighted-stats"
     },
-    "volume_in": {
-      "type": "string",
-      "x-styx-type": "file",
-      "title": "volume_in",
-      "description": "the input volume"
-    },
-    "weight_volume": {
+    "weight-volume": {
       "anyOf": [
         {
           "type": "object",
           "properties": {
             "@type": {
-              "const": "weight_volume"
+              "const": "weight-volume"
             },
-            "weight_volume": {
+            "weight-volume": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "weight_volume",
               "description": "volume file containing the weights"
             },
-            "opt_match_maps": {
+            "match-maps": {
               "type": "boolean",
               "default": false,
-              "title": "opt_match_maps",
               "description": "each subvolume of input uses the corresponding subvolume from the weights file"
             }
           },
           "additionalProperties": false,
-          "title": "weight_volume",
           "description": "use weights from a volume file",
           "required": [
-            "weight_volume"
+            "weight-volume"
           ]
         },
         {
@@ -46,10 +36,9 @@
         }
       ],
       "default": null,
-      "title": "weight_volume",
       "description": "use weights from a volume file"
     },
-    "opt_subvolume_subvolume": {
+    "subvolume": {
       "anyOf": [
         {
           "type": "string"
@@ -58,9 +47,7 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_subvolume_subvolume",
-      "description": "only display output for one subvolume: the subvolume number or name"
+      "description": "only display output for one subvolume\n\nthe subvolume number or name"
     },
     "roi": {
       "anyOf": [
@@ -70,24 +57,21 @@
             "@type": {
               "const": "roi"
             },
-            "roi_volume": {
+            "roi-volume": {
               "type": "string",
               "x-styx-type": "file",
-              "title": "roi_volume",
               "description": "the roi, as a volume file"
             },
-            "opt_match_maps": {
+            "match-maps": {
               "type": "boolean",
               "default": false,
-              "title": "opt_match_maps",
               "description": "each subvolume of input uses the corresponding subvolume from the roi file"
             }
           },
           "additionalProperties": false,
-          "title": "roi",
           "description": "only consider data inside an roi",
           "required": [
-            "roi_volume"
+            "roi-volume"
           ]
         },
         {
@@ -95,43 +79,26 @@
         }
       ],
       "default": null,
-      "title": "roi",
       "description": "only consider data inside an roi"
     },
-    "opt_mean": {
+    "mean": {
       "type": "boolean",
       "default": false,
-      "title": "opt_mean",
       "description": "compute weighted mean"
     },
-    "stdev": {
+    "sample": {
       "anyOf": [
         {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "stdev"
-            },
-            "opt_sample": {
-              "type": "boolean",
-              "default": false,
-              "title": "opt_sample",
-              "description": "estimate population stdev from the sample"
-            }
-          },
-          "additionalProperties": false,
-          "title": "stdev",
-          "description": "compute weighted standard deviation"
+          "type": "boolean"
         },
         {
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "stdev",
-      "description": "compute weighted standard deviation"
+      "default": false,
+      "description": "compute weighted standard deviation\n\nestimate population stdev from the sample"
     },
-    "opt_percentile_percent": {
+    "percent": {
       "anyOf": [
         {
           "type": "number"
@@ -140,26 +107,27 @@
           "type": "null"
         }
       ],
-      "default": null,
-      "title": "opt_percentile_percent",
-      "description": "compute weighted percentile: the percentile to find, must be between 0 and 100"
+      "description": "compute weighted percentile\n\nthe percentile to find, must be between 0 and 100"
     },
-    "opt_sum": {
+    "sum": {
       "type": "boolean",
       "default": false,
-      "title": "opt_sum",
       "description": "compute weighted sum"
     },
-    "opt_show_map_name": {
+    "show-map-name": {
       "type": "boolean",
       "default": false,
-      "title": "opt_show_map_name",
       "description": "print map index and name before each output"
+    },
+    "volume-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input volume"
     }
   },
   "additionalProperties": false,
   "required": [
-    "volume_in",
+    "volume-in",
     "@type"
   ]
 }
