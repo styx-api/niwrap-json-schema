@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "antsBrainExtraction.sh",
-  "description": "antsBrainExtraction.sh performs template-based brain extraction.",
+  "description": "antsBrainExtraction.sh performs template-based brain extraction using N4 bias correction, registration, and Atropos segmentation.",
   "type": "object",
   "properties": {
     "@type": {
@@ -9,15 +9,18 @@
     },
     "image_dimension": {
       "type": "integer",
-      "default": 3,
+      "enum": [
+        2,
+        3
+      ],
       "title": "Image Dimension",
-      "description": "Image dimension (2 or 3)"
+      "description": "Image dimension (2 or 3 for 2- or 3-dimensional image)"
     },
     "anatomical_image": {
       "type": "string",
       "x-styx-type": "file",
       "title": "Anatomical Image",
-      "description": "Anatomical image (Structural image, typically T1)"
+      "description": "Anatomical image (Structural image, typically T1). If more than one anatomical image is specified, subsequently specified images are used during the segmentation process. However, only the first image is used in the registration of priors."
     },
     "template": {
       "type": "string",
@@ -29,7 +32,7 @@
       "type": "string",
       "x-styx-type": "file",
       "title": "Brain Extraction Probability Mask",
-      "description": "Brain extraction probability mask"
+      "description": "Brain extraction probability mask (with intensity range 1=definitely brain to 0=definitely background)"
     },
     "tissue_classification": {
       "anyOf": [
@@ -42,7 +45,7 @@
       ],
       "default": null,
       "title": "Tissue Classification",
-      "description": "Tissue classification"
+      "description": "Tissue classification - A k-means segmentation to find tissue classes. Format: KxcsfLabelxgmLabelxwmLabel. Examples: '3x1x2x3' for T1 (K=3, CSF=1, GM=2, WM=3), '3x3x2x1' for T2, '3x1x3x2' for FLAIR, '4x4x2x3' for K=4"
     },
     "brain_extraction_registration_mask": {
       "anyOf": [
@@ -56,19 +59,33 @@
       ],
       "default": null,
       "title": "Brain Extraction Registration Mask",
-      "description": "Brain extraction registration mask"
+      "description": "Brain extraction registration mask (Mask used for registration to limit the metric computation to a specific region)"
     },
     "keep_temporary_files": {
-      "type": "boolean",
-      "default": false,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
       "title": "Keep Temporary Files",
-      "description": "Keep temporary files"
+      "description": "Keep temporary files (keep brain extraction/segmentation warps, etc). 0=delete, 1=keep"
     },
     "single_floating_point_precision": {
-      "type": "boolean",
-      "default": false,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
       "title": "Single Floating Point Precision",
-      "description": "Use single floating point precision"
+      "description": "Use antsRegistration with single (1) or double (0) floating point precision"
     },
     "initial_moving_transform": {
       "anyOf": [
@@ -82,7 +99,7 @@
       ],
       "default": null,
       "title": "Initial Moving Transform",
-      "description": "Initial moving transform"
+      "description": "Initial moving transform (An ITK affine transform, e.g., from antsAI or ITK-SNAP). Without this option, the script calls antsAI to search for a good initial moving transform."
     },
     "rotation_search_params": {
       "anyOf": [
@@ -95,7 +112,7 @@
       ],
       "default": null,
       "title": "Rotation Search Parameters",
-      "description": "Rotation search parameters"
+      "description": "Rotation search parameters for antsAI in format 'step,arcFraction'. Step is in degrees, arcFraction goes from 0 (no search) to 1 (search -180 to 180 degrees)"
     },
     "image_file_suffix": {
       "anyOf": [
@@ -108,7 +125,7 @@
       ],
       "default": null,
       "title": "Image File Suffix",
-      "description": "Image file suffix"
+      "description": "Image file suffix (any standard ITK IO format, e.g., nrrd, nii.gz, mhd)"
     },
     "translation_search_params": {
       "anyOf": [
@@ -121,19 +138,34 @@
       ],
       "default": null,
       "title": "Translation Search Parameters",
-      "description": "Translation search parameters"
+      "description": "Translation search parameters for antsAI in format 'step,range'. Step is in mm, -range to range will be tested in each dimension"
     },
     "random_seeding": {
-      "type": "boolean",
-      "default": false,
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
       "title": "Use Random Seeding",
-      "description": "Use random seeding"
+      "description": "Use random seeding: 1=use random seed from system clock, 0=use fixed seed (ANTS_RANDOM_SEED=19650218 or value from environment). For reproducibility, set to 0 and also set ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1"
     },
     "debug_mode": {
-      "type": "boolean",
-      "default": false,
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
       "title": "Debug Mode",
-      "description": "Test / debug mode"
+      "description": "Test/debug mode: If > 0, runs a faster version of the script. Only for debugging, results will not be good."
     },
     "output_prefix": {
       "anyOf": [
@@ -146,11 +178,12 @@
       ],
       "default": null,
       "title": "Output Prefix",
-      "description": "Output prefix"
+      "description": "Output prefix (directory + file prefix)"
     }
   },
   "additionalProperties": false,
   "required": [
+    "image_dimension",
     "anatomical_image",
     "template",
     "probability_mask",

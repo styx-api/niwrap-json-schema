@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "antsBrainExtraction.sh",
-  "description": "antsBrainExtraction.sh performs template-based brain extraction.",
+  "description": "antsBrainExtraction.sh performs template-based brain extraction using N4 bias correction, registration, and Atropos segmentation.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -18,12 +18,42 @@
     "brain_mask": {
       "type": "string",
       "title": "Brain Mask",
-      "description": "Brain mask"
+      "description": "Brain extraction mask"
     },
-    "brain_probability_mask": {
+    "brain_segmentation": {
       "type": "string",
-      "title": "Brain Probability Mask",
-      "description": "Brain probability mask"
+      "title": "Brain Segmentation",
+      "description": "Brain segmentation (tissue classification)"
+    },
+    "csf_segmentation": {
+      "type": "string",
+      "title": "CSF Segmentation",
+      "description": "Cerebrospinal fluid segmentation"
+    },
+    "gm_segmentation": {
+      "type": "string",
+      "title": "GM Segmentation",
+      "description": "Gray matter segmentation"
+    },
+    "wm_segmentation": {
+      "type": "string",
+      "title": "WM Segmentation",
+      "description": "White matter segmentation"
+    },
+    "generic_affine": {
+      "type": "string",
+      "title": "Generic Affine Transform",
+      "description": "Generic affine transform from registration"
+    },
+    "warp_field": {
+      "type": "string",
+      "title": "Warp Field",
+      "description": "Warp field from registration"
+    },
+    "inverse_warp_field": {
+      "type": "string",
+      "title": "Inverse Warp Field",
+      "description": "Inverse warp field from registration"
     }
   }
 }
