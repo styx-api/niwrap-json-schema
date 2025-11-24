@@ -215,12 +215,7 @@
                 "@type": {
                   "const": "initial_moving_transform_use_inverse"
                 },
-                "initial_moving_transform": {
-                  "type": "string",
-                  "x-styx-type": "file",
-                  "title": "Initial moving transform"
-                },
-                "use_inverse": {
+                "use_inverse_value": {
                   "anyOf": [
                     {
                       "type": "boolean"
@@ -230,15 +225,14 @@
                     }
                   ],
                   "default": null,
-                  "title": "Use inverse",
+                  "title": "Use inverse value",
                   "description": "Use the inverse of the initial moving transform."
                 }
               },
               "additionalProperties": false,
               "title": "Initial moving transform",
               "required": [
-                "@type",
-                "initial_moving_transform"
+                "@type"
               ]
             },
             {
@@ -455,26 +449,31 @@
                   "total_field_mesh_size_at_base_level": {
                     "anyOf": [
                       {
-                        "type": "number"
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "total_field_mesh_size_at_base_level"
+                          },
+                          "spline_order_value": {
+                            "anyOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null,
+                            "title": "Spline order value"
+                          }
+                        },
+                        "additionalProperties": false
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Total field mesh size at base level"
-                  },
-                  "spline_order": {
-                    "anyOf": [
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Spline order"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
@@ -545,26 +544,31 @@
                   "number_of_time_point_samples": {
                     "anyOf": [
                       {
-                        "type": "number"
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "number_of_time_point_samples"
+                          },
+                          "spline_order_value": {
+                            "anyOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null,
+                            "title": "Spline order value"
+                          }
+                        },
+                        "additionalProperties": false
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Number of time point samples"
-                  },
-                  "spline_order": {
-                    "anyOf": [
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Spline order"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
@@ -586,21 +590,40 @@
                     "title": "Gradient step"
                   },
                   "update_field_variance_in_voxel_space": {
-                    "type": "number",
-                    "title": "Update field variance in voxel space"
-                  },
-                  "total_field_variance_in_voxel_space": {
-                    "type": "number",
-                    "title": "Total field variance in voxel space"
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "update_field_variance_in_voxel_space"
+                          },
+                          "total_field_variance_in_voxel_space_value": {
+                            "anyOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null,
+                            "title": "Total field variance in voxel space value"
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
                 "title": "SyN",
                 "required": [
                   "@type",
-                  "gradient_step",
-                  "update_field_variance_in_voxel_space",
-                  "total_field_variance_in_voxel_space"
+                  "gradient_step"
                 ]
               },
               {
@@ -620,26 +643,31 @@
                   "total_field_mesh_size_at_base_level": {
                     "anyOf": [
                       {
-                        "type": "number"
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "total_field_mesh_size_at_base_level_1"
+                          },
+                          "spline_order_value": {
+                            "anyOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null,
+                            "title": "Spline order value"
+                          }
+                        },
+                        "additionalProperties": false
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Total field mesh size at base level"
-                  },
-                  "spline_order": {
-                    "anyOf": [
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Spline order"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
@@ -656,31 +684,23 @@
                   "@type": {
                     "const": "transform_exponential"
                   },
-                  "gradient_step": {
-                    "type": "number",
-                    "title": "Gradient step"
-                  },
-                  "update_field_variance_in_voxel_space": {
-                    "type": "number",
-                    "title": "Update field variance in voxel space"
-                  },
-                  "velocity_field_variance_in_voxel_space": {
-                    "type": "number",
-                    "title": "Velocity field variance in voxel space"
-                  },
-                  "number_of_integration_steps": {
-                    "type": "number",
-                    "title": "Number of integration steps"
+                  "number_of_integration_steps_value": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Number of integration steps value"
                   }
                 },
                 "additionalProperties": false,
                 "title": "Exponential",
                 "required": [
-                  "@type",
-                  "gradient_step",
-                  "update_field_variance_in_voxel_space",
-                  "velocity_field_variance_in_voxel_space",
-                  "number_of_integration_steps"
+                  "@type"
                 ]
               },
               {
@@ -700,38 +720,55 @@
                   "velocity_field_mesh_size_at_base_level": {
                     "anyOf": [
                       {
-                        "type": "number"
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "velocity_field_mesh_size_at_base_level"
+                          },
+                          "velocity_field_mesh_size_at_base_level_value": {
+                            "type": "number",
+                            "title": "Velocity field mesh size at base level value"
+                          },
+                          "number_of_integration_steps": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "const": "number_of_integration_steps_1"
+                                  },
+                                  "spline_order_value": {
+                                    "anyOf": [
+                                      {
+                                        "type": "number"
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ],
+                                    "default": null,
+                                    "title": "Spline order value"
+                                  }
+                                },
+                                "additionalProperties": false
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "velocity_field_mesh_size_at_base_level_value"
+                        ]
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Velocity field mesh size at base level"
-                  },
-                  "number_of_integration_steps": {
-                    "anyOf": [
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Number of integration steps"
-                  },
-                  "spline_order": {
-                    "anyOf": [
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Spline order"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
@@ -769,57 +806,84 @@
                   "radius": {
                     "anyOf": [
                       {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Radius"
-                  },
-                  "sampling_strategy": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "enum": [
-                          "None",
-                          "Regular",
-                          "Random"
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "radius"
+                          },
+                          "radius_value": {
+                            "type": "number",
+                            "title": "Radius value"
+                          },
+                          "sampling_strategy": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "const": "sampling_strategy"
+                                  },
+                                  "sampling_strategy_value": {
+                                    "type": "string",
+                                    "enum": [
+                                      "None",
+                                      "Regular",
+                                      "Random"
+                                    ],
+                                    "title": "Sampling strategy value"
+                                  },
+                                  "sampling_percentage": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "@type": {
+                                            "const": "sampling_percentage"
+                                          },
+                                          "use_gradient_filter_value": {
+                                            "anyOf": [
+                                              {
+                                                "type": "boolean"
+                                              },
+                                              {
+                                                "type": "null"
+                                              }
+                                            ],
+                                            "default": null,
+                                            "title": "Use gradient filter value"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ],
+                                    "default": null
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                  "sampling_strategy_value"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "radius_value"
                         ]
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Sampling strategy"
-                  },
-                  "sampling_percentage": {
-                    "anyOf": [
-                      {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Sampling percentage"
-                  },
-                  "use_gradient_filter": {
-                    "anyOf": [
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Use gradient filter"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
@@ -852,57 +916,84 @@
                   "number_of_bins": {
                     "anyOf": [
                       {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Number of bins"
-                  },
-                  "sampling_strategy": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "enum": [
-                          "None",
-                          "Regular",
-                          "Random"
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "number_of_bins"
+                          },
+                          "number_of_bins_value": {
+                            "type": "number",
+                            "title": "Number of bins value"
+                          },
+                          "sampling_strategy": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "const": "sampling_strategy_1"
+                                  },
+                                  "sampling_strategy_value": {
+                                    "type": "string",
+                                    "enum": [
+                                      "None",
+                                      "Regular",
+                                      "Random"
+                                    ],
+                                    "title": "Sampling strategy value"
+                                  },
+                                  "sampling_percentage": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "@type": {
+                                            "const": "sampling_percentage_1"
+                                          },
+                                          "use_gradient_filter_value": {
+                                            "anyOf": [
+                                              {
+                                                "type": "boolean"
+                                              },
+                                              {
+                                                "type": "null"
+                                              }
+                                            ],
+                                            "default": null,
+                                            "title": "Use gradient filter value"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ],
+                                    "default": null
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                  "sampling_strategy_value"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "number_of_bins_value"
                         ]
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Sampling strategy"
-                  },
-                  "sampling_percentage": {
-                    "anyOf": [
-                      {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Sampling percentage"
-                  },
-                  "use_gradient_filter": {
-                    "anyOf": [
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Use gradient filter"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
@@ -935,57 +1026,84 @@
                   "number_of_bins": {
                     "anyOf": [
                       {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Number of bins"
-                  },
-                  "sampling_strategy": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "enum": [
-                          "None",
-                          "Regular",
-                          "Random"
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "number_of_bins_1"
+                          },
+                          "number_of_bins_value": {
+                            "type": "number",
+                            "title": "Number of bins value"
+                          },
+                          "sampling_strategy": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "const": "sampling_strategy_2"
+                                  },
+                                  "sampling_strategy_value": {
+                                    "type": "string",
+                                    "enum": [
+                                      "None",
+                                      "Regular",
+                                      "Random"
+                                    ],
+                                    "title": "Sampling strategy value"
+                                  },
+                                  "sampling_percentage": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "@type": {
+                                            "const": "sampling_percentage_2"
+                                          },
+                                          "use_gradient_filter_value": {
+                                            "anyOf": [
+                                              {
+                                                "type": "boolean"
+                                              },
+                                              {
+                                                "type": "null"
+                                              }
+                                            ],
+                                            "default": null,
+                                            "title": "Use gradient filter value"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ],
+                                    "default": null
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                  "sampling_strategy_value"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "number_of_bins_value"
                         ]
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Sampling strategy"
-                  },
-                  "sampling_percentage": {
-                    "anyOf": [
-                      {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Sampling percentage"
-                  },
-                  "use_gradient_filter": {
-                    "anyOf": [
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Use gradient filter"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
@@ -1018,57 +1136,84 @@
                   "radius": {
                     "anyOf": [
                       {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Radius"
-                  },
-                  "sampling_strategy": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "enum": [
-                          "None",
-                          "Regular",
-                          "Random"
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "radius_1"
+                          },
+                          "radius_value": {
+                            "type": "number",
+                            "title": "Radius value"
+                          },
+                          "sampling_strategy": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "const": "sampling_strategy_3"
+                                  },
+                                  "sampling_strategy_value": {
+                                    "type": "string",
+                                    "enum": [
+                                      "None",
+                                      "Regular",
+                                      "Random"
+                                    ],
+                                    "title": "Sampling strategy value"
+                                  },
+                                  "sampling_percentage": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "@type": {
+                                            "const": "sampling_percentage_3"
+                                          },
+                                          "use_gradient_filter_value": {
+                                            "anyOf": [
+                                              {
+                                                "type": "boolean"
+                                              },
+                                              {
+                                                "type": "null"
+                                              }
+                                            ],
+                                            "default": null,
+                                            "title": "Use gradient filter value"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ],
+                                    "default": null
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                  "sampling_strategy_value"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "radius_value"
                         ]
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Sampling strategy"
-                  },
-                  "sampling_percentage": {
-                    "anyOf": [
-                      {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Sampling percentage"
-                  },
-                  "use_gradient_filter": {
-                    "anyOf": [
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Use gradient filter"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
@@ -1101,57 +1246,84 @@
                   "number_of_bins": {
                     "anyOf": [
                       {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Number of bins"
-                  },
-                  "sampling_strategy": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "enum": [
-                          "None",
-                          "Regular",
-                          "Random"
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "number_of_bins_2"
+                          },
+                          "number_of_bins_value": {
+                            "type": "number",
+                            "title": "Number of bins value"
+                          },
+                          "sampling_strategy": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "const": "sampling_strategy_4"
+                                  },
+                                  "sampling_strategy_value": {
+                                    "type": "string",
+                                    "enum": [
+                                      "None",
+                                      "Regular",
+                                      "Random"
+                                    ],
+                                    "title": "Sampling strategy value"
+                                  },
+                                  "sampling_percentage": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "@type": {
+                                            "const": "sampling_percentage_4"
+                                          },
+                                          "use_gradient_filter_value": {
+                                            "anyOf": [
+                                              {
+                                                "type": "boolean"
+                                              },
+                                              {
+                                                "type": "null"
+                                              }
+                                            ],
+                                            "default": null,
+                                            "title": "Use gradient filter value"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ],
+                                    "default": null
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                  "sampling_strategy_value"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "number_of_bins_value"
                         ]
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Sampling strategy"
-                  },
-                  "sampling_percentage": {
-                    "anyOf": [
-                      {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Sampling percentage"
-                  },
-                  "use_gradient_filter": {
-                    "anyOf": [
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Use gradient filter"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
@@ -1184,57 +1356,84 @@
                   "radius": {
                     "anyOf": [
                       {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Radius"
-                  },
-                  "sampling_strategy": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "enum": [
-                          "None",
-                          "Regular",
-                          "Random"
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "radius_2"
+                          },
+                          "radius_value": {
+                            "type": "number",
+                            "title": "Radius value"
+                          },
+                          "sampling_strategy": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "const": "sampling_strategy_5"
+                                  },
+                                  "sampling_strategy_value": {
+                                    "type": "string",
+                                    "enum": [
+                                      "None",
+                                      "Regular",
+                                      "Random"
+                                    ],
+                                    "title": "Sampling strategy value"
+                                  },
+                                  "sampling_percentage": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "@type": {
+                                            "const": "sampling_percentage_5"
+                                          },
+                                          "use_gradient_filter_value": {
+                                            "anyOf": [
+                                              {
+                                                "type": "boolean"
+                                              },
+                                              {
+                                                "type": "null"
+                                              }
+                                            ],
+                                            "default": null,
+                                            "title": "Use gradient filter value"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ],
+                                    "default": null
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                  "sampling_strategy_value"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "radius_value"
                         ]
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Sampling strategy"
-                  },
-                  "sampling_percentage": {
-                    "anyOf": [
-                      {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Sampling percentage"
-                  },
-                  "use_gradient_filter": {
-                    "anyOf": [
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Use gradient filter"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
@@ -1267,31 +1466,34 @@
                   "sampling_percentage": {
                     "anyOf": [
                       {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "sampling_percentage_6"
+                          },
+                          "boundary_points_only_value": {
+                            "anyOf": [
+                              {
+                                "type": "string",
+                                "enum": [
+                                  "0"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null,
+                            "title": "Boundary points only value"
+                          }
+                        },
+                        "additionalProperties": false
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Sampling percentage"
-                  },
-                  "boundary_points_only": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "enum": [
-                          "0"
-                        ]
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Boundary points only"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
@@ -1309,41 +1511,107 @@
                   "@type": {
                     "const": "metric_point_set_expectation"
                   },
+                  "fixed_point_set": {
+                    "type": "string",
+                    "title": "Fixed point set"
+                  },
+                  "moving_point_set": {
+                    "type": "string",
+                    "title": "Moving point set"
+                  },
                   "metric_weight": {
                     "type": "number",
                     "title": "Metric weight"
                   },
-                  "point_set_sigma": {
-                    "anyOf": [
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Point set sigma"
-                  },
                   "sampling_percentage": {
                     "anyOf": [
                       {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "sampling_percentage_7"
+                          },
+                          "sampling_percentage_value": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "title": "Sampling percentage value"
+                          },
+                          "boundary_points_only": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "const": "boundary_points_only_1"
+                                  },
+                                  "boundary_points_only_value": {
+                                    "type": "string",
+                                    "enum": [
+                                      "0"
+                                    ],
+                                    "title": "Boundary points only value"
+                                  },
+                                  "point_set_sigma": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "@type": {
+                                            "const": "point_set_sigma"
+                                          },
+                                          "k_neighborhood_value": {
+                                            "anyOf": [
+                                              {
+                                                "type": "number"
+                                              },
+                                              {
+                                                "type": "null"
+                                              }
+                                            ],
+                                            "default": null,
+                                            "title": "K neighborhood value"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ],
+                                    "default": null
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                  "boundary_points_only_value"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "sampling_percentage_value"
+                        ]
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Sampling percentage"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
                 "title": "Point-set expectation (PSE)",
                 "required": [
                   "@type",
+                  "fixed_point_set",
+                  "moving_point_set",
                   "metric_weight"
                 ]
               },
@@ -1368,55 +1636,84 @@
                   "sampling_percentage": {
                     "anyOf": [
                       {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Sampling percentage"
-                  },
-                  "boundary_points_only": {
-                    "anyOf": [
-                      {
-                        "type": "string",
-                        "enum": [
-                          "0"
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "sampling_percentage_8"
+                          },
+                          "sampling_percentage_value": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "title": "Sampling percentage value"
+                          },
+                          "boundary_points_only": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "const": "boundary_points_only_2"
+                                  },
+                                  "boundary_points_only_value": {
+                                    "type": "string",
+                                    "enum": [
+                                      "0"
+                                    ],
+                                    "title": "Boundary points only value"
+                                  },
+                                  "point_set_sigma": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "@type": {
+                                            "const": "point_set_sigma_1"
+                                          },
+                                          "k_neighborhood_value": {
+                                            "anyOf": [
+                                              {
+                                                "type": "number"
+                                              },
+                                              {
+                                                "type": "null"
+                                              }
+                                            ],
+                                            "default": null,
+                                            "title": "K neighborhood value"
+                                          }
+                                        },
+                                        "additionalProperties": false
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ],
+                                    "default": null
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                  "boundary_points_only_value"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "sampling_percentage_value"
                         ]
                       },
                       {
                         "type": "null"
                       }
                     ],
-                    "default": null,
-                    "title": "Boundary points only"
-                  },
-                  "point_set_sigma": {
-                    "anyOf": [
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "Point set sigma"
-                  },
-                  "k_neighborhood": {
-                    "anyOf": [
-                      {
-                        "type": "number"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "default": null,
-                    "title": "K neighborhood"
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
@@ -1433,12 +1730,138 @@
                 "properties": {
                   "@type": {
                     "const": "metric_igdm"
+                  },
+                  "fixed_image": {
+                    "type": "string",
+                    "title": "Fixed image"
+                  },
+                  "moving_image": {
+                    "type": "string",
+                    "title": "Moving image"
+                  },
+                  "metric_weight": {
+                    "type": "number",
+                    "title": "Metric weight"
+                  },
+                  "fixed_mask": {
+                    "type": "string",
+                    "title": "Fixed mask"
+                  },
+                  "moving_mask": {
+                    "type": "string",
+                    "title": "Moving mask"
+                  },
+                  "neighborhood_radius": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "const": "neighborhood_radius"
+                          },
+                          "neighborhood_radius_value": {
+                            "type": "string",
+                            "title": "Neighborhood radius value"
+                          },
+                          "intensity_sigma": {
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "@type": {
+                                    "const": "intensity_sigma"
+                                  },
+                                  "intensity_sigma_value": {
+                                    "type": "number",
+                                    "title": "Intensity sigma value"
+                                  },
+                                  "distance_sigma": {
+                                    "anyOf": [
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "@type": {
+                                            "const": "distance_sigma"
+                                          },
+                                          "distance_sigma_value": {
+                                            "type": "number",
+                                            "title": "Distance sigma value"
+                                          },
+                                          "k_neighborhood": {
+                                            "anyOf": [
+                                              {
+                                                "type": "object",
+                                                "properties": {
+                                                  "@type": {
+                                                    "const": "k_neighborhood_2"
+                                                  },
+                                                  "gradient_sigma_value": {
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "number"
+                                                      },
+                                                      {
+                                                        "type": "null"
+                                                      }
+                                                    ],
+                                                    "default": null,
+                                                    "title": "Gradient sigma value"
+                                                  }
+                                                },
+                                                "additionalProperties": false
+                                              },
+                                              {
+                                                "type": "null"
+                                              }
+                                            ],
+                                            "default": null
+                                          }
+                                        },
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "distance_sigma_value"
+                                        ]
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ],
+                                    "default": null
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                  "intensity_sigma_value"
+                                ]
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ],
+                            "default": null
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "neighborhood_radius_value"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
                   }
                 },
                 "additionalProperties": false,
                 "title": "IGDM",
                 "required": [
-                  "@type"
+                  "@type",
+                  "fixed_image",
+                  "moving_image",
+                  "metric_weight",
+                  "fixed_mask",
+                  "moving_mask"
                 ]
               }
             ],
@@ -1547,7 +1970,7 @@
             "@type": {
               "const": "masks"
             },
-            "fixed_mask": {
+            "moving_mask_value": {
               "anyOf": [
                 {
                   "type": "string"
@@ -1557,19 +1980,7 @@
                 }
               ],
               "default": null,
-              "title": "Fixed mask"
-            },
-            "moving_mask": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "title": "Moving mask"
+              "title": "Moving mask value"
             }
           },
           "additionalProperties": false,
