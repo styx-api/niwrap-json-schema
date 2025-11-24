@@ -55,17 +55,31 @@
       "default": null,
       "description": "select a region of interest to take the gradient of\n\nthe region to take the gradient within"
     },
-    "vector-volume-out": {
+    "vectors": {
       "anyOf": [
         {
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "vectors"
+            },
+            "vector-volume-out": {
+              "type": "string",
+              "description": "the vectors as a volume file"
+            }
+          },
+          "additionalProperties": false,
+          "description": "output vectors",
+          "required": [
+            "vector-volume-out"
+          ]
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "output vectors\n\nthe vectors as a volume file"
+      "description": "output vectors"
     },
     "subvol": {
       "anyOf": [

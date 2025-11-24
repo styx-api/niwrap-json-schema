@@ -11,29 +11,57 @@
       "type": "string",
       "description": "the output averaged surface"
     },
-    "stddev-metric-out": {
+    "stddev": {
       "anyOf": [
         {
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "stddev"
+            },
+            "stddev-metric-out": {
+              "type": "string",
+              "description": "the output metric for 3D sample standard deviation"
+            }
+          },
+          "additionalProperties": false,
+          "description": "compute 3D sample standard deviation",
+          "required": [
+            "stddev-metric-out"
+          ]
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "compute 3D sample standard deviation\n\nthe output metric for 3D sample standard deviation"
+      "description": "compute 3D sample standard deviation"
     },
-    "uncert-metric-out": {
+    "uncertainty": {
       "anyOf": [
         {
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "uncertainty"
+            },
+            "uncert-metric-out": {
+              "type": "string",
+              "description": "the output metric for uncertainty"
+            }
+          },
+          "additionalProperties": false,
+          "description": "compute caret5 'uncertainty'",
+          "required": [
+            "uncert-metric-out"
+          ]
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "compute caret5 'uncertainty'\n\nthe output metric for uncertainty"
+      "description": "compute caret5 'uncertainty'"
     },
     "surf": {
       "anyOf": [

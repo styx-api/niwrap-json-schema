@@ -74,17 +74,31 @@
       "default": null,
       "description": "select a region of interest to take the gradient of"
     },
-    "vector-metric-out": {
+    "vectors": {
       "anyOf": [
         {
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "vectors"
+            },
+            "vector-metric-out": {
+              "type": "string",
+              "description": "the vectors as a metric file"
+            }
+          },
+          "additionalProperties": false,
+          "description": "output gradient vectors",
+          "required": [
+            "vector-metric-out"
+          ]
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "output gradient vectors\n\nthe vectors as a metric file"
+      "description": "output gradient vectors"
     },
     "column": {
       "anyOf": [

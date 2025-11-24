@@ -148,17 +148,31 @@
               "default": null,
               "description": "instead of a weighted average of voxels, interpolate at subpoints inside the ribbon\n\ninterpolation method, must be CUBIC, ENCLOSING_VOXEL, or TRILINEAR"
             },
-            "roi-out": {
+            "bad-vertices-out": {
               "anyOf": [
                 {
-                  "type": "string"
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "bad-vertices-out"
+                    },
+                    "roi-out": {
+                      "type": "string",
+                      "description": "the output metric file of vertices that have no data"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "output an ROI of which vertices didn't intersect any valid voxels",
+                  "required": [
+                    "roi-out"
+                  ]
                 },
                 {
                   "type": "null"
                 }
               ],
               "default": null,
-              "description": "output an ROI of which vertices didn't intersect any valid voxels\n\nthe output metric file of vertices that have no data"
+              "description": "output an ROI of which vertices didn't intersect any valid voxels"
             },
             "output-weights": {
               "anyOf": [

@@ -11,17 +11,31 @@
       "type": "string",
       "description": "the total fiber counts, as a cifti file"
     },
-    "distance-out": {
+    "distances": {
       "anyOf": [
         {
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "distances"
+            },
+            "distance-out": {
+              "type": "string",
+              "description": "the distances, as a cifti file"
+            }
+          },
+          "additionalProperties": false,
+          "description": "output average trajectory distance",
+          "required": [
+            "distance-out"
+          ]
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "output average trajectory distance\n\nthe distances, as a cifti file"
+      "description": "output average trajectory distance"
     },
     "individual-fibers": {
       "anyOf": [

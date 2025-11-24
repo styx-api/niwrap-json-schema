@@ -11,17 +11,31 @@
       "type": "string",
       "description": "the output volume"
     },
-    "roi-vol": {
+    "roi-out": {
       "anyOf": [
         {
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "roi-out"
+            },
+            "roi-vol": {
+              "type": "string",
+              "description": "the output roi volume"
+            }
+          },
+          "additionalProperties": false,
+          "description": "output an roi volume of where the output has a computed value",
+          "required": [
+            "roi-vol"
+          ]
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "output an roi volume of where the output has a computed value\n\nthe output roi volume"
+      "description": "output an roi volume of where the output has a computed value"
     },
     "value": {
       "anyOf": [

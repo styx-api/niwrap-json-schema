@@ -11,17 +11,31 @@
       "type": "string",
       "description": "the output surface"
     },
-    "placement-metric": {
+    "placement-out": {
       "anyOf": [
         {
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "placement-out"
+            },
+            "placement-metric": {
+              "type": "string",
+              "description": "output metric"
+            }
+          },
+          "additionalProperties": false,
+          "description": "output the placement as a volume fraction from pial to white",
+          "required": [
+            "placement-metric"
+          ]
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "output the placement as a volume fraction from pial to white\n\noutput metric"
+      "description": "output the placement as a volume fraction from pial to white"
     },
     "white-surface": {
       "type": "string",

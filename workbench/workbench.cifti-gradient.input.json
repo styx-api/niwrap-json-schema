@@ -165,17 +165,31 @@
       "default": false,
       "description": "output the average of the gradient magnitude maps instead of each gradient map separately"
     },
-    "vectors-out": {
+    "vectors": {
       "anyOf": [
         {
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "vectors"
+            },
+            "vectors-out": {
+              "type": "string",
+              "description": "the vectors, as a dscalar file"
+            }
+          },
+          "additionalProperties": false,
+          "description": "output gradient vectors",
+          "required": [
+            "vectors-out"
+          ]
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "output gradient vectors\n\nthe vectors, as a dscalar file"
+      "description": "output gradient vectors"
     },
     "surface": {
       "anyOf": [

@@ -215,6 +215,11 @@
                 "@type": {
                   "const": "initial_moving_transform_use_inverse"
                 },
+                "initial_moving_transform": {
+                  "type": "string",
+                  "x-styx-type": "file",
+                  "title": "Initial moving transform"
+                },
                 "use_inverse_value": {
                   "anyOf": [
                     {
@@ -232,7 +237,8 @@
               "additionalProperties": false,
               "title": "Initial moving transform",
               "required": [
-                "@type"
+                "@type",
+                "initial_moving_transform"
               ]
             },
             {
@@ -454,6 +460,10 @@
                           "@type": {
                             "const": "total_field_mesh_size_at_base_level"
                           },
+                          "total_field_mesh_size_at_base_level_value": {
+                            "type": "number",
+                            "title": "Total field mesh size at base level value"
+                          },
                           "spline_order_value": {
                             "anyOf": [
                               {
@@ -467,7 +477,10 @@
                             "title": "Spline order value"
                           }
                         },
-                        "additionalProperties": false
+                        "additionalProperties": false,
+                        "required": [
+                          "total_field_mesh_size_at_base_level_value"
+                        ]
                       },
                       {
                         "type": "null"
@@ -549,6 +562,10 @@
                           "@type": {
                             "const": "number_of_time_point_samples"
                           },
+                          "number_of_time_point_samples_value": {
+                            "type": "number",
+                            "title": "Number of time point samples value"
+                          },
                           "spline_order_value": {
                             "anyOf": [
                               {
@@ -562,7 +579,10 @@
                             "title": "Spline order value"
                           }
                         },
-                        "additionalProperties": false
+                        "additionalProperties": false,
+                        "required": [
+                          "number_of_time_point_samples_value"
+                        ]
                       },
                       {
                         "type": "null"
@@ -597,6 +617,10 @@
                           "@type": {
                             "const": "update_field_variance_in_voxel_space"
                           },
+                          "update_field_variance_in_voxel_space_value": {
+                            "type": "number",
+                            "title": "Update field variance in voxel space value"
+                          },
                           "total_field_variance_in_voxel_space_value": {
                             "anyOf": [
                               {
@@ -610,7 +634,10 @@
                             "title": "Total field variance in voxel space value"
                           }
                         },
-                        "additionalProperties": false
+                        "additionalProperties": false,
+                        "required": [
+                          "update_field_variance_in_voxel_space_value"
+                        ]
                       },
                       {
                         "type": "null"
@@ -648,6 +675,10 @@
                           "@type": {
                             "const": "total_field_mesh_size_at_base_level_1"
                           },
+                          "total_field_mesh_size_at_base_level_value": {
+                            "type": "number",
+                            "title": "Total field mesh size at base level value"
+                          },
                           "spline_order_value": {
                             "anyOf": [
                               {
@@ -661,7 +692,10 @@
                             "title": "Spline order value"
                           }
                         },
-                        "additionalProperties": false
+                        "additionalProperties": false,
+                        "required": [
+                          "total_field_mesh_size_at_base_level_value"
+                        ]
                       },
                       {
                         "type": "null"
@@ -684,6 +718,18 @@
                   "@type": {
                     "const": "transform_exponential"
                   },
+                  "gradient_step": {
+                    "type": "number",
+                    "title": "Gradient step"
+                  },
+                  "update_field_variance_in_voxel_space": {
+                    "type": "number",
+                    "title": "Update field variance in voxel space"
+                  },
+                  "velocity_field_variance_in_voxel_space": {
+                    "type": "number",
+                    "title": "Velocity field variance in voxel space"
+                  },
                   "number_of_integration_steps_value": {
                     "anyOf": [
                       {
@@ -700,7 +746,10 @@
                 "additionalProperties": false,
                 "title": "Exponential",
                 "required": [
-                  "@type"
+                  "@type",
+                  "gradient_step",
+                  "update_field_variance_in_voxel_space",
+                  "velocity_field_variance_in_voxel_space"
                 ]
               },
               {
@@ -737,6 +786,10 @@
                                   "@type": {
                                     "const": "number_of_integration_steps_1"
                                   },
+                                  "number_of_integration_steps_value": {
+                                    "type": "number",
+                                    "title": "Number of integration steps value"
+                                  },
                                   "spline_order_value": {
                                     "anyOf": [
                                       {
@@ -750,7 +803,10 @@
                                     "title": "Spline order value"
                                   }
                                 },
-                                "additionalProperties": false
+                                "additionalProperties": false,
+                                "required": [
+                                  "number_of_integration_steps_value"
+                                ]
                               },
                               {
                                 "type": "null"
@@ -840,6 +896,12 @@
                                           "@type": {
                                             "const": "sampling_percentage"
                                           },
+                                          "sampling_percentage_value": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 1,
+                                            "title": "Sampling percentage value"
+                                          },
                                           "use_gradient_filter_value": {
                                             "anyOf": [
                                               {
@@ -853,7 +915,10 @@
                                             "title": "Use gradient filter value"
                                           }
                                         },
-                                        "additionalProperties": false
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "sampling_percentage_value"
+                                        ]
                                       },
                                       {
                                         "type": "null"
@@ -950,6 +1015,12 @@
                                           "@type": {
                                             "const": "sampling_percentage_1"
                                           },
+                                          "sampling_percentage_value": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 1,
+                                            "title": "Sampling percentage value"
+                                          },
                                           "use_gradient_filter_value": {
                                             "anyOf": [
                                               {
@@ -963,7 +1034,10 @@
                                             "title": "Use gradient filter value"
                                           }
                                         },
-                                        "additionalProperties": false
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "sampling_percentage_value"
+                                        ]
                                       },
                                       {
                                         "type": "null"
@@ -1060,6 +1134,12 @@
                                           "@type": {
                                             "const": "sampling_percentage_2"
                                           },
+                                          "sampling_percentage_value": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 1,
+                                            "title": "Sampling percentage value"
+                                          },
                                           "use_gradient_filter_value": {
                                             "anyOf": [
                                               {
@@ -1073,7 +1153,10 @@
                                             "title": "Use gradient filter value"
                                           }
                                         },
-                                        "additionalProperties": false
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "sampling_percentage_value"
+                                        ]
                                       },
                                       {
                                         "type": "null"
@@ -1170,6 +1253,12 @@
                                           "@type": {
                                             "const": "sampling_percentage_3"
                                           },
+                                          "sampling_percentage_value": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 1,
+                                            "title": "Sampling percentage value"
+                                          },
                                           "use_gradient_filter_value": {
                                             "anyOf": [
                                               {
@@ -1183,7 +1272,10 @@
                                             "title": "Use gradient filter value"
                                           }
                                         },
-                                        "additionalProperties": false
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "sampling_percentage_value"
+                                        ]
                                       },
                                       {
                                         "type": "null"
@@ -1280,6 +1372,12 @@
                                           "@type": {
                                             "const": "sampling_percentage_4"
                                           },
+                                          "sampling_percentage_value": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 1,
+                                            "title": "Sampling percentage value"
+                                          },
                                           "use_gradient_filter_value": {
                                             "anyOf": [
                                               {
@@ -1293,7 +1391,10 @@
                                             "title": "Use gradient filter value"
                                           }
                                         },
-                                        "additionalProperties": false
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "sampling_percentage_value"
+                                        ]
                                       },
                                       {
                                         "type": "null"
@@ -1390,6 +1491,12 @@
                                           "@type": {
                                             "const": "sampling_percentage_5"
                                           },
+                                          "sampling_percentage_value": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 1,
+                                            "title": "Sampling percentage value"
+                                          },
                                           "use_gradient_filter_value": {
                                             "anyOf": [
                                               {
@@ -1403,7 +1510,10 @@
                                             "title": "Use gradient filter value"
                                           }
                                         },
-                                        "additionalProperties": false
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "sampling_percentage_value"
+                                        ]
                                       },
                                       {
                                         "type": "null"
@@ -1471,6 +1581,12 @@
                           "@type": {
                             "const": "sampling_percentage_6"
                           },
+                          "sampling_percentage_value": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1,
+                            "title": "Sampling percentage value"
+                          },
                           "boundary_points_only_value": {
                             "anyOf": [
                               {
@@ -1487,7 +1603,10 @@
                             "title": "Boundary points only value"
                           }
                         },
-                        "additionalProperties": false
+                        "additionalProperties": false,
+                        "required": [
+                          "sampling_percentage_value"
+                        ]
                       },
                       {
                         "type": "null"
@@ -1560,6 +1679,10 @@
                                           "@type": {
                                             "const": "point_set_sigma"
                                           },
+                                          "point_set_sigma_value": {
+                                            "type": "number",
+                                            "title": "Point set sigma value"
+                                          },
                                           "k_neighborhood_value": {
                                             "anyOf": [
                                               {
@@ -1573,7 +1696,10 @@
                                             "title": "K neighborhood value"
                                           }
                                         },
-                                        "additionalProperties": false
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "point_set_sigma_value"
+                                        ]
                                       },
                                       {
                                         "type": "null"
@@ -1670,6 +1796,10 @@
                                           "@type": {
                                             "const": "point_set_sigma_1"
                                           },
+                                          "point_set_sigma_value": {
+                                            "type": "number",
+                                            "title": "Point set sigma value"
+                                          },
                                           "k_neighborhood_value": {
                                             "anyOf": [
                                               {
@@ -1683,7 +1813,10 @@
                                             "title": "K neighborhood value"
                                           }
                                         },
-                                        "additionalProperties": false
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "point_set_sigma_value"
+                                        ]
                                       },
                                       {
                                         "type": "null"
@@ -1795,6 +1928,10 @@
                                                   "@type": {
                                                     "const": "k_neighborhood_2"
                                                   },
+                                                  "k_neighborhood_value": {
+                                                    "type": "number",
+                                                    "title": "K neighborhood value"
+                                                  },
                                                   "gradient_sigma_value": {
                                                     "anyOf": [
                                                       {
@@ -1808,7 +1945,10 @@
                                                     "title": "Gradient sigma value"
                                                   }
                                                 },
-                                                "additionalProperties": false
+                                                "additionalProperties": false,
+                                                "required": [
+                                                  "k_neighborhood_value"
+                                                ]
                                               },
                                               {
                                                 "type": "null"
@@ -1969,6 +2109,18 @@
           "properties": {
             "@type": {
               "const": "masks"
+            },
+            "fixed_mask": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Fixed mask"
             },
             "moving_mask_value": {
               "anyOf": [

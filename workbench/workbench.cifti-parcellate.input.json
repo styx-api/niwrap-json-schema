@@ -181,17 +181,31 @@
       "default": null,
       "description": "specify value to use in empty parcels (default 0)\n\nthe value to fill empty parcels with"
     },
-    "mask-out": {
+    "nonempty-mask-out": {
       "anyOf": [
         {
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "nonempty-mask-out"
+            },
+            "mask-out": {
+              "type": "string",
+              "description": "the output mask file"
+            }
+          },
+          "additionalProperties": false,
+          "description": "output a matching pscalar file that has 0s in empty parcels, and 1s elsewhere",
+          "required": [
+            "mask-out"
+          ]
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "output a matching pscalar file that has 0s in empty parcels, and 1s elsewhere\n\nthe output mask file"
+      "description": "output a matching pscalar file that has 0s in empty parcels, and 1s elsewhere"
     },
     "legacy-mode": {
       "type": "boolean",
