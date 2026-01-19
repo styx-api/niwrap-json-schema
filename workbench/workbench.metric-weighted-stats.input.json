@@ -7,44 +7,6 @@
     "@type": {
       "const": "workbench/metric-weighted-stats"
     },
-    "area-surface": {
-      "anyOf": [
-        {
-          "type": "string",
-          "x-styx-type": "file"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "use vertex areas as weights\n\nthe surface to use for vertex areas"
-    },
-    "weight-metric": {
-      "anyOf": [
-        {
-          "type": "string",
-          "x-styx-type": "file"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "use weights from a metric file\n\nmetric file containing the weights"
-    },
-    "column": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "only display output for one column\n\nthe column number or name"
-    },
     "roi": {
       "anyOf": [
         {
@@ -77,10 +39,17 @@
       "default": null,
       "description": "only consider data inside an roi"
     },
-    "mean": {
-      "type": "boolean",
-      "default": false,
-      "description": "compute weighted mean"
+    "percent": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "compute weighted percentile\n\nthe percentile to find, must be between 0 and 100"
     },
     "sample": {
       "anyOf": [
@@ -94,27 +63,58 @@
       "default": null,
       "description": "compute weighted standard deviation\n\nestimate population stdev from the sample"
     },
-    "percent": {
+    "column": {
       "anyOf": [
         {
-          "type": "number"
+          "type": "string"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "compute weighted percentile\n\nthe percentile to find, must be between 0 and 100"
+      "description": "only display output for one column\n\nthe column number or name"
+    },
+    "weight-metric": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "use weights from a metric file\n\nmetric file containing the weights"
+    },
+    "area-surface": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "use vertex areas as weights\n\nthe surface to use for vertex areas"
+    },
+    "show-map-name": {
+      "type": "boolean",
+      "default": false,
+      "description": "print map index and name before each output"
     },
     "sum": {
       "type": "boolean",
       "default": false,
       "description": "compute weighted sum"
     },
-    "show-map-name": {
+    "mean": {
       "type": "boolean",
       "default": false,
-      "description": "print map index and name before each output"
+      "description": "compute weighted mean"
     },
     "metric-in": {
       "type": "string",

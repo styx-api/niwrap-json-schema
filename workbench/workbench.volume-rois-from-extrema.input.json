@@ -11,17 +11,29 @@
       "type": "string",
       "description": "the output volume"
     },
-    "sigma": {
+    "subvol": {
       "anyOf": [
         {
-          "type": "number"
+          "type": "string"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "generate a gaussian kernel instead of a flat ROI\n\nthe sigma for the gaussian kernel, in mm"
+      "description": "select a single subvolume to take the gradient of\n\nthe subvolume number or name"
+    },
+    "method": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "how to handle overlapping ROIs, default ALLOW\n\nthe method of resolving overlaps"
     },
     "roi-volume": {
       "anyOf": [
@@ -36,29 +48,17 @@
       "default": null,
       "description": "select a region of interest to use\n\nthe region to use"
     },
-    "method": {
+    "sigma": {
       "anyOf": [
         {
-          "type": "string"
+          "type": "number"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "how to handle overlapping ROIs, default ALLOW\n\nthe method of resolving overlaps"
-    },
-    "subvol": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "select a single subvolume to take the gradient of\n\nthe subvolume number or name"
+      "description": "generate a gaussian kernel instead of a flat ROI\n\nthe sigma for the gaussian kernel, in mm"
     },
     "volume-in": {
       "type": "string",

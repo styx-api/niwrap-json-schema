@@ -11,21 +11,6 @@
       "type": "string",
       "description": "the output metric file"
     },
-    "trilinear": {
-      "type": "boolean",
-      "default": false,
-      "description": "use trilinear volume interpolation"
-    },
-    "enclosing": {
-      "type": "boolean",
-      "default": false,
-      "description": "use value of the enclosing voxel"
-    },
-    "cubic": {
-      "type": "boolean",
-      "default": false,
-      "description": "use cubic splines"
-    },
     "ribbon-constrained": {
       "anyOf": [
         {
@@ -107,47 +92,6 @@
               "default": null,
               "description": "use dilation for small vertices that 'missed' the geometry tests"
             },
-            "subdiv-num": {
-              "anyOf": [
-                {
-                  "type": "integer"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "description": "voxel divisions while estimating voxel weights\n\nnumber of subdivisions, default 3"
-            },
-            "thin-columns": {
-              "type": "boolean",
-              "default": false,
-              "description": "use non-overlapping polyhedra"
-            },
-            "scale": {
-              "anyOf": [
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "description": "reduce weight to voxels that aren't near <surface>\n\nvalue to multiply the local thickness by, to get the gaussian sigma"
-            },
-            "method": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "description": "instead of a weighted average of voxels, interpolate at subpoints inside the ribbon\n\ninterpolation method, must be CUBIC, ENCLOSING_VOXEL, or TRILINEAR"
-            },
             "bad-vertices-out": {
               "anyOf": [
                 {
@@ -216,6 +160,47 @@
               ],
               "default": null,
               "description": "write the voxel weights for all vertices to a text file\n\noutput - the output text filename"
+            },
+            "method": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "instead of a weighted average of voxels, interpolate at subpoints inside the ribbon\n\ninterpolation method, must be CUBIC, ENCLOSING_VOXEL, or TRILINEAR"
+            },
+            "scale": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "reduce weight to voxels that aren't near <surface>\n\nvalue to multiply the local thickness by, to get the gaussian sigma"
+            },
+            "subdiv-num": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "voxel divisions while estimating voxel weights\n\nnumber of subdivisions, default 3"
+            },
+            "thin-columns": {
+              "type": "boolean",
+              "default": false,
+              "description": "use non-overlapping polyhedra"
             }
           },
           "additionalProperties": false,
@@ -286,6 +271,21 @@
       ],
       "default": null,
       "description": "select a single subvolume to map\n\nthe subvolume number or name"
+    },
+    "cubic": {
+      "type": "boolean",
+      "default": false,
+      "description": "use cubic splines"
+    },
+    "enclosing": {
+      "type": "boolean",
+      "default": false,
+      "description": "use value of the enclosing voxel"
+    },
+    "trilinear": {
+      "type": "boolean",
+      "default": false,
+      "description": "use trilinear volume interpolation"
     },
     "volume": {
       "type": "string",

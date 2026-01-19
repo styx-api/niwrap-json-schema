@@ -11,10 +11,17 @@
       "type": "string",
       "description": "the output volume"
     },
-    "fwhm": {
-      "type": "boolean",
-      "default": false,
-      "description": "kernel size is FWHM, not sigma"
+    "subvol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "select a single subvolume to smooth\n\nthe subvolume number or name"
     },
     "roivol": {
       "anyOf": [
@@ -34,17 +41,10 @@
       "default": false,
       "description": "treat zero values as not being data"
     },
-    "subvol": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "select a single subvolume to smooth\n\nthe subvolume number or name"
+    "fwhm": {
+      "type": "boolean",
+      "default": false,
+      "description": "kernel size is FWHM, not sigma"
     },
     "volume-in": {
       "type": "string",

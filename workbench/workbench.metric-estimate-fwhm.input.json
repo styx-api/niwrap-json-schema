@@ -7,18 +7,17 @@
     "@type": {
       "const": "workbench/metric-estimate-fwhm"
     },
-    "roi-metric": {
+    "demean": {
       "anyOf": [
         {
-          "type": "string",
-          "x-styx-type": "file"
+          "type": "boolean"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "use only data within an ROI\n\nthe metric file to use as an ROI"
+      "description": "estimate for the whole file at once, not each column separately\n\nsubtract the mean image before estimating smoothness"
     },
     "column": {
       "anyOf": [
@@ -32,17 +31,18 @@
       "default": null,
       "description": "select a single column to estimate smoothness of\n\nthe column number or name"
     },
-    "demean": {
+    "roi-metric": {
       "anyOf": [
         {
-          "type": "boolean"
+          "type": "string",
+          "x-styx-type": "file"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "estimate for the whole file at once, not each column separately\n\nsubtract the mean image before estimating smoothness"
+      "description": "use only data within an ROI\n\nthe metric file to use as an ROI"
     },
     "surface": {
       "type": "string",

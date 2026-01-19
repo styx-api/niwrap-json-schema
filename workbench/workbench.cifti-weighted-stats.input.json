@@ -15,7 +15,7 @@
             "@type": {
               "const": "spatial-weights"
             },
-            "left-surf": {
+            "cerebellum-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -26,46 +26,7 @@
                 }
               ],
               "default": null,
-              "description": "use a surface for left vertex areas\n\nthe left surface to use, areas are in mm^2"
-            },
-            "right-surf": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "x-styx-type": "file"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "description": "use a surface for right vertex areas\n\nthe right surface to use, areas are in mm^2"
-            },
-            "cerebellum-surf": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "x-styx-type": "file"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "description": "use a surface for cerebellum vertex areas\n\nthe cerebellum surface to use, areas are in mm^2"
-            },
-            "left-metric": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "x-styx-type": "file"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "description": "use a metric file for left vertex areas\n\nmetric file containing left vertex areas"
+              "description": "use a metric file for cerebellum vertex areas\n\nmetric file containing cerebellum vertex areas"
             },
             "right-metric": {
               "anyOf": [
@@ -80,7 +41,7 @@
               "default": null,
               "description": "use a metric file for right vertex areas\n\nmetric file containing right vertex areas"
             },
-            "cerebellum-metric": {
+            "left-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -91,7 +52,46 @@
                 }
               ],
               "default": null,
-              "description": "use a metric file for cerebellum vertex areas\n\nmetric file containing cerebellum vertex areas"
+              "description": "use a metric file for left vertex areas\n\nmetric file containing left vertex areas"
+            },
+            "cerebellum-surf": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "use a surface for cerebellum vertex areas\n\nthe cerebellum surface to use, areas are in mm^2"
+            },
+            "right-surf": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "use a surface for right vertex areas\n\nthe right surface to use, areas are in mm^2"
+            },
+            "left-surf": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "use a surface for left vertex areas\n\nthe left surface to use, areas are in mm^2"
             }
           },
           "additionalProperties": false,
@@ -103,31 +103,6 @@
       ],
       "default": null,
       "description": "use vertex area and voxel volume as weights"
-    },
-    "weight-cifti": {
-      "anyOf": [
-        {
-          "type": "string",
-          "x-styx-type": "file"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "use a cifti file containing weights\n\nthe weights to use, as a cifti file"
-    },
-    "column": {
-      "anyOf": [
-        {
-          "type": "integer"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "only display output for one column\n\nthe column to use (1-based)"
     },
     "roi": {
       "anyOf": [
@@ -161,10 +136,17 @@
       "default": null,
       "description": "only consider data inside an roi"
     },
-    "mean": {
-      "type": "boolean",
-      "default": false,
-      "description": "compute weighted mean"
+    "percent": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "compute weighted percentile\n\nthe percentile to find, must be between 0 and 100"
     },
     "sample": {
       "anyOf": [
@@ -178,27 +160,45 @@
       "default": null,
       "description": "compute weighted standard deviation\n\nestimate population stdev from the sample"
     },
-    "percent": {
+    "column": {
       "anyOf": [
         {
-          "type": "number"
+          "type": "integer"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "compute weighted percentile\n\nthe percentile to find, must be between 0 and 100"
+      "description": "only display output for one column\n\nthe column to use (1-based)"
+    },
+    "weight-cifti": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "use a cifti file containing weights\n\nthe weights to use, as a cifti file"
+    },
+    "show-map-name": {
+      "type": "boolean",
+      "default": false,
+      "description": "print map index and name before each output"
     },
     "sum": {
       "type": "boolean",
       "default": false,
       "description": "compute weighted sum"
     },
-    "show-map-name": {
+    "mean": {
       "type": "boolean",
       "default": false,
-      "description": "print map index and name before each output"
+      "description": "compute weighted mean"
     },
     "cifti-in": {
       "type": "string",

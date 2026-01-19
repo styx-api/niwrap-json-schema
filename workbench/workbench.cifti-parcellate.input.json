@@ -19,7 +19,7 @@
             "@type": {
               "const": "spatial-weights"
             },
-            "left-surf": {
+            "cerebellum-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -30,46 +30,7 @@
                 }
               ],
               "default": null,
-              "description": "use a surface for left vertex areas\n\nthe left surface to use, areas are in mm^2"
-            },
-            "right-surf": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "x-styx-type": "file"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "description": "use a surface for right vertex areas\n\nthe right surface to use, areas are in mm^2"
-            },
-            "cerebellum-surf": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "x-styx-type": "file"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "description": "use a surface for cerebellum vertex areas\n\nthe cerebellum surface to use, areas are in mm^2"
-            },
-            "left-metric": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "x-styx-type": "file"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": null,
-              "description": "use a metric file for left vertex weights\n\nmetric file containing left vertex weights"
+              "description": "use a metric file for cerebellum vertex weights\n\nmetric file containing cerebellum vertex weights"
             },
             "right-metric": {
               "anyOf": [
@@ -84,7 +45,7 @@
               "default": null,
               "description": "use a metric file for right vertex weights\n\nmetric file containing right vertex weights"
             },
-            "cerebellum-metric": {
+            "left-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -95,7 +56,46 @@
                 }
               ],
               "default": null,
-              "description": "use a metric file for cerebellum vertex weights\n\nmetric file containing cerebellum vertex weights"
+              "description": "use a metric file for left vertex weights\n\nmetric file containing left vertex weights"
+            },
+            "cerebellum-surf": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "use a surface for cerebellum vertex areas\n\nthe cerebellum surface to use, areas are in mm^2"
+            },
+            "right-surf": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "use a surface for right vertex areas\n\nthe right surface to use, areas are in mm^2"
+            },
+            "left-surf": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "x-styx-type": "file"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "use a surface for left vertex areas\n\nthe left surface to use, areas are in mm^2"
             }
           },
           "additionalProperties": false,
@@ -107,31 +107,6 @@
       ],
       "default": null,
       "description": "use voxel volume and either vertex areas or metric files as weights"
-    },
-    "weight-cifti": {
-      "anyOf": [
-        {
-          "type": "string",
-          "x-styx-type": "file"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "use a cifti file containing weights\n\nthe weights to use, as a cifti file"
-    },
-    "method": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "specify method of parcellation (default MEAN, or MODE if label data)\n\nthe method to use to assign parcel values from the values of member brainordinates"
     },
     "exclude-outliers": {
       "anyOf": [
@@ -164,23 +139,6 @@
       "default": null,
       "description": "exclude non-numeric values and outliers from each parcel by standard deviation"
     },
-    "only-numeric": {
-      "type": "boolean",
-      "default": false,
-      "description": "exclude non-numeric values"
-    },
-    "value": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "specify value to use in empty parcels (default 0)\n\nthe value to fill empty parcels with"
-    },
     "nonempty-mask-out": {
       "anyOf": [
         {
@@ -207,15 +165,57 @@
       "default": null,
       "description": "output a matching pscalar file that has 0s in empty parcels, and 1s elsewhere"
     },
-    "legacy-mode": {
-      "type": "boolean",
-      "default": false,
-      "description": "use the old behavior, parcels are defined by the intersection between labels and valid data, and empty parcels are discarded"
+    "value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify value to use in empty parcels (default 0)\n\nthe value to fill empty parcels with"
+    },
+    "method": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify method of parcellation (default MEAN, or MODE if label data)\n\nthe method to use to assign parcel values from the values of member brainordinates"
+    },
+    "weight-cifti": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "use a cifti file containing weights\n\nthe weights to use, as a cifti file"
     },
     "include-empty": {
       "type": "boolean",
       "default": false,
       "description": "deprecated: now the default behavior"
+    },
+    "legacy-mode": {
+      "type": "boolean",
+      "default": false,
+      "description": "use the old behavior, parcels are defined by the intersection between labels and valid data, and empty parcels are discarded"
+    },
+    "only-numeric": {
+      "type": "boolean",
+      "default": false,
+      "description": "exclude non-numeric values"
     },
     "cifti-in": {
       "type": "string",

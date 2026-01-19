@@ -11,11 +11,6 @@
       "type": "string",
       "description": "the output metric"
     },
-    "fwhm": {
-      "type": "boolean",
-      "default": false,
-      "description": "kernel size is FWHM, not sigma"
-    },
     "roi": {
       "anyOf": [
         {
@@ -48,12 +43,7 @@
       "default": null,
       "description": "select a region of interest to smooth"
     },
-    "fix-zeros": {
-      "type": "boolean",
-      "default": false,
-      "description": "treat zero values as not being data"
-    },
-    "column": {
+    "method": {
       "anyOf": [
         {
           "type": "string"
@@ -63,7 +53,7 @@
         }
       ],
       "default": null,
-      "description": "select a single column to smooth\n\nthe column number or name"
+      "description": "select smoothing method, default GEO_GAUSS_AREA\n\nthe name of the smoothing method"
     },
     "area-metric": {
       "anyOf": [
@@ -78,7 +68,7 @@
       "default": null,
       "description": "vertex areas to use instead of computing them from the surface\n\nthe corrected vertex areas, as a metric"
     },
-    "method": {
+    "column": {
       "anyOf": [
         {
           "type": "string"
@@ -88,7 +78,17 @@
         }
       ],
       "default": null,
-      "description": "select smoothing method, default GEO_GAUSS_AREA\n\nthe name of the smoothing method"
+      "description": "select a single column to smooth\n\nthe column number or name"
+    },
+    "fix-zeros": {
+      "type": "boolean",
+      "default": false,
+      "description": "treat zero values as not being data"
+    },
+    "fwhm": {
+      "type": "boolean",
+      "default": false,
+      "description": "kernel size is FWHM, not sigma"
     },
     "surface": {
       "type": "string",

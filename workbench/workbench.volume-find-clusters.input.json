@@ -11,10 +11,53 @@
       "type": "string",
       "description": "the output volume"
     },
-    "less-than": {
-      "type": "boolean",
-      "default": false,
-      "description": "find values less than <value-threshold>, rather than greater"
+    "startval": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "start labeling clusters from a value other than 1\n\nthe value to give the first cluster found"
+    },
+    "distance": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "ignore clusters further than a given distance from the largest cluster\n\nhow far from the largest cluster a cluster can be, edge to edge, in mm"
+    },
+    "ratio": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "ignore clusters smaller than a given fraction of the largest cluster in map\n\nfraction of the largest cluster's volume"
+    },
+    "subvol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "select a single subvolume\n\nthe subvolume number or name"
     },
     "roi-volume": {
       "anyOf": [
@@ -29,53 +72,10 @@
       "default": null,
       "description": "select a region of interest\n\nthe roi, as a volume file"
     },
-    "subvol": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "select a single subvolume\n\nthe subvolume number or name"
-    },
-    "ratio": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "ignore clusters smaller than a given fraction of the largest cluster in map\n\nfraction of the largest cluster's volume"
-    },
-    "distance": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "ignore clusters further than a given distance from the largest cluster\n\nhow far from the largest cluster a cluster can be, edge to edge, in mm"
-    },
-    "startval": {
-      "anyOf": [
-        {
-          "type": "integer"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "start labeling clusters from a value other than 1\n\nthe value to give the first cluster found"
+    "less-than": {
+      "type": "boolean",
+      "default": false,
+      "description": "find values less than <value-threshold>, rather than greater"
     },
     "volume-in": {
       "type": "string",

@@ -7,18 +7,17 @@
     "@type": {
       "const": "workbench/volume-estimate-fwhm"
     },
-    "roivol": {
+    "demean": {
       "anyOf": [
         {
-          "type": "string",
-          "x-styx-type": "file"
+          "type": "boolean"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "use only data within an ROI\n\nthe volume to use as an ROI"
+      "description": "estimate for the whole file at once, not each subvolume separately\n\nsubtract the mean image before estimating smoothness"
     },
     "subvol": {
       "anyOf": [
@@ -32,17 +31,18 @@
       "default": null,
       "description": "select a single subvolume to estimate smoothness of\n\nthe subvolume number or name"
     },
-    "demean": {
+    "roivol": {
       "anyOf": [
         {
-          "type": "boolean"
+          "type": "string",
+          "x-styx-type": "file"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "estimate for the whole file at once, not each subvolume separately\n\nsubtract the mean image before estimating smoothness"
+      "description": "use only data within an ROI\n\nthe volume to use as an ROI"
     },
     "volume": {
       "type": "string",

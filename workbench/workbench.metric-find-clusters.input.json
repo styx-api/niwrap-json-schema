@@ -11,23 +11,53 @@
       "type": "string",
       "description": "the output metric"
     },
-    "less-than": {
-      "type": "boolean",
-      "default": false,
-      "description": "find values less than <value-threshold>, rather than greater"
-    },
-    "roi-metric": {
+    "startval": {
       "anyOf": [
         {
-          "type": "string",
-          "x-styx-type": "file"
+          "type": "integer"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "select a region of interest\n\nthe roi, as a metric"
+      "description": "start labeling clusters from a value other than 1\n\nthe value to give the first cluster found"
+    },
+    "distance": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "ignore clusters further than a given distance from the largest cluster\n\nhow far from the largest cluster a cluster can be, edge to edge, in mm"
+    },
+    "ratio": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "ignore clusters smaller than a given fraction of the largest cluster in map\n\nfraction of the largest cluster's area"
+    },
+    "column": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "select a single column\n\nthe column number or name"
     },
     "area-metric": {
       "anyOf": [
@@ -42,53 +72,23 @@
       "default": null,
       "description": "vertex areas to use instead of computing them from the surface\n\nthe corrected vertex areas, as a metric"
     },
-    "column": {
+    "roi-metric": {
       "anyOf": [
         {
-          "type": "string"
+          "type": "string",
+          "x-styx-type": "file"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "select a single column\n\nthe column number or name"
+      "description": "select a region of interest\n\nthe roi, as a metric"
     },
-    "ratio": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "ignore clusters smaller than a given fraction of the largest cluster in map\n\nfraction of the largest cluster's area"
-    },
-    "distance": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "ignore clusters further than a given distance from the largest cluster\n\nhow far from the largest cluster a cluster can be, edge to edge, in mm"
-    },
-    "startval": {
-      "anyOf": [
-        {
-          "type": "integer"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "start labeling clusters from a value other than 1\n\nthe value to give the first cluster found"
+    "less-than": {
+      "type": "boolean",
+      "default": false,
+      "description": "find values less than <value-threshold>, rather than greater"
     },
     "surface": {
       "type": "string",

@@ -11,10 +11,17 @@
       "type": "string",
       "description": "the output cifti label file"
     },
-    "discard-others": {
-      "type": "boolean",
-      "default": false,
-      "description": "set any values not mentioned in the label list to the ??? label"
+    "file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "read label name hierarchy from a json file\n\nthe input json file"
     },
     "value": {
       "anyOf": [
@@ -33,17 +40,10 @@
       "default": false,
       "description": "remove any unused label values from the label table"
     },
-    "file": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "read label name hierarchy from a json file\n\nthe input json file"
+    "discard-others": {
+      "type": "boolean",
+      "default": false,
+      "description": "set any values not mentioned in the label list to the ??? label"
     },
     "input": {
       "type": "string",

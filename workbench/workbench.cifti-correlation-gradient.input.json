@@ -131,61 +131,39 @@
       "default": null,
       "description": "specify the cerebellum surface to use"
     },
-    "surface-kernel": {
+    "double-correlation": {
       "anyOf": [
         {
-          "type": "number"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "double-correlation"
+            },
+            "covariance-first": {
+              "type": "boolean",
+              "default": false,
+              "description": "instead of correlation for the FIRST operation, compute covariance"
+            },
+            "no-demean-first": {
+              "type": "boolean",
+              "default": false,
+              "description": "instead of correlation for the FIRST operation, do dot product of rows, then normalize by diagonal"
+            },
+            "fisher-z-first": {
+              "type": "boolean",
+              "default": false,
+              "description": "after the FIRST correlation, apply fisher small z transform (ie, artanh)"
+            }
+          },
+          "additionalProperties": false,
+          "description": "do two correlations before taking the gradient"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "smooth on the surface before computing the gradient\n\nthe size of the gaussian surface smoothing kernel in mm, as sigma by default"
-    },
-    "volume-kernel": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "smooth the volume before computing the gradient\n\nthe size of the gaussian volume smoothing kernel in mm, as sigma by default"
-    },
-    "presmooth-fwhm": {
-      "type": "boolean",
-      "default": false,
-      "description": "smoothing kernel sizes are FWHM, not sigma"
-    },
-    "undo-fisher-z": {
-      "type": "boolean",
-      "default": false,
-      "description": "apply the inverse fisher small z transform to the input"
-    },
-    "fisher-z": {
-      "type": "boolean",
-      "default": false,
-      "description": "apply the fisher small z transform to the correlations before taking the gradient"
-    },
-    "distance": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "exclude voxels near each seed voxel from computation\n\ndistance from seed voxel for the exclusion zone, in mm"
-    },
-    "covariance": {
-      "type": "boolean",
-      "default": false,
-      "description": "compute covariance instead of correlation"
+      "description": "do two correlations before taking the gradient"
     },
     "limit-GB": {
       "anyOf": [
@@ -199,39 +177,61 @@
       "default": null,
       "description": "restrict memory usage\n\nmemory limit in gigabytes"
     },
-    "double-correlation": {
+    "distance": {
       "anyOf": [
         {
-          "type": "object",
-          "properties": {
-            "@type": {
-              "const": "double-correlation"
-            },
-            "fisher-z-first": {
-              "type": "boolean",
-              "default": false,
-              "description": "after the FIRST correlation, apply fisher small z transform (ie, artanh)"
-            },
-            "no-demean-first": {
-              "type": "boolean",
-              "default": false,
-              "description": "instead of correlation for the FIRST operation, do dot product of rows, then normalize by diagonal"
-            },
-            "covariance-first": {
-              "type": "boolean",
-              "default": false,
-              "description": "instead of correlation for the FIRST operation, compute covariance"
-            }
-          },
-          "additionalProperties": false,
-          "description": "do two correlations before taking the gradient"
+          "type": "number"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "do two correlations before taking the gradient"
+      "description": "exclude vertices near each seed vertex from computation\n\ngeodesic distance from seed vertex for the exclusion zone, in mm"
+    },
+    "volume-kernel": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "smooth the volume before computing the gradient\n\nthe size of the gaussian volume smoothing kernel in mm, as sigma by default"
+    },
+    "surface-kernel": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "smooth on the surface before computing the gradient\n\nthe size of the gaussian surface smoothing kernel in mm, as sigma by default"
+    },
+    "covariance": {
+      "type": "boolean",
+      "default": false,
+      "description": "compute covariance instead of correlation"
+    },
+    "fisher-z": {
+      "type": "boolean",
+      "default": false,
+      "description": "apply the fisher small z transform to the correlations before taking the gradient"
+    },
+    "undo-fisher-z": {
+      "type": "boolean",
+      "default": false,
+      "description": "apply the inverse fisher small z transform to the input"
+    },
+    "presmooth-fwhm": {
+      "type": "boolean",
+      "default": false,
+      "description": "smoothing kernel sizes are FWHM, not sigma"
     },
     "cifti": {
       "type": "string",

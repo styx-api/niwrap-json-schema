@@ -11,48 +11,6 @@
       "type": "string",
       "description": "the output cifti"
     },
-    "surface": {
-      "anyOf": [
-        {
-          "type": "string",
-          "x-styx-type": "file"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "specify the cerebellum surface to use\n\nthe cerebellum surface file"
-    },
-    "surface-kernel": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "smooth on the surface before finding extrema\n\nthe size of the gaussian surface smoothing kernel in mm, as sigma by default"
-    },
-    "volume-kernel": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "smooth volume components before finding extrema\n\nthe size of the gaussian volume smoothing kernel in mm, as sigma by default"
-    },
-    "presmooth-fwhm": {
-      "type": "boolean",
-      "default": false,
-      "description": "smoothing kernel distances are FWHM, not sigma"
-    },
     "threshold": {
       "anyOf": [
         {
@@ -84,30 +42,72 @@
       "default": null,
       "description": "ignore small extrema"
     },
-    "merged-volume": {
-      "type": "boolean",
-      "default": false,
-      "description": "treat volume components as if they were a single component"
+    "volume-kernel": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "smooth volume components before finding extrema\n\nthe size of the gaussian volume smoothing kernel in mm, as sigma by default"
     },
-    "sum-maps": {
-      "type": "boolean",
-      "default": false,
-      "description": "output the sum of the extrema maps instead of each map separately"
+    "surface-kernel": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "smooth on the surface before finding extrema\n\nthe size of the gaussian surface smoothing kernel in mm, as sigma by default"
     },
-    "consolidate-mode": {
+    "surface": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify the left surface to use\n\nthe left surface file"
+    },
+    "only-minima": {
       "type": "boolean",
       "default": false,
-      "description": "use consolidation of local minima instead of a large neighborhood"
+      "description": "only find the minima"
     },
     "only-maxima": {
       "type": "boolean",
       "default": false,
       "description": "only find the maxima"
     },
-    "only-minima": {
+    "consolidate-mode": {
       "type": "boolean",
       "default": false,
-      "description": "only find the minima"
+      "description": "use consolidation of local minima instead of a large neighborhood"
+    },
+    "sum-maps": {
+      "type": "boolean",
+      "default": false,
+      "description": "output the sum of the extrema maps instead of each map separately"
+    },
+    "merged-volume": {
+      "type": "boolean",
+      "default": false,
+      "description": "treat volume components as if they were a single component"
+    },
+    "presmooth-fwhm": {
+      "type": "boolean",
+      "default": false,
+      "description": "smoothing kernel distances are FWHM, not sigma"
     },
     "cifti": {
       "type": "string",

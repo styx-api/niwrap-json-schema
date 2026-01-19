@@ -11,29 +11,18 @@
       "type": "string",
       "description": "the output metric"
     },
-    "sigma": {
+    "area-metric": {
       "anyOf": [
         {
-          "type": "number"
+          "type": "string",
+          "x-styx-type": "file"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "generate a gaussian kernel instead of a flat ROI\n\nthe sigma for the gaussian kernel, in mm"
-    },
-    "method": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "how to handle overlapping ROIs, default ALLOW\n\nthe method of resolving overlaps"
+      "description": "vertex areas to use instead of computing them from the surface\n\nthe corrected vertex areas, as a metric"
     },
     "name-list-file": {
       "anyOf": [
@@ -47,18 +36,29 @@
       "default": null,
       "description": "name the columns from text file\n\na text file containing column names, one per line"
     },
-    "area-metric": {
+    "method": {
       "anyOf": [
         {
-          "type": "string",
-          "x-styx-type": "file"
+          "type": "string"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "description": "vertex areas to use instead of computing them from the surface\n\nthe corrected vertex areas, as a metric"
+      "description": "how to handle overlapping ROIs, default ALLOW\n\nthe method of resolving overlaps"
+    },
+    "sigma": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "generate a gaussian kernel instead of a flat ROI\n\nthe sigma for the gaussian kernel, in mm"
     },
     "surface": {
       "type": "string",

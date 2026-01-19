@@ -19,7 +19,7 @@
             "@type": {
               "const": "roi-override"
             },
-            "roi-metric": {
+            "roi-cifti": {
               "anyOf": [
                 {
                   "type": "string",
@@ -30,7 +30,7 @@
                 }
               ],
               "default": null,
-              "description": "use an roi for cerebellum\n\nthe cerebellum roi as a metric file"
+              "description": "use a cifti file for combined rois\n\nthe cifti roi file"
             },
             "roi-vol": {
               "anyOf": [
@@ -45,7 +45,7 @@
               "default": null,
               "description": "use an roi for volume\n\nthe volume roi file"
             },
-            "roi-cifti": {
+            "roi-metric": {
               "anyOf": [
                 {
                   "type": "string",
@@ -56,7 +56,7 @@
                 }
               ],
               "default": null,
-              "description": "use a cifti file for combined rois\n\nthe cifti roi file"
+              "description": "use an roi for left hempsphere\n\nthe left roi as a metric file"
             }
           },
           "additionalProperties": false,
@@ -68,6 +68,18 @@
       ],
       "default": null,
       "description": "perform correlation from a subset of rows to all rows"
+    },
+    "limit-GB": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "restrict memory usage\n\nmemory limit in gigabytes"
     },
     "weight-file": {
       "anyOf": [
@@ -81,32 +93,20 @@
       "default": null,
       "description": "specify column weights\n\ntext file containing one weight per column"
     },
-    "fisher-z": {
+    "covariance": {
       "type": "boolean",
       "default": false,
-      "description": "apply fisher small z transform (ie, artanh) to correlation"
+      "description": "compute covariance instead of correlation"
     },
     "no-demean": {
       "type": "boolean",
       "default": false,
       "description": "instead of correlation, do dot product of rows, then normalize by diagonal"
     },
-    "covariance": {
+    "fisher-z": {
       "type": "boolean",
       "default": false,
-      "description": "compute covariance instead of correlation"
-    },
-    "limit-GB": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "restrict memory usage\n\nmemory limit in gigabytes"
+      "description": "apply fisher small z transform (ie, artanh) to correlation"
     },
     "cifti": {
       "type": "string",

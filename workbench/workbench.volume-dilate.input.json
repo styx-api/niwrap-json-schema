@@ -11,48 +11,6 @@
       "type": "string",
       "description": "the output volume"
     },
-    "exponent": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "use a different exponent in the weighting function\n\nexponent 'n' to use in (1 / (distance ^ n)) as the weighting function (default 7)"
-    },
-    "roi-volume": {
-      "anyOf": [
-        {
-          "type": "string",
-          "x-styx-type": "file"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "specify an roi of where there is data\n\nvolume file, positive values denote voxels that have data"
-    },
-    "subvol": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "description": "select a single subvolume to dilate\n\nthe subvolume number or name"
-    },
-    "legacy-cutoff": {
-      "type": "boolean",
-      "default": false,
-      "description": "use the v1.3.2 method of excluding voxels further than the dilation distance when calculating the dilated value"
-    },
     "grad-extrapolate": {
       "anyOf": [
         {
@@ -102,6 +60,48 @@
       ],
       "default": null,
       "description": "additionally use the gradient to extrapolate, intended to be used with WEIGHTED"
+    },
+    "subvol": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "select a single subvolume to dilate\n\nthe subvolume number or name"
+    },
+    "roi-volume": {
+      "anyOf": [
+        {
+          "type": "string",
+          "x-styx-type": "file"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "specify an roi of voxels to overwrite, rather than voxels with value zero\n\nvolume file, positive values denote voxels to have their values replaced"
+    },
+    "exponent": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "use a different exponent in the weighting function\n\nexponent 'n' to use in (1 / (distance ^ n)) as the weighting function (default 7)"
+    },
+    "legacy-cutoff": {
+      "type": "boolean",
+      "default": false,
+      "description": "use the v1.3.2 method of excluding voxels further than the dilation distance when calculating the dilated value"
     },
     "volume": {
       "type": "string",

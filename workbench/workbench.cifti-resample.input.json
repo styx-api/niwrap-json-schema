@@ -11,11 +11,6 @@
       "type": "string",
       "description": "the output cifti file"
     },
-    "surface-largest": {
-      "type": "boolean",
-      "default": false,
-      "description": "use largest weight instead of weighted average or popularity when doing surface resampling"
-    },
     "volume-predilate": {
       "anyOf": [
         {
@@ -27,11 +22,6 @@
             "dilate-mm": {
               "type": "number",
               "description": "distance, in mm, to dilate"
-            },
-            "nearest": {
-              "type": "boolean",
-              "default": false,
-              "description": "use nearest value dilation"
             },
             "weighted": {
               "anyOf": [
@@ -68,6 +58,11 @@
               ],
               "default": null,
               "description": "use weighted dilation (default)"
+            },
+            "nearest": {
+              "type": "boolean",
+              "default": false,
+              "description": "use nearest value dilation"
             }
           },
           "additionalProperties": false,
@@ -94,16 +89,6 @@
             "dilate-mm": {
               "type": "number",
               "description": "distance, in mm, to dilate"
-            },
-            "nearest": {
-              "type": "boolean",
-              "default": false,
-              "description": "use nearest value dilation"
-            },
-            "linear": {
-              "type": "boolean",
-              "default": false,
-              "description": "use linear dilation"
             },
             "weighted": {
               "anyOf": [
@@ -140,6 +125,16 @@
               ],
               "default": null,
               "description": "use weighted dilation (default for non-label data)"
+            },
+            "linear": {
+              "type": "boolean",
+              "default": false,
+              "description": "use linear dilation"
+            },
+            "nearest": {
+              "type": "boolean",
+              "default": false,
+              "description": "use nearest value dilation"
             }
           },
           "additionalProperties": false,
@@ -546,6 +541,11 @@
       ],
       "default": null,
       "description": "specify spheres for cerebellum surface resampling"
+    },
+    "surface-largest": {
+      "type": "boolean",
+      "default": false,
+      "description": "use largest weight instead of weighted average or popularity when doing surface resampling"
     },
     "cifti-in": {
       "type": "string",
