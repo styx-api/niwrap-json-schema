@@ -7,6 +7,25 @@
     "@type": {
       "const": "workbench/volume-parcel-resampling"
     },
+    "volume-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input data volume"
+    },
+    "cur-parcels": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "label volume of where the parcels currently are"
+    },
+    "new-parcels": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "label volume of where the parcels should be"
+    },
+    "kernel": {
+      "type": "number",
+      "description": "gaussian kernel size in mm to smooth by during resampling, as sigma by default"
+    },
     "volume-out": {
       "type": "string",
       "description": "output volume"
@@ -32,34 +51,15 @@
       "type": "boolean",
       "default": false,
       "description": "treat zero values as not being data"
-    },
-    "volume-in": {
-      "type": "string",
-      "x-styx-type": "file",
-      "description": "the input data volume"
-    },
-    "cur-parcels": {
-      "type": "string",
-      "x-styx-type": "file",
-      "description": "label volume of where the parcels currently are"
-    },
-    "new-parcels": {
-      "type": "string",
-      "x-styx-type": "file",
-      "description": "label volume of where the parcels should be"
-    },
-    "kernel": {
-      "type": "number",
-      "description": "gaussian kernel size in mm to smooth by during resampling, as sigma by default"
     }
   },
   "additionalProperties": false,
   "required": [
-    "volume-out",
     "volume-in",
     "cur-parcels",
     "new-parcels",
     "kernel",
+    "volume-out",
     "@type"
   ]
 }

@@ -7,6 +7,28 @@
     "@type": {
       "const": "workbench/cifti-resample-dconn-memory"
     },
+    "cifti-in": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the cifti file to resample"
+    },
+    "cifti-template": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "a cifti file containing the cifti space to resample to"
+    },
+    "template-direction": {
+      "type": "string",
+      "description": "the direction of the template to use as the resampling space, ROW or COLUMN"
+    },
+    "surface-method": {
+      "type": "string",
+      "description": "specify a surface resampling method"
+    },
+    "volume-method": {
+      "type": "string",
+      "description": "specify a volume interpolation method"
+    },
     "cifti-out": {
       "type": "string",
       "description": "the output cifti file"
@@ -546,38 +568,16 @@
       "type": "boolean",
       "default": false,
       "description": "use largest weight instead of weighted average when doing surface resampling"
-    },
-    "cifti-in": {
-      "type": "string",
-      "x-styx-type": "file",
-      "description": "the cifti file to resample"
-    },
-    "cifti-template": {
-      "type": "string",
-      "x-styx-type": "file",
-      "description": "a cifti file containing the cifti space to resample to"
-    },
-    "template-direction": {
-      "type": "string",
-      "description": "the direction of the template to use as the resampling space, ROW or COLUMN"
-    },
-    "surface-method": {
-      "type": "string",
-      "description": "specify a surface resampling method"
-    },
-    "volume-method": {
-      "type": "string",
-      "description": "specify a volume interpolation method"
     }
   },
   "additionalProperties": false,
   "required": [
-    "cifti-out",
     "cifti-in",
     "cifti-template",
     "template-direction",
     "surface-method",
     "volume-method",
+    "cifti-out",
     "@type"
   ]
 }

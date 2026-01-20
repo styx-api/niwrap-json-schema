@@ -7,6 +7,31 @@
     "@type": {
       "const": "workbench/cifti-find-clusters"
     },
+    "cifti": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input cifti"
+    },
+    "surface-value-threshold": {
+      "type": "number",
+      "description": "threshold for surface data values"
+    },
+    "surface-minimum-area": {
+      "type": "number",
+      "description": "threshold for surface cluster area, in mm^2"
+    },
+    "volume-value-threshold": {
+      "type": "number",
+      "description": "threshold for volume data values"
+    },
+    "volume-minimum-size": {
+      "type": "number",
+      "description": "threshold for volume cluster size, in mm^3"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which dimension to use for spatial information, ROW or COLUMN"
+    },
     "cifti-out": {
       "type": "string",
       "description": "the output cifti"
@@ -227,42 +252,17 @@
       "type": "boolean",
       "default": false,
       "description": "find values less than <value-threshold>, rather than greater"
-    },
-    "cifti": {
-      "type": "string",
-      "x-styx-type": "file",
-      "description": "the input cifti"
-    },
-    "surface-value-threshold": {
-      "type": "number",
-      "description": "threshold for surface data values"
-    },
-    "surface-minimum-area": {
-      "type": "number",
-      "description": "threshold for surface cluster area, in mm^2"
-    },
-    "volume-value-threshold": {
-      "type": "number",
-      "description": "threshold for volume data values"
-    },
-    "volume-minimum-size": {
-      "type": "number",
-      "description": "threshold for volume cluster size, in mm^3"
-    },
-    "direction": {
-      "type": "string",
-      "description": "which dimension to use for spatial information, ROW or COLUMN"
     }
   },
   "additionalProperties": false,
   "required": [
-    "cifti-out",
     "cifti",
     "surface-value-threshold",
     "surface-minimum-area",
     "volume-value-threshold",
     "volume-minimum-size",
     "direction",
+    "cifti-out",
     "@type"
   ]
 }

@@ -7,6 +7,23 @@
     "@type": {
       "const": "workbench/cifti-extrema"
     },
+    "cifti": {
+      "type": "string",
+      "x-styx-type": "file",
+      "description": "the input cifti"
+    },
+    "surface-distance": {
+      "type": "number",
+      "description": "the minimum distance between extrema of the same type, for surface components"
+    },
+    "volume-distance": {
+      "type": "number",
+      "description": "the minimum distance between extrema of the same type, for volume components"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which dimension to find extrema along, ROW or COLUMN"
+    },
     "cifti-out": {
       "type": "string",
       "description": "the output cifti"
@@ -108,32 +125,15 @@
       "type": "boolean",
       "default": false,
       "description": "smoothing kernel distances are FWHM, not sigma"
-    },
-    "cifti": {
-      "type": "string",
-      "x-styx-type": "file",
-      "description": "the input cifti"
-    },
-    "surface-distance": {
-      "type": "number",
-      "description": "the minimum distance between extrema of the same type, for surface components"
-    },
-    "volume-distance": {
-      "type": "number",
-      "description": "the minimum distance between extrema of the same type, for volume components"
-    },
-    "direction": {
-      "type": "string",
-      "description": "which dimension to find extrema along, ROW or COLUMN"
     }
   },
   "additionalProperties": false,
   "required": [
-    "cifti-out",
     "cifti",
     "surface-distance",
     "volume-distance",
     "direction",
+    "cifti-out",
     "@type"
   ]
 }
