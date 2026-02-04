@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "3dcalc",
-  "description": "AFNI's calculator program.",
+  "description": "AFNI's calculator program. Performs voxel-by-voxel arithmetic on 3D datasets, with strict handling of complex/synthetic inputs and state-dependent flags.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -10,10 +10,20 @@
       "title": "Root",
       "description": "Output root directory"
     },
-    "out_file": {
+    "output_head": {
       "type": "string",
-      "title": "Out file",
-      "description": "Output image file name."
+      "title": null,
+      "description": "Output dataset header file (if AFNI format is used)."
+    },
+    "output_brik": {
+      "type": "string",
+      "title": null,
+      "description": "Output dataset binary file (if AFNI format is used)."
+    },
+    "output_file": {
+      "type": "string",
+      "title": null,
+      "description": "Output dataset file (if NIfTI or other format is used)."
     }
   }
 }

@@ -1,109 +1,182 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "3dcalc",
-  "description": "AFNI's calculator program.",
+  "description": "AFNI's calculator program. Performs voxel-by-voxel arithmetic on 3D datasets, with strict handling of complex/synthetic inputs and state-dependent flags.",
   "type": "object",
   "properties": {
     "@type": {
       "const": "afni/3dcalc"
     },
-    "in_file_a": {
+    "dataset_a": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "dataset_a_file"
+            },
+            "cx2r": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "REAL",
+                    "IMAG",
+                    "ABS",
+                    "PHASE"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Complex-to-Real Method",
+              "description": "Method to convert complex numbers to real before loading this dataset."
+            },
+            "file": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Input File"
+            },
+            "selectors": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Sub-brick Selectors",
+              "description": "AFNI sub-brick selectors, e.g., '[2..$]' or '<100..200>'."
+            }
+          },
+          "additionalProperties": false,
+          "title": "Dataset A (File)",
+          "description": "Standard file input for dataset A.",
+          "required": [
+            "@type",
+            "file"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "dataset_a_synthetic"
+            },
+            "cx2r": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "REAL",
+                    "IMAG",
+                    "ABS",
+                    "PHASE"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Complex-to-Real Method"
+            },
+            "synth_string": {
+              "type": "string",
+              "title": "Synthetic Definition",
+              "description": "String definition for 1D or random dataset (e.g., '1D:5@0,5@1')."
+            }
+          },
+          "additionalProperties": false,
+          "title": "Dataset A (Synthetic)",
+          "description": "Synthetic input string (e.g. '1D:...' or 'jRandomDataset:...').",
+          "required": [
+            "@type",
+            "synth_string"
+          ]
+        }
+      ],
+      "title": "Dataset A (Template)",
+      "description": "Input dataset 'a' (required). This can be a standard file or a synthetic '1D:'/'jRandomDataset:' string. This dataset serves as the template for the output."
+    },
+    "other_datasets": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "other_dataset_config"
+              },
+              "cx2r": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "enum": [
+                      "REAL",
+                      "IMAG",
+                      "ABS",
+                      "PHASE"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Complex-to-Real Method",
+                "description": "Method to convert complex numbers to real for *this specific dataset*."
+              },
+              "variable_letter": {
+                "type": "string",
+                "title": "Variable Letter",
+                "description": "The variable letter used in the expression (e.g., 'b', 'c')."
+              },
+              "file": {
+                "type": "string",
+                "x-styx-type": "file",
+                "title": "Input File"
+              },
+              "selectors": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Sub-brick Selectors",
+                "description": "AFNI sub-brick selectors, e.g., '[2]' or '[2..$]'."
+              }
+            },
+            "additionalProperties": false,
+            "title": "Other Dataset Configuration",
+            "description": "Additional input datasets (b, c, etc.). Includes 'cx2r' support to ensure the flag precedes the specific dataset.",
+            "required": [
+              "variable_letter",
+              "file"
+            ]
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Other Dataset Configuration",
+      "description": "Additional input datasets (b, c, etc.). Includes 'cx2r' support to ensure the flag precedes the specific dataset."
+    },
+    "expression": {
       "type": "string",
-      "x-styx-type": "file",
-      "title": "In file a",
-      "description": "Input file to 3dcalc."
-    },
-    "in_file_b": {
-      "anyOf": [
-        {
-          "type": "string",
-          "x-styx-type": "file"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "In file b",
-      "description": "Operand file to 3dcalc."
-    },
-    "in_file_c": {
-      "anyOf": [
-        {
-          "type": "string",
-          "x-styx-type": "file"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "In file c",
-      "description": "Operand file to 3dcalc."
-    },
-    "other": {
-      "anyOf": [
-        {
-          "type": "string",
-          "x-styx-type": "file"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "Other",
-      "description": "Other options."
-    },
-    "overwrite": {
-      "type": "boolean",
-      "default": false,
-      "title": "Overwrite",
-      "description": "Overwrite output."
-    },
-    "single_idx": {
-      "anyOf": [
-        {
-          "type": "integer"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "Single idx",
-      "description": "Volume index for in_file_a."
-    },
-    "start_idx": {
-      "anyOf": [
-        {
-          "type": "integer"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "Start idx",
-      "description": "Start index for in_file_a."
-    },
-    "stop_idx": {
-      "anyOf": [
-        {
-          "type": "integer"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "Stop idx",
-      "description": "Stop index for in_file_a."
-    },
-    "expr": {
-      "type": "string",
-      "title": "Expr",
-      "description": "Expr."
+      "title": "Arithmetic Expression",
+      "description": "Arithmetic expression to apply to the input datasets (within quotes)."
     },
     "prefix": {
       "anyOf": [
@@ -115,14 +188,197 @@
         }
       ],
       "default": null,
-      "title": "Prefix",
-      "description": "Output image file name."
+      "title": "Output Prefix",
+      "description": "Use 'pname' for the output dataset prefix name."
+    },
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose Flag",
+      "description": "Makes the program print out various information as it progresses."
+    },
+    "datum": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "byte",
+            "short",
+            "float"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Output Data Type",
+      "description": "Coerce the output data to be stored as the given type."
+    },
+    "fscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Force Scaling",
+      "description": "Force scaling of the output to the maximum integer range (for byte or short output)."
+    },
+    "gscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Global Scaling",
+      "description": "Same as -fscale, but also forces each output sub-brick to get the same scaling factor. Incompatible with -usetemp."
+    },
+    "nscale": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Scaling",
+      "description": "Don't do any scaling on output to byte or short datasets."
+    },
+    "usetemp": {
+      "type": "boolean",
+      "default": false,
+      "title": "Use Temporary File",
+      "description": "Create a temporary file to hold intermediate results. Incompatible with -gscale."
+    },
+    "dt": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time Step",
+      "description": "Use 'tstep' as the TR for 'manufactured' 3D+time datasets (in seconds)."
+    },
+    "taxis": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "taxis_config"
+            },
+            "num_points": {
+              "type": "integer",
+              "title": "Number of Time Points",
+              "description": "Length of the time axis."
+            },
+            "time_step": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Time Step",
+              "description": "Time step in seconds."
+            }
+          },
+          "additionalProperties": false,
+          "title": "T-Axis Config",
+          "description": "Force the creation of a time axis. Replaces string input with strict micro-syntax structure 'N:tstep'.",
+          "required": [
+            "num_points"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "T-Axis Config",
+      "description": "Force the creation of a time axis. Replaces string input with strict micro-syntax structure 'N:tstep'."
+    },
+    "rgbfac": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "rgbfac_config"
+            },
+            "a": {
+              "type": "number",
+              "title": "Factor A"
+            },
+            "b": {
+              "type": "number",
+              "title": "Factor B"
+            },
+            "c": {
+              "type": "number",
+              "title": "Factor C"
+            }
+          },
+          "additionalProperties": false,
+          "title": "RGB Factors Config",
+          "description": "Factors A, B, C for collapsing RGB input datasets (value = A*r + B*g + C*b).",
+          "required": [
+            "a",
+            "b",
+            "c"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "RGB Factors Config",
+      "description": "Factors A, B, C for collapsing RGB input datasets (value = A*r + B*g + C*b)."
+    },
+    "sort_mode": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "sort",
+            "SORT"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sorting Mode",
+      "description": "Sort each output brick separately. 'sort' = increasing, 'SORT' = decreasing."
+    },
+    "isola": {
+      "type": "boolean",
+      "default": false,
+      "title": "Remove Isolated Voxels",
+      "description": "After computation, remove isolated non-zero voxels."
+    },
+    "coordinate_system": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "dicom",
+            "RAI",
+            "SPM",
+            "LPI"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Coordinate System Order",
+      "description": "Set the coordinate display order (DICOM/RAI or SPM/LPI)."
     }
   },
   "additionalProperties": false,
   "required": [
-    "in_file_a",
-    "expr",
+    "dataset_a",
+    "expression",
     "@type"
   ]
 }
