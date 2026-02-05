@@ -40,896 +40,2261 @@
     "operations": {
       "type": "array",
       "items": {
-        "type": "object",
-        "properties": {
-          "@type": {
-            "const": "operation"
-          },
-          "add": {
-            "anyOf": [
-              {
-                "type": "number"
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_add"
               },
-              {
-                "type": "null"
+              "add": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Add",
+                "description": "Add following input to current image"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Add",
-            "description": "Add following input to current image"
+            "description": "Add following input to current image",
+            "required": [
+              "@type"
+            ]
           },
-          "sub": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_sub"
               },
-              {
-                "type": "null"
+              "sub": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Subtract",
+                "description": "Subtract following input from current image"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Subtract",
-            "description": "Subtract following input from current image"
+            "description": "Subtract following input from current image",
+            "required": [
+              "@type"
+            ]
           },
-          "mul": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_mul"
               },
-              {
-                "type": "null"
+              "mul": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Multiply",
+                "description": "Multiply current image by following input"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Multiply",
-            "description": "Multiply current image by following input"
+            "description": "Multiply current image by following input",
+            "required": [
+              "@type"
+            ]
           },
-          "div": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_div"
               },
-              {
-                "type": "null"
+              "div": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Divide",
+                "description": "Divide current image by following input"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Divide",
-            "description": "Divide current image by following input"
+            "description": "Divide current image by following input",
+            "required": [
+              "@type"
+            ]
           },
-          "rem": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_rem"
               },
-              {
-                "type": "null"
+              "rem": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Modulus remainder",
+                "description": "Modulus remainder - divide current image by following input and take remainder"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Modulus remainder",
-            "description": "Modulus remainder - divide current image by following input and take remainder"
+            "description": "Modulus remainder - divide current image by following input and take remainder",
+            "required": [
+              "@type"
+            ]
           },
-          "mas": {
-            "anyOf": [
-              {
-                "type": "string",
-                "x-styx-type": "file"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_mas"
               },
-              {
-                "type": "null"
+              "mas": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "x-styx-type": "file"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mask",
+                "description": "Use (following image>0) to mask current image"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Mask",
-            "description": "Use (following image>0) to mask current image"
+            "description": "Use (following image>0) to mask current image",
+            "required": [
+              "@type"
+            ]
           },
-          "thr": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_thr"
               },
-              {
-                "type": "null"
+              "thr": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Threshold",
+                "description": "Use following number to threshold current image (zero anything below the number)"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Threshold",
-            "description": "Use following number to threshold current image (zero anything below the number)"
+            "description": "Use following number to threshold current image (zero anything below the number)",
+            "required": [
+              "@type"
+            ]
           },
-          "thrp": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0,
-                "maximum": 100
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_thrp"
               },
-              {
-                "type": "null"
+              "thrp": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Threshold percentage",
+                "description": "Use following percentage (0-100) of ROBUST RANGE to threshold current image (zero anything below the number)"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Threshold percentage",
-            "description": "Use following percentage (0-100) of ROBUST RANGE to threshold current image (zero anything below the number)"
+            "description": "Use following percentage (0-100) of ROBUST RANGE to threshold current image (zero anything below the number)",
+            "required": [
+              "@type"
+            ]
           },
-          "thrP": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0,
-                "maximum": 100
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_thrP"
               },
-              {
-                "type": "null"
+              "thrP": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Threshold percentage of non-zero voxels",
+                "description": "Use following percentage (0-100) of ROBUST RANGE of non-zero voxels and threshold below"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Threshold percentage of non-zero voxels",
-            "description": "Use following percentage (0-100) of ROBUST RANGE of non-zero voxels and threshold below"
+            "description": "Use following percentage (0-100) of ROBUST RANGE of non-zero voxels and threshold below",
+            "required": [
+              "@type"
+            ]
           },
-          "uthr": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_uthr"
               },
-              {
-                "type": "null"
+              "uthr": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Upper threshold",
+                "description": "Use following number to upper-threshold current image (zero anything above the number)"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Upper threshold",
-            "description": "Use following number to upper-threshold current image (zero anything above the number)"
+            "description": "Use following number to upper-threshold current image (zero anything above the number)",
+            "required": [
+              "@type"
+            ]
           },
-          "uthrp": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0,
-                "maximum": 100
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_uthrp"
               },
-              {
-                "type": "null"
+              "uthrp": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Upper threshold percentage",
+                "description": "Use following percentage (0-100) of ROBUST RANGE to upper-threshold current image (zero anything above the number)"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Upper threshold percentage",
-            "description": "Use following percentage (0-100) of ROBUST RANGE to upper-threshold current image (zero anything above the number)"
+            "description": "Use following percentage (0-100) of ROBUST RANGE to upper-threshold current image (zero anything above the number)",
+            "required": [
+              "@type"
+            ]
           },
-          "uthrP": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0,
-                "maximum": 100
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_uthrP"
               },
-              {
-                "type": "null"
+              "uthrP": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Upper threshold percentage of non-zero voxels",
+                "description": "Use following percentage (0-100) of ROBUST RANGE of non-zero voxels and threshold above"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Upper threshold percentage of non-zero voxels",
-            "description": "Use following percentage (0-100) of ROBUST RANGE of non-zero voxels and threshold above"
+            "description": "Use following percentage (0-100) of ROBUST RANGE of non-zero voxels and threshold above",
+            "required": [
+              "@type"
+            ]
           },
-          "max": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_max"
               },
-              {
-                "type": "null"
+              "max": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Maximum",
+                "description": "Take maximum of following input and current image"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Maximum",
-            "description": "Take maximum of following input and current image"
+            "description": "Take maximum of following input and current image",
+            "required": [
+              "@type"
+            ]
           },
-          "min": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_min"
               },
-              {
-                "type": "null"
+              "min": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Minimum",
+                "description": "Take minimum of following input and current image"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Minimum",
-            "description": "Take minimum of following input and current image"
+            "description": "Take minimum of following input and current image",
+            "required": [
+              "@type"
+            ]
           },
-          "seed": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_seed"
               },
-              {
-                "type": "null"
+              "seed": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Seed",
+                "description": "Seed random number generator with following number"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Seed",
-            "description": "Seed random number generator with following number"
+            "description": "Seed random number generator with following number",
+            "required": [
+              "@type"
+            ]
           },
-          "restart": {
-            "anyOf": [
-              {
-                "type": "string",
-                "x-styx-type": "file"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_restart"
               },
-              {
-                "type": "null"
+              "restart": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "x-styx-type": "file"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Restart",
+                "description": "Replace the current image with input for future processing operations"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Restart",
-            "description": "Replace the current image with input for future processing operations"
+            "description": "Replace the current image with input for future processing operations",
+            "required": [
+              "@type"
+            ]
           },
-          "save": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_save"
+              },
+              "save": {
+                "type": "boolean",
+                "default": false,
+                "title": "Save",
+                "description": "Save the current working image to the input filename"
+              }
+            },
+            "additionalProperties": false,
             "title": "Save",
-            "description": "Save the current working image to the input filename"
+            "description": "Save the current working image to the input filename",
+            "required": [
+              "@type"
+            ]
           },
-          "exp": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_exp"
+              },
+              "exp": {
+                "type": "boolean",
+                "default": false,
+                "title": "Exponential",
+                "description": "Exponential"
+              }
+            },
+            "additionalProperties": false,
             "title": "Exponential",
-            "description": "Exponential"
+            "description": "Exponential",
+            "required": [
+              "@type"
+            ]
           },
-          "log": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_log"
+              },
+              "log": {
+                "type": "boolean",
+                "default": false,
+                "title": "Natural logarithm",
+                "description": "Natural logarithm"
+              }
+            },
+            "additionalProperties": false,
             "title": "Natural logarithm",
-            "description": "Natural logarithm"
+            "description": "Natural logarithm",
+            "required": [
+              "@type"
+            ]
           },
-          "sin": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_sin"
+              },
+              "sin": {
+                "type": "boolean",
+                "default": false,
+                "title": "Sine",
+                "description": "Sine function"
+              }
+            },
+            "additionalProperties": false,
             "title": "Sine",
-            "description": "Sine function"
+            "description": "Sine function",
+            "required": [
+              "@type"
+            ]
           },
-          "cos": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_cos"
+              },
+              "cos": {
+                "type": "boolean",
+                "default": false,
+                "title": "Cosine",
+                "description": "Cosine function"
+              }
+            },
+            "additionalProperties": false,
             "title": "Cosine",
-            "description": "Cosine function"
+            "description": "Cosine function",
+            "required": [
+              "@type"
+            ]
           },
-          "tan": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_tan"
+              },
+              "tan": {
+                "type": "boolean",
+                "default": false,
+                "title": "Tangent",
+                "description": "Tangent function"
+              }
+            },
+            "additionalProperties": false,
             "title": "Tangent",
-            "description": "Tangent function"
+            "description": "Tangent function",
+            "required": [
+              "@type"
+            ]
           },
-          "asin": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_asin"
+              },
+              "asin": {
+                "type": "boolean",
+                "default": false,
+                "title": "Arc sine",
+                "description": "Arc sine function"
+              }
+            },
+            "additionalProperties": false,
             "title": "Arc sine",
-            "description": "Arc sine function"
+            "description": "Arc sine function",
+            "required": [
+              "@type"
+            ]
           },
-          "acos": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_acos"
+              },
+              "acos": {
+                "type": "boolean",
+                "default": false,
+                "title": "Arc cosine",
+                "description": "Arc cosine function"
+              }
+            },
+            "additionalProperties": false,
             "title": "Arc cosine",
-            "description": "Arc cosine function"
+            "description": "Arc cosine function",
+            "required": [
+              "@type"
+            ]
           },
-          "atan": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_atan"
+              },
+              "atan": {
+                "type": "boolean",
+                "default": false,
+                "title": "Arc tangent",
+                "description": "Arc tangent function"
+              }
+            },
+            "additionalProperties": false,
             "title": "Arc tangent",
-            "description": "Arc tangent function"
+            "description": "Arc tangent function",
+            "required": [
+              "@type"
+            ]
           },
-          "sqr": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_sqr"
+              },
+              "sqr": {
+                "type": "boolean",
+                "default": false,
+                "title": "Square",
+                "description": "Square"
+              }
+            },
+            "additionalProperties": false,
             "title": "Square",
-            "description": "Square"
+            "description": "Square",
+            "required": [
+              "@type"
+            ]
           },
-          "sqrt": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_sqrt"
+              },
+              "sqrt": {
+                "type": "boolean",
+                "default": false,
+                "title": "Square root",
+                "description": "Square root"
+              }
+            },
+            "additionalProperties": false,
             "title": "Square root",
-            "description": "Square root"
+            "description": "Square root",
+            "required": [
+              "@type"
+            ]
           },
-          "recip": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_recip"
+              },
+              "recip": {
+                "type": "boolean",
+                "default": false,
+                "title": "Reciprocal",
+                "description": "Reciprocal (1/current image)"
+              }
+            },
+            "additionalProperties": false,
             "title": "Reciprocal",
-            "description": "Reciprocal (1/current image)"
+            "description": "Reciprocal (1/current image)",
+            "required": [
+              "@type"
+            ]
           },
-          "abs": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_abs"
+              },
+              "abs": {
+                "type": "boolean",
+                "default": false,
+                "title": "Absolute value",
+                "description": "Absolute value"
+              }
+            },
+            "additionalProperties": false,
             "title": "Absolute value",
-            "description": "Absolute value"
+            "description": "Absolute value",
+            "required": [
+              "@type"
+            ]
           },
-          "bin": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_bin"
+              },
+              "bin": {
+                "type": "boolean",
+                "default": false,
+                "title": "Binarise",
+                "description": "Use (current image>0) to binarise"
+              }
+            },
+            "additionalProperties": false,
             "title": "Binarise",
-            "description": "Use (current image>0) to binarise"
+            "description": "Use (current image>0) to binarise",
+            "required": [
+              "@type"
+            ]
           },
-          "binv": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_binv"
+              },
+              "binv": {
+                "type": "boolean",
+                "default": false,
+                "title": "Binarise and invert",
+                "description": "Binarise and invert (binarisation and logical inversion)"
+              }
+            },
+            "additionalProperties": false,
             "title": "Binarise and invert",
-            "description": "Binarise and invert (binarisation and logical inversion)"
+            "description": "Binarise and invert (binarisation and logical inversion)",
+            "required": [
+              "@type"
+            ]
           },
-          "fillh": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_fillh"
+              },
+              "fillh": {
+                "type": "boolean",
+                "default": false,
+                "title": "Fill holes",
+                "description": "Fill holes in a binary mask (holes are internal - i.e. do not touch the edge of the FOV)"
+              }
+            },
+            "additionalProperties": false,
             "title": "Fill holes",
-            "description": "Fill holes in a binary mask (holes are internal - i.e. do not touch the edge of the FOV)"
+            "description": "Fill holes in a binary mask (holes are internal - i.e. do not touch the edge of the FOV)",
+            "required": [
+              "@type"
+            ]
           },
-          "fillh26": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_fillh26"
+              },
+              "fillh26": {
+                "type": "boolean",
+                "default": false,
+                "title": "Fill holes using 26 connectivity",
+                "description": "Fill holes using 26 connectivity"
+              }
+            },
+            "additionalProperties": false,
             "title": "Fill holes using 26 connectivity",
-            "description": "Fill holes using 26 connectivity"
+            "description": "Fill holes using 26 connectivity",
+            "required": [
+              "@type"
+            ]
           },
-          "index": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_index"
+              },
+              "index": {
+                "type": "boolean",
+                "default": false,
+                "title": "Index",
+                "description": "Replace each nonzero voxel with a unique (subject to wrapping) index number"
+              }
+            },
+            "additionalProperties": false,
             "title": "Index",
-            "description": "Replace each nonzero voxel with a unique (subject to wrapping) index number"
+            "description": "Replace each nonzero voxel with a unique (subject to wrapping) index number",
+            "required": [
+              "@type"
+            ]
           },
-          "grid": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "type": "number"
-                }
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_grid"
               },
-              {
-                "type": "null"
+              "grid": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Grid",
+                "description": "Add a 3D grid of intensity <value> with grid spacing <spacing>"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Grid",
-            "description": "Add a 3D grid of intensity <value> with grid spacing <spacing>"
+            "description": "Add a 3D grid of intensity <value> with grid spacing <spacing>",
+            "required": [
+              "@type"
+            ]
           },
-          "edge": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_edge"
+              },
+              "edge": {
+                "type": "boolean",
+                "default": false,
+                "title": "Edge strength",
+                "description": "Edge strength"
+              }
+            },
+            "additionalProperties": false,
             "title": "Edge strength",
-            "description": "Edge strength"
+            "description": "Edge strength",
+            "required": [
+              "@type"
+            ]
           },
-          "tfce": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "type": "number"
-                }
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_tfce"
               },
-              {
-                "type": "null"
+              "tfce": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Enhance with TFCE",
+                "description": "Enhance with TFCE, e.g. -tfce 2 0.5 6 (maybe change 6 to 26 for skeletons)"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Enhance with TFCE",
-            "description": "Enhance with TFCE, e.g. -tfce 2 0.5 6 (maybe change 6 to 26 for skeletons)"
+            "description": "Enhance with TFCE, e.g. -tfce 2 0.5 6 (maybe change 6 to 26 for skeletons)",
+            "required": [
+              "@type"
+            ]
           },
-          "tfceS": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "type": "number"
-                }
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_tfceS"
               },
-              {
-                "type": "null"
+              "tfceS": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Show support area for voxel",
+                "description": "Show support area for voxel (X,Y,Z)"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Show support area for voxel",
-            "description": "Show support area for voxel (X,Y,Z)"
+            "description": "Show support area for voxel (X,Y,Z)",
+            "required": [
+              "@type"
+            ]
           },
-          "nan": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_nan"
+              },
+              "nan": {
+                "type": "boolean",
+                "default": false,
+                "title": "Replace NaNs",
+                "description": "Replace NaNs (improper numbers) with 0"
+              }
+            },
+            "additionalProperties": false,
             "title": "Replace NaNs",
-            "description": "Replace NaNs (improper numbers) with 0"
+            "description": "Replace NaNs (improper numbers) with 0",
+            "required": [
+              "@type"
+            ]
           },
-          "nanm": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_nanm"
+              },
+              "nanm": {
+                "type": "boolean",
+                "default": false,
+                "title": "Make NaN mask",
+                "description": "Make NaN (improper number) mask with 1 for NaN voxels, 0 otherwise"
+              }
+            },
+            "additionalProperties": false,
             "title": "Make NaN mask",
-            "description": "Make NaN (improper number) mask with 1 for NaN voxels, 0 otherwise"
+            "description": "Make NaN (improper number) mask with 1 for NaN voxels, 0 otherwise",
+            "required": [
+              "@type"
+            ]
           },
-          "rand": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_rand"
+              },
+              "rand": {
+                "type": "boolean",
+                "default": false,
+                "title": "Add uniform noise",
+                "description": "Add uniform noise (range 0:1)"
+              }
+            },
+            "additionalProperties": false,
             "title": "Add uniform noise",
-            "description": "Add uniform noise (range 0:1)"
+            "description": "Add uniform noise (range 0:1)",
+            "required": [
+              "@type"
+            ]
           },
-          "randn": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_randn"
+              },
+              "randn": {
+                "type": "boolean",
+                "default": false,
+                "title": "Add Gaussian noise",
+                "description": "Add Gaussian noise (mean=0 sigma=1)"
+              }
+            },
+            "additionalProperties": false,
             "title": "Add Gaussian noise",
-            "description": "Add Gaussian noise (mean=0 sigma=1)"
+            "description": "Add Gaussian noise (mean=0 sigma=1)",
+            "required": [
+              "@type"
+            ]
           },
-          "inm": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_inm"
               },
-              {
-                "type": "null"
+              "inm": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Intensity normalisation",
+                "description": "Intensity normalisation (per 3D volume mean)"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Intensity normalisation",
-            "description": "Intensity normalisation (per 3D volume mean)"
+            "description": "Intensity normalisation (per 3D volume mean)",
+            "required": [
+              "@type"
+            ]
           },
-          "ing": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_ing"
               },
-              {
-                "type": "null"
+              "ing": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Intensity normalisation, global 4D mean",
+                "description": "Intensity normalisation, global 4D mean"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Intensity normalisation, global 4D mean",
-            "description": "Intensity normalisation, global 4D mean"
+            "description": "Intensity normalisation, global 4D mean",
+            "required": [
+              "@type"
+            ]
           },
-          "range": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_range"
+              },
+              "range": {
+                "type": "boolean",
+                "default": false,
+                "title": "Set output calmin/max to full data range",
+                "description": "Set the output calmin/max to full data range"
+              }
+            },
+            "additionalProperties": false,
             "title": "Set output calmin/max to full data range",
-            "description": "Set the output calmin/max to full data range"
+            "description": "Set the output calmin/max to full data range",
+            "required": [
+              "@type"
+            ]
           },
-          "tensor_decomp": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_tensor_decomp"
+              },
+              "tensor_decomp": {
+                "type": "boolean",
+                "default": false,
+                "title": "Tensor decomposition",
+                "description": "Convert a 4D (6-timepoint) tensor image into L1,2,3,FA,MD,MO,V1,2,3 (remaining image in pipeline is FA)"
+              }
+            },
+            "additionalProperties": false,
             "title": "Tensor decomposition",
-            "description": "Convert a 4D (6-timepoint) tensor image into L1,2,3,FA,MD,MO,V1,2,3 (remaining image in pipeline is FA)"
+            "description": "Convert a 4D (6-timepoint) tensor image into L1,2,3,FA,MD,MO,V1,2,3 (remaining image in pipeline is FA)",
+            "required": [
+              "@type"
+            ]
           },
-          "kernel_3D": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_3D"
+              },
+              "kernel_3D": {
+                "type": "boolean",
+                "default": false,
+                "title": "3D kernel",
+                "description": "3x3x3 box centered on target voxel (set as default kernel)"
+              }
+            },
+            "additionalProperties": false,
             "title": "3D kernel",
-            "description": "3x3x3 box centered on target voxel (set as default kernel)"
+            "description": "3x3x3 box centered on target voxel (set as default kernel)",
+            "required": [
+              "@type"
+            ]
           },
-          "kernel_2D": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_2D"
+              },
+              "kernel_2D": {
+                "type": "boolean",
+                "default": false,
+                "title": "2D kernel",
+                "description": "3x3x1 box centered on target voxel"
+              }
+            },
+            "additionalProperties": false,
             "title": "2D kernel",
-            "description": "3x3x1 box centered on target voxel"
+            "description": "3x3x1 box centered on target voxel",
+            "required": [
+              "@type"
+            ]
           },
-          "kernel_box": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_box"
               },
-              {
-                "type": "null"
+              "kernel_box": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Box kernel",
+                "description": "All voxels in a cube of width <size> mm centered on target voxel"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Box kernel",
-            "description": "All voxels in a cube of width <size> mm centered on target voxel"
+            "description": "All voxels in a cube of width <size> mm centered on target voxel",
+            "required": [
+              "@type"
+            ]
           },
-          "kernel_boxv": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_boxv"
               },
-              {
-                "type": "null"
+              "kernel_boxv": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Box kernel (voxels)",
+                "description": "All voxels in a cube of width <size> voxels centered on target voxel"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Box kernel (voxels)",
-            "description": "All voxels in a cube of width <size> voxels centered on target voxel"
+            "description": "All voxels in a cube of width <size> voxels centered on target voxel",
+            "required": [
+              "@type"
+            ]
           },
-          "kernel_boxv3": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "type": "number"
-                },
-                "minItems": 3,
-                "maxItems": 3
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_boxv3"
               },
-              {
-                "type": "null"
+              "kernel_boxv3": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Box kernel (3D voxels)",
+                "description": "All voxels in a cuboid of dimensions X x Y x Z centered on target voxel"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Box kernel (3D voxels)",
-            "description": "All voxels in a cuboid of dimensions X x Y x Z centered on target voxel"
+            "description": "All voxels in a cuboid of dimensions X x Y x Z centered on target voxel",
+            "required": [
+              "@type"
+            ]
           },
-          "kernel_gauss": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_gauss"
               },
-              {
-                "type": "null"
+              "kernel_gauss": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Gaussian kernel",
+                "description": "Gaussian kernel (sigma in mm, not voxels)"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Gaussian kernel",
-            "description": "Gaussian kernel (sigma in mm, not voxels)"
+            "description": "Gaussian kernel (sigma in mm, not voxels)",
+            "required": [
+              "@type"
+            ]
           },
-          "kernel_sphere": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_sphere"
               },
-              {
-                "type": "null"
+              "kernel_sphere": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Sphere kernel",
+                "description": "All voxels in a sphere of radius <size> mm centered on target voxel"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Sphere kernel",
-            "description": "All voxels in a sphere of radius <size> mm centered on target voxel"
+            "description": "All voxels in a sphere of radius <size> mm centered on target voxel",
+            "required": [
+              "@type"
+            ]
           },
-          "kernel_file": {
-            "anyOf": [
-              {
-                "type": "string",
-                "x-styx-type": "file"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_file"
               },
-              {
-                "type": "null"
+              "kernel_file": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "x-styx-type": "file"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "External file kernel",
+                "description": "Use external file as kernel"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "External file kernel",
-            "description": "Use external file as kernel"
+            "description": "Use external file as kernel",
+            "required": [
+              "@type"
+            ]
           },
-          "dilM": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_dilM"
+              },
+              "dilM": {
+                "type": "boolean",
+                "default": false,
+                "title": "Mean dilation",
+                "description": "Mean Dilation of non-zero voxels"
+              }
+            },
+            "additionalProperties": false,
             "title": "Mean dilation",
-            "description": "Mean Dilation of non-zero voxels"
+            "description": "Mean Dilation of non-zero voxels",
+            "required": [
+              "@type"
+            ]
           },
-          "dilD": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_dilD"
+              },
+              "dilD": {
+                "type": "boolean",
+                "default": false,
+                "title": "Modal dilation",
+                "description": "Modal Dilation of non-zero voxels"
+              }
+            },
+            "additionalProperties": false,
             "title": "Modal dilation",
-            "description": "Modal Dilation of non-zero voxels"
+            "description": "Modal Dilation of non-zero voxels",
+            "required": [
+              "@type"
+            ]
           },
-          "dilF": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_dilF"
+              },
+              "dilF": {
+                "type": "boolean",
+                "default": false,
+                "title": "Maximum filtering",
+                "description": "Maximum filtering of all voxels"
+              }
+            },
+            "additionalProperties": false,
             "title": "Maximum filtering",
-            "description": "Maximum filtering of all voxels"
+            "description": "Maximum filtering of all voxels",
+            "required": [
+              "@type"
+            ]
           },
-          "dilall": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_dilall"
+              },
+              "dilall": {
+                "type": "boolean",
+                "default": false,
+                "title": "Dilate all",
+                "description": "Apply -dilM repeatedly until the entire FOV is covered"
+              }
+            },
+            "additionalProperties": false,
             "title": "Dilate all",
-            "description": "Apply -dilM repeatedly until the entire FOV is covered"
+            "description": "Apply -dilM repeatedly until the entire FOV is covered",
+            "required": [
+              "@type"
+            ]
           },
-          "ero": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_ero"
+              },
+              "ero": {
+                "type": "boolean",
+                "default": false,
+                "title": "Erode",
+                "description": "Erode by zeroing non-zero voxels when zero voxels found in kernel"
+              }
+            },
+            "additionalProperties": false,
             "title": "Erode",
-            "description": "Erode by zeroing non-zero voxels when zero voxels found in kernel"
+            "description": "Erode by zeroing non-zero voxels when zero voxels found in kernel",
+            "required": [
+              "@type"
+            ]
           },
-          "eroF": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_eroF"
+              },
+              "eroF": {
+                "type": "boolean",
+                "default": false,
+                "title": "Minimum filtering",
+                "description": "Minimum filtering of all voxels"
+              }
+            },
+            "additionalProperties": false,
             "title": "Minimum filtering",
-            "description": "Minimum filtering of all voxels"
+            "description": "Minimum filtering of all voxels",
+            "required": [
+              "@type"
+            ]
           },
-          "fmedian": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_fmedian"
+              },
+              "fmedian": {
+                "type": "boolean",
+                "default": false,
+                "title": "Median filtering",
+                "description": "Median Filtering"
+              }
+            },
+            "additionalProperties": false,
             "title": "Median filtering",
-            "description": "Median Filtering"
+            "description": "Median Filtering",
+            "required": [
+              "@type"
+            ]
           },
-          "fmean": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_fmean"
+              },
+              "fmean": {
+                "type": "boolean",
+                "default": false,
+                "title": "Mean filtering",
+                "description": "Mean filtering, kernel weighted (conventionally used with gauss kernel)"
+              }
+            },
+            "additionalProperties": false,
             "title": "Mean filtering",
-            "description": "Mean filtering, kernel weighted (conventionally used with gauss kernel)"
+            "description": "Mean filtering, kernel weighted (conventionally used with gauss kernel)",
+            "required": [
+              "@type"
+            ]
           },
-          "fmeanu": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_fmeanu"
+              },
+              "fmeanu": {
+                "type": "boolean",
+                "default": false,
+                "title": "Mean filtering un-normalised",
+                "description": "Mean filtering, kernel weighted, un-normalised (gives edge effects)"
+              }
+            },
+            "additionalProperties": false,
             "title": "Mean filtering un-normalised",
-            "description": "Mean filtering, kernel weighted, un-normalised (gives edge effects)"
+            "description": "Mean filtering, kernel weighted, un-normalised (gives edge effects)",
+            "required": [
+              "@type"
+            ]
           },
-          "s": {
-            "anyOf": [
-              {
-                "type": "number"
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_s"
               },
-              {
-                "type": "null"
+              "s": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Gaussian kernel filtering",
+                "description": "Create a gauss kernel of sigma mm and perform mean filtering"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Gaussian kernel filtering",
-            "description": "Create a gauss kernel of sigma mm and perform mean filtering"
+            "description": "Create a gauss kernel of sigma mm and perform mean filtering",
+            "required": [
+              "@type"
+            ]
           },
-          "subsamp2": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_subsamp2"
+              },
+              "subsamp2": {
+                "type": "boolean",
+                "default": false,
+                "title": "Downsample by factor of 2",
+                "description": "Downsamples image by a factor of 2 (keeping new voxels centred on old)"
+              }
+            },
+            "additionalProperties": false,
             "title": "Downsample by factor of 2",
-            "description": "Downsamples image by a factor of 2 (keeping new voxels centred on old)"
+            "description": "Downsamples image by a factor of 2 (keeping new voxels centred on old)",
+            "required": [
+              "@type"
+            ]
           },
-          "subsamp2offc": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_subsamp2offc"
+              },
+              "subsamp2offc": {
+                "type": "boolean",
+                "default": false,
+                "title": "Downsample by factor of 2 (non-centred)",
+                "description": "Downsamples image by a factor of 2 (non-centred)"
+              }
+            },
+            "additionalProperties": false,
             "title": "Downsample by factor of 2 (non-centred)",
-            "description": "Downsamples image by a factor of 2 (non-centred)"
+            "description": "Downsamples image by a factor of 2 (non-centred)",
+            "required": [
+              "@type"
+            ]
           },
-          "Tmean": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tmean"
+              },
+              "Tmean": {
+                "type": "boolean",
+                "default": false,
+                "title": "Mean across time",
+                "description": "Mean across time"
+              }
+            },
+            "additionalProperties": false,
             "title": "Mean across time",
-            "description": "Mean across time"
+            "description": "Mean across time",
+            "required": [
+              "@type"
+            ]
           },
-          "Xmean": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xmean"
+              },
+              "Xmean": {
+                "type": "boolean",
+                "default": false,
+                "title": "Mean across X axis",
+                "description": "Mean across X axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Mean across X axis",
-            "description": "Mean across X axis"
+            "description": "Mean across X axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Ymean": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Ymean"
+              },
+              "Ymean": {
+                "type": "boolean",
+                "default": false,
+                "title": "Mean across Y axis",
+                "description": "Mean across Y axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Mean across Y axis",
-            "description": "Mean across Y axis"
+            "description": "Mean across Y axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Zmean": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zmean"
+              },
+              "Zmean": {
+                "type": "boolean",
+                "default": false,
+                "title": "Mean across Z axis",
+                "description": "Mean across Z axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Mean across Z axis",
-            "description": "Mean across Z axis"
+            "description": "Mean across Z axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Tstd": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tstd"
+              },
+              "Tstd": {
+                "type": "boolean",
+                "default": false,
+                "title": "Standard deviation across time",
+                "description": "Standard deviation across time"
+              }
+            },
+            "additionalProperties": false,
             "title": "Standard deviation across time",
-            "description": "Standard deviation across time"
+            "description": "Standard deviation across time",
+            "required": [
+              "@type"
+            ]
           },
-          "Xstd": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xstd"
+              },
+              "Xstd": {
+                "type": "boolean",
+                "default": false,
+                "title": "Standard deviation across X axis",
+                "description": "Standard deviation across X axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Standard deviation across X axis",
-            "description": "Standard deviation across X axis"
+            "description": "Standard deviation across X axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Ystd": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Ystd"
+              },
+              "Ystd": {
+                "type": "boolean",
+                "default": false,
+                "title": "Standard deviation across Y axis",
+                "description": "Standard deviation across Y axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Standard deviation across Y axis",
-            "description": "Standard deviation across Y axis"
+            "description": "Standard deviation across Y axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Zstd": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zstd"
+              },
+              "Zstd": {
+                "type": "boolean",
+                "default": false,
+                "title": "Standard deviation across Z axis",
+                "description": "Standard deviation across Z axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Standard deviation across Z axis",
-            "description": "Standard deviation across Z axis"
+            "description": "Standard deviation across Z axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Tmax": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tmax"
+              },
+              "Tmax": {
+                "type": "boolean",
+                "default": false,
+                "title": "Max across time",
+                "description": "Max across time"
+              }
+            },
+            "additionalProperties": false,
             "title": "Max across time",
-            "description": "Max across time"
+            "description": "Max across time",
+            "required": [
+              "@type"
+            ]
           },
-          "Xmax": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xmax"
+              },
+              "Xmax": {
+                "type": "boolean",
+                "default": false,
+                "title": "Max across X axis",
+                "description": "Max across X axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Max across X axis",
-            "description": "Max across X axis"
+            "description": "Max across X axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Ymax": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Ymax"
+              },
+              "Ymax": {
+                "type": "boolean",
+                "default": false,
+                "title": "Max across Y axis",
+                "description": "Max across Y axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Max across Y axis",
-            "description": "Max across Y axis"
+            "description": "Max across Y axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Zmax": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zmax"
+              },
+              "Zmax": {
+                "type": "boolean",
+                "default": false,
+                "title": "Max across Z axis",
+                "description": "Max across Z axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Max across Z axis",
-            "description": "Max across Z axis"
+            "description": "Max across Z axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Tmaxn": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tmaxn"
+              },
+              "Tmaxn": {
+                "type": "boolean",
+                "default": false,
+                "title": "Time index of max across time",
+                "description": "Time index of max across time"
+              }
+            },
+            "additionalProperties": false,
             "title": "Time index of max across time",
-            "description": "Time index of max across time"
+            "description": "Time index of max across time",
+            "required": [
+              "@type"
+            ]
           },
-          "Xmaxn": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xmaxn"
+              },
+              "Xmaxn": {
+                "type": "boolean",
+                "default": false,
+                "title": "X index of max across X axis",
+                "description": "X index of max across X axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "X index of max across X axis",
-            "description": "X index of max across X axis"
+            "description": "X index of max across X axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Ymaxn": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Ymaxn"
+              },
+              "Ymaxn": {
+                "type": "boolean",
+                "default": false,
+                "title": "Y index of max across Y axis",
+                "description": "Y index of max across Y axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Y index of max across Y axis",
-            "description": "Y index of max across Y axis"
+            "description": "Y index of max across Y axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Zmaxn": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zmaxn"
+              },
+              "Zmaxn": {
+                "type": "boolean",
+                "default": false,
+                "title": "Z index of max across Z axis",
+                "description": "Z index of max across Z axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Z index of max across Z axis",
-            "description": "Z index of max across Z axis"
+            "description": "Z index of max across Z axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Tmin": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tmin"
+              },
+              "Tmin": {
+                "type": "boolean",
+                "default": false,
+                "title": "Min across time",
+                "description": "Min across time"
+              }
+            },
+            "additionalProperties": false,
             "title": "Min across time",
-            "description": "Min across time"
+            "description": "Min across time",
+            "required": [
+              "@type"
+            ]
           },
-          "Xmin": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xmin"
+              },
+              "Xmin": {
+                "type": "boolean",
+                "default": false,
+                "title": "Min across X axis",
+                "description": "Min across X axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Min across X axis",
-            "description": "Min across X axis"
+            "description": "Min across X axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Ymin": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Ymin"
+              },
+              "Ymin": {
+                "type": "boolean",
+                "default": false,
+                "title": "Min across Y axis",
+                "description": "Min across Y axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Min across Y axis",
-            "description": "Min across Y axis"
+            "description": "Min across Y axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Zmin": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zmin"
+              },
+              "Zmin": {
+                "type": "boolean",
+                "default": false,
+                "title": "Min across Z axis",
+                "description": "Min across Z axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Min across Z axis",
-            "description": "Min across Z axis"
+            "description": "Min across Z axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Tmedian": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tmedian"
+              },
+              "Tmedian": {
+                "type": "boolean",
+                "default": false,
+                "title": "Median across time",
+                "description": "Median across time"
+              }
+            },
+            "additionalProperties": false,
             "title": "Median across time",
-            "description": "Median across time"
+            "description": "Median across time",
+            "required": [
+              "@type"
+            ]
           },
-          "Xmedian": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xmedian"
+              },
+              "Xmedian": {
+                "type": "boolean",
+                "default": false,
+                "title": "Median across X axis",
+                "description": "Median across X axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Median across X axis",
-            "description": "Median across X axis"
+            "description": "Median across X axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Ymedian": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Ymedian"
+              },
+              "Ymedian": {
+                "type": "boolean",
+                "default": false,
+                "title": "Median across Y axis",
+                "description": "Median across Y axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Median across Y axis",
-            "description": "Median across Y axis"
+            "description": "Median across Y axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Zmedian": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zmedian"
+              },
+              "Zmedian": {
+                "type": "boolean",
+                "default": false,
+                "title": "Median across Z axis",
+                "description": "Median across Z axis"
+              }
+            },
+            "additionalProperties": false,
             "title": "Median across Z axis",
-            "description": "Median across Z axis"
+            "description": "Median across Z axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Tperc": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0,
-                "maximum": 100
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tperc"
               },
-              {
-                "type": "null"
+              "Tperc": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Percentile across time",
+                "description": "Nth percentile (0-100) of FULL RANGE across time"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Percentile across time",
-            "description": "Nth percentile (0-100) of FULL RANGE across time"
+            "description": "Nth percentile (0-100) of FULL RANGE across time",
+            "required": [
+              "@type"
+            ]
           },
-          "Xperc": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0,
-                "maximum": 100
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xperc"
               },
-              {
-                "type": "null"
+              "Xperc": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Percentile across X axis",
+                "description": "Nth percentile (0-100) of FULL RANGE across X axis"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Percentile across X axis",
-            "description": "Nth percentile (0-100) of FULL RANGE across X axis"
+            "description": "Nth percentile (0-100) of FULL RANGE across X axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Yperc": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0,
-                "maximum": 100
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Yperc"
               },
-              {
-                "type": "null"
+              "Yperc": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Percentile across Y axis",
+                "description": "Nth percentile (0-100) of FULL RANGE across Y axis"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Percentile across Y axis",
-            "description": "Nth percentile (0-100) of FULL RANGE across Y axis"
+            "description": "Nth percentile (0-100) of FULL RANGE across Y axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Zperc": {
-            "anyOf": [
-              {
-                "type": "number",
-                "minimum": 0,
-                "maximum": 100
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zperc"
               },
-              {
-                "type": "null"
+              "Zperc": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Percentile across Z axis",
+                "description": "Nth percentile (0-100) of FULL RANGE across Z axis"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Percentile across Z axis",
-            "description": "Nth percentile (0-100) of FULL RANGE across Z axis"
+            "description": "Nth percentile (0-100) of FULL RANGE across Z axis",
+            "required": [
+              "@type"
+            ]
           },
-          "Tar1": {
-            "type": "boolean",
-            "default": false,
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tar1"
+              },
+              "Tar1": {
+                "type": "boolean",
+                "default": false,
+                "title": "Temporal AR(1) coefficient",
+                "description": "Temporal AR(1) coefficient (use -odt float and probably demean first)"
+              }
+            },
+            "additionalProperties": false,
             "title": "Temporal AR(1) coefficient",
-            "description": "Temporal AR(1) coefficient (use -odt float and probably demean first)"
+            "description": "Temporal AR(1) coefficient (use -odt float and probably demean first)",
+            "required": [
+              "@type"
+            ]
           },
-          "roi": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "type": "number"
-                },
-                "minItems": 6,
-                "maxItems": 6
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_roi"
               },
-              {
-                "type": "null"
+              "roi": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 6,
+                    "maxItems": 6
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Zero outside ROI",
+                "description": "<xmin> <xsize> <ymin> <ysize> <zmin> <zsize> <tmin> <tsize>. Zero outside roi (using voxel coordinates). Inputting -1 for a size will set it to the full image extent for that dimension."
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Zero outside ROI",
-            "description": "<xmin> <xsize> <ymin> <ysize> <zmin> <zsize> <tmin> <tsize>. Zero outside roi (using voxel coordinates). Inputting -1 for a size will set it to the full image extent for that dimension."
+            "description": "<xmin> <xsize> <ymin> <ysize> <zmin> <zsize> <tmin> <tsize>. Zero outside roi (using voxel coordinates). Inputting -1 for a size will set it to the full image extent for that dimension.",
+            "required": [
+              "@type"
+            ]
           },
-          "bptf": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "type": "number"
-                },
-                "minItems": 2,
-                "maxItems": 2
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_bptf"
               },
-              {
-                "type": "null"
+              "bptf": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Bandpass temporal filtering",
+                "description": "<lowpass> <highpass>. Bandpass temporal filtering (use -odt float and probably demean first)"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "Bandpass temporal filtering",
-            "description": "<lowpass> <highpass>. Bandpass temporal filtering (use -odt float and probably demean first)"
+            "description": "<lowpass> <highpass>. Bandpass temporal filtering (use -odt float and probably demean first)",
+            "required": [
+              "@type"
+            ]
           },
-          "roc": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "type": "number"
-                }
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_roc"
               },
-              {
-                "type": "null"
+              "roc": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "ROC analysis",
+                "description": "<threshold> <output>. ROC analysis"
               }
-            ],
-            "default": null,
+            },
+            "additionalProperties": false,
             "title": "ROC analysis",
-            "description": "<threshold> <output>. ROC analysis"
+            "description": "<threshold> <output>. ROC analysis",
+            "required": [
+              "@type"
+            ]
           }
-        },
-        "additionalProperties": false,
-        "title": "Operation",
-        "description": "Operations to perform on input images"
+        ]
       },
-      "title": "Operation",
+      "title": "Operations",
       "description": "Operations to perform on input images"
     },
     "output": {
