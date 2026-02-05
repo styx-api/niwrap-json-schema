@@ -107,7 +107,9 @@
           "items": {
             "type": "string",
             "x-styx-type": "file"
-          }
+          },
+          "minItems": 3,
+          "maxItems": 3
         },
         {
           "type": "null"
@@ -115,7 +117,7 @@
       ],
       "default": null,
       "title": "Other priors",
-      "description": "Alternative prior images."
+      "description": "Alternative prior images (requires 3 files: prior1 prior2 prior3)."
     },
     "output_biasfield": {
       "type": "boolean",
@@ -138,7 +140,8 @@
     "channels": {
       "anyOf": [
         {
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1
         },
         {
           "type": "null"
@@ -165,7 +168,7 @@
       "type": "boolean",
       "default": false,
       "title": "Use priors",
-      "description": "Use priors throughout."
+      "description": "Use priors throughout (requires -a option)."
     },
     "no_pve": {
       "type": "boolean",
@@ -213,7 +216,7 @@
       ],
       "default": null,
       "title": "Hyper",
-      "description": "0.0 <= a floating point number <= 1.0. segmentation spatial smoothness; default=0.1"
+      "description": "segmentation spatial smoothness (0.0 to 1.0); default=0.1"
     },
     "verbose": {
       "type": "boolean",
@@ -248,6 +251,12 @@
       "default": null,
       "title": "Iters afterbias",
       "description": "number of main-loop iterations after bias-field removal; default=4"
+    },
+    "output_probabilities": {
+      "type": "boolean",
+      "default": false,
+      "title": "Output probabilities",
+      "description": "outputs individual probability maps"
     },
     "in_files": {
       "type": "array",
