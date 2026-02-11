@@ -18,7 +18,7 @@
       ],
       "default": null,
       "title": "Prefix",
-      "description": "Prefix for output image file name."
+      "description": "Prefix for output image file name. The default is 'tshift'."
     },
     "ignore": {
       "anyOf": [
@@ -30,14 +30,14 @@
         }
       ],
       "default": null,
-      "title": "Ignore",
-      "description": "Ignore the first set of points specified."
+      "title": "Ignore Initial Points",
+      "description": "Ignore the first 'ii' points. The first ii values will be unchanged in the output (regardless of the -rlt option). They also will not be used in the detrending or time shifting. Default is ii=0."
     },
     "in_file": {
       "type": "string",
       "x-styx-type": "file",
-      "title": "In file",
-      "description": "Input file to 3dtshift."
+      "title": "Input dataset",
+      "description": "Input dataset to 3dTshift. The input dataset can have a sub-brick selector attached."
     },
     "interp": {
       "anyOf": [
@@ -48,7 +48,9 @@
             "linear",
             "cubic",
             "quintic",
-            "heptic"
+            "heptic",
+            "wsinc5",
+            "wsinc9"
           ]
         },
         {
@@ -56,8 +58,8 @@
         }
       ],
       "default": null,
-      "title": "Interp",
-      "description": "'fourier' or 'linear' or 'cubic' or 'quintic' or 'heptic'. Different interpolation methods (see 3dtshift for details) default = fourier."
+      "title": "Interpolation Method",
+      "description": "Different interpolation methods. Fourier (default) is most accurate but slowest. Linear is least accurate. Polynomials: cubic, quintic, heptic. Weighted sinc: wsinc5, wsinc9."
     },
     "num_threads": {
       "anyOf": [
@@ -69,7 +71,7 @@
         }
       ],
       "default": null,
-      "title": "Num threads",
+      "title": "Number of Threads",
       "description": "Set number of threads."
     },
     "outputtype": {
@@ -87,20 +89,139 @@
         }
       ],
       "default": null,
-      "title": "Outputtype",
-      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype."
+      "title": "Output Type",
+      "description": "Afni output filetype."
     },
-    "rlt": {
-      "type": "boolean",
-      "default": false,
-      "title": "Rlt",
-      "description": "Before shifting, remove the mean and linear trend."
+    "detrend_strategy": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "rlt"
+                }
+              },
+              "additionalProperties": false,
+              "title": "Remove Mean & Trend",
+              "description": "Before shifting, remove the mean and linear trend. Do not put them back.",
+              "required": [
+                "@type"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "rlt_plus"
+                }
+              },
+              "additionalProperties": false,
+              "title": "Remove Trend, Add Mean",
+              "description": "Before shifting, remove the mean and linear trend. After shifting, put back the mean.",
+              "required": [
+                "@type"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "no_detrend"
+                }
+              },
+              "additionalProperties": false,
+              "title": "No Detrending",
+              "description": "Do not remove or restore linear trend. (Default interpolation becomes 'heptic').",
+              "required": [
+                "@type"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Detrending Method",
+      "description": "Specify how to handle the mean and linear trend during shifting. If unspecified, the default is to remove the trend and add it back."
     },
-    "rltplus": {
-      "type": "boolean",
-      "default": false,
-      "title": "Rltplus",
-      "description": "Before shifting, remove the mean and linear trend and later put back the mean."
+    "shift_strategy": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "align_to_tzero"
+                },
+                "tzero": {
+                  "type": "number",
+                  "title": "Time Zero",
+                  "description": "The time offset to align to (e.g., 0)."
+                }
+              },
+              "additionalProperties": false,
+              "title": "Align to Time Zero",
+              "description": "Align each slice to a specific time offset.",
+              "required": [
+                "@type",
+                "tzero"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "align_to_slice"
+                },
+                "slice_index": {
+                  "type": "integer",
+                  "title": "Slice Index",
+                  "description": "The index of the slice to use as the reference."
+                }
+              },
+              "additionalProperties": false,
+              "title": "Align to Slice",
+              "description": "Align each slice to the time offset of a reference slice.",
+              "required": [
+                "@type",
+                "slice_index"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "align_voxel_wise"
+                },
+                "voxshift_file": {
+                  "type": "string",
+                  "x-styx-type": "file",
+                  "title": "Shift Dataset",
+                  "description": "Dataset containing fractional TR shift values."
+                }
+              },
+              "additionalProperties": false,
+              "title": "Voxel-wise Shifting",
+              "description": "Shift each voxel by a different amount specified in a dataset.",
+              "required": [
+                "@type",
+                "voxshift_file"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Shifting Strategy",
+      "description": "Select how the temporal alignment should be calculated."
     },
     "slice_encoding_direction": {
       "anyOf": [
@@ -116,24 +237,62 @@
         }
       ],
       "default": null,
-      "title": "Slice encoding direction",
-      "description": "'k' or 'k-'. Direction in which slice_timing is specified (default: k). if negative,slice_timing is defined in reverse order, that is, the first entry corresponds to the slice with the largest index, and the final entry corresponds to slice index zero. only in effect when slice_timing is passed as list, not when it is passed as file."
+      "title": "Slice Encoding Direction",
+      "description": "'k' or 'k-'. Direction in which slice_timing is specified (default: k). Only in effect when slice_timing is passed as list."
     },
     "tpattern": {
       "anyOf": [
         {
-          "type": "string",
-          "enum": [
-            "alt+z",
-            "altplus",
-            "alt+z2",
-            "alt-z",
-            "altminus",
-            "alt-z2",
-            "seq+z",
-            "seqplus",
-            "seq-z",
-            "seqminus"
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "tpattern_mode_string"
+                },
+                "tpattern_string": {
+                  "type": "string",
+                  "enum": [
+                    "alt+z",
+                    "altplus",
+                    "alt+z2",
+                    "alt-z",
+                    "altminus",
+                    "alt-z2",
+                    "seq+z",
+                    "seqplus",
+                    "seq-z",
+                    "seqminus"
+                  ],
+                  "title": "Pattern String",
+                  "description": "Standard slice timing pattern code."
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "@type",
+                "tpattern_string"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "tpattern_mode_file"
+                },
+                "tpattern_file": {
+                  "type": "string",
+                  "x-styx-type": "file",
+                  "title": "Pattern File",
+                  "description": "File containing temporal offsets."
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "@type",
+                "tpattern_file"
+              ]
+            }
           ]
         },
         {
@@ -141,47 +300,58 @@
         }
       ],
       "default": null,
-      "title": "Tpattern",
-      "description": "'alt+z' or 'altplus' or 'alt+z2' or 'alt-z' or 'altminus' or 'alt-z2' or 'seq+z' or 'seqplus' or 'seq-z' or 'seqminus' or a string. Use specified slice time pattern rather than one in header."
+      "title": "Slice Timing Pattern",
+      "description": "Use specified slice time pattern rather than one in header. Values can be a standard pattern string (e.g. 'alt+z') or a filename prefixed with '@'."
     },
     "tr": {
       "anyOf": [
         {
-          "type": "number"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "tr_microsyntax"
+            },
+            "value": {
+              "type": "number",
+              "title": "TR Value",
+              "description": "The temporal resolution value."
+            },
+            "unit": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "s",
+                    "ms"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "TR Unit",
+              "description": "Unit for the TR (seconds or milliseconds)."
+            }
+          },
+          "additionalProperties": false,
+          "description": "Manually set the TR. You can attach suffix 's' for seconds or 'ms' for milliseconds.",
+          "required": [
+            "value"
+          ]
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "title": "Tr",
-      "description": "Manually set the tr. you can attach suffix \"s\" for seconds or \"ms\" for milliseconds."
+      "description": "Manually set the TR. You can attach suffix 's' for seconds or 'ms' for milliseconds."
     },
-    "tslice": {
-      "anyOf": [
-        {
-          "type": "integer"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "Tslice",
-      "description": "Align each slice to time offset of given slice."
-    },
-    "tzero": {
-      "anyOf": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "Tzero",
-      "description": "Align each slice to given time offset."
+    "verbose": {
+      "type": "boolean",
+      "default": false,
+      "title": "Verbose",
+      "description": "Print lots of messages while program runs."
     }
   },
   "additionalProperties": false,
