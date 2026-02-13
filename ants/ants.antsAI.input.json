@@ -25,26 +25,408 @@
       "description": "This option forces the image to be treated as a specified-dimensional image. If not specified, we try to infer the dimensionality from the input image."
     },
     "metric": {
-      "type": "string",
-      "enum": [
-        "Mattes[fixedImage,movingImage]",
-        "GC[fixedImage,movingImage]",
-        "MI[fixedImage,movingImage]"
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "metric_mattes"
+            },
+            "fixed_image": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Fixed image"
+            },
+            "moving_image": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Moving image"
+            },
+            "number_of_bins": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "number_of_bins"
+                    },
+                    "number_of_bins_value": {
+                      "type": "integer",
+                      "title": "Number of bins"
+                    },
+                    "sampling_strategy": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "@type": {
+                              "const": "sampling_strategy"
+                            },
+                            "sampling_strategy_value": {
+                              "type": "string",
+                              "enum": [
+                                "None",
+                                "Regular",
+                                "Random"
+                              ],
+                              "title": "Sampling strategy"
+                            },
+                            "sampling_percentage": {
+                              "anyOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "@type": {
+                                      "const": "sampling_percentage"
+                                    },
+                                    "sampling_percentage_value": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1,
+                                      "title": "Sampling percentage"
+                                    }
+                                  },
+                                  "additionalProperties": false,
+                                  "required": [
+                                    "sampling_percentage_value"
+                                  ]
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ],
+                              "default": null
+                            }
+                          },
+                          "additionalProperties": false,
+                          "required": [
+                            "sampling_strategy_value"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "number_of_bins_value"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "additionalProperties": false,
+          "title": "Mattes mutual information",
+          "required": [
+            "@type",
+            "fixed_image",
+            "moving_image"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "metric_gc"
+            },
+            "fixed_image": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Fixed image"
+            },
+            "moving_image": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Moving image"
+            },
+            "radius": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "radius"
+                    },
+                    "radius_value": {
+                      "type": "number",
+                      "title": "Radius"
+                    },
+                    "sampling_strategy": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "@type": {
+                              "const": "sampling_strategy_1"
+                            },
+                            "sampling_strategy_value": {
+                              "type": "string",
+                              "enum": [
+                                "None",
+                                "Regular",
+                                "Random"
+                              ],
+                              "title": "Sampling strategy"
+                            },
+                            "sampling_percentage": {
+                              "anyOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "@type": {
+                                      "const": "sampling_percentage_1"
+                                    },
+                                    "sampling_percentage_value": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1,
+                                      "title": "Sampling percentage"
+                                    }
+                                  },
+                                  "additionalProperties": false,
+                                  "required": [
+                                    "sampling_percentage_value"
+                                  ]
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ],
+                              "default": null
+                            }
+                          },
+                          "additionalProperties": false,
+                          "required": [
+                            "sampling_strategy_value"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "radius_value"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "additionalProperties": false,
+          "title": "Global correlation",
+          "required": [
+            "@type",
+            "fixed_image",
+            "moving_image"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "metric_mi"
+            },
+            "fixed_image": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Fixed image"
+            },
+            "moving_image": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Moving image"
+            },
+            "number_of_bins": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "number_of_bins_1"
+                    },
+                    "number_of_bins_value": {
+                      "type": "integer",
+                      "title": "Number of bins"
+                    },
+                    "sampling_strategy": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "@type": {
+                              "const": "sampling_strategy_2"
+                            },
+                            "sampling_strategy_value": {
+                              "type": "string",
+                              "enum": [
+                                "None",
+                                "Regular",
+                                "Random"
+                              ],
+                              "title": "Sampling strategy"
+                            },
+                            "sampling_percentage": {
+                              "anyOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "@type": {
+                                      "const": "sampling_percentage_2"
+                                    },
+                                    "sampling_percentage_value": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1,
+                                      "title": "Sampling percentage"
+                                    }
+                                  },
+                                  "additionalProperties": false,
+                                  "required": [
+                                    "sampling_percentage_value"
+                                  ]
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ],
+                              "default": null
+                            }
+                          },
+                          "additionalProperties": false,
+                          "required": [
+                            "sampling_strategy_value"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "number_of_bins_value"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "additionalProperties": false,
+          "title": "Joint histogram mutual information",
+          "required": [
+            "@type",
+            "fixed_image",
+            "moving_image"
+          ]
+        }
       ],
       "title": "Metric",
-      "description": "These image metrics are available: Mattes: Mattes mutual information (recommended), GC: global correlation, MI: joint histogram mutual information"
+      "description": "Image similarity metric. Available metrics: Mattes (Mattes mutual information, recommended), GC (global correlation), MI (joint histogram mutual information). Each metric takes a fixed and moving image, with optional sampling parameters."
     },
     "transform": {
-      "type": "string",
-      "enum": [
-        "Rigid[gradientStep]",
-        "Affine[gradientStep]",
-        "Similarity[gradientStep]",
-        "AlignGeometricCenters",
-        "AlignCentersOfMass"
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "transform_rigid"
+            },
+            "gradient_step": {
+              "type": "number",
+              "title": "Gradient step"
+            }
+          },
+          "additionalProperties": false,
+          "title": "Rigid",
+          "required": [
+            "@type",
+            "gradient_step"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "transform_affine"
+            },
+            "gradient_step": {
+              "type": "number",
+              "title": "Gradient step"
+            }
+          },
+          "additionalProperties": false,
+          "title": "Affine",
+          "required": [
+            "@type",
+            "gradient_step"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "transform_similarity"
+            },
+            "gradient_step": {
+              "type": "number",
+              "title": "Gradient step"
+            }
+          },
+          "additionalProperties": false,
+          "title": "Similarity",
+          "required": [
+            "@type",
+            "gradient_step"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "transform_align_geometric_centers"
+            }
+          },
+          "additionalProperties": false,
+          "title": "Align geometric centers",
+          "required": [
+            "@type"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "transform_align_centers_of_mass"
+            }
+          },
+          "additionalProperties": false,
+          "title": "Align centers of mass",
+          "required": [
+            "@type"
+          ]
+        }
       ],
       "title": "Transform",
-      "description": "Several transform options are available. For the rigid, affine, and similarity transforms, the gradientStep characterizes the gradient descent optimization. The other two transform types finds the simple translation transform which aligns the specified image feature."
+      "description": "Transform type for alignment. The rigid, affine, and similarity transforms take a gradient step parameter that characterizes the gradient descent optimization and is scaled appropriately for each transform using the shift scales estimator. AlignGeometricCenters and AlignCentersOfMass find the simple translation transform aligning the specified image feature. Note that the images are read from the metric option although the metric value itself is not used for the latter two."
     },
     "align_principal_axes": {
       "anyOf": [
@@ -56,16 +438,50 @@
         }
       ],
       "default": null,
-      "title": "Align by Principal Axes",
-      "description": "Boolean indicating alignment by principal axes. Alternatively, one can align using blobs."
+      "title": "Align principal axes",
+      "description": "Align images by their principal axes. Alternatively, one can align using blobs (see --align-blobs option)."
     },
     "align_blobs": {
       "anyOf": [
         {
-          "type": "string",
-          "enum": [
-            "numberOfBlobsToExtract",
-            "[numberOfBlobsToExtract,numberOfBlobsToMatch]"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "align_blobs"
+            },
+            "number_of_blobs_to_extract": {
+              "type": "integer",
+              "title": "Number of blobs to extract"
+            },
+            "number_of_blobs_to_match": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "number_of_blobs_to_match"
+                    },
+                    "number_of_blobs_to_match_value": {
+                      "type": "integer",
+                      "title": "Number of blobs to match"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "number_of_blobs_to_match_value"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "additionalProperties": false,
+          "description": "Align images using a set of extracted blobs. Specify the number of blobs to extract, and optionally the number of blobs to match (defaults to numberOfBlobsToExtract). Alternatively, one can align using principal axes (see --align-principal-axes option).",
+          "required": [
+            "number_of_blobs_to_extract"
           ]
         },
         {
@@ -73,16 +489,49 @@
         }
       ],
       "default": null,
-      "title": "Align by Blobs",
-      "description": "Boolean indicating alignment by a set of blobs."
+      "description": "Align images using a set of extracted blobs. Specify the number of blobs to extract, and optionally the number of blobs to match (defaults to numberOfBlobsToExtract). Alternatively, one can align using principal axes (see --align-principal-axes option)."
     },
     "search_factor": {
       "anyOf": [
         {
-          "type": "string",
-          "enum": [
-            "searchFactor",
-            "[searchFactor,arcFraction]"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "search_factor"
+            },
+            "search_factor_value": {
+              "type": "number",
+              "title": "Search factor"
+            },
+            "arc_fraction": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "arc_fraction"
+                    },
+                    "arc_fraction_value": {
+                      "type": "number",
+                      "title": "Arc fraction"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "arc_fraction_value"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "additionalProperties": false,
+          "description": "Incremental search factor (in degrees) which will sample the arc fraction around the principal axis or default axis. Default search factor is 20 degrees with an arc fraction of 1.0.",
+          "required": [
+            "search_factor_value"
           ]
         },
         {
@@ -90,15 +539,35 @@
         }
       ],
       "default": null,
-      "title": "Search Factor",
-      "description": "Incremental search factor (in degrees) which will sample the arc fraction around the principal axis or default axis."
+      "description": "Incremental search factor (in degrees) which will sample the arc fraction around the principal axis or default axis. Default search factor is 20 degrees with an arc fraction of 1.0."
     },
     "translation_search_grid": {
       "anyOf": [
         {
-          "type": "string",
-          "enum": [
-            "[stepSize, AxBxC]"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "translation_search_grid"
+            },
+            "step_size": {
+              "type": "number",
+              "title": "Step size",
+              "description": "Translation step size in mm. Default is 25."
+            },
+            "grid": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "title": "Grid",
+              "description": "Translation search grid extent in each dimension, specified as AxBxC. Default is 0x0x0."
+            }
+          },
+          "additionalProperties": false,
+          "description": "Translation search grid in mm, which will translate the moving image in each dimension in increments of the step size.",
+          "required": [
+            "step_size",
+            "grid"
           ]
         },
         {
@@ -106,16 +575,73 @@
         }
       ],
       "default": null,
-      "title": "Translation Search Grid",
       "description": "Translation search grid in mm, which will translate the moving image in each dimension in increments of the step size."
     },
     "convergence": {
       "anyOf": [
         {
-          "type": "string",
-          "enum": [
-            "numberOfIterations",
-            "[numberOfIterations,convergenceThreshold,convergenceWindowSize]"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "convergence"
+            },
+            "number_of_iterations": {
+              "type": "integer",
+              "title": "Number of iterations"
+            },
+            "convergence_threshold": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "convergence_threshold"
+                    },
+                    "convergence_threshold_value": {
+                      "type": "number",
+                      "title": "Convergence threshold"
+                    },
+                    "convergence_window_size": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "@type": {
+                              "const": "convergence_window_size"
+                            },
+                            "convergence_window_size_value": {
+                              "type": "integer",
+                              "title": "Convergence window size"
+                            }
+                          },
+                          "additionalProperties": false,
+                          "required": [
+                            "convergence_window_size_value"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "convergence_threshold_value"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "additionalProperties": false,
+          "description": "Convergence parameters for the optimization. Specify the number of iterations, and optionally a convergence threshold (default 1e-6) and convergence window size (default 10).",
+          "required": [
+            "number_of_iterations"
           ]
         },
         {
@@ -123,16 +649,51 @@
         }
       ],
       "default": null,
-      "title": "Convergence",
-      "description": "Number of iterations."
+      "description": "Convergence parameters for the optimization. Specify the number of iterations, and optionally a convergence threshold (default 1e-6) and convergence window size (default 10)."
     },
     "masks": {
       "anyOf": [
         {
-          "type": "string",
-          "enum": [
-            "fixedImageMask",
-            "[fixedImageMask,movingImageMask]"
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "masks"
+            },
+            "fixed_image_mask": {
+              "type": "string",
+              "x-styx-type": "file",
+              "title": "Fixed image mask"
+            },
+            "moving_image_mask": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "@type": {
+                      "const": "moving_image_mask"
+                    },
+                    "moving_image_mask_value": {
+                      "type": "string",
+                      "x-styx-type": "file",
+                      "title": "Moving image mask"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "moving_image_mask_value"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "additionalProperties": false,
+          "description": "Image masks to limit the voxels considered by the metric. Specify a fixed image mask, and optionally a moving image mask.",
+          "required": [
+            "fixed_image_mask"
           ]
         },
         {
@@ -140,27 +701,25 @@
         }
       ],
       "default": null,
-      "title": "Masks",
-      "description": "Image masks to limit voxels considered by the metric."
+      "description": "Image masks to limit the voxels considered by the metric. Specify a fixed image mask, and optionally a moving image mask."
     },
     "output": {
       "type": "string",
       "title": "Output",
-      "description": "Specify the output transform (output format an ITK .mat file)."
+      "description": "Specify the output transform filename (output format is an ITK .mat file)."
     },
     "random_seed": {
       "anyOf": [
         {
-          "type": "integer",
-          "minimum": 0
+          "type": "integer"
         },
         {
           "type": "null"
         }
       ],
       "default": null,
-      "title": "Random Seed",
-      "description": "Use a fixed seed for random number generation."
+      "title": "Random seed",
+      "description": "Use a fixed seed for random number generation. The default fixed seed is overwritten by this value. The fixed seed can be any nonzero int value. If the specified seed is zero, the system time will be used."
     },
     "verbose": {
       "anyOf": [
@@ -173,7 +732,7 @@
       ],
       "default": null,
       "title": "Verbose",
-      "description": "Verbose output."
+      "description": "Verbose output. Default is 0 (off)."
     }
   },
   "additionalProperties": false,
