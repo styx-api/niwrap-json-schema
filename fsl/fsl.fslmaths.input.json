@@ -88,9 +88,47 @@
                 "const": "operation_mul"
               },
               "mul": {
-                "type": "number",
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "const": "mul_value"
+                      },
+                      "value": {
+                        "type": "number",
+                        "title": "Value"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "title": "Multiply by value",
+                    "required": [
+                      "@type",
+                      "value"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "const": "mul_image"
+                      },
+                      "image": {
+                        "type": "string",
+                        "x-styx-type": "file",
+                        "title": "Image"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "title": "Multiply by image",
+                    "required": [
+                      "@type",
+                      "image"
+                    ]
+                  }
+                ],
                 "title": "Multiply",
-                "description": "Multiply current image by following input"
+                "description": "Multiply current image by following input (a number or an image)"
               }
             },
             "additionalProperties": false,
