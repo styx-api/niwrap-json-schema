@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "PrintHeader",
-  "description": "A utility to print header information from an image file.",
+  "description": "Prints header information from a medical image file. When called with only an image, prints a full header dump including dimensions, bounding box, origin, spacing, intensity range and mean, canonical orientation code, direction cosine matrix, and all image metadata. When called with a specific information code, prints only that property.",
   "type": "object",
   "properties": {
     "@type": {
@@ -11,7 +11,7 @@
       "type": "string",
       "x-styx-type": "file",
       "title": "Image",
-      "description": "The image file to extract header information from. Supported extension: .ext."
+      "description": "Input image file (any format supported by ITK, e.g. NIfTI, NRRD, MetaImage). Supports 1D through 5D images."
     },
     "what_information": {
       "anyOf": [
@@ -31,7 +31,7 @@
       ],
       "default": null,
       "title": "What Information",
-      "description": "Specify the type of information to print: 0 for origin, 1 for spacing, 2 for size, 3 for index, 4 for direction."
+      "description": "Specify which header field to print: 0 = origin, 1 = spacing, 2 = size, 3 = index, 4 = direction. Values are printed as 'x'-delimited strings. If omitted, prints a full header dump."
     }
   },
   "additionalProperties": false,
