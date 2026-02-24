@@ -279,18 +279,24 @@
               "type": "object",
               "properties": {
                 "@type": {
+                  "const": "gaussianNoParams"
+                }
+              },
+              "additionalProperties": false,
+              "title": "Gaussian no params",
+              "description": "Gaussian interpolation.",
+              "required": [
+                "@type"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
                   "const": "gaussian"
                 },
                 "sigma": {
-                  "anyOf": [
-                    {
-                      "type": "number"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
-                  "default": null,
+                  "type": "number",
                   "title": "Sigma",
                   "description": "Sigma value."
                 },
@@ -312,6 +318,21 @@
               "title": "Gaussian",
               "description": "Gaussian interpolation.",
               "required": [
+                "@type",
+                "sigma"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "const": "bsplineNoParams"
+                }
+              },
+              "additionalProperties": false,
+              "title": "BSpline no params",
+              "description": "BSpline interpolation.",
+              "required": [
                 "@type"
               ]
             },
@@ -322,15 +343,7 @@
                   "const": "bspline"
                 },
                 "order": {
-                  "anyOf": [
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
-                  "default": null,
+                  "type": "integer",
                   "title": "Order",
                   "description": "Order value."
                 }
@@ -339,7 +352,8 @@
               "title": "BSpline",
               "description": "BSpline interpolation.",
               "required": [
-                "@type"
+                "@type",
+                "order"
               ]
             },
             {
@@ -402,18 +416,24 @@
               "type": "object",
               "properties": {
                 "@type": {
+                  "const": "genericLabelNoParams"
+                }
+              },
+              "additionalProperties": false,
+              "title": "Generic label no params",
+              "description": "Generic label interpolation.",
+              "required": [
+                "@type"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@type": {
                   "const": "genericLabel"
                 },
                 "interpolator": {
-                  "anyOf": [
-                    {
-                      "type": "string"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
-                  "default": null,
+                  "type": "string",
                   "title": "Interpolator",
                   "description": "Interpolator value."
                 }
@@ -422,7 +442,8 @@
               "title": "Generic label",
               "description": "Generic label interpolation.",
               "required": [
-                "@type"
+                "@type",
+                "interpolator"
               ]
             }
           ]
