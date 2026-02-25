@@ -7,21 +7,21 @@
     "@type": {
       "const": "freesurfer/mri_robust_template"
     },
-    "mov_files": {
+    "mov": {
       "type": "array",
       "items": {
         "type": "string",
         "x-styx-type": "file"
       },
-      "title": "Movable volumes",
-      "description": "Input movable volumes to be aligned to common mean/median template."
+      "title": "Movable Volumes",
+      "description": "Input movable volumes to be aligned to common mean/median template (at least 2 required)."
     },
-    "template_file": {
+    "template": {
       "type": "string",
-      "title": "Template file",
+      "title": "Template Output",
       "description": "Output template volume (final mean/median image)."
     },
-    "sat_value": {
+    "sat": {
       "anyOf": [
         {
           "type": "number"
@@ -31,16 +31,16 @@
         }
       ],
       "default": null,
-      "title": "Outlier sensitivity",
+      "title": "Outlier Sensitivity",
       "description": "Set outlier sensitivity manually. Higher values mean less sensitivity."
     },
-    "satit_flag": {
+    "satit": {
       "type": "boolean",
       "default": false,
-      "title": "Auto-detect sensitivity",
+      "title": "Auto-detect Sensitivity",
       "description": "Auto-detect good sensitivity (recommended for head or full brain scans)."
     },
-    "lta_files": {
+    "lta": {
       "anyOf": [
         {
           "type": "array",
@@ -53,10 +53,10 @@
         }
       ],
       "default": null,
-      "title": "Output transforms",
-      "description": "Output transforms to template (for each input)."
+      "title": "Output Transforms",
+      "description": "Output LTA transforms to template (one per input volume)."
     },
-    "mapmov_files": {
+    "mapmov": {
       "anyOf": [
         {
           "type": "array",
@@ -69,10 +69,10 @@
         }
       ],
       "default": null,
-      "title": "Resampled images",
-      "description": "Output images: map and resample each input to template."
+      "title": "Mapped Movables",
+      "description": "Output mapped and resampled images in template space (one per input volume)."
     },
-    "mapmovhdr_files": {
+    "mapmovhdr": {
       "anyOf": [
         {
           "type": "array",
@@ -85,10 +85,10 @@
         }
       ],
       "default": null,
-      "title": "Header-adjusted images",
-      "description": "Output images: header-adjusted movables (no resampling)."
+      "title": "Header-adjusted Movables",
+      "description": "Output header-adjusted movable images (no resampling, only vox2ras adjusted)."
     },
-    "weights_files": {
+    "weights": {
       "anyOf": [
         {
           "type": "array",
@@ -101,16 +101,16 @@
         }
       ],
       "default": null,
-      "title": "Outlier weights",
-      "description": "Output weights (outliers) in target space."
+      "title": "Outlier Weights",
+      "description": "Output weight volumes in template space (0=regular, 1=outlier)."
     },
-    "oneminusw_flag": {
+    "oneminusw": {
       "type": "boolean",
       "default": false,
-      "title": "Invert outlier weights",
-      "description": "Weights (outlier) map will be inverted (0=outlier), as in earlier versions."
+      "title": "Invert Weights",
+      "description": "Invert outlier weight map (0=outlier), as in earlier versions."
     },
-    "average_type": {
+    "average": {
       "anyOf": [
         {
           "type": "integer"
@@ -120,8 +120,8 @@
         }
       ],
       "default": null,
-      "title": "Template average type",
-      "description": "Construct template from: 0 Mean, 1 Median (default)."
+      "title": "Average Type",
+      "description": "Construct template from: 0=mean, 1=median (default 1)."
     },
     "inittp": {
       "anyOf": [
@@ -133,28 +133,45 @@
         }
       ],
       "default": null,
-      "title": "Initial TP",
-      "description": "Use TP# for spatial init (default random), 0: no init."
+      "title": "Initial Timepoint",
+      "description": "Use timepoint number for spatial initialization (default: random). 0 constructs template from original volumes without initialization."
     },
-    "fixtp_flag": {
+    "fixtp": {
       "type": "boolean",
       "default": false,
-      "title": "Fix initial TP",
-      "description": "Map everything to init TP# (init TP is not resampled)."
+      "title": "Fix Timepoint",
+      "description": "Map everything to initial timepoint (init TP is not resampled)."
     },
-    "iscale_flag": {
+    "iscale": {
       "type": "boolean",
       "default": false,
-      "title": "Intensity scaling",
-      "description": "Allow also intensity scaling (default off)."
+      "title": "Intensity Scaling",
+      "description": "Enable intensity scaling (default off)."
     },
-    "iscaleonly_flag": {
+    "iscaleonly": {
       "type": "boolean",
       "default": false,
-      "title": "Intensity scaling only",
-      "description": "Only perform iscale (no transformation, default off)."
+      "title": "Intensity Scaling Only",
+      "description": "Only perform intensity scaling (no spatial transformation)."
     },
-    "iscalein_files": {
+    "iscalein": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-styx-type": "file"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Initial Intensity Scales",
+      "description": "Input initial intensity scale files."
+    },
+    "iscaleout": {
       "anyOf": [
         {
           "type": "array",
@@ -167,43 +184,28 @@
         }
       ],
       "default": null,
-      "title": "Initial intensity scales",
-      "description": "Use initial intensity scales."
+      "title": "Output Intensity Scales",
+      "description": "Output final intensity scale files (will activate --iscale)."
     },
-    "iscaleout_files": {
-      "anyOf": [
-        {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "default": null,
-      "title": "Final intensity scales",
-      "description": "Output final intensity scales (will activate --iscale)."
-    },
-    "transonly_flag": {
+    "transonly": {
       "type": "boolean",
       "default": false,
-      "title": "Translation only",
+      "title": "Translation Only",
       "description": "Find 3 parameter translation only."
     },
-    "affine_flag": {
+    "affine": {
       "type": "boolean",
       "default": false,
-      "title": "Affine transform",
+      "title": "Affine Transform",
       "description": "Find 12 parameter affine transform."
     },
-    "ixforms_files": {
+    "ixforms": {
       "anyOf": [
         {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "x-styx-type": "file"
           }
         },
         {
@@ -211,15 +213,16 @@
         }
       ],
       "default": null,
-      "title": "Initial transforms",
-      "description": "Use initial transforms (lta) on source ('id'=identity)."
+      "title": "Initial Transforms",
+      "description": "Use initial LTA transforms on source ('id' for identity)."
     },
-    "masks_files": {
+    "masks": {
       "anyOf": [
         {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "x-styx-type": "file"
           }
         },
         {
@@ -227,25 +230,25 @@
         }
       ],
       "default": null,
-      "title": "Input masks",
-      "description": "Input masks applied to movables."
+      "title": "Input Masks",
+      "description": "Input mask volumes applied to movable images."
     },
-    "vox2vox_flag": {
+    "vox2vox": {
       "type": "boolean",
       "default": false,
-      "title": "VOX2VOX output",
-      "description": "Output VOX2VOX lta file (default is RAS2RAS)."
+      "title": "Vox2Vox Output",
+      "description": "Output VOX2VOX LTA file (default is RAS2RAS)."
     },
-    "leastsquares_flag": {
+    "leastsquares": {
       "type": "boolean",
       "default": false,
-      "title": "Least squares",
+      "title": "Least Squares",
       "description": "Use least squares instead of robust M-estimator (for testing only)."
     },
-    "noit_flag": {
+    "noit": {
       "type": "boolean",
       "default": false,
-      "title": "No iteration",
+      "title": "No Iteration",
       "description": "Do not iterate, just create first template."
     },
     "maxit": {
@@ -258,8 +261,8 @@
         }
       ],
       "default": null,
-      "title": "Max iterations",
-      "description": "Iterate max # times (if #tp>2 default 6, else 5 for 2tp reg.)."
+      "title": "Max Iterations",
+      "description": "Maximum number of template iterations (default: 6 if >2 timepoints, 5 otherwise)."
     },
     "highit": {
       "anyOf": [
@@ -271,8 +274,8 @@
         }
       ],
       "default": null,
-      "title": "High resolution max iterations",
-      "description": "Iterate max # times on highest resolution (default 5)."
+      "title": "High Resolution Iterations",
+      "description": "Maximum number of iterations on highest resolution (default: -1, use maxit)."
     },
     "epsit": {
       "anyOf": [
@@ -284,8 +287,8 @@
         }
       ],
       "default": null,
-      "title": "Iteration stop threshold",
-      "description": "Stop iterations when all transform updates fall below the specified value."
+      "title": "Iteration Convergence Threshold",
+      "description": "Stop template iterations when all transform updates fall below this value (default: -1.0, disabled)."
     },
     "pairmaxit": {
       "anyOf": [
@@ -297,8 +300,8 @@
         }
       ],
       "default": null,
-      "title": "Pairwise max iterations",
-      "description": "Iterate max # times (default 5) for individual pairwise registrations."
+      "title": "Pairwise Max Iterations",
+      "description": "Maximum number of iterations for pairwise registrations (default: 5)."
     },
     "pairepsit": {
       "anyOf": [
@@ -310,8 +313,8 @@
         }
       ],
       "default": null,
-      "title": "Pairwise iteration stop threshold",
-      "description": "Stop individual pairwise registration iterations when transform updates fall below the specified value."
+      "title": "Pairwise Convergence Threshold",
+      "description": "Stop pairwise registration iterations when transform updates fall below this value (default: 0.01)."
     },
     "subsample": {
       "anyOf": [
@@ -323,38 +326,38 @@
         }
       ],
       "default": null,
-      "title": "Subsample threshold",
-      "description": "Subsample if dimension > specified value on all axes (default no subsampling)."
+      "title": "Subsample Threshold",
+      "description": "Subsample if voxel dimension exceeds this value on all axes (default: -1, disabled)."
     },
-    "nomulti_flag": {
+    "nomulti": {
       "type": "boolean",
       "default": false,
-      "title": "Disable multi-resolution",
-      "description": "Do not use multi-resolution (only highest resolution)."
+      "title": "Disable Multi-resolution",
+      "description": "Do not use multi-resolution (process highest resolution only)."
     },
-    "floattype_flag": {
+    "floattype": {
       "type": "boolean",
       "default": false,
-      "title": "Convert to float",
+      "title": "Convert to Float",
       "description": "Convert images to float internally (default: keep input type)."
     },
-    "finalnearest_flag": {
+    "finalnearest": {
       "type": "boolean",
       "default": false,
-      "title": "Nearest neighbor interpolation",
-      "description": "Use nearest neighbor in final interpolation when creating average."
+      "title": "Nearest Neighbor Interpolation",
+      "description": "Use nearest neighbor interpolation when creating the final average."
     },
-    "doubleprec_flag": {
+    "doubleprec": {
       "type": "boolean",
       "default": false,
-      "title": "Double precision",
+      "title": "Double Precision",
       "description": "Use double precision instead of float internally (large memory usage)."
     },
-    "cras_flag": {
+    "cras": {
       "type": "boolean",
       "default": false,
       "title": "Center at CRAS",
-      "description": "Center template at average CRAS, instead of average barycenter."
+      "description": "Center template at average CRAS instead of average barycenter."
     },
     "res_thresh": {
       "anyOf": [
@@ -366,8 +369,8 @@
         }
       ],
       "default": null,
-      "title": "Resolution threshold",
-      "description": "Volume resolution threshold (default is 0.01 mm)."
+      "title": "Resolution Threshold",
+      "description": "Volume resolution threshold in mm (default: 0.01)."
     },
     "frobnorm_thresh": {
       "anyOf": [
@@ -379,20 +382,65 @@
         }
       ],
       "default": null,
-      "title": "Frobenius norm threshold",
-      "description": "Matrix frobenius norm threshold (default is 0.0001)."
+      "title": "Frobenius Norm Threshold",
+      "description": "Matrix Frobenius norm threshold (default: 0.0001)."
     },
-    "debug_flag": {
+    "conform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Conform Template",
+      "description": "Output conformed template (256^3, 1mm isotropic voxels)."
+    },
+    "seed": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Random Seed",
+      "description": "Set random seed for target selection (default: 0)."
+    },
+    "allow_diff_vox_size": {
       "type": "boolean",
       "default": false,
-      "title": "Debug mode",
-      "description": "Show debug output (default no debug output)."
+      "title": "Allow Different Voxel Sizes",
+      "description": "Allow input volumes with different voxel sizes."
+    },
+    "threads": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Threads",
+      "description": "Set number of OpenMP threads."
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false,
+      "title": "Debug Mode",
+      "description": "Show debug output."
     }
   },
   "additionalProperties": false,
   "required": [
-    "mov_files",
-    "template_file",
+    "mov",
+    "template",
     "@type"
   ]
 }
