@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@Quiet_Talkers",
+  "description": "A script to find and kill AFNI processes",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@Quiet_Talkers"
+    },
+    "sudo": {
+      "type": "boolean",
+      "description": "Invoke higher powers to kill processes that you do not own",
+      "title": "Sudo flag",
+      "default": false
+    },
+    "prog": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Instead of the default program list, only kill the specified program. You can use multiple -prog options",
+      "title": "Program list"
+    },
+    "npb_val": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Kill those programs using NIML port block NV",
+      "title": "NIML port block values"
+    },
+    "npb_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Kill those using NIML port blocks between NV0 and NV1",
+      "title": "NIML port block range"
+    },
+    "pif_key": {
+      "type": "string",
+      "description": "Kill those programs that have a string matching KEY_STRING in their commandline",
+      "title": "Key string"
+    },
+    "no_npb": {
+      "type": "boolean",
+      "description": "Kill any program in the list regardless of -npb options or -pif",
+      "title": "No NPB flag",
+      "default": false
+    },
+    "list": {
+      "type": "boolean",
+      "description": "Just list process numbers, don't run kill command",
+      "title": "List flag",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Do it quietly",
+      "title": "Quiet flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

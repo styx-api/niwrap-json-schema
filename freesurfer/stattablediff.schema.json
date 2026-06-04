@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "stattablediff",
+  "description": "Creates a table of the differences between two stats tables.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/stattablediff"
+    },
+    "t1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input table 1 (output of asegstats2table or aparcstats2table)",
+      "title": "Input Table 1"
+    },
+    "t2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input table 2 (output of asegstats2table or aparcstats2table)",
+      "title": "Input Table 2"
+    },
+    "output": {
+      "type": "string",
+      "description": "Output file for the table of differences",
+      "title": "Output File"
+    },
+    "percent_diff": {
+      "type": "boolean",
+      "description": "Compute percent difference with respect to mean of tables",
+      "title": "Percent Difference",
+      "default": false
+    },
+    "percent_diff_t1": {
+      "type": "boolean",
+      "description": "Compute percent difference with respect to table 1",
+      "title": "Percent Difference Table 1",
+      "default": false
+    },
+    "percent_diff_t2": {
+      "type": "boolean",
+      "description": "Compute percent difference with respect to table 2",
+      "title": "Percent Difference Table 2",
+      "default": false
+    },
+    "multiply": {
+      "type": "number",
+      "description": "Multiply by mulval",
+      "title": "Multiply"
+    },
+    "divide": {
+      "type": "number",
+      "description": "Divide by divval",
+      "title": "Divide"
+    },
+    "common": {
+      "type": "boolean",
+      "description": "Compute difference on common segments (may reorder)",
+      "title": "Common Segments",
+      "default": false
+    },
+    "remove_exvivo": {
+      "type": "boolean",
+      "description": "Remove the string '_exvivo' from the column header",
+      "title": "Remove Exvivo",
+      "default": false
+    },
+    "diff_subjects": {
+      "type": "boolean",
+      "description": "Compare subjects with different names",
+      "title": "Different Subjects",
+      "default": false
+    },
+    "noreplace53": {
+      "type": "boolean",
+      "description": "Do not replace 5.3 structure names with later names",
+      "title": "No Replace 5.3 Names",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "t1",
+    "t2",
+    "output"
+  ]
+}

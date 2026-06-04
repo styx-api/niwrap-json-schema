@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsJointLabelFusion.sh",
+  "description": "The antsJointLabelFusion script is used for performing label fusion using multiple atlases to improve segmentation accuracy.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsJointLabelFusion.sh"
+    },
+    "dimensionality": {
+      "enum": [
+        2,
+        3
+      ],
+      "description": "Image dimensionality (2 or 3).",
+      "title": "Dimensionality"
+    },
+    "output": {
+      "type": "string",
+      "description": "Root directory for the output segmentation.",
+      "title": "Output"
+    },
+    "atlas_image_mrf": {
+      "type": "string",
+      "description": "Atlas image(s) to be used for MRF initialization.",
+      "title": "Atlas image for MRF"
+    },
+    "atlas_segmentation_mrf": {
+      "type": "string",
+      "description": "Atlas segmentation(s) to be used for MRF initialization.",
+      "title": "Atlas segmentation for MRF"
+    },
+    "rigid_transform": {
+      "type": "string",
+      "description": "Rigid transform initialization.",
+      "title": "Rigid transform"
+    },
+    "similarity_metric": {
+      "type": "string",
+      "description": "Metric used for calculating similarity.",
+      "title": "Similarity metric"
+    },
+    "other_options": {
+      "type": "string",
+      "description": "Additional options for label fusion.",
+      "title": "Other options"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose output.",
+      "title": "Verbose"
+    },
+    "target_image": {
+      "type": "string",
+      "description": "Image to segment.",
+      "title": "Target image"
+    },
+    "mask_image": {
+      "type": "string",
+      "description": "Mask image.",
+      "title": "Mask image"
+    },
+    "rigid_transform_additional_options": {
+      "type": "string",
+      "description": "Additional options for rigid transform.",
+      "title": "Rigid transform additional options"
+    },
+    "similarity_metric_additional_options": {
+      "type": "string",
+      "description": "Additional options for similarity metric.",
+      "title": "Similarity metric additional options"
+    }
+  },
+  "required": [
+    "@type",
+    "target_image",
+    "mask_image"
+  ]
+}

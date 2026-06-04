@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@animal_warper",
+  "description": "Align a subject structural dataset to a template and perform several post-alignment operations",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@animal_warper"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "input dataset to align to base template",
+      "title": "Input File"
+    },
+    "base_template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "base dataset (template) to align with",
+      "title": "Base Template"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "output directory where all processing will be performed",
+      "title": "Output Directory"
+    },
+    "brainmask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "provide a brainmask in the base template space",
+      "title": "Brainmask"
+    },
+    "atlases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "one or more atlas datasets in the base volume space",
+      "title": "Atlas Datasets"
+    },
+    "atlas_followers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "one or more atlas datasets in the base volume space",
+      "title": "Atlas Followers"
+    },
+    "seg_followers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "one or more segmentation datasets in the base volume space",
+      "title": "Segmentation Followers"
+    },
+    "template_followers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "one or more datasets in the template volume space",
+      "title": "Template Followers"
+    },
+    "dset_followers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "one or more datasets in the input volume space",
+      "title": "Dataset Followers"
+    },
+    "roidset_followers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "one or more (int-valued) datasets in the input volume space",
+      "title": "ROIDSET Followers"
+    },
+    "input_abbrev": {
+      "type": "string",
+      "description": "specify abbreviation for input dataset",
+      "title": "Input Abbreviation"
+    },
+    "base_abbrev": {
+      "type": "string",
+      "description": "specify abbreviation for base dataset",
+      "title": "Base Abbreviation"
+    },
+    "atlas_abbrevs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "specify an abbreviation for each atlas follower dataset",
+      "title": "Atlas Abbreviations"
+    },
+    "template_abbrevs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "specify an abbreviation for each template follower dataset",
+      "title": "Template Abbreviations"
+    },
+    "seg_abbrevs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "specify an abbreviation for each segmentation follower dataset",
+      "title": "Segmentation Abbreviations"
+    },
+    "dset_abbrevs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "specify an abbreviation for each dataset follower dataset",
+      "title": "Dataset Abbreviations"
+    },
+    "roidset_abbrevs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "specify an abbreviation for each ROI dataset follower dataset",
+      "title": "ROI Dataset Abbreviations"
+    },
+    "align_centers_meth": {
+      "type": "string",
+      "description": "center alignment method to use",
+      "title": "Align Centers Method"
+    },
+    "aff_move_opt": {
+      "type": "string",
+      "description": "alignment movement options for affine alignment step",
+      "title": "Affine Move Options"
+    },
+    "cost": {
+      "type": "string",
+      "description": "cost function for affine and nonlinear alignment",
+      "title": "Cost Function"
+    },
+    "maxlev": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 11,
+      "description": "Max level for nonlinear warping. Final patch size is determined based on this value.",
+      "title": "Maximum Level"
+    },
+    "no_surfaces": {
+      "type": "boolean",
+      "description": "Do not make surfaces for atlas regions in native space.",
+      "title": "No Surfaces Flag",
+      "default": false
+    },
+    "feature_size": {
+      "type": "number",
+      "description": "Set feature size for affine alignment (in mm)",
+      "title": "Feature Size"
+    },
+    "supersize": {
+      "type": "boolean",
+      "description": "Allow up to 50% size difference between subject and template",
+      "title": "Supersize Flag",
+      "default": false
+    },
+    "init_scale": {
+      "type": "number",
+      "description": "Approximate length ratio of input to template for initial scaling",
+      "title": "Initial Scale"
+    },
+    "mode_smooth_size": {
+      "type": "number",
+      "description": "Modal smoothing kernel size in voxels",
+      "title": "Modal Smoothing Size"
+    },
+    "mode_smooth_replacement_off": {
+      "type": "boolean",
+      "description": "Turn off replacement in modal smoothing",
+      "title": "Mode Smooth Replacement Off Flag",
+      "default": false
+    },
+    "center_out": {
+      "type": "string",
+      "description": "Center native-space output to native original space or template space center-shifted",
+      "title": "Center Output"
+    },
+    "align_type": {
+      "type": "string",
+      "description": "Specify level of alignment",
+      "title": "Align Type"
+    },
+    "extra_qw_opts": {
+      "type": "string",
+      "description": "Additional options to add to existing options for 3dQwarp",
+      "title": "Additional 3dQwarp Options"
+    },
+    "keep_temp": {
+      "type": "boolean",
+      "description": "Keep temporary files including awpy directory and other intermediate datasets",
+      "title": "Keep Temporary Files Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Display the program version",
+      "title": "Version Flag",
+      "default": false
+    },
+    "ok_to_exist": {
+      "type": "boolean",
+      "description": "Reuse and do not overwrite existing datasets",
+      "title": "OK to Exist Flag",
+      "default": false
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Copy all commands being run into the terminal",
+      "title": "Echo Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "base_template",
+    "output_dir"
+  ]
+}

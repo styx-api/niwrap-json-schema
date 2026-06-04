@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_mat_tableize.py",
+  "description": "Make tables for AFNI group analysis programs from 3dNetCorr (*.netcc) and 3dTrackID (*.grid) outputs, with optional additional subject information from CSV files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_mat_tableize.py"
+    },
+    "input_matrices": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Names of *.netcc or *.grid files with matrices to be used to make table; can be provided using wildcard chars.",
+      "title": "Input Matrices"
+    },
+    "input_csv": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of a CSV file to include in the table. The first column must have subject ID labels that match with the input matrix files.",
+      "title": "Input CSV"
+    },
+    "input_list": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing paths to subject matrices and optionally CSV IDs for matching.",
+      "title": "Input List File"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Output basename for the table and log files. Suffix and file extensions will be added for the outputs.",
+      "title": "Output Prefix"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of matrices to be included in the table, identified by their parameter name.",
+      "title": "List of Parameters"
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Display current version.",
+      "title": "Show Version",
+      "default": false
+    },
+    "date": {
+      "type": "boolean",
+      "description": "Display release/editing date of current version.",
+      "title": "Show Date",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help in terminal.",
+      "title": "Show Help",
+      "default": false
+    },
+    "help_short": {
+      "type": "boolean",
+      "description": "Display help in terminal (short flag).",
+      "title": "Show Help (Short Flag)",
+      "default": false
+    },
+    "help_view": {
+      "type": "boolean",
+      "description": "Display help in a separate text editor.",
+      "title": "Show Help in Editor",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_matrices",
+    "output_prefix"
+  ]
+}

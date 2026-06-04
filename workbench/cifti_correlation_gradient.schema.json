@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CORRELATE CIFTI ROWS AND TAKE GRADIENT",
+  "description": "For each structure, compute the correlation of the rows in the structure, and take the gradients of the resulting rows, then average them.  Memory limit does not need to be an integer, you may also specify 0 to use as little memory as possible (this may be very slow).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_correlation_gradient"
+    },
+    "cifti": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input cifti"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "the output cifti"
+    },
+    "left_surface": {
+      "type": "object",
+      "properties": {
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the left surface file"
+        },
+        "left_corrected_areas": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "vertex areas to use instead of computing them from the left surface"
+        }
+      },
+      "required": [
+        "surface"
+      ],
+      "description": "specify the left surface to use"
+    },
+    "right_surface": {
+      "type": "object",
+      "properties": {
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the right surface file"
+        },
+        "right_corrected_areas": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "vertex areas to use instead of computing them from the right surface"
+        }
+      },
+      "required": [
+        "surface"
+      ],
+      "description": "specify the right surface to use"
+    },
+    "cerebellum_surface": {
+      "type": "object",
+      "properties": {
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the cerebellum surface file"
+        },
+        "cerebellum_corrected_areas": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "vertex areas to use instead of computing them from the cerebellum surface"
+        }
+      },
+      "required": [
+        "surface"
+      ],
+      "description": "specify the cerebellum surface to use"
+    },
+    "surface_presmooth": {
+      "type": "number",
+      "description": "smooth on the surface before computing the gradient"
+    },
+    "volume_presmooth": {
+      "type": "number",
+      "description": "smooth the volume before computing the gradient"
+    },
+    "presmooth_fwhm": {
+      "type": "boolean",
+      "description": "smoothing kernel sizes are FWHM, not sigma",
+      "default": false
+    },
+    "undo_fisher_z": {
+      "type": "boolean",
+      "description": "apply the inverse fisher small z transform to the input",
+      "default": false
+    },
+    "fisher_z": {
+      "type": "boolean",
+      "description": "apply the fisher small z transform to the correlations before taking the gradient",
+      "default": false
+    },
+    "surface_exclude": {
+      "type": "number",
+      "description": "exclude vertices near each seed vertex from computation"
+    },
+    "volume_exclude": {
+      "type": "number",
+      "description": "exclude voxels near each seed voxel from computation"
+    },
+    "covariance": {
+      "type": "boolean",
+      "description": "compute covariance instead of correlation",
+      "default": false
+    },
+    "mem_limit": {
+      "type": "number",
+      "description": "restrict memory usage"
+    },
+    "double_correlation": {
+      "type": "object",
+      "properties": {
+        "fisher_z_first": {
+          "type": "boolean",
+          "description": "after the FIRST correlation, apply fisher small z transform (ie, artanh)",
+          "default": false
+        },
+        "no_demean_first": {
+          "type": "boolean",
+          "description": "instead of correlation for the FIRST operation, do dot product of rows, then normalize by diagonal",
+          "default": false
+        },
+        "covariance_first": {
+          "type": "boolean",
+          "description": "instead of correlation for the FIRST operation, compute covariance",
+          "default": false
+        }
+      },
+      "description": "do two correlations before taking the gradient"
+    }
+  },
+  "required": [
+    "@type",
+    "cifti",
+    "cifti_out"
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IsoSurface",
+  "description": "A program to perform isosurface extraction from a volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/IsoSurface"
+    },
+    "input_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume file.",
+      "title": "Input Volume"
+    },
+    "shape_spec": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Built-in shape specification.",
+      "title": "Shape Specification"
+    },
+    "isorois": {
+      "type": "boolean",
+      "description": "Create isosurface for each unique value in the input volume.",
+      "title": "Isosurface for unique values",
+      "default": false
+    },
+    "isoval": {
+      "type": "string",
+      "description": "Create isosurface where volume = V.",
+      "title": "Isoval"
+    },
+    "isorange": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Create isosurface where V0 <= volume < V1.",
+      "title": "Isorange"
+    },
+    "isocmask": {
+      "type": "string",
+      "description": "Create isosurface where MASK_COM != 0.",
+      "title": "Isocmask"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix of output surface file.",
+      "title": "Output Prefix"
+    },
+    "tsmooth": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Smooth resultant surface using Taubin smoothing with parameters KPB and NITER.",
+      "title": "Taubin Smoothing"
+    },
+    "debug": {
+      "type": "string",
+      "description": "Debug levels of 0 (default), 1, 2, 3.",
+      "title": "Debug"
+    },
+    "autocrop": {
+      "type": "boolean",
+      "description": "Crop input volume before extraction.",
+      "title": "Autocrop",
+      "default": false
+    },
+    "remesh": {
+      "type": "string",
+      "description": "Remesh the surface(s).",
+      "title": "Remesh"
+    },
+    "xform": {
+      "type": "string",
+      "description": "Transform to apply to volume values before extracting.",
+      "title": "Transform"
+    },
+    "novolreg": {
+      "type": "boolean",
+      "description": "Ignore any Rotate, Volreg, Tagalign, or WarpDrive transformations.",
+      "title": "No Volreg Transform",
+      "default": false
+    },
+    "noxform": {
+      "type": "boolean",
+      "description": "Same as -novolreg.",
+      "title": "No Transform",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

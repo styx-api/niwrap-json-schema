@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "warpinvert",
+  "description": "Invert a non-linear warp field.\n\nBy default, this command assumes that the input warp field is a deformation field, i.e. each voxel stores the corresponding position in the other image (in scanner space), and the calculated output warp image will also be a deformation field. If the input warp field is instead a displacment field, i.e. where each voxel stores an offset from which to sample the other image (but still in scanner space), then the -displacement option should be used; the output warp field will additionally be calculated as a displacement field in this case.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/warpinvert"
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "define a template image grid for the output warp",
+      "title": "template"
+    },
+    "displacement": {
+      "type": "boolean",
+      "description": "indicates that the input warp field is a displacement field; the output will also be a displacement field",
+      "title": "displacement",
+      "default": false
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input warp image.",
+      "title": "in"
+    },
+    "out": {
+      "type": "string",
+      "description": "the output warp image.",
+      "title": "out"
+    }
+  },
+  "required": [
+    "@type",
+    "in",
+    "out"
+  ]
+}

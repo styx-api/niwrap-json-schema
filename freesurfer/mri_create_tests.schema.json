@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_create_tests",
+  "description": "Creates test cases for the registration by mapping the input to a source (half way backward) and to a target (half way forward).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_create_tests"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume to be modified.",
+      "title": "Input File"
+    },
+    "out_src": {
+      "type": "string",
+      "description": "Output source volume name.",
+      "title": "Output Source"
+    },
+    "out_target": {
+      "type": "string",
+      "description": "Output target volume name.",
+      "title": "Output Target"
+    },
+    "input_target": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input target volume to be modified, must be in the same space as input volume. Default: use input volume to create output target.",
+      "title": "Input Target"
+    },
+    "lta_in": {
+      "type": "string",
+      "description": "Specify LTA for mapping input to output target. Cannot be used with --rotation or --translation.",
+      "title": "LTA In"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask source MRI with mask file.",
+      "title": "Mask File"
+    },
+    "noise": {
+      "type": "number",
+      "description": "Add global Gaussian noise.",
+      "title": "Noise"
+    },
+    "outlier": {
+      "type": "number",
+      "description": "Add random outlier voxels.",
+      "title": "Outlier"
+    },
+    "outlier_box": {
+      "type": "number",
+      "description": "Add box containing random voxels.",
+      "title": "Outlier Box"
+    },
+    "translation_flag": {
+      "type": "boolean",
+      "description": "Apply random translation.",
+      "title": "Translation Flag",
+      "default": false
+    },
+    "transdist": {
+      "type": "number",
+      "description": "Set maximal translation distance in mm. Default is 11.",
+      "title": "Max Translation Distance"
+    },
+    "rotation_flag": {
+      "type": "boolean",
+      "description": "Apply random rotation.",
+      "title": "Rotation Flag",
+      "default": false
+    },
+    "maxdeg": {
+      "type": "number",
+      "description": "Maximal rotation in degrees. Default is 25.",
+      "title": "Max Rotation Degrees"
+    },
+    "intensity_flag": {
+      "type": "boolean",
+      "description": "Apply random intensity scaling.",
+      "title": "Intensity Flag",
+      "default": false
+    },
+    "iscale": {
+      "type": "number",
+      "description": "Use fixed intensity scaling parameter.",
+      "title": "Intensity Scale"
+    },
+    "lta_out": {
+      "type": "string",
+      "description": "Write used random transform to LTA.",
+      "title": "LTA Out"
+    },
+    "lta_outs": {
+      "type": "string",
+      "description": "Write halfway LTA for source.",
+      "title": "LTA Outs"
+    },
+    "lta_outt": {
+      "type": "string",
+      "description": "Write halfway LTA for target.",
+      "title": "LTA Outt"
+    },
+    "iscale_out": {
+      "type": "string",
+      "description": "Write used intensity scaling parameter.",
+      "title": "Intensity Scale Out"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "out_src",
+    "out_target"
+  ]
+}

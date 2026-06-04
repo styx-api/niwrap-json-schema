@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "std2imgcoord",
+  "description": "Convert standard space coordinates to image space coordinates",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/std2imgcoord"
+    },
+    "filename_coordinates": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the filename containing coordinates or '-' to read from standard input",
+      "title": "Coordinate file"
+    },
+    "standard_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of standard image",
+      "title": "Standard Image"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input image",
+      "title": "Input Image"
+    },
+    "affine_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of affine transform (e.g. example_func2standard.mat)",
+      "title": "Affine Transform"
+    },
+    "warp_field": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of warpfield (e.g. highres2standard_warp.nii.gz)",
+      "title": "Warp Field"
+    },
+    "prewarp_affine_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of pre-warp affine transform (e.g. example_func2highres.mat). Defaults to identity matrix.",
+      "title": "Pre-warp Affine Transform"
+    },
+    "output_mm": {
+      "type": "boolean",
+      "description": "Outputs coordinates in mm (default)",
+      "title": "Output in mm",
+      "default": false
+    },
+    "output_vox": {
+      "type": "boolean",
+      "description": "Outputs coordinates in voxels",
+      "title": "Output in voxels",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose output",
+      "title": "Verbose output",
+      "default": false
+    },
+    "more_verbose": {
+      "type": "boolean",
+      "description": "More verbose output",
+      "title": "More verbose output",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "filename_coordinates",
+    "input_image"
+  ]
+}

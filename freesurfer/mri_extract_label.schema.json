@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_extract_label",
+  "description": "Extracts a set of labeled voxels from an image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_extract_label"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume from which to extract labels.",
+      "title": "Input Volume"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Labels to extract. Can include one or more labels.",
+      "title": "Labels"
+    },
+    "output_name": {
+      "type": "string",
+      "description": "Name of the output file.",
+      "title": "Output Name"
+    },
+    "gaussian_smoothing": {
+      "type": "number",
+      "description": "Apply a Gaussian smoothing kernel with sigma.",
+      "title": "Gaussian Smoothing"
+    },
+    "transform_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Apply the transform in xform file to the extracted volume.",
+      "title": "Transform File"
+    },
+    "exit_none_found": {
+      "type": "boolean",
+      "description": "Exit with error if none of the specified labels are found.",
+      "title": "Exit None Found Flag",
+      "default": false
+    },
+    "dilate": {
+      "type": "number",
+      "description": "Dilate the output volume n times.",
+      "title": "Dilate"
+    },
+    "erode": {
+      "type": "number",
+      "description": "Erode the output volume n times.",
+      "title": "Erode"
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "labels",
+    "output_name"
+  ]
+}

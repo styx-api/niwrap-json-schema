@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ScriptCheck",
+  "description": "Checks scripts for improperly terminated lines and optionally cleans them.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@ScriptCheck"
+    },
+    "clean": {
+      "type": "boolean",
+      "description": "Clean bad line breaks",
+      "title": "Clean Flag",
+      "default": false
+    },
+    "suffix": {
+      "type": "string",
+      "description": "Rename uncleaned file with specified suffix. Default is .uncln",
+      "title": "Suffix"
+    },
+    "scripts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Scripts to be checked for improperly terminated lines",
+      "title": "Script Files"
+    }
+  },
+  "required": [
+    "@type",
+    "scripts"
+  ]
+}

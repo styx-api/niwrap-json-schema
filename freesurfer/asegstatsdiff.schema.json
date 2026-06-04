@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "asegstatsdiff",
+  "description": "Compute and report percentage differences in aseg morphometry data between two subjects.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/asegstatsdiff"
+    },
+    "subject1": {
+      "type": "string",
+      "description": "The first subject to be compared.",
+      "title": "Subject 1"
+    },
+    "subject2": {
+      "type": "object",
+      "properties": {
+        "subject2": {
+          "type": "string",
+          "description": "The second subject to be compared.",
+          "title": "Subject 2"
+        },
+        "outdir": {
+          "type": "string",
+          "description": "Optionally specify a directory to write the output asegstats.txt.",
+          "title": "Output Directory"
+        }
+      },
+      "required": [
+        "subject2"
+      ]
+    }
+  },
+  "required": [
+    "@type",
+    "subject1",
+    "subject2"
+  ]
+}

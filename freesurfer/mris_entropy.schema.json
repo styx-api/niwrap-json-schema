@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_entropy",
+  "description": "Computes the entropy of a surface activation pattern for FreeSurfer",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_entropy"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject ID",
+      "title": "Subject"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere (e.g., lh or rh)",
+      "title": "Hemisphere"
+    },
+    "wfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Weight file for surface",
+      "title": "Weight File"
+    },
+    "curvfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Curvature file for input",
+      "title": "Curvature File"
+    },
+    "average_iterations": {
+      "type": "number",
+      "description": "Specify number of curvature averaging iterations (default=0)",
+      "title": "Curvature Averaging Iterations"
+    },
+    "normalize": {
+      "type": "boolean",
+      "description": "Normalize curvature before writing",
+      "title": "Normalize Curvature Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject",
+    "hemi",
+    "wfile",
+    "curvfile"
+  ]
+}

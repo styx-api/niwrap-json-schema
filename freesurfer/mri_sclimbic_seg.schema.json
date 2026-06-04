@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_sclimbic_seg",
+  "description": "Segment subcortical limbic structures using Freesurfer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_sclimbic_seg"
+    },
+    "input_file": {
+      "type": "string",
+      "description": "T1-w image(s) to segment. Can be a path to a single image or a directory of images.",
+      "title": "Input file"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Segmentation output (required if --i is provided). Must be the same type as the input path (a single file or directory).",
+      "title": "Output file"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Process a series of freesurfer recon-all subjects (enables subject-mode).",
+      "title": "Subjects"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Set the subjects directory (overrides the SUBJECTS_DIR env variable).",
+      "title": "Subjects directory"
+    },
+    "conform": {
+      "type": "boolean",
+      "description": "Resample input to 1mm-iso; results will be put back in native resolution.",
+      "title": "Conform flag",
+      "default": false
+    },
+    "etiv": {
+      "type": "boolean",
+      "description": "Include eTIV in volume stats (enabled by default in subject-mode and --tal).",
+      "title": "eTIV flag",
+      "default": false
+    },
+    "exclude_labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of label IDs to exclude in any output stats files.",
+      "title": "Exclude labels"
+    },
+    "keep_ac": {
+      "type": "boolean",
+      "description": "Explicitly keep anterior commissure in the volume/qa files.",
+      "title": "Keep anterior commissure",
+      "default": false
+    },
+    "vox_count_volumes": {
+      "type": "boolean",
+      "description": "Use discrete voxel count for label volumes.",
+      "title": "Voxel count volumes",
+      "default": false
+    },
+    "model_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alternative model weights to load.",
+      "title": "Model weights file"
+    },
+    "ctab_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alternative color lookup table to embed in segmentation. Must be minimal, including 0, and sorted.",
+      "title": "Color table file"
+    },
+    "population_stats": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alternative population volume stats for QA output.",
+      "title": "Population stats file"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Enable debug logging.",
+      "title": "Debug flag",
+      "default": false
+    },
+    "vmp": {
+      "type": "boolean",
+      "description": "Enable printing of vmpeak at the end.",
+      "title": "VMP flag",
+      "default": false
+    },
+    "threads": {
+      "type": "integer",
+      "description": "Number of threads to use. Default is 1.",
+      "title": "Threads"
+    },
+    "tal_xfm": {
+      "type": "string",
+      "description": "Alternative talairach xfm transform for estimating TIV. Can be file or suffix (for multiple inputs).",
+      "title": "Talairach transformation"
+    },
+    "write_posteriors": {
+      "type": "boolean",
+      "description": "Save the label posteriors.",
+      "title": "Write posteriors flag",
+      "default": false
+    },
+    "write_volumes": {
+      "type": "boolean",
+      "description": "Save label volume stats (enabled by default in subject-mode).",
+      "title": "Write volumes flag",
+      "default": false
+    },
+    "write_qa_stats": {
+      "type": "boolean",
+      "description": "Save QA stats (z and confidence).",
+      "title": "Write QA stats flag",
+      "default": false
+    },
+    "preprocess_7T": {
+      "type": "boolean",
+      "description": "Preprocess 7T images (just sets percentile to 99.9).",
+      "title": "Preprocess 7T",
+      "default": false
+    },
+    "percentile": {
+      "type": "number",
+      "description": "Use intensity percentile threshold for normalization.",
+      "title": "Percentile"
+    },
+    "cuda_device": {
+      "type": "string",
+      "description": "Cuda device for GPU support.",
+      "title": "CUDA device"
+    },
+    "output_base": {
+      "type": "string",
+      "description": "String to use in output file name; default is sclimbic.",
+      "title": "Output base"
+    },
+    "no_cite": {
+      "type": "boolean",
+      "description": "Do not cite sclimbic paper at the end.",
+      "title": "No cite flag",
+      "default": false
+    },
+    "nchannels": {
+      "type": "integer",
+      "description": "Number of channels",
+      "title": "Number of channels"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file"
+  ]
+}

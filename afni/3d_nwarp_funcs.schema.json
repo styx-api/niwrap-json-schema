@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dNwarpFuncs",
+  "description": "Compute functions of 3D warp displacements, such as bulk volume change, shear energy, and vorticity energy.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dNwarpFuncs"
+    },
+    "input_warp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "'www' is the name of the 3D warp dataset (mandatory option).",
+      "title": "Input Warp"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "'ppp' is the name of the new output dataset.",
+      "title": "Output Prefix"
+    },
+    "bulk_flag": {
+      "type": "boolean",
+      "description": "Compute the (fractional) bulk volume change (Jacobian determinant minus 1).",
+      "title": "Bulk Volume Change Flag",
+      "default": false
+    },
+    "shear_flag": {
+      "type": "boolean",
+      "description": "Compute the shear energy.",
+      "title": "Shear Energy Flag",
+      "default": false
+    },
+    "vorticity_flag": {
+      "type": "boolean",
+      "description": "Compute the vorticity energy.",
+      "title": "Vorticity Energy Flag",
+      "default": false
+    },
+    "all_flag": {
+      "type": "boolean",
+      "description": "Compute all 3 functions: bulk, shear, and vorticity.",
+      "title": "Compute All Functions",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_warp",
+    "output_prefix"
+  ]
+}

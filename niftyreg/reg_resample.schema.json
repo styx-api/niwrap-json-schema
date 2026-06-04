@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "reg_resample",
+  "description": "Tool for resampling floating images to the reference image space using different transformations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "niftyreg/reg_resample"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the reference image",
+      "title": "Reference Image"
+    },
+    "floating_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the floating image",
+      "title": "Floating Image"
+    },
+    "affine_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename which contains an affine transformation (Affine*Reference=Floating)",
+      "title": "Affine Transformation"
+    },
+    "flirt_affine_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename which contains a radiological flirt affine transformation",
+      "title": "Flirt Affine Transformation"
+    },
+    "control_point_grid": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the control point grid image (from reg_f3d)",
+      "title": "Control Point Grid"
+    },
+    "deformation_field": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the deformation field image (from reg_transform)",
+      "title": "Deformation Field"
+    },
+    "resampled_image": {
+      "type": "string",
+      "description": "Filename of the resampled image",
+      "title": "Resampled Image"
+    },
+    "resampled_blank": {
+      "type": "string",
+      "description": "Filename of the resampled blank grid",
+      "title": "Resampled Blank Grid"
+    },
+    "nearest_neighbor": {
+      "type": "boolean",
+      "description": "Use a Nearest Neighbor interpolation for the source resampling (cubic spline by default)",
+      "title": "Nearest Neighbor Interpolation",
+      "default": false
+    },
+    "linear_interpolation": {
+      "type": "boolean",
+      "description": "Use a Linear interpolation for the source resampling (cubic spline by default)",
+      "title": "Linear Interpolation",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "reference_image",
+    "floating_image"
+  ]
+}

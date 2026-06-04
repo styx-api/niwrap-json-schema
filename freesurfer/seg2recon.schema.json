@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "seg2recon",
+  "description": "Creates and populates a subjects directory from an input image and segmentation suitable for running recon-all.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/seg2recon"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Output subject directory name.",
+      "title": "Subject ID"
+    },
+    "segvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Aseg-type volume, e.g., from synthseg, fastsurfer, psacnn, samseg, or aseg.",
+      "title": "Segmentation volume"
+    },
+    "inputvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume as would be passed to recon-all.",
+      "title": "Input volume"
+    },
+    "ctab": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Color table for the segmentation. Uses embedded table if available, or FreeSurferColorLUT.txt if not specified.",
+      "title": "Color table"
+    },
+    "ndilate": {
+      "type": "number",
+      "description": "Dilate binarization of segmentation when creating brainmask. Default is 2.",
+      "title": "Dilate binarization"
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads to use for processing.",
+      "title": "Number of threads"
+    },
+    "force_update": {
+      "type": "boolean",
+      "description": "Force regeneration of files whether needed or not.",
+      "title": "Force update flag",
+      "default": false
+    },
+    "no_cc": {
+      "type": "boolean",
+      "description": "Do not segment corpus callosum.",
+      "title": "No corpus callosum flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use this mask as brainmask instead of computing from segmentation.",
+      "title": "Brainmask"
+    },
+    "headmask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use this headmask instead of running mri_seghead.",
+      "title": "Headmask"
+    },
+    "thresh": {
+      "type": "number",
+      "description": "Threshold for bias field estimation.",
+      "title": "Bias field threshold"
+    },
+    "expert": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to expert options file.",
+      "title": "Expert options file"
+    },
+    "rca": {
+      "type": "boolean",
+      "description": "Run recon-all on the output.",
+      "title": "Run recon-all",
+      "default": false
+    },
+    "no_bias_field_cor": {
+      "type": "boolean",
+      "description": "Do not compute or apply bias field correction.",
+      "title": "No bias field correction",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject",
+    "segvol",
+    "inputvol"
+  ]
+}

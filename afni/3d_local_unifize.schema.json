@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLocalUnifize",
+  "description": "This program generates a 'unifized' output volume by estimating the median in the local neighborhood of each voxel and using that to scale each voxel's brightness.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLocalUnifize"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Input dataset"
+    },
+    "output": {
+      "type": "string",
+      "description": "Output dataset name, including path",
+      "title": "Output dataset name"
+    },
+    "working_dir": {
+      "type": "string",
+      "description": "Name of temporary working directory (def: __wdir_LocalUni_, plus a random alphanumeric str)",
+      "title": "Working directory name"
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Run this program very verbosely (default: false)",
+      "title": "Verbose mode",
+      "default": false
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Do not remove the working directory (default: remove it)",
+      "title": "Do not remove working directory",
+      "default": false
+    },
+    "local_rad": {
+      "type": "number",
+      "description": "The spherical neighborhood's radius for the 3dLocalStat step (default: -3)",
+      "title": "Local radius"
+    },
+    "local_perc": {
+      "type": "number",
+      "description": "The percentile used in the 3dLocalStat step, generating the scaling volume (default: 50)",
+      "title": "Local percentile"
+    },
+    "local_mask": {
+      "type": "string",
+      "description": "Provide the masking option for the 3dLocalStat step; to remove any masking, put 'None' as the option value (default: \"-automask\")",
+      "title": "Local mask"
+    },
+    "filter_thr": {
+      "type": "number",
+      "description": "Ceiling on values in the final, scaled dataset; values <=0 turn off this final filtering (default: 1.5)",
+      "title": "Filter threshold"
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "output"
+  ]
+}

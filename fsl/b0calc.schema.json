@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "b0calc",
+  "description": "B0 field calculation program",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/b0calc"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input image (usually a tissue/air segmentation)",
+      "title": "Input file"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Filename of B0 output volume",
+      "title": "Output file"
+    },
+    "zero_order_x": {
+      "type": "number",
+      "description": "Value for zeroth-order x-gradient field (per mm); default=0",
+      "title": "Zeroth-order x-gradient"
+    },
+    "zero_order_y": {
+      "type": "number",
+      "description": "Value for zeroth-order y-gradient field (per mm); default=0",
+      "title": "Zeroth-order y-gradient"
+    },
+    "zero_order_z": {
+      "type": "number",
+      "description": "Value for zeroth-order z-gradient field (per mm); default=0",
+      "title": "Zeroth-order z-gradient"
+    },
+    "b0_x": {
+      "type": "number",
+      "description": "Value for zeroth-order B0 field (x-component); default=0",
+      "title": "Zeroth-order B0 x-component"
+    },
+    "b0_y": {
+      "type": "number",
+      "description": "Value for zeroth-order B0 field (y-component); default=0",
+      "title": "Zeroth-order B0 y-component"
+    },
+    "b0_z": {
+      "type": "number",
+      "description": "Value for zeroth-order B0 field (z-component); default=1",
+      "title": "Zeroth-order B0 z-component"
+    },
+    "delta": {
+      "type": "number",
+      "description": "Delta value (chi_tissue - chi_air); default=-9.45e-6",
+      "title": "Delta value"
+    },
+    "chi0": {
+      "type": "number",
+      "description": "Value for susceptibility of air; default=+4e-7",
+      "title": "Susceptibility of air"
+    },
+    "xyz_flag": {
+      "type": "boolean",
+      "description": "Calculate and save all 3 field components (i.e. x,y,z)",
+      "title": "XYZ field components flag",
+      "default": false
+    },
+    "extend_boundary": {
+      "type": "number",
+      "description": "Relative proportion to extend voxels at boundary; default=1",
+      "title": "Boundary extension proportion"
+    },
+    "direct_conv": {
+      "type": "boolean",
+      "description": "Use direct (image space) convolution, not FFT",
+      "title": "Direct convolution flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file"
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_defacer",
+  "description": "Tool for defacing MRI images to remove facial features",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_defacer"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume",
+      "title": "Input Volume"
+    },
+    "headmask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Head mask volume",
+      "title": "Head Mask"
+    },
+    "tempsurf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Template surface file",
+      "title": "Template Surface"
+    },
+    "templabel": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Template label, specify one or multiple labels",
+      "title": "Template Label"
+    },
+    "watermark": {
+      "type": "number",
+      "description": "Watermark density",
+      "title": "Watermark Density"
+    },
+    "defaced_volume": {
+      "type": "string",
+      "description": "Output defaced volume",
+      "title": "Defaced Volume"
+    },
+    "facemask": {
+      "type": "string",
+      "description": "Face mask volume",
+      "title": "Face Mask"
+    },
+    "fill_constants": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Constants for filling within/outside the mask",
+      "title": "Fill Constants"
+    },
+    "exclude_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask to exclude from defacing",
+      "title": "Exclude Mask"
+    },
+    "tempreg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Registration file to apply to surface",
+      "title": "Registration File"
+    },
+    "minsurfpath": {
+      "type": "string",
+      "description": "Output minimum surface path",
+      "title": "Minimum Surface Path"
+    },
+    "maxsurfpath": {
+      "type": "string",
+      "description": "Output maximum surface path",
+      "title": "Maximum Surface Path"
+    },
+    "distbounds": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with distance bounds for each label",
+      "title": "Distance Bounds Path"
+    },
+    "distoverlay": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Overlay file showing distance for each vertex",
+      "title": "Distance Overlay"
+    },
+    "distdat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with distances for each vertex",
+      "title": "Distance Data Path"
+    },
+    "statspath": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Statistics path for nxmask with means and modes",
+      "title": "Statistics Path"
+    },
+    "output_tempsurf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output template surface after watermark/ripple",
+      "title": "Output Template Surface"
+    },
+    "apply_to_volume": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Apply face mask and registration to another volume",
+      "title": "Apply to Volume"
+    },
+    "ripple_center": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Center of ripple effect",
+      "title": "Ripple Center"
+    },
+    "apply_ripple": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Apply ripple effect on surface",
+      "title": "Apply Ripple"
+    },
+    "diagnostic_level": {
+      "type": "number",
+      "description": "Set diagnostic level",
+      "title": "Diagnostic Level"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "checkopts": {
+      "type": "boolean",
+      "description": "Check options and exit without executing",
+      "title": "Check Options Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version and exit",
+      "title": "Version Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "headmask",
+    "tempsurf",
+    "defaced_volume"
+  ]
+}

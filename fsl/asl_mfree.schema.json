@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "asl_mfree",
+  "description": "ASL model-free analysis tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/asl_mfree"
+    },
+    "datafile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "ASL data file",
+      "title": "Data file"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file",
+      "title": "Mask file"
+    },
+    "out": {
+      "type": "string",
+      "description": "Output directory name",
+      "title": "Output directory"
+    },
+    "aif": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Arterial input functions for deconvolution (4D volume, one aif for each voxel within mask)",
+      "title": "Arterial input functions"
+    },
+    "dt": {
+      "type": "number",
+      "description": "Temporal spacing in data (s)",
+      "title": "Temporal spacing"
+    },
+    "metric": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Metric image file (optional)",
+      "title": "Metric image"
+    },
+    "mthresh": {
+      "type": "number",
+      "description": "Metric threshold (optional)",
+      "title": "Metric threshold"
+    },
+    "tcorrect": {
+      "type": "boolean",
+      "description": "Apply correction for timing difference between AIF and tissue curve (optional)",
+      "title": "Timing correction",
+      "default": false
+    },
+    "bata": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Arterial BAT image (optional)",
+      "title": "Arterial BAT image"
+    },
+    "batt": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Tissue BAT image (optional)",
+      "title": "Tissue BAT image"
+    },
+    "bat": {
+      "type": "boolean",
+      "description": "Estimate tissue BAT from data and save this image (optional)",
+      "title": "Estimate tissue BAT",
+      "default": false
+    },
+    "bat_grad_thr": {
+      "type": "number",
+      "description": "Edge detection gradient threshold (default: 0.2, optional)",
+      "title": "BAT gradient threshold"
+    },
+    "t1": {
+      "type": "number",
+      "description": "T1 (of blood) value (optional)",
+      "title": "T1 value"
+    },
+    "fa": {
+      "type": "number",
+      "description": "Flip angle (if using LL readout, optional)",
+      "title": "Flip angle"
+    },
+    "std": {
+      "type": "boolean",
+      "description": "Calculate standard deviations on perfusion values using wild bootstrapping (optional)",
+      "title": "Calculate standard deviations",
+      "default": false
+    },
+    "nwb": {
+      "type": "number",
+      "description": "Number of permutations for wild bootstrapping (optional)",
+      "title": "Number of permutations"
+    },
+    "turbo_quasar": {
+      "type": "boolean",
+      "description": "Specify this is a Turbo QUASAR Sequence (optional)",
+      "title": "Turbo QUASAR Sequence",
+      "default": false
+    },
+    "shift_factor": {
+      "type": "number",
+      "description": "Slice shifting factor in Turbo QUASAR (default value: 1, optional)",
+      "title": "Slice shifting factor"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Enable verbose mode",
+      "title": "Verbose mode",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "datafile",
+    "mask",
+    "out",
+    "aif",
+    "dt"
+  ]
+}

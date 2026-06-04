@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FILTER CLUSTERS BY AREA/VOLUME",
+  "description": "Outputs a cifti file with nonzero integers for all brainordinates within a large enough cluster, and zeros elsewhere.  The integers denote cluster membership (by default, first cluster found will use value 1, second cluster 2, etc).  Cluster values are not reused across maps of the output, but instead keep counting up.  The input cifti file must have a brain models mapping on the chosen dimension, columns for .dtseries, and either for .dconn.  The ROI should have a brain models mapping along columns, exactly matching the mapping of the chosen direction in the input file.  Data outside the ROI is ignored.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_find_clusters"
+    },
+    "cifti": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input cifti"
+    },
+    "surface_value_threshold": {
+      "type": "number",
+      "description": "threshold for surface data values"
+    },
+    "surface_minimum_area": {
+      "type": "number",
+      "description": "threshold for surface cluster area, in mm^2"
+    },
+    "volume_value_threshold": {
+      "type": "number",
+      "description": "threshold for volume data values"
+    },
+    "volume_minimum_size": {
+      "type": "number",
+      "description": "threshold for volume cluster size, in mm^3"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which dimension to use for spatial information, ROW or COLUMN"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "the output cifti"
+    },
+    "less_than": {
+      "type": "boolean",
+      "description": "find values less than <value-threshold>, rather than greater",
+      "default": false
+    },
+    "left_surface": {
+      "type": "object",
+      "properties": {
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the left surface file"
+        },
+        "corrected_areas": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "vertex areas to use instead of computing them from the surface"
+        }
+      },
+      "required": [
+        "surface"
+      ],
+      "description": "specify the left surface to use"
+    },
+    "right_surface": {
+      "type": "object",
+      "properties": {
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the right surface file"
+        },
+        "corrected_areas": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "vertex areas to use instead of computing them from the surface"
+        }
+      },
+      "required": [
+        "surface"
+      ],
+      "description": "specify the right surface to use"
+    },
+    "cerebellum_surface": {
+      "type": "object",
+      "properties": {
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the cerebellum surface file"
+        },
+        "corrected_areas": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "vertex areas to use instead of computing them from the surface"
+        }
+      },
+      "required": [
+        "surface"
+      ],
+      "description": "specify the cerebellum surface to use"
+    },
+    "cifti_roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "search only within regions of interest"
+    },
+    "merged_volume": {
+      "type": "boolean",
+      "description": "treat volume components as if they were a single component",
+      "default": false
+    },
+    "size_ratio": {
+      "type": "object",
+      "properties": {
+        "surface_ratio": {
+          "type": "number",
+          "description": "fraction of the structure's largest cluster area"
+        },
+        "volume_ratio": {
+          "type": "number",
+          "description": "fraction of the structure's largest cluster volume"
+        }
+      },
+      "required": [
+        "surface_ratio",
+        "volume_ratio"
+      ],
+      "description": "ignore clusters smaller than a given fraction of the largest cluster in the structure"
+    },
+    "distance": {
+      "type": "object",
+      "properties": {
+        "surface_distance": {
+          "type": "number",
+          "description": "how far from the largest cluster a cluster can be, edge to edge, in mm"
+        },
+        "volume_distance": {
+          "type": "number",
+          "description": "how far from the largest cluster a cluster can be, edge to edge, in mm"
+        }
+      },
+      "required": [
+        "surface_distance",
+        "volume_distance"
+      ],
+      "description": "ignore clusters further than a given distance from the largest cluster in the structure"
+    },
+    "start": {
+      "type": "integer",
+      "description": "start labeling clusters from a value other than 1"
+    }
+  },
+  "required": [
+    "@type",
+    "cifti",
+    "surface_value_threshold",
+    "surface_minimum_area",
+    "volume_value_threshold",
+    "volume_minimum_size",
+    "direction",
+    "cifti_out"
+  ]
+}

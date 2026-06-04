@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@SSwarper",
+  "description": "Dual purposes for processing a given subject's anatomical volume: skull-strip the brain and calculate the warp to a reference template/standard space.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@SSwarper"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "An anatomical dataset, not skull-stripped, with about 1 mm resolution.",
+      "title": "Input anatomical dataset"
+    },
+    "base_template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A base template dataset with similar contrast to the input dataset.",
+      "title": "Base template dataset"
+    },
+    "subject_id": {
+      "type": "string",
+      "description": "Name code for output datasets (e.g., 'sub007').",
+      "title": "Subject ID"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Output directory for all files from this program.",
+      "title": "Output directory"
+    },
+    "min_patch_size": {
+      "type": "number",
+      "description": "Minimum patch size on final 3dQwarp.",
+      "title": "Minimum patch size"
+    },
+    "no_lite": {
+      "type": "boolean",
+      "description": "Do not use the '-lite' option with 3dQwarp.",
+      "title": "No lite",
+      "default": false
+    },
+    "skip_warp": {
+      "type": "boolean",
+      "description": "Do not compute past the output of anatSS.<subid>.nii.",
+      "title": "Skip warp",
+      "default": false
+    },
+    "unifize_off": {
+      "type": "boolean",
+      "description": "Do not start with a 3dUnifize command.",
+      "title": "Unifize off",
+      "default": false
+    },
+    "init_skullstr_off": {
+      "type": "boolean",
+      "description": "Do not preprocess with a 3dSkullstrip command.",
+      "title": "Init skullstrip off",
+      "default": false
+    },
+    "extra_qc_off": {
+      "type": "boolean",
+      "description": "Do not make extra QC images.",
+      "title": "Extra QC off",
+      "default": false
+    },
+    "jump_to_extra_qc": {
+      "type": "boolean",
+      "description": "Just make the two QC*jpg images from a previous run.",
+      "title": "Jump to extra QC",
+      "default": false
+    },
+    "cost_nl_init": {
+      "type": "string",
+      "description": "Specify cost function for initial nonlinear (3dQwarp) part of alignment.",
+      "title": "Initial nonlinear alignment cost function"
+    },
+    "cost_nl_final": {
+      "type": "string",
+      "description": "Specify cost function for final nonlinear (3dQwarp) parts of alignment.",
+      "title": "Final nonlinear alignment cost function"
+    },
+    "deoblique": {
+      "type": "boolean",
+      "description": "Apply obliquity information to deoblique the input volume.",
+      "title": "Deoblique",
+      "default": false
+    },
+    "deoblique_refitly": {
+      "type": "boolean",
+      "description": "Purge obliquity information to deoblique the input volume.",
+      "title": "Deoblique refitly",
+      "default": false
+    },
+    "warp_scale": {
+      "type": "number",
+      "minimum": 0.1,
+      "maximum": 1,
+      "description": "Control flexibility of warps in 3dQwarp.",
+      "title": "Warp scale"
+    },
+    "ssopt_flag": {
+      "type": "string",
+      "description": "Append a string of options for 3dSkullStrip.",
+      "title": "3dSkullStrip options"
+    },
+    "aniso_off": {
+      "type": "boolean",
+      "description": "Do not preprocess with a 3danisosmooth command.",
+      "title": "Aniso off",
+      "default": false
+    },
+    "ceil_off": {
+      "type": "boolean",
+      "description": "Turn off capping on values after anisosmoothing.",
+      "title": "Ceil off",
+      "default": false
+    },
+    "tmp_name_nice": {
+      "type": "boolean",
+      "description": "Use nicer, non-random intermediate file prefix for temporary files.",
+      "title": "Temporary file naming",
+      "default": false
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Run the script with 'set echo' for extra verbosity in the terminal output.",
+      "title": "Echo flag",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Apply the '-verb' option to 3dQwarp for verbose progress information.",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "noclean": {
+      "type": "boolean",
+      "description": "Do not delete the 'junk' files at the end of computations.",
+      "title": "No clean flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "base_template",
+    "subject_id"
+  ]
+}

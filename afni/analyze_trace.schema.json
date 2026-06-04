@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AnalyzeTrace",
+  "description": "A program to analyze SUMA (and AFNI's perhaps) stack output for functions that return with RETURN without bothering to go on the stack.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/AnalyzeTrace"
+    },
+    "tracefile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Trace output file obtained by redirecting the program’s trace output.",
+      "title": "Trace output file"
+    },
+    "max_func_lines": {
+      "type": "integer",
+      "description": "Set the maximum number of code lines before a function returns. Default is no limit.",
+      "title": "Maximum function lines"
+    },
+    "suma_c": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "FILE is a SUMA_*.c file. It is analyzed for functions that use SUMA_RETURN without ENTRY.",
+      "title": "SUMA C file"
+    },
+    "max_err": {
+      "type": "integer",
+      "description": "Stop after encountering MAX_ERR errors reported in log. Default is 5. Error key terms are: 'Error', 'error', 'corruption'.",
+      "title": "Maximum errors"
+    },
+    "novolreg": {
+      "type": "boolean",
+      "description": "Ignore any Rotate, Volreg, Tagalign, or WarpDrive transformations present in the Surface Volume.",
+      "title": "Ignore volume registration",
+      "default": false
+    },
+    "noxform": {
+      "type": "boolean",
+      "description": "Same as -novolreg",
+      "title": "Ignore transform",
+      "default": false
+    },
+    "setenv": {
+      "type": "string",
+      "description": "Set environment variable ENVname to be ENVvalue. Quotes are necessary.",
+      "title": "Set environment variable"
+    },
+    "trace": {
+      "type": "boolean",
+      "description": "Turns on In/Out debug and Memory tracing.",
+      "title": "Trace flag",
+      "default": false
+    },
+    "extreme_trace": {
+      "type": "boolean",
+      "description": "Turns on extreme tracing.",
+      "title": "Extreme trace flag",
+      "default": false
+    },
+    "nomall": {
+      "type": "boolean",
+      "description": "Turn off memory tracing.",
+      "title": "Disable memory tracing",
+      "default": false
+    },
+    "yesmall": {
+      "type": "boolean",
+      "description": "Turn on memory tracing (default).",
+      "title": "Enable memory tracing",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "tracefile"
+  ]
+}

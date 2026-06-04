@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dnewid",
+  "description": "Assigns a new ID code to a dataset, ensuring internal ID codes remain unique.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dnewid"
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input datasets to assign new ID codes.",
+      "title": "Datasets"
+    },
+    "fun": {
+      "type": "number",
+      "description": "Generate n randomly generated ID codes. If n is not present, 1 ID code is printed.",
+      "title": "Randomly generated ID codes"
+    },
+    "fun11": {
+      "type": "boolean",
+      "description": "Generate an 11 character ID code for use in scripting",
+      "title": "11 character ID code flag",
+      "default": false
+    },
+    "int": {
+      "type": "boolean",
+      "description": "Generate a random positive integer between 1 million and 1 billion.",
+      "title": "Random positive integer flag",
+      "default": false
+    },
+    "hash": {
+      "type": "string",
+      "description": "Generate a unique hash code of the provided string. The same string produces the same hash code.",
+      "title": "Hash code of string"
+    },
+    "MD5": {
+      "type": "string",
+      "description": "Generate the MD5 hash of the provided string. Output should be the same as the -hash output without the prefix and without the + and / char substitutions.",
+      "title": "MD5 hash of string"
+    }
+  },
+  "required": [
+    "@type",
+    "datasets"
+  ]
+}

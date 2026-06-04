@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SURFACE GRADIENT OF A METRIC FILE",
+  "description": "At each vertex, the immediate neighbors are unfolded onto a plane tangent to the surface at the vertex (specifically, perpendicular to the normal).  The gradient is computed using a regression between the unfolded positions of the vertices and their values.  The gradient is then given by the slopes of the regression, and reconstructed as a 3D gradient vector.  By default, takes the gradient of all columns, with no presmoothing, across the whole surface, without averaging the normals of the surface among neighbors.\n\nWhen using -corrected-areas, note that it is an approximate correction.  Doing smoothing on individual surfaces before averaging/gradient is preferred, when possible, in order to make use of the original surface structure.\n\nSpecifying an ROI will restrict the gradient to only use data from where the ROI metric is positive, and output zeros anywhere the ROI metric is not positive.\n\nBy default, the first column of the roi metric is used for all input columns.  When -match-columns is specified to the -roi option, the input and roi metrics must have the same number of columns, and for each input column's index, the same column index is used in the roi metric.  If the -match-columns option to -roi is used while the -column option is also used, the number of columns of the roi metric must match the input metric, and it will use the roi column with the index of the selected input column.\n\nThe vector output metric is organized such that the X, Y, and Z components from a single input column are consecutive columns.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric_gradient"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the surface to compute the gradient on"
+    },
+    "metric_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the metric to compute the gradient of"
+    },
+    "metric_out": {
+      "type": "string",
+      "description": "the magnitude of the gradient"
+    },
+    "presmooth": {
+      "type": "object",
+      "properties": {
+        "kernel": {
+          "type": "number",
+          "description": "the size of the gaussian smoothing kernel in mm, as sigma by default"
+        },
+        "fwhm": {
+          "type": "boolean",
+          "description": "kernel size is FWHM, not sigma",
+          "default": false
+        }
+      },
+      "required": [
+        "kernel"
+      ],
+      "description": "smooth the metric before computing the gradient"
+    },
+    "roi": {
+      "type": "object",
+      "properties": {
+        "roi_metric": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the area to take the gradient within, as a metric"
+        },
+        "match_columns": {
+          "type": "boolean",
+          "description": "for each input column, use the corresponding column from the roi",
+          "default": false
+        }
+      },
+      "required": [
+        "roi_metric"
+      ],
+      "description": "select a region of interest to take the gradient of"
+    },
+    "vectors": {
+      "type": "object",
+      "properties": {
+        "vector_metric_out": {
+          "type": "string",
+          "description": "the vectors as a metric file"
+        }
+      },
+      "required": [
+        "vector_metric_out"
+      ],
+      "description": "output gradient vectors"
+    },
+    "column": {
+      "type": "string",
+      "description": "select a single column to compute the gradient of"
+    },
+    "corrected_areas": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "vertex areas to use instead of computing them from the surface"
+    },
+    "average_normals": {
+      "type": "boolean",
+      "description": "average the normals of each vertex with its neighbors before using them to compute the gradient",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "metric_in",
+    "metric_out"
+  ]
+}

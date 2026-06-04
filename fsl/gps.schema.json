@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gps",
+  "description": "Generate set of diffusion gradient directions",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/gps"
+    },
+    "ndir": {
+      "type": "number",
+      "description": "Number of directions",
+      "title": "Number of directions"
+    },
+    "optws": {
+      "type": "boolean",
+      "description": "Perform additional optimisation on the whole sphere (needed for eddy)",
+      "title": "Whole sphere optimization flag",
+      "default": false
+    },
+    "output": {
+      "type": "string",
+      "description": "Name of output file (default: bvecs#.txt)",
+      "title": "Output file name"
+    },
+    "ranseed": {
+      "type": "number",
+      "description": "Seed random generator with supplied number",
+      "title": "Random seed"
+    },
+    "init": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with bvecs to use as initialisation",
+      "title": "Initialisation file"
+    },
+    "report": {
+      "type": "boolean",
+      "description": "Report coulomb forces for initial configuration",
+      "title": "Report initial configuration flag",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "ndir"
+  ]
+}

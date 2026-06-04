@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "niml_feedme",
+  "description": "Sends volumes from the dataset to AFNI via the NIML socket interface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/niml_feedme"
+    },
+    "host": {
+      "type": "string",
+      "description": "Send data, via TCP/IP, to AFNI running on the computer system 'sname'. By default, uses the current system (localhost), if you don't use this option.",
+      "title": "Host"
+    },
+    "interval": {
+      "type": "number",
+      "description": "Tries to maintain an inter-transmit interval of 'ms' milliseconds. The default is 1000 msec per volume.",
+      "title": "Inter-transmit Interval"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Be (very) talkative about actions.",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "accum": {
+      "type": "boolean",
+      "description": "Send sub-bricks so that they accumulate in AFNI. The default is to create only a 1 volume dataset inside AFNI, and each sub-brick just replaces that one volume when it is received.",
+      "title": "Accumulate Flag",
+      "default": false
+    },
+    "target_dataset": {
+      "type": "string",
+      "description": "Change the dataset name transmitted to AFNI from 'niml_feedme' to 'nam'.",
+      "title": "Target Dataset Name"
+    },
+    "drive_cmds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Send 'cmd' as a DRIVE_AFNI command. If cmd contains blanks, it must be in 'quotes'. Multiple -drive options may be used. These commands will be sent to AFNI just after the first volume is transmitted. See file README.driver for a list of commands.",
+      "title": "Drive AFNI Commands"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset to be sent to AFNI.",
+      "title": "Input dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset"
+  ]
+}

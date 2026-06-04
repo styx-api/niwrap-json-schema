@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_rf_label",
+  "description": "MRI automatic tissue labeling using a Gaussian Classifier Atlas (GCA).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_rf_label"
+    },
+    "input_volumes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input volume(s)",
+      "title": "Input volumes"
+    },
+    "transform_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Transform file",
+      "title": "Transform file"
+    },
+    "gcafile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "GCA file",
+      "title": "GCA file"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume",
+      "title": "Output volume"
+    },
+    "cross_sequence_flag": {
+      "type": "boolean",
+      "description": "Label a volume acquired with a sequence different than atlas",
+      "title": "Cross sequence flag",
+      "default": false
+    },
+    "nogibbs_flag": {
+      "type": "boolean",
+      "description": "Disable gibbs priors",
+      "title": "No gibbs flag",
+      "default": false
+    },
+    "wm_path": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use WM segmentation from provided file",
+      "title": "WM segmentation path"
+    },
+    "conform_flag": {
+      "type": "boolean",
+      "description": "Interpolate volume to be isotropic 1mm^3",
+      "title": "Conform flag",
+      "default": false
+    },
+    "normpd_flag": {
+      "type": "boolean",
+      "description": "Normalize PD image to GCA means",
+      "title": "Normalize PD flag",
+      "default": false
+    },
+    "gca_tl": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use file to label the thin temporal lobe",
+      "title": "GCA thin temporal lobe"
+    },
+    "debug_voxel": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Debug voxel at specified coordinates",
+      "title": "Debug voxel"
+    },
+    "debug_node": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Debug node at specified coordinates",
+      "title": "Debug node"
+    },
+    "debug_label": {
+      "type": "number",
+      "description": "Debug label at specified index",
+      "title": "Debug label"
+    },
+    "tr": {
+      "type": "number",
+      "description": "Set TR in msec",
+      "title": "TR"
+    },
+    "te": {
+      "type": "number",
+      "description": "Set TE in msec",
+      "title": "TE"
+    },
+    "alpha": {
+      "type": "number",
+      "description": "Set alpha in radians",
+      "title": "Alpha"
+    },
+    "example": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Use T1 (mri_vol) and segmentation as example",
+      "title": "Example T1 and segmentation"
+    },
+    "pthresh": {
+      "type": "number",
+      "description": "Use p threshold for adaptive renormalization",
+      "title": "P threshold"
+    },
+    "niter": {
+      "type": "number",
+      "description": "Apply max likelihood for n iterations",
+      "title": "Number of iterations"
+    },
+    "novar_flag": {
+      "type": "boolean",
+      "description": "Do not use variance in classification",
+      "title": "No variance flag",
+      "default": false
+    },
+    "regularize": {
+      "type": "number",
+      "description": "Regularize variance to be sigma+nC(noise)",
+      "title": "Regularize variance"
+    },
+    "nohippo_flag": {
+      "type": "boolean",
+      "description": "Do not auto-edit hippocampus",
+      "title": "No hippocampus edit flag",
+      "default": false
+    },
+    "fwm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use fixed white matter segmentation from wm",
+      "title": "Fixed white matter segmentation"
+    },
+    "mri_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Write most likely MR volume to specified file",
+      "title": "MR volume"
+    },
+    "heq": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use histogram equalization from specified volume",
+      "title": "Histogram equalization"
+    },
+    "renorm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Renormalize using predicted intensity values",
+      "title": "Renormalize using predicted intensities"
+    },
+    "flash_flag": {
+      "type": "boolean",
+      "description": "Use FLASH forward model to predict intensity values",
+      "title": "FLASH model flag",
+      "default": false
+    },
+    "flash_params": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use FLASH forward model and tissue params from file",
+      "title": "FLASH model parameters"
+    },
+    "renormalize": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Renorm class means iter times after initial label with window of wsize",
+      "title": "Renormalize class means"
+    },
+    "set_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set input volume",
+      "title": "Set input volume"
+    },
+    "histogram_flag": {
+      "type": "boolean",
+      "description": "Use GCA to histogram normalize input image",
+      "title": "Use GCA for histogram normalization",
+      "default": false
+    },
+    "cond_density_mean": {
+      "type": "number",
+      "description": "Mean filter n times to conditional densities",
+      "title": "Conditional density mean filter"
+    },
+    "snapshots": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Write snapshots of gibbs process every n times to filename",
+      "title": "Gibbs process snapshots"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use mri_vol to mask final labeling",
+      "title": "Mask volume"
+    },
+    "expand": {
+      "type": "number",
+      "description": "Expand",
+      "title": "Expand"
+    },
+    "max_iter": {
+      "type": "number",
+      "description": "Set max iterations",
+      "title": "Max iterations"
+    },
+    "filter_mode": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Filter labeled volume with threshold t mode filter f times",
+      "title": "Filter with threshold"
+    },
+    "longitudinal_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Longitudinal processing: mri_vol is label from tp1, LTA is registration from tp1 to current data",
+      "title": "Longitudinal processing volume"
+    },
+    "longitudinal_lta": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Longitudinal LTA registration",
+      "title": "Longitudinal LTA"
+    },
+    "relabel_unlikely_flag": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Reclassify voxels using a Gaussian window to recomute priors and likelihoods",
+      "title": "Relabel unlikely flag"
+    }
+  },
+  "required": [
+    "@type",
+    "input_volumes",
+    "transform_file",
+    "gcafile",
+    "output_volume"
+  ]
+}

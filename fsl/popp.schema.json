@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "popp",
+  "description": "Physiological data processing tool of FSL",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/popp"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input physiological data filename (text format)",
+      "title": "Input file"
+    },
+    "output_basename": {
+      "type": "string",
+      "description": "Output basename for physiological data and timing/triggers (no extensions)",
+      "title": "Output basename"
+    },
+    "sampling_rate": {
+      "type": "number",
+      "description": "Sampling rate in Hz (default is 100Hz)",
+      "title": "Sampling Rate"
+    },
+    "tr_value": {
+      "type": "number",
+      "description": "TR value in seconds",
+      "title": "TR Value"
+    },
+    "resp_column": {
+      "type": "number",
+      "description": "Specify column number of respiratory input",
+      "title": "Respiratory Column"
+    },
+    "cardiac_column": {
+      "type": "number",
+      "description": "Specify column number of cardiac input",
+      "title": "Cardiac Column"
+    },
+    "trigger_column": {
+      "type": "number",
+      "description": "Specify column number of trigger input",
+      "title": "Trigger Column"
+    },
+    "rvt_flag": {
+      "type": "boolean",
+      "description": "Generate RVT data",
+      "title": "RVT Flag",
+      "default": false
+    },
+    "heart_rate_flag": {
+      "type": "boolean",
+      "description": "Generate heartrate data",
+      "title": "Heartrate Flag",
+      "default": false
+    },
+    "pulseox_trigger_flag": {
+      "type": "boolean",
+      "description": "Specify that cardiac data is a trigger",
+      "title": "Pulseox Trigger Flag",
+      "default": false
+    },
+    "smooth_card": {
+      "type": "number",
+      "description": "Specify smoothing amount for cardiac (in seconds)",
+      "title": "Cardiac Smoothing Amount"
+    },
+    "smooth_resp": {
+      "type": "number",
+      "description": "Specify smoothing amount for respiratory (in seconds)",
+      "title": "Respiratory Smoothing Amount"
+    },
+    "high_freq_cutoff": {
+      "type": "number",
+      "description": "High frequency cut off for respiratory filter in Hz (default is 5Hz)",
+      "title": "High Frequency Cutoff"
+    },
+    "low_freq_cutoff": {
+      "type": "number",
+      "description": "Low frequency cut off for respiratory filter in Hz (default is 0.1Hz)",
+      "title": "Low Frequency Cutoff"
+    },
+    "init_thresh_c": {
+      "type": "number",
+      "description": "Initial threshold percentile for cardiac (default 90)",
+      "title": "Initial Threshold for Cardiac"
+    },
+    "n_thresh_c": {
+      "type": "number",
+      "description": "Neighbourhood exclusion threshold percentile for cardiac (default 60)",
+      "title": "Neighbourhood Threshold for Cardiac"
+    },
+    "init_thresh_r": {
+      "type": "number",
+      "description": "Initial threshold percentile for respiratory (default 80)",
+      "title": "Initial Threshold for Respiratory"
+    },
+    "n_thresh_r": {
+      "type": "number",
+      "description": "Neighbourhood exclusion threshold percentile for respiratory (default 80)",
+      "title": "Neighbourhood Threshold for Respiratory"
+    },
+    "invert_resp_flag": {
+      "type": "boolean",
+      "description": "Invert respiratory trace",
+      "title": "Invert Respiratory Flag",
+      "default": false
+    },
+    "invert_cardiac_flag": {
+      "type": "boolean",
+      "description": "Invert cardiac trace",
+      "title": "Invert Cardiac Flag",
+      "default": false
+    },
+    "noclean1_flag": {
+      "type": "boolean",
+      "description": "Turn off cleanup phase 1",
+      "title": "No Clean Phase 1 Flag",
+      "default": false
+    },
+    "noclean2_flag": {
+      "type": "boolean",
+      "description": "Turn off cleanup phase 2",
+      "title": "No Clean Phase 2 Flag",
+      "default": false
+    },
+    "load_card_phase": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input cardiac phase for reprocessing (text format)",
+      "title": "Load Cardiac Phase"
+    },
+    "load_resp_phase": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input respiratory phase for reprocessing (text format)",
+      "title": "Load Respiratory Phase"
+    },
+    "vol_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volumetric image (EPI) filename",
+      "title": "Volumetric Image File"
+    },
+    "start_sample": {
+      "type": "number",
+      "description": "Set sample number of the starting time (t=0)",
+      "title": "Starting Sample"
+    },
+    "resp_add": {
+      "type": "string",
+      "description": "Comma separated list of times (in sec) to add to respiratory peak list (uses nearest local max)",
+      "title": "Add Respiratory Peaks"
+    },
+    "resp_del": {
+      "type": "string",
+      "description": "Comma separated list of times (in sec) to delete from respiratory peak list (uses nearest existing peak)",
+      "title": "Delete Respiratory Peaks"
+    },
+    "card_add": {
+      "type": "string",
+      "description": "Comma separated list of times (in sec) to add to cardiac peak list (uses nearest local max)",
+      "title": "Add Cardiac Peaks"
+    },
+    "card_del": {
+      "type": "string",
+      "description": "Comma separated list of times (in sec) to delete from cardiac peak list (uses nearest existing peak)",
+      "title": "Delete Cardiac Peaks"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Output debugging information",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display this help message",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_basename"
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TRR",
+  "description": "Test-Retest Reliability Program through Bayesian Multilevel Modeling",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/TRR"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output file names",
+      "title": "Output prefix"
+    },
+    "chains": {
+      "type": "number",
+      "description": "Specify the number of Markov chains",
+      "title": "Number of chains"
+    },
+    "iterations": {
+      "type": "number",
+      "description": "Specify the number of iterations per Markov chain",
+      "title": "Number of iterations"
+    },
+    "response_var": {
+      "type": "string",
+      "description": "Specify the column name for the response variable",
+      "title": "Response variable"
+    },
+    "subject_var": {
+      "type": "string",
+      "description": "Specify the column name for the subject variable",
+      "title": "Subject variable"
+    },
+    "repetition_var": {
+      "type": "string",
+      "description": "Specify the column name for the repetition variable",
+      "title": "Repetition variable"
+    },
+    "condition_var": {
+      "type": "string",
+      "description": "Specify the column name for the condition variable",
+      "title": "Condition variable"
+    },
+    "data_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the path to the data table in pure text format",
+      "title": "Data table"
+    },
+    "categorical_vars": {
+      "type": "string",
+      "description": "Identify categorical (qualitative) variables",
+      "title": "Categorical variables"
+    },
+    "quantitative_vars": {
+      "type": "string",
+      "description": "Identify quantitative (covariate) variables",
+      "title": "Quantitative variables"
+    },
+    "response_dist": {
+      "type": "string",
+      "description": "Specify the distribution for the response variable (e.g., 'gaussian', 'student', 'exgaussian')",
+      "title": "Response Distribution"
+    },
+    "model": {
+      "type": "string",
+      "description": "Specify the effects associated with explanatory variables",
+      "title": "Model"
+    },
+    "plot_size": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify the layout of posterior distribution plot (PDP) with width and height in inches",
+      "title": "Posterior distribution plot size"
+    },
+    "standard_error": {
+      "type": "string",
+      "description": "Include standard error for the response variable as input",
+      "title": "Standard error column"
+    },
+    "t_stat": {
+      "type": "string",
+      "description": "Specify the column name for the t-statistic values",
+      "title": "T-statistic column"
+    },
+    "within_chain_parallelization": {
+      "type": "number",
+      "description": "Invoke within-chain parallelization; specify number of threads per chain",
+      "title": "Within-chain parallelization"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Enable R to save the parameters for debugging",
+      "title": "Debug flag",
+      "default": false
+    },
+    "verbose": {
+      "type": "number",
+      "description": "Specify verbose level",
+      "title": "Verbose level"
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "response_var",
+    "subject_var",
+    "data_table"
+  ]
+}

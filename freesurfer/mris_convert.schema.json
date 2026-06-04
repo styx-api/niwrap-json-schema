@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_convert",
+  "description": "This program will convert MRI-surface data formats.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_convert"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input filename",
+      "title": "Input file"
+    },
+    "second_input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second input filename to be combined, required for --combinesurfs",
+      "title": "Second input file"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output filename",
+      "title": "Output file"
+    },
+    "patch": {
+      "type": "boolean",
+      "description": "Input file is a patch file, not a full surface",
+      "title": "Patch flag",
+      "default": false
+    },
+    "curv_overlay_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Input scalar curv overlay files",
+      "title": "Curv overlay files"
+    },
+    "functional_data_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input functional time-series or other multi-frame data",
+      "title": "Functional data file"
+    },
+    "orig_positions": {
+      "type": "string",
+      "description": "Read orig positions",
+      "title": "Orig positions"
+    },
+    "scale": {
+      "type": "number",
+      "description": "Scale vertex xyz by scale",
+      "title": "Scale"
+    },
+    "rescale": {
+      "type": "boolean",
+      "description": "Rescale vertex xyz so total area is same as group average",
+      "title": "Rescale flag",
+      "default": false
+    },
+    "talairach_xfm": {
+      "type": "string",
+      "description": "Apply talairach xfm of subject to vertex xyz",
+      "title": "Talairach xfm"
+    },
+    "normals": {
+      "type": "boolean",
+      "description": "Output ascii file where vertex data is the surface normal vector",
+      "title": "Normals flag",
+      "default": false
+    },
+    "neighbors": {
+      "type": "boolean",
+      "description": "Write out neighbors of a vertex in each row",
+      "title": "Neighbors flag",
+      "default": false
+    },
+    "xyz": {
+      "type": "boolean",
+      "description": "Print only surface xyz to ascii file",
+      "title": "XYZ flag",
+      "default": false
+    },
+    "annotation_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input annotation or gifti label data",
+      "title": "Annotation file"
+    },
+    "parcstats_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input text file containing label/val pairs for parcellation",
+      "title": "Parcstats file"
+    },
+    "gifti_dataarray_num": {
+      "type": "number",
+      "description": "Input gifti dataarray number to use",
+      "title": "Gifti dataarray number"
+    },
+    "label_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input .label file and name for this label",
+      "title": "Label file"
+    },
+    "label_stats_file": {
+      "type": "string",
+      "description": "Output gifti file to which label stats will be written",
+      "title": "Label stats file"
+    },
+    "combine_surfs": {
+      "type": "boolean",
+      "description": "Combine surface files, two input surface files required",
+      "title": "Combine surfaces flag",
+      "default": false
+    },
+    "merge_gifti": {
+      "type": "boolean",
+      "description": "Generate combined gifti file with surface and multiple curvature data",
+      "title": "Merge gifti flag",
+      "default": false
+    },
+    "split_gifti": {
+      "type": "boolean",
+      "description": "Separate surface and data array from combined gifti file",
+      "title": "Split gifti flag",
+      "default": false
+    },
+    "gifti_outdir": {
+      "type": "string",
+      "description": "Output directory for generated gifti files",
+      "title": "Gifti output directory"
+    },
+    "delete_cmds": {
+      "type": "boolean",
+      "description": "Delete command lines in surface",
+      "title": "Delete cmds flag",
+      "default": false
+    },
+    "center": {
+      "type": "boolean",
+      "description": "Put center of surface at (0,0,0)",
+      "title": "Center flag",
+      "default": false
+    },
+    "vol_geom": {
+      "type": "string",
+      "description": "Use MRIVol to set the volume geometry",
+      "title": "Volume geometry"
+    },
+    "remove_vol_geom": {
+      "type": "boolean",
+      "description": "Set the valid flag in vg to 0",
+      "title": "Remove volume geometry flag",
+      "default": false
+    },
+    "to_surf": {
+      "type": "string",
+      "description": "Copy coordinates from surfcoords to output (good for patches)",
+      "title": "To surface coordinates"
+    },
+    "to_scanner": {
+      "type": "boolean",
+      "description": "Convert coordinates from native FS (tkr) coords to scanner coords",
+      "title": "To scanner flag",
+      "default": false
+    },
+    "to_tkr": {
+      "type": "boolean",
+      "description": "Convert coordinates from scanner coords to native FS (tkr) coords",
+      "title": "To TKR flag",
+      "default": false
+    },
+    "userealras": {
+      "type": "boolean",
+      "description": "Same as --to-scanner",
+      "title": "Use real RAS flag",
+      "default": false
+    },
+    "usesurfras": {
+      "type": "boolean",
+      "description": "Same as --to-tkr",
+      "title": "Use surf RAS flag",
+      "default": false
+    },
+    "upsample": {
+      "type": "string",
+      "description": "Upsample N times by splitting edges/faces",
+      "title": "Upsample times"
+    },
+    "volume": {
+      "type": "string",
+      "description": "Compute vertex-wise volume",
+      "title": "Volume surface"
+    },
+    "area": {
+      "type": "string",
+      "description": "Compute vertex-wise area",
+      "title": "Area surface"
+    },
+    "angle": {
+      "type": "string",
+      "description": "Compute cortical orientation angles",
+      "title": "Angle surface"
+    },
+    "label_to_mask": {
+      "type": "string",
+      "description": "Convert a surface-based label to a binary mask",
+      "title": "Label to mask surface"
+    },
+    "cras_add": {
+      "type": "boolean",
+      "description": "Shift center to scanner coordinate center",
+      "title": "CRAS Add flag",
+      "default": false
+    },
+    "cras_subtract": {
+      "type": "boolean",
+      "description": "Shift center from scanner coordinate center",
+      "title": "CRAS Subtract flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file"
+  ]
+}

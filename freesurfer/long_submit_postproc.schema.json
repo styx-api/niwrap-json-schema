@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "long_submit_postproc",
+  "description": "Submits jobs to the cluster (either seychelles or launchpad at NMR) for longitudinal post-processing.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/long_submit_postproc"
+    },
+    "qdec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "QDEC table file specifying the subjects and time points",
+      "title": "QDEC Table File"
+    },
+    "prog": {
+      "type": "string",
+      "description": "Longitudinal script to call",
+      "title": "Longitudinal Script"
+    },
+    "flags": {
+      "type": "string",
+      "description": "Parameters (without --qdec) to pass to prog (using quotes ...)",
+      "title": "Program Flags"
+    },
+    "dir": {
+      "type": "string",
+      "description": "Directory to store sub-tables and command files",
+      "title": "Directory"
+    },
+    "simulate": {
+      "type": "boolean",
+      "description": "Do not submit anything, just print commands",
+      "title": "Simulate Flag",
+      "default": false
+    },
+    "pause": {
+      "type": "number",
+      "description": "Pause in seconds between submissions",
+      "title": "Pause Duration"
+    },
+    "max": {
+      "type": "number",
+      "description": "Maximum number of jobs for this user",
+      "title": "Maximum Jobs"
+    },
+    "queue": {
+      "type": "string",
+      "description": "Special queue to submit",
+      "title": "Queue"
+    }
+  },
+  "required": [
+    "@type",
+    "qdec",
+    "prog"
+  ]
+}

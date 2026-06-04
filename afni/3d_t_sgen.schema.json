@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTSgen",
+  "description": "This program generates an AFNI 3d+time data set based on user-specified signal and noise models for each voxel.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTSgen"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of prototype 3d + time data file",
+      "title": "Input file"
+    },
+    "in_tr_flag": {
+      "type": "boolean",
+      "description": "Set the TR of the created timeseries to be the TR of the prototype dataset. The default is TR = 1.",
+      "title": "In-TR Flag",
+      "default": false
+    },
+    "signal_label": {
+      "type": "string",
+      "description": "Name of the (non-linear) signal model",
+      "title": "Signal label"
+    },
+    "noise_label": {
+      "type": "string",
+      "description": "Name of the (linear) noise model",
+      "title": "Noise label"
+    },
+    "signal_constr": {
+      "type": "string",
+      "description": "Constraints for kth signal parameter. Format: k c d where c <= gs[k] <= d",
+      "title": "Signal constraints"
+    },
+    "noise_constr": {
+      "type": "string",
+      "description": "Constraints for kth noise parameter. Format: k c d where c+b[k] <= gn[k] <= d+b[k]",
+      "title": "Noise constraints"
+    },
+    "sigma_value": {
+      "type": "number",
+      "description": "Standard deviation of additive Gaussian noise",
+      "title": "Sigma value"
+    },
+    "voxel_number": {
+      "type": "number",
+      "description": "Screen output for voxel number",
+      "title": "Voxel number"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Filename of output 3d + time data file",
+      "title": "Output file"
+    },
+    "signal_coef": {
+      "type": "string",
+      "description": "Write kth signal parameter gs[k]. Output 'fim' is written to prefix filename",
+      "title": "Signal coefficient file"
+    },
+    "noise_coef": {
+      "type": "string",
+      "description": "Write kth noise parameter gn[k]. Output 'fim' is written to prefix filename",
+      "title": "Noise coefficient file"
+    },
+    "bucket_config": {
+      "type": "string",
+      "description": "Create one AFNI 'bucket' dataset containing n sub-bricks. n=0 creates the default output. Output 'bucket' is written to prefixname",
+      "title": "Bucket configuration"
+    },
+    "brick_config": {
+      "type": "string",
+      "description": "Specify content for sub-brick in the form 'm t k label' where m is the sub-brick number, t is 'scoef' or 'ncoef', k is parameter index, and label is a descriptive label.",
+      "title": "Brick configuration"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "signal_label",
+    "noise_label",
+    "sigma_value",
+    "output_file"
+  ]
+}

@@ -1,0 +1,377 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTstat",
+  "description": "Compute voxel-wise statistics using AFNI 3dTstat command",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTstat"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file to 3dtstat.",
+      "title": "In file"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file.",
+      "title": "Mask"
+    },
+    "num_threads": {
+      "type": "integer",
+      "description": "Set number of threads.",
+      "title": "Num threads"
+    },
+    "options": {
+      "type": "string",
+      "description": "Selected statistical output.",
+      "title": "Options"
+    },
+    "outputtype": {
+      "enum": [
+        "NIFTI",
+        "AFNI",
+        "NIFTI_GZ"
+      ],
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype.",
+      "title": "Outputtype"
+    },
+    "sum": {
+      "type": "boolean",
+      "description": "Compute sum of input voxels.",
+      "title": "Sum",
+      "default": false
+    },
+    "abssum": {
+      "type": "boolean",
+      "description": "Compute absolute sum of input voxels.",
+      "title": "Absolute Sum",
+      "default": false
+    },
+    "sos": {
+      "type": "boolean",
+      "description": "Compute sum of squares.",
+      "title": "Sum of Squares",
+      "default": false
+    },
+    "l2norm": {
+      "type": "boolean",
+      "description": "Compute L2 norm (sqrt(sum squares)).",
+      "title": "L2 Norm",
+      "default": false
+    },
+    "mean": {
+      "type": "boolean",
+      "description": "Compute mean of input voxels.",
+      "title": "Mean",
+      "default": false
+    },
+    "slope": {
+      "type": "boolean",
+      "description": "Compute the slope of input voxels vs. time.",
+      "title": "Slope",
+      "default": false
+    },
+    "stdev": {
+      "type": "boolean",
+      "description": "Compute standard deviation of input voxels.",
+      "title": "Standard Deviation",
+      "default": false
+    },
+    "stdevNOD": {
+      "type": "boolean",
+      "description": "Compute standard deviation of input voxels without detrending.",
+      "title": "Standard Deviation No Detrending",
+      "default": false
+    },
+    "cvar": {
+      "type": "boolean",
+      "description": "Compute coefficient of variation of input voxels.",
+      "title": "Coefficient of Variation",
+      "default": false
+    },
+    "cvarNOD": {
+      "type": "boolean",
+      "description": "Compute coefficient of variation of input voxels without detrending.",
+      "title": "Coefficient of Variation No Detrending",
+      "default": false
+    },
+    "cvarinv": {
+      "type": "boolean",
+      "description": "Compute inverse coefficient of variation of input voxels.",
+      "title": "Inverse Coefficient of Variation",
+      "default": false
+    },
+    "cvarinvNOD": {
+      "type": "boolean",
+      "description": "Compute inverse coefficient of variation of input voxels without detrending.",
+      "title": "Inverse Coefficient of Variation No Detrending",
+      "default": false
+    },
+    "tsnr": {
+      "type": "boolean",
+      "description": "Compute temporal signal to noise ratio.",
+      "title": "Temporal Signal to Noise Ratio",
+      "default": false
+    },
+    "MAD": {
+      "type": "boolean",
+      "description": "Compute median absolute deviation of input voxels.",
+      "title": "Median Absolute Deviation",
+      "default": false
+    },
+    "DW": {
+      "type": "boolean",
+      "description": "Compute Durbin-Watson Statistic of input voxels.",
+      "title": "Durbin-Watson Statistic",
+      "default": false
+    },
+    "median": {
+      "type": "boolean",
+      "description": "Compute median of input voxels.",
+      "title": "Median",
+      "default": false
+    },
+    "nzmedian": {
+      "type": "boolean",
+      "description": "Compute median of non-zero input voxels.",
+      "title": "Non-Zero Median",
+      "default": false
+    },
+    "nzstdev": {
+      "type": "boolean",
+      "description": "Compute standard deviation of non-zero input voxels.",
+      "title": "Non-Zero Standard Deviation",
+      "default": false
+    },
+    "bmv": {
+      "type": "boolean",
+      "description": "Compute biweight midvariance of input voxels.",
+      "title": "Biweight Midvariance",
+      "default": false
+    },
+    "MSSD": {
+      "type": "boolean",
+      "description": "Compute mean of successive squared differences of input voxels.",
+      "title": "Mean of Successive Squared Differences",
+      "default": false
+    },
+    "MSSDsqrt": {
+      "type": "boolean",
+      "description": "Compute square root of mean of successive squared differences of input voxels.",
+      "title": "Square Root of MSSD",
+      "default": false
+    },
+    "MASDx": {
+      "type": "boolean",
+      "description": "Compute median of absolute values of first time differences of input voxels.",
+      "title": "Median of Absolute Values of First Time Differences",
+      "default": false
+    },
+    "min": {
+      "type": "boolean",
+      "description": "Compute minimum of input voxels.",
+      "title": "Minimum",
+      "default": false
+    },
+    "max": {
+      "type": "boolean",
+      "description": "Compute maximum of input voxels.",
+      "title": "Maximum",
+      "default": false
+    },
+    "absmax": {
+      "type": "boolean",
+      "description": "Compute absolute maximum of input voxels.",
+      "title": "Absolute Maximum",
+      "default": false
+    },
+    "signed_absmax": {
+      "type": "boolean",
+      "description": "Compute signed absolute maximum of input voxels.",
+      "title": "Signed Absolute Maximum",
+      "default": false
+    },
+    "percentile": {
+      "type": "boolean",
+      "description": "Compute the P-th percentile point of the data in each voxel time series.",
+      "title": "Percentile",
+      "default": false
+    },
+    "argmin": {
+      "type": "boolean",
+      "description": "Compute index of minimum of input voxels.",
+      "title": "Index of Minimum",
+      "default": false
+    },
+    "argmin1": {
+      "type": "boolean",
+      "description": "Compute index + 1 of minimum of input voxels.",
+      "title": "Index + 1 of Minimum",
+      "default": false
+    },
+    "argmax": {
+      "type": "boolean",
+      "description": "Compute index of maximum of input voxels.",
+      "title": "Index of Maximum",
+      "default": false
+    },
+    "argmax1": {
+      "type": "boolean",
+      "description": "Compute index + 1 of maximum of input voxels.",
+      "title": "Index + 1 of Maximum",
+      "default": false
+    },
+    "argabsmax": {
+      "type": "boolean",
+      "description": "Compute index of absolute maximum of input voxels.",
+      "title": "Index of Absolute Maximum",
+      "default": false
+    },
+    "argabsmax1": {
+      "type": "boolean",
+      "description": "Compute index + 1 of absolute maximum of input voxels.",
+      "title": "Index + 1 of Absolute Maximum",
+      "default": false
+    },
+    "duration": {
+      "type": "boolean",
+      "description": "Compute number of points around max above a threshold.",
+      "title": "Duration",
+      "default": false
+    },
+    "onset": {
+      "type": "boolean",
+      "description": "Compute beginning of duration around max where value exceeds basepercent.",
+      "title": "Onset",
+      "default": false
+    },
+    "offset": {
+      "type": "boolean",
+      "description": "Compute end of duration around max where value exceeds basepercent.",
+      "title": "Offset",
+      "default": false
+    },
+    "centroid": {
+      "type": "boolean",
+      "description": "Compute centroid of data time curves.",
+      "title": "Centroid",
+      "default": false
+    },
+    "centduration": {
+      "type": "boolean",
+      "description": "Compute duration using centroid's index as center.",
+      "title": "Centroid Duration",
+      "default": false
+    },
+    "nzmean": {
+      "type": "boolean",
+      "description": "Compute mean of non-zero voxels.",
+      "title": "Non-Zero Mean",
+      "default": false
+    },
+    "zcount": {
+      "type": "boolean",
+      "description": "Count number of zero values at each voxel.",
+      "title": "Zero Count",
+      "default": false
+    },
+    "nzcount": {
+      "type": "boolean",
+      "description": "Count number of non-zero values at each voxel.",
+      "title": "Non-Zero Count",
+      "default": false
+    },
+    "autocorr": {
+      "type": "boolean",
+      "description": "Compute autocorrelation function and return first n coefficients.",
+      "title": "Autocorrelation",
+      "default": false
+    },
+    "autoreg": {
+      "type": "boolean",
+      "description": "Compute autoregression coefficients and return first n coefficients.",
+      "title": "Autoregression",
+      "default": false
+    },
+    "accumulate": {
+      "type": "boolean",
+      "description": "Accumulate time series values (partial sums).",
+      "title": "Accumulate",
+      "default": false
+    },
+    "centromean": {
+      "type": "boolean",
+      "description": "Compute mean of middle 50% of voxel values.",
+      "title": "Centromean",
+      "default": false
+    },
+    "skewness": {
+      "type": "boolean",
+      "description": "Measure of asymmetry in distribution.",
+      "title": "Skewness",
+      "default": false
+    },
+    "kurtosis": {
+      "type": "boolean",
+      "description": "Measure of the 'tailedness' of the probability distribution.",
+      "title": "Kurtosis",
+      "default": false
+    },
+    "firstvalue": {
+      "type": "boolean",
+      "description": "First value in dataset.",
+      "title": "First Value",
+      "default": false
+    },
+    "tdiff": {
+      "type": "boolean",
+      "description": "Take the first difference of each time series before further processing.",
+      "title": "First Difference",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use string 'p' for the prefix of the output dataset [DEFAULT = 'stat'].",
+      "title": "Prefix"
+    },
+    "datum": {
+      "type": "string",
+      "description": "Use data type 'd' for the type of storage of the output, where 'd' is one of 'byte', 'short', or 'float' [DEFAULT=float].",
+      "title": "Datum"
+    },
+    "nscale": {
+      "type": "boolean",
+      "description": "Do not scale output values when datum is byte or short. Scaling is done by default.",
+      "title": "No Scale",
+      "default": false
+    },
+    "basepercent": {
+      "type": "number",
+      "description": "Percentage of maximum for duration calculation.",
+      "title": "Base Percent"
+    },
+    "mask_mset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use the dataset 'mset' as a mask. Only voxels with nonzero values in 'mset' will be printed from 'dataset'.",
+      "title": "Mask Mset"
+    },
+    "mrange": {
+      "type": "string",
+      "description": "Further restrict the voxels from 'mset' so that only those mask values between 'a' and 'b' (inclusive) will be used.",
+      "title": "Mask Range"
+    },
+    "cmask": {
+      "type": "string",
+      "description": "Execute the options enclosed in single quotes as a 3dcalc-like program, and produce a mask from the resulting 3D brick.",
+      "title": "Cmask"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

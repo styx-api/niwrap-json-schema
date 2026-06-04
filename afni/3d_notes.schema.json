@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dNotes",
+  "description": "A program to add, delete and show notes for AFNI datasets.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dNotes"
+    },
+    "add_note": {
+      "type": "string",
+      "description": "Add the string 'str' to the list of notes.",
+      "title": "Add Note"
+    },
+    "append_history": {
+      "type": "string",
+      "description": "Append the string 'str' to the dataset's history. This can only appear once on the command line.",
+      "title": "Append History"
+    },
+    "replace_history": {
+      "type": "string",
+      "description": "Replace any existing history note with 'str'. This option cannot be used with '-h'.",
+      "title": "Replace History"
+    },
+    "delete_note": {
+      "type": "number",
+      "description": "Deletes note number num.",
+      "title": "Delete Note"
+    },
+    "print_notes": {
+      "type": "boolean",
+      "description": "Print to stdout the expanded notes.",
+      "title": "Print Notes",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Displays this help screen.",
+      "title": "Help",
+      "default": false
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "AFNI compatible dataset [required].",
+      "title": "Dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset"
+  ]
+}

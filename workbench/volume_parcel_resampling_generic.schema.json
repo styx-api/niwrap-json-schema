@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SMOOTH AND RESAMPLE VOLUME PARCELS FROM DIFFERENT VOLUME SPACE",
+  "description": "Smooths and resamples the region inside each label in cur-parcels to the region of the same label name in new-parcels.  Any voxels in the output label region but outside the input label region will be extrapolated from nearby data.  The -fix-zeros option causes the smoothing to not use an input value if it is zero, but still write a smoothed value to the voxel, and after smoothing is complete, it will check for any remaining values of zero, and fill them in with extrapolated values.  The output volume will use the volume space of new-parcels, which does not need to be in the same volume space as the input.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume_parcel_resampling_generic"
+    },
+    "volume_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input data volume"
+    },
+    "cur_parcels": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "label volume of where the parcels currently are"
+    },
+    "new_parcels": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "label volume of where the parcels should be"
+    },
+    "kernel": {
+      "type": "number",
+      "description": "gaussian kernel size in mm to smooth by during resampling, as sigma by default"
+    },
+    "volume_out": {
+      "type": "string",
+      "description": "output volume"
+    },
+    "fwhm": {
+      "type": "boolean",
+      "description": "smoothing kernel size is FWHM, not sigma",
+      "default": false
+    },
+    "fix_zeros": {
+      "type": "boolean",
+      "description": "treat zero values as not being data",
+      "default": false
+    },
+    "subvolume": {
+      "type": "string",
+      "description": "select a single subvolume as input"
+    }
+  },
+  "required": [
+    "@type",
+    "volume_in",
+    "cur_parcels",
+    "new_parcels",
+    "kernel",
+    "volume_out"
+  ]
+}

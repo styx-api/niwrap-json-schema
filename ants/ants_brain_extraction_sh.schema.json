@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsBrainExtraction.sh",
+  "description": "antsBrainExtraction.sh performs template-based brain extraction using N4 bias correction, registration, and Atropos segmentation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsBrainExtraction.sh"
+    },
+    "image_dimension": {
+      "enum": [
+        2,
+        3
+      ],
+      "description": "Image dimension (2 or 3 for 2- or 3-dimensional image)",
+      "title": "Image Dimension"
+    },
+    "anatomical_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Anatomical image (Structural image, typically T1). If more than one anatomical image is specified, subsequently specified images are used during the segmentation process. However, only the first image is used in the registration of priors.",
+      "title": "Anatomical Image"
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Brain extraction template (Anatomical template)",
+      "title": "Brain Extraction Template"
+    },
+    "probability_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Brain extraction probability mask (with intensity range 1=definitely brain to 0=definitely background)",
+      "title": "Brain Extraction Probability Mask"
+    },
+    "tissue_classification": {
+      "type": "string",
+      "description": "Tissue classification - A k-means segmentation to find tissue classes. Format: KxcsfLabelxgmLabelxwmLabel. Examples: '3x1x2x3' for T1 (K=3, CSF=1, GM=2, WM=3), '3x3x2x1' for T2, '3x1x3x2' for FLAIR, '4x4x2x3' for K=4",
+      "title": "Tissue Classification"
+    },
+    "brain_extraction_registration_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Brain extraction registration mask (Mask used for registration to limit the metric computation to a specific region)",
+      "title": "Brain Extraction Registration Mask"
+    },
+    "keep_temporary_files": {
+      "type": "boolean",
+      "description": "Keep temporary files (keep brain extraction/segmentation warps, etc). 0=delete, 1=keep",
+      "title": "Keep Temporary Files"
+    },
+    "single_floating_point_precision": {
+      "type": "boolean",
+      "description": "Use antsRegistration with single (1) or double (0) floating point precision",
+      "title": "Single Floating Point Precision"
+    },
+    "initial_moving_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Initial moving transform (An ITK affine transform, e.g., from antsAI or ITK-SNAP). Without this option, the script calls antsAI to search for a good initial moving transform.",
+      "title": "Initial Moving Transform"
+    },
+    "rotation_search_params": {
+      "type": "string",
+      "description": "Rotation search parameters for antsAI in format 'step,arcFraction'. Step is in degrees, arcFraction goes from 0 (no search) to 1 (search -180 to 180 degrees)",
+      "title": "Rotation Search Parameters"
+    },
+    "image_file_suffix": {
+      "type": "string",
+      "description": "Image file suffix (any standard ITK IO format, e.g., nrrd, nii.gz, mhd)",
+      "title": "Image File Suffix"
+    },
+    "translation_search_params": {
+      "type": "string",
+      "description": "Translation search parameters for antsAI in format 'step,range'. Step is in mm, -range to range will be tested in each dimension",
+      "title": "Translation Search Parameters"
+    },
+    "random_seeding": {
+      "type": "boolean",
+      "description": "Use random seeding: 1=use random seed from system clock, 0=use fixed seed (ANTS_RANDOM_SEED=19650218 or value from environment). For reproducibility, set to 0 and also set ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1",
+      "title": "Use Random Seeding"
+    },
+    "debug_mode": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Test/debug mode: If > 0, runs a faster version of the script. Only for debugging, results will not be good.",
+      "title": "Debug Mode"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Output prefix (directory + file prefix)",
+      "title": "Output Prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "anatomical_image",
+    "template",
+    "probability_mask"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_fdr",
+  "description": "A program that performs False Discovery Rate correction.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_fdr"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "Input source volume or surface overlay. Specify mask, output, and frame as needed.",
+      "title": "Input source"
+    },
+    "fdr_value": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "FDR value between 0 and 1, typically .05",
+      "title": "FDR value"
+    },
+    "default_frame": {
+      "type": "integer",
+      "description": "Use input frame when not specifying frame in --i",
+      "title": "Default frame"
+    },
+    "positive_only": {
+      "type": "boolean",
+      "description": "Only consider positive voxels",
+      "title": "Positive voxels only",
+      "default": false
+    },
+    "negative_only": {
+      "type": "boolean",
+      "description": "Only consider negative voxels",
+      "title": "Negative voxels only",
+      "default": false
+    },
+    "all_voxels": {
+      "type": "boolean",
+      "description": "Consider all voxels regardless of sign (default)",
+      "title": "All voxels",
+      "default": false
+    },
+    "raw_p_values": {
+      "type": "boolean",
+      "description": "Input is raw p-values, not -log10(p)",
+      "title": "Raw p-values",
+      "default": false
+    },
+    "threshold_file": {
+      "type": "string",
+      "description": "Write threshold to text file",
+      "title": "Threshold file"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug",
+      "default": false
+    },
+    "check_options": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit",
+      "title": "Check options",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_files",
+    "fdr_value"
+  ]
+}

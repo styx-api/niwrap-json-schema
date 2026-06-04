@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CREATE CIFTI ROI MAPS FROM EXTREMA MAPS",
+  "description": "For each nonzero value in each map, make a map with an ROI around that location.  If the -gaussian option is specified, then normalized gaussian kernels are output instead of ROIs.  The <method> argument to -overlap-logic must be one of ALLOW, CLOSEST, or EXCLUDE.  ALLOW is the default, and means that ROIs are treated independently and may overlap.  CLOSEST means that ROIs may not overlap, and that no ROI contains vertices that are closer to a different seed vertex.  EXCLUDE means that ROIs may not overlap, and that any vertex within range of more than one ROI does not belong to any ROI.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_rois_from_extrema"
+    },
+    "cifti": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input cifti"
+    },
+    "surf_limit": {
+      "type": "number",
+      "description": "geodesic distance limit from vertex, in mm"
+    },
+    "vol_limit": {
+      "type": "number",
+      "description": "euclidean distance limit from voxel center, in mm"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which dimension an extrema map is along, ROW or COLUMN"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "the output cifti"
+    },
+    "left_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify the left surface to use"
+    },
+    "right_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify the right surface to use"
+    },
+    "cerebellum_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify the cerebellum surface to use"
+    },
+    "gaussian": {
+      "type": "object",
+      "properties": {
+        "surf_sigma": {
+          "type": "number",
+          "description": "the sigma for the surface gaussian kernel, in mm"
+        },
+        "vol_sigma": {
+          "type": "number",
+          "description": "the sigma for the volume gaussian kernel, in mm"
+        }
+      },
+      "required": [
+        "surf_sigma",
+        "vol_sigma"
+      ],
+      "description": "generate gaussian kernels instead of flat ROIs"
+    },
+    "overlap_logic": {
+      "type": "string",
+      "description": "how to handle overlapping ROIs, default ALLOW"
+    },
+    "merged_volume": {
+      "type": "boolean",
+      "description": "treat volume components as if they were a single component",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "cifti",
+    "surf_limit",
+    "vol_limit",
+    "direction",
+    "cifti_out"
+  ]
+}

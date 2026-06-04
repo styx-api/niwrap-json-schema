@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "slicetimer",
+  "description": "FMRIB's Interpolation for Slice Timing",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/slicetimer"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input timeseries",
+      "title": "Input file"
+    },
+    "outfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of output timeseries",
+      "title": "Output file"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "down_flag": {
+      "type": "boolean",
+      "description": "Reverse slice indexing (default is: slices were acquired bottom-up)",
+      "title": "Reverse slice indexing",
+      "default": false
+    },
+    "tr_value": {
+      "type": "number",
+      "description": "Specify TR of data - default is 3s",
+      "title": "TR value"
+    },
+    "direction": {
+      "type": "string",
+      "description": "Direction of slice acquisition (x=1,y=2,z=3) - default is z",
+      "title": "Acquisition direction"
+    },
+    "odd_flag": {
+      "type": "boolean",
+      "description": "Use interleaved acquisition",
+      "title": "Interleaved acquisition",
+      "default": false
+    },
+    "tcustom_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of single-column slice timings, in fractions of TR, +ve values shift slices forward in time",
+      "title": "Custom slice timings file"
+    },
+    "tglobal_value": {
+      "type": "number",
+      "description": "Global shift in fraction of TR, (default is 0)",
+      "title": "Global shift in TR fraction"
+    },
+    "ocustom_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of single-column custom interleave order file (first slice is referred to as 1 not 0)",
+      "title": "Custom interleave order file"
+    }
+  },
+  "required": [
+    "@type",
+    "infile"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dRetinoPhase",
+  "description": "Process time series from retinotopy stimuli to create phase datasets and visual field angle datasets",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dRetinoPhase"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix of output datasets.",
+      "title": "Prefix"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Time series from a retinotopy stimulus.",
+      "title": "Dataset"
+    },
+    "exp": {
+      "type": "string",
+      "description": "Expanding rings stimulus.",
+      "title": "Expanding Rings"
+    },
+    "con": {
+      "type": "string",
+      "description": "Contracting rings stimulus.",
+      "title": "Contracting Rings"
+    },
+    "clw": {
+      "type": "string",
+      "description": "Clockwise moving polar angle mapping stimulus.",
+      "title": "Clockwise Polar Angle"
+    },
+    "ccw": {
+      "type": "string",
+      "description": "Counterclockwise moving polar angle mapping stimulus.",
+      "title": "Counterclockwise Polar Angle"
+    },
+    "spectra": {
+      "type": "boolean",
+      "description": "Output amplitude and phase spectra datasets.",
+      "title": "Spectra",
+      "default": false
+    },
+    "tstim": {
+      "type": "number",
+      "description": "Period of stimulus in seconds.",
+      "title": "Stimulus Period"
+    },
+    "nrings": {
+      "type": "number",
+      "description": "Number of rings in the stimulus. Default is 1.",
+      "title": "Number of Rings"
+    },
+    "nwedges": {
+      "type": "number",
+      "description": "Number of wedges in the stimulus. Default is 1.",
+      "title": "Number of Wedges"
+    },
+    "ort_adjust": {
+      "type": "number",
+      "description": "Number of DOF lost in detrending outside of this program.",
+      "title": "Detrending DOF Adjustment"
+    },
+    "pre_stim": {
+      "type": "number",
+      "description": "Blank period, in seconds, before stimulus began.",
+      "title": "Pre-Stimulus Period"
+    },
+    "sum_adjust": {
+      "type": "string",
+      "description": "Adjust sum of angles for wrapping based on the angle difference. Default is 'y'.",
+      "title": "Sum Adjustment"
+    },
+    "phase_estimate": {
+      "type": "string",
+      "description": "Method of phase estimation.",
+      "title": "Phase Estimation Method"
+    },
+    "ref_ts": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "0 lag reference time series of response for DELAY phase estimation method.",
+      "title": "Reference Time Series"
+    },
+    "multi_ref_ts": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Multiple 0 lag reference time series. This allows you to test multiple regressors.",
+      "title": "Multiple Reference Time Series"
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "dataset"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_distance_transform",
+  "description": "Computes the distance transform of a label on the surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_distance_transform"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface file for processing.",
+      "title": "Surface File"
+    },
+    "label": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Label file to apply distance transform.",
+      "title": "Label File"
+    },
+    "mode": {
+      "enum": [
+        "signed",
+        "unsigned",
+        "outside"
+      ],
+      "description": "Mode of the distance transform, can be 'signed', 'unsigned', or 'outside'.",
+      "title": "Mode"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output file for the distance transform results.",
+      "title": "Output File"
+    },
+    "anterior": {
+      "type": "number",
+      "description": "Only use anteriormost <dist> portion of the label.",
+      "title": "Anterior Distance"
+    },
+    "posterior": {
+      "type": "number",
+      "description": "Only use posteriormost <dist> portion of the label.",
+      "title": "Posterior Distance"
+    },
+    "divide": {
+      "type": "number",
+      "description": "Divide label into <n> units along primary eigendirection.",
+      "title": "Divide Units"
+    },
+    "olabel": {
+      "type": "boolean",
+      "description": "Output label subdivisions.",
+      "title": "Output Label Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "label",
+    "mode",
+    "output_file"
+  ]
+}

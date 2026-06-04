@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dAFNItoRaw",
+  "description": "Convert an AFNI brik file with multiple sub-briks to a raw file with each sub-brik voxel concatenated voxel-wise.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dAFNItoRaw"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Name of the output file (not an AFNI dataset prefix). Default is rawxyz.dat.",
+      "title": "Output File"
+    },
+    "force_float": {
+      "type": "boolean",
+      "description": "Force floating point output. Floating point forced if any sub-brik scale factors not equal to 1.",
+      "title": "Force Float Output",
+      "default": false
+    },
+    "dataset": {
+      "type": "string",
+      "description": "Input AFNI dataset with possible modifiers for sub-brick and sub-range selection.",
+      "title": "Input Dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset"
+  ]
+}

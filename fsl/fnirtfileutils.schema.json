@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fnirtfileutils",
+  "description": "FNIRT file utilities for FSL - Converts FNIRT warp field coefficients to other formats",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fnirtfileutils"
+    },
+    "input_coefs": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input coefficient volume to be converted",
+      "title": "Input Coefficients"
+    },
+    "ref_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for reference volume",
+      "title": "Reference Volume"
+    },
+    "out_field": {
+      "type": "string",
+      "description": "Filename for output field/coef volume - uses relative warp convention",
+      "title": "Output Field"
+    },
+    "output_format": {
+      "type": "string",
+      "description": "Output format [field, spline], default=field",
+      "title": "Output Format"
+    },
+    "warp_res": {
+      "type": "number",
+      "description": "Warp resolution (mm), only relevant when --outformat=spline",
+      "title": "Warp Resolution"
+    },
+    "knot_space": {
+      "type": "number",
+      "description": "Knot-spacing (voxels), only relevant when --outformat=spline",
+      "title": "Knot Spacing"
+    },
+    "jacobian_output": {
+      "type": "string",
+      "description": "Filename for output jacobian determinant map volume",
+      "title": "Jacobian Determinant Map Output"
+    },
+    "jacobian_matrix_output": {
+      "type": "string",
+      "description": "Filename for output full jacobian matrix 4D-map volume",
+      "title": "Full Jacobian Matrix Output"
+    },
+    "with_aff": {
+      "type": "boolean",
+      "description": "If set, the affine transform is included in the field/jacobian",
+      "title": "Include Affine Transform",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display this help message",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_coefs"
+  ]
+}

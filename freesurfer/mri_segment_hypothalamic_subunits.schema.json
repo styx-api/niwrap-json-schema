@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_segment_hypothalamic_subunits",
+  "description": "This module segments hypothalamic subunits and can be run in two modes: on FreeSurfer subjects or on any T1-weighted scan(s) of approximately 1mm resolution.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_segment_hypothalamic_subunits"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "(required in FS mode) Name of one or several subjects in $SUBJECTS_DIR on which to run the module, assuming recon-all has been run on the specified subjects.",
+      "title": "Subjects"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "(FS mode, optional) Override current $SUBJECTS_DIR.",
+      "title": "Subjects Directory"
+    },
+    "write_posteriors": {
+      "type": "boolean",
+      "description": "(FS mode, optional) Save posteriors; default is False.",
+      "title": "Write Posteriors Flag",
+      "default": false
+    },
+    "image_input": {
+      "type": "string",
+      "description": "(required in T1 mode) Image(s) to segment. Can be a path to a single image or to a folder.",
+      "title": "Image Input"
+    },
+    "output": {
+      "type": "string",
+      "description": "(required in T1 mode) Segmentation output(s). Must be a folder if --i designates a folder.",
+      "title": "Output"
+    },
+    "posteriors": {
+      "type": "string",
+      "description": "(T1 mode, optional) Posteriors output(s). Must be a folder if --i designates a folder.",
+      "title": "Posteriors"
+    },
+    "resample": {
+      "type": "string",
+      "description": "(T1 mode, optional) Resampled image(s). Must be a folder if --i designates a folder.",
+      "title": "Resample"
+    },
+    "volume_output": {
+      "type": "string",
+      "description": "(T1 mode, optional) Output CSV file with volumes for all structures and subjects.",
+      "title": "Volume Output"
+    },
+    "crop_size": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "(both modes, optional) Size of the central patch to analyse (must be divisible by 8). The whole image is analysed by default.",
+      "title": "Crop Size"
+    },
+    "threads": {
+      "type": "number",
+      "description": "(both modes, optional) Number of cores to be used. Default uses 1 core.",
+      "title": "Threads"
+    },
+    "cpu": {
+      "type": "boolean",
+      "description": "(both modes, optional) Enforce running with CPU rather than GPU.",
+      "title": "CPU Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

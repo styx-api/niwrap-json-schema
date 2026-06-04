@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IMPORT SERIES DATA INTO CIFTI",
+  "description": "Convert a text file containing series of equal length into a cifti file.  The text file should have lines made up of numbers separated by whitespace, with no extra newlines between lines.\n\nThe <unit> argument must be one of the following:\n\nSECOND\nHERTZ\nMETER\nRADIAN",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_create_scalar_series"
+    },
+    "input": {
+      "type": "string",
+      "description": "input file"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "output cifti file"
+    },
+    "transpose": {
+      "type": "boolean",
+      "description": "use if the rows of the text file are along the scalar dimension",
+      "default": false
+    },
+    "name_file": {
+      "type": "string",
+      "description": "use a text file to set names on scalar dimension"
+    },
+    "series": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "description": "the unit to use"
+        },
+        "start": {
+          "type": "number",
+          "description": "the value at the first series point"
+        },
+        "step": {
+          "type": "number",
+          "description": "the interval between series points"
+        }
+      },
+      "required": [
+        "unit",
+        "start",
+        "step"
+      ],
+      "description": "set the units and values of the series"
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "cifti_out"
+  ]
+}

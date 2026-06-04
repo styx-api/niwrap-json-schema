@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "adwarp",
+  "description": "Resamples a 'data parent' dataset to the grid defined by an 'anat parent' dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/adwarp"
+    },
+    "apar": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set the anat parent dataset (nonoptional)",
+      "title": "Anat parent dataset"
+    },
+    "dpar": {
+      "type": "string",
+      "description": "Set the data parent dataset (nonoptional). dset may contain a sub-brick selector, e.g., -dpar 'dset+orig[2,5,7]'",
+      "title": "Data parent dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Set the prefix for the output dataset. Default is the prefix of 'dset'.",
+      "title": "Output prefix"
+    },
+    "dxyz": {
+      "type": "number",
+      "description": "Set the grid spacing in the output dataset. Default is 1 mm.",
+      "title": "Grid spacing"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print out progress reports.",
+      "title": "Verbose",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "Write out result even if it means deleting an existing dataset. Default is not to overwrite.",
+      "title": "Force overwrite",
+      "default": false
+    },
+    "resam": {
+      "type": "string",
+      "description": "Set resampling mode for all sub-bricks. Modes: NN (Nearest Neighbor), Li (Linear Interpolation), Cu (Cubic Interpolation), Bk (Blocky Interpolation). Default is Li for all sub-bricks.",
+      "title": "Resampling mode"
+    },
+    "thr": {
+      "type": "string",
+      "description": "Set resampling mode for threshold sub-bricks. Modes: NN (Nearest Neighbor), Li (Linear Interpolation), Cu (Cubic Interpolation), Bk (Blocky Interpolation).",
+      "title": "Threshold resampling mode"
+    },
+    "func": {
+      "type": "string",
+      "description": "Set resampling mode for functional sub-bricks. Modes: NN (Nearest Neighbor), Li (Linear Interpolation), Cu (Cubic Interpolation), Bk (Blocky Interpolation).",
+      "title": "Functional resampling mode"
+    }
+  },
+  "required": [
+    "@type",
+    "apar",
+    "dpar"
+  ]
+}

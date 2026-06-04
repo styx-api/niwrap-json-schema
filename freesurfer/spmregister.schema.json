@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "spmregister",
+  "description": "Registers a volume to its FreeSurfer anatomical using SPM's spm_coreg",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/spmregister"
+    },
+    "subjid": {
+      "type": "string",
+      "description": "Id of the subject as found in SUBJECTS_DIR. This is converted to analyze using mri_convert.",
+      "title": "Subject ID"
+    },
+    "mov": {
+      "type": "string",
+      "description": "Volume identifier of the movable volume. Must be specified in a way suitable for mri_convert.",
+      "title": "Movable volume"
+    },
+    "reg": {
+      "type": "string",
+      "description": "Output registration file. Maps RAS in the reference to RAS in the movable.",
+      "title": "Registration file"
+    },
+    "frame": {
+      "type": "number",
+      "description": "Use something other than the first frame. Specify the frame number you want.",
+      "title": "Frame number"
+    },
+    "mid_frame": {
+      "type": "boolean",
+      "description": "Use the middle frame of the mov volume as the template.",
+      "title": "Middle frame flag",
+      "default": false
+    },
+    "template_out": {
+      "type": "string",
+      "description": "Save the mov template when template is something other than the first frame.",
+      "title": "Template output"
+    },
+    "fsvol": {
+      "type": "string",
+      "description": "Use FreeSurfer volid (default brainmask).",
+      "title": "FreeSurfer volume"
+    },
+    "force_ras": {
+      "type": "boolean",
+      "description": "Force input geometry to be RAS.",
+      "title": "Force RAS flag",
+      "default": false
+    },
+    "outvol": {
+      "type": "string",
+      "description": "Resample mov and save as outvol.",
+      "title": "Output volume"
+    },
+    "tmpdir": {
+      "type": "string",
+      "description": "Temporary directory (implies --nocleanup).",
+      "title": "Temporary directory"
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "description": "Do not delete temporary files.",
+      "title": "No cleanup flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version and exit.",
+      "title": "Version flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print help and exit.",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subjid",
+    "mov",
+    "reg"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_long_normalize",
+  "description": "Tool to normalize the white-matter of MRI volumes, optionally based on control points.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_long_normalize"
+    },
+    "input_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input MRI volume file.",
+      "title": "Input Volume"
+    },
+    "base_tp_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Base time point file.",
+      "title": "Base Time Point File"
+    },
+    "output_vol": {
+      "type": "string",
+      "description": "Output MRI volume file.",
+      "title": "Output Volume"
+    },
+    "normalization_iters": {
+      "type": "integer",
+      "description": "Use n 3D normalization iterations (default is 2).",
+      "title": "Normalization Iterations"
+    },
+    "disable_1d": {
+      "type": "boolean",
+      "description": "Disable 1D normalization.",
+      "title": "Disable 1D Normalization Flag",
+      "default": false
+    },
+    "smooth_bias": {
+      "type": "number",
+      "description": "Smooth the bias field.",
+      "title": "Smooth Bias"
+    },
+    "aseg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Aseg file specification.",
+      "title": "Aseg"
+    },
+    "debug_gvx": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "For debugging: specify Gvx, Gvy, Gvz.",
+      "title": "Debug GVx"
+    },
+    "debug_gx": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "For debugging: specify Gx, Gy, Gz.",
+      "title": "Debug GX"
+    },
+    "reading": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "For reading: specify control points and bias field.",
+      "title": "Reading"
+    },
+    "print_usage": {
+      "type": "boolean",
+      "description": "Print usage information.",
+      "title": "Print Usage Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_vol",
+    "base_tp_file",
+    "output_vol"
+  ]
+}

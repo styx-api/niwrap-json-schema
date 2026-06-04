@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Atropos",
+  "description": "Atropos is a finite mixture modeling (FMM) segmentation approach that allows for prior constraints including a prior label image, prior probability images, and/or an MRF prior to enforce spatial smoothing of the labels.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/Atropos"
+    },
+    "image_dimensionality": {
+      "enum": [
+        2,
+        3,
+        4
+      ],
+      "description": "This option forces the image to be treated as a specified-dimensional image. If not specified, Atropos tries to infer the dimensionality from the first input image.",
+      "title": "Image Dimensionality"
+    },
+    "intensity_image": {
+      "type": "string",
+      "description": "One or more scalar images is specified for segmentation. For scenarios with no prior information, the first scalar image is used to order labelings by intensity. The optional adaptive smoothing weight is applicable with prior images, specified between [0,1].",
+      "title": "Intensity Image"
+    },
+    "bspline": {
+      "type": "string",
+      "description": "Parameters for B-Spline. Adaptive smoothing is applied to intensity images if smoothing weights > 0.",
+      "title": "B-Spline Parameters"
+    },
+    "initialization": {
+      "type": "string",
+      "description": "Initialize the FMM parameters. options include Random, Otsu, KMeans, PriorProbabilityImages, and PriorLabelImage.",
+      "title": "Initialization"
+    },
+    "partial_volume_label_set": {
+      "type": "string",
+      "description": "Model mixtures of classes within single voxels. Specify labels for each partial volume class.",
+      "title": "Partial Volume Label Set"
+    },
+    "use_partial_volume_likelihoods": {
+      "type": "boolean",
+      "description": "Whether to use partial volume likelihoods. A value of 1 considers the partial volume class separate from tissue classes.",
+      "title": "Use Partial Volume Likelihoods"
+    },
+    "posterior_formulation": {
+      "type": "string",
+      "description": "Specify posterior probability formulation. Options are Socrates, Plato, Aristotle, or Sigmoid.",
+      "title": "Posterior Formulation"
+    },
+    "mask_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The required image mask defines the region to be labeled by Atropos.",
+      "title": "Mask Image"
+    },
+    "convergence": {
+      "type": "string",
+      "description": "Determine convergence based on mean maximum posterior probability over region of interest.",
+      "title": "Convergence"
+    },
+    "likelihood_model": {
+      "type": "string",
+      "description": "Specify parametric or non-parametric likelihood model. Options include Gaussian, HistogramParzenWindows, ManifoldParzenWindows, among others.",
+      "title": "Likelihood Model"
+    },
+    "mrf": {
+      "type": "string",
+      "description": "Markov Random Field parameters to enforce spatial constraints on segmentation.",
+      "title": "MRF Parameters"
+    },
+    "icm": {
+      "type": "string",
+      "description": "ICM (Iterated Conditional Modes) parameters for asynchronous updating.",
+      "title": "ICM Parameters"
+    },
+    "use_random_seed": {
+      "type": "boolean",
+      "description": "Initialize with a random seed or a constant seed number.",
+      "title": "Use Random Seed"
+    },
+    "output": {
+      "type": "string",
+      "description": "Output labeled image and optionally posterior probability images.",
+      "title": "Output"
+    },
+    "minimize_memory_usage": {
+      "type": "boolean",
+      "description": "Minimize memory usage by calculating images on the fly and storing only non-negligible pixel values.",
+      "title": "Minimize Memory Usage"
+    },
+    "winsorize_outliers": {
+      "type": "string",
+      "description": "Options to remove effects of outliers in calculations using methods like BoxPlot or GrubbsRosner.",
+      "title": "Winsorize Outliers"
+    },
+    "use_euclidean_distance": {
+      "type": "boolean",
+      "description": "Propagate labels throughout the mask using a distance transform.",
+      "title": "Use Euclidean Distance"
+    },
+    "label_propagation": {
+      "type": "string",
+      "description": "Control propagation of each prior label by specified lambda and boundary probability.",
+      "title": "Label Propagation"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose output.",
+      "title": "Verbose"
+    }
+  },
+  "required": [
+    "@type",
+    "intensity_image",
+    "initialization",
+    "mask_image",
+    "convergence",
+    "likelihood_model",
+    "output"
+  ]
+}

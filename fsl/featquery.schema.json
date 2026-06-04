@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "featquery",
+  "description": "Tool to extract statistics and/or time series from FEAT directories",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/featquery"
+    },
+    "n_featdirs": {
+      "type": "number",
+      "description": "Number of feat directories",
+      "title": "Number of feat directories"
+    },
+    "featdirs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of feat directories",
+      "title": "Feat directories"
+    },
+    "n_stats": {
+      "type": "number",
+      "description": "Number of stats to query",
+      "title": "Number of statistics"
+    },
+    "stats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of stats",
+      "title": "Statistics"
+    },
+    "output_rootname": {
+      "type": "string",
+      "description": "Root name for output files",
+      "title": "Output root name"
+    },
+    "atlas_flag": {
+      "type": "string",
+      "description": "Use selected atlas to generate label (etc.) information",
+      "title": "Atlas flag"
+    },
+    "percent_convert_flag": {
+      "type": "boolean",
+      "description": "Convert PE / COPE values into percentages",
+      "title": "Percent convert flag",
+      "default": false
+    },
+    "thresh_flag": {
+      "type": "boolean",
+      "description": "Threshold stats images",
+      "title": "Threshold flag",
+      "default": false
+    },
+    "interp_thresh": {
+      "type": "number",
+      "description": "Affect size of resampled masks by changing post-interpolation thresholding (default 0.5)",
+      "title": "Interpolation threshold"
+    },
+    "timeseries_flag": {
+      "type": "boolean",
+      "description": "Create time-series plots",
+      "title": "Time-series flag",
+      "default": false
+    },
+    "weight_flag": {
+      "type": "boolean",
+      "description": "Do not binarise mask (allow weighting)",
+      "title": "Weight flag",
+      "default": false
+    },
+    "browser_flag": {
+      "type": "boolean",
+      "description": "Popup results in browser when finished",
+      "title": "Browser flag",
+      "default": false
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file used as a reference for coordinates; if relative, searched within each FEAT directory",
+      "title": "Mask file"
+    },
+    "coords": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Coordinates specified in voxels (X Y Z)",
+      "title": "Voxel coordinates"
+    }
+  },
+  "required": [
+    "@type",
+    "n_featdirs",
+    "featdirs",
+    "n_stats",
+    "stats",
+    "output_rootname",
+    "mask_file"
+  ]
+}

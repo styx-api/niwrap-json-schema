@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "sfa2fieldsign",
+  "description": "Computes fieldsign map from sfa-sess output. Masks the angle volumes and samples them to the surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/sfa2fieldsign"
+    },
+    "sfadir": {
+      "type": "string",
+      "description": "Output directory of sfa-sess",
+      "title": "SFA Directory"
+    },
+    "register_dat": {
+      "type": "string",
+      "description": "Registration file",
+      "title": "Register File"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Sigthresh threshold (Default: 2)",
+      "title": "Threshold"
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "Full width at half maximum (FWHM) (Default: 10mm)",
+      "title": "FWHM"
+    },
+    "proj_frac": {
+      "type": "number",
+      "description": "Projection fraction (Default: 0.5)",
+      "title": "Projection Fraction"
+    },
+    "occip": {
+      "type": "boolean",
+      "description": "Use rh.occip.patch.flat",
+      "title": "Occipital Patch Flag",
+      "default": false
+    },
+    "patch": {
+      "type": "string",
+      "description": "Use specific patch (?)h.patch",
+      "title": "Patch"
+    },
+    "osd": {
+      "type": "string",
+      "description": "Directory under SFA to put output (Default: fieldsign)",
+      "title": "Output Subdirectory"
+    },
+    "lh": {
+      "type": "boolean",
+      "description": "Process left hemisphere only",
+      "title": "Left Hemisphere Flag",
+      "default": false
+    },
+    "rh": {
+      "type": "boolean",
+      "description": "Process right hemisphere only",
+      "title": "Right Hemisphere Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "sfadir",
+    "register_dat"
+  ]
+}

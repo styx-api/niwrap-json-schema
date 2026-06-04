@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsJointFusion",
+  "description": "antsJointFusion is an image fusion algorithm developed by Hongzhi Wang and Paul Yushkevich. This implementation is based on Paul's original ITK-style implementation and Brian's ANTsR implementation. The original label fusion framework was extended to accommodate intensities.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsJointFusion"
+    },
+    "image_dimensionality": {
+      "enum": [
+        2,
+        3,
+        4
+      ],
+      "description": "This option forces the image to be treated as a specified-dimensional image. If not specified, the program tries to infer the dimensionality from the input image.",
+      "title": "Image Dimensionality"
+    },
+    "target_image": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "The target image (or multimodal target images) assumed to be aligned to a common image domain.",
+      "title": "Target Image"
+    },
+    "atlas_image": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "The atlas image (or multimodal atlas images) assumed to be aligned to a common image domain.",
+      "title": "Atlas Image"
+    },
+    "atlas_segmentation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The atlas segmentation images. For performing label fusion the number of specified segmentations should be identical to the number of atlas image sets.",
+      "title": "Atlas Segmentation"
+    },
+    "alpha": {
+      "type": "number",
+      "description": "Regularization term added to matrix Mx for calculating the inverse. Default = 0.1.",
+      "title": "Alpha"
+    },
+    "beta": {
+      "type": "number",
+      "description": "Exponent for mapping intensity difference to the joint error. Default = 2.0.",
+      "title": "Beta"
+    },
+    "constrain_nonnegative": {
+      "type": "boolean",
+      "description": "Constrain solution to non-negative weights.",
+      "title": "Constrain Non-negative"
+    },
+    "patch_radius": {
+      "type": "string",
+      "description": "Patch radius for similarity measures. Default = 2x2x2.",
+      "title": "Patch Radius"
+    },
+    "patch_metric": {
+      "enum": [
+        "PC",
+        "MSQ"
+      ],
+      "description": "Metric to be used in determining the most similar neighborhood patch. Options include Pearson's correlation (PC) and mean squares (MSQ). Default = PC (Pearson correlation).",
+      "title": "Patch Metric"
+    },
+    "search_radius": {
+      "type": "string",
+      "description": "Search radius for similarity measures. Default = 3x3x3. One can also specify an image where the value at the voxel specifies the isotropic search radius at that voxel.",
+      "title": "Search Radius"
+    },
+    "exclusion_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify an exclusion region for the given label.",
+      "title": "Exclusion Image"
+    },
+    "mask_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "If a mask image is specified, fusion is only performed in the mask region.",
+      "title": "Mask Image"
+    },
+    "output": {
+      "type": "string",
+      "description": "The output is the intensity and/or label fusion image. Additional optional outputs include the label posterior probability images and the atlas voting weight images.",
+      "title": "Output"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose output.",
+      "title": "Verbose"
+    }
+  },
+  "required": [
+    "@type",
+    "target_image",
+    "atlas_image",
+    "atlas_segmentation",
+    "output"
+  ]
+}

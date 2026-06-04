@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CREATE A CIFTI DENSE SCALAR FILE",
+  "description": "All input files must have the same number of columns/subvolumes.  Only the specified components will be in the output cifti file.  Map names will be taken from one of the input files.  At least one component must be specified.\n\nSee -volume-label-import and -volume-help for format details of label volume files.  The -metric structure argument and labels in the structure-label-volume must use names from the below list (labels with other names are ignored, -metric arguments with other strings are an error):\n\nCORTEX_LEFT\nCORTEX_RIGHT\nCEREBELLUM\nACCUMBENS_LEFT\nACCUMBENS_RIGHT\nALL_GREY_MATTER\nALL_WHITE_MATTER\nAMYGDALA_LEFT\nAMYGDALA_RIGHT\nBRAIN_STEM\nCAUDATE_LEFT\nCAUDATE_RIGHT\nCEREBELLAR_WHITE_MATTER_LEFT\nCEREBELLAR_WHITE_MATTER_RIGHT\nCEREBELLUM_LEFT\nCEREBELLUM_RIGHT\nCEREBRAL_WHITE_MATTER_LEFT\nCEREBRAL_WHITE_MATTER_RIGHT\nCORTEX\nDIENCEPHALON_VENTRAL_LEFT\nDIENCEPHALON_VENTRAL_RIGHT\nHIPPOCAMPUS_LEFT\nHIPPOCAMPUS_RIGHT\nHIPPOCAMPUS_DENTATE_LEFT\nHIPPOCAMPUS_DENTATE_RIGHT\nINVALID\nOTHER\nOTHER_GREY_MATTER\nOTHER_WHITE_MATTER\nPALLIDUM_LEFT\nPALLIDUM_RIGHT\nPUTAMEN_LEFT\nPUTAMEN_RIGHT\nTHALAMUS_LEFT\nTHALAMUS_RIGHT",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_create_dense_scalar"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "the output cifti file"
+    },
+    "volume": {
+      "type": "object",
+      "properties": {
+        "volume_data": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "volume file containing all voxel data for all volume structures"
+        },
+        "structure_label_volume": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "label volume file containing labels for cifti structures"
+        }
+      },
+      "required": [
+        "volume_data",
+        "structure_label_volume"
+      ],
+      "description": "volume component"
+    },
+    "left_metric": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the metric file"
+        },
+        "roi_left": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "roi of vertices to use from left surface"
+        }
+      },
+      "required": [
+        "metric"
+      ],
+      "description": "metric for the left cortical surface"
+    },
+    "right_metric": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the metric file"
+        },
+        "roi_right": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "roi of vertices to use from right surface"
+        }
+      },
+      "required": [
+        "metric"
+      ],
+      "description": "metric for the right cortical surface"
+    },
+    "cerebellum_metric": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the metric file"
+        },
+        "roi_cerebellum": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "roi of vertices to use from right surface"
+        }
+      },
+      "required": [
+        "metric"
+      ],
+      "description": "metric for the cerebellum"
+    },
+    "name_file": {
+      "type": "string",
+      "description": "use a text file to set all map names"
+    },
+    "metric": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "structure": {
+            "type": "string",
+            "description": "the structure name"
+          },
+          "metric": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "the metric file"
+          },
+          "roi": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "roi of vertices to use from this structure"
+          }
+        },
+        "required": [
+          "structure",
+          "metric"
+        ]
+      },
+      "description": "metric for a specified surface structure"
+    }
+  },
+  "required": [
+    "@type",
+    "cifti_out",
+    "metric"
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mrstats",
+  "description": "Compute images statistics.\n\n\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/mrstats"
+    },
+    "output": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "output only the field specified. Multiple such options can be supplied if required. Choices are: mean, median, std, std_rv, min, max, count. Useful for use in scripts. Both std options refer to the unbiased (sample) standard deviation. For complex data, min, max and std are calculated separately for real and imaginary parts, std_rv is based on the real valued variance (equals sqrt of sum of variances of imaginary and real parts).",
+      "title": "output"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "only perform computation within the specified binary mask image.",
+      "title": "mask"
+    },
+    "ignorezero": {
+      "type": "boolean",
+      "description": "ignore zero values during statistics calculation",
+      "title": "ignorezero",
+      "default": false
+    },
+    "allvolumes": {
+      "type": "boolean",
+      "description": "generate statistics across all image volumes, rather than one set of statistics per image volume",
+      "title": "allvolumes",
+      "default": false
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input image from which statistics will be computed.",
+      "title": "image"
+    }
+  },
+  "required": [
+    "@type",
+    "image"
+  ]
+}

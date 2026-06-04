@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@Align_Centers",
+  "description": "Moves the center of a dataset (DSET) to the center of a base volume (BASE) and optionally creates a transform matrix.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@Align_Centers"
+    },
+    "base": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Base volume, typically a template. Can also specify RAI coordinates for center alignment.",
+      "title": "Base Volume"
+    },
+    "dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset to be aligned to BASE.",
+      "title": "Dataset"
+    },
+    "children": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Additional datasets (originally in register with DSET) that should be shifted in the same way.",
+      "title": "Child Datasets"
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Echo all commands to terminal for debugging.",
+      "title": "Echo Flag",
+      "default": false
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Overwrite existing output files.",
+      "title": "Overwrite Flag",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Custom prefix for the result files.",
+      "title": "Prefix"
+    },
+    "matrix_only": {
+      "type": "boolean",
+      "description": "Only output the transform needed to align the centers without shifting any child volumes.",
+      "title": "1D Matrix Only Flag",
+      "default": false
+    },
+    "matrix_only_no_dset": {
+      "type": "boolean",
+      "description": "Like -1Dmat_only, but no datasets are created or changed.",
+      "title": "1D Matrix Only No Dataset Flag",
+      "default": false
+    },
+    "no_cp": {
+      "type": "boolean",
+      "description": "Do not create new data; shift existing ones. Use with caution.",
+      "title": "No Copy Flag",
+      "default": false
+    },
+    "center_grid": {
+      "type": "boolean",
+      "description": "Center is that of the volume's grid (default).",
+      "title": "Center Grid Flag",
+      "default": false
+    },
+    "center_cm": {
+      "type": "boolean",
+      "description": "Center is the center of mass of the volume.",
+      "title": "Center of Mass Flag",
+      "default": false
+    },
+    "center_cm_no_amask": {
+      "type": "boolean",
+      "description": "Like -cm, but with no automask.",
+      "title": "Center of Mass No Automask Flag",
+      "default": false
+    },
+    "shift_xform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Apply shift translation from a 1D file.",
+      "title": "Shift Transform File"
+    },
+    "shift_xform_inv": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Apply inverse of shift translation from a 1D file.",
+      "title": "Shift Transform Inverse File"
+    }
+  },
+  "required": [
+    "@type",
+    "base",
+    "dset"
+  ]
+}

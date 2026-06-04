@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_volsynth",
+  "description": "Synthesizes a volume with specified geometry and probability distribution function.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_volsynth"
+    },
+    "output_volid": {
+      "type": "string",
+      "description": "Output volume path id and format",
+      "title": "Output volume"
+    },
+    "template": {
+      "type": "string",
+      "description": "Template volume id",
+      "title": "Template"
+    },
+    "nframes": {
+      "type": "number",
+      "description": "Override template number of frames",
+      "title": "Number of frames"
+    },
+    "offset_flag": {
+      "type": "boolean",
+      "description": "Use template as intensity offset",
+      "title": "Offset flag",
+      "default": false
+    },
+    "offset_mid_flag": {
+      "type": "boolean",
+      "description": "Use middle frame of template as intensity offset",
+      "title": "Offset mid flag",
+      "default": false
+    },
+    "curv": {
+      "type": "string",
+      "description": "Save output as curvature, uses lh.thickness as template. Requires subject and hemisphere.",
+      "title": "Curvature output"
+    },
+    "dim": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify dimensionality nc nr ns nf",
+      "title": "Dimensions"
+    },
+    "res": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Voxel resolution dc dr ds df (df is TR, in msec)",
+      "title": "Resolution"
+    },
+    "vox_size": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Change template voxel resolution and dimension dc dr ds",
+      "title": "Voxel size"
+    },
+    "tr": {
+      "type": "number",
+      "description": "Time between frames in msec",
+      "title": "Time between frames"
+    },
+    "cdircos": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Column cosine direction x, y, z",
+      "title": "Column Cosine Direction"
+    },
+    "rdircos": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Row cosine direction x, y, z",
+      "title": "Row Cosine Direction"
+    },
+    "sdircos": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Slice cosine direction x, y, z",
+      "title": "Slice Cosine Direction"
+    },
+    "c_ras": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "RAS coordinates of 'center' voxel c_r c_a c_s",
+      "title": "RAS Center Voxel"
+    },
+    "p0": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "First voxel coordinates p0r p0a p0s",
+      "title": "First voxel"
+    },
+    "precision": {
+      "type": "string",
+      "description": "Precision of the output (e.g., float)",
+      "title": "Precision"
+    },
+    "seed": {
+      "type": "number",
+      "description": "Seed for the random number generator",
+      "title": "Seed"
+    },
+    "seedfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Write seed value to this file",
+      "title": "Seed file"
+    },
+    "pdf": {
+      "type": "string",
+      "description": "Probability distribution function (e.g., gaussian, uniform, const)",
+      "title": "PDF"
+    },
+    "bb": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Bounding box c r s dc dr ds (In=ValA, Out=ValB)",
+      "title": "Bounding box"
+    },
+    "gmean": {
+      "type": "number",
+      "description": "Mean for the gaussian distribution",
+      "title": "Gaussian mean"
+    },
+    "gstd": {
+      "type": "number",
+      "description": "Standard deviation for the gaussian distribution",
+      "title": "Gaussian stddev"
+    },
+    "delta_crsf": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Delta's col, row, slice, and frame coordinates",
+      "title": "Delta CRSF"
+    },
+    "delta_val": {
+      "type": "number",
+      "description": "Delta value",
+      "title": "Delta Value"
+    },
+    "delta_val_off": {
+      "type": "number",
+      "description": "Delta background value",
+      "title": "Delta Background Value"
+    },
+    "grid": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Grid dimensions dcol, drow, dslice",
+      "title": "Grid"
+    },
+    "dof": {
+      "type": "number",
+      "description": "Degrees of freedom for t and chi2 distributions",
+      "title": "Degrees of freedom"
+    },
+    "dof_num": {
+      "type": "number",
+      "description": "Numerator degrees of freedom for F distribution",
+      "title": "Numerator DOF"
+    },
+    "dof_den": {
+      "type": "number",
+      "description": "Denominator degrees of freedom for F distribution",
+      "title": "Denominator DOF"
+    },
+    "rescale_flag": {
+      "type": "boolean",
+      "description": "Rescale z, t, F, or chi2 after smoothing",
+      "title": "Rescale flag",
+      "default": false
+    },
+    "val_a": {
+      "type": "number",
+      "description": "Set ValA",
+      "title": "ValA"
+    },
+    "val_b": {
+      "type": "number",
+      "description": "Set ValB",
+      "title": "ValB"
+    },
+    "vox_radius": {
+      "type": "number",
+      "description": "Radius in voxels for sphere",
+      "title": "Voxel Radius"
+    },
+    "mm_radius": {
+      "type": "number",
+      "description": "Radius in mm for sphere",
+      "title": "MM Radius"
+    },
+    "sphere_center": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Sphere center coordinates column, row, slice",
+      "title": "Sphere Center"
+    },
+    "hsc": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Multiply each frame by a random number between min and max",
+      "title": "HSC Range"
+    },
+    "abs_flag": {
+      "type": "boolean",
+      "description": "Compute absolute value",
+      "title": "Absolute value flag",
+      "default": false
+    },
+    "cp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set control point voxels to 1",
+      "title": "Control Points"
+    },
+    "spike": {
+      "type": "number",
+      "description": "Set all values at a given time point to 1e9",
+      "title": "Spike Time Point"
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "Smooth by Full Width at Half Maximum (FWHM) in mm",
+      "title": "FWHM"
+    },
+    "sum2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Save sum of volume squared into specified file",
+      "title": "Sum Volume Squared"
+    },
+    "dim_surf_flag": {
+      "type": "boolean",
+      "description": "Set dimension to nvertices x 1 x 1",
+      "title": "Surface Dimension Flag",
+      "default": false
+    },
+    "ctab": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Embed color table",
+      "title": "Color Table"
+    }
+  },
+  "required": [
+    "@type",
+    "output_volid"
+  ]
+}

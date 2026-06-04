@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "train-gcs-atlas",
+  "description": "Script to train a surface-based gaussian classifier for cortical surface parcellation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/train-gcs-atlas"
+    },
+    "manual_parcellation": {
+      "type": "string",
+      "description": "Manual parcellation; default is aparc_edited",
+      "title": "Manual Parcellation"
+    },
+    "subjlist_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing the list of subjects",
+      "title": "Subject List File"
+    },
+    "left_hemi": {
+      "type": "boolean",
+      "description": "Left hemisphere processing",
+      "title": "Left Hemisphere Flag",
+      "default": false
+    },
+    "right_hemi": {
+      "type": "boolean",
+      "description": "Right hemisphere processing",
+      "title": "Right Hemisphere Flag",
+      "default": false
+    },
+    "hemi_spec": {
+      "type": "string",
+      "description": "Specify hemisphere for processing",
+      "title": "Hemisphere Specification"
+    },
+    "output_gcs": {
+      "type": "string",
+      "description": "Output GCS file",
+      "title": "Output GCS File"
+    },
+    "surf_reg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface registration file; default is sphere.reg",
+      "title": "Surface Registration File"
+    },
+    "color_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Color table file",
+      "title": "Color Table File"
+    },
+    "exclude_subject": {
+      "type": "string",
+      "description": "Exclude a subject from the atlas",
+      "title": "Exclude Subject"
+    },
+    "jackknife_flag": {
+      "type": "boolean",
+      "description": "Submit a job for each subject excluding it",
+      "title": "Jackknife Flag",
+      "default": false
+    },
+    "aseg_filename": {
+      "type": "string",
+      "description": "Aseg filename; default is aseg.auto.mgz",
+      "title": "Aseg Filename"
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads to use",
+      "title": "Threads"
+    }
+  },
+  "required": [
+    "@type",
+    "output_gcs"
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "epi_b0_correct.py",
+  "description": "B0 distortion correction tool using an acquired frequency (phase) image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/epi_b0_correct.py"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix of output files; can include path.",
+      "title": "Output prefix"
+    },
+    "input_freq": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Phase dataset (frequency volume); should be at similar resolution and FOV as the EPI dataset; must be scaled appropriately.",
+      "title": "Input frequency dataset"
+    },
+    "input_epi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "EPI dataset to which B0 distortion correction will be applied.",
+      "title": "Input EPI dataset"
+    },
+    "input_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask of brain volume.",
+      "title": "Input mask dataset"
+    },
+    "input_magn": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Magnitude dataset from which to estimate brain mask; can be used for QC imaging.",
+      "title": "Input magnitude dataset"
+    },
+    "input_anat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Anatomical dataset to be used as underlay for QC images (optional).",
+      "title": "Input anatomical dataset"
+    },
+    "input_json": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "JSON file containing parameters about the EPI dataset.",
+      "title": "Input EPI JSON"
+    },
+    "epi_pe_dir": {
+      "type": "string",
+      "description": "Direction (axis) of phase encoding, e.g., AP, PA, RL, ...",
+      "title": "EPI PE direction"
+    },
+    "epi_pe_bwpp": {
+      "type": "number",
+      "description": "Bandwidth per pixel (in Hz) in the EPI dataset along the phase encode direction.",
+      "title": "EPI PE bandwidth per pixel"
+    },
+    "epi_pe_echo_sp": {
+      "type": "number",
+      "description": "Effective TE spacing of the phase encoded volume, in seconds.",
+      "title": "EPI PE echo spacing"
+    },
+    "epi_pe_vox_dim": {
+      "type": "number",
+      "description": "Voxel size along the EPI dataset's phase encode axis, in mm.",
+      "title": "EPI PE voxel dimension"
+    },
+    "scale_freq": {
+      "type": "number",
+      "description": "Scale to apply to frequency volume to match units (def: SF=1.0).",
+      "title": "Scale frequency"
+    },
+    "out_cmds": {
+      "type": "string",
+      "description": "Name for output script recording commands (def: PREFIX_cmds.tcsh).",
+      "title": "Output commands script"
+    },
+    "out_pars": {
+      "type": "string",
+      "description": "Name for output text file recording relevant parameters (def: PREFIX_pars.txt).",
+      "title": "Output parameters file"
+    },
+    "wdir_name": {
+      "type": "string",
+      "description": "Working directory name (def: automatic name).",
+      "title": "Working directory name"
+    },
+    "blur_sigma": {
+      "type": "number",
+      "description": "Amount of blurring to apply to masked phase encode dataset (def: BS=9).",
+      "title": "Blur sigma"
+    },
+    "do_recenter_freq": {
+      "type": "string",
+      "description": "Method to recenter the phase volume within the brain mask (def: MC=mode).",
+      "title": "Recenter frequency method"
+    },
+    "mask_dilate": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Erosion and dilation parameters for automask (when using magnitude image).",
+      "title": "Mask dilation parameters"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Don't remove the temporary directory of intermediate files.",
+      "title": "No clean temporary files",
+      "default": false
+    },
+    "qc_box_focus_ulay": {
+      "type": "boolean",
+      "description": "Focus the QC images on an automask region of the underlay dataset.",
+      "title": "QC box focus underlay",
+      "default": false
+    },
+    "no_qc_image": {
+      "type": "boolean",
+      "description": "Don't generate QC images.",
+      "title": "No QC images",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display program help in terminal.",
+      "title": "Help",
+      "default": false
+    },
+    "ver": {
+      "type": "boolean",
+      "description": "Display program version number in terminal.",
+      "title": "Version",
+      "default": false
+    },
+    "date": {
+      "type": "boolean",
+      "description": "Display date of program's last update in terminal.",
+      "title": "Date",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "input_freq",
+    "input_epi",
+    "epi_pe_dir"
+  ]
+}

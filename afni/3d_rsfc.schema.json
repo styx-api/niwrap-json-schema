@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dRSFC",
+  "description": "Program to calculate common resting state functional connectivity (RSFC) parameters.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dRSFC"
+    },
+    "fbot": {
+      "type": "number",
+      "description": "Lowest frequency in the passband, in Hz",
+      "title": "Frequency Band Bottom"
+    },
+    "ftop": {
+      "type": "number",
+      "description": "Highest frequency in the passband (must be > fbot)",
+      "title": "Frequency Band Top"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset (3D+time sequence of volumes)",
+      "title": "Input Dataset"
+    },
+    "despike": {
+      "type": "boolean",
+      "description": "Despike each time series before other processing.",
+      "title": "Despike Flag",
+      "default": false
+    },
+    "ort_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Also orthogonalize input to columns in specified file.",
+      "title": "Ort File"
+    },
+    "dsort_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Orthogonalize each voxel to the corresponding voxel time series in specified dataset.",
+      "title": "Dsort File"
+    },
+    "nodetrend": {
+      "type": "boolean",
+      "description": "Skip the quadratic detrending of input before FFT-based bandpassing.",
+      "title": "No Detrend Flag",
+      "default": false
+    },
+    "time_step": {
+      "type": "number",
+      "description": "Set time step to specified value in seconds.",
+      "title": "Time Step"
+    },
+    "nfft": {
+      "type": "integer",
+      "description": "Set the FFT length to specified value.",
+      "title": "NFFT Value"
+    },
+    "norm": {
+      "type": "boolean",
+      "description": "Make all output time series have L2 norm = 1.",
+      "title": "Normalize Flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify mask dataset.",
+      "title": "Mask File"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Create a mask from the input dataset.",
+      "title": "Automask Flag",
+      "default": false
+    },
+    "blur": {
+      "type": "number",
+      "description": "Blur inside the mask only with specified FWHM in mm.",
+      "title": "Blur FWHM"
+    },
+    "localpv": {
+      "type": "number",
+      "description": "Replace each vector by the local Principal Vector from a neighborhood radius.",
+      "title": "LocalPV Radius"
+    },
+    "input_alt": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alternative way to specify input dataset.",
+      "title": "Input Dataset Alternative"
+    },
+    "band": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Alternative way to specify passband frequencies.",
+      "title": "Passband Frequencies"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Set prefix name of the output dataset.",
+      "title": "Output Prefix"
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Turn off the fun and informative messages.",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "no_rs_out": {
+      "type": "boolean",
+      "description": "Don't output processed time series, just output parameters.",
+      "title": "No RS Output Flag",
+      "default": false
+    },
+    "un_bandpass_out": {
+      "type": "boolean",
+      "description": "Output the un-bandpassed series as well.",
+      "title": "Un-Bandpass Output Flag",
+      "default": false
+    },
+    "no_rsfa": {
+      "type": "boolean",
+      "description": "Exclude RSFA output (default is to include).",
+      "title": "No RSFA Flag",
+      "default": false
+    },
+    "bp_at_end": {
+      "type": "boolean",
+      "description": "Bandpassing as the last step in the processing sequence.",
+      "title": "Bandpass at End Flag",
+      "default": false
+    },
+    "notrans": {
+      "type": "boolean",
+      "description": "Don't check for initial positive transients in the data.",
+      "title": "No Transients Flag",
+      "default": false
+    },
+    "nosat": {
+      "type": "boolean",
+      "description": "Equivalent to -notrans, skips checking for initial transients.",
+      "title": "No Saturation Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "fbot",
+    "ftop",
+    "input_dataset"
+  ]
+}

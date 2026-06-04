@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dExchange",
+  "description": "Replaces voxel values using a mapping file with specified columns",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dExchange"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output prefix",
+      "title": "Output Prefix"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset. Acceptable data types are byte, short, and floats.",
+      "title": "Input file"
+    },
+    "mapfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mapping columns. Input values in the first column, output values in the second column",
+      "title": "Mapping file"
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print author and version info",
+      "title": "Version info flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print this help screen",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "infile",
+    "mapfile"
+  ]
+}

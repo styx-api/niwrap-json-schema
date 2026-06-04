@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_refine_surfaces",
+  "description": "Refines cortical surfaces around the region specified by the label file",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_refine_surfaces"
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "The name of the subject",
+      "title": "Subject name"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "The hemisphere to process ('lh' for left hemisphere, 'rh' for right hemisphere)",
+      "title": "Hemisphere"
+    },
+    "hires_volume": {
+      "type": "string",
+      "description": "The high-resolution volume filename",
+      "title": "High-resolution volume"
+    },
+    "label_file": {
+      "type": "string",
+      "description": "The label file specifying the region to refine",
+      "title": "Label file"
+    },
+    "low_to_hires_xfm": {
+      "type": "string",
+      "description": "The optional low to high resolution transform file",
+      "title": "Low-to-high resolution transform"
+    },
+    "sdir": {
+      "type": "string",
+      "description": "Specify the SUBJECTS_DIR",
+      "title": "Subjects directory"
+    },
+    "use_mgz": {
+      "type": "boolean",
+      "description": "Use .mgz volumes",
+      "title": "Use mgz volumes",
+      "default": false
+    },
+    "suffix": {
+      "type": "string",
+      "description": "Add specified suffix to the final surfaces",
+      "title": "Suffix for final surfaces"
+    }
+  },
+  "required": [
+    "@type",
+    "subject_name",
+    "hemi",
+    "hires_volume",
+    "label_file"
+  ]
+}

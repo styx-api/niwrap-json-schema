@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_extract",
+  "description": "MRI data extraction tool for FreeSurfer",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_extract"
+    },
+    "like_template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Extract region like the given template volume.",
+      "title": "Template Volume"
+    },
+    "src_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Source MRI volume file from which data will be extracted.",
+      "title": "Source Volume"
+    },
+    "dst_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The destination file where the extracted data will be saved.",
+      "title": "Destination Volume"
+    },
+    "coordinates": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 6,
+      "maxItems": 6,
+      "description": "Coordinates and size of the extraction box: x0 y0 z0 dx dy dz.",
+      "title": "Extraction Coordinates"
+    }
+  },
+  "required": [
+    "@type",
+    "src_volume",
+    "dst_volume"
+  ]
+}

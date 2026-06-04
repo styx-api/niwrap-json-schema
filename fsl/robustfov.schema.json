@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "robustfov",
+  "description": "Reduce FOV of image to remove lower head and neck.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/robustfov"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image file",
+      "title": "Input file"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "ROI volume output name",
+      "title": "Output image"
+    },
+    "brain_size": {
+      "type": "number",
+      "description": "Size of the brain in z-dimension (default 170mm)",
+      "title": "Brain size in z-dimension"
+    },
+    "matrix_output": {
+      "type": "string",
+      "description": "Matrix output name (ROI to full FOV)",
+      "title": "Matrix output name"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Turn on debugging output",
+      "title": "Debug flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file"
+  ]
+}

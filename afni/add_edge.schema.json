@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@AddEdge",
+  "description": "A script to create composite edge-enhanced datasets and drive the AFNI interface to display the results",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@AddEdge"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input datasets",
+      "title": "Input datasets"
+    },
+    "examine_list": {
+      "type": "string",
+      "description": "Use list of paired datasets from file",
+      "title": "Examine list file"
+    },
+    "ax_mont": {
+      "type": "string",
+      "description": "Axial montage string (default='2x2:24')",
+      "title": "Axial montage format"
+    },
+    "ax_geom": {
+      "type": "string",
+      "description": "Axial image window geometry (default='777x702+433+334')",
+      "title": "Axial image window geometry"
+    },
+    "sag_geom": {
+      "type": "string",
+      "description": "Sagittal image window geometry (default='540x360+4+436')",
+      "title": "Sagittal image window geometry"
+    },
+    "layout_file": {
+      "type": "string",
+      "description": "Use AFNI layout file for display",
+      "title": "AFNI layout file"
+    },
+    "no_layout": {
+      "type": "boolean",
+      "description": "Do not use layout. Use AFNI as it is open.",
+      "title": "No layout flag",
+      "default": false
+    },
+    "edge_percentile": {
+      "type": "integer",
+      "description": "Specify edge threshold value (default=30%)",
+      "title": "Edge threshold value"
+    },
+    "single_edge": {
+      "type": "boolean",
+      "description": "Show only a single edge in composite image",
+      "title": "Single edge flag",
+      "default": false
+    },
+    "opacity": {
+      "type": "integer",
+      "description": "Set opacity of overlay (default=9 opaque)",
+      "title": "Overlay opacity"
+    },
+    "keep_temp": {
+      "type": "boolean",
+      "description": "Do not remove temporary files",
+      "title": "Keep temporary files flag",
+      "default": false
+    },
+    "no_deoblique": {
+      "type": "boolean",
+      "description": "Do not deoblique any data to show overlap",
+      "title": "No deoblique flag",
+      "default": false
+    },
+    "auto_record": {
+      "type": "boolean",
+      "description": "Save JPEG files of current slices without prompting",
+      "title": "Auto record flag",
+      "default": false
+    },
+    "auto": {
+      "type": "boolean",
+      "description": "Closes old AFNI sessions and relaunches a new one ready to listen to @AddEdge in review mode.",
+      "title": "Auto flag",
+      "default": false
+    },
+    "no_auto": {
+      "type": "boolean",
+      "description": "Opposite of -auto",
+      "title": "No auto flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dClustSim",
+  "description": "Program to estimate the probability of false positive (noise-only) clusters.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dClustSim"
+    },
+    "nxyz": {
+      "type": "string",
+      "description": "Size of 3D grid to use for simulation",
+      "title": "Grid Size"
+    },
+    "dxyz": {
+      "type": "string",
+      "description": "Voxel sizes along each dimension",
+      "title": "Voxel Sizes"
+    },
+    "ball": {
+      "type": "boolean",
+      "description": "Mask off points outside a ball at the center of the grid",
+      "title": "Ball Mask",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use the 0 sub-brick of this dataset as a mask",
+      "title": "Mask Dataset"
+    },
+    "oksmallmask": {
+      "type": "boolean",
+      "description": "Allow small masks with less than 128 nonzero voxels",
+      "title": "Allow Small Mask",
+      "default": false
+    },
+    "inset": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Use these dataset(s) as the simulations to threshold and clusterize",
+      "title": "Input Datasets"
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "Gaussian filter width in mm (use -fwhmxyz for different values per axis)",
+      "title": "Gaussian Filter Width"
+    },
+    "acf": {
+      "type": "string",
+      "description": "Parameters a, b, c for the autocorrelation function",
+      "title": "Autocorrelation Function"
+    },
+    "nopad": {
+      "type": "boolean",
+      "description": "Turn off padding slices added for edge effects",
+      "title": "No Padding",
+      "default": false
+    },
+    "pthr": {
+      "type": "string",
+      "description": "List of uncorrected per voxel p-values",
+      "title": "P-Value Thresholds"
+    },
+    "athr": {
+      "type": "string",
+      "description": "List of corrected whole volume alpha-values",
+      "title": "Alpha Thresholds"
+    },
+    "lots": {
+      "type": "boolean",
+      "description": "Use a longer list of values for pthr and athr",
+      "title": "Lots of Values",
+      "default": false
+    },
+    "mega": {
+      "type": "boolean",
+      "description": "Add even more values to the pthr and athr grids",
+      "title": "Mega Values",
+      "default": false
+    },
+    "iter": {
+      "type": "number",
+      "description": "Number of Monte Carlo simulations",
+      "title": "Monte Carlo Iterations"
+    },
+    "nodec": {
+      "type": "boolean",
+      "description": "Print the cluster size threshold as an integer",
+      "title": "No Decimal",
+      "default": false
+    },
+    "seed": {
+      "type": "number",
+      "description": "Random number seed",
+      "title": "Random Seed"
+    },
+    "niml": {
+      "type": "boolean",
+      "description": "Output the table in XML/NIML format",
+      "title": "NIML Output",
+      "default": false
+    },
+    "both": {
+      "type": "boolean",
+      "description": "Output the table in both XML/NIML format and in .1D format",
+      "title": "Both Formats",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Specify prefix for the output files",
+      "title": "Output Prefix"
+    },
+    "cmd": {
+      "type": "string",
+      "description": "Write command for putting results into a file's header",
+      "title": "Command File"
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Don't print out progress reports",
+      "title": "Quiet Mode",
+      "default": false
+    },
+    "ssave": {
+      "type": "string",
+      "description": "Save un-thresholded generated random volumes",
+      "title": "Save Random Volumes"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

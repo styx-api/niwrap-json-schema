@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dfim+",
+  "description": "Program to calculate the cross-correlation of an ideal reference waveform with the measured FMRI time series for each voxel.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dfim+"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input 3d+time dataset",
+      "title": "Input file"
+    },
+    "input1dfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of single (fMRI) .1D time series",
+      "title": "Input 1D file"
+    },
+    "maskfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of 3d mask dataset",
+      "title": "Mask file"
+    },
+    "first_image": {
+      "type": "number",
+      "description": "Number of first dataset image to use in the cross-correlation procedure (default = 0)",
+      "title": "Number of first dataset image"
+    },
+    "last_image": {
+      "type": "number",
+      "description": "Number of last dataset image to use in the cross-correlation procedure (default = last)",
+      "title": "Number of last dataset image"
+    },
+    "baseline_polynomial": {
+      "type": "number",
+      "description": "Degree of polynomial corresponding to the baseline model (default: 1). Use -1 for no baseline model.",
+      "title": "Degree of baseline polynomial"
+    },
+    "threshold": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "FIM internal mask threshold value (0 <= p <= 1) to get rid of low intensity voxels (default: 0.0999)",
+      "title": "Threshold value"
+    },
+    "cdisp_value": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Write (to screen) results for voxels whose correlation stat. > cval (0 <= cval <= 1; default: disabled)",
+      "title": "Correlation display value"
+    },
+    "ort_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input ort time series file name. Can be used multiple times.",
+      "title": "Ort file"
+    },
+    "ideal_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input ideal time series file name. Can be used multiple times.",
+      "title": "Ideal file"
+    },
+    "output_params": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Output the specified parameter. Can be used multiple times. Possible values are: 'Fit Coef', 'Best Index', '% Change', 'Baseline', 'Correlation', '% From Ave', 'Average', '% From Top', 'Topline', 'Sigma Resid', 'All', 'Spearman CC', 'Quadrant CC'.",
+      "title": "Output parameters"
+    },
+    "output_bucket": {
+      "type": "string",
+      "description": "Create one AFNI 'bucket' dataset containing the parameters of interest, as specified by the '-out' commands. The output 'bucket' dataset is written to a file with the prefix name bprefix.",
+      "title": "Output bucket prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "infile",
+    "ideal_file"
+  ]
+}

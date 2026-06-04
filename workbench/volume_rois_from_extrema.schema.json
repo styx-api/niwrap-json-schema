@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CREATE VOLUME ROI MAPS FROM EXTREMA MAPS",
+  "description": "For each nonzero value in each map, make a map with an ROI around that location.  If the -gaussian option is specified, then normalized gaussian kernels are output instead of ROIs.  The <method> argument to -overlap-logic must be one of ALLOW, CLOSEST, or EXCLUDE.  ALLOW is the default, and means that ROIs are treated independently and may overlap.  CLOSEST means that ROIs may not overlap, and that no ROI contains vertices that are closer to a different seed vertex.  EXCLUDE means that ROIs may not overlap, and that any vertex within range of more than one ROI does not belong to any ROI.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume_rois_from_extrema"
+    },
+    "volume_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input volume"
+    },
+    "limit": {
+      "type": "number",
+      "description": "distance limit from voxel center, in mm"
+    },
+    "volume_out": {
+      "type": "string",
+      "description": "the output volume"
+    },
+    "gaussian": {
+      "type": "number",
+      "description": "generate a gaussian kernel instead of a flat ROI"
+    },
+    "roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "select a region of interest to use"
+    },
+    "overlap_logic": {
+      "type": "string",
+      "description": "how to handle overlapping ROIs, default ALLOW"
+    },
+    "subvolume": {
+      "type": "string",
+      "description": "select a single subvolume to take the gradient of"
+    }
+  },
+  "required": [
+    "@type",
+    "volume_in",
+    "limit",
+    "volume_out"
+  ]
+}

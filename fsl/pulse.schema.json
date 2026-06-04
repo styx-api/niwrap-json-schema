@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "pulse",
+  "description": "Generates a pulse sequence matrix for a given digital brain image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/pulse"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "4D digital brain, resolution can be any.",
+      "title": "Input digital brain file"
+    },
+    "output_base": {
+      "type": "string",
+      "description": "Output base name",
+      "title": "Output base name"
+    },
+    "seq": {
+      "type": "string",
+      "description": "Type of pulse sequence; default=epi (epi OR ge)",
+      "title": "Pulse sequence"
+    },
+    "angle": {
+      "type": "number",
+      "description": "Flip angle in degrees; default=90",
+      "title": "Flip angle"
+    },
+    "te": {
+      "type": "number",
+      "description": "The time from the first RF to the first echo; default=0.03s",
+      "title": "Echo time"
+    },
+    "tr": {
+      "type": "number",
+      "description": "The time between the two RF pulses applied on the same part of the object; default=3s",
+      "title": "Repetition time"
+    },
+    "trslc": {
+      "type": "number",
+      "description": "The time that takes for the acquisition of one slice; default=0.12s",
+      "title": "Slice acquisition time"
+    },
+    "nx": {
+      "type": "number",
+      "description": "Resolution in x of the output image; default=64",
+      "title": "X resolution"
+    },
+    "ny": {
+      "type": "number",
+      "description": "Resolution in y of the output image; default=64",
+      "title": "Y resolution"
+    },
+    "dx": {
+      "type": "number",
+      "description": "Image voxel x-dimension; default=0.004m",
+      "title": "Voxel x-dimension"
+    },
+    "dy": {
+      "type": "number",
+      "description": "Image voxel y-dimension; default=0.004m",
+      "title": "Voxel y-dimension"
+    },
+    "maxG": {
+      "type": "number",
+      "description": "Maximum gradient strength; default=0.055 T/m",
+      "title": "Maximum gradient strength"
+    },
+    "riset": {
+      "type": "number",
+      "description": "Time it takes for the gradient to reach its max value; default=0.00022s",
+      "title": "Gradient rise time"
+    },
+    "bw": {
+      "type": "number",
+      "description": "Receiving bandwidth; default=100000Hz",
+      "title": "Receiving bandwidth"
+    },
+    "numvol": {
+      "type": "number",
+      "description": "Number of volumes; default=1",
+      "title": "Number of volumes"
+    },
+    "numslc": {
+      "type": "number",
+      "description": "Number of slices; default=1",
+      "title": "Number of slices"
+    },
+    "slcthk": {
+      "type": "number",
+      "description": "Slice thickness; default=0.006m",
+      "title": "Slice thickness"
+    },
+    "gap": {
+      "type": "number",
+      "description": "Gap between the slices in meters; default=0m",
+      "title": "Slice gap"
+    },
+    "zstart": {
+      "type": "number",
+      "description": "The lowest position in the slice direction in meters; default=0m",
+      "title": "Slice start position"
+    },
+    "slcdir": {
+      "type": "string",
+      "description": "Slice acquisition direction/orientation; default=z- (x+,x-, y+,y- or z+,or z-)",
+      "title": "Slice acquisition direction"
+    },
+    "phasedir": {
+      "type": "string",
+      "description": "Phase encode direction/orientation; default=y+ (x+,x-, y+,y- or z+,or z-)",
+      "title": "Phase encode direction"
+    },
+    "readdir": {
+      "type": "string",
+      "description": "Read-out direction/orientation; default=x+ (x+,x-, y+,y- or z+,or z-)",
+      "title": "Read-out direction"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "kcoord_flag": {
+      "type": "boolean",
+      "description": "Save k-space coordinates; default=no",
+      "title": "K-space coordinates flag",
+      "default": false
+    },
+    "cover": {
+      "type": "number",
+      "minimum": 50,
+      "maximum": 100,
+      "description": "Phase partial Fourier coverage in percentage; default=100 (min=50, max=100)",
+      "title": "Fourier coverage"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_base"
+  ]
+}

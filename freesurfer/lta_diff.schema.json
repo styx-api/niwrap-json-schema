@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "lta_diff",
+  "description": "A tool to compute different distance norms for a single transform or for the difference between two transforms.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/lta_diff"
+    },
+    "transform1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First transform file",
+      "title": "Transform 1"
+    },
+    "transform2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second transform file",
+      "title": "Transform 2"
+    },
+    "dist_type": {
+      "type": "integer",
+      "description": "Distance type: 1 (Rigid Trans. Dist.), 2 (Affine Transform Distance), 3 (8-corners mean distance), 4 (Max Displacement), 5 (Determinant scaling), 6 (Interpolation Smoothing), 7 (Decomposition). Default is 2.",
+      "title": "Distance Type"
+    },
+    "invert1": {
+      "type": "boolean",
+      "description": "Invert first transform before computing difference matrix D",
+      "title": "Invert First Transform",
+      "default": false
+    },
+    "invert2": {
+      "type": "boolean",
+      "description": "Invert second transform before computing difference matrix D",
+      "title": "Invert Second Transform",
+      "default": false
+    },
+    "vox": {
+      "type": "boolean",
+      "description": "Compute distance in vox coordinates, after adjusting for voxel sizes. Default is RAS coordinates.",
+      "title": "Vox Coordinates",
+      "default": false
+    },
+    "normdiv": {
+      "type": "number",
+      "description": "Divide final distance by this value for step adjustment.",
+      "title": "Normalization Divisor"
+    },
+    "radius": {
+      "type": "number",
+      "description": "Radius in mm, used for RMS distance. Default is 100 to include the head.",
+      "title": "Radius"
+    }
+  },
+  "required": [
+    "@type",
+    "transform1"
+  ]
+}

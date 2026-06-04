@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dt_recon",
+  "description": "Performs DTI reconstruction from the raw DWI input files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dt_recon"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume (DWI data).",
+      "title": "Input Volume"
+    },
+    "bvals_bvecs": {
+      "type": "string",
+      "description": "B-values and B-vectors files.",
+      "title": "B-values and B-vectors"
+    },
+    "subject_id": {
+      "type": "string",
+      "description": "Subject ID.",
+      "title": "Subject ID"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Output directory.",
+      "title": "Output Directory"
+    },
+    "info_dump": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use info dump created by unpacksdcmdir or dcmunpack.",
+      "title": "Info Dump"
+    },
+    "ec_reference": {
+      "type": "number",
+      "description": "Use specified time points as 0-based reference for eddy current correction.",
+      "title": "EC Reference Time Points"
+    },
+    "no_ec_flag": {
+      "type": "boolean",
+      "description": "Turn off eddy/motion correction.",
+      "title": "No Eddy Correction Flag",
+      "default": false
+    },
+    "no_reg_flag": {
+      "type": "boolean",
+      "description": "Do not register to subject or resample to talairach.",
+      "title": "No Registration Flag",
+      "default": false
+    },
+    "register_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Supply a register.lta file instead of registering.",
+      "title": "Register File"
+    },
+    "no_tal_flag": {
+      "type": "boolean",
+      "description": "Do not resample FA to talairach space.",
+      "title": "No Talairach Flag",
+      "default": false
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Specify subjects directory (default env SUBJECTS_DIR).",
+      "title": "Subjects Directory"
+    },
+    "save_ec_residuals_flag": {
+      "type": "boolean",
+      "description": "Save residual error (dwires and eres).",
+      "title": "Save EC Residuals Flag",
+      "default": false
+    },
+    "pca_analysis_flag": {
+      "type": "boolean",
+      "description": "Run PCA/SVD analysis on eres (saves in pca-eres dir).",
+      "title": "PCA Analysis Flag",
+      "default": false
+    },
+    "mask_prune_threshold": {
+      "type": "number",
+      "description": "Set threshold for masking (default is FLT_MIN).",
+      "title": "Mask Prune Threshold"
+    },
+    "init_spm_flag": {
+      "type": "boolean",
+      "description": "Initialize BBR with SPM instead of coreg (requires MATLAB).",
+      "title": "Initialize with SPM Flag",
+      "default": false
+    },
+    "init_fsl_flag": {
+      "type": "boolean",
+      "description": "Initialize BBR with FSL instead of coreg.",
+      "title": "Initialize with FSL Flag",
+      "default": false
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Print out lots of info.",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "version_flag": {
+      "type": "boolean",
+      "description": "Print version of this script and exit.",
+      "title": "Version Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "subject_id",
+    "output_dir"
+  ]
+}

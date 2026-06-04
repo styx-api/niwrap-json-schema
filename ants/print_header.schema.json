@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PrintHeader",
+  "description": "Prints header information from a medical image file. When called with only an image, prints a full header dump including dimensions, bounding box, origin, spacing, intensity range and mean, canonical orientation code, direction cosine matrix, and all image metadata. When called with a specific information code, prints only that property.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/PrintHeader"
+    },
+    "image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image file (any format supported by ITK, e.g. NIfTI, NRRD, MetaImage). Supports 1D through 5D images.",
+      "title": "Image"
+    },
+    "what_information": {
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "description": "Specify which header field to print: 0 = origin, 1 = spacing, 2 = size, 3 = index, 4 = direction. Values are printed as 'x'-delimited strings. If omitted, prints a full header dump.",
+      "title": "What Information"
+    }
+  },
+  "required": [
+    "@type",
+    "image"
+  ]
+}

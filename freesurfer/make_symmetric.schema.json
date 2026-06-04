@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "make_symmetric",
+  "description": "Registers an input image to its left/right reversed version using mri_robust_register in a half-way space and mirrors the selected hemisphere.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/make_symmetric"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "The hemisphere to mirror; accepted values are 'lh' for left hemisphere or 'rh' for right hemisphere.",
+      "title": "Hemisphere"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image in .mgz format.",
+      "title": "Input file"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output image in .mgz format resulting from the symmetric processing.",
+      "title": "Output file"
+    },
+    "transform_map": {
+      "type": "string",
+      "description": "Transformation map in .lta format mapping the input to the upright space.",
+      "title": "Transform map file"
+    }
+  },
+  "required": [
+    "@type",
+    "hemi",
+    "input_file",
+    "output_file",
+    "transform_map"
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fim2",
+  "description": "Functional Imaging Mapping Tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fim2"
+    },
+    "image_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input MRI image files",
+      "title": "Image files"
+    },
+    "pcnt": {
+      "type": "number",
+      "description": "Correlation coefficient threshold will be 1 - 0.01 * #",
+      "title": "Percent Correlation Threshold"
+    },
+    "pcthresh": {
+      "type": "number",
+      "description": "Correlation coefficient threshold will be #",
+      "title": "Coefficient Threshold"
+    },
+    "im1": {
+      "type": "integer",
+      "description": "Index of image file to use as first in time series; default is 1",
+      "title": "First Image Index"
+    },
+    "num": {
+      "type": "integer",
+      "description": "Number of images to actually use; default is to use all images",
+      "title": "Number of Images"
+    },
+    "non": {
+      "type": "boolean",
+      "description": "Turn off default normalization of the output activation image",
+      "title": "Disable Normalization",
+      "default": false
+    },
+    "coef": {
+      "type": "number",
+      "description": "Scaling factor to convert the activation output from floats to short ints",
+      "title": "Scaling Factor"
+    },
+    "ort": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Filename of a time series to which the image data will be orthogonalized before correlations are computed",
+      "title": "Orthogonalization Time Series"
+    },
+    "ideal": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Filename of a time series to which the image data is to be correlated",
+      "title": "Ideal Time Series"
+    },
+    "polref": {
+      "type": "integer",
+      "description": "Use polynomials of order 0..# as extra 'orts'; default is 0",
+      "title": "Polynomial Order"
+    },
+    "fimfile": {
+      "type": "string",
+      "description": "Filename to save activation magnitudes in",
+      "title": "FIM File"
+    },
+    "corr": {
+      "type": "boolean",
+      "description": "Indicates to write correlation output to image file 'fimfile.CORR'",
+      "title": "Correlation Output Flag",
+      "default": false
+    },
+    "corfile": {
+      "type": "string",
+      "description": "Filename to save correlation image in",
+      "title": "Correlation File"
+    },
+    "cnrfile": {
+      "type": "string",
+      "description": "Filename to save contrast-to-noise image in",
+      "title": "CNR File"
+    },
+    "sigfile": {
+      "type": "string",
+      "description": "Filename to save standard deviation image in",
+      "title": "Standard Deviation File"
+    },
+    "fitfile": {
+      "type": "string",
+      "description": "Image files of the least squares fit coefficients of all the -ort and -polref time series",
+      "title": "Least Squares Fit Coefficients File"
+    },
+    "subort": {
+      "type": "string",
+      "description": "Filename of the new timeseries of images with the orts and polrefs subtracted out",
+      "title": "Subtracted Ortho Reference Time Series"
+    },
+    "flim": {
+      "type": "boolean",
+      "description": "Write outputs in mrilib 'float' format",
+      "title": "Floating-Point Output Flag",
+      "default": false
+    },
+    "clean": {
+      "type": "boolean",
+      "description": "Output images won't have the +/- 10000 values forced into their corners for scaling purposes",
+      "title": "Clean Output Flag",
+      "default": false
+    },
+    "clip": {
+      "type": "boolean",
+      "description": "Set to zero regions of low intensity in output correlations, etc.",
+      "title": "Clip Low Intensity Output Flag",
+      "default": false
+    },
+    "q": {
+      "type": "boolean",
+      "description": "Quiet operation mode",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "dfspace": {
+      "type": "boolean",
+      "description": "Use the 'dfspace' filter to register the images spatially before filtering.",
+      "title": "DF Space Filter Flag",
+      "default": false
+    },
+    "regbase": {
+      "type": "string",
+      "description": "Read image in file 'fname' as the base image for registration",
+      "title": "Base Registration Image"
+    }
+  },
+  "required": [
+    "@type",
+    "image_files"
+  ]
+}

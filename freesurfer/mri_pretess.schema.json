@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_pretess",
+  "description": "Tool to modify WM segmentation so that all neighbors of WM voxels have a common face.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_pretess"
+    },
+    "filledvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input filled volume, usually wm.mgz",
+      "title": "Filled Volume"
+    },
+    "labelstring": {
+      "type": "string",
+      "description": "Label string, usually wm",
+      "title": "Label String"
+    },
+    "normvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Normalization volume, usually norm.mgz",
+      "title": "Normalization Volume"
+    },
+    "newfilledvol": {
+      "type": "string",
+      "description": "New filled volume output, usually wm.mgz",
+      "title": "New Filled Volume"
+    },
+    "debug_voxel": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify the voxel to debug with coordinates C R S",
+      "title": "Debug Voxel Coordinates"
+    },
+    "nocorners": {
+      "type": "boolean",
+      "description": "No removal of corner configurations in addition to edge ones",
+      "title": "No Corners Flag",
+      "default": false
+    },
+    "write": {
+      "type": "boolean",
+      "description": "Turn on diagnostic writing",
+      "title": "Write Flag",
+      "default": false
+    },
+    "keep": {
+      "type": "boolean",
+      "description": "Keep WM edits",
+      "title": "Keep Edits Flag",
+      "default": false
+    },
+    "test": {
+      "type": "boolean",
+      "description": "Adds a voxel to test removal by mri_pretess, retained with -keep. Output not saved.",
+      "title": "Test Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "filledvol",
+    "labelstring",
+    "normvol",
+    "newfilledvol"
+  ]
+}

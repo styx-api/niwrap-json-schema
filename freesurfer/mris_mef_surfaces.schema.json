@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_mef_surfaces",
+  "description": "Positions the tessellation of the cortical surface at the white matter surface, then the gray matter surface and generates surface files for these surfaces. Also generates 'curvature' file for cortical thickness and a surface file approximating layer IV of the cortical sheet.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_mef_surfaces"
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "Name of the subject",
+      "title": "Subject Name"
+    },
+    "hemisphere": {
+      "type": "string",
+      "description": "Hemisphere (e.g., left or right)",
+      "title": "Hemisphere"
+    },
+    "omit_self_intersection": {
+      "type": "boolean",
+      "description": "Omit self-intersection and only generate gray/white surface.",
+      "title": "Omit Self-Intersection",
+      "default": false
+    },
+    "curvature": {
+      "type": "boolean",
+      "description": "Create curvature and area files from the white matter surface.",
+      "title": "Create Curvature and Area Files",
+      "default": false
+    },
+    "average_curvature": {
+      "type": "number",
+      "description": "Average curvature values specified number of times, default is 10.",
+      "title": "Average Curvature Values"
+    },
+    "white_only": {
+      "type": "boolean",
+      "description": "Only generate the white matter surface.",
+      "title": "Generate White Matter Surface Only",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject_name",
+    "hemisphere"
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mcflirt",
+  "description": "MCFLIRT is an intra-modal motion correction tool designed for use on fMRI time series and based on optimization and registration techniques used in FLIRT, a fully automated robust and accurate tool for linear (affine) inter- and inter-modal brain image registration.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/mcflirt"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Timeseries to motion-correct.",
+      "title": "In file"
+    },
+    "bins": {
+      "type": "integer",
+      "description": "Number of histogram bins.",
+      "title": "Bins"
+    },
+    "cost": {
+      "enum": [
+        "mutualinfo",
+        "woods",
+        "corratio",
+        "normcorr",
+        "normmi",
+        "leastsquares"
+      ],
+      "description": "'mutualinfo' or 'woods' or 'corratio' or 'normcorr' or 'normmi' or 'leastsquares'. Cost function to optimize.",
+      "title": "Cost"
+    },
+    "dof": {
+      "type": "integer",
+      "description": "Degrees of freedom for the transformation.",
+      "title": "Dof"
+    },
+    "init": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Initial transformation matrix.",
+      "title": "Init"
+    },
+    "interpolation": {
+      "enum": [
+        "spline_final",
+        "nn_final",
+        "sinc_final"
+      ],
+      "description": "'spline' or 'nn' or 'sinc'. Interpolation method for transformation.",
+      "title": "Interpolation"
+    },
+    "mean_vol": {
+      "type": "boolean",
+      "description": "Register to mean volume.",
+      "title": "Mean vol",
+      "default": false
+    },
+    "out_file": {
+      "type": "string",
+      "description": "File to write.",
+      "title": "Out file"
+    },
+    "ref_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Target image for motion correction.",
+      "title": "Ref file"
+    },
+    "ref_vol": {
+      "type": "integer",
+      "description": "Volume to align frames to.",
+      "title": "Ref vol"
+    },
+    "rotation": {
+      "type": "integer",
+      "description": "Scaling factor for rotation tolerances.",
+      "title": "Rotation"
+    },
+    "save_mats": {
+      "type": "boolean",
+      "description": "Save transformation matrices.",
+      "title": "Save mats",
+      "default": false
+    },
+    "save_plots": {
+      "type": "boolean",
+      "description": "Save transformation parameters.",
+      "title": "Save plots",
+      "default": false
+    },
+    "save_rmsabs": {
+      "type": "boolean",
+      "description": "Save rms displacement parameters.",
+      "title": "Save rmsabs",
+      "default": false
+    },
+    "save_rmsrel": {
+      "type": "boolean",
+      "description": "Save relative rms displacement parameters.",
+      "title": "Save rmsrel",
+      "default": false
+    },
+    "scaling": {
+      "type": "number",
+      "description": "Scaling factor to use.",
+      "title": "Scaling"
+    },
+    "smooth": {
+      "type": "number",
+      "description": "Smoothing factor for the cost function.",
+      "title": "Smooth"
+    },
+    "stages": {
+      "type": "integer",
+      "description": "Stages (if 4, perform final search with sinc interpolation.",
+      "title": "Stages"
+    },
+    "stats_imgs": {
+      "type": "boolean",
+      "description": "Produce variance and std. dev. images.",
+      "title": "Stats imgs",
+      "default": false
+    },
+    "use_contour": {
+      "type": "boolean",
+      "description": "Run search on contour images.",
+      "title": "Use contour",
+      "default": false
+    },
+    "use_gradient": {
+      "type": "boolean",
+      "description": "Run search on gradient images.",
+      "title": "Use gradient",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

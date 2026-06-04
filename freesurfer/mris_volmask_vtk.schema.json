@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_volmask_vtk",
+  "description": "Computes a volume mask at the resolution of the brain.mgz file, containing labels for various brain structures using surface files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_volmask_vtk"
+    },
+    "cap_distance": {
+      "type": "number",
+      "description": "Maximum distance up to which the signed distance function computation is accurate.",
+      "title": "Cap Distance"
+    },
+    "label_background": {
+      "type": "number",
+      "description": "Override the default background label value (0).",
+      "title": "Background Label"
+    },
+    "label_left_white": {
+      "type": "number",
+      "description": "Override the default left white matter label (20).",
+      "title": "Left White Matter Label"
+    },
+    "label_left_ribbon": {
+      "type": "number",
+      "description": "Override the default left ribbon label (10).",
+      "title": "Left Ribbon Label"
+    },
+    "label_right_white": {
+      "type": "number",
+      "description": "Override the default right white matter label (120).",
+      "title": "Right White Matter Label"
+    },
+    "label_right_ribbon": {
+      "type": "number",
+      "description": "Override the default right ribbon label (110).",
+      "title": "Right Ribbon Label"
+    },
+    "surf_white": {
+      "type": "string",
+      "description": "Surface root name for white matter surfaces (default: white).",
+      "title": "White Surface Name"
+    },
+    "surf_pial": {
+      "type": "string",
+      "description": "Surface root name for pial surfaces (default: pial).",
+      "title": "Pial Surface Name"
+    },
+    "aseg_name": {
+      "type": "string",
+      "description": "Specify a different name for the aseg input file (default: aseg).",
+      "title": "Aseg Name"
+    },
+    "out_root": {
+      "type": "string",
+      "description": "Output root name (default: ribbon) for generated output files.",
+      "title": "Output Root"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Specify the SUBJECTS_DIR, default is read from environment.",
+      "title": "Subjects Directory"
+    },
+    "save_distance": {
+      "type": "boolean",
+      "description": "Option to save the signed distance function.",
+      "title": "Save Distance Function Flag",
+      "default": false
+    },
+    "lh_only": {
+      "type": "boolean",
+      "description": "Only process left hemisphere.",
+      "title": "Left Hemisphere Only Flag",
+      "default": false
+    },
+    "rh_only": {
+      "type": "boolean",
+      "description": "Only process right hemisphere.",
+      "title": "Right Hemisphere Only Flag",
+      "default": false
+    },
+    "parallel": {
+      "type": "boolean",
+      "description": "Run hemispheres in parallel and combine the result.",
+      "title": "Parallel Processing Flag",
+      "default": false
+    },
+    "edit_aseg": {
+      "type": "boolean",
+      "description": "Edit the aseg using the ribbons and save it.",
+      "title": "Edit Aseg Flag",
+      "default": false
+    },
+    "save_ribbon": {
+      "type": "boolean",
+      "description": "Save only the ribbon for the hemispheres.",
+      "title": "Save Ribbon Flag",
+      "default": false
+    },
+    "io_param": {
+      "type": "string",
+      "description": "Input-Output parameter as positional argument",
+      "title": "IO Parameter"
+    }
+  },
+  "required": [
+    "@type",
+    "io_param"
+  ]
+}

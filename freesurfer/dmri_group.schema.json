@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dmri_group",
+  "description": "A tool to process and analyze diffusion MRI group data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dmri_group"
+    },
+    "input_list": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file with list of individual inputs",
+      "title": "Input List File"
+    },
+    "reference_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference volume for output path",
+      "title": "Reference Volume"
+    },
+    "output_base": {
+      "type": "string",
+      "description": "Base name of output stats files",
+      "title": "Output Base Name"
+    },
+    "no_interpolation": {
+      "type": "boolean",
+      "description": "Do not attempt to interpolate along-tract measures (Assume that subjects are sampled at equivalent positions)",
+      "title": "No Interpolation Flag",
+      "default": false
+    },
+    "sections_num": {
+      "type": "number",
+      "description": "Divide the pathway into a number of sections and output average measures for each section",
+      "title": "Sections Number"
+    },
+    "debug_mode": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug Mode Flag",
+      "default": false
+    },
+    "check_options": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit",
+      "title": "Check Options Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_list",
+    "reference_volume",
+    "output_base"
+  ]
+}

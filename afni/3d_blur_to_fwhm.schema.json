@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dBlurToFWHM",
+  "description": "Blurs a 'master' dataset until it reaches a specified FWHM smoothness (approximately).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dBlurToFWHM"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Create an automask from the input dataset.",
+      "title": "Automask",
+      "default": false
+    },
+    "blurmaster": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The dataset whose smoothness controls the process.",
+      "title": "Blurmaster"
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "Blur until the 3d fwhm reaches this value (in mm).",
+      "title": "Fwhm"
+    },
+    "fwhmxy": {
+      "type": "number",
+      "description": "Blur until the 2d (x,y)-plane fwhm reaches this value (in mm).",
+      "title": "Fwhmxy"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The dataset that will be smoothed.",
+      "title": "In file"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask dataset, if desired. voxels not in mask will be set to zero in output.",
+      "title": "Mask"
+    },
+    "outputtype": {
+      "enum": [
+        "NIFTI",
+        "AFNI",
+        "NIFTI_GZ"
+      ],
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype.",
+      "title": "Outputtype"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output dataset.",
+      "title": "Prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

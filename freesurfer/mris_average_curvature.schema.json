@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_average_curvature",
+  "description": "This tool averages curvature data across multiple subjects and generates an output curvature file painted onto the last subject specified. It can also generate summary statistics if requested.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_average_curvature"
+    },
+    "input_curvature_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The input curvature file.",
+      "title": "Input Curvature File"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Specifies the hemisphere (e.g., lh or rh).",
+      "title": "Hemisphere"
+    },
+    "surface": {
+      "type": "string",
+      "description": "Specifies the surface.",
+      "title": "Surface"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The list of subjects. The output curvature file will be painted onto the last subject specified.",
+      "title": "Subjects"
+    },
+    "output_curvature_file": {
+      "type": "string",
+      "description": "The output curvature file.",
+      "title": "Output Curvature File"
+    },
+    "summary_stats_flag": {
+      "type": "boolean",
+      "description": "Generate summary statistics and write them into specified directory.",
+      "title": "Summary Statistics Flag",
+      "default": false
+    },
+    "output_surface_flag": {
+      "type": "boolean",
+      "description": "Override the last subject as the output surface.",
+      "title": "Output Surface Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_curvature_file",
+    "hemi",
+    "surface",
+    "subjects",
+    "output_curvature_file"
+  ]
+}

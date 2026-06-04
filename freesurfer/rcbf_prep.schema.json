@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "rcbf-prep",
+  "description": "Performs integration of rCBF as produced by Siemens scanners with FreeSurfer analysis in preparation for group analysis.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/rcbf-prep"
+    },
+    "outdir": {
+      "type": "string",
+      "description": "Output directory where results will be stored.",
+      "title": "Output directory"
+    },
+    "rcbfvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input rCBF volume to be registered to the FreeSurfer anatomical.",
+      "title": "rCBF volume"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject identifier for FreeSurfer anatomical registration.",
+      "title": "Subject"
+    },
+    "roitab": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "ROI table specifying which ROIs will be summarized, e.g., FreeSurferColorLUT.txt.",
+      "title": "ROI table"
+    },
+    "register": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Registration data file instead of a subject.",
+      "title": "Register file"
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Template file used instead of rCBF itself.",
+      "title": "Template file"
+    }
+  },
+  "required": [
+    "@type",
+    "outdir",
+    "rcbfvol"
+  ]
+}

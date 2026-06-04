@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "featregapply",
+  "description": "Apply registration from FEAT analysis to other images",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/featregapply"
+    },
+    "feat_directory": {
+      "type": "string",
+      "description": "FEAT directory from which registration will be taken",
+      "title": "FEAT Directory"
+    },
+    "force_flag": {
+      "type": "boolean",
+      "description": "Force featregapply to run even if it has already been run on this FEAT directory",
+      "title": "Force Flag",
+      "default": false
+    },
+    "cleanup_flag": {
+      "type": "boolean",
+      "description": "Cleanup, i.e. remove all featregapply output",
+      "title": "Cleanup Flag",
+      "default": false
+    },
+    "upsample_trilinear": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Upsample functional-space image to standard space using trilinear interpolation",
+      "title": "Upsample Functional-Space Image (Trilinear)"
+    },
+    "upsample_spline": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Upsample functional-space image to standard space using spline (like sinc) interpolation",
+      "title": "Upsample Functional-Space Image (Spline)"
+    },
+    "standard_space_res": {
+      "type": "number",
+      "description": "Specify the standard space resolution for melodic (e.g. 3 for 3mm)",
+      "title": "Standard Space Resolution"
+    },
+    "exclude_filtered_func_flag": {
+      "type": "boolean",
+      "description": "Exclude filtered func when processing melodic directories (for FEAT directories filtered func is never processed)",
+      "title": "Exclude Filtered Func Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "feat_directory"
+  ]
+}

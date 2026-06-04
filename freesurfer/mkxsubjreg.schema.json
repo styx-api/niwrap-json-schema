@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mkxsubjreg",
+  "description": "Creates a new registration matrix that maps from the functional volume of the source subject to the orig of the target subject through the talairach transform.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mkxsubjreg"
+    },
+    "srcreg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the source registration file (srcreg.dat)",
+      "title": "Source Registration"
+    },
+    "targreg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the target registration file (targreg.dat)",
+      "title": "Target Registration"
+    },
+    "targsubj": {
+      "type": "string",
+      "description": "Target subject ID; default is talairach",
+      "title": "Target Subject"
+    },
+    "xfm": {
+      "type": "string",
+      "description": "XFM file name relative to transforms",
+      "title": "Transform Name"
+    },
+    "sd": {
+      "type": "string",
+      "description": "Directory containing subject data; default is env SUBJECTS_DIR",
+      "title": "Subjects Directory"
+    },
+    "fvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to example functional volume",
+      "title": "Functional Volume"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help information",
+      "title": "Help Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Display version information",
+      "title": "Version Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "srcreg",
+    "targreg"
+  ]
+}

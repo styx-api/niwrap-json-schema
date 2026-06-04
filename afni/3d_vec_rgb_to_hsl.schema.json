@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dVecRGB_to_HSL",
+  "description": "Convert a 3-brick RGB (red, green, blue) data set to an HSL (hue, saturation, luminance) one.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dVecRGB_to_HSL"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output file name part.",
+      "title": "Prefix"
+    },
+    "in_vec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input RGB vector file of three bricks, presumably each having values in the interval [0,1].",
+      "title": "Input RGB Vector File"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Whole brain mask within which to calculate things. Otherwise, data should be masked already.",
+      "title": "Mask File"
+    },
+    "in_scal": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Scalar file (single brick) which will be appended to the output file, mainly aimed at loading in an FA data set for tract volume coloration.",
+      "title": "Input Scalar File"
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "in_vec"
+  ]
+}

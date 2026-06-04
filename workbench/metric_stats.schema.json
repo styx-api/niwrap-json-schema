@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SPATIAL STATISTICS ON A METRIC FILE",
+  "description": "For each column of the input, a line of text is printed, resulting from the specified reduction or percentile operation.  Use -column to only give output for a single column.  If the -roi option is used without -match-maps, then each line will contain as many numbers as there are maps in the ROI file, separated by tab characters.  Exactly one of -reduce or -percentile must be specified.\n\nThe argument to the -reduce option must be one of the following:\n\nMAX: the maximum value\nMIN: the minimum value\nINDEXMAX: the 1-based index of the maximum value\nINDEXMIN: the 1-based index of the minimum value\nSUM: add all values\nPRODUCT: multiply all values\nMEAN: the mean of the data\nSTDEV: the standard deviation (N denominator)\nSAMPSTDEV: the sample standard deviation (N-1 denominator)\nVARIANCE: the variance of the data\nTSNR: mean divided by sample standard deviation (N-1 denominator)\nCOV: sample standard deviation (N-1 denominator) divided by mean\nL2NORM: square root of sum of squares\nMEDIAN: the median of the data\nMODE: the mode of the data\nCOUNT_NONZERO: the number of nonzero elements in the data\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric_stats"
+    },
+    "metric_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input metric"
+    },
+    "reduce": {
+      "type": "string",
+      "description": "use a reduction operation"
+    },
+    "percentile": {
+      "type": "number",
+      "description": "give the value at a percentile"
+    },
+    "column": {
+      "type": "string",
+      "description": "only display output for one column"
+    },
+    "roi": {
+      "type": "object",
+      "properties": {
+        "roi_metric": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the roi, as a metric file"
+        },
+        "match_maps": {
+          "type": "boolean",
+          "description": "each column of input uses the corresponding column from the roi file",
+          "default": false
+        }
+      },
+      "required": [
+        "roi_metric"
+      ],
+      "description": "only consider data inside an roi"
+    },
+    "show_map_name": {
+      "type": "boolean",
+      "description": "print map index and name before each output",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "metric_in"
+  ]
+}

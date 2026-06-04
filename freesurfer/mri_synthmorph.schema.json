@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_synthmorph",
+  "description": "SynthMorph is a deep-learning tool for brain-specific MRI image registration without preprocessing.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_synthmorph"
+    },
+    "moving_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The moving input image, which will be registered to the fixed image.",
+      "title": "Moving Image"
+    },
+    "fixed_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The fixed input image, which is used as the reference for registration.",
+      "title": "Fixed Image"
+    },
+    "moved_output": {
+      "type": "string",
+      "description": "The resulting image after registration.",
+      "title": "Moved Output Image"
+    },
+    "transform_output": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output transform file for registration. Can be a text file for linear or an image file for deformable registration.",
+      "title": "Output Transform"
+    },
+    "header_only": {
+      "type": "boolean",
+      "description": "Adjust the voxel-to-world matrix instead of resampling. Linear registration only.",
+      "title": "Header Only Flag",
+      "default": false
+    },
+    "transformation_model": {
+      "enum": [
+        "deform",
+        "affine",
+        "rigid"
+      ],
+      "description": "Specifies the registration transformation model. Options include 'deform', 'affine', and 'rigid'.",
+      "title": "Transformation Model"
+    },
+    "init_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Initial linear transform for registration.",
+      "title": "Initial Transform"
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of TensorFlow threads to utilize. Defaults to the number of cores.",
+      "title": "Number of Threads"
+    },
+    "gpu_flag": {
+      "type": "boolean",
+      "description": "Utilize the GPU specified by CUDA_VISIBLE_DEVICES or GPU 0 if unset or empty.",
+      "title": "Use GPU",
+      "default": false
+    },
+    "smooth": {
+      "type": "number",
+      "description": "Regularization parameter for deformable registration. Higher values indicate smoother displacement fields.",
+      "title": "Smoothness"
+    },
+    "extent": {
+      "enum": [
+        192,
+        256
+      ],
+      "description": "Isotropic extent of the registration space in unit voxels.",
+      "title": "Extent"
+    },
+    "model_weights": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alternative model weights as an H5 file.",
+      "title": "Model Weights"
+    },
+    "inspect_directory": {
+      "type": "string",
+      "description": "Save model inputs resampled into network space for inspection.",
+      "title": "Inspect Directory"
+    }
+  },
+  "required": [
+    "@type",
+    "moving_image",
+    "fixed_image"
+  ]
+}

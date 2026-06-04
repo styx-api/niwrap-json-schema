@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_aparc2aseg",
+  "description": "Maps the cortical labels from the automatic cortical parcellation to the automatic segmentation volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_aparc2aseg"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Name of the subject as found in the SUBJECTS_DIR.",
+      "title": "Subject name"
+    },
+    "output_volfile": {
+      "type": "string",
+      "description": "Full path of file to save the output segmentation in. Default is mri/aparc+aseg.mgz",
+      "title": "Output Volume File"
+    },
+    "old_ribbon": {
+      "type": "boolean",
+      "description": "Use mri/hemi.ribbon.mgz as a mask for the cortex",
+      "title": "Old Ribbon Flag",
+      "default": false
+    },
+    "new_ribbon": {
+      "type": "boolean",
+      "description": "Mask cortical voxels with mri/ribbon.mgz. Same as --volmask",
+      "title": "New Ribbon Flag",
+      "default": false
+    },
+    "a2005s": {
+      "type": "boolean",
+      "description": "Use ?h.aparc.a2005s.annot. Output will be aparc.a2005s+aseg.mgz.",
+      "title": "A2005s Flag",
+      "default": false
+    },
+    "a2009s": {
+      "type": "boolean",
+      "description": "Use ?h.aparc.a2009s.annot. Output will be aparc.a2009s+aseg.mgz.",
+      "title": "A2009s Flag",
+      "default": false
+    },
+    "annot_name": {
+      "type": "string",
+      "description": "Use annotname surface annotation. By default, uses ?h.aparc.annot.",
+      "title": "Annotation Name"
+    },
+    "annot_table": {
+      "type": "string",
+      "description": "Annotation table file. Default is $FREESURFER_HOME/Simple_surface_labels2009.txt",
+      "title": "Annotation Table"
+    },
+    "base_offset": {
+      "type": "number",
+      "description": "Add offset to all segmentation ids.",
+      "title": "Base Offset"
+    },
+    "label_wm": {
+      "type": "boolean",
+      "description": "Re-assign white matter voxel labels to the closest cortical point if within distance.",
+      "title": "Label WM Flag",
+      "default": false
+    },
+    "wmparc_dmax": {
+      "type": "number",
+      "description": "Max distance (mm) from cortex to be labeled as gyral WM (default 5mm)",
+      "title": "WM Parc DM"
+    },
+    "rip_unknown": {
+      "type": "boolean",
+      "description": "Do not label WM based on 'unknown' cortical label",
+      "title": "Rip Unknown Flag",
+      "default": false
+    },
+    "hypo_as_wm": {
+      "type": "boolean",
+      "description": "Label hypointensities as WM",
+      "title": "Hypo as WM Flag",
+      "default": false
+    },
+    "no_fix_parahip": {
+      "type": "boolean",
+      "description": "Do not remove unconnected regions from WM parahip",
+      "title": "No Fix Parahip Flag",
+      "default": false
+    },
+    "smooth_normals": {
+      "type": "number",
+      "description": "Change number of surface normal smoothing steps (default is 10).",
+      "title": "Smooth Normals"
+    },
+    "crs_test": {
+      "type": "string",
+      "description": "Test mapping of column, row, slice",
+      "title": "CRS Test"
+    },
+    "left_hemisphere": {
+      "type": "boolean",
+      "description": "Only process the left hemisphere",
+      "title": "Left Hemisphere Flag",
+      "default": false
+    },
+    "right_hemisphere": {
+      "type": "boolean",
+      "description": "Only process the right hemisphere",
+      "title": "Right Hemisphere Flag",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Run in parallel with the specified number of threads",
+      "title": "Threads"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print out information on how to use this program",
+      "title": "Help Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print out version and exit",
+      "title": "Version Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

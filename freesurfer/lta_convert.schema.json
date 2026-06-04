@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "lta_convert",
+  "description": "This program converts between different linear transform formats.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/lta_convert"
+    },
+    "in_lta": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input transform of LTA type",
+      "title": "Input LTA Transform"
+    },
+    "in_fsl": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input transform of FSL type",
+      "title": "Input FSL Transform"
+    },
+    "in_mni": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input transform of MNI / XFM type",
+      "title": "Input MNI Transform"
+    },
+    "in_reg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input transform of TK REG type (deprecated format)",
+      "title": "Input REG Transform"
+    },
+    "in_niftyreg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input transform of NiftyReg type (inverse RAS2RAS)",
+      "title": "Input NiftyReg Transform"
+    },
+    "in_itk": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input ITK transform (inverse LPS2LPS).",
+      "title": "Input ITK Transform"
+    },
+    "in_vox": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input transform in source image space (inverse VOX2VOX)",
+      "title": "Input VOX Transform"
+    },
+    "out_lta": {
+      "type": "string",
+      "description": "Output linear transform (LTA FreeSurfer format)",
+      "title": "Output LTA Transform"
+    },
+    "out_fsl": {
+      "type": "string",
+      "description": "Output transform in FSL format",
+      "title": "Output FSL Transform"
+    },
+    "out_mni": {
+      "type": "string",
+      "description": "Output transform in MNI/XFM format",
+      "title": "Output MNI Transform"
+    },
+    "out_reg": {
+      "type": "string",
+      "description": "Output transform in REG DAT format",
+      "title": "Output REG Transform"
+    },
+    "out_niftyreg": {
+      "type": "string",
+      "description": "Output transform in NiftyReg format (inverse RAS2RAS)",
+      "title": "Output NiftyReg Transform"
+    },
+    "out_itk": {
+      "type": "string",
+      "description": "Output transform in ITK TXT format (inverse LPS2LPS)",
+      "title": "Output ITK Transform"
+    },
+    "out_vox": {
+      "type": "string",
+      "description": "Output transform in source image space (inverse VOX2VOX)",
+      "title": "Output VOX Transform"
+    },
+    "invert": {
+      "type": "boolean",
+      "description": "Inverts transform",
+      "title": "Invert Transform",
+      "default": false
+    },
+    "ltavox2vox": {
+      "type": "boolean",
+      "description": "Output type VOX2VOX (default RAS2RAS) with --ltaout",
+      "title": "LTA VOX2VOX Output",
+      "default": false
+    },
+    "ltatkreg": {
+      "type": "boolean",
+      "description": "Output type REGISTER_DAT (default RAS2RAS) with --ltaout",
+      "title": "LTA REGISTER_DAT Output",
+      "default": false
+    },
+    "src_geometry": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify src image geometry (mov volume for TKREG/register.dat)",
+      "title": "Source Geometry Image"
+    },
+    "trg_geometry": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify trg image geometry",
+      "title": "Target Geometry Image"
+    },
+    "trg_conform": {
+      "type": "boolean",
+      "description": "Conform trg image geometry (COR standard)",
+      "title": "Conform Target Geometry",
+      "default": false
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "Specify subject name (overrides if input has subject name defined)",
+      "title": "Subject Name"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

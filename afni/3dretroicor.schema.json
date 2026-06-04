@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dretroicor",
+  "description": "Performs Retrospective Image Correction for physiological motion effects using a modified RETROICOR algorithm",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dretroicor"
+    },
+    "ignore": {
+      "type": "number",
+      "description": "The number of initial timepoints to ignore in the input. These points will be passed through uncorrected.",
+      "title": "Ignore"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for new, corrected dataset.",
+      "title": "Prefix"
+    },
+    "card": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "1D cardiac data file for cardiac correction.",
+      "title": "Cardiac data file"
+    },
+    "cardphase": {
+      "type": "string",
+      "description": "Filename for 1D cardiac phase output.",
+      "title": "Cardiac phase output file"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold for detection of R-wave peaks in input. Make sure it's above the background noise level; try 3/4 or 4/5 times range plus minimum.",
+      "title": "Threshold"
+    },
+    "resp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "1D respiratory waveform data for correction.",
+      "title": "Respiratory data file"
+    },
+    "respphase": {
+      "type": "string",
+      "description": "Filename for 1D respiratory phase output.",
+      "title": "Respiratory phase output file"
+    },
+    "order": {
+      "type": "number",
+      "description": "The order of the correction. Higher-order terms yield little improvement according to Glover et al.",
+      "title": "Order"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "3D+time dataset to process.",
+      "title": "Dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset"
+  ]
+}

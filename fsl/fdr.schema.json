@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fdr",
+  "description": "False Discovery Rate (FDR) correction tool from FSL",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fdr"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input p-value image file",
+      "title": "Input file"
+    },
+    "maskfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask image file",
+      "title": "Mask file"
+    },
+    "qvalue": {
+      "type": "number",
+      "description": "Q-value (FDR) threshold",
+      "title": "Q-value threshold"
+    },
+    "adjustedimage": {
+      "type": "string",
+      "description": "Output image with FDR-adjusted p-values",
+      "title": "Adjusted output image"
+    },
+    "othresh_flag": {
+      "type": "boolean",
+      "description": "Output a thresholded p-value image",
+      "title": "Output thresholded image",
+      "default": false
+    },
+    "order_flag": {
+      "type": "boolean",
+      "description": "Output image of order values",
+      "title": "Output order values",
+      "default": false
+    },
+    "oneminusp_flag": {
+      "type": "boolean",
+      "description": "Treat input as 1-p (also save output like this)",
+      "title": "One minus p-value flag",
+      "default": false
+    },
+    "positive_corr_flag": {
+      "type": "boolean",
+      "description": "Use FDR correction factor that assumes positive correlation",
+      "title": "Positive correlation correction",
+      "default": false
+    },
+    "independent_flag": {
+      "type": "boolean",
+      "description": "Use FDR correction factor that assumes independence",
+      "title": "Assume independence",
+      "default": false
+    },
+    "conservative_flag": {
+      "type": "boolean",
+      "description": "Use conservative FDR correction factor (allows for any correlation)",
+      "title": "Conservative correction",
+      "default": false
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Switch on debugging output",
+      "title": "Debug flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "infile"
+  ]
+}

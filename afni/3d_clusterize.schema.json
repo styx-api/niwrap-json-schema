@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dClusterize",
+  "description": "A tool for voxelwise thresholding and clusterizing of datasets.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dClusterize"
+    },
+    "inset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Load in a dataset for thresholding and clusterizing",
+      "title": "Input dataset"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Load in a dataset to use as a mask",
+      "title": "Mask dataset"
+    },
+    "mask_from_hdr": {
+      "type": "boolean",
+      "description": "Use internal mask from dataset header",
+      "title": "Mask from header flag",
+      "default": false
+    },
+    "out_mask": {
+      "type": "string",
+      "description": "Specify to dump the utilized mask as a dataset",
+      "title": "Output mask name"
+    },
+    "ithr": {
+      "type": "string",
+      "description": "Specify the sub-brick to use as the threshold source",
+      "title": "Threshold sub-brick"
+    },
+    "idat": {
+      "type": "string",
+      "description": "Specify the sub-brick to use as the data source",
+      "title": "Data sub-brick"
+    },
+    "onesided": {
+      "type": "string",
+      "description": "Perform one-sided testing",
+      "title": "One-sided testing"
+    },
+    "twosided": {
+      "type": "string",
+      "description": "Perform two-sided testing",
+      "title": "Two-sided testing"
+    },
+    "bisided": {
+      "type": "string",
+      "description": "Perform bisided testing",
+      "title": "Bisided testing"
+    },
+    "within_range": {
+      "type": "string",
+      "description": "Keep values within the range [AA, BB]",
+      "title": "Within range values"
+    },
+    "nn": {
+      "type": "integer",
+      "description": "Specify the number of voxel neighbors (1: 6, 2: 18, 3: 26)",
+      "title": "Number of neighbors"
+    },
+    "clust_nvox": {
+      "type": "integer",
+      "description": "Specify the minimum cluster size in terms of number of voxels",
+      "title": "Minimum cluster size by voxels"
+    },
+    "clust_vol": {
+      "type": "integer",
+      "description": "Specify the minimum cluster size by volume in microliters",
+      "title": "Minimum cluster size by volume"
+    },
+    "pref_map": {
+      "type": "string",
+      "description": "Prefix/filename of the output map of cluster ROIs",
+      "title": "Output map prefix"
+    },
+    "pref_dat": {
+      "type": "string",
+      "description": "Output a cluster-masked version of the data volume",
+      "title": "Output cluster-masked data"
+    },
+    "one_d_format": {
+      "type": "boolean",
+      "description": "Write output in 1D format",
+      "title": "1D format output",
+      "default": false
+    },
+    "no_one_d_format": {
+      "type": "boolean",
+      "description": "Do not write output in 1D format",
+      "title": "No 1D format output",
+      "default": false
+    },
+    "summarize": {
+      "type": "boolean",
+      "description": "Write out only the total nonzero voxel count and volume for each dataset",
+      "title": "Summarize output",
+      "default": false
+    },
+    "nosum": {
+      "type": "boolean",
+      "description": "Suppress printout of the totals",
+      "title": "Suppress totals",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Suppress all non-essential output",
+      "title": "Quiet mode",
+      "default": false
+    },
+    "outvol_if_no_clust": {
+      "type": "boolean",
+      "description": "Output an empty volume if no clusters are found",
+      "title": "Output volume if no clusters",
+      "default": false
+    },
+    "orient": {
+      "type": "string",
+      "description": "Coordinate order in the output report table (default: RAI)",
+      "title": "Output orientation"
+    },
+    "abs_table_data": {
+      "type": "boolean",
+      "description": "Use absolute values for mean and SEM in report table",
+      "title": "Absolute table data",
+      "default": false
+    },
+    "binary": {
+      "type": "boolean",
+      "description": "Turn output map of cluster ROIs into a binary mask",
+      "title": "Binary output",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "inset",
+    "ithr",
+    "nn"
+  ]
+}

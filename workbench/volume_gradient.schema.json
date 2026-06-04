@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GRADIENT OF A VOLUME FILE",
+  "description": "Computes the gradient of the volume by doing linear regressions for each voxel, considering only its face neighbors unless too few face neighbors exist.  The gradient vector is constructed from the partial derivatives of the resulting linear function, and the magnitude of this vector is the output.  If specified, the volume vector output is arranged with the x, y, and z components from a subvolume as consecutive subvolumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume_gradient"
+    },
+    "volume_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input volume"
+    },
+    "volume_out": {
+      "type": "string",
+      "description": "the output gradient magnitude volume"
+    },
+    "presmooth": {
+      "type": "object",
+      "properties": {
+        "kernel": {
+          "type": "number",
+          "description": "the size of the gaussian smoothing kernel in mm, as sigma by default"
+        },
+        "fwhm": {
+          "type": "boolean",
+          "description": "kernel size is FWHM, not sigma",
+          "default": false
+        }
+      },
+      "required": [
+        "kernel"
+      ],
+      "description": "smooth the volume before computing the gradient"
+    },
+    "roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "select a region of interest to take the gradient of"
+    },
+    "vectors": {
+      "type": "object",
+      "properties": {
+        "vector_volume_out": {
+          "type": "string",
+          "description": "the vectors as a volume file"
+        }
+      },
+      "required": [
+        "vector_volume_out"
+      ],
+      "description": "output vectors"
+    },
+    "subvolume": {
+      "type": "string",
+      "description": "select a single subvolume to take the gradient of"
+    }
+  },
+  "required": [
+    "@type",
+    "volume_in",
+    "volume_out"
+  ]
+}

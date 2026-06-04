@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MERGE VOLUME FILES INTO A NEW FILE",
+  "description": "Takes one or more volume files and constructs a new volume file by concatenating subvolumes from them.  The input volume files must have the same volume space.\n\nExample: wb_command -volume-merge out.nii -volume first.nii -subvolume 1 -volume second.nii\n\nThis example would take the first subvolume from first.nii, followed by all subvolumes from second.nii, and write these to out.nii.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume_merge"
+    },
+    "volume_out": {
+      "type": "string",
+      "description": "the output volume file"
+    },
+    "volume": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "volume_in": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "a volume file to use subvolumes from"
+          },
+          "subvolume": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "subvol": {
+                  "type": "string",
+                  "description": "the subvolume number or name"
+                },
+                "up_to": {
+                  "type": "object",
+                  "properties": {
+                    "last_subvol": {
+                      "type": "string",
+                      "description": "the number or name of the last subvolume to include"
+                    },
+                    "reverse": {
+                      "type": "boolean",
+                      "description": "use the range in reverse order",
+                      "default": false
+                    }
+                  },
+                  "required": [
+                    "last_subvol"
+                  ],
+                  "description": "use an inclusive range of subvolumes"
+                }
+              },
+              "required": [
+                "subvol"
+              ]
+            },
+            "description": "select a single subvolume to use"
+          }
+        },
+        "required": [
+          "volume_in",
+          "subvolume"
+        ]
+      },
+      "description": "specify an input volume file"
+    }
+  },
+  "required": [
+    "@type",
+    "volume_out",
+    "volume"
+  ]
+}

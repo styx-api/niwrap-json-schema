@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MAKE ADJACENCY MATRIX OF A CIFTI LABEL FILE",
+  "description": "Find face-adjacent voxels and connected vertices that have different label values, and count them for each pair.  Put the resulting counts into a parcellated connectivity file, with the diagonal being zero.  This gives a rough estimate of how long or expansive the border between two labels is.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_label_adjacency"
+    },
+    "label_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input cifti label file"
+    },
+    "adjacency_out": {
+      "type": "string",
+      "description": "the output cifti pconn adjacency matrix"
+    },
+    "left_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify the left surface to use"
+    },
+    "right_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify the right surface to use"
+    },
+    "cerebellum_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify the cerebellum surface to use"
+    }
+  },
+  "required": [
+    "@type",
+    "label_in",
+    "adjacency_out"
+  ]
+}

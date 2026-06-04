@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dinfill",
+  "description": "A program to fill holes in volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dinfill"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Fill volume dataset",
+      "title": "Input Dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use PREF for output prefix.",
+      "title": "Output Prefix"
+    },
+    "niter": {
+      "type": "number",
+      "description": "Do not allow the fill function to do more than NITER passes.",
+      "title": "Number of Iterations"
+    },
+    "blend": {
+      "enum": [
+        "MODE",
+        "AVG",
+        "AUTO",
+        "SOLID",
+        "SOLID_CLEAN"
+      ],
+      "description": "Method for assigning a value to a hole.",
+      "title": "Blend Method"
+    },
+    "minhits": {
+      "type": "number",
+      "description": "Criterion for considering a zero voxel to be a hole. Can only be used with -blend SOLID.",
+      "title": "Minimum Hits"
+    },
+    "ed": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Erode N times then dilate N times to get rid of hanging chunks. Values filled in by this process get value V.",
+      "title": "Erode and Dilate Parameters"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Provide mask dataset to select subset of input.",
+      "title": "Mask Dataset"
+    },
+    "mask_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify the range of values to consider from mask dataset.",
+      "title": "Mask Range"
+    },
+    "mrange": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Alias for -mask_range option.",
+      "title": "MRange"
+    },
+    "cmask": {
+      "type": "string",
+      "description": "Provide cmask expression. Voxels where expression is 0 are excluded from computations.",
+      "title": "CMask Expression"
+    }
+  },
+  "required": [
+    "@type",
+    "input"
+  ]
+}

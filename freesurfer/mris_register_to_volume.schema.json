@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_register_to_volume",
+  "description": "Aligns cortical surfaces to a volumetric template.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_register_to_volume"
+    },
+    "surface": {
+      "type": "string",
+      "description": "The main surface file.",
+      "title": "Surface"
+    },
+    "pial": {
+      "type": "string",
+      "description": "Pial surface name.",
+      "title": "Pial Surface"
+    },
+    "pial_only": {
+      "type": "string",
+      "description": "Pial surface name (only).",
+      "title": "Pial Surface Only"
+    },
+    "reg": {
+      "type": "string",
+      "description": "Registration file.",
+      "title": "Register File"
+    },
+    "noglobal": {
+      "type": "boolean",
+      "description": "Do not use global optimization.",
+      "title": "No Global",
+      "default": false
+    },
+    "median": {
+      "type": "boolean",
+      "description": "Use median filtering.",
+      "title": "Median Filtering",
+      "default": false
+    },
+    "mri_reg": {
+      "type": "string",
+      "description": "MRI volume registration file.",
+      "title": "MRI Register"
+    },
+    "tx_mmd": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Translation in x (min, max, delta).",
+      "title": "Translation X"
+    },
+    "ty_mmd": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Translation in y (min, max, delta).",
+      "title": "Translation Y"
+    },
+    "tz_mmd": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Translation in z (min, max, delta).",
+      "title": "Translation Z"
+    },
+    "ax_mmd": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Rotation about x (min, max, delta).",
+      "title": "Rotation X"
+    },
+    "ay_mmd": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Rotation about y (min, max, delta).",
+      "title": "Rotation Y"
+    },
+    "az_mmd": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Rotation about z (min, max, delta).",
+      "title": "Rotation Z"
+    },
+    "cost": {
+      "type": "string",
+      "description": "Cost file.",
+      "title": "Cost File"
+    },
+    "interp": {
+      "type": "string",
+      "description": "Interpolation type: trilinear or nearest.",
+      "title": "Interpolation Type"
+    },
+    "noise": {
+      "type": "number",
+      "description": "Add noise with stddev for testing sensitivity.",
+      "title": "Noise Standard Deviation"
+    },
+    "seed": {
+      "type": "number",
+      "description": "Random seed for use with noise.",
+      "title": "Random Seed"
+    },
+    "skip": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Number of vertices to skip.",
+      "title": "Vertices Skip"
+    },
+    "sigma": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Size of blurring kernels to use.",
+      "title": "Blurring Kernel Size"
+    },
+    "cnr": {
+      "type": "boolean",
+      "description": "Use CNR-based similarity function.",
+      "title": "CNR Similarity Function",
+      "default": false
+    },
+    "max_rot": {
+      "type": "number",
+      "description": "Max angle (degrees) to search over.",
+      "title": "Max Rotation"
+    },
+    "max_trans": {
+      "type": "number",
+      "description": "Max translation (mm) to search over.",
+      "title": "Max Translation"
+    },
+    "border": {
+      "type": "number",
+      "description": "Size of the border region to ignore.",
+      "title": "Border Size"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Specify name of subject (for register.dat file).",
+      "title": "Subject Name"
+    },
+    "dilate": {
+      "type": "number",
+      "description": "Dilate ripflags ndil times.",
+      "title": "Dilate Ripflags"
+    },
+    "patch": {
+      "type": "string",
+      "description": "Load patch and limit calculations.",
+      "title": "Load Patch"
+    },
+    "label": {
+      "type": "string",
+      "description": "Load label and limit calculations.",
+      "title": "Load Label"
+    },
+    "out_reg": {
+      "type": "string",
+      "description": "Output registration at lowest cost.",
+      "title": "Output Registration"
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "pial",
+    "reg",
+    "mri_reg"
+  ]
+}

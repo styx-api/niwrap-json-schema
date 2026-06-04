@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "c3d_affine_tool",
+  "description": "RAS affine transform tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "c3d/c3d_affine_tool"
+    },
+    "transform_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "file or string representing the transform.",
+      "title": "Transform file"
+    },
+    "reference_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set reference (fixed) image - only for -fsl2ras and -ras2fsl.",
+      "title": "Reference file"
+    },
+    "source_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set source (moving) image - only for -fsl2ras and -ras2fsl.",
+      "title": "Source file"
+    },
+    "sform_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read matrix from NifTI sform.",
+      "title": "Sform file"
+    },
+    "invert": {
+      "type": "boolean",
+      "description": "Invert matrix.",
+      "title": "Invert",
+      "default": false
+    },
+    "determinant": {
+      "type": "boolean",
+      "description": "Print the determinant.",
+      "title": "Determinant",
+      "default": false
+    },
+    "multiply": {
+      "type": "boolean",
+      "description": "Multiply matrices.",
+      "title": "Multiply",
+      "default": false
+    },
+    "sqrt": {
+      "type": "boolean",
+      "description": "Matrix square root (i.e., Q s.t. A = Q * Q).",
+      "title": "Square root",
+      "default": false
+    },
+    "itk_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Import ITK transform.",
+      "title": "ITK transform"
+    },
+    "irtk_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Import IRTK .dof format transform.",
+      "title": "IRTK transform"
+    },
+    "fsl2ras": {
+      "type": "boolean",
+      "description": "Convert FSL to RAS.",
+      "title": "Fsl2ras",
+      "default": false
+    },
+    "ras2fsl": {
+      "type": "boolean",
+      "description": "Convert RAS to FSL.",
+      "title": "Ras2fsl",
+      "default": false
+    },
+    "out_itk_transform": {
+      "type": "string",
+      "description": "Export ITK transform.",
+      "title": "Output ITK transform"
+    },
+    "out_irtk_transform": {
+      "type": "string",
+      "description": "Export IRTK .dof format transform.",
+      "title": "Output IRTK transform"
+    },
+    "out_matfile": {
+      "type": "string",
+      "description": "Write output matrix.",
+      "title": "Output matrix"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "Print matrix.",
+      "title": "Info",
+      "default": false
+    },
+    "info_full": {
+      "type": "boolean",
+      "description": "Print matrix and more detail about the transform.",
+      "title": "Info full",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

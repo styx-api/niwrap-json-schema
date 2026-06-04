@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslcomplex",
+  "description": "Tool for manipulating complex-valued MR data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fslcomplex"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume (e.g. complexvol.nii.gz)",
+      "title": "Input file"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output volume (e.g. absvol.nii.gz)",
+      "title": "Output file"
+    },
+    "output_type": {
+      "enum": [
+        "-realabs",
+        "-realphase",
+        "-realpolar",
+        "-realcartesian",
+        "-complex",
+        "-complexpolar",
+        "-complexsplit",
+        "-complexmerge",
+        "-copyonly"
+      ],
+      "description": "Output type (determines the operation to perform)",
+      "title": "Output type"
+    },
+    "start_vol": {
+      "type": "integer",
+      "description": "Start volume (optional)",
+      "title": "Start volume"
+    },
+    "end_vol": {
+      "type": "integer",
+      "description": "End volume (optional)",
+      "title": "End volume"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file",
+    "output_type"
+  ]
+}

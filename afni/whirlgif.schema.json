@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "whirlgif",
+  "description": "A quick program that reads a series of GIF files and produces a single GIF file composed of those images.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/whirlgif"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose mode",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "loop": {
+      "type": "string",
+      "description": "Add the Netscape 'loop' extension. Optionally specify a loop count.",
+      "title": "Loop Flag"
+    },
+    "transparency_index": {
+      "type": "number",
+      "description": "Set the colormap index 'index' to be transparent.",
+      "title": "Transparency Index"
+    },
+    "inter_frame_delay": {
+      "type": "number",
+      "description": "Inter-frame timing delay.",
+      "title": "Inter-frame Delay"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Specify the output file to write the results to.",
+      "title": "Output File"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read a list of filenames from a file.",
+      "title": "Input File List"
+    },
+    "gif_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input GIF files to be combined into a single GIF file.",
+      "title": "Input GIF Files"
+    }
+  },
+  "required": [
+    "@type",
+    "gif_files"
+  ]
+}

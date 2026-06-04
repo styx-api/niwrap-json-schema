@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dplot.py",
+  "description": "This program is for making images to visualize columns of numbers from 1D text files. It uses Python, particularly matplotlib, to create plots.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dplot.py"
+    },
+    "infiles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "One or more file names of text files. Each column in this file will be treated as a separate time series for plotting.",
+      "title": "Input files"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output filename or prefix. Default output image type is .jpg",
+      "title": "Output prefix"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "See helpfile",
+      "title": "Help",
+      "default": false
+    },
+    "boxplot_on": {
+      "type": "boolean",
+      "description": "A fun feature to show an additional boxplot adjacent to each time series",
+      "title": "Boxplot on",
+      "default": false
+    },
+    "bplot_view": {
+      "type": "string",
+      "description": "Adjust view for boxplots when using censoring",
+      "title": "Boxplot view"
+    },
+    "margin_off": {
+      "type": "boolean",
+      "description": "Fill the plot frame completely, thus no labels, frame, or titles will be visible",
+      "title": "Margin off",
+      "default": false
+    },
+    "scale": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Provide a list of scales to apply to the y-values",
+      "title": "Scale"
+    },
+    "xfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "One way to input x-values explicitly: as a \"1D\" file containing a single file of numbers",
+      "title": "X file"
+    },
+    "xvals": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Provide exactly 3 numbers for x-values: start, stop, and stepsize",
+      "title": "X values"
+    },
+    "yaxis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Optional range for each 'infile' y-axis",
+      "title": "Y axis"
+    },
+    "ylabels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Optional text labels for each 'infile' column",
+      "title": "Y labels"
+    },
+    "ylabels_maxlen": {
+      "type": "number",
+      "description": "allows y-axis labels to wrap into multiple rows, each of length <= which the user can decide",
+      "title": "Y labels max length"
+    },
+    "legend_on": {
+      "type": "boolean",
+      "description": "Turn on the plotting of a legend in the plot(s)",
+      "title": "Legend on",
+      "default": false
+    },
+    "legend_labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Optional legend labels, if using '-legend_on'",
+      "title": "Legend labels"
+    },
+    "legend_locs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Optional legend locations, if using '-legend_on'",
+      "title": "Legend locations"
+    },
+    "xlabel": {
+      "type": "string",
+      "description": "Optional text labels for the abscissa/x-axis",
+      "title": "X label"
+    },
+    "title": {
+      "type": "string",
+      "description": "Optional title for the set of plots",
+      "title": "Title"
+    },
+    "reverse_order": {
+      "type": "boolean",
+      "description": "Reverses the order of plotted time series",
+      "title": "Reverse order",
+      "default": false
+    },
+    "sepscl": {
+      "type": "boolean",
+      "description": "Make each graph have its own y-range",
+      "title": "Separate scale",
+      "default": false
+    },
+    "one_graph": {
+      "type": "boolean",
+      "description": "Plot multiple infiles in a single subplot",
+      "title": "One graph",
+      "default": false
+    },
+    "dpi": {
+      "type": "number",
+      "description": "Choose the output image's DPI. Default value is 150",
+      "title": "DPI"
+    },
+    "figsize": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Choose the output image's dimensions (units are inches)",
+      "title": "Figure size"
+    },
+    "fontsize": {
+      "type": "number",
+      "description": "Change image fontsize; default is 10",
+      "title": "Font size"
+    },
+    "fontfamily": {
+      "type": "string",
+      "description": "Change font-family used; default is monospace",
+      "title": "Font family"
+    },
+    "fontstyles": {
+      "type": "string",
+      "description": "Add a specific font name; should match with chosen font-family",
+      "title": "Font styles"
+    },
+    "colors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Decide what color(s) to cycle through in plots (one or more)",
+      "title": "Colors"
+    },
+    "patches": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify run lengths for background patches to distinguish runs",
+      "title": "Patches"
+    },
+    "censor_trs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify time points where censoring has occurred using AFNI index notation",
+      "title": "Censor TRs"
+    },
+    "censor_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify time points where censoring has occurred using one or more 1D files",
+      "title": "Censor files"
+    },
+    "censor_hline": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Add a dotted horizontal line to the plot, representing the censor threshold",
+      "title": "Censor horizontal line"
+    },
+    "censor_rgb": {
+      "type": "string",
+      "description": "Choose the color of the censoring background; default is: [1, 0.7, 0.7]",
+      "title": "Censor RGB"
+    },
+    "bkgd_color": {
+      "type": "string",
+      "description": "Change the background color outside of the plot windows. Default is 0.9",
+      "title": "Background color"
+    }
+  },
+  "required": [
+    "@type",
+    "infiles",
+    "prefix"
+  ]
+}

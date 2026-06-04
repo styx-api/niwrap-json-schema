@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dVol2Surf",
+  "description": "Map data from a volume domain to a surface domain",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dVol2Surf"
+    },
+    "spec_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "SUMA spec file",
+      "title": "Spec file"
+    },
+    "sv": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "AFNI volume dataset mapped by the surface",
+      "title": "Surface volume"
+    },
+    "grid_parent": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "AFNI volume dataset used as a grid and orientation master for output",
+      "title": "Grid parent"
+    },
+    "map_func": {
+      "type": "string",
+      "description": "Filter for values along the segment",
+      "title": "Map function"
+    },
+    "surf_A": {
+      "type": "string",
+      "description": "Name of surface A from the spec file",
+      "title": "Surface A"
+    },
+    "surf_B": {
+      "type": "string",
+      "description": "Name of surface B from the spec file",
+      "title": "Surface B"
+    },
+    "out_1D": {
+      "type": "string",
+      "description": "Specify a 1D file for the output",
+      "title": "Output 1D file"
+    },
+    "out_niml": {
+      "type": "string",
+      "description": "Specify a niml file for the output",
+      "title": "Output niml file"
+    },
+    "use_norms": {
+      "type": "boolean",
+      "description": "Use normals for second surface",
+      "title": "Use norms",
+      "default": false
+    },
+    "norm_len": {
+      "type": "number",
+      "description": "Length for node normals",
+      "title": "Normal length"
+    },
+    "first_node": {
+      "type": "number",
+      "description": "Skip all previous nodes",
+      "title": "First node"
+    },
+    "last_node": {
+      "type": "number",
+      "description": "Skip all following nodes",
+      "title": "Last node"
+    },
+    "debug_level": {
+      "type": "number",
+      "description": "Verbose output level",
+      "title": "Debug level"
+    },
+    "dnode": {
+      "type": "number",
+      "description": "Node for debug",
+      "title": "Debug node"
+    },
+    "f_steps": {
+      "type": "number",
+      "description": "Number of steps along each segment (defines the number of evenly spaced points along each segment)",
+      "title": "Number of steps"
+    },
+    "f_index": {
+      "type": "string",
+      "description": "Whether to use all segment point values or only those corresponding to unique volume voxels",
+      "title": "Index type"
+    },
+    "f_p1_mm": {
+      "type": "number",
+      "description": "Distance in millimeters to add to the first point of each line segment",
+      "title": "First point distance in mm"
+    },
+    "f_pn_mm": {
+      "type": "number",
+      "description": "Distance in millimeters to add to the second point of each line segment",
+      "title": "Second point distance in mm"
+    },
+    "f_p1_fr": {
+      "type": "number",
+      "description": "Fractional distance to add to the first point of each line segment",
+      "title": "First point fractional distance"
+    },
+    "f_pn_fr": {
+      "type": "number",
+      "description": "Fractional distance to add to the second point of each line segment",
+      "title": "Second point fractional distance"
+    },
+    "skip_col_nodes": {
+      "type": "boolean",
+      "description": "Do not output node column",
+      "title": "Skip nodes column",
+      "default": false
+    },
+    "skip_col_1dindex": {
+      "type": "boolean",
+      "description": "Do not output 1dindex column",
+      "title": "Skip 1dindex column",
+      "default": false
+    },
+    "skip_col_i": {
+      "type": "boolean",
+      "description": "Do not output i column",
+      "title": "Skip i column",
+      "default": false
+    },
+    "skip_col_j": {
+      "type": "boolean",
+      "description": "Do not output j column",
+      "title": "Skip j column",
+      "default": false
+    },
+    "skip_col_k": {
+      "type": "boolean",
+      "description": "Do not output k column",
+      "title": "Skip k column",
+      "default": false
+    },
+    "skip_col_vals": {
+      "type": "boolean",
+      "description": "Do not output vals column",
+      "title": "Skip vals column",
+      "default": false
+    },
+    "no_headers": {
+      "type": "boolean",
+      "description": "Do not output column headers",
+      "title": "No headers",
+      "default": false
+    },
+    "save_seg_coords": {
+      "type": "string",
+      "description": "Save segment coordinates to a file",
+      "title": "Save segment coordinates"
+    },
+    "cmask": {
+      "type": "string",
+      "description": "Command for dataset mask",
+      "title": "CMASK"
+    },
+    "gp_index": {
+      "type": "number",
+      "description": "Choose grid_parent sub-brick",
+      "title": "GP index"
+    },
+    "oob_index": {
+      "type": "number",
+      "description": "Specify default index for out of bounds nodes",
+      "title": "Out of bounds index"
+    },
+    "oob_value": {
+      "type": "number",
+      "description": "Specify default value for out of bounds nodes",
+      "title": "Out of bounds value"
+    },
+    "oom_value": {
+      "type": "number",
+      "description": "Specify default value for out of mask nodes",
+      "title": "Out of mask value"
+    },
+    "outcols_afni_nsd": {
+      "type": "boolean",
+      "description": "Output nodes and one result column",
+      "title": "Output AFNI NSD",
+      "default": false
+    },
+    "outcols_1_result": {
+      "type": "boolean",
+      "description": "Output only one result column",
+      "title": "Output one result column",
+      "default": false
+    },
+    "outcols_results": {
+      "type": "boolean",
+      "description": "Output only all result columns",
+      "title": "Output all result columns",
+      "default": false
+    },
+    "outcols_nsd_format": {
+      "type": "boolean",
+      "description": "Output nodes and all results (NI_SURF_DSET format)",
+      "title": "Output NSD format",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show this help",
+      "title": "Help",
+      "default": false
+    },
+    "hist": {
+      "type": "boolean",
+      "description": "Show revision history",
+      "title": "History",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Show version information",
+      "title": "Version",
+      "default": false
+    },
+    "keep_norm_dir": {
+      "type": "boolean",
+      "description": "Keep the direction of the normals",
+      "title": "Keep normals direction",
+      "default": false
+    },
+    "reverse_norm_dir": {
+      "type": "boolean",
+      "description": "Reverse the normal directions",
+      "title": "Reverse normals direction",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "spec_file",
+    "sv",
+    "grid_parent",
+    "map_func",
+    "surf_A"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_voldiff",
+  "description": "Determines whether two volumes are different in terms of pixel data, dimension, precision, resolution, or geometry.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_voldiff"
+    },
+    "volume1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First input volume",
+      "title": "First Volume"
+    },
+    "volume2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second input volume",
+      "title": "Second Volume"
+    },
+    "vox2ras_thresh": {
+      "type": "number",
+      "description": "Vox2RAS threshold value",
+      "title": "Vox2RAS Threshold"
+    },
+    "pix_thresh": {
+      "type": "number",
+      "description": "Pixel threshold value",
+      "title": "Pixel Threshold"
+    },
+    "allow_precision": {
+      "type": "boolean",
+      "description": "Allow differences in precision",
+      "title": "Allow Precision Differences",
+      "default": false
+    },
+    "allow_resolution": {
+      "type": "boolean",
+      "description": "Allow differences in resolution",
+      "title": "Allow Resolution Differences",
+      "default": false
+    },
+    "allow_vox2ras": {
+      "type": "boolean",
+      "description": "Allow differences in Vox2RAS",
+      "title": "Allow Vox2RAS Differences",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "checkopts": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit",
+      "title": "Check Options Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "volume1",
+    "volume2"
+  ]
+}

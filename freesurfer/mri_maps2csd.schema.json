@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_maps2csd",
+  "description": "Tool to create CSD files and PDFs from input maps and apply them.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_maps2csd"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Input file(s) or specify them directly on the command line",
+      "title": "Input Files"
+    },
+    "csd_file": {
+      "type": "string",
+      "description": "Output CSD file",
+      "title": "CSD File"
+    },
+    "pdf_file": {
+      "type": "string",
+      "description": "PDF file created from CSD",
+      "title": "PDF File"
+    },
+    "subject_hemi_surf": {
+      "type": "string",
+      "description": "Subject name, hemisphere, and surface specification",
+      "title": "Subject Hemisphere Surface"
+    },
+    "thresh": {
+      "type": "number",
+      "description": "Threshold for cluster-forming (-log10 scale)",
+      "title": "Threshold"
+    },
+    "sign": {
+      "type": "string",
+      "description": "Sign adjustment for threshold (+1, -1 or 0)",
+      "title": "Sign Adjustment"
+    },
+    "csd_apply_file": {
+      "type": "string",
+      "description": "Apply a CSD file to inputs, return p-value of max cluster",
+      "title": "CSD Apply File"
+    },
+    "apply_out": {
+      "type": "string",
+      "title": "Apply Output"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Subjects directory",
+      "title": "Subjects Directory"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "checkopts": {
+      "type": "boolean",
+      "description": "Don't run, just check options then exit",
+      "title": "Check Options Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

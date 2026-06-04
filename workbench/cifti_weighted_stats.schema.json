@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WEIGHTED STATISTICS ALONG CIFTI COLUMNS",
+  "description": "If the mapping along column is brain models, for each column of the input, the specified operation is done on each surface and across all voxels, and the results are printed on separate lines.  For other mapping types, the operation is done on each column, and one line per map is printed.  Exactly one of -spatial-weights or -cifti-weights must be specified.  Use -column to only give output for a single column.  If the -roi option is used without -match-maps, then each line will contain as many numbers as there are maps in the ROI file, separated by tab characters.  Exactly one of -mean, -stdev, -percentile or -sum must be specified.\n\nUsing -sum with -spatial-weights (or with -cifti-weights and a cifti containing weights of similar meaning) is equivalent to integrating with respect to area and volume.  When the input is binary ROIs, this will therefore output the area or volume of each ROI.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_weighted_stats"
+    },
+    "cifti_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input cifti"
+    },
+    "spatial_weights": {
+      "type": "object",
+      "properties": {
+        "left_area_surf": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "use a surface for left vertex areas"
+        },
+        "right_area_surf": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "use a surface for right vertex areas"
+        },
+        "cerebellum_area_surf": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "use a surface for cerebellum vertex areas"
+        },
+        "left_area_metric": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "use a metric file for left vertex areas"
+        },
+        "right_area_metric": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "use a metric file for right vertex areas"
+        },
+        "cerebellum_area_metric": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "use a metric file for cerebellum vertex areas"
+        }
+      },
+      "description": "use vertex area and voxel volume as weights"
+    },
+    "cifti_weights": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "use a cifti file containing weights"
+    },
+    "column": {
+      "type": "integer",
+      "description": "only display output for one column"
+    },
+    "roi": {
+      "type": "object",
+      "properties": {
+        "roi_cifti": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the roi, as a cifti file"
+        },
+        "match_maps": {
+          "type": "boolean",
+          "description": "each column of input uses the corresponding column from the roi file",
+          "default": false
+        }
+      },
+      "required": [
+        "roi_cifti"
+      ],
+      "description": "only consider data inside an roi"
+    },
+    "mean": {
+      "type": "boolean",
+      "description": "compute weighted mean",
+      "default": false
+    },
+    "stdev": {
+      "type": "object",
+      "properties": {
+        "sample": {
+          "type": "boolean",
+          "description": "estimate population stdev from the sample",
+          "default": false
+        }
+      },
+      "description": "compute weighted standard deviation"
+    },
+    "percentile": {
+      "type": "number",
+      "description": "compute weighted percentile"
+    },
+    "sum": {
+      "type": "boolean",
+      "description": "compute weighted sum",
+      "default": false
+    },
+    "show_map_name": {
+      "type": "boolean",
+      "description": "print map index and name before each output",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "cifti_in"
+  ]
+}

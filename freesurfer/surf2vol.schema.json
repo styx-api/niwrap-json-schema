@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surf2vol",
+  "description": "Diffuse surface deformation to volumes using surface and MRI data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/surf2vol"
+    },
+    "fixed_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File path for the main fixed surface.",
+      "title": "Fixed Surface"
+    },
+    "moving_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File path for the main moving surface.",
+      "title": "Moving Surface"
+    },
+    "fixed_mri": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Fixed volume file.",
+      "title": "Fixed MRI"
+    },
+    "moving_mri": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Moving volume file.",
+      "title": "Moving MRI"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output file for the result, default is out.mgz.",
+      "title": "Output File"
+    },
+    "output_field": {
+      "type": "string",
+      "description": "Output field file, default is out_field.mgz.",
+      "title": "Output Field"
+    },
+    "output_affine": {
+      "type": "string",
+      "description": "Path for the output affine file.",
+      "title": "Output Affine"
+    },
+    "output_surf": {
+      "type": "string",
+      "description": "Root file name for output surfaces which will have indices appended for each surface.",
+      "title": "Output Surface"
+    },
+    "output_surf_affine": {
+      "type": "string",
+      "description": "Root file name for output surfaces with affine transformations.",
+      "title": "Output Surface Affine"
+    },
+    "output_mesh": {
+      "type": "string",
+      "description": "File path for the output mesh.",
+      "title": "Output Mesh"
+    },
+    "spacing_x": {
+      "type": "number",
+      "description": "Specifies the x spacing for the deformation grid.",
+      "title": "Spacing X"
+    },
+    "spacing_y": {
+      "type": "number",
+      "description": "Specifies the y spacing for the deformation grid.",
+      "title": "Spacing Y"
+    },
+    "spacing_z": {
+      "type": "number",
+      "description": "Specifies the z spacing for the deformation grid.",
+      "title": "Spacing Z"
+    },
+    "poisson_ratio": {
+      "type": "number",
+      "maximum": 0.5,
+      "description": "Poisson ratio for material properties, default is 0.3.",
+      "title": "Poisson Ratio"
+    },
+    "dirty_factor": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Factor for dirty regions, between 0 and 1.",
+      "title": "Dirty Factor"
+    },
+    "debug_output": {
+      "type": "boolean",
+      "description": "Enable debug output, writing a morph file at each iteration.",
+      "title": "Debug Output",
+      "default": false
+    },
+    "cache_transform": {
+      "type": "string",
+      "description": "Path to save transformation cache for reusing in subsequent runs.",
+      "title": "Cache Transform"
+    }
+  },
+  "required": [
+    "@type",
+    "fixed_surface",
+    "moving_surface",
+    "fixed_mri",
+    "moving_mri"
+  ]
+}

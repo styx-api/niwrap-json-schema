@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_segcentroids",
+  "description": "Computes the center of mass for individual structures in a segmentation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_segcentroids"
+    },
+    "input_segmentation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input segmentation volume file.",
+      "title": "Input Segmentation"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output text file for centroids.",
+      "title": "Output Text File"
+    },
+    "pointset_flag": {
+      "type": "boolean",
+      "description": "Save centroids as a Freeview pointset (json).",
+      "title": "Pointset Flag",
+      "default": false
+    },
+    "registration_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Apply a linear registration (lta).",
+      "title": "Linear Registration File"
+    },
+    "weights_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Compute weighted centroids with provided voxel weights.",
+      "title": "Voxel Weights File"
+    },
+    "lut_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify label lookup table.",
+      "title": "Label Lookup Table File"
+    },
+    "default_lut_flag": {
+      "type": "boolean",
+      "description": "Use default FreeSurferColorLUT.txt for lookup table.",
+      "title": "Default LUT Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_segmentation",
+    "output_file"
+  ]
+}

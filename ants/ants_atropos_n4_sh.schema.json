@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsAtroposN4.sh",
+  "description": "antsAtroposN4.sh iterates between N4 <-> Atropos to improve segmentation results.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsAtroposN4.sh"
+    },
+    "image_dimension": {
+      "enum": [
+        2,
+        3
+      ],
+      "description": "2 or 3, for 2- or 3-dimensional image.",
+      "title": "Image Dimension"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Anatomical image, typically T1. If more than one anatomical image is specified, subsequent images are also used during the segmentation process.",
+      "title": "Input Image"
+    },
+    "mask_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Binary mask defining the region of interest.",
+      "title": "Mask Image"
+    },
+    "number_of_classes": {
+      "type": "integer",
+      "description": "Number of classes defining the segmentation.",
+      "title": "Number of Segmentation Classes"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "The following images are created: {output_prefix}N4Corrected.{output_suffix}, {output_prefix}Segmentation.{output_suffix}, {output_prefix}SegmentationPosteriors.{output_suffix}",
+      "title": "Output Prefix"
+    },
+    "max_n4_atropos_iterations": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Maximum number of (outer loop) iterations between N4 <-> Atropos (default = 15).",
+      "title": "Max. N4 <-> Atropos Iterations"
+    },
+    "max_atropos_iterations": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Maximum number of (inner loop) iterations in Atropos (default = 3).",
+      "title": "Max. Atropos Iterations"
+    },
+    "segmentation_priors": {
+      "type": "object",
+      "properties": {
+        "segmentation_priors_pattern": {
+          "type": "string",
+          "description": "Prior probability images initializing the segmentation. Specified using c-style formatting, e.g. -p labelsPriors%02d.nii.gz. If this is not specified, k-means initialization is used instead.",
+          "title": "Segmentation Priors"
+        },
+        "segmentation_priors_folder": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Included so.",
+          "title": "Segmentation Priors Folder"
+        }
+      },
+      "description": "Prior probability images initializing the segmentation. Specified using c-style formatting, e.g. -p labelsPriors%02d.nii.gz. If this is not specified, k-means initialization is used instead.",
+      "title": "Segmentation Priors"
+    },
+    "mrf": {
+      "type": "string",
+      "description": "Specifies MRF prior (of the form '[ weight,neighborhood ]', e.g. '[ 0.1,1x1x1 ]' which is default).",
+      "title": "MRF"
+    },
+    "denoise_anatomical_images": {
+      "type": "boolean",
+      "description": "Denoise anatomical images (1) or not (0) (default = 1).",
+      "title": "Denoise Anatomical Images"
+    },
+    "posterior_formulation": {
+      "enum": [
+        "Socrates[ 1 ]",
+        "Aristotle[ 1 ]"
+      ],
+      "description": "Posterior formulation and whether or not to use mixture model proportions. e.g 'Socrates[ 1 ]' (default) or 'Aristotle[ 1 ]'.  Choose the latter if you want to use the distance priors, see also the -l option for label propagation control (default = 'Socrates[ 1 ]').",
+      "title": "Posterior Formulation"
+    },
+    "label_propagation": {
+      "type": "string",
+      "description": "Incorporate a distance prior into the 'Aristotle' posterior formulation. Should be of the form 'label[ lambda,boundaryProbability ]' where label is a value of 1,2,3,... denoting label ID. The label probability for anything outside the current label\n\n  = boundaryProbability * exp( -lambda * distanceFromBoundary )\n\nIntuitively, smaller lambda values will increase the spatial capture range of the distance prior. To apply to all label values, simply omit specifying the label, i.e. -l '[ lambda,boundaryProbability ]'.",
+      "title": "Label Propagation"
+    },
+    "posterior_label_for_n4_weight_mask": {
+      "type": "string",
+      "description": "Which posterior probability image should be used to define the N4 weight mask. Can also specify multiple posteriors in which case the chosen posteriors are combined.",
+      "title": "Posterior Label for N4 Weight Mask"
+    },
+    "image_file_suffix": {
+      "type": "string",
+      "description": "Any of the standard ITK IO formats e.g. nrrd, nii.gz (default), mhd.",
+      "title": "Image File Suffix"
+    },
+    "keep_temporary_files": {
+      "type": "boolean",
+      "description": "Keep temporary files on disk (1) or delete them (0) (default = 0).",
+      "title": "Keep Temporary Files"
+    },
+    "use_random_seeding": {
+      "type": "boolean",
+      "description": "Use random number generated from system clock in Atropos (default = 1).",
+      "title": "Use Random Seeding"
+    },
+    "atropos_segmentation_prior_weight": {
+      "type": "number",
+      "description": "Atropos spatial prior probability weight for the segmentation (default = 0.25).",
+      "title": "Atropos Prior Segmentation Weight"
+    },
+    "n4_convergence": {
+      "type": "string",
+      "description": "Convergence parameters for N4, see '-c' option in N4BiasFieldCorrection (default = [50x50x50x50,0.0000001]).",
+      "title": "N4 Convergence"
+    },
+    "n4_shrink_factor": {
+      "type": "integer",
+      "description": "Shrink factor for N4 (default = 4).",
+      "title": "N4 Shrink Factor"
+    },
+    "n4_bspline_params": {
+      "type": "string",
+      "description": "N4 b-spline specification, see '-b' option in N4BiasFieldCorrection (default = [200,0,0,0]).",
+      "title": "N4 B-spline Parameters"
+    },
+    "atropos_segmentation_icm": {
+      "type": "string",
+      "description": "ICM parameters for segmentation, see '-g' option in Atropos (default = [1,1]).",
+      "title": "Atropos ICM"
+    },
+    "atropos_segmentation_use_euclidean_distance": {
+      "type": "boolean",
+      "description": "Use euclidean distances in distance prior formulation (1) or not (0), see Atropos usage for details (default = 1).",
+      "title": "Atropos Use Euclidean Distance"
+    },
+    "test_debug_mode": {
+      "type": "integer",
+      "description": "If > 0, attempts to continue after errors.",
+      "title": "Test / Debug Mode"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "input_image",
+    "mask_image",
+    "number_of_classes",
+    "output_prefix",
+    "segmentation_priors"
+  ]
+}

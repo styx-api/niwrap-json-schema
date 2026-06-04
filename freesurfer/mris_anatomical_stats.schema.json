@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_anatomical_stats",
+  "description": "This program computes a number of anatomical properties.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_anatomical_stats"
+    },
+    "subjectname": {
+      "type": "string",
+      "description": "Subject name",
+      "title": "Subject Name"
+    },
+    "hemisphere": {
+      "type": "string",
+      "description": "Hemisphere",
+      "title": "Hemisphere"
+    },
+    "surfacename": {
+      "type": "string",
+      "description": "Surface name",
+      "title": "Surface Name"
+    },
+    "thickness_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Only consider thicknesses in the specified range.",
+      "title": "Thickness Range"
+    },
+    "label_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Limit calculations to specified label",
+      "title": "Label File"
+    },
+    "thickness_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use specified file for computing thickness statistics",
+      "title": "Thickness File"
+    },
+    "annotation_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Compute properties for each label in the annotation file separately",
+      "title": "Annotation File"
+    },
+    "tabular_output": {
+      "type": "boolean",
+      "description": "Tabular output",
+      "title": "Tabular Output Flag",
+      "default": false
+    },
+    "tablefile": {
+      "type": "string",
+      "description": "Table output to tablefile. Must use -a or -l options to specify input.",
+      "title": "Table File"
+    },
+    "logfile": {
+      "type": "string",
+      "description": "Write stats to file named log",
+      "title": "Log File"
+    },
+    "nsmooth": {
+      "type": "number",
+      "description": "Smooth thickness map # of iterations before using it",
+      "title": "Number of Smoothing Iterations"
+    },
+    "color_table": {
+      "type": "string",
+      "description": "Output annotation file's color table to text file",
+      "title": "Color Table File"
+    },
+    "noglobal": {
+      "type": "boolean",
+      "description": "Do not compute global brain stats",
+      "title": "No Global Stats Flag",
+      "default": false
+    },
+    "th3_computation": {
+      "type": "boolean",
+      "description": "Compute vertex-wise volume by dividing each obliquely truncated trilateral pyramid into three tetrahedra",
+      "title": "TH3 Computation Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subjectname",
+    "hemisphere"
+  ]
+}

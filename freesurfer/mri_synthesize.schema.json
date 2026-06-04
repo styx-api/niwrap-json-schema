@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_synthesize",
+  "description": "This program synthesizes a FLASH acquisition based on previously computed T1/PD maps.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_synthesize"
+    },
+    "tr": {
+      "type": "number",
+      "description": "Repetition time (TR) for the synthesis.",
+      "title": "TR"
+    },
+    "alpha": {
+      "type": "number",
+      "description": "Flip angle (alpha) in degrees.",
+      "title": "Alpha (degrees)"
+    },
+    "te": {
+      "type": "number",
+      "description": "Echo time (TE) for the synthesis.",
+      "title": "TE"
+    },
+    "t1_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the T1 volume.",
+      "title": "T1 Volume"
+    },
+    "pd_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the PD volume.",
+      "title": "PD Volume"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Path for the output volume.",
+      "title": "Output Volume"
+    },
+    "fixed_weight": {
+      "type": "boolean",
+      "description": "Use a fixed weighting to generate an output volume with optimal gray/white contrast.",
+      "title": "Fixed Weight Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "tr",
+    "alpha",
+    "te",
+    "t1_volume",
+    "pd_volume",
+    "output_volume"
+  ]
+}

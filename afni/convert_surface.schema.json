@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ConvertSurface",
+  "description": "Reads in a surface and writes it out in another format. Only fields pertinent to SUMA are preserved.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/ConvertSurface"
+    },
+    "input_surface": {
+      "type": "string",
+      "description": "Specifies the input surface.",
+      "title": "Input Surface"
+    },
+    "output_surface": {
+      "type": "string",
+      "description": "Specifies the output surface.",
+      "title": "Output Surface"
+    },
+    "surface_volume": {
+      "type": "string",
+      "description": "Specifies a surface volume.",
+      "title": "Surface Volume"
+    },
+    "transform_tlrc": {
+      "type": "boolean",
+      "description": "Apply Talairach transform.",
+      "title": "Talairach Transform",
+      "default": false
+    },
+    "mni_rai": {
+      "type": "boolean",
+      "description": "Turn AFNI tlrc coordinates (RAI) into MNI coord space in RAI.",
+      "title": "MNI RAI",
+      "default": false
+    },
+    "mni_lpi": {
+      "type": "boolean",
+      "description": "Turn AFNI tlrc coordinates (RAI) into MNI coord space in LPI.",
+      "title": "MNI LPI",
+      "default": false
+    },
+    "xmat_1D": {
+      "type": "string",
+      "description": "Apply transformation specified in 1D file.",
+      "title": "1D Transformation Matrix"
+    },
+    "ixmat_1D": {
+      "type": "string",
+      "description": "Apply inverse transformation specified in 1D file.",
+      "title": "Inverse 1D Transformation Matrix"
+    },
+    "seed": {
+      "type": "string",
+      "description": "Specify SEED to seed the random number generator for random matrix generation.",
+      "title": "Random Seed"
+    },
+    "native": {
+      "type": "boolean",
+      "description": "Write the output surface in the coordinate system native to its format.",
+      "title": "Native Coordinate System",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface",
+    "output_surface"
+  ]
+}

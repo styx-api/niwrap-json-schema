@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfDist",
+  "description": "Calculate shortest distance between node pairs on a surface mesh.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SurfDist"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface on which distances are computed.",
+      "title": "Surface"
+    },
+    "nodepairs": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify node pairs for distance computation.",
+      "title": "Node pairs"
+    },
+    "node_path_do": {
+      "type": "string",
+      "description": "Output the shortest path between each node pair as a SUMA Displayable object.",
+      "title": "Node path display object"
+    },
+    "euclidean": {
+      "type": "boolean",
+      "description": "Calculate Euclidean distance, rather than graph distance.",
+      "title": "Euclidean distance flag",
+      "default": false
+    },
+    "euclidian": {
+      "type": "boolean",
+      "description": "Synonym for '-Euclidean'.",
+      "title": "Euclidian distance flag",
+      "default": false
+    },
+    "graph": {
+      "type": "boolean",
+      "description": "Calculate distance along the mesh (default).",
+      "title": "Graph distance flag",
+      "default": false
+    },
+    "from_node": {
+      "type": "string",
+      "description": "Specify one starting node for pair calculation.",
+      "title": "From node"
+    },
+    "to_nodes": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify nodes used for pair calculation when using -from_node.",
+      "title": "To nodes"
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "nodepairs"
+  ]
+}

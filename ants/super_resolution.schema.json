@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SuperResolution",
+  "description": "The SuperResolution tool enhances the spatial resolution of input images. The 'gradientSigma' parameter is used in calculating the gradient magnitude of the input images for weighting the voxel points during fitting. If a negative 'gradient' sigma is specified then no weighting is used.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/SuperResolution"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "description": "Specifies the dimensionality of the input images (e.g., 2 for 2D images, 3 for 3D images).",
+      "title": "Image Dimension"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "The file path for the output super-resolved image.",
+      "title": "Output Image"
+    },
+    "domain_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The domain image is used as the template space for the alignment of input images.",
+      "title": "Domain Image"
+    },
+    "gradient_sigma": {
+      "type": "number",
+      "description": "The sigma used for calculating the gradient magnitude of input images. If negative, no weighting is applied.",
+      "title": "Gradient Sigma"
+    },
+    "mesh_size": {
+      "type": "number",
+      "description": "The size of the mesh used in fitting.",
+      "title": "Mesh Size"
+    },
+    "number_of_levels": {
+      "type": "integer",
+      "description": "The number of resolution levels to process.",
+      "title": "Number of Levels"
+    },
+    "input_image_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of paths to input images to be processed for super resolution.",
+      "title": "Input Image Files"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "output_image",
+    "domain_image",
+    "gradient_sigma",
+    "mesh_size",
+    "number_of_levels",
+    "input_image_files"
+  ]
+}

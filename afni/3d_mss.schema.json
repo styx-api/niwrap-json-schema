@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dMSS",
+  "description": "Voxelwise Multilevel Smoothing Spline (MSS) Analysis",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dMSS"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output file name. For AFNI format, provide prefix only, with no view+suffix needed. Filename for NIfTI format should have .nii attached.",
+      "title": "Output filename prefix"
+    },
+    "jobs": {
+      "type": "number",
+      "description": "Number of CPU cores for parallel processing",
+      "title": "CPU cores"
+    },
+    "mrr_formula": {
+      "type": "string",
+      "description": "Model formulation through multilevel smoothing splines",
+      "title": "Multilevel smoothing splines formulation"
+    },
+    "lme_formula": {
+      "type": "string",
+      "description": "Specify the fixed effect components of the model",
+      "title": "Linear mixed effect formula"
+    },
+    "random_effect": {
+      "type": "string",
+      "description": "Specify the random effect components of the model",
+      "title": "Random effect formula"
+    },
+    "qvars": {
+      "type": "string",
+      "description": "Identify quantitative variables (or covariates). The list with more than one variable has to be separated with comma without any other characters.",
+      "title": "Quantitative variables"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Process voxels inside this mask only.",
+      "title": "Mask"
+    },
+    "bounds": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Outlier removal bounds. Any values in the input data that are beyond the bounds will be removed and treated as missing.",
+      "title": "Outlier removal bounds"
+    },
+    "prediction_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Provide a data table so that predicted values could be generated for graphical illustration.",
+      "title": "Prediction table"
+    },
+    "data_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "List the data structure with a header as the first line.",
+      "title": "Data table"
+    },
+    "cio_flag": {
+      "type": "boolean",
+      "description": "Use AFNI's C io functions, which is default.",
+      "title": "C IO flag",
+      "default": false
+    },
+    "rio_flag": {
+      "type": "boolean",
+      "description": "Use R's io functions.",
+      "title": "R IO flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help flag",
+      "default": false
+    },
+    "dbg_args_flag": {
+      "type": "boolean",
+      "description": "Enable R to save the parameters in a file called .3dMSS.dbg.AFNI.args for debugging.",
+      "title": "Debug args flag",
+      "default": false
+    },
+    "if_name": {
+      "type": "string",
+      "description": "Specify the column name that is designated for input files of effect estimate. Default is 'InputFile'.",
+      "title": "Input file column name"
+    },
+    "show_allowed_options_flag": {
+      "type": "boolean",
+      "description": "List of allowed options",
+      "title": "Show allowed options flag",
+      "default": false
+    },
+    "sdiff_vars": {
+      "type": "string",
+      "description": "Specify the factors for group comparisons.",
+      "title": "Group comparison factors"
+    },
+    "vt_formula": {
+      "type": "string",
+      "description": "Specify varying smoothing terms. Two components are required: the first one 'var' indicates the variable (e.g., subject) around which the smoothing will vary while the second component specifies the smoothing formulation.",
+      "title": "Varying smoothing terms"
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "data_table"
+  ]
+}

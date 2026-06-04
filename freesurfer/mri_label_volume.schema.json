@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_label_volume",
+  "description": "A tool to compute volumes of labeled voxels within MRI images, often used in conjunction with FreeSurfer processed data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_label_volume"
+    },
+    "volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Volume file (e.g., volume.mgz) to analyze",
+      "title": "Volume File"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Labels to compute volume for",
+      "title": "Labels"
+    },
+    "partial_volume_effects": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Compute partial volume effects using intensity volume",
+      "title": "Partial Volume Effects File"
+    },
+    "intracranial_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Normalize by the intracranial volume in provided file",
+      "title": "Intracranial Volume File"
+    },
+    "spreadsheet_subject": {
+      "type": "string",
+      "description": "Output in spreadsheet mode, including subject name",
+      "title": "Spreadsheet Subject"
+    },
+    "non_zero_voxels": {
+      "type": "boolean",
+      "description": "Compute volume of all non-zero voxels (e.g. for computing brain volume)",
+      "title": "Non-Zero Voxels Flag",
+      "default": false
+    },
+    "replace_label_in": {
+      "type": "string",
+      "description": "Replace label <in> with label <out>.",
+      "title": "Replace Label Input"
+    },
+    "replace_label_out": {
+      "type": "string",
+      "description": "Label to replace with",
+      "title": "Replace Label Output"
+    },
+    "brain_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Compute the brain volume from provided brain volume file and normalize by it",
+      "title": "Brain Volume File"
+    },
+    "percentage": {
+      "type": "boolean",
+      "description": "Compute volume as a percentage of all non-zero labels",
+      "title": "Percentage Flag",
+      "default": false
+    },
+    "log_results": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Log results to provided file",
+      "title": "Log Results File"
+    },
+    "atlas_transform_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify LTA or XFM atlas transform file and scale factor to use for ICV correction",
+      "title": "Atlas Transform File"
+    },
+    "atlas_scalefactor": {
+      "type": "number",
+      "description": "Scale factor for ICV correction",
+      "title": "Atlas Scale Factor"
+    },
+    "etiv_transform_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Same as -atlas_icv",
+      "title": "eTIV Transform File"
+    },
+    "etiv_scalefactor": {
+      "type": "number",
+      "description": "eTIV scale factor",
+      "title": "eTIV Scale Factor"
+    },
+    "etiv_subject": {
+      "type": "string",
+      "description": "Same as -eTIV, and generate MATLAB data appending subject to structure",
+      "title": "eTIV Subject"
+    }
+  },
+  "required": [
+    "@type",
+    "volume",
+    "labels"
+  ]
+}

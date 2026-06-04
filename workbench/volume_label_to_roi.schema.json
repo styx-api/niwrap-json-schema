@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MAKE A VOLUME LABEL INTO AN ROI VOLUME",
+  "description": "For each map in <label-in>, a map is created in <volume-out> where all locations labeled with <label-name> or with a key of <label-key> are given a value of 1, and all other locations are given 0.  Exactly one of -name and -key must be specified.  Specify -map to use only one map from <label-in>.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume_label_to_roi"
+    },
+    "label_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input volume label file"
+    },
+    "volume_out": {
+      "type": "string",
+      "description": "the output volume file"
+    },
+    "name": {
+      "type": "string",
+      "description": "select label by name"
+    },
+    "key": {
+      "type": "integer",
+      "description": "select label by key"
+    },
+    "map": {
+      "type": "string",
+      "description": "select a single label map to use"
+    }
+  },
+  "required": [
+    "@type",
+    "label_in",
+    "volume_out"
+  ]
+}

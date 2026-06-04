@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "pnm_evs",
+  "description": "PNM EVs: Generates physiological noise regressors for fMRI data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/pnm_evs"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image filename (4D functional/EPI data)",
+      "title": "Input file"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output filename (for confound/EV matrix)",
+      "title": "Output file"
+    },
+    "tr_value": {
+      "type": "number",
+      "description": "TR of fMRI volumes (in seconds)",
+      "title": "Repetition time"
+    },
+    "cardiac_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input filename for cardiac values (1 or 2 columns: time [phase])",
+      "title": "Cardiac values file"
+    },
+    "respiratory_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input filename for respiratory phase values (1 or 2 columns: time [phase])",
+      "title": "Respiratory values file"
+    },
+    "order_cardiac": {
+      "type": "number",
+      "description": "Order of basic cardiac regressors (number of Fourier pairs)",
+      "title": "Order of cardiac regressors"
+    },
+    "order_respiratory": {
+      "type": "number",
+      "description": "Order of basic respiratory regressors (number of Fourier pairs)",
+      "title": "Order of respiratory regressors"
+    },
+    "order_mult_cardiac": {
+      "type": "number",
+      "description": "Order of multiplicative cardiac terms (also need to set --multr)",
+      "title": "Order of multiplicative cardiac terms"
+    },
+    "order_mult_respiratory": {
+      "type": "number",
+      "description": "Order of multiplicative respiratory terms (also need to set --multc)",
+      "title": "Order of multiplicative respiratory terms"
+    },
+    "csf_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of CSF mask image (and generate CSF regressor)",
+      "title": "CSF mask image file"
+    },
+    "rvt_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input filename of RVT data (2 columns: time value)",
+      "title": "RVT data file"
+    },
+    "heartrate_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input filename for heart rate data (2 columns: time value)",
+      "title": "Heart rate data file"
+    },
+    "rvt_smooth": {
+      "type": "number",
+      "description": "Optional smoothing of RVT regressor (in seconds)",
+      "title": "RVT smoothing"
+    },
+    "heartrate_smooth": {
+      "type": "number",
+      "description": "Optional smoothing of heart rate regressor (in seconds)",
+      "title": "Heart rate smoothing"
+    },
+    "slice_direction": {
+      "type": "string",
+      "description": "Specify slice direction (x/y/z)",
+      "title": "Slice direction"
+    },
+    "slice_order": {
+      "type": "string",
+      "description": "Specify slice ordering (up/down/interleaved_up/interleaved_down)",
+      "title": "Slice ordering"
+    },
+    "slice_timing_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify slice timing via an external file",
+      "title": "Slice timing file"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Turn on debugging output",
+      "title": "Debug flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file",
+    "tr_value"
+  ]
+}

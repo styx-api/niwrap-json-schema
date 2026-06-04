@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dSetupGroupInCorr",
+  "description": "Pre-process a collection of AFNI 3D+time datasets for use with Group InstaCorr.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dSetupGroupInCorr"
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "AFNI 3D+time datasets to be processed.",
+      "title": "Input datasets"
+    },
+    "mask_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask dataset for voxel selection.",
+      "title": "Mask dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output dataset names.",
+      "title": "Prefix"
+    },
+    "short_flag": {
+      "type": "boolean",
+      "description": "Store data as 16-bit shorts.",
+      "title": "Short flag",
+      "default": false
+    },
+    "byte_flag": {
+      "type": "boolean",
+      "description": "Store data as 8-bit bytes.",
+      "title": "Byte flag",
+      "default": false
+    },
+    "labels_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing a list of labels for each dataset.",
+      "title": "Labels file"
+    },
+    "delete_flag": {
+      "type": "boolean",
+      "description": "Delete input datasets from disk after processing.",
+      "title": "Delete flag",
+      "default": false
+    },
+    "prep_method": {
+      "type": "string",
+      "description": "Preprocess each data time series with the specified method.",
+      "title": "Prep method"
+    },
+    "lr_pairs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Set the domains for left and right hemisphere surfaces and indicate that the datasets are arranged in (Left, Right) pairs.",
+      "title": "Left-Right pairs"
+    }
+  },
+  "required": [
+    "@type",
+    "datasets",
+    "prefix"
+  ]
+}

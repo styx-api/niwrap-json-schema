@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_cc",
+  "description": "Segments the corpus callosum into five separate labels in the subcortical segmentation volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_cc"
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "Subject name used in processing",
+      "title": "Subject Name"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Write aseg including CC to SDIR/mri/<fname>",
+      "title": "Output File"
+    },
+    "aseg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read aseg from SDIR/mri/<fname>",
+      "title": "Aseg File"
+    },
+    "norm_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read norm from SDIR/mri/<fname>",
+      "title": "Norm File"
+    },
+    "sdir": {
+      "type": "string",
+      "description": "Set SUBJECTS_DIR to <dname>",
+      "title": "Subjects Directory"
+    },
+    "rotation_lta": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Write rotation lta to global <fname>",
+      "title": "Rotation LTA File"
+    },
+    "force_flag": {
+      "type": "boolean",
+      "description": "Process regardless of existing CC in input",
+      "title": "Force Flag",
+      "default": false
+    },
+    "include_fornix": {
+      "type": "boolean",
+      "description": "Include fornix in segmentation",
+      "title": "Include Fornix",
+      "default": false
+    },
+    "compartments": {
+      "type": "number",
+      "description": "Subdivide into <int> compartments",
+      "title": "Compartments"
+    },
+    "thickness": {
+      "type": "number",
+      "description": "Setting CC thickness to <int> mm",
+      "title": "CC Thickness"
+    },
+    "skip_voxels": {
+      "type": "number",
+      "description": "Skipping <int> voxels in rotational align",
+      "title": "Skip Voxels"
+    },
+    "max_rotation": {
+      "type": "number",
+      "description": "Set max of rotations to be searched (default=7deg)",
+      "title": "Max Rotation"
+    }
+  },
+  "required": [
+    "@type",
+    "subject_name"
+  ]
+}

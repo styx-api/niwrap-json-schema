@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "immask",
+  "description": "Masks the input image based on specified criteria and produces the output image",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/immask"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold value; all pixels with absolute value below this will be set to zero in the output image",
+      "title": "Threshold Value"
+    },
+    "mask_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask image; only locations that are nonzero in the mask image will be nonzero in the output image",
+      "title": "Mask Image"
+    },
+    "positive_only": {
+      "type": "boolean",
+      "description": "Use only positive pixels from input image",
+      "title": "Positive Only Flag",
+      "default": false
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image to be masked",
+      "title": "Input Image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Output image after masking",
+      "title": "Output Image"
+    }
+  },
+  "required": [
+    "@type",
+    "input_image",
+    "output_image"
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tensor2metric",
+  "description": "Generate maps of tensor-derived parameters.\n\n\n\nReferences:\n\nBasser, P. J.; Mattiello, J. & Lebihan, D. MR diffusion tensor spectroscopy and imaging. Biophysical Journal, 1994, 66, 259-267\n\nWestin, C. F.; Peled, S.; Gudbjartsson, H.; Kikinis, R. & Jolesz, F. A. Geometrical diffusion measures for MRI from tensor basis analysis. Proc Intl Soc Mag Reson Med, 1997, 5, 1742",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/tensor2metric"
+    },
+    "adc": {
+      "type": "string",
+      "description": "compute the mean apparent diffusion coefficient (ADC) of the diffusion tensor. (sometimes also referred to as the mean diffusivity (MD))",
+      "title": "adc"
+    },
+    "fa": {
+      "type": "string",
+      "description": "compute the fractional anisotropy (FA) of the diffusion tensor.",
+      "title": "fa"
+    },
+    "ad": {
+      "type": "string",
+      "description": "compute the axial diffusivity (AD) of the diffusion tensor. (equivalent to the principal eigenvalue)",
+      "title": "ad"
+    },
+    "rd": {
+      "type": "string",
+      "description": "compute the radial diffusivity (RD) of the diffusion tensor. (equivalent to the mean of the two non-principal eigenvalues)",
+      "title": "rd"
+    },
+    "cl": {
+      "type": "string",
+      "description": "compute the linearity metric of the diffusion tensor. (one of the three Westin shape metrics)",
+      "title": "cl"
+    },
+    "cp": {
+      "type": "string",
+      "description": "compute the planarity metric of the diffusion tensor. (one of the three Westin shape metrics)",
+      "title": "cp"
+    },
+    "cs": {
+      "type": "string",
+      "description": "compute the sphericity metric of the diffusion tensor. (one of the three Westin shape metrics)",
+      "title": "cs"
+    },
+    "value": {
+      "type": "string",
+      "description": "compute the selected eigenvalue(s) of the diffusion tensor.",
+      "title": "value"
+    },
+    "vector": {
+      "type": "string",
+      "description": "compute the selected eigenvector(s) of the diffusion tensor.",
+      "title": "vector"
+    },
+    "num": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "specify the desired eigenvalue/eigenvector(s). Note that several eigenvalues can be specified as a number sequence. For example, '1,3' specifies the principal (1) and minor (3) eigenvalues/eigenvectors (default = 1).",
+      "title": "num"
+    },
+    "modulate": {
+      "type": "string",
+      "description": "specify how to modulate the magnitude of the eigenvectors. Valid choices are: none, FA, eigval (default = FA).",
+      "title": "modulate"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "only perform computation within the specified binary brain mask image.",
+      "title": "mask"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "tensor": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input tensor image.",
+      "title": "tensor"
+    }
+  },
+  "required": [
+    "@type",
+    "tensor"
+  ]
+}

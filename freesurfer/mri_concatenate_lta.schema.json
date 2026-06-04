@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_concatenate_lta",
+  "description": "Concatenates two consecutive LTA transformations into one overall transformation, Out = LTA2*LTA1",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_concatenate_lta"
+    },
+    "lta_1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File for LTA transformation that maps some src1 to dst1",
+      "title": "LTA 1 File"
+    },
+    "lta_2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File for LTA transformation that maps dst1 (src2) to dst2",
+      "title": "LTA 2 File"
+    },
+    "lta_final": {
+      "type": "string",
+      "description": "File for the combined LTA maps: src1 to dst2 = LTA2*LTA1",
+      "title": "LTA Final File"
+    },
+    "tal_src": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify source (file1) for Talairach transformation",
+      "title": "Talairach Source File"
+    },
+    "tal_template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify template (file2) for Talairach transformation",
+      "title": "Talairach Template File"
+    },
+    "invert1": {
+      "type": "boolean",
+      "description": "Invert LTA1 before applying it",
+      "title": "Invert LTA 1 Flag",
+      "default": false
+    },
+    "invert2": {
+      "type": "boolean",
+      "description": "Invert LTA2 before applying it",
+      "title": "Invert LTA 2 Flag",
+      "default": false
+    },
+    "invertout": {
+      "type": "boolean",
+      "description": "Invert output LTA",
+      "title": "Invert Output LTA Flag",
+      "default": false
+    },
+    "out_type": {
+      "type": "number",
+      "description": "Set final LTA type: 0 for VOX2VOX (default), 1 for RAS2RAS",
+      "title": "Output Type"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Set subject in output LTA",
+      "title": "Subject"
+    },
+    "rmsdiff_radius": {
+      "type": "number",
+      "description": "Radius used for computing RMS diff between transforms",
+      "title": "RMS Diff Radius"
+    },
+    "rmsdiff_outputfile": {
+      "type": "string",
+      "description": "Output file for RMS diff computation. Use 'nofile' to skip output",
+      "title": "RMS Diff Output File"
+    }
+  },
+  "required": [
+    "@type",
+    "lta_1",
+    "lta_2",
+    "lta_final"
+  ]
+}

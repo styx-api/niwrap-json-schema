@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dNetCorr",
+  "description": "Compute correlation matrix of a set of ROIs based on mean time series",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dNetCorr"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output file name prefix",
+      "title": "Prefix"
+    },
+    "inset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Time series file (4D data set)",
+      "title": "Input time series file"
+    },
+    "in_rois": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input a set of ROIs each labelled with distinct integers. Multiple subbricks can be input, each will be treated as a separate network.",
+      "title": "Input ROIs file"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Whole brain mask within which to calculate correlation.",
+      "title": "Mask"
+    },
+    "fish_z": {
+      "type": "boolean",
+      "description": "Output Fisher Z-transform matrix along with correlation matrix.",
+      "title": "Fisher Z-transform flag",
+      "default": false
+    },
+    "part_corr": {
+      "type": "boolean",
+      "description": "Output the partial correlation matrix.",
+      "title": "Partial correlation flag",
+      "default": false
+    },
+    "ts_out": {
+      "type": "boolean",
+      "description": "Output the mean time series of the ROIs.",
+      "title": "Time series output flag",
+      "default": false
+    },
+    "ts_label": {
+      "type": "boolean",
+      "description": "Insert the integer ROI label at the start of each line of the *.netts file created.",
+      "title": "Time series label flag",
+      "default": false
+    },
+    "ts_indiv": {
+      "type": "boolean",
+      "description": "Create a directory for each network that contains the average time series for each ROI in individual files.",
+      "title": "Individual time series flag",
+      "default": false
+    },
+    "ts_wb_corr": {
+      "type": "boolean",
+      "description": "Perform whole brain correlation for each ROI's average time series and output as Pearson 'r' values.",
+      "title": "Whole brain correlation flag",
+      "default": false
+    },
+    "ts_wb_Z": {
+      "type": "boolean",
+      "description": "Perform whole brain correlation for each ROI's average time series and output as Fisher transformed Z-scores.",
+      "title": "Whole brain Fisher Z-score flag",
+      "default": false
+    },
+    "weight_ts": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input a 1D file of weights to be applied multiplicatively to each ROI's average time series.",
+      "title": "Weight time series"
+    },
+    "weight_corr": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input a 1D file of weights to estimate a weighted Pearson Correlation.",
+      "title": "Weight correlation"
+    },
+    "ts_wb_strlabel": {
+      "type": "boolean",
+      "description": "Apply string labels to the WB correlation/Z-score output files.",
+      "title": "Whole brain string label flag",
+      "default": false
+    },
+    "nifti": {
+      "type": "boolean",
+      "description": "Output any correlation map files as NIFTI files.",
+      "title": "NIFTI output flag",
+      "default": false
+    },
+    "output_mask_nonnull": {
+      "type": "boolean",
+      "description": "Output mask of non-null time series.",
+      "title": "Output non-null mask flag",
+      "default": false
+    },
+    "push_thru_many_zeros": {
+      "type": "boolean",
+      "description": "Push through the calculation even if any ROI contains more than 10 percent of voxels with null time series.",
+      "title": "Push through many zeros flag",
+      "default": false
+    },
+    "allow_roi_zeros": {
+      "type": "boolean",
+      "description": "Allow ROIs to have all-zero time series.",
+      "title": "Allow zero-filled ROI flag",
+      "default": false
+    },
+    "automask_off": {
+      "type": "boolean",
+      "description": "Disable internal automasking of where time series are not uniformly zero.",
+      "title": "Automask off flag",
+      "default": false
+    },
+    "ignore_LT": {
+      "type": "boolean",
+      "description": "Ignore any label table labels in the '-in_rois' file.",
+      "title": "Ignore label table flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "inset",
+    "in_rois"
+  ]
+}

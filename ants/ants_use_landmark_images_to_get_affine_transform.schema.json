@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ANTSUseLandmarkImagesToGetAffineTransform",
+  "description": "This tool computes an affine transform (rigid or affine) from labeled landmark images. It requires input images to be N-ary, in the same physical space as the images you want to register, and to have the same landmark points defined within them. Landmarks are defined from the center of mass of the labels in the input images. ITK-snap can be used to generate the label images.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/ANTSUseLandmarkImagesToGetAffineTransform"
+    },
+    "fixed_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The fixed image containing labeled landmarks (N-ary image).",
+      "title": "Fixed image with labeled landmarks"
+    },
+    "moving_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The moving image containing labeled landmarks (N-ary image).",
+      "title": "Moving image with labeled landmarks"
+    },
+    "transform_type": {
+      "enum": [
+        "rigid",
+        "affine"
+      ],
+      "description": "Type of transform to compute: 'rigid' or 'affine'.",
+      "title": "Transform type"
+    },
+    "output_affine": {
+      "type": "string",
+      "description": "The output file for the affine transform matrix (e.g., OutAffine.txt).",
+      "title": "Output affine"
+    }
+  },
+  "required": [
+    "@type",
+    "fixed_image",
+    "moving_image",
+    "transform_type",
+    "output_affine"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fs-check-version",
+  "description": "Script to manage which version of FreeSurfer can be used to analyze data ensuring consistency with the desired version.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/fs-check-version"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Subjects directory path",
+      "title": "Subjects Directory"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Output file path where result of version check will be written",
+      "title": "Output File"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject name (optional)",
+      "title": "Subject"
+    },
+    "require_match": {
+      "type": "boolean",
+      "description": "Set REQUIRE_FS_MATCH for testing",
+      "title": "Require Match Flag",
+      "default": false
+    },
+    "no_require_match": {
+      "type": "boolean",
+      "description": "Unset REQUIRE_FS_MATCH for testing",
+      "title": "No Require Match Flag",
+      "default": false
+    },
+    "test": {
+      "type": "boolean",
+      "description": "Go through permutations for testing",
+      "title": "Test Flag",
+      "default": false
+    },
+    "test_debug": {
+      "type": "boolean",
+      "description": "Go through permutations for debugging",
+      "title": "Test Debug Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subjects_dir",
+    "outfile"
+  ]
+}

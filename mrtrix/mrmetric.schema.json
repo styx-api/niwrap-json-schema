@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mrmetric",
+  "description": "Computes a dissimilarity metric between two images.\n\nCurrently only the mean squared difference is fully implemented.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/mrmetric"
+    },
+    "space": {
+      "type": "string",
+      "description": "voxel (default): per voxel image1: scanner space of image 1 image2: scanner space of image 2 average: scanner space of the average affine transformation of image 1 and 2 ",
+      "title": "space"
+    },
+    "interp": {
+      "type": "string",
+      "description": "set the interpolation method to use when reslicing (choices: nearest, linear, cubic, sinc. Default: linear).",
+      "title": "interp"
+    },
+    "metric": {
+      "type": "string",
+      "description": "define the dissimilarity metric used to calculate the cost. Choices: diff (squared differences), cc (non-normalised negative cross correlation aka negative cross covariance). Default: diff). cc is only implemented for -space average and -interp linear and cubic.",
+      "title": "metric"
+    },
+    "mask1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "mask for image 1",
+      "title": "mask1"
+    },
+    "mask2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "mask for image 2",
+      "title": "mask2"
+    },
+    "nonormalisation": {
+      "type": "boolean",
+      "description": "do not normalise the dissimilarity metric to the number of voxels.",
+      "title": "nonormalisation",
+      "default": false
+    },
+    "overlap": {
+      "type": "boolean",
+      "description": "output number of voxels that were used.",
+      "title": "overlap",
+      "default": false
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "image1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the first input image.",
+      "title": "image1"
+    },
+    "image2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the second input image.",
+      "title": "image2"
+    }
+  },
+  "required": [
+    "@type",
+    "image1",
+    "image2"
+  ]
+}

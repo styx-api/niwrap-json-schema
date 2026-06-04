@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_hausdorff_dist",
+  "description": "Tool for computing the mean or max of the minimum distances between point sets in 3D volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_hausdorff_dist"
+    },
+    "vol1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First input volume",
+      "title": "Volume 1"
+    },
+    "vol2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second input volume",
+      "title": "Volume 2"
+    },
+    "output_text_file": {
+      "type": "string",
+      "description": "Output text file",
+      "title": "Output Text File"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Binarize input volumes with given threshold",
+      "title": "Binarize Threshold"
+    },
+    "input_file_flag": {
+      "type": "boolean",
+      "description": "Read volumes from an input file (first argument is the input filename)",
+      "title": "Input File Flag",
+      "default": false
+    },
+    "blur_sigma": {
+      "type": "number",
+      "description": "Blur the input image with Gaussian of specified sigma",
+      "title": "Gaussian Blur Sigma"
+    },
+    "max_flag": {
+      "type": "boolean",
+      "description": "Compute the maximum of the minimum distances instead of the mean",
+      "title": "Max Distance Flag",
+      "default": false
+    },
+    "label_index": {
+      "type": "number",
+      "description": "Use specified label index as the target label",
+      "title": "Label Index"
+    }
+  },
+  "required": [
+    "@type",
+    "vol1",
+    "vol2",
+    "output_text_file"
+  ]
+}

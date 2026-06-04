@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_resample",
+  "description": "Resample cortical surfaces in FreeSurfer",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_resample"
+    },
+    "atlas_reg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Atlas spherical registration file.",
+      "title": "Atlas Registration File"
+    },
+    "subject_reg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Subject spherical registration file.",
+      "title": "Subject Registration File"
+    },
+    "subject_surf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Subject actual surface.",
+      "title": "Subject Surface File"
+    },
+    "output": {
+      "type": "string",
+      "description": "Output resampled surface.",
+      "title": "Output Resampled Surface"
+    },
+    "annot_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input annotation (for the subject). If present, output annotation must be present as well.",
+      "title": "Input Annotation"
+    },
+    "annot_out": {
+      "type": "string",
+      "description": "Output annotation (for the resampled atlas). If present, input annotation must be present as well.",
+      "title": "Output Annotation"
+    }
+  },
+  "required": [
+    "@type",
+    "atlas_reg",
+    "subject_reg",
+    "subject_surf",
+    "output"
+  ]
+}

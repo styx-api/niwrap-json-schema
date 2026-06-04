@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_transform",
+  "description": "Applies a linear transform to an MRI volume and writes out the result.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_transform"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input MRI volume",
+      "title": "Input Volume"
+    },
+    "lta_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Linear Transform Array (LTA) file",
+      "title": "LTA File"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output file for the transformed MRI volume",
+      "title": "Output File"
+    },
+    "out_like": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set output volume parameters like the reference volume",
+      "title": "Output Like"
+    },
+    "invert": {
+      "type": "boolean",
+      "description": "Invert transform coordinates",
+      "title": "Invert Transform",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "lta_file",
+    "output_file"
+  ]
+}

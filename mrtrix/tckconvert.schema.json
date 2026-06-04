@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tckconvert",
+  "description": "Convert between different track file formats.\n\nThe program currently supports MRtrix .tck files (input/output), ascii text files (input/output), VTK polydata files (input/output), and RenderMan RIB (export only).\n\nNote that ascii files will be stored with one streamline per numbered file. To support this, the command will use the multi-file numbering syntax, where square brackets denote the position of the numbering for the files, for example:\n\n$ tckconvert input.tck output-'[]'.txt\n\nwill produce files named output-0000.txt, output-0001.txt, output-0002.txt, ...\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/tckconvert"
+    },
+    "scanner2voxel": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "if specified, the properties of this image will be used to convert track point positions from real (scanner) coordinates into voxel coordinates.",
+      "title": "scanner2voxel"
+    },
+    "scanner2image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "if specified, the properties of this image will be used to convert track point positions from real (scanner) coordinates into image coordinates (in mm).",
+      "title": "scanner2image"
+    },
+    "voxel2scanner": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "if specified, the properties of this image will be used to convert track point positions from voxel coordinates into real (scanner) coordinates.",
+      "title": "voxel2scanner"
+    },
+    "image2scanner": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "if specified, the properties of this image will be used to convert track point positions from image coordinates (in mm) into real (scanner) coordinates.",
+      "title": "image2scanner"
+    },
+    "sides": {
+      "type": "integer",
+      "description": "number of sides for streamlines",
+      "title": "sides"
+    },
+    "increment": {
+      "type": "integer",
+      "description": "generate streamline points at every (increment) points",
+      "title": "increment"
+    },
+    "dec": {
+      "type": "boolean",
+      "description": "add DEC as a primvar",
+      "title": "dec",
+      "default": false
+    },
+    "radius": {
+      "type": "number",
+      "description": "radius of the streamlines",
+      "title": "radius"
+    },
+    "ascii": {
+      "type": "boolean",
+      "description": "write an ASCII VTK file (this is the default)",
+      "title": "ascii",
+      "default": false
+    },
+    "binary": {
+      "type": "boolean",
+      "description": "write a binary VTK file",
+      "title": "binary",
+      "default": false
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "input": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousString"
+            },
+            "obj": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "@type",
+            "obj"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousFile"
+            },
+            "obj": {
+              "type": "string",
+              "x-styx-type": "path"
+            }
+          },
+          "required": [
+            "@type",
+            "obj"
+          ]
+        }
+      ],
+      "description": "the input track file.",
+      "title": "input"
+    },
+    "output": {
+      "type": "string",
+      "description": "the output track file.",
+      "title": "output"
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "output"
+  ]
+}

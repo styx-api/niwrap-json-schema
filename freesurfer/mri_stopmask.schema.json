@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_stopmask",
+  "description": "This program creates a mask used to stop the search for the maximum gradient in mris_place_surface, preventing the surface from wandering into areas it should not.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_stopmask"
+    },
+    "output_mask": {
+      "type": "string",
+      "description": "Output stop mask in volume format",
+      "title": "Output Mask"
+    },
+    "filled": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "maxItems": 2,
+      "description": "Include voxels edited fill voxels that are set in the filled.mgz",
+      "title": "Filled Volume Files"
+    },
+    "aseg_presurf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Used with --lv and/or --wmsa; Note: must be aseg.presurf.mgz, not aseg.mgz",
+      "title": "ASEG presurf file"
+    },
+    "lateral_ventricles": {
+      "type": "boolean",
+      "description": "Add lateral ventricles and choroid plexus to the mask (needs --aseg)",
+      "title": "Lateral Ventricles Flag",
+      "default": false
+    },
+    "wmsa": {
+      "type": "number",
+      "description": "Add WM hypointensities to the mask (needs --aseg); erode by given distance away from any adjacent cortex",
+      "title": "WMSA Erode mm"
+    },
+    "wm_voxels": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Include voxels that =255 from wm.mgz",
+      "title": "WM Voxels File"
+    },
+    "brain_final_surfs": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Include voxels that =255 from brain.finalsurfs.mgz",
+      "title": "Brain Final Surfaces File"
+    },
+    "no_filled": {
+      "type": "boolean",
+      "description": "Turns off --filled option",
+      "title": "No Filled Flag",
+      "default": false
+    },
+    "no_lv": {
+      "type": "boolean",
+      "description": "Turns off --lv option",
+      "title": "No LV Flag",
+      "default": false
+    },
+    "no_wmsa": {
+      "type": "boolean",
+      "description": "Turns off --wmsa option",
+      "title": "No WMSA Flag",
+      "default": false
+    },
+    "no_wm": {
+      "type": "boolean",
+      "description": "Turns off --wm option",
+      "title": "No WM Flag",
+      "default": false
+    },
+    "no_bfs": {
+      "type": "boolean",
+      "description": "Turns off --bfs option",
+      "title": "No BFS Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "output_mask",
+    "filled",
+    "aseg_presurf"
+  ]
+}

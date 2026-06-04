@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GLTsymtest",
+  "description": "A tool to test the validity of '-gltsym' strings for use with 3dDeconvolve or 3dREMLfit.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/GLTsymtest"
+    },
+    "badonly": {
+      "type": "boolean",
+      "description": "A flag to only output BAD messages rather than all messages",
+      "title": "Badonly Flag",
+      "default": false
+    },
+    "varlist": {
+      "type": "string",
+      "description": "A list of allowed variable names in the expression, separated by commas, semicolons, and/or spaces",
+      "title": "Variable List"
+    },
+    "expr": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "GLT symbolic expression(s), enclosed in quotes",
+      "title": "Expression"
+    }
+  },
+  "required": [
+    "@type",
+    "varlist",
+    "expr"
+  ]
+}

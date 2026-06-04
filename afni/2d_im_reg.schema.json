@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "2dImReg",
+  "description": "2D image registration tool for 3D+time datasets, aligning images on a slice-by-slice basis to a specified base image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/2dImReg"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input 3d+time dataset to process",
+      "title": "Input file"
+    },
+    "base_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of 3d+time dataset for base image (default = current input dataset)",
+      "title": "Base file"
+    },
+    "base": {
+      "type": "number",
+      "description": "Time index for base image (0 <= num) (default: num = 3)",
+      "title": "Base time index"
+    },
+    "nofine": {
+      "type": "boolean",
+      "description": "Deactivate fine fit phase of image registration (default: fine fit is active)",
+      "title": "No fine fit phase flag",
+      "default": false
+    },
+    "fine_blur": {
+      "type": "number",
+      "description": "FWHM of blurring prior to registration (in pixels) (default: blur = 1.0)",
+      "title": "Fine fit parameters - Blur"
+    },
+    "fine_dxy": {
+      "type": "number",
+      "description": "Convergence tolerance for translations (in pixels) (default: dxy = 0.07)",
+      "title": "Fine fit parameters - DXY"
+    },
+    "fine_dphi": {
+      "type": "number",
+      "description": "Convergence tolerance for rotations (in degrees) (default: dphi = 0.21)",
+      "title": "Fine fit parameters - DPHI"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix name for output 3d+time dataset",
+      "title": "Output prefix"
+    },
+    "dprefix": {
+      "type": "string",
+      "description": "Write files containing the registration parameters for each slice in chronological order",
+      "title": "D-prefix"
+    },
+    "dmm": {
+      "type": "boolean",
+      "description": "Change dx and dy output format from pixels to mm",
+      "title": "DMM flag",
+      "default": false
+    },
+    "rprefix": {
+      "type": "string",
+      "description": "Write files containing the volume RMS error for the original and the registered datasets",
+      "title": "R-prefix"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Lots of additional output to screen",
+      "title": "Debug flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "prefix"
+  ]
+}

@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@RetinoProc",
+  "description": "A script to process retinotopic FMRI data, using AFNI's 3dRetinoPhase and SurfRetinMap.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@RetinoProc"
+    },
+    "ccw": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input time series dataset for counterclockwise stimulus",
+      "title": "Counterclockwise time series"
+    },
+    "clw": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input time series dataset for clockwise stimulus",
+      "title": "Clockwise time series"
+    },
+    "exp": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input time series dataset for expanding stimulus",
+      "title": "Expanding time series"
+    },
+    "con": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input time series dataset for contracting stimulus",
+      "title": "Contracting time series"
+    },
+    "epi_ref": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify a volume from the EPI time series to which all EPI volumes are aligned",
+      "title": "EPI Reference Volume"
+    },
+    "epi_anat_ref": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify a volume from the EPI time series that is better suited for aligning the T1 to it than EpiRef might be",
+      "title": "EPI Anatomical Reference Volume"
+    },
+    "anat_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T1 volume acquired during the same session as the retinotopic scans",
+      "title": "Anatomical Volume"
+    },
+    "anat_vol_epi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Anatomical volume aligned to EPI reference",
+      "title": "Aligned Anatomical Volume"
+    },
+    "surf_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface Volume for the cortical surfaces",
+      "title": "Surface Volume"
+    },
+    "surf_vol_epi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface volume aligned to experiment's EPI data",
+      "title": "Aligned Surface Volume"
+    },
+    "phase": {
+      "type": "boolean",
+      "description": "Use phase of fundamental frequency to estimate latency",
+      "title": "Phase Estimation Flag",
+      "default": false
+    },
+    "delay": {
+      "type": "boolean",
+      "description": "Use delay relative to reference time series to estimate latency",
+      "title": "Delay Estimation Flag",
+      "default": false
+    },
+    "tr": {
+      "type": "number",
+      "description": "TR, in seconds, of retinotopic scans",
+      "title": "TR"
+    },
+    "period_ecc": {
+      "type": "number",
+      "description": "Period, in seconds, of eccentricity stimuli",
+      "title": "Period (Eccentricity)"
+    },
+    "period_pol": {
+      "type": "number",
+      "description": "Period, in seconds, of polar angle stimuli",
+      "title": "Period (Polar Angle)"
+    },
+    "pre_ecc": {
+      "type": "number",
+      "description": "Duration, in seconds, before eccentricity stimulus",
+      "title": "Pre-Eccentricity Stimulus Duration"
+    },
+    "pre_pol": {
+      "type": "number",
+      "description": "Duration, in seconds, before polar angle stimulus",
+      "title": "Pre-Polar Angle Stimulus Duration"
+    },
+    "on_ecc": {
+      "type": "string",
+      "description": "Number of stimulation blocks and duration of stimulation for eccentricity stimulus",
+      "title": "On Eccentricity Stimulus"
+    },
+    "on_pol": {
+      "type": "string",
+      "description": "Number of stimulation blocks and duration of stimulation for polar angle stimulus",
+      "title": "On Polar Angle Stimulus"
+    },
+    "var_on_ecc": {
+      "type": "string",
+      "description": "Multiple on durations for eccentricity stimulus",
+      "title": "Variable On Eccentricity"
+    },
+    "var_on_pol": {
+      "type": "string",
+      "description": "Multiple on durations for polar angle stimulus",
+      "title": "Variable On Polar Angle"
+    },
+    "nwedges": {
+      "type": "number",
+      "description": "Number of wedges in polar stimulus",
+      "title": "Number of Wedges"
+    },
+    "nrings": {
+      "type": "number",
+      "description": "Number of rings in eccentricity stimulus",
+      "title": "Number of Rings"
+    },
+    "fwhm_pol": {
+      "type": "number",
+      "description": "Target smoothness for polar stimulus",
+      "title": "FWHM Polar"
+    },
+    "fwhm_ecc": {
+      "type": "number",
+      "description": "Target smoothness for eccentricity stimulus",
+      "title": "FWHM Eccentricity"
+    },
+    "ignore": {
+      "type": "number",
+      "description": "Ignore volumes from the beginning of each time series",
+      "title": "Ignore Volumes"
+    },
+    "no_tshift": {
+      "type": "boolean",
+      "description": "Do not correct for slice timing",
+      "title": "No Slice Timing Correction",
+      "default": false
+    },
+    "spec_left": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Spec file for left hemisphere",
+      "title": "Left Hemisphere Spec"
+    },
+    "spec_right": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Spec file for right hemisphere",
+      "title": "Right Hemisphere Spec"
+    },
+    "dorts": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Detrend time series using columns in ORT1D file",
+      "title": "Detrend ORT File"
+    },
+    "ccw_orts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Detrend time series for counterclockwise stimulus",
+      "title": "Detrend ORT for CCW"
+    },
+    "clw_orts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Detrend time series for clockwise stimulus",
+      "title": "Detrend ORT for CLW"
+    },
+    "exp_orts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Detrend time series for expanding stimulus",
+      "title": "Detrend ORT for EXP"
+    },
+    "con_orts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Detrend time series for contracting stimulus",
+      "title": "Detrend ORT for CON"
+    },
+    "sid": {
+      "type": "string",
+      "description": "SID is a flag identifying the subject",
+      "title": "Subject ID"
+    },
+    "out_dir": {
+      "type": "string",
+      "description": "Directory where processing results are to be stored",
+      "title": "Output Directory"
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Turn on the command echoing to help with debugging script failure",
+      "title": "Echo Command Flag",
+      "default": false
+    },
+    "echo_edu": {
+      "type": "boolean",
+      "description": "Turn on command echoing for certain programs only",
+      "title": "Educational Echo Command Flag",
+      "default": false
+    },
+    "a2e_opts": {
+      "type": "string",
+      "description": "Pass options to @SUMA_AlignToExperiment script",
+      "title": "A2E Options"
+    },
+    "aea_opts": {
+      "type": "string",
+      "description": "Pass options to align_epi_anat.py",
+      "title": "AEA Options"
+    }
+  },
+  "required": [
+    "@type",
+    "tr",
+    "period_ecc",
+    "period_pol"
+  ]
+}

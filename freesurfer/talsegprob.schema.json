@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "talsegprob",
+  "description": "Tool to create a binary probability volume from aseg.mgz based on segmentation numbers, resliced to talirach/MNI305/fsaverage space.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/talsegprob"
+    },
+    "subjects_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subjects to include in the analysis.",
+      "title": "Subjects List"
+    },
+    "fsgd_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "FSGD file to get subject list.",
+      "title": "FSGD File"
+    },
+    "segmentation_number": {
+      "type": "number",
+      "description": "Segmentation number.",
+      "title": "Segmentation Number"
+    },
+    "second_segmentation_number": {
+      "type": "number",
+      "description": "Second segmentation number.",
+      "title": "Second Segmentation Number"
+    },
+    "hippo_flag": {
+      "type": "boolean",
+      "description": "Use segmentation numbers 17 and 53.",
+      "title": "Hippocampus Flag",
+      "default": false
+    },
+    "left_hippo_flag": {
+      "type": "boolean",
+      "description": "Use segmentation number 17.",
+      "title": "Left Hippocampus Flag",
+      "default": false
+    },
+    "right_hippo_flag": {
+      "type": "boolean",
+      "description": "Use segmentation number 53.",
+      "title": "Right Hippocampus Flag",
+      "default": false
+    },
+    "segmentation_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use subject/mri/segfile.mgz instead of aseg.",
+      "title": "Segmentation File"
+    },
+    "probability_output": {
+      "type": "string",
+      "description": "Probability output file name.",
+      "title": "Probability Output"
+    },
+    "vote_output": {
+      "type": "string",
+      "description": "Vote output file name.",
+      "title": "Vote Output"
+    },
+    "concat_output": {
+      "type": "string",
+      "description": "Concatenated output file name.",
+      "title": "Concatenated Output"
+    },
+    "xform_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Transformation file to use (default is talairach.xfm).",
+      "title": "Transformation File"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "SUBJECTS_DIR to use instead of the one in the environment.",
+      "title": "Subjects Directory"
+    },
+    "tmpdir": {
+      "type": "string",
+      "description": "Temporary directory (implies --nocleanup).",
+      "title": "Temporary Directory"
+    },
+    "nocleanup_flag": {
+      "type": "boolean",
+      "description": "Do not delete temporary directory.",
+      "title": "No Cleanup Flag",
+      "default": false
+    },
+    "version_flag": {
+      "type": "boolean",
+      "description": "Display script version information.",
+      "title": "Version Flag",
+      "default": false
+    },
+    "echo_flag": {
+      "type": "boolean",
+      "description": "Enable command echo, for debug.",
+      "title": "Echo Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_3d_photo_recon",
+  "description": "Code for 3D photo reconstruction (Tregidgo, et al., MICCAI 2020)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_3d_photo_recon"
+    },
+    "input_photo_dir": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Directory with input photos (required)",
+      "title": "Input Photo Directory"
+    },
+    "input_segmentation_dir": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Directory with input slab masks / segmentations (required)",
+      "title": "Input Segmentation Directory"
+    },
+    "slice_thickness": {
+      "type": "number",
+      "description": "Slice thickness in mm",
+      "title": "Slice Thickness"
+    },
+    "photo_resolution": {
+      "type": "number",
+      "description": "Resolution of the photos in mm",
+      "title": "Photo Resolution"
+    },
+    "output_directory": {
+      "type": "string",
+      "description": "Output directory with reconstructed photo volume and reference",
+      "title": "Output Directory"
+    },
+    "ref_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference binary mask",
+      "title": "Reference Mask"
+    },
+    "ref_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference surface file",
+      "title": "Reference Surface"
+    },
+    "ref_soft_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference soft mask",
+      "title": "Reference Soft Mask"
+    },
+    "mesh_reorient_with_indices": {
+      "type": "string",
+      "description": "Vertex indices of frontal pole, occipital pole, and top of central sulcus, separated with commas, for mesh alignment",
+      "title": "Mesh Reorient Indices"
+    },
+    "photos_posterior_side": {
+      "type": "boolean",
+      "description": "Use when photos are taken of posterior side of slabs (default is anterior side)",
+      "title": "Photos Posterior Side Flag",
+      "default": false
+    },
+    "order_posterior_to_anterior": {
+      "type": "boolean",
+      "description": "Use when photos are ordered from posterior to anterior (default is anterior to posterior)",
+      "title": "Order Posterior to Anterior Flag",
+      "default": false
+    },
+    "allow_z_stretch": {
+      "type": "boolean",
+      "description": "Use to adjust the slice thickness to best match the reference. You should probably *never* use this with soft references (ref_soft_mask)",
+      "title": "Allow Z Stretch Flag",
+      "default": false
+    },
+    "rigid_only_for_photos": {
+      "type": "boolean",
+      "description": "Switch on if you want photos to deform only rigidly (not affine)",
+      "title": "Rigid Only for Photos Flag",
+      "default": false
+    },
+    "gpu_index": {
+      "type": "number",
+      "description": "Index of GPU to use",
+      "title": "GPU Index"
+    }
+  },
+  "required": [
+    "@type",
+    "input_photo_dir",
+    "input_segmentation_dir",
+    "slice_thickness",
+    "photo_resolution",
+    "output_directory"
+  ]
+}

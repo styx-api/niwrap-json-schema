@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dUpsample",
+  "description": "Upsamples a 3D+time dataset in the time direction by a specified factor.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dUpsample"
+    },
+    "upsample_factor": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 320,
+      "description": "Upsampling factor; must be between 2 and 320 (inclusive)",
+      "title": "Upsample Factor"
+    },
+    "input_dataset": {
+      "type": "string",
+      "description": "Input dataset",
+      "title": "Input Dataset"
+    },
+    "linear_interpolation": {
+      "type": "boolean",
+      "description": "Use linear interpolation instead of 7th order polynomial interpolation",
+      "title": "Linear Interpolation Flag",
+      "default": false
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Define the prefix name of the output dataset; default is 'Upsam'",
+      "title": "Output Prefix"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Print verbose output",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "datatype": {
+      "type": "string",
+      "description": "Specify the datatype for the output dataset (float, short, byte); default is float",
+      "title": "Output Datatype"
+    }
+  },
+  "required": [
+    "@type",
+    "upsample_factor",
+    "input_dataset"
+  ]
+}

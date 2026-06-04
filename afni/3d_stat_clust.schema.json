@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dStatClust",
+  "description": "Perform agglomerative hierarchical clustering for user specified parameter sub-bricks, for all voxels whose threshold statistic is above a user specified value.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dStatClust"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use 'pname' for the output dataset prefix name.",
+      "title": "Output dataset prefix"
+    },
+    "session_dir": {
+      "type": "string",
+      "description": "Use 'dir' for the output dataset session directory.",
+      "title": "Session directory"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print out verbose output as the program proceeds.",
+      "title": "Verbose output",
+      "default": false
+    },
+    "dist_euc": {
+      "type": "boolean",
+      "description": "Calculate Euclidean distance between parameters",
+      "title": "Euclidean distance",
+      "default": false
+    },
+    "dist_ind": {
+      "type": "boolean",
+      "description": "Statistical distance for independent parameters",
+      "title": "Statistical distance for independent parameters",
+      "default": false
+    },
+    "dist_cor": {
+      "type": "boolean",
+      "description": "Statistical distance for correlated parameters",
+      "title": "Statistical distance for correlated parameters",
+      "default": false
+    },
+    "thresh": {
+      "type": "string",
+      "description": "Threshold statistic from file tname. Only voxels whose threshold statistic is greater than t in absolute value will be considered. If file tname contains more than 1 sub-brick, the threshold stat. sub-brick must be specified.",
+      "title": "Threshold"
+    },
+    "nclust": {
+      "type": "number",
+      "description": "Maximum number of clusters for output (= number of sub-bricks in output dataset).",
+      "title": "Number of clusters"
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Parameter datasets.",
+      "title": "Parameter datasets"
+    }
+  },
+  "required": [
+    "@type",
+    "thresh",
+    "nclust",
+    "datasets"
+  ]
+}

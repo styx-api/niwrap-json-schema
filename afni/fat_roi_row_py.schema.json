@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_roi_row.py",
+  "description": "Select a single ROI's row out of a connectivity matrix file (*.grid or *.netcc) for viewing and/or further analysis.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_roi_row.py"
+    },
+    "roi": {
+      "type": "string",
+      "description": "Specify which ROI's row of connectivity you want to select out. If labeltables were used, you may select the ROI by either the string label or the ROI mask number.",
+      "title": "ROI"
+    },
+    "matrix_files": {
+      "type": "string",
+      "description": "Provide the set of matrix (*.grid or *.netcc) files by searchable path. This can be a globbable entry in quotes containing wildcard characters.",
+      "title": "Matrix files"
+    },
+    "list_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Provide the set of matrix (*.grid or *.netcc) files by explicit path in a text file. The LIST text file must contain at least one column with the path to subject matrix file.",
+      "title": "List file"
+    },
+    "extern_labs_no": {
+      "type": "boolean",
+      "description": "Switch to turn off the writing/usage of user-defined labels in the *.grid/*.netcc files.",
+      "title": "Extern Labs No",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "roi"
+  ]
+}

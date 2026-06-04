@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "imcat",
+  "description": "Assembles a set of images into an image matrix (IM) montage of NX by NY images.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/imcat"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input image files",
+      "title": "Input files"
+    },
+    "scale_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Multiply each image IM(i,j) in output image matrix IM by the color or intensity of the pixel (i,j) in SCALE_IMG.",
+      "title": "Scale image"
+    },
+    "scale_pixels": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Multiply each pixel (i,j) in output image by the color or intensity of the pixel (i,j) in SCALE_IMG. SCALE_IMG is automatically resized to the resolution of the output image.",
+      "title": "Scale pixels"
+    },
+    "scale_intensity": {
+      "type": "boolean",
+      "description": "Instead of multiplying by the color of pixel (i,j), use its intensity (average color).",
+      "title": "Scale intensity flag",
+      "default": false
+    },
+    "gscale": {
+      "type": "number",
+      "description": "Apply FAC in addition to scaling of -scale_* options.",
+      "title": "Global scale factor"
+    },
+    "rgb_out": {
+      "type": "boolean",
+      "description": "Force output to be in RGB, even if input is bytes. This option is turned on automatically in certain cases.",
+      "title": "RGB output flag",
+      "default": false
+    },
+    "res_in": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set resolution of all input images to RX by RY pixels. Default is to make all input have the same resolution as the first image.",
+      "title": "Input resolution"
+    },
+    "respad_in": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Like -res_in, but resample to the max while respecting the aspect ratio, and then pad to achieve desired pixel count.",
+      "title": "Input resolution with padding"
+    },
+    "pad_val": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 255,
+      "description": "Set the padding value, should it be needed by -respad_in to VAL. VAL is typecast to byte, default is 0, max is 255.",
+      "title": "Padding value"
+    },
+    "crop": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Crop images by L (Left), R (Right), T (Top), B (Bottom) pixels. Cutting is performed after any resolution change, if any, is to be done.",
+      "title": "Crop parameters"
+    },
+    "autocrop_ctol": {
+      "type": "number",
+      "description": "A line is eliminated if none of its R G B values differ by more than CTOL% from those of the corner pixel.",
+      "title": "Autocrop color tolerance"
+    },
+    "autocrop_atol": {
+      "type": "number",
+      "description": "A line is eliminated if none of its R G B values differ by more than ATOL% from those of line average.",
+      "title": "Autocrop average tolerance"
+    },
+    "autocrop": {
+      "type": "boolean",
+      "description": "This option is the same as using both of -autocrop_atol 20 and -autocrop_ctol 20",
+      "title": "Autocrop flag",
+      "default": false
+    },
+    "zero_wrap": {
+      "type": "boolean",
+      "description": "If number of images is not enough to fill matrix solid black images are used.",
+      "title": "Zero wrap flag",
+      "default": false
+    },
+    "white_wrap": {
+      "type": "boolean",
+      "description": "If number of images is not enough to fill matrix solid white images are used.",
+      "title": "White wrap flag",
+      "default": false
+    },
+    "gray_wrap": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "If number of images is not enough to fill matrix, solid gray images are used. GRAY must be between 0 and 1.0.",
+      "title": "Gray wrap value"
+    },
+    "image_wrap": {
+      "type": "boolean",
+      "description": "If number of images is not enough to fill matrix, images on command line are reused (default).",
+      "title": "Image wrap flag",
+      "default": false
+    },
+    "rand_wrap": {
+      "type": "boolean",
+      "description": "When reusing images to fill matrix, randomize the order in refill section only.",
+      "title": "Random wrap flag",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix the output files with string 'ppp'.",
+      "title": "Prefix"
+    },
+    "matrix": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify number of images in each row and column of IM at the same time.",
+      "title": "Matrix dimensions"
+    },
+    "nx": {
+      "type": "number",
+      "description": "Number of images in each row.",
+      "title": "Number of rows"
+    },
+    "ny": {
+      "type": "number",
+      "description": "Number of images in each column.",
+      "title": "Number of columns"
+    },
+    "matrix_from_scale": {
+      "type": "boolean",
+      "description": "Set NX and NY to be the same as the SCALE_IMG's dimensions. (needs -scale_image)",
+      "title": "Matrix from scale flag",
+      "default": false
+    },
+    "gap": {
+      "type": "number",
+      "description": "Put a line G pixels wide between images.",
+      "title": "Gap width"
+    },
+    "gap_col": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set color of line to R G B values. Values range between 0 and 255.",
+      "title": "Gap color"
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

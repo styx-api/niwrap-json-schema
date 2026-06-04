@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "exvivo-hemi-proc",
+  "description": "Processes whole hemisphere data for Jeans entorhinal subfield labeling project.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/exvivo-hemi-proc"
+    },
+    "flashdir": {
+      "type": "string",
+      "description": "Path to the FLASH data directory.",
+      "title": "Flash Directory"
+    },
+    "outdir": {
+      "type": "string",
+      "description": "Output directory where results will be saved.",
+      "title": "Output Directory"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Full path to the subject.",
+      "title": "Subject Path"
+    },
+    "left_hemi": {
+      "type": "boolean",
+      "description": "Process left hemisphere.",
+      "title": "Left Hemisphere Flag",
+      "default": false
+    },
+    "right_hemi": {
+      "type": "boolean",
+      "description": "Process right hemisphere.",
+      "title": "Right Hemisphere Flag",
+      "default": false
+    },
+    "suptent": {
+      "type": "boolean",
+      "description": "Indicate no tentorium (cblum and bstem) in the sample.",
+      "title": "Supratentorial Flag",
+      "default": false
+    },
+    "no_rotate": {
+      "type": "boolean",
+      "description": "Indicate rotation is not needed.",
+      "title": "No Rotate Flag",
+      "default": false
+    },
+    "t1thresh": {
+      "type": "number",
+      "description": "T1 threshold, default is 415.",
+      "title": "T1 Threshold"
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads to use.",
+      "title": "Threads"
+    },
+    "check_only": {
+      "type": "boolean",
+      "description": "Only perform check, without further processing.",
+      "title": "Check Only Flag",
+      "default": false
+    },
+    "prep_only": {
+      "type": "boolean",
+      "description": "Only run up to manual rotation.",
+      "title": "Prep Only Flag",
+      "default": false
+    },
+    "mask_only": {
+      "type": "boolean",
+      "description": "Only run up to creation of masks.",
+      "title": "Mask Only Flag",
+      "default": false
+    },
+    "samseg_only": {
+      "type": "boolean",
+      "description": "Only run up to samseg.",
+      "title": "Samseg Only Flag",
+      "default": false
+    },
+    "stop_mmppsp_after": {
+      "type": "string",
+      "description": "Stop processing after a specific step {tess,fix,preaparc,sphere,spherereg,white,pial}.",
+      "title": "Stop after step"
+    },
+    "force": {
+      "type": "boolean",
+      "description": "Force the execution, overriding checks.",
+      "title": "Force Execution Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "flashdir",
+    "outdir",
+    "subject"
+  ]
+}

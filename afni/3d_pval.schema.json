@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dPval",
+  "description": "Convert a dataset's statistical sub-bricks to p-values or other statistical representations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dPval"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset (e.g., InputDataset.nii)",
+      "title": "Input dataset"
+    },
+    "zscore": {
+      "type": "boolean",
+      "description": "Convert statistic to a z-score instead, an N(0,1) deviate that represents the same p-value.",
+      "title": "Z-score flag",
+      "default": false
+    },
+    "log2": {
+      "type": "boolean",
+      "description": "Convert statistic to -log2(p).",
+      "title": "Log2 flag",
+      "default": false
+    },
+    "log10": {
+      "type": "boolean",
+      "description": "Convert statistic to -log10(p).",
+      "title": "Log10 flag",
+      "default": false
+    },
+    "qval": {
+      "type": "boolean",
+      "description": "Convert statistic to a q-value (FDR) instead. This option only works with datasets that have FDR curves inserted in their headers.",
+      "title": "Q-value flag",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix name for output file (default name is 'Pval').",
+      "title": "Output prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

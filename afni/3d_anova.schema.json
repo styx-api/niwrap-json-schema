@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dANOVA",
+  "description": "Performs single-factor Analysis of Variance (ANOVA) on 3D datasets",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dANOVA"
+    },
+    "levels": {
+      "type": "integer",
+      "description": "Number of factor levels",
+      "title": "Factor levels"
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Datasets for each factor level",
+      "title": "Datasets"
+    },
+    "voxel": {
+      "type": "integer",
+      "description": "Screen output for the specified voxel number",
+      "title": "Voxel number"
+    },
+    "diskspace": {
+      "type": "boolean",
+      "description": "Print out the required disk space for program execution",
+      "title": "Disk space flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use sub-brick #0 of dataset to define which voxels to process",
+      "title": "Mask dataset"
+    },
+    "debug": {
+      "type": "integer",
+      "description": "Request extra output verbosity",
+      "title": "Debug level"
+    },
+    "ftr": {
+      "type": "string",
+      "description": "F-statistic for treatment effect",
+      "title": "F-statistic prefix"
+    },
+    "mean": {
+      "type": "string",
+      "description": "Estimate of factor level mean",
+      "title": "Mean prefix"
+    },
+    "diff": {
+      "type": "string",
+      "description": "Difference between factor levels",
+      "title": "Difference prefix"
+    },
+    "contr": {
+      "type": "string",
+      "description": "Contrast in factor levels",
+      "title": "Contrast prefix"
+    },
+    "old_method": {
+      "type": "boolean",
+      "description": "Perform ANOVA using the previous functionality",
+      "title": "Old method flag",
+      "default": false
+    },
+    "ok": {
+      "type": "boolean",
+      "description": "Confirm understanding of t-stats and sphericity assumptions with old method",
+      "title": "OK flag",
+      "default": false
+    },
+    "assume_sph": {
+      "type": "boolean",
+      "description": "Assume sphericity (zero-sum contrasts only)",
+      "title": "Assume sphericity flag",
+      "default": false
+    },
+    "bucket": {
+      "type": "string",
+      "description": "Create one AFNI 'bucket' dataset",
+      "title": "Bucket prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "levels",
+    "datasets"
+  ]
+}

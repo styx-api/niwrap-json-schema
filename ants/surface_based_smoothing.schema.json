@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfaceBasedSmoothing",
+  "description": "Surface-based smoothing applied to ImageToSmooth using a geodesic neighbourhood defined by sigma and the surface image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/SurfaceBasedSmoothing"
+    },
+    "image_to_smooth": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The image that needs to be smoothed.",
+      "title": "Image to Smooth"
+    },
+    "sigma": {
+      "type": "number",
+      "description": "Geodesic neighborhood radius.",
+      "title": "Sigma"
+    },
+    "surface_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Assumes a label == 1 that defines the surface.",
+      "title": "Surface Image"
+    },
+    "outname": {
+      "type": "string",
+      "description": "The name of the output file.",
+      "title": "Output Name"
+    },
+    "num_repeats": {
+      "type": "integer",
+      "description": "Number of times the geodesic neighborhood is applied repeatedly.",
+      "title": "Number of Repeats"
+    }
+  },
+  "required": [
+    "@type",
+    "image_to_smooth",
+    "sigma",
+    "surface_image",
+    "outname"
+  ]
+}

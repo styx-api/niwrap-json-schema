@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_AA_shrinkwrap",
+  "description": "This program positions the tessellation of the cortical surface at the white matter surface, then the gray matter surface and generates surface files for these surfaces as well as a 'curvature' file for the cortical thickness, and a surface file which approximates layer IV of the cortical sheet.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_AA_shrinkwrap"
+    },
+    "t1_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T1 volume file",
+      "title": "T1 Volume File"
+    },
+    "pd_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "PD volume file",
+      "title": "PD Volume File"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Output directory",
+      "title": "Output Directory"
+    },
+    "omit_self_intersection": {
+      "type": "boolean",
+      "description": "Omit self-intersection and only generate gray/white surface",
+      "title": "Omit Self-intersection Flag",
+      "default": false
+    },
+    "create_curvature_area": {
+      "type": "boolean",
+      "description": "Create curvature and area files from white matter surface",
+      "title": "Create Curvature and Area Flag",
+      "default": false
+    },
+    "average_curvature": {
+      "type": "number",
+      "description": "Average curvature values a specified number of times (default=10)",
+      "title": "Average Curvature"
+    },
+    "white_only": {
+      "type": "boolean",
+      "description": "Only generate white matter surface",
+      "title": "White Only Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "t1_vol",
+    "pd_vol",
+    "output_dir"
+  ]
+}

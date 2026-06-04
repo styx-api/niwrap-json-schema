@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "realtime_receiver.py",
+  "description": "Program to receive and display real-time plugin data from AFNI.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/realtime_receiver.py"
+    },
+    "show_data": {
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "description": "Display incoming data in terminal window",
+      "title": "Show Data"
+    },
+    "write_text_data": {
+      "type": "string",
+      "description": "Write data to text file",
+      "title": "Write Text Data"
+    },
+    "data_choice": {
+      "enum": [
+        "motion",
+        "motion_norm",
+        "all_extras",
+        "diff_ratio"
+      ],
+      "description": "Pick which data to send as feedback",
+      "title": "Data Choice"
+    },
+    "serial_port": {
+      "type": "string",
+      "description": "Specify serial port file for feedback data",
+      "title": "Serial Port"
+    },
+    "show_demo_gui": {
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "description": "Demonstrate a feedback GUI",
+      "title": "Show Demo GUI"
+    },
+    "dc_params": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set data_choice parameters, e.g. for diff_ratio, params P1 P2",
+      "title": "Data Choice Parameters"
+    },
+    "extras_on_one_line": {
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "description": "Show 'extras' on one line only",
+      "title": "Extras On One Line"
+    },
+    "show_comm_times": {
+      "type": "boolean",
+      "description": "Display communication times",
+      "title": "Show Communication Times",
+      "default": false
+    },
+    "show_demo_data": {
+      "type": "boolean",
+      "description": "Display feedback data in terminal window",
+      "title": "Show Demo Data",
+      "default": false
+    },
+    "swap": {
+      "type": "boolean",
+      "description": "Swap bytes of incoming data",
+      "title": "Swap Bytes",
+      "default": false
+    },
+    "tcp_port": {
+      "type": "number",
+      "description": "Specify TCP port for incoming connections",
+      "title": "TCP Port"
+    },
+    "verbosity": {
+      "type": "number",
+      "description": "Set the verbosity level",
+      "title": "Verbosity Level"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

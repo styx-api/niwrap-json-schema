@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "img2stdcoord",
+  "description": "Transforms image coordinates using standard space transformations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/img2stdcoord"
+    },
+    "coordinate_file": {
+      "type": "string",
+      "description": "Filename containing coordinates. If '-' is used, coordinates are read from standard input.",
+      "title": "Coordinate File"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input image.",
+      "title": "Input Image"
+    },
+    "standard_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of standard image.",
+      "title": "Standard Image"
+    },
+    "affine_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of affine transform (e.g., example_func2standard.mat).",
+      "title": "Affine Transform"
+    },
+    "warp_field": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of warp field (e.g., highres2standard_warp.nii.gz).",
+      "title": "Warp Field"
+    },
+    "prewarp_affine_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of pre-warp affine transform (e.g., example_func2highres.mat). Default is identity.",
+      "title": "Pre-warp Affine Transform"
+    },
+    "voxel_flag": {
+      "type": "boolean",
+      "description": "Input coordinates in voxels (default).",
+      "title": "Voxel Flag",
+      "default": false
+    },
+    "mm_flag": {
+      "type": "boolean",
+      "description": "Input coordinates in mm.",
+      "title": "Millimeter Flag",
+      "default": false
+    },
+    "verbose_flag_1": {
+      "type": "boolean",
+      "description": "Verbose output.",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "verbose_flag_2": {
+      "type": "boolean",
+      "description": "More verbose output.",
+      "title": "More Verbose Flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help message.",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "coordinate_file",
+    "input_image"
+  ]
+}

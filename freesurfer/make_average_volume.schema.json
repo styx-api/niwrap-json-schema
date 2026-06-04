@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "make_average_volume",
+  "description": "Creates average volumes from a set of subjects.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/make_average_volume"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subjects to include in the average.",
+      "title": "Subjects"
+    },
+    "fsgd": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing subject list for averaging.",
+      "title": "FSGD file"
+    },
+    "out": {
+      "type": "string",
+      "description": "Output average subject name. Default is 'average'.",
+      "title": "Output average subject name"
+    },
+    "topdir": {
+      "type": "string",
+      "description": "Directory to put data and link to SUBJECTS_DIR.",
+      "title": "Top directory"
+    },
+    "xform": {
+      "type": "string",
+      "description": "Transformation name to use, default is talairach.xfm.",
+      "title": "Transformation name"
+    },
+    "sdir": {
+      "type": "string",
+      "description": "Use specified SUBJECTS_DIR instead of the environment's one.",
+      "title": "Subjects directory"
+    },
+    "sd_flag": {
+      "type": "boolean",
+      "description": "Same as --sdir.",
+      "title": "SDIR flag",
+      "default": false
+    },
+    "force_flag": {
+      "type": "boolean",
+      "description": "Overwrite existing average subject data.",
+      "title": "Force overwrite flag",
+      "default": false
+    },
+    "keep_all_orig_flag": {
+      "type": "boolean",
+      "description": "Concatenate all original volumes into mri/orig.all.mgz.",
+      "title": "Keep all original volumes flag",
+      "default": false
+    },
+    "no_aseg_flag": {
+      "type": "boolean",
+      "description": "Do not create 'average' aseg.",
+      "title": "No aseg flag",
+      "default": false
+    },
+    "ctab": {
+      "type": "string",
+      "description": "Embed colortable into segmentations.",
+      "title": "Color table"
+    },
+    "ctab_default_flag": {
+      "type": "boolean",
+      "description": "Embed FreeSurferColorLUT.txt into segmentations.",
+      "title": "Default color table flag",
+      "default": false
+    },
+    "echo_flag": {
+      "type": "boolean",
+      "description": "Enable command echo for debugging.",
+      "title": "Echo flag",
+      "default": false
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Same as --echo for debugging.",
+      "title": "Debug flag",
+      "default": false
+    },
+    "nocleanup_flag": {
+      "type": "boolean",
+      "description": "Do not delete temporary files.",
+      "title": "No cleanup flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subjects"
+  ]
+}

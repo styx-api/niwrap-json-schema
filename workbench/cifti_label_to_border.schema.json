@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DRAW BORDERS AROUND CIFTI LABELS",
+  "description": "For each surface, takes the labels on the matching structure and draws borders around the labels.  Use -column to only draw borders around one label map.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_label_to_border"
+    },
+    "cifti_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input cifti dlabel file"
+    },
+    "placement": {
+      "type": "number",
+      "description": "set how far along the edge border points are drawn"
+    },
+    "column": {
+      "type": "string",
+      "description": "select a single column"
+    },
+    "border": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "surface": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "the surface to use for neighbor and structure information"
+          },
+          "border_out": {
+            "type": "string",
+            "description": "the output border file"
+          }
+        },
+        "required": [
+          "surface",
+          "border_out"
+        ]
+      },
+      "description": "specify output file for a surface structure"
+    }
+  },
+  "required": [
+    "@type",
+    "cifti_in",
+    "border"
+  ]
+}

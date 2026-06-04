@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "slices",
+  "description": "Generate a set of slices from an image, possibly with some scaling and intensity range options, and save as a GIF.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/slices"
+    },
+    "primary_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Primary input image file (e.g. img1.nii.gz)",
+      "title": "Primary Input File"
+    },
+    "secondary_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Secondary input image file (e.g. img2.nii.gz)",
+      "title": "Secondary Input File"
+    },
+    "scale_factor": {
+      "type": "number",
+      "description": "Scale factor to apply to images.",
+      "title": "Scale Factor"
+    },
+    "intensity_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Intensity range to consider (minimum and maximum values).",
+      "title": "Intensity Range"
+    },
+    "output_gif": {
+      "type": "string",
+      "description": "Output GIF file.",
+      "title": "Output GIF File"
+    }
+  },
+  "required": [
+    "@type",
+    "primary_input"
+  ]
+}

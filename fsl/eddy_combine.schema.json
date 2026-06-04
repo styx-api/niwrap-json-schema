@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "eddy_combine",
+  "description": "Combines diffusion data sets with opposite phase encoding directions for use with FSL's EDDY.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/eddy_combine"
+    },
+    "pos_data": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the positive phase-encoded data file (e.g. PosData.nii.gz)",
+      "title": "Positive Data File"
+    },
+    "pos_bvals": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the positive phase-encoded b-values file (e.g. Posbvals)",
+      "title": "Positive B-values File"
+    },
+    "pos_bvecs": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the positive phase-encoded b-vectors file (e.g. Posbvecs)",
+      "title": "Positive B-vectors File"
+    },
+    "pos_series_vol": {
+      "type": "number",
+      "description": "Positive series volume count",
+      "title": "Positive Series Volume"
+    },
+    "neg_data": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the negative phase-encoded data file (e.g. NegData.nii.gz)",
+      "title": "Negative Data File"
+    },
+    "neg_bvals": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the negative phase-encoded b-values file (e.g. Negbvals)",
+      "title": "Negative B-values File"
+    },
+    "neg_bvecs": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the negative phase-encoded b-vectors file (e.g. Negbvecs)",
+      "title": "Negative B-vectors File"
+    },
+    "neg_series_vol": {
+      "type": "number",
+      "description": "Negative series volume count",
+      "title": "Negative Series Volume"
+    },
+    "output_path": {
+      "type": "string",
+      "description": "Output directory path",
+      "title": "Output Path"
+    },
+    "only_matched_flag": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Flag to include only matched volumes (set to 1 to include only matched volumes, otherwise 0)",
+      "title": "Only Matched Volumes Flag"
+    }
+  },
+  "required": [
+    "@type",
+    "pos_data",
+    "pos_bvals",
+    "pos_bvecs",
+    "pos_series_vol",
+    "neg_data",
+    "neg_bvals",
+    "neg_bvecs",
+    "neg_series_vol",
+    "output_path",
+    "only_matched_flag"
+  ]
+}

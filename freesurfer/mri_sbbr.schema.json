@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_sbbr",
+  "description": "Special implementation of boundary-based registration for a single slice.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_sbbr"
+    },
+    "template_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Template volume file.",
+      "title": "Template Volume"
+    },
+    "surface_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface file.",
+      "title": "Surface File"
+    },
+    "init_reg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Initial registration file.",
+      "title": "Initial Registration File"
+    },
+    "t1": {
+      "type": "boolean",
+      "description": "Use T1-weighted image.",
+      "title": "T1 Flag",
+      "default": false
+    },
+    "t2": {
+      "type": "boolean",
+      "description": "Use T2-weighted image.",
+      "title": "T2 Flag",
+      "default": false
+    },
+    "optimization_type": {
+      "type": "number",
+      "description": "Optimization type; choose 1, 2, or 3 (default is 1, 6 dof).",
+      "title": "Optimization Type"
+    },
+    "distance_in": {
+      "type": "number",
+      "description": "Distance in mm into surface (default 1.0).",
+      "title": "Distance In"
+    },
+    "distance_out": {
+      "type": "number",
+      "description": "Distance in mm out of surface (default 2.0).",
+      "title": "Distance Out"
+    },
+    "slope": {
+      "type": "number",
+      "description": "BBR slope (default 0.5).",
+      "title": "BBR Slope"
+    },
+    "ftol": {
+      "type": "number",
+      "description": "Tolerance for fitting (default 1.000000e-08).",
+      "title": "Fitting Tolerance"
+    },
+    "linmintol": {
+      "type": "number",
+      "description": "Linear minimization tolerance (default 0.0).",
+      "title": "Linear Minimization Tolerance"
+    },
+    "niters_max": {
+      "type": "number",
+      "description": "Maximum number of iterations (default 10).",
+      "title": "Maximum Iterations"
+    },
+    "search": {
+      "type": "string",
+      "description": "Brute force search through parameter space.",
+      "title": "Parameter Space Search"
+    },
+    "search1d": {
+      "type": "string",
+      "description": "1D search through parameter space.",
+      "title": "1D Parameter Search"
+    },
+    "parameter_set": {
+      "type": "string",
+      "description": "Set initial parameter.",
+      "title": "Initial Parameter"
+    },
+    "increment": {
+      "type": "number",
+      "description": "Face number increment (default 1).",
+      "title": "Face Number Increment"
+    },
+    "slice_number": {
+      "type": "number",
+      "description": "Slice number (defaults to 0).",
+      "title": "Slice Number"
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads.",
+      "title": "Threads"
+    },
+    "output_registration": {
+      "type": "string",
+      "description": "Output registration file.",
+      "title": "Output Registration"
+    },
+    "inverted_output_registration": {
+      "type": "string",
+      "description": "Inverted output registration file.",
+      "title": "Inverted Output Registration"
+    },
+    "output_surface": {
+      "type": "string",
+      "description": "Output surface in slice coordinates.",
+      "title": "Output Surface"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging.",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "diagnostic": {
+      "type": "boolean",
+      "description": "Turn on diagnostics.",
+      "title": "Diagnostic Flag",
+      "default": false
+    },
+    "check_options": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit.",
+      "title": "Check Options Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "template_volume",
+    "surface_file",
+    "init_reg_file"
+  ]
+}

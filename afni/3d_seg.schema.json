@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dSeg",
+  "description": "Segments brain volumes into tissue classes with optional global and voxelwise priors.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dSeg"
+    },
+    "anat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Volume to segment",
+      "title": "Anatomical Image"
+    },
+    "mask": {
+      "type": "string",
+      "description": "Mask of the volume to be segmented. Can be a dataset or 'AUTO' to use AFNI's automask function.",
+      "title": "Mask"
+    },
+    "blur_meth": {
+      "type": "string",
+      "description": "Blurring method for bias field estimation. Options: BFT, BIM, BNN, LSB. Default: BFT",
+      "title": "Blurring Method"
+    },
+    "bias_fwhm": {
+      "type": "number",
+      "description": "The amount of blurring used when estimating the field bias. Default: 25.0",
+      "title": "Bias FWHM"
+    },
+    "classes": {
+      "type": "string",
+      "description": "String of class labels separated by semicolons. Default: 'CSF; GM; WM'",
+      "title": "Classes"
+    },
+    "Bmrf": {
+      "type": "number",
+      "description": "Weighting factor controlling spatial homogeneity of classifications. Default: 0.0",
+      "title": "MRF Weighting Factor"
+    },
+    "bias_classes": {
+      "type": "string",
+      "description": "Classes that contribute to the estimation of the bias field. Default: 'GM; WM'",
+      "title": "Bias Classes"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for all output volume",
+      "title": "Output Prefix"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Automatically overwrite existing files with the same prefix.",
+      "title": "Overwrite",
+      "default": false
+    },
+    "debug": {
+      "type": "number",
+      "description": "Set debug level (0, 1, or 2)",
+      "title": "Debug Level"
+    },
+    "mixfrac": {
+      "type": "string",
+      "description": "Volume-wide mixing fractions for initialization. Options: '0.1 0.45 0.45', 'UNI', 'AVG152_BRAIN_MASK', 'IGNORE'. Default: UNI",
+      "title": "Mixing Fraction"
+    },
+    "mixfloor": {
+      "type": "number",
+      "description": "Set the minimum value for any class's mixing fraction. Default: 0.0001",
+      "title": "Mixing Fraction Floor"
+    },
+    "gold": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Goldstandard segmentation volume for comparison.",
+      "title": "Gold Standard Segmentation"
+    },
+    "gold_bias": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Goldstandard bias volume for comparison.",
+      "title": "Gold Standard Bias"
+    },
+    "main_N": {
+      "type": "number",
+      "description": "Number of iterations to perform. Default: 5",
+      "title": "Number of Iterations"
+    },
+    "cset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Initial classification. Uses 3dkmean's engine if not provided.",
+      "title": "Initial Classification Set"
+    },
+    "labeltable": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Label table containing integer keys and corresponding labels.",
+      "title": "Label Table"
+    },
+    "vox_debug": {
+      "type": "string",
+      "description": "1D index of voxel to debug or 3D voxel indices.",
+      "title": "Voxel Debug Index"
+    },
+    "vox_debug_file": {
+      "type": "string",
+      "description": "File in which debug information is output, use '-' for stdout, '+' for stderr.",
+      "title": "Debug Information Output File"
+    }
+  },
+  "required": [
+    "@type",
+    "anat"
+  ]
+}

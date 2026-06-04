@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "nifti_tool",
+  "description": "Display, modify, or compare nifti headers",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/nifti_tool"
+    },
+    "action": {
+      "type": "string",
+      "description": "Action type that defines what nifti_tool will do.",
+      "title": "Action to perform"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "One or more input nifti files.",
+      "title": "Input files"
+    },
+    "field": {
+      "type": "string",
+      "description": "Field name to display, modify, or compare.",
+      "title": "Field"
+    },
+    "mod_field": {
+      "type": "string",
+      "description": "Field name and new value to modify.",
+      "title": "Modify field"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output file.",
+      "title": "Output file prefix"
+    },
+    "debug": {
+      "type": "number",
+      "description": "Debugging level (0-3).",
+      "title": "Debug level"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Overwrite input files with modifications.",
+      "title": "Overwrite mode",
+      "default": false
+    },
+    "convert2dtype": {
+      "type": "string",
+      "description": "Convert data to a new datatype.",
+      "title": "Convert to datatype"
+    },
+    "convert_fail_choice": {
+      "type": "string",
+      "description": "Action on conversion failure (ignore, warn, fail).",
+      "title": "Conversion failure choice"
+    },
+    "convert_verify": {
+      "type": "boolean",
+      "description": "Verify datatype conversion exactness.",
+      "title": "Verify conversion",
+      "default": false
+    },
+    "add_comment_ext": {
+      "type": "string",
+      "description": "Add COMMENT-type extension to dataset.",
+      "title": "Add comment extension"
+    },
+    "rm_ext": {
+      "type": "string",
+      "description": "Remove extension by index or ALL.",
+      "title": "Remove extension"
+    }
+  },
+  "required": [
+    "@type",
+    "action"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "abids_json_info.py",
+  "description": "A tool to extract information from BIDS formatted json files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/abids_json_info.py"
+    },
+    "json_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify .json file(s).",
+      "title": "JSON files"
+    },
+    "tr_flag": {
+      "type": "boolean",
+      "description": "Print the TR from the json file in seconds, from the 'RepetitionTime' field.",
+      "title": "TR flag",
+      "default": false
+    },
+    "te_flag": {
+      "type": "boolean",
+      "description": "Print out the 'EchoTime' field in milliseconds (the json file stores it in seconds).",
+      "title": "TE flag",
+      "default": false
+    },
+    "te_sec_flag": {
+      "type": "boolean",
+      "description": "Print the 'EchoTime' field in seconds.",
+      "title": "TE seconds flag",
+      "default": false
+    },
+    "match_nii_flag": {
+      "type": "boolean",
+      "description": "Check if there is a .nii or .nii.gz file that matches the .json file (1 if the dataset is loadable).",
+      "title": "Match NII flag",
+      "default": false
+    },
+    "field_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Print any field or list of fields from the json file.",
+      "title": "Field list"
+    },
+    "list_fields_flag": {
+      "type": "boolean",
+      "description": "Print a list of the available fields from the .json file. This must be the only argument specified.",
+      "title": "List fields flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Show this help message and exit.",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "json_files"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CREATE SIGNED DISTANCE VOLUME FROM SURFACE",
+  "description": "Computes the signed distance function of the surface.  Exact distance is calculated by finding the closest point on any surface triangle to the center of the voxel.  Approximate distance is calculated starting with these distances, using dijkstra's method with a neighborhood of voxels.  Specifying too small of an exact distance may produce unexpected results.  Valid specifiers for winding methods are as follows:\n\nEVEN_ODD (default)\nNEGATIVE\nNONZERO\nNORMALS\n\nThe NORMALS method uses the normals of triangles and edges, or the closest triangle hit by a ray from the point.  This method may be slightly faster, but is only reliable for a closed surface that does not cross through itself.  All other methods count entry (positive) and exit (negative) crossings of a vertical ray from the point, then counts as inside if the total is odd, negative, or nonzero, respectively.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/create_signed_distance_volume"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input surface"
+    },
+    "refspace": {
+      "type": "string",
+      "description": "a volume in the desired output space (dims, spacing, origin)"
+    },
+    "outvol": {
+      "type": "string",
+      "description": "the output volume"
+    },
+    "roi_out": {
+      "type": "object",
+      "properties": {
+        "roi_vol": {
+          "type": "string",
+          "description": "the output roi volume"
+        }
+      },
+      "required": [
+        "roi_vol"
+      ],
+      "description": "output an roi volume of where the output has a computed value"
+    },
+    "fill_value": {
+      "type": "number",
+      "description": "specify a value to put in all voxels that don't get assigned a distance"
+    },
+    "exact_limit": {
+      "type": "number",
+      "description": "specify distance for exact output"
+    },
+    "approx_limit": {
+      "type": "number",
+      "description": "specify distance for approximate output"
+    },
+    "approx_neighborhood": {
+      "type": "integer",
+      "description": "voxel neighborhood for approximate calculation"
+    },
+    "winding": {
+      "type": "string",
+      "description": "winding method for point inside surface test"
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "refspace",
+    "outvol"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@build_afni_Xlib",
+  "description": "Compile and install lesstif, openmotif, and/or libXt",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@build_afni_Xlib"
+    },
+    "afniX": {
+      "type": "boolean",
+      "description": "Install under /usr/local/afniX",
+      "title": "Install under /usr/local/afniX",
+      "default": false
+    },
+    "localinstall": {
+      "type": "boolean",
+      "description": "Install under each package directory",
+      "title": "Local install",
+      "default": false
+    },
+    "debug_symbols": {
+      "type": "boolean",
+      "description": "Compile with -g to add symbols",
+      "title": "Compile with debug symbols",
+      "default": false
+    },
+    "lib32": {
+      "type": "boolean",
+      "description": "Install libs under lib, and force 32-bit compile (on Linux: add --target=i386)",
+      "title": "32-bit library installation",
+      "default": false
+    },
+    "lib64": {
+      "type": "boolean",
+      "description": "Install libs under lib64 (default is lib)",
+      "title": "64-bit library installation",
+      "default": false
+    },
+    "packages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Packages to compile and install (e.g., lesstif, openmotif, libXt)",
+      "title": "Packages"
+    }
+  },
+  "required": [
+    "@type",
+    "packages"
+  ]
+}

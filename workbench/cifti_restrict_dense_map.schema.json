@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EXCLUDE BRAINORDINATES FROM A CIFTI FILE",
+  "description": "Writes a modified version of <cifti-in>, where all brainordinates outside the specified roi(s) are removed from the file.  The direction can be either an integer starting from 1, or the strings 'ROW' or 'COLUMN'.  If -cifti-roi is specified, no other -*-roi option may be specified.  If not using -cifti-roi, any -*-roi options not present will discard the relevant structure, if present in the input file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_restrict_dense_map"
+    },
+    "cifti_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input cifti"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which dimension to change the mapping on (integer, 'ROW', or 'COLUMN')"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "the output cifti"
+    },
+    "cifti_roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "cifti file containing combined rois"
+    },
+    "left_roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "vertices to use from left hemisphere"
+    },
+    "right_roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "vertices to use from right hemisphere"
+    },
+    "cerebellum_roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "vertices to use from cerebellum"
+    },
+    "vol_roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "voxels to use"
+    }
+  },
+  "required": [
+    "@type",
+    "cifti_in",
+    "direction",
+    "cifti_out"
+  ]
+}

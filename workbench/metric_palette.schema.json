@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SET THE PALETTE OF A METRIC FILE",
+  "description": "The original metric file is overwritten with the modified version.  By default, all columns of the metric file are adjusted to the new settings, use the -column option to change only one column.  Mapping settings not specified in options will be taken from the first column.  The <mode> argument must be one of the following:\n\nMODE_AUTO_SCALE\nMODE_AUTO_SCALE_ABSOLUTE_PERCENTAGE\nMODE_AUTO_SCALE_PERCENTAGE\nMODE_USER_SCALE\n\nThe <name> argument to -palette-name must be one of the following:\n\nROY-BIG-BL\nvideen_style\nGray_Interp_Positive\nGray_Interp\nPSYCH-FIXED\nRBGYR20\nRBGYR20P\nRYGBR4_positive\nRGRBR_mirror90_pos\nOrange-Yellow\nPOS_NEG_ZERO\nred-yellow\nblue-lightblue\nFSL\npower_surf\nblack-red\nblack-green\nblack-blue\nblack-red-positive\nblack-green-positive\nblack-blue-positive\nblue-black-green\nblue-black-red\nred-black-green\nfsl_red\nfsl_green\nfsl_blue\nfsl_yellow\nRedWhiteBlue\ncool-warm\nspectral\nRY-BC-BL\nmagma\nJET256\nPSYCH\nPSYCH-NO-NONE\nROY-BIG\nclear_brain\nfidl\nraich4_clrmid\nraich6_clrmid\nHSB8_clrmid\nPOS_NEG\nSpecial-RGB-Volume\n\nThe <type> argument to -thresholding must be one of the following:\n\nTHRESHOLD_TYPE_OFF\nTHRESHOLD_TYPE_NORMAL\nTHRESHOLD_TYPE_FILE\n\nThe <test> argument to -thresholding must be one of the following:\n\nTHRESHOLD_TEST_SHOW_OUTSIDE\nTHRESHOLD_TEST_SHOW_INSIDE\n\nThe <type> argument to -inversion must be one of the following:\n\nOFF\nPOSITIVE_WITH_NEGATIVE\nPOSITIVE_NEGATIVE_SEPARATE\n\nThe <type> argument to -normalization must be one of the following:\n\nNORMALIZATION_ALL_MAP_DATA\nNORMALIZATION_SELECTED_MAP_DATA\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric_palette"
+    },
+    "metric": {
+      "type": "string",
+      "description": "the metric to modify"
+    },
+    "mode": {
+      "type": "string",
+      "description": "the mapping mode"
+    },
+    "column": {
+      "type": "string",
+      "description": "select a single column"
+    },
+    "pos_percent": {
+      "type": "object",
+      "properties": {
+        "pos_min": {
+          "type": "number",
+          "description": "the percentile for the least positive data"
+        },
+        "pos_max": {
+          "type": "number",
+          "description": "the percentile for the most positive data"
+        }
+      },
+      "required": [
+        "pos_min",
+        "pos_max"
+      ],
+      "description": "percentage min/max for positive data coloring"
+    },
+    "neg_percent": {
+      "type": "object",
+      "properties": {
+        "neg_min": {
+          "type": "number",
+          "description": "the percentile for the least negative data"
+        },
+        "neg_max": {
+          "type": "number",
+          "description": "the percentile for the most negative data"
+        }
+      },
+      "required": [
+        "neg_min",
+        "neg_max"
+      ],
+      "description": "percentage min/max for negative data coloring"
+    },
+    "pos_user": {
+      "type": "object",
+      "properties": {
+        "pos_min_user": {
+          "type": "number",
+          "description": "the value for the least positive data"
+        },
+        "pos_max_user": {
+          "type": "number",
+          "description": "the value for the most positive data"
+        }
+      },
+      "required": [
+        "pos_min_user",
+        "pos_max_user"
+      ],
+      "description": "user min/max values for positive data coloring"
+    },
+    "neg_user": {
+      "type": "object",
+      "properties": {
+        "neg_min_user": {
+          "type": "number",
+          "description": "the value for the least negative data"
+        },
+        "neg_max_user": {
+          "type": "number",
+          "description": "the value for the most negative data"
+        }
+      },
+      "required": [
+        "neg_min_user",
+        "neg_max_user"
+      ],
+      "description": "user min/max values for negative data coloring"
+    },
+    "interpolate": {
+      "type": "boolean",
+      "description": "interpolate colors"
+    },
+    "disp_pos": {
+      "type": "boolean",
+      "description": "display positive data"
+    },
+    "disp_neg": {
+      "type": "boolean",
+      "description": "display positive data"
+    },
+    "disp_zero": {
+      "type": "boolean",
+      "description": "display data closer to zero than the min cutoff"
+    },
+    "palette_name": {
+      "type": "string",
+      "description": "set the palette used"
+    },
+    "thresholding": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "thresholding setting"
+        },
+        "test": {
+          "type": "string",
+          "description": "show values inside or outside thresholds"
+        },
+        "min": {
+          "type": "number",
+          "description": "lower threshold"
+        },
+        "max": {
+          "type": "number",
+          "description": "upper threshold"
+        }
+      },
+      "required": [
+        "type",
+        "test",
+        "min",
+        "max"
+      ],
+      "description": "set the thresholding"
+    },
+    "inversion": {
+      "type": "string",
+      "description": "specify palette inversion"
+    },
+    "normalization": {
+      "type": "string",
+      "description": "specify normalization mode (NOTE: this is always a file-wide setting, NOT per-map)"
+    }
+  },
+  "required": [
+    "@type",
+    "metric",
+    "mode"
+  ]
+}

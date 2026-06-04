@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLMEr",
+  "description": "Program for Voxelwise Linear Mixed-Effects (LME) Analysis",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLMEr"
+    },
+    "bound_lower": {
+      "type": "number",
+      "description": "Specify the lower and upper bounds for outlier removal",
+      "title": "Lower Bound"
+    },
+    "bound_upper": {
+      "type": "number",
+      "description": "Specify the lower and upper bounds for outlier removal",
+      "title": "Upper Bound"
+    },
+    "cio": {
+      "type": "boolean",
+      "description": "Use AFNI's C io functions",
+      "title": "Use CIO",
+      "default": false
+    },
+    "data_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "List the data structure with a header as the first line",
+      "title": "Input Data Table"
+    },
+    "debug_args": {
+      "type": "boolean",
+      "description": "Enable R to save the parameters for debugging",
+      "title": "Debug Arguments",
+      "default": false
+    },
+    "glf_code": {
+      "type": "string",
+      "description": "Specify a general linear F-style (GLF) formulation",
+      "title": "GLF Code"
+    },
+    "glt_code": {
+      "type": "string",
+      "description": "Specify the label and weights of interest in a general linear t-style (GLT) formulation",
+      "title": "GLT Code"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display the help message",
+      "title": "Help",
+      "default": false
+    },
+    "input_file_column": {
+      "type": "string",
+      "description": "Specify the column name for input files of effect estimate",
+      "title": "Input File Column"
+    },
+    "jobs": {
+      "type": "number",
+      "description": "Number of jobs for parallel computing",
+      "title": "Number of Jobs"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Process voxels inside this mask only",
+      "title": "Mask File"
+    },
+    "model": {
+      "type": "string",
+      "description": "Specify the model structure for all the variables",
+      "title": "Model Formula"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output file name",
+      "title": "Output Prefix"
+    },
+    "qvar_centers": {
+      "type": "string",
+      "description": "Specify centering values for quantitative variables",
+      "title": "QVar Centers"
+    },
+    "qvars": {
+      "type": "string",
+      "description": "Identify quantitative variables (or covariates)",
+      "title": "Quantitative Variables"
+    },
+    "resid": {
+      "type": "string",
+      "description": "Output file name for the residuals",
+      "title": "Residuals Output Prefix"
+    },
+    "rio": {
+      "type": "boolean",
+      "description": "Use R's io functions",
+      "title": "Use RIO",
+      "default": false
+    },
+    "show_options": {
+      "type": "boolean",
+      "description": "List of allowed options",
+      "title": "Show Allowed Options",
+      "default": false
+    },
+    "ss_type": {
+      "type": "number",
+      "description": "Specify the type for sums of squares in the F-statistics",
+      "title": "Sums of Squares Type"
+    },
+    "trr": {
+      "type": "boolean",
+      "description": "Perform test-retest reliability analysis",
+      "title": "Test-Retest Reliability",
+      "default": false
+    },
+    "vvar_centers": {
+      "type": "string",
+      "description": "Specify centering values for voxel-wise covariates",
+      "title": "VVar Centers"
+    },
+    "vvars": {
+      "type": "string",
+      "description": "Identify voxel-wise covariates",
+      "title": "Voxel-wise Variables"
+    }
+  },
+  "required": [
+    "@type",
+    "data_table",
+    "model",
+    "prefix"
+  ]
+}

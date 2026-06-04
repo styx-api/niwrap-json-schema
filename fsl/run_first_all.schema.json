@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "run_first_all",
+  "description": "FIRST - FMRIB's Integrated Registration and Segmentation Tool for subcortical brain structures",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/run_first_all"
+    },
+    "method": {
+      "enum": [
+        "auto",
+        "fast",
+        "none"
+      ],
+      "description": "Method for brain extraction (auto, fast, none or a numerical threshold value)",
+      "title": "Method"
+    },
+    "brainextract_flag": {
+      "type": "boolean",
+      "description": "Input is already brain extracted",
+      "title": "Brain Extracted Flag",
+      "default": false
+    },
+    "structure": {
+      "type": "string",
+      "description": "Run only on one specified structure (e.g. L_Hipp) or a comma separated list (no spaces)",
+      "title": "Structure"
+    },
+    "affine_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use affine matrix (do not re-run registration)",
+      "title": "Affine Matrix"
+    },
+    "threestage_flag": {
+      "type": "boolean",
+      "description": "Use 3-stage affine registration (only currently for hippocampus)",
+      "title": "3-Stage Affine Registration Flag",
+      "default": false
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Do not cleanup image output files (useful for debugging)",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Verbose output",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image file",
+      "title": "Input Image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Output image file",
+      "title": "Output Image"
+    }
+  },
+  "required": [
+    "@type",
+    "input_image",
+    "output_image"
+  ]
+}

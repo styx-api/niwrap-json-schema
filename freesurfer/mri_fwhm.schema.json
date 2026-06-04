@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_fwhm",
+  "description": "FreeSurfer program to estimate the global Gaussian smoothness of a multi-frame, volume-based data set.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_fwhm"
+    },
+    "inputvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume file. Format must be something readable by mri_convert (e.g., mgh, mgz, img, nii, nii.gz).",
+      "title": "Input Volume"
+    },
+    "outputvol": {
+      "type": "string",
+      "description": "Output volume file: save input after smoothing.",
+      "title": "Output Volume"
+    },
+    "save_detrended": {
+      "type": "boolean",
+      "description": "Save input after smoothing and detrending.",
+      "title": "Save Detrended Flag",
+      "default": false
+    },
+    "save_unmasked": {
+      "type": "boolean",
+      "description": "Do not mask output volume.",
+      "title": "Save Unmasked Flag",
+      "default": false
+    },
+    "smooth_only": {
+      "type": "boolean",
+      "description": "Smooth and save, do not compute fwhm.",
+      "title": "Smooth Only Flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Binary mask file.",
+      "title": "Binary Mask"
+    },
+    "mask_thresh": {
+      "type": "number",
+      "description": "Threshold for mask (default is 0.5).",
+      "title": "Mask Threshold"
+    },
+    "auto_mask": {
+      "type": "number",
+      "description": "Auto compute mask based on global mean threshold.",
+      "title": "Auto Mask"
+    },
+    "nerode": {
+      "type": "number",
+      "description": "Erode mask n times prior to FWHM computation.",
+      "title": "Erode Mask Times"
+    },
+    "mask_inv": {
+      "type": "boolean",
+      "description": "Invert mask.",
+      "title": "Mask Inversion Flag",
+      "default": false
+    },
+    "out_mask": {
+      "type": "string",
+      "description": "Save final mask to outmaskvol.",
+      "title": "Output Mask"
+    },
+    "detrend_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Detrending matrix file in MATLAB4 format.",
+      "title": "Detrend Matrix"
+    },
+    "detrend_order": {
+      "type": "number",
+      "description": "Polynomial detrending order (default 0).",
+      "title": "Detrend Order"
+    },
+    "square_input": {
+      "type": "boolean",
+      "description": "Compute square of input before smoothing.",
+      "title": "Square Input Flag",
+      "default": false
+    },
+    "smooth_by_fwhm": {
+      "type": "number",
+      "description": "Smooth BY fwhm before measuring.",
+      "title": "Smooth by FWHM"
+    },
+    "smooth_by_gstd": {
+      "type": "number",
+      "description": "Smooth using gstd (equivalent to --fwhm).",
+      "title": "Smooth by gstd"
+    },
+    "median_filter": {
+      "type": "number",
+      "description": "Perform median filtering instead of Gaussian.",
+      "title": "Median Filter Width"
+    },
+    "smooth_to_fwhm": {
+      "type": "number",
+      "description": "Smooth TO this FWHM.",
+      "title": "Smooth to FWHM"
+    },
+    "to_fwhm_tol": {
+      "type": "number",
+      "description": "Tolerance for smoothing to FWHM (default 0.5mm).",
+      "title": "To FWHM Tolerance"
+    },
+    "to_fwhm_nmax": {
+      "type": "number",
+      "description": "Maximum iterations for smoothing to FWHM (default 20).",
+      "title": "To FWHM Max Iterations"
+    },
+    "to_fwhm_file": {
+      "type": "string",
+      "description": "Save smoothing to FWHM parameters to file.",
+      "title": "To FWHM File"
+    },
+    "summary_file": {
+      "type": "string",
+      "description": "Summary/log file.",
+      "title": "Summary File"
+    },
+    "dat_file": {
+      "type": "string",
+      "description": "Prints only the final FWHM estimate into this file.",
+      "title": "DAT File"
+    },
+    "fwhm_dat_file": {
+      "type": "string",
+      "description": "Compute and save the FWHM of each dimension.",
+      "title": "FWHM DAT File"
+    },
+    "fwhm_vol_mean_file": {
+      "type": "string",
+      "description": "Compute and save the FWHM of each dimension based on fwhmvol.",
+      "title": "FWHM Volume Mean File"
+    },
+    "fwhm_vol": {
+      "type": "string",
+      "description": "Save FWHM volume.",
+      "title": "FWHM Volume"
+    },
+    "synth": {
+      "type": "boolean",
+      "description": "Synthesize input with white Gaussian noise.",
+      "title": "Synthesize Input Flag",
+      "default": false
+    },
+    "synth_frames": {
+      "type": "number",
+      "description": "Number of frames for synthesized input (default is 10).",
+      "title": "Synthesize Frames"
+    },
+    "nframes_min": {
+      "type": "number",
+      "description": "Require at least this many frames.",
+      "title": "Minimum Frames"
+    },
+    "ispm": {
+      "type": "boolean",
+      "description": "Input is SPM-analyze.",
+      "title": "SPM Analyze Input Flag",
+      "default": false
+    },
+    "nspm_zero_padding": {
+      "type": "number",
+      "description": "Zero-padding for SPM-analyze.",
+      "title": "SPM Zero Padding"
+    },
+    "threads": {
+      "type": "number",
+      "description": "Set OPEN MP threads.",
+      "title": "Number of Threads"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging.",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "checkopts": {
+      "type": "boolean",
+      "description": "Check options and exit without running.",
+      "title": "Check Options Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version and exit.",
+      "title": "Version Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "inputvol",
+    "outputvol"
+  ]
+}

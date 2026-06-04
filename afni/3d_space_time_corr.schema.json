@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dSpaceTimeCorr",
+  "description": "Calculates correlation coefficients between two 4D datasets using space+time patterns",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dSpaceTimeCorr"
+    },
+    "insetA": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First 4D data set.",
+      "title": "Input data set A"
+    },
+    "insetB": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second 4D data set. Must have the same spatial dimensions and number of time points as insetA.",
+      "title": "Input data set B"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output filename/base.",
+      "title": "Output prefix"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional mask for calculations. Recommended for speed and interpretability.",
+      "title": "Mask file"
+    },
+    "out_Zcorr": {
+      "type": "boolean",
+      "description": "Switch to output Fisher Z transform of spatial map correlation instead of Pearson r values.",
+      "title": "Output Z-transformed correlation",
+      "default": false
+    },
+    "freeze_insetA_ijk": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Freeze the seed voxel location in the insetA data set using ijk indices while the seed location in insetB moves throughout the volume or mask. Provide three ijk values.",
+      "title": "Freeze insetA ijk indices"
+    },
+    "freeze_insetA_xyz": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Freeze the seed voxel location in the insetA data set using xyz coordinates while the seed location in insetB moves throughout the volume or mask. Provide three xyz values.",
+      "title": "Freeze insetA xyz coordinates"
+    }
+  },
+  "required": [
+    "@type",
+    "insetA",
+    "insetB",
+    "prefix"
+  ]
+}

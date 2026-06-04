@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dicom_hdr",
+  "description": "A tool to print DICOM file information to stdout.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/dicom_hdr"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "DICOM file(s) to read",
+      "title": "Input files"
+    },
+    "hex": {
+      "type": "boolean",
+      "description": "Include hexadecimal printout for integer values.",
+      "title": "Hexadecimal printout flag",
+      "default": false
+    },
+    "noname": {
+      "type": "boolean",
+      "description": "Don't include element names in the printout.",
+      "title": "No element names flag",
+      "default": false
+    },
+    "sexinfo": {
+      "type": "boolean",
+      "description": "Dump Siemens EXtra INFO text (0029 1020), if present (can be VERY lengthy).",
+      "title": "Siemens EXtra INFO flag",
+      "default": false
+    },
+    "mulfram": {
+      "type": "boolean",
+      "description": "Dump multi-frame information, if present (1 line per frame, plus an XML-style header/footer). This option also implies -noname.",
+      "title": "Multi-frame information flag",
+      "default": false
+    },
+    "v_dump": {
+      "type": "number",
+      "description": "Dump n words of binary data also.",
+      "title": "Binary data dump count"
+    },
+    "no_length": {
+      "type": "boolean",
+      "description": "Skip lengths and offsets (helps diffs).",
+      "title": "No lengths and offsets flag",
+      "default": false
+    },
+    "slice_times": {
+      "type": "boolean",
+      "description": "Show slice times from Siemens mosaic images.",
+      "title": "Slice times flag",
+      "default": false
+    },
+    "slice_times_verb": {
+      "type": "boolean",
+      "description": "Show slice times from Siemens mosaic images verbosely. (multiple uses increase verbosity, can dump CSA data)",
+      "title": "Verbose slice times flag",
+      "default": false
+    },
+    "siemens_csa_data": {
+      "type": "boolean",
+      "description": "Same as 3 -slice_times_verb opts.",
+      "title": "Siemens CSA data flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "files"
+  ]
+}

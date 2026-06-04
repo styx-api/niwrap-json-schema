@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3ddelay",
+  "description": "Estimates the time delay between each voxel time series in a 3D+time dataset and a reference time series.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3ddelay"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the input 3D+time dataset",
+      "title": "Input file"
+    },
+    "reference_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input ideal time series file name",
+      "title": "Reference file"
+    },
+    "sampling_freq": {
+      "type": "number",
+      "description": "Sampling frequency in Hz. of data time series (1/TR)",
+      "title": "Sampling frequency"
+    },
+    "stim_period": {
+      "type": "number",
+      "description": "Stimulus period in seconds. Set to 0 if stimulus is not periodic",
+      "title": "Stimulus period"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "The prefix for the results Brick",
+      "title": "Prefix"
+    },
+    "polort": {
+      "type": "number",
+      "description": "Detrend input time series with polynomial of specified order. Default is -1 for auto selection",
+      "title": "Polynomial order"
+    },
+    "nodtrnd": {
+      "type": "boolean",
+      "description": "Remove only the mean (equivalent to polort 0)",
+      "title": "No detrending",
+      "default": false
+    },
+    "units_seconds": {
+      "type": "boolean",
+      "description": "Units for delay estimates in seconds",
+      "title": "Units in seconds",
+      "default": false
+    },
+    "units_degrees": {
+      "type": "boolean",
+      "description": "Units for delay estimates in degrees. Requires Tstim > 0",
+      "title": "Units in degrees",
+      "default": false
+    },
+    "units_radians": {
+      "type": "boolean",
+      "description": "Units for delay estimates in radians. Requires Tstim > 0",
+      "title": "Units in radians",
+      "default": false
+    },
+    "phzwrp": {
+      "type": "boolean",
+      "description": "Wrap delay (or phase) values",
+      "title": "Phase wrap",
+      "default": false
+    },
+    "nophzwrp": {
+      "type": "boolean",
+      "description": "Do not wrap phase (default)",
+      "title": "No phase wrap",
+      "default": false
+    },
+    "phzreverse": {
+      "type": "boolean",
+      "description": "Reverse phase such that phase -> (T-phase)",
+      "title": "Phase reverse",
+      "default": false
+    },
+    "phzscale": {
+      "type": "number",
+      "description": "Scale phase: phase -> phase*SC (default no scaling)",
+      "title": "Phase scale"
+    },
+    "bias": {
+      "type": "boolean",
+      "description": "Do not correct for the bias in the estimates",
+      "title": "Bias correction disabled",
+      "default": false
+    },
+    "nobias": {
+      "type": "boolean",
+      "description": "Correct for the bias in the estimates (default)",
+      "title": "Bias correction enabled",
+      "default": false
+    },
+    "dsamp": {
+      "type": "boolean",
+      "description": "Correct for slice timing differences (default)",
+      "title": "Slice timing correction enabled",
+      "default": false
+    },
+    "nodsamp": {
+      "type": "boolean",
+      "description": "Do not correct for slice timing differences",
+      "title": "Slice timing correction disabled",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of mask dataset. Only voxels with non-zero values in the mask will be considered",
+      "title": "Mask file"
+    },
+    "nfirst": {
+      "type": "number",
+      "description": "Number of first dataset image to use in the delay estimate",
+      "title": "First image"
+    },
+    "nlast": {
+      "type": "number",
+      "description": "Number of last dataset image to use in the delay estimate",
+      "title": "Last image"
+    },
+    "co": {
+      "type": "number",
+      "description": "Cross Correlation Coefficient threshold value to limit ascii output",
+      "title": "Cross Correlation Coefficient threshold"
+    },
+    "asc": {
+      "type": "string",
+      "description": "Write the results to an ascii file for voxels with cross correlation coefficients larger than CCT",
+      "title": "Output ASCII file"
+    },
+    "ascts": {
+      "type": "string",
+      "description": "Write the results and time series to an ascii file for voxels with cross correlation coefficients larger than CCT",
+      "title": "Output ASCII file with time series"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "reference_file",
+    "sampling_freq",
+    "stim_period"
+  ]
+}

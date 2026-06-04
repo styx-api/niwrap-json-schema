@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "niccc",
+  "description": "A program for conducting certain NIML tests on input from streamspec and write the results to stderr",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/niccc"
+    },
+    "streamspec": {
+      "type": "string",
+      "description": "A string defining a NIML stream",
+      "title": "Stream specification"
+    },
+    "duplicate": {
+      "type": "boolean",
+      "description": "Duplicate the element before showing it. This is to test NI_duplicate function.",
+      "title": "Duplicate Flag",
+      "default": false
+    },
+    "nodata": {
+      "type": "boolean",
+      "description": "Show header parts only in output",
+      "title": "No Data Flag",
+      "default": false
+    },
+    "attribute": {
+      "type": "string",
+      "description": "Dump the value of attribute ATTR",
+      "title": "Attribute"
+    },
+    "match": {
+      "type": "string",
+      "description": "Match attribute: If MATCH is exact, then attribute name is matched exactly. If MATCH is partial, then a match of all the characters in ATTR is enough.",
+      "title": "Match"
+    },
+    "file": {
+      "type": "boolean",
+      "description": "Streamspec is a filename.",
+      "title": "File Flag",
+      "default": false
+    },
+    "string": {
+      "type": "boolean",
+      "description": "Streamspec is an element string like: '<T font=9 coords=\"2.3 23 2\"/>'",
+      "title": "String Flag",
+      "default": false
+    },
+    "stdout": {
+      "type": "boolean",
+      "description": "Write elements to stdout, instead of stderr",
+      "title": "Stdout Flag",
+      "default": false
+    },
+    "hash": {
+      "type": "boolean",
+      "description": "Put the # at the beginning of lines with no data",
+      "title": "Hash Flag",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Quiet stderr messages, and don't echo attribute name with -attribute option",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "find_attr": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Only output elements that have an attribute ATTR of value ATTRVAL.",
+      "title": "Find Attribute"
+    },
+    "skip_attr": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Do not output elements that have an attribute ATTR of value ATTRVAL.",
+      "title": "Skip Attribute"
+    }
+  },
+  "required": [
+    "@type",
+    "streamspec"
+  ]
+}

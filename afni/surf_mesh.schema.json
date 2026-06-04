@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfMesh",
+  "description": "Surface mesh manipulation tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SurfMesh"
+    },
+    "input_surface": {
+      "type": "string",
+      "description": "Input surface file with specified type",
+      "title": "Input Surface"
+    },
+    "output_surface": {
+      "type": "string",
+      "description": "Output surface file with specified type",
+      "title": "Output Surface"
+    },
+    "edge_fraction": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Fraction of edges to simplify the surface",
+      "title": "Edge Fraction"
+    },
+    "surface_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface volume file",
+      "title": "Surface Volume"
+    },
+    "one_state": {
+      "type": "boolean",
+      "description": "Make all input surfaces have the same state",
+      "title": "One State",
+      "default": false
+    },
+    "anatomical_label": {
+      "type": "boolean",
+      "description": "Label all input surfaces as anatomically correct",
+      "title": "Anatomical Label",
+      "default": false
+    },
+    "no_volume_registration": {
+      "type": "boolean",
+      "description": "Ignore any Rotate, Volreg, Tagalign, or WarpDrive transformations present in the Surface Volume",
+      "title": "No Volume Registration",
+      "default": false
+    },
+    "set_env": {
+      "type": "string",
+      "description": "Set environment variable",
+      "title": "Set Environment Variable"
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface",
+    "output_surface",
+    "edge_fraction"
+  ]
+}

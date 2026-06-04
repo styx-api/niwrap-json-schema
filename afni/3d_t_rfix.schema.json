@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTRfix",
+  "description": "Re-sample dataset with irregular time grid to regular time grid via linear interpolation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTRfix"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Input File"
+    },
+    "tr_list": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File of time gaps between sub-bricks in input dataset",
+      "title": "TR List File"
+    },
+    "time_list": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with times at each sub-brick in the input dataset",
+      "title": "Time List File"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix name for output dataset",
+      "title": "Output Prefix"
+    },
+    "output_tr": {
+      "type": "number",
+      "description": "TR value for output dataset (in seconds)",
+      "title": "Output TR"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "prefix"
+  ]
+}

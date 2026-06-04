@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "stimband",
+  "description": "Determines frequency band covering at least 90% of the 'power' (|FFT|^2) of stimulus columns from X.nocensor.xmat.1D files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/stimband"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Print the power band for each individual stimulus column from each matrix.",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "matrixfiles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Path to matrix files.",
+      "title": "Matrix files"
+    },
+    "additional_matrixfiles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Another way to read 1 or more matrix files.",
+      "title": "Additional matrix files"
+    },
+    "min_freq": {
+      "type": "number",
+      "description": "Set the minimum frequency output for the band. Default value is 0.01.",
+      "title": "Minimum Frequency"
+    },
+    "min_bwidth": {
+      "type": "number",
+      "description": "Set the minimum bandwidth output (top frequency minus bottom frequency). Default is 0.03.",
+      "title": "Minimum Bandwidth"
+    },
+    "min_pow": {
+      "type": "number",
+      "minimum": 50,
+      "maximum": 99,
+      "description": "Set the minimum power fraction (percentage) to 'ff' instead of the default 90%. Value must be in the range 50..99.",
+      "title": "Minimum Power Fraction"
+    }
+  },
+  "required": [
+    "@type",
+    "matrixfiles"
+  ]
+}

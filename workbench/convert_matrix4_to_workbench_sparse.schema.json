@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CONVERT A 3-FILE MATRIX4 TO A WORKBENCH SPARSE FILE",
+  "description": "Converts the matrix 4 output of probtrackx to workbench sparse file format.  Exactly one of -surface-seeds and -volume-seeds must be specified.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/convert_matrix4_to_workbench_sparse"
+    },
+    "matrix4_1": {
+      "type": "string",
+      "description": "the first matrix4 file"
+    },
+    "matrix4_2": {
+      "type": "string",
+      "description": "the second matrix4 file"
+    },
+    "matrix4_3": {
+      "type": "string",
+      "description": "the third matrix4 file"
+    },
+    "orientation_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the .fiberTEMP.nii file this trajectory file applies to"
+    },
+    "voxel_list": {
+      "type": "string",
+      "description": "list of white matter voxel index triplets as used in the trajectory matrix"
+    },
+    "wb_sparse_out": {
+      "type": "string",
+      "description": "output - the output workbench sparse file"
+    },
+    "surface_seeds": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify the surface seed space"
+    },
+    "volume_seeds": {
+      "type": "object",
+      "properties": {
+        "cifti_template": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "cifti file to use the volume mappings from"
+        },
+        "direction": {
+          "type": "string",
+          "description": "dimension along the cifti file to take the mapping from, ROW or COLUMN"
+        }
+      },
+      "required": [
+        "cifti_template",
+        "direction"
+      ],
+      "description": "specify the volume seed space"
+    }
+  },
+  "required": [
+    "@type",
+    "matrix4_1",
+    "matrix4_2",
+    "matrix4_3",
+    "orientation_file",
+    "voxel_list",
+    "wb_sparse_out"
+  ]
+}

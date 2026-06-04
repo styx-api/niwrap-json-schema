@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "make-segvol-table",
+  "description": "Creates a table of volumes of subcortical structures for a given list of subjects using FreeSurfer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/make-segvol-table"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subject IDs. Each subject should be specified with a separate -s flag.",
+      "title": "Subject IDs"
+    },
+    "subject_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to a file containing a list of subjects.",
+      "title": "Subject file"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Output file where the table will be saved.",
+      "title": "Output file"
+    },
+    "idmap": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with structure name and id number. Default is FREESURFER_HOME/tkmeditColorsCMA.",
+      "title": "ID map"
+    },
+    "structure_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Names of structures to include in the table. Defaults to all structures.",
+      "title": "Structure IDs"
+    },
+    "segdir": {
+      "type": "string",
+      "description": "Segmentation subdirectory name. Default is 'aseg'.",
+      "title": "Segmentation directory"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Path to the subjects directory. Default is SUBJECTS_DIR environment variable.",
+      "title": "Subjects directory"
+    },
+    "umask": {
+      "type": "string",
+      "description": "Set UNIX file permission mask.",
+      "title": "Umask"
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version and exit.",
+      "title": "Version flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help information.",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subjects",
+    "subject_file",
+    "outfile"
+  ]
+}

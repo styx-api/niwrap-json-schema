@@ -1,0 +1,354 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_register",
+  "description": "This program registers a surface to an average surface template.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_register"
+    },
+    "surf_fname": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface to register, often {hemi}.sphere",
+      "title": "Surface file name"
+    },
+    "target": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The data to register to. A template file for average surface or a single-subject's surface.",
+      "title": "Target"
+    },
+    "out_fname": {
+      "type": "string",
+      "description": "Output surface file to capture registration. Example: {hemi}.sphere.reg",
+      "title": "Output file name"
+    },
+    "one_flag": {
+      "type": "boolean",
+      "description": "Treats target argument as a single subject's surface not a template file.",
+      "title": "Single subject target",
+      "default": false
+    },
+    "addframe": {
+      "type": "string",
+      "description": "Add field with location in the atlas.",
+      "title": "Add frame values"
+    },
+    "annot_name": {
+      "type": "string",
+      "description": "Zeroes medial wall using annotation.",
+      "title": "Annotation"
+    },
+    "curvature_fname": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Curvature file name.",
+      "title": "Curvature file"
+    },
+    "canonical_name": {
+      "type": "string",
+      "description": "Use surface for canonical properties.",
+      "title": "Canonical name"
+    },
+    "inflated": {
+      "type": "boolean",
+      "description": "Use inflated surface for initial alignment.",
+      "title": "Inflated initial alignment flag",
+      "default": false
+    },
+    "inflated_name": {
+      "type": "string",
+      "description": "Uses this name for inflated surface for initial alignment.",
+      "title": "Inflated surface name"
+    },
+    "label_file": {
+      "type": "string",
+      "description": "Specify a manual label to align with atlas label.",
+      "title": "Label file"
+    },
+    "orig_name": {
+      "type": "string",
+      "description": "Use this for original properties.",
+      "title": "Original name"
+    },
+    "overlay_values": {
+      "type": "string",
+      "description": "Adds a variable to the atlas from overlay file, smoothing it specified number of times.",
+      "title": "Overlay values"
+    },
+    "overlay_dir": {
+      "type": "string",
+      "description": "Changes overlay path.",
+      "title": "Overlay directory"
+    },
+    "starting_reg_fname": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Start registration with coordinates from file.",
+      "title": "Starting registration file"
+    },
+    "jacobian_fname": {
+      "type": "string",
+      "description": "Write out jacobian of mapping to the specified file.",
+      "title": "Jacobian output file"
+    },
+    "n_averages": {
+      "type": "number",
+      "description": "Set the number of averages.",
+      "title": "Number of averages"
+    },
+    "adaptive": {
+      "type": "boolean",
+      "description": "Use adaptive time step integration.",
+      "title": "Adaptive flag",
+      "default": false
+    },
+    "l_area": {
+      "type": "number",
+      "description": "Sets l_area parameter.",
+      "title": "Area"
+    },
+    "l_corr": {
+      "type": "number",
+      "description": "Sets the l_corr parameter.",
+      "title": "Correlation"
+    },
+    "curvature_flag": {
+      "type": "boolean",
+      "description": "Use smoothwm curvature for final alignment.",
+      "title": "Curvature flag",
+      "default": false
+    },
+    "l_dist": {
+      "type": "number",
+      "description": "Specify distance term.",
+      "title": "Distance term"
+    },
+    "dt_value": {
+      "type": "number",
+      "description": "Sets momentum with specified dt.",
+      "title": "Time step"
+    },
+    "dt_decrease": {
+      "type": "number",
+      "description": "Set decrease for dt.",
+      "title": "Dt decrease"
+    },
+    "dt_increase": {
+      "type": "number",
+      "description": "Set increase for dt.",
+      "title": "Dt increase"
+    },
+    "l_external": {
+      "type": "number",
+      "description": "Sets l_external parameter.",
+      "title": "External parameter"
+    },
+    "error_ratio": {
+      "type": "number",
+      "description": "Sets error ratio.",
+      "title": "Error ratio"
+    },
+    "initial_flag": {
+      "type": "boolean",
+      "description": "Use initial registration.",
+      "title": "Initial flag",
+      "default": false
+    },
+    "l_laplacian": {
+      "type": "number",
+      "description": "Sets l_laplacian.",
+      "title": "Laplacian"
+    },
+    "line_min": {
+      "type": "boolean",
+      "description": "Integrate using line minimization.",
+      "title": "Line minimization flag",
+      "default": false
+    },
+    "momentum": {
+      "type": "number",
+      "description": "Chooses integration_type = INTEGRATE_MOMENTUM and sets momentum value.",
+      "title": "Momentum"
+    },
+    "max_degrees": {
+      "type": "number",
+      "description": "Set max angle for search.",
+      "title": "Max degrees"
+    },
+    "median": {
+      "type": "boolean",
+      "description": "Uses median normalization (instead of mean).",
+      "title": "Median normalization flag",
+      "default": false
+    },
+    "min_degrees": {
+      "type": "number",
+      "description": "Set min angle for search.",
+      "title": "Min degrees"
+    },
+    "multi_scale": {
+      "type": "number",
+      "description": "Use multi_scale scales for morphing.",
+      "title": "Multi scale"
+    },
+    "n_iterations": {
+      "type": "number",
+      "description": "Sets number of iterations.",
+      "title": "Number of iterations"
+    },
+    "n_angles": {
+      "type": "number",
+      "description": "Set number of angles/search per scale.",
+      "title": "Number of angles per scale"
+    },
+    "neighborhood_size": {
+      "type": "number",
+      "description": "Use neighborhood size specified.",
+      "title": "Neighborhood size"
+    },
+    "l_nlarea": {
+      "type": "number",
+      "description": "Sets l_nlarea parameter.",
+      "title": "NL Area"
+    },
+    "no_curv": {
+      "type": "boolean",
+      "description": "Do not use smoothwm curvature for final alignment.",
+      "title": "No curvature flag",
+      "default": false
+    },
+    "no_normalization": {
+      "type": "boolean",
+      "description": "Disables normalization.",
+      "title": "No normalization flag",
+      "default": false
+    },
+    "no_rotation": {
+      "type": "boolean",
+      "description": "Disables initial rigid alignment.",
+      "title": "No rotation flag",
+      "default": false
+    },
+    "no_sulc": {
+      "type": "boolean",
+      "description": "Disables initial sulc alignment.",
+      "title": "No sulc alignment flag",
+      "default": false
+    },
+    "num_surfaces": {
+      "type": "number",
+      "description": "Use specified number of surfaces/curvatures for alignment.",
+      "title": "Number of surfaces"
+    },
+    "overlay_corr": {
+      "type": "number",
+      "description": "Sets overlay correlation coefficient.",
+      "title": "Overlay correlation"
+    },
+    "max_passes": {
+      "type": "number",
+      "description": "Limit unfolding to specified passes.",
+      "title": "Max passes"
+    },
+    "l_parea": {
+      "type": "number",
+      "description": "Sets l_parea parameter.",
+      "title": "P Area"
+    },
+    "remove_negative": {
+      "type": "number",
+      "description": "Remove negative triangles with iterative smoothing if non-zero.",
+      "title": "Remove negative"
+    },
+    "reverse": {
+      "type": "boolean",
+      "description": "Mirror image reverse brain before morphing.",
+      "title": "Reverse flag",
+      "default": false
+    },
+    "rotate_values": {
+      "type": "string",
+      "description": "Rotates brain by specified angles.",
+      "title": "Rotation values"
+    },
+    "registration_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Extract rotational components from registration file.",
+      "title": "Registration file"
+    },
+    "scale": {
+      "type": "number",
+      "description": "Scales distances by the specified value.",
+      "title": "Scale"
+    },
+    "search_flag": {
+      "type": "boolean",
+      "description": "Integrate with binary search line minimization.",
+      "title": "Search flag",
+      "default": false
+    },
+    "spring_value": {
+      "type": "number",
+      "description": "Sets the spring parameter.",
+      "title": "Spring"
+    },
+    "tolerance": {
+      "type": "number",
+      "description": "Specifies tolerance.",
+      "title": "Tolerance"
+    },
+    "topology_flag": {
+      "type": "boolean",
+      "description": "Preserves the topology of positive area triangles.",
+      "title": "Topology flag",
+      "default": false
+    },
+    "vnum": {
+      "type": "string",
+      "description": "Set neighborhood parameters.",
+      "title": "Vnum distance values"
+    },
+    "vsmooth": {
+      "type": "boolean",
+      "description": "Use space/time varying smoothness weighting.",
+      "title": "Smoothness flag",
+      "default": false
+    },
+    "write_iterations": {
+      "type": "number",
+      "description": "Set number of write iterations.",
+      "title": "Write iterations"
+    },
+    "gdiag_no": {
+      "type": "number",
+      "description": "Supplies a vertex number for diagnostics.",
+      "title": "Vertex number"
+    },
+    "vector_flag": {
+      "type": "boolean",
+      "description": "Prints help for Multiframe mode, listing field names and numbers.",
+      "title": "Vector flag",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Set number of OMP threads.",
+      "title": "OMP threads"
+    },
+    "version_flag": {
+      "type": "boolean",
+      "description": "Print the version number.",
+      "title": "Version flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "surf_fname",
+    "target",
+    "out_fname"
+  ]
+}

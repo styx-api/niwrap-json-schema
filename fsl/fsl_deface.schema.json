@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_deface",
+  "description": "Tool to deface a structural T1w image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fsl_deface"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input T1w image",
+      "title": "Input file"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Output defaced T1w image",
+      "title": "Output file"
+    },
+    "cropped_defacing_flag": {
+      "type": "boolean",
+      "description": "Apply the defacing to the cropped image instead of the original image",
+      "title": "Cropped defacing flag",
+      "default": false
+    },
+    "defacing_mask": {
+      "type": "string",
+      "description": "Filename to save the defacing mask",
+      "title": "Defacing mask"
+    },
+    "cropped_struc": {
+      "type": "string",
+      "description": "Filename to save the new cropped struct",
+      "title": "Cropped struct"
+    },
+    "orig_to_std_mat": {
+      "type": "string",
+      "description": "Filename to save affine matrix from original struct to std",
+      "title": "Original to std matrix"
+    },
+    "orig_to_cropped_mat": {
+      "type": "string",
+      "description": "Filename to save affine matrix from original struct to cropped struct",
+      "title": "Original to cropped matrix"
+    },
+    "cropped_to_std_mat": {
+      "type": "string",
+      "description": "Filename to save affine matrix from cropped struct to std",
+      "title": "Cropped to std matrix"
+    },
+    "shift_nud": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Shift, in mm, x-, y- and z-directions, to shift face mask by (These matrices will only work if the input has been previously reoriented to std)",
+      "title": "Face mask shift vector"
+    },
+    "fractional_intensity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Fractional intensity for bet (0->1); default=0.5",
+      "title": "Fractional intensity for bet"
+    },
+    "bias_correct_flag": {
+      "type": "boolean",
+      "description": "Bias-correct the input image (with fast)",
+      "title": "Bias correct flag",
+      "default": false
+    },
+    "center_of_gravity": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Center-of-gravity for bet (voxels, not mm)",
+      "title": "Center of gravity vector"
+    },
+    "qc_images": {
+      "type": "string",
+      "description": "Generate 2 pngs to show how the defacing worked for QC purposes",
+      "title": "QC images base name"
+    }
+  },
+  "required": [
+    "@type",
+    "infile",
+    "outfile"
+  ]
+}

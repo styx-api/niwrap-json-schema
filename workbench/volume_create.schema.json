@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CREATE A BLANK VOLUME FILE",
+  "description": "Creates a volume file full of zeros.  Exactly one of -plumb or -sform must be specified.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume_create"
+    },
+    "i_dim": {
+      "type": "integer",
+      "description": "length of first dimension"
+    },
+    "j_dim": {
+      "type": "integer",
+      "description": "length of second dimension"
+    },
+    "k_dim": {
+      "type": "integer",
+      "description": "length of third dimension"
+    },
+    "volume_out": {
+      "type": "string",
+      "description": "the output volume"
+    },
+    "plumb": {
+      "type": "object",
+      "properties": {
+        "axis_order": {
+          "type": "string",
+          "description": "a string like 'XYZ' that specifies which index is along which spatial dimension"
+        },
+        "x_spacing": {
+          "type": "number",
+          "description": "change in x-coordinate from incrementing the relevant index"
+        },
+        "y_spacing": {
+          "type": "number",
+          "description": "change in y-coordinate from incrementing the relevant index"
+        },
+        "z_spacing": {
+          "type": "number",
+          "description": "change in z-coordinate from incrementing the relevant index"
+        },
+        "x_offset": {
+          "type": "number",
+          "description": "the x-coordinate of the center of the first voxel"
+        },
+        "y_offset": {
+          "type": "number",
+          "description": "the y-coordinate of the center of the first voxel"
+        },
+        "z_offset": {
+          "type": "number",
+          "description": "the z-coordinate of the center of the first voxel"
+        }
+      },
+      "required": [
+        "axis_order",
+        "x_spacing",
+        "y_spacing",
+        "z_spacing",
+        "x_offset",
+        "y_offset",
+        "z_offset"
+      ],
+      "description": "set via axis order and spacing/offset"
+    },
+    "sform": {
+      "type": "object",
+      "properties": {
+        "xi_spacing": {
+          "type": "number",
+          "description": "increase in x coordinate from incrementing the i index"
+        },
+        "xj_spacing": {
+          "type": "number",
+          "description": "increase in x coordinate from incrementing the j index"
+        },
+        "xk_spacing": {
+          "type": "number",
+          "description": "increase in x coordinate from incrementing the k index"
+        },
+        "x_offset": {
+          "type": "number",
+          "description": "x coordinate of first voxel"
+        },
+        "yi_spacing": {
+          "type": "number",
+          "description": "increase in y coordinate from incrementing the i index"
+        },
+        "yj_spacing": {
+          "type": "number",
+          "description": "increase in y coordinate from incrementing the j index"
+        },
+        "yk_spacing": {
+          "type": "number",
+          "description": "increase in y coordinate from incrementing the k index"
+        },
+        "y_offset": {
+          "type": "number",
+          "description": "y coordinate of first voxel"
+        },
+        "zi_spacing": {
+          "type": "number",
+          "description": "increase in z coordinate from incrementing the i index"
+        },
+        "zj_spacing": {
+          "type": "number",
+          "description": "increase in z coordinate from incrementing the j index"
+        },
+        "zk_spacing": {
+          "type": "number",
+          "description": "increase in z coordinate from incrementing the k index"
+        },
+        "z_offset": {
+          "type": "number",
+          "description": "z coordinate of first voxel"
+        }
+      },
+      "required": [
+        "xi_spacing",
+        "xj_spacing",
+        "xk_spacing",
+        "x_offset",
+        "yi_spacing",
+        "yj_spacing",
+        "yk_spacing",
+        "y_offset",
+        "zi_spacing",
+        "zj_spacing",
+        "zk_spacing",
+        "z_offset"
+      ],
+      "description": "set via a nifti sform"
+    }
+  },
+  "required": [
+    "@type",
+    "i_dim",
+    "j_dim",
+    "k_dim",
+    "volume_out"
+  ]
+}

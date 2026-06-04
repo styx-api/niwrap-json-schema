@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "groupstats",
+  "description": "A script for comprehensive group analysis on both maps and ROI results within FreeSurfer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/groupstats"
+    },
+    "outdir": {
+      "type": "string",
+      "description": "Output folder",
+      "title": "Output directory"
+    },
+    "group_fsgd": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the FSGD file for the group",
+      "title": "Group FSGD file"
+    },
+    "subjectfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Subject list file",
+      "title": "Subject file"
+    },
+    "fwhm": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify smoothing level(s)",
+      "title": "FWHM smoothing levels"
+    },
+    "subject_dir": {
+      "type": "string",
+      "description": "Subject directory",
+      "title": "Subjects directory"
+    },
+    "mapname": {
+      "type": "string",
+      "description": "Use the given map name",
+      "title": "Map name"
+    },
+    "srcsurfreg": {
+      "type": "string",
+      "description": "Source surface registration (default is sphere.reg)",
+      "title": "Source surface registration"
+    },
+    "no_maps": {
+      "type": "boolean",
+      "description": "Only analyze ROI data",
+      "title": "No maps option",
+      "default": false
+    },
+    "lh_only": {
+      "type": "boolean",
+      "description": "Only analyze left hemisphere",
+      "title": "Left hemisphere only",
+      "default": false
+    },
+    "rh_only": {
+      "type": "boolean",
+      "description": "Only analyze right hemisphere",
+      "title": "Right hemisphere only",
+      "default": false
+    },
+    "no_aparcstats": {
+      "type": "boolean",
+      "description": "Do not compute aparcstats",
+      "title": "No aparcstats",
+      "default": false
+    },
+    "no_asegstats": {
+      "type": "boolean",
+      "description": "Do not compute asegstats",
+      "title": "No asegstats",
+      "default": false
+    },
+    "no_wparcstats": {
+      "type": "boolean",
+      "description": "Do not compute wmparcstats",
+      "title": "No wmparcstats",
+      "default": false
+    },
+    "no_stats": {
+      "type": "boolean",
+      "description": "Do not perform any ROI stats",
+      "title": "No ROI stats",
+      "default": false
+    },
+    "new": {
+      "type": "boolean",
+      "description": "Append .new.mris_make_surfaces to map names",
+      "title": "New map names",
+      "default": false
+    },
+    "base": {
+      "type": "boolean",
+      "description": "Sets measure thickness area volume curvature sulcus (excludes white-gray percentage)",
+      "title": "Base measures option",
+      "default": false
+    },
+    "keep53": {
+      "type": "boolean",
+      "description": "Keep 5.3 aseg names (e.g., Thalamus-Proper)",
+      "title": "Keep 5.3 aseg names",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "outdir"
+  ]
+}

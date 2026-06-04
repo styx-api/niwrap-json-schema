@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "find_variance_lines.tcsh",
+  "description": "Look for bars of high variance that might suggest scanner interference in EPI datasets.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/find_variance_lines.tcsh"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input EPI datasets",
+      "title": "Input Files"
+    },
+    "mask": {
+      "type": "string",
+      "description": "Mask for computations (default=AUTO)",
+      "title": "Mask"
+    },
+    "min_cvox": {
+      "type": "integer",
+      "description": "Minimum voxels for valid mask column (default=5)",
+      "title": "Min Voxels"
+    },
+    "min_nt": {
+      "type": "integer",
+      "description": "Minimum number of time points required (default=10)",
+      "title": "Min Time Points"
+    },
+    "nerode": {
+      "type": "integer",
+      "description": "How much to erode input or auto-mask (default=0)",
+      "title": "Erode Levels"
+    },
+    "nfirst": {
+      "type": "integer",
+      "description": "Discard the first VAL time points (default=0)",
+      "title": "Discard Initial Time Points"
+    },
+    "percentile": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 99,
+      "description": "Percentile of variance values to scale to (default=90)",
+      "title": "Variance Percentile"
+    },
+    "polort": {
+      "type": "string",
+      "description": "Polynomial detrending degree (default=A)",
+      "title": "Polynomial Detrending"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Name of the output directory (default=vlines.result)",
+      "title": "Output Directory"
+    },
+    "do_clean": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Do we clean up a little? (default=1)",
+      "title": "Clean Up"
+    },
+    "do_img": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Make vline images? (default=1)",
+      "title": "Generate Images"
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Run script with shell 'echo' set (default=no)",
+      "title": "Shell Echo",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show this help",
+      "title": "Help",
+      "default": false
+    },
+    "hist": {
+      "type": "boolean",
+      "description": "Show the version history",
+      "title": "History",
+      "default": false
+    },
+    "ver": {
+      "type": "boolean",
+      "description": "Show the current version",
+      "title": "Version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

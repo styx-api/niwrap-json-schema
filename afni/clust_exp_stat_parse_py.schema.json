@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ClustExp_StatParse.py",
+  "description": "Parser for statistical data sets and subject data sets, generating several outputs for further analysis.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/ClustExp_StatParse.py"
+    },
+    "statdset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Statistics dataset.",
+      "title": "Statistics dataset"
+    },
+    "meanbrik": {
+      "type": "number",
+      "description": "Mean subbrik (integer >= 0).",
+      "title": "Mean subbrik"
+    },
+    "threshbrik": {
+      "type": "number",
+      "description": "Threshold subbrik. Might be the same as MeanBrik (integer >= 0).",
+      "title": "Threshold subbrik"
+    },
+    "subjdset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Labeled dataset with all subjects (from @ClustExp_CatLab).",
+      "title": "Labeled dataset with all subjects"
+    },
+    "subjtable": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Table with subject labels and input datasets.",
+      "title": "Table with subject labels and input datasets"
+    },
+    "master": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Master data set for underlay.",
+      "title": "Master data set for underlay"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Name for output (no path).",
+      "title": "Output Prefix"
+    },
+    "pval": {
+      "type": "number",
+      "description": "Uncorrected p value for thresholding.",
+      "title": "Uncorrected p value for thresholding"
+    },
+    "minvox": {
+      "type": "number",
+      "description": "Minimum voxels in cluster.",
+      "title": "Minimum voxels in cluster"
+    },
+    "atlas": {
+      "type": "string",
+      "description": "Atlas name for lookup (list at: whereami -help).",
+      "title": "Atlas name for lookup"
+    },
+    "session": {
+      "type": "string",
+      "description": "Output parent folder if you don't want the current working directory.",
+      "title": "Output parent folder"
+    },
+    "noshiny": {
+      "type": "boolean",
+      "description": "Do not create shiny app.",
+      "title": "Do not create shiny app",
+      "default": false
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Remove previous folder with same PREFIX.",
+      "title": "Remove previous folder with same PREFIX",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "statdset",
+    "meanbrik",
+    "threshbrik",
+    "subjdset",
+    "subjtable",
+    "master"
+  ]
+}

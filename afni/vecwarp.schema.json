@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Vecwarp",
+  "description": "Transforms (warps) a list of 3-vectors into another list of 3-vectors according to the specified options.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/Vecwarp"
+    },
+    "apar": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use the AFNI dataset 'aaa' as the source of the transformation; this dataset must be in +acpc or +tlrc coordinates, and must contain the attributes WARP_TYPE and WARP_DATA which describe the forward transformation from +orig coordinates to the 'aaa' coordinate system.",
+      "title": "AFNI Dataset"
+    },
+    "matvec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read an affine transformation matrix-vector from file 'mmm', which must be in the specified format.",
+      "title": "Affine Matrix-Vector File"
+    },
+    "forward": {
+      "type": "boolean",
+      "description": "To apply the forward transformation. If neither -forward nor -backward is given, -forward is the default.",
+      "title": "Forward Transformation Flag",
+      "default": false
+    },
+    "backward": {
+      "type": "boolean",
+      "description": "To apply the backward transformation.",
+      "title": "Backward Transformation Flag",
+      "default": false
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read input 3-vectors from the file 'iii' (from stdin if 'iii' is '-' or the -input option is missing).",
+      "title": "Input File"
+    },
+    "output": {
+      "type": "string",
+      "description": "Write the output to file 'ooo' (to stdout if 'ooo' is '-', or if the -output option is missing).",
+      "title": "Output File"
+    },
+    "force": {
+      "type": "boolean",
+      "description": "If the output file already exists, use -force to overwrite it. If -force is used, it must come before -output on the command line.",
+      "title": "Force Overwrite Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

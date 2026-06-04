@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dToutcount",
+  "description": "Calculates the number of 'outliers' in a 3D+time dataset at each time point.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dToutcount"
+    },
+    "input_dataset": {
+      "type": "string",
+      "description": "Input 3D+time dataset (e.g. dataset+orig)",
+      "title": "Input dataset"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix of the new dataset saved with the outlier Q values, applicable with the -save option",
+      "title": "Output prefix"
+    },
+    "mask_dataset": {
+      "type": "string",
+      "description": "Only count voxels in the provided mask dataset",
+      "title": "Mask dataset"
+    },
+    "q_threshold": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Use 'q' instead of 0.001 in the calculation of alpha. Must be within range 0 < q < 1.",
+      "title": "Q threshold"
+    },
+    "autoclip": {
+      "type": "boolean",
+      "description": "Clip off 'small' voxels (as in 3dClipLevel). Cannot use with -mask.",
+      "title": "Autoclip flag",
+      "default": false
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Automatically mask the dataset. Cannot use with -mask.",
+      "title": "Automask flag",
+      "default": false
+    },
+    "fraction": {
+      "type": "boolean",
+      "description": "Output the fraction of (masked) voxels which are outliers at each time point, instead of the count.",
+      "title": "Fraction flag",
+      "default": false
+    },
+    "range": {
+      "type": "boolean",
+      "description": "Print out median+3.5*MAD of outlier count with each time point.",
+      "title": "Range flag",
+      "default": false
+    },
+    "polort_order": {
+      "type": "number",
+      "description": "Detrend each voxel time series with polynomials of order 'nn'. Default value is 0, which removes the median.",
+      "title": "Polort order"
+    },
+    "legendre": {
+      "type": "boolean",
+      "description": "Use Legendre polynomials for detrending (also allows -polort > 3).",
+      "title": "Legendre flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTshift",
+  "description": "Shifts voxel time series from input so that separate slices are aligned to the same temporal origin.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTshift"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print lots of messages while program runs.",
+      "title": "Verbose",
+      "default": false
+    },
+    "tr": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "The TR value. Must be greater than 0.",
+          "title": "TR Value"
+        },
+        "unit": {
+          "enum": [
+            "s",
+            "ms",
+            "Hz"
+          ],
+          "description": "Unit for the TR.",
+          "title": "TR Unit"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Manually set the TR instead of using the value in the dataset header. You can attach a suffix for units.",
+      "title": "TR"
+    },
+    "shift_strategy": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "align_to_tzero"
+            },
+            "tzero": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "@type",
+            "tzero"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "align_to_slice"
+            },
+            "slice_index": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "@type",
+            "slice_index"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "align_voxel_wise"
+            },
+            "voxshift_file": {
+              "type": "string",
+              "x-styx-type": "path"
+            }
+          },
+          "required": [
+            "@type",
+            "voxshift_file"
+          ]
+        }
+      ],
+      "description": "How to determine the temporal alignment target. Default is the average of the tpattern values.",
+      "title": "Shifting Strategy"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output file name. Default is 'tshift'.",
+      "title": "Prefix"
+    },
+    "ignore": {
+      "type": "integer",
+      "description": "Ignore the first 'ii' points. These values will be unchanged in the output and will not be used in detrending or time shifting. Default is 0.",
+      "title": "Ignore Initial Points"
+    },
+    "detrend_strategy": {
+      "enum": [
+        "-rlt",
+        "-rlt+",
+        "-no_detrend"
+      ],
+      "description": "How to handle the mean and linear trend during shifting. Default is to remove both before shifting and add both back after.",
+      "title": "Detrending Strategy"
+    },
+    "interp": {
+      "enum": [
+        "Fourier",
+        "linear",
+        "cubic",
+        "quintic",
+        "heptic",
+        "wsinc5",
+        "wsinc9"
+      ],
+      "description": "Interpolation method. Fourier (default) is most accurate but slowest. Linear is least accurate. Polynomials: cubic, quintic, heptic. Weighted sinc: wsinc5, wsinc9.",
+      "title": "Interpolation Method"
+    },
+    "tpattern": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "tpattern_mode_string"
+            },
+            "tpattern_string": {
+              "enum": [
+                "alt+z",
+                "altplus",
+                "alt+z2",
+                "alt-z",
+                "altminus",
+                "alt-z2",
+                "seq+z",
+                "seqplus",
+                "seq-z",
+                "seqminus"
+              ]
+            }
+          },
+          "required": [
+            "@type",
+            "tpattern_string"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "tpattern_mode_file"
+            },
+            "tpattern_file": {
+              "type": "string",
+              "x-styx-type": "path"
+            }
+          },
+          "required": [
+            "@type",
+            "tpattern_file"
+          ]
+        }
+      ],
+      "description": "Use specified slice time pattern rather than the one in the dataset header.",
+      "title": "Slice Timing Pattern"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset to 3dTshift. Can include a sub-brick selector (e.g., prefix+orig[4..$]).",
+      "title": "Input dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

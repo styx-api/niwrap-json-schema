@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "iMath",
+  "description": "iMath is a tool for performing various image mathematical operations on medical images, specifically supporting operations on 2D, 3D, and 4D data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/iMath"
+    },
+    "image_dimension": {
+      "enum": [
+        2,
+        3,
+        4
+      ],
+      "description": "Dimensionality of the image, either 2, 3, or 4.",
+      "title": "Image Dimension"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Path for the output image file.",
+      "title": "Output Image"
+    },
+    "operations": {
+      "type": "string",
+      "description": "Operations to be performed along with parameters, e.g., GetLargestComponent, MC for Closing, etc.",
+      "title": "Operations"
+    },
+    "image1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First input image file.",
+      "title": "Input Image 1"
+    },
+    "image2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second input image file, if required by operation.",
+      "title": "Input Image 2"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "output_image",
+    "operations",
+    "image1"
+  ]
+}

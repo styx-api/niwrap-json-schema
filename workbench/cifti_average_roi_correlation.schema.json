@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CORRELATE ROI AVERAGE WITH ALL ROWS THEN AVERAGE ACROSS SUBJECTS",
+  "description": "Averages rows for each map of the ROI(s), takes the correlation of each ROI average to the rest of the rows in the same file, applies the fisher small z transform, then averages the results across all files.  ROIs are always treated as weighting functions, including negative values.  For efficiency, ensure that everything that is not intended to be used is zero in the ROI map.  If -cifti-roi is specified, -left-roi, -right-roi, -cerebellum-roi, and -vol-roi must not be specified.  If multiple non-cifti ROI files are specified, they must have the same number of columns.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_average_roi_correlation"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "output cifti file"
+    },
+    "cifti_roi": {
+      "type": "object",
+      "properties": {
+        "roi_cifti": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the roi cifti file"
+        },
+        "in_memory": {
+          "type": "boolean",
+          "description": "cache the roi in memory so that it isn't re-read for each input cifti",
+          "default": false
+        }
+      },
+      "required": [
+        "roi_cifti"
+      ],
+      "description": "cifti file containing combined weights"
+    },
+    "left_roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "weights to use for left hempsphere"
+    },
+    "right_roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "weights to use for right hempsphere"
+    },
+    "cerebellum_roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "weights to use for cerebellum surface"
+    },
+    "vol_roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "voxel weights to use"
+    },
+    "left_area_surf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify the left surface for vertex area correction"
+    },
+    "right_area_surf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify the right surface for vertex area correction"
+    },
+    "cerebellum_area_surf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify the cerebellum surface for vertex area correction"
+    },
+    "cifti": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "specify an input cifti file"
+    }
+  },
+  "required": [
+    "@type",
+    "cifti_out",
+    "cifti"
+  ]
+}

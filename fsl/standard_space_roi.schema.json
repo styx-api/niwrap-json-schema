@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "standard_space_roi",
+  "description": "Masks input and/or reduces its FOV based on a standard space image or mask, transformed into the space of the input image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/standard_space_roi"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image",
+      "title": "Input file"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Output image",
+      "title": "Output file"
+    },
+    "mask_fov_flag": {
+      "type": "boolean",
+      "description": "Mask output using transformed standard space FOV",
+      "title": "Mask FOV",
+      "default": false
+    },
+    "mask_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask output using transformed standard space mask",
+      "title": "Mask using standard space mask"
+    },
+    "mask_none_flag": {
+      "type": "boolean",
+      "description": "Do not mask output",
+      "title": "Do not mask output",
+      "default": false
+    },
+    "roi_fov_flag": {
+      "type": "boolean",
+      "description": "Cut down input FOV using bounding box of the transformed standard space FOV",
+      "title": "Cut down FOV using standard space bounding box",
+      "default": false
+    },
+    "roi_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Cut down input FOV using nonbackground bounding box of the transformed standard space mask",
+      "title": "Cut down FOV using standard space mask"
+    },
+    "roi_none_flag": {
+      "type": "boolean",
+      "description": "Do not cut down input FOV",
+      "title": "Do not cut down input FOV",
+      "default": false
+    },
+    "ss_ref": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Standard space reference image to use (default: /usr/local/fsl/data/standard/MNI152_T1)",
+      "title": "Standard space reference image"
+    },
+    "alt_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alternative input image to apply the ROI to (instead of the one used to register to the reference)",
+      "title": "Alternative input image"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Debug mode (don't delete intermediate files)",
+      "title": "Debug flag",
+      "default": false
+    },
+    "bet_premask_flag": {
+      "type": "boolean",
+      "description": "Equivalent to: -maskMASK /usr/local/fsl/data/standard/MNI152_T1_2mm_brain_mask_dil -roiNONE",
+      "title": "BET pre-mask",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "infile",
+    "outfile"
+  ]
+}

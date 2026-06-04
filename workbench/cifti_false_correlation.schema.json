@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "COMPARE CORRELATION LOCALLY AND ACROSS/THROUGH SULCI/GYRI",
+  "description": "For each vertex, compute the average correlation within a range of geodesic distances that don't cross a sulcus/gyrus, and the correlation to the closest vertex crossing a sulcus/gyrus.  A vertex is considered to cross a sulcus/gyrus if the 3D distance is less than a third of the geodesic distance.  The output file contains the ratio between these correlations, and some additional maps to help explain the ratio.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_false_correlation"
+    },
+    "cifti_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the cifti file to use for correlation"
+    },
+    "3_d_dist": {
+      "type": "number",
+      "description": "maximum 3D distance to check around each vertex"
+    },
+    "geo_outer": {
+      "type": "number",
+      "description": "maximum geodesic distance to use for neighboring correlation"
+    },
+    "geo_inner": {
+      "type": "number",
+      "description": "minimum geodesic distance to use for neighboring correlation"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "the output cifti dscalar file"
+    },
+    "left_surface": {
+      "type": "object",
+      "properties": {
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the left surface file"
+        },
+        "dump_text": {
+          "type": "string",
+          "description": "dump the raw measures used to a text file"
+        }
+      },
+      "required": [
+        "surface"
+      ],
+      "description": "specify the left surface to use"
+    },
+    "right_surface": {
+      "type": "object",
+      "properties": {
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the right surface file"
+        },
+        "dump_text": {
+          "type": "string",
+          "description": "dump the raw measures used to a text file"
+        }
+      },
+      "required": [
+        "surface"
+      ],
+      "description": "specify the right surface to use"
+    },
+    "cerebellum_surface": {
+      "type": "object",
+      "properties": {
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the cerebellum surface file"
+        },
+        "dump_text": {
+          "type": "string",
+          "description": "dump the raw measures used to a text file"
+        }
+      },
+      "required": [
+        "surface"
+      ],
+      "description": "specify the cerebellum surface to use"
+    }
+  },
+  "required": [
+    "@type",
+    "cifti_in",
+    "3_d_dist",
+    "geo_outer",
+    "geo_inner",
+    "cifti_out"
+  ]
+}

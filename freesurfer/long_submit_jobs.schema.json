@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "long_submit_jobs",
+  "description": "Submits longitudinal processing jobs to the NMR cluster (seychelles or launchpad).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/long_submit_jobs"
+    },
+    "qdec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "QDEC table file specifying the subjects and time points.",
+      "title": "QDEC Table File"
+    },
+    "cdir": {
+      "type": "string",
+      "description": "Directory for cross-sectional subjects (inherited by base and long).",
+      "title": "Cross Subjects Directory"
+    },
+    "bdir": {
+      "type": "string",
+      "description": "Directory for base runs (default: inherit from cross).",
+      "title": "Base Subjects Directory"
+    },
+    "ldir": {
+      "type": "string",
+      "description": "Directory for longitudinal runs (default: inherit from base).",
+      "title": "Longitudinal Subjects Directory"
+    },
+    "scriptsdir": {
+      "type": "string",
+      "description": "Location to save submitted scripts (default: <cdir,bdir,ldir>/scripts_submitted).",
+      "title": "Scripts Directory"
+    },
+    "cross": {
+      "type": "boolean",
+      "description": "Process cross-sectional streams.",
+      "title": "Cross Sectionals",
+      "default": false
+    },
+    "base": {
+      "type": "boolean",
+      "description": "Process base streams.",
+      "title": "Base",
+      "default": false
+    },
+    "long": {
+      "type": "boolean",
+      "description": "Process longitudinal streams.",
+      "title": "Longitudinals",
+      "default": false
+    },
+    "cflags": {
+      "type": "string",
+      "description": "Manual flags for cross processing (e.g., '-all -cw256').",
+      "title": "Cross Flags"
+    },
+    "bflags": {
+      "type": "string",
+      "description": "Manual flags for base processing (default: '-all').",
+      "title": "Base Flags"
+    },
+    "lflags": {
+      "type": "string",
+      "description": "Manual flags for long processing (default: '-all').",
+      "title": "Long Flags"
+    },
+    "affine": {
+      "type": "boolean",
+      "description": "Use affine registration for base.",
+      "title": "Affine Registration",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "Force reprocessing of jobs even if marked as done.",
+      "title": "Force Reprocessing",
+      "default": false
+    },
+    "simulate": {
+      "type": "boolean",
+      "description": "Simulate submission only, without executing.",
+      "title": "Simulate Submission",
+      "default": false
+    },
+    "simfiles": {
+      "type": "boolean",
+      "description": "Simulate command file creation only, without executing.",
+      "title": "Simulate Command Files",
+      "default": false
+    },
+    "check": {
+      "type": "boolean",
+      "description": "Check if all longitudinal processing is complete.",
+      "title": "Check Completion",
+      "default": false
+    },
+    "pause": {
+      "type": "number",
+      "description": "Pause duration (in seconds) between submissions (default: 13).",
+      "title": "Pause Between Submissions"
+    },
+    "max": {
+      "type": "number",
+      "description": "Maximum number of jobs per user (default: 100).",
+      "title": "Max Jobs"
+    },
+    "queue": {
+      "type": "string",
+      "description": "Queue to submit jobs.",
+      "title": "Queue"
+    },
+    "cmem": {
+      "type": "number",
+      "description": "RAM (in GB) requested for cross (default: 7).",
+      "title": "Cross RAM"
+    },
+    "bmem": {
+      "type": "number",
+      "description": "RAM (in GB) requested for base (default: 7).",
+      "title": "Base RAM"
+    },
+    "lmem": {
+      "type": "number",
+      "description": "RAM (in GB) requested for long (default: 7).",
+      "title": "Long RAM"
+    },
+    "cnodes": {
+      "type": "number",
+      "description": "Number of nodes for cross runs (default: 1).",
+      "title": "Cross Nodes"
+    },
+    "bnodes": {
+      "type": "number",
+      "description": "Number of nodes for base runs (default: 1).",
+      "title": "Base Nodes"
+    },
+    "lnodes": {
+      "type": "number",
+      "description": "Number of nodes for long runs (default: 1).",
+      "title": "Long Nodes"
+    }
+  },
+  "required": [
+    "@type",
+    "qdec",
+    "cdir"
+  ]
+}

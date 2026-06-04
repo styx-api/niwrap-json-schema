@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "slicer",
+  "description": "the main program which takes in one or two input images and produces as many separate output pictures of slices as are requested. The basic output options (-x, -y and -z) produce single slice pictures. The more advanced options (-a, -A and -S) produce montages of various slices. slicer outputs PPM format pictures",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/slicer"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume.",
+      "title": "input file"
+    },
+    "overlay_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Overlay volume.",
+      "title": "Overlay file "
+    },
+    "label_slices": {
+      "type": "boolean",
+      "description": "Label slices with slice number.",
+      "title": "Label slices",
+      "default": false
+    },
+    "colour_map": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use different colour map from that specified in the header.",
+      "title": "Colour map"
+    },
+    "scaling": {
+      "type": "number",
+      "description": "Image scale.",
+      "title": "Scaling"
+    },
+    "intensity_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify intensity min and max for display range.",
+      "title": "Intensity range"
+    },
+    "threshold_edges": {
+      "type": "number",
+      "description": "Use specified threshold for edges (if >0 use this proportion of max-min, if <0, use the absolute value)",
+      "title": "Threshold edges"
+    },
+    "dither_edges": {
+      "type": "boolean",
+      "description": "Produce semi-transparent (dithered) edges.",
+      "title": "Dither edges",
+      "default": false
+    },
+    "nearest_neighbour": {
+      "type": "boolean",
+      "description": "Use nearest neighbor interpolation for output.",
+      "title": "Nearest neighbour",
+      "default": false
+    },
+    "show_orientation": {
+      "type": "boolean",
+      "description": "Do not put left-right labels in output",
+      "title": "Show orientation",
+      "default": false
+    },
+    "red_dot_marker": {
+      "type": "boolean",
+      "description": "Add a red dot marker to topright of image.",
+      "title": "Red dot marker",
+      "default": false
+    },
+    "output_single_image": {
+      "type": "string",
+      "description": "Output mid-sagittal, -coronal, and -axial slices into one image.",
+      "title": "Output single image"
+    },
+    "output_sagittal_slice": {
+      "type": "boolean",
+      "description": "Output sagittal slice (if slice >0, it is a fraction of image dimension, if <0, it is absolute slice number).",
+      "title": "Output sagittal slice",
+      "default": false
+    },
+    "output_sagittal_slice_fname": {
+      "type": "string",
+      "description": "Output file name sagittal slice.",
+      "title": "Output sagittal slice file name"
+    },
+    "output_axial_slice": {
+      "type": "boolean",
+      "description": "Output axial slice (if slice >0, it is a fraction of image dimension, if <0, it is absolute slice number).",
+      "title": "Output axial slice",
+      "default": false
+    },
+    "output_axial_slice_fname": {
+      "type": "string",
+      "description": "Output file name axial slice.",
+      "title": "Output axial slice file name"
+    },
+    "output_coronal_slice": {
+      "type": "boolean",
+      "description": "Output coronal slice (if slice >0, it is a fraction of image dimension, if <0, it is absolute slice number).",
+      "title": "Output coronal slice",
+      "default": false
+    },
+    "output_coronal_slice_fname": {
+      "type": "string",
+      "description": "Output file name coronal slice.",
+      "title": "Output coronal slice file name"
+    },
+    "output_all_axial_slices": {
+      "type": "boolean",
+      "description": "Maximum width of image of all axial slices.",
+      "title": "Output all axial slices width",
+      "default": false
+    },
+    "output_all_axial_slices_fname": {
+      "type": "string",
+      "description": "File name of all axial slice output image.",
+      "title": "Output all axial slices image file name"
+    },
+    "output_sample_axial_slices": {
+      "type": "boolean",
+      "description": "Ouput every <sample>'th axial slice.",
+      "title": "Output every sample axial slices",
+      "default": false
+    },
+    "output_sample_axial_slices_width": {
+      "type": "string",
+      "description": "Width of every <sample'th> axial slice output image.",
+      "title": "Output all axial slices image width"
+    },
+    "output_sample_axial_slices_fname": {
+      "type": "string",
+      "description": "File name of every <sample'th> axial slice output image.",
+      "title": "Output all axial slices image file name"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

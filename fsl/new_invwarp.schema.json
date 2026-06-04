@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "new_invwarp",
+  "description": "Inverse warp tool from FSL suite",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/new_invwarp"
+    },
+    "warpvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for warp/shiftmap transform (volume)",
+      "title": "Warp volume file"
+    },
+    "outvol": {
+      "type": "string",
+      "description": "Filename for output (inverse warped) image",
+      "title": "Output volume file"
+    },
+    "refvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for new reference image, i.e., what was originally the input image (determines inverse warpvol's FOV and pixdims)",
+      "title": "Reference volume file"
+    },
+    "relflag": {
+      "type": "boolean",
+      "description": "Use relative warp convention: x' = x + w(x)",
+      "title": "Relative warp convention flag",
+      "default": false
+    },
+    "absflag": {
+      "type": "boolean",
+      "description": "Use absolute warp convention (default): x' = w(x)",
+      "title": "Absolute warp convention flag",
+      "default": false
+    },
+    "noconstraintflag": {
+      "type": "boolean",
+      "description": "Do not apply the Jacobian constraint",
+      "title": "No Jacobian constraint flag",
+      "default": false
+    },
+    "jmin": {
+      "type": "number",
+      "description": "Minimum acceptable Jacobian value for constraint (default 0.01)",
+      "title": "Minimum Jacobian value"
+    },
+    "jmax": {
+      "type": "number",
+      "description": "Maximum acceptable Jacobian value for constraint (default 100.0)",
+      "title": "Maximum Jacobian value"
+    },
+    "debugflag": {
+      "type": "boolean",
+      "description": "Turn on debugging output",
+      "title": "Debugging flag",
+      "default": false
+    },
+    "verboseflag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "warpvol",
+    "outvol",
+    "refvol"
+  ]
+}

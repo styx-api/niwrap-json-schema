@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "film_gls",
+  "description": "General Linear Model fitting with autocorrelation in FMRI",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/film_gls"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input data file (NIFTI for volumetric, GIFTI for surface)",
+      "title": "Input file"
+    },
+    "ac_flag": {
+      "type": "boolean",
+      "description": "Perform autocorrelation estimation only",
+      "title": "Autocorrelation estimation only",
+      "default": false
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Initial threshold to apply to input data",
+      "title": "Initial threshold"
+    },
+    "ar_flag": {
+      "type": "boolean",
+      "description": "Fits autoregressive model - default is to use tukey with M=sqrt(numvols)",
+      "title": "Autoregressive model flag",
+      "default": false
+    },
+    "noest_flag": {
+      "type": "boolean",
+      "description": "Do not estimate autocorrelations",
+      "title": "No autocorrelation estimation flag",
+      "default": false
+    },
+    "outputPW_flag": {
+      "type": "boolean",
+      "description": "Output prewhitened data and average design matrix",
+      "title": "Output PW data",
+      "default": false
+    },
+    "pava_flag": {
+      "type": "boolean",
+      "description": "Estimates autocorrelation using PAVA - default is to use tukey with M=sqrt(numvols)",
+      "title": "PAVA autocorrelation estimation",
+      "default": false
+    },
+    "sa_flag": {
+      "type": "boolean",
+      "description": "Smooths autocorrelation estimates",
+      "title": "Smooth autocorrelation estimates flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Outputs full data",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "results_dir": {
+      "type": "string",
+      "description": "Directory name to store results in, default is results",
+      "title": "Results directory"
+    },
+    "mode": {
+      "type": "string",
+      "description": "Analysis mode, options are volumetric (default) or surface. Caution: surface-based functionality is still BETA",
+      "title": "Analysis mode"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface for autocorrelation smoothing in surface-based analyses",
+      "title": "Input surface file"
+    },
+    "mean_func_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Re-estimate mean_func baseline - for use with perfusion subtraction",
+      "title": "Mean function file"
+    },
+    "min_timepoint_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Minimum timepoint file",
+      "title": "Minimum timepoint file"
+    },
+    "paradigm_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Paradigm file",
+      "title": "Paradigm file"
+    },
+    "t_contrasts_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T-contrasts file",
+      "title": "T-contrasts file"
+    },
+    "f_contrasts_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "F-contrasts file",
+      "title": "F-contrasts file"
+    },
+    "epith": {
+      "type": "number",
+      "description": "SUSAN brightness threshold for volumetric analysis/smoothing sigma for surface analysis",
+      "title": "SUSAN brightness threshold"
+    },
+    "ms": {
+      "type": "number",
+      "description": "SUSAN mask size for volumetric analysis/smoothing extent for surface analysis",
+      "title": "SUSAN mask size"
+    },
+    "tukey": {
+      "type": "number",
+      "description": "Uses tukey window to estimate autocorrelation with window size num - default is to use tukey with M=sqrt(numvols)",
+      "title": "Tukey window size"
+    },
+    "mt": {
+      "type": "number",
+      "description": "Uses multitapering with slepian tapers and num is the time-bandwidth product - default is to use tukey with M=sqrt(numvols)",
+      "title": "Multitapering time-bandwidth product"
+    },
+    "ven": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of numbers indicating voxelwise EVs position in the design matrix (list order corresponds to files in vxf option). Caution BETA option, only use with volumetric analysis.",
+      "title": "Voxelwise EVs positions"
+    },
+    "vef": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of 4D images containing voxelwise EVs (list order corresponds to numbers in vxl option). Caution BETA option, only use with volumetric analysis.",
+      "title": "Voxelwise EVs files"
+    }
+  },
+  "required": [
+    "@type",
+    "infile"
+  ]
+}

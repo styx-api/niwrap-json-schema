@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "3dTfitter",
+  "description": "* At each voxel, assembles and solves a set of linear equations.\n ++ The matrix at each voxel may be the same or may be different.\n ++ This flexibility (for voxel-wise regressors) is one feature\n    that makes 3dTfitter different from 3dDeconvolve.\n ++ Another distinguishing feature is that 3dTfitter allows for\n    L2, L1, and L2+L1 (LASSO) regression solvers, and allows you\n    to impose sign constraints on the solution parameters.",
+  "properties": {
+    "root": {
+      "type": "string",
+      "x-styx-type": "path"
+    },
+    "output_prefix": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-styx-type": "path",
+      "description": "Output dataset for LHS parameters."
+    },
+    "fitted_time_series": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-styx-type": "path",
+      "description": "Output fitted time series dataset."
+    },
+    "error_sums": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-styx-type": "path",
+      "description": "Output error sums dataset."
+    }
+  },
+  "required": [
+    "root",
+    "output_prefix",
+    "fitted_time_series",
+    "error_sums"
+  ]
+}

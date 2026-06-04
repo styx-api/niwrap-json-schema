@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "float_scan",
+  "description": "Scans the input file of IEEE floating point numbers for illegal values: infinities and not-a-number (NaN) values.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/float_scan"
+    },
+    "fix_illegal_values": {
+      "type": "boolean",
+      "description": "Writes a copy of the input file to stdout, replacing illegal values with 0.",
+      "title": "Fix Illegal Values",
+      "default": false
+    },
+    "verbose_mode": {
+      "type": "boolean",
+      "description": "Verbose mode: print out index of each illegal value.",
+      "title": "Verbose Mode",
+      "default": false
+    },
+    "skip_count": {
+      "type": "integer",
+      "description": "Skip the first n floating point locations (i.e., the first 4*n bytes) in the file",
+      "title": "Skip Initial Locations"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file containing IEEE floating point numbers",
+      "title": "Input Filename"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file"
+  ]
+}

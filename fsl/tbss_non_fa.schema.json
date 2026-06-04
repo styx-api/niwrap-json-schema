@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tbss_non_FA",
+  "description": "TBSS processing for non-FA images",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/tbss_non_FA"
+    },
+    "concat_auto": {
+      "type": "boolean",
+      "description": "Auto-choose: single slices -> volume, volumes -> 4D (time series).",
+      "title": "Auto-choose concatenation",
+      "default": false
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output file for merged images.",
+      "title": "Output file"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Images to concatenate.",
+      "title": "Input files"
+    },
+    "concat_x": {
+      "type": "boolean",
+      "description": "Concatenate images in the x direction.",
+      "title": "Concatenate in x direction",
+      "default": false
+    },
+    "concat_y": {
+      "type": "boolean",
+      "description": "Concatenate images in the y direction.",
+      "title": "Concatenate in y direction",
+      "default": false
+    },
+    "concat_z": {
+      "type": "boolean",
+      "description": "Concatenate images in the z direction.",
+      "title": "Concatenate in z direction",
+      "default": false
+    },
+    "concat_t": {
+      "type": "boolean",
+      "description": "Concatenate images in time.",
+      "title": "Concatenate in time",
+      "default": false
+    },
+    "concat_tr": {
+      "type": "number",
+      "description": "Concatenate images in time and set the output image TR (repetition time) to the final option value.",
+      "title": "Concatenate in time with TR set"
+    },
+    "volume_number": {
+      "type": "number",
+      "description": "Only use volume <N> from each input file (first volume is 0 not 1).",
+      "title": "Volume Number"
+    }
+  },
+  "required": [
+    "@type",
+    "output_file",
+    "input_files"
+  ]
+}

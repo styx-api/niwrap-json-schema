@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dDegreeCentrality",
+  "description": "Computes voxelwise weighted and binary degree centrality and stores the result in a new 3D bucket dataset as floats to preserve their values. Degree centrality reflects the strength and extent of the correlation of a voxel with every other voxel in the brain. ",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dDegreeCentrality"
+    },
+    "autoclip": {
+      "type": "boolean",
+      "description": "Clip off low-intensity regions in the dataset.",
+      "title": "Autoclip",
+      "default": false
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Mask the dataset to target brain-only voxels.",
+      "title": "Automask",
+      "default": false
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file to 3ddegreecentrality.",
+      "title": "In file"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file to mask input data.",
+      "title": "Mask"
+    },
+    "oned_file": {
+      "type": "string",
+      "description": "Output filepath to text dump of correlation matrix.",
+      "title": "Oned file"
+    },
+    "polort": {
+      "type": "integer",
+      "description": "No description provided.",
+      "title": "Polort"
+    },
+    "sparsity": {
+      "type": "number",
+      "description": "Only take the top percent of connections.",
+      "title": "Sparsity"
+    },
+    "thresh": {
+      "type": "number",
+      "description": "Threshold to exclude connections where corr <= thresh.",
+      "title": "Thresh"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

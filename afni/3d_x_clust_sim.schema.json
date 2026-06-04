@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dXClustSim",
+  "description": "ETAC processing tool to find cluster figure of merit (FOM) thresholds.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dXClustSim"
+    },
+    "inset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask sdata file (from 3dtoXdataset or 3dttest++)",
+      "title": "Input mask file"
+    },
+    "insdat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Data files in the '.sdat' format.",
+      "title": "Data files"
+    },
+    "nn": {
+      "type": "number",
+      "description": "Neighborhood connectivity (1, 2, or 3). Default is 2.",
+      "title": "Neighborhood connectivity"
+    },
+    "sid": {
+      "type": "number",
+      "description": "Sidedness: 1 (one-sided) or 2 (two-sided). Default is 2.",
+      "title": "Sidedness"
+    },
+    "hpow": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "H power values (can be a subset of 0, 1, 2). Default is 2.",
+      "title": "H power values"
+    },
+    "ncase": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Number of cases with labels. Default is 1 A.",
+      "title": "Number of cases"
+    },
+    "pthr": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "List of p-value thresholds. Default is 0.0100 0.0056 0.0031 0.0018 0.0010.",
+      "title": "P-value thresholds"
+    },
+    "fpr": {
+      "type": "number",
+      "minimum": 2,
+      "maximum": 9,
+      "description": "Set global FPR goal to an integer ff between 2 and 9. Default is 5.",
+      "title": "Global FPR goal"
+    },
+    "multiFPR": {
+      "type": "boolean",
+      "description": "Compute results for multiple FPR goals (2%, 3%, ... 9%).",
+      "title": "Multiple FPR goal",
+      "default": false
+    },
+    "minclust": {
+      "type": "number",
+      "description": "Minimum cluster size in voxels. Default is 5.",
+      "title": "Minimum cluster size"
+    },
+    "local": {
+      "type": "boolean",
+      "description": "Do voxel-wise (local) ETAC computations.",
+      "title": "Local ETAC computations",
+      "default": false
+    },
+    "global": {
+      "type": "boolean",
+      "description": "Do volume-wise (global) ETAC computations.",
+      "title": "Global ETAC computations",
+      "default": false
+    },
+    "nolocal": {
+      "type": "boolean",
+      "description": "Do not perform voxel-wise ETAC computations.",
+      "title": "No voxel-wise ETAC computations",
+      "default": false
+    },
+    "noglobal": {
+      "type": "boolean",
+      "description": "Do not perform volume-wise ETAC computations.",
+      "title": "No volume-wise ETAC computations",
+      "default": false
+    },
+    "splitfrac": {
+      "type": "number",
+      "minimum": 0.2,
+      "maximum": 0.8,
+      "description": "Fraction to split simulations into pieces (0.2 < F < 0.8).",
+      "title": "Split fraction"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output filename prefix.",
+      "title": "Output prefix"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Be more verbose.",
+      "title": "Verbose output",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Silent mode.",
+      "title": "Quiet mode",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "inset"
+  ]
+}

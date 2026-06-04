@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UpdateNeeded",
+  "description": "A command-line tool to update a target file based on one or more source files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/UpdateNeeded"
+    },
+    "target_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The target file that needs to be updated.",
+      "title": "Target file"
+    },
+    "source_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The primary source file for updating the target file.",
+      "title": "Source file"
+    },
+    "additional_source_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Additional source files for updating the target file.",
+      "title": "Additional source files"
+    }
+  },
+  "required": [
+    "@type",
+    "target_file",
+    "source_file"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dMEPFM",
+  "description": "Voxelwise deconvolution of Multiecho fMRI data to yield time-varying estimates of changes in transverse relaxation (DR2*) and optionally, net magnetization (DS0)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dMEPFM"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Dataset to analyze with Multiecho Paradigm Free Mapping, along with the echo time",
+      "title": "Input files"
+    },
+    "dbgArgs": {
+      "type": "boolean",
+      "description": "Enable R to save the parameters in .3dMEPFM.dbg.AFNI.args in the current directory",
+      "title": "Debug arguments flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Process voxels inside this mask only. Default is no masking.",
+      "title": "Mask file"
+    },
+    "hrf_model": {
+      "type": "string",
+      "description": "Haemodynamic response function used for deconvolution",
+      "title": "HRF model"
+    },
+    "verbosity": {
+      "type": "integer",
+      "description": "Verbosity level. 0 for quiet, 1 (default) or more: talkative.",
+      "title": "Verbosity level"
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

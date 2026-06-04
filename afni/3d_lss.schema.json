@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLSS",
+  "description": "Least-Squares-Sum (LSS) estimation tool from a -stim_times_IM matrix for multivoxel pattern classification analyses.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLSS"
+    },
+    "matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read the matrix 'mmm', which should have been output from 3dDeconvolve via the '-x1D' option. It should have included exactly one '-stim_times_IM' option.",
+      "title": "Matrix File"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read time series dataset 'ddd'.",
+      "title": "Input Dataset"
+    },
+    "nodata": {
+      "type": "boolean",
+      "description": "Just compute the estimator matrix -- to be saved with '-save1D'.",
+      "title": "No Data Flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset 'MMM' will be used as a mask for the input; voxels outside the mask will not be fit by the regression model.",
+      "title": "Mask File"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "If you don't know what this does by now, please don't use this program.",
+      "title": "Automask",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix name for the output dataset; this dataset will contain ONLY the LSS estimates of the beta weights for the '-stim_times_IM' stimuli.",
+      "title": "Output Prefix"
+    },
+    "save1D": {
+      "type": "string",
+      "description": "Save the estimator vectors to a 1D formatted file named 'qqq'.",
+      "title": "Save Estimators File"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Write out progress reports.",
+      "title": "Verbose Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "matrix"
+  ]
+}

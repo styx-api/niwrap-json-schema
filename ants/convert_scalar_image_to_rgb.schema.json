@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ConvertScalarImageToRGB",
+  "description": "Converts a scalar image to an RGB image using specified parameters. Supports multiple colormap options and customization.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/ConvertScalarImageToRGB"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "description": "The dimensionality of the image (e.g., 2D or 3D).",
+      "title": "Image Dimension"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The input scalar image to be converted to RGB.",
+      "title": "Input Image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "The output RGB image file.",
+      "title": "Output Image"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The mask image to apply during conversion.",
+      "title": "Mask"
+    },
+    "colormap": {
+      "enum": [
+        "grey",
+        "red",
+        "green",
+        "blue",
+        "copper",
+        "jet",
+        "hsv",
+        "spring",
+        "summer",
+        "autumn",
+        "winter",
+        "hot",
+        "cool",
+        "overunder",
+        "custom"
+      ],
+      "description": "The colormap to use for RGB conversion.",
+      "title": "Colormap"
+    },
+    "custom_colormap_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The file specifying the custom colormap (only used if colormap is 'custom').",
+      "title": "Custom Colormap File"
+    },
+    "minimum_input": {
+      "type": "number",
+      "description": "The minimum input value for scaling.",
+      "title": "Minimum Input"
+    },
+    "maximum_input": {
+      "type": "number",
+      "description": "The maximum input value for scaling.",
+      "title": "Maximum Input"
+    },
+    "minimum_rgb_output": {
+      "type": "integer",
+      "description": "The minimum output value for the RGB image. Defaults to 0.",
+      "title": "Minimum RGB Output"
+    },
+    "maximum_rgb_output": {
+      "type": "integer",
+      "description": "The maximum output value for the RGB image. Defaults to 255.",
+      "title": "Maximum RGB Output"
+    },
+    "vtk_lookup_table": {
+      "type": "string",
+      "description": "The VTK lookup table to apply for additional customization.",
+      "title": "VTK Lookup Table"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "input_image",
+    "output_image",
+    "mask",
+    "colormap"
+  ]
+}

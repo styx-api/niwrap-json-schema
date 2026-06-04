@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_exvivo_norm",
+  "description": "MRI Ex Vivo Normalization Tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_exvivo_norm"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input MRI volume",
+      "title": "Input Volume"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output MRI volume",
+      "title": "Output Volume"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemi to process",
+      "title": "Hemisphere"
+    },
+    "prediction_volume": {
+      "type": "string",
+      "description": "Write prediction volume",
+      "title": "Prediction Volume"
+    },
+    "normalized_volume": {
+      "type": "string",
+      "description": "Write normalized volume",
+      "title": "Normalized Volume"
+    },
+    "freeview": {
+      "type": "boolean",
+      "description": "Bring up freeview to show results",
+      "title": "Freeview Flag",
+      "default": false
+    },
+    "normalize_output_mean": {
+      "type": "boolean",
+      "description": "Normalize output mean to match input mean",
+      "title": "Normalize Output Mean Flag",
+      "default": false
+    },
+    "write_normalization_rounds": {
+      "type": "boolean",
+      "description": "Write normalization results after each round",
+      "title": "Write Normalization Rounds Flag",
+      "default": false
+    },
+    "upper_threshold": {
+      "type": "number",
+      "description": "Specify threshold to erase above",
+      "title": "Upper Threshold"
+    },
+    "bias_field_sigma": {
+      "type": "number",
+      "description": "Sigma to smooth bias field",
+      "title": "Bias Field Sigma"
+    },
+    "normalization_rounds": {
+      "type": "number",
+      "description": "Number of rounds of iterative normalization to apply",
+      "title": "Normalization Rounds"
+    },
+    "multichannel": {
+      "type": "boolean",
+      "description": "Specify that data has multiple channels",
+      "title": "Multichannel Flag",
+      "default": false
+    },
+    "model_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use alternative model file",
+      "title": "Model File"
+    },
+    "weights_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alternative weights filename",
+      "title": "Weights File"
+    },
+    "gpu_number": {
+      "type": "number",
+      "description": "GPU number - if not supplied, CPU is used",
+      "title": "GPU Number"
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "output_volume",
+    "hemi"
+  ]
+}

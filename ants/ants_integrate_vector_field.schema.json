@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ANTSIntegrateVectorField",
+  "description": "This tool integrates a vector field, where vectors are voxels, using a region of interest (ROI) mask. The ROI mask controls where the integration is performed and specifies the starting point region.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/ANTSIntegrateVectorField"
+    },
+    "vector_field_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input vector field image (e.g., VecImageIN.nii.gz), where vectors are voxels.",
+      "title": "Vector Field Input"
+    },
+    "roi_mask_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input ROI mask image (e.g., ROIMaskIN.nii.gz), an integer image controlling where the integration is performed.",
+      "title": "ROI Mask Input"
+    },
+    "fibers_output": {
+      "type": "string",
+      "description": "Output VTK text file for fibers (e.g., FibersOUT.vtk).",
+      "title": "Fibers Output"
+    },
+    "length_image_output": {
+      "type": "string",
+      "description": "Output length image (e.g., LengthImageOUT.nii.gz).",
+      "title": "Length Image Output"
+    }
+  },
+  "required": [
+    "@type",
+    "vector_field_input",
+    "roi_mask_input",
+    "fibers_output",
+    "length_image_output"
+  ]
+}

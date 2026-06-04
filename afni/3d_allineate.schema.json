@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dAllineate",
+  "description": "Program to align one dataset (the 'source') to a 'base' dataset using an affine (matrix) transformation of space.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dAllineate"
+    },
+    "source": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Source dataset file",
+      "title": "Source file"
+    },
+    "base": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Base dataset file",
+      "title": "Base file"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output prefix",
+      "title": "Output prefix"
+    },
+    "param_save": {
+      "type": "string",
+      "description": "Save the warp parameters in ASCII (.1D) format into file",
+      "title": "1D Parameters Save file"
+    },
+    "param_apply": {
+      "type": "string",
+      "description": "Read warp parameters from file and apply them to the source dataset",
+      "title": "1D Parameters Apply file"
+    },
+    "matrix_save": {
+      "type": "string",
+      "description": "Save the transformation matrix for each sub-brick into file",
+      "title": "1D Matrix Save file"
+    },
+    "matrix_apply": {
+      "type": "string",
+      "description": "Use the matrices in file to define the spatial transformations to be applied",
+      "title": "1D Matrix Apply file"
+    },
+    "cost": {
+      "type": "string",
+      "description": "Defines the 'cost' function that defines the matching between the source and the base",
+      "title": "Cost function"
+    },
+    "interp": {
+      "type": "string",
+      "description": "Defines interpolation method to use during matching process",
+      "title": "Interpolation method"
+    },
+    "final": {
+      "type": "string",
+      "description": "Defines the interpolation mode used to create the output dataset",
+      "title": "Final interpolation mode"
+    },
+    "nmatch": {
+      "type": "number",
+      "description": "Use at most 'nnn' scattered points to match the datasets",
+      "title": "Number of match points"
+    },
+    "nopad": {
+      "type": "boolean",
+      "description": "Do not use zero-padding on the base image",
+      "title": "No padding flag",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print out verbose progress reports",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Don't print out verbose stuff",
+      "title": "Quiet flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "source",
+    "prefix"
+  ]
+}

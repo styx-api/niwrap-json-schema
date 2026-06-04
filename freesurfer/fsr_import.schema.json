@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsr-import",
+  "description": "Copies/converts data into a directory structure for samseg-expected format",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/fsr-import"
+    },
+    "outdir": {
+      "type": "string",
+      "description": "Root directory for output data",
+      "title": "Output directory"
+    },
+    "t1w_input": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input T1-weighted image files",
+      "title": "T1-weighted images"
+    },
+    "t2w_input": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input T2-weighted image files",
+      "title": "T2-weighted images"
+    },
+    "flair_input": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input FLAIR image files",
+      "title": "FLAIR images"
+    },
+    "custom_mode_input": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Custom modality image file with specified mode name (not t1w, t2w, or flair)",
+      "title": "Custom modality images"
+    },
+    "force_update": {
+      "type": "boolean",
+      "description": "Update files regardless of timestamp",
+      "title": "Force update flag",
+      "default": false
+    },
+    "no_conform": {
+      "type": "boolean",
+      "description": "Do not conform inputs to 1mm, 256 dimensions",
+      "title": "No conform flag",
+      "default": false
+    },
+    "hires": {
+      "type": "boolean",
+      "description": "Same as --no-conform",
+      "title": "High resolution flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "outdir"
+  ]
+}

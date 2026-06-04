@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DO TFCE ON A METRIC FILE",
+  "description": "This command does not do any statistical analysis.  Please use something like PALM if you are just trying to do statistics on your data.\n\nThreshold-free cluster enhancement is a method to increase the relative value of regions that would form clusters in a standard thresholding test.  This is accomplished by evaluating the integral of:\n\ne(h, p)^E * h^H * dh\n\nat each vertex p, where h ranges from 0 to the maximum value in the data, and e(h, p) is the extent of the cluster containing vertex p at threshold h.  Negative values are similarly enhanced by negating the data, running the same process, and negating the result.\n\nWhen using -presmooth with -corrected-areas, note that it is an approximate correction within the smoothing algorithm (the TFCE correction is exact).  Doing smoothing on individual surfaces before averaging/TFCE is preferred, when possible, in order to better tie the smoothing kernel size to the original feature size.\n\nThe TFCE method is explained in: Smith SM, Nichols TE., \"Threshold-free cluster enhancement: addressing problems of smoothing, threshold dependence and localisation in cluster inference.\" Neuroimage. 2009 Jan 1;44(1):83-98. PMID: 18501637",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric_tfce"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the surface to compute on"
+    },
+    "metric_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the metric to run TFCE on"
+    },
+    "metric_out": {
+      "type": "string",
+      "description": "the output metric"
+    },
+    "presmooth": {
+      "type": "object",
+      "properties": {
+        "kernel": {
+          "type": "number",
+          "description": "the size of the gaussian smoothing kernel in mm, as sigma by default"
+        },
+        "fwhm": {
+          "type": "boolean",
+          "description": "kernel size is FWHM, not sigma",
+          "default": false
+        }
+      },
+      "required": [
+        "kernel"
+      ],
+      "description": "smooth the metric before running TFCE"
+    },
+    "roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "select a region of interest to run TFCE on"
+    },
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "e": {
+          "type": "number",
+          "description": "exponent for cluster area (default 1.0)"
+        },
+        "h": {
+          "type": "number",
+          "description": "exponent for threshold value (default 2.0)"
+        }
+      },
+      "required": [
+        "e",
+        "h"
+      ],
+      "description": "set parameters for TFCE integral"
+    },
+    "column": {
+      "type": "string",
+      "description": "select a single column"
+    },
+    "corrected_areas": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "vertex areas to use instead of computing them from the surface"
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "metric_in",
+    "metric_out"
+  ]
+}

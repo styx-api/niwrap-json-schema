@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_add_xform_to_header",
+  "description": "Program to add specified transformation to the volume header.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_add_xform_to_header"
+    },
+    "xfm_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Transformation file to be added to the volume header.",
+      "title": "XFM File"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume to which the transformation is added.",
+      "title": "Input Volume"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume with the transformation included.",
+      "title": "Output Volume"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Enable verbose output for more detailed logging.",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "copy_name": {
+      "type": "boolean",
+      "description": "Copy the name of the xfm file without loading it.",
+      "title": "Copy Name Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "xfm_file",
+    "input_volume",
+    "output_volume"
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dDWItoDT",
+  "description": "Computes 6 principal direction tensors from multiple gradient vectors and corresponding DTI image volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dDWItoDT"
+    },
+    "gradient_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A 1D file of the gradient vectors with lines of ASCII floats (Gxi, Gyi, Gzi) or a 1D file of b-matrix elements.",
+      "title": "Gradient file"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A 3D bucket dataset with Np+1 sub-briks where the first sub-brik is the volume acquired with no diffusion weighting.",
+      "title": "DTI dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output dataset prefix name. Default is 'DT'.",
+      "title": "Output prefix"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Mask dataset so that tensors are computed only for high-intensity (presumably brain) voxels.",
+      "title": "Automatic mask",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use this dataset as mask to include/exclude voxels.",
+      "title": "Mask dataset"
+    },
+    "bmatrix_NZ": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset is b-matrix, not gradient directions, and there is no row of zeros at the top of the file.",
+      "title": "B-matrix NZ"
+    },
+    "bmatrix_Z": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Similar to '-bmatrix_NZ' but first row of the file is all zeros.",
+      "title": "B-matrix Z"
+    },
+    "bmatrix_FULL": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Same as '-bmatrix_Z' but with a more intuitive name.",
+      "title": "B-matrix FULL"
+    },
+    "scale_out_1000": {
+      "type": "boolean",
+      "description": "Increase output parameters with physical units by multiplying them by 1000.",
+      "title": "Scale output by 1000",
+      "default": false
+    },
+    "bmax_ref": {
+      "type": "number",
+      "description": "Flag the reference b-value if it is greater than zero.",
+      "title": "Reference b-value"
+    },
+    "nonlinear": {
+      "type": "boolean",
+      "description": "Compute iterative solution to avoid negative eigenvalues. This is the default method.",
+      "title": "Nonlinear computation",
+      "default": false
+    },
+    "linear": {
+      "type": "boolean",
+      "description": "Compute simple linear solution.",
+      "title": "Linear computation",
+      "default": false
+    },
+    "reweight": {
+      "type": "boolean",
+      "description": "Recompute weight factors at end of iterations and restart.",
+      "title": "Recompute weight factors",
+      "default": false
+    },
+    "max_iter": {
+      "type": "integer",
+      "description": "Maximum number of iterations for convergence. Default is 10.",
+      "title": "Maximum iterations"
+    },
+    "max_iter_rw": {
+      "type": "integer",
+      "description": "Max number of iterations after reweighting. Default is 5.",
+      "title": "Max iterations after reweighting"
+    },
+    "eigs": {
+      "type": "boolean",
+      "description": "Compute eigenvalues, eigenvectors, fractional anisotropy, and mean diffusivity in sub-briks 6-19.",
+      "title": "Compute Eigen parameters",
+      "default": false
+    },
+    "debug_briks": {
+      "type": "boolean",
+      "description": "Add sub-briks with error functional, original error, number of steps to convergence, and modeled B0 volume.",
+      "title": "Add debugging sub-briks",
+      "default": false
+    },
+    "cumulative_wts": {
+      "type": "boolean",
+      "description": "Show overall weight factors for each gradient level.",
+      "title": "Show weight factors",
+      "default": false
+    },
+    "verbose": {
+      "type": "integer",
+      "description": "Print convergence steps every nnnnn voxels.",
+      "title": "Verbose"
+    },
+    "drive_afni": {
+      "type": "integer",
+      "description": "Show convergence graphs every nnnnn voxels. AFNI must have NIML communications on.",
+      "title": "AFNI drive"
+    },
+    "sep_dsets": {
+      "type": "boolean",
+      "description": "Save tensor, eigenvalues, vectors, FA, MD in separate datasets.",
+      "title": "Separate datasets",
+      "default": false
+    },
+    "csf_val": {
+      "type": "number",
+      "description": "Assign diffusivity value to DWI data where the mean values for b=0 volumes is less than the mean of the remaining volumes at each voxel.",
+      "title": "CSF diffusivity"
+    },
+    "min_bad_md": {
+      "type": "integer",
+      "description": "Change the min MD value used as a 'badness check' for tensor fits.",
+      "title": "Minimum bad MD value"
+    },
+    "csf_fa": {
+      "type": "number",
+      "description": "Assign a specific FA value to CSF voxels.",
+      "title": "CSF FA value"
+    },
+    "opt": {
+      "type": "string",
+      "description": "Optimization method: 'powell', 'gradient', or 'hybrid'.",
+      "title": "Optimization method"
+    },
+    "mean_b0": {
+      "type": "boolean",
+      "description": "Use mean of all b=0 volumes for linear computation and initial linear for nonlinear method.",
+      "title": "Use mean b=0",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "gradient_file",
+    "dataset"
+  ]
+}

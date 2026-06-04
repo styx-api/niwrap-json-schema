@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "rbox",
+  "description": "Generate various point distributions. Default is random in cube.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/rbox"
+    },
+    "number_points": {
+      "type": "string",
+      "description": "Number of random points in cube, lens, spiral, sphere or grid",
+      "title": "Number of points"
+    },
+    "dimension": {
+      "type": "string",
+      "description": "Dimension (e.g., D3 for 3-d)",
+      "title": "Dimension"
+    },
+    "unit_cube": {
+      "type": "boolean",
+      "description": "Add a unit cube to the output (optional: 'c G2.0' sets size)",
+      "title": "Unit cube",
+      "default": false
+    },
+    "unit_diamond": {
+      "type": "boolean",
+      "description": "Add a unit diamond to the output (optional: 'd G2.0' sets size)",
+      "title": "Unit diamond",
+      "default": false
+    },
+    "spiral": {
+      "type": "boolean",
+      "description": "Generate a regular 3-d spiral",
+      "title": "Regular spiral",
+      "default": false
+    },
+    "regular_polygon": {
+      "type": "boolean",
+      "description": "Generate a regular polygon (optional: 'r s Z1 G0.1' makes a cone)",
+      "title": "Regular polygon",
+      "default": false
+    },
+    "cospherical_points": {
+      "type": "boolean",
+      "description": "Generate cospherical points",
+      "title": "Cospherical points",
+      "default": false
+    },
+    "simplex_points": {
+      "type": "boolean",
+      "description": "Generate random points in simplex, may use 'r' or 'Wn'",
+      "title": "Simplex points",
+      "default": false
+    },
+    "simplex_plus_points": {
+      "type": "boolean",
+      "description": "Same as 'x', plus simplex",
+      "title": "Simplex plus points",
+      "default": false
+    },
+    "add_point": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Add point [n,m,r] first, pads with 0",
+      "title": "Add point"
+    },
+    "lens_distribution": {
+      "type": "string",
+      "description": "Lens distribution of radius n. Also 's', 'r', 'G', 'W'.",
+      "title": "Lens distribution"
+    },
+    "random_within": {
+      "type": "boolean",
+      "description": "Random distribution within 0.1 of the cube's or sphere's surface",
+      "title": "Random within surface",
+      "default": false
+    },
+    "random_disk": {
+      "type": "string",
+      "description": "Random points in a 0.5 disk projected to a sphere, optional gap size (e.g., 'Z0.5 s G0.6')",
+      "title": "Random disk points"
+    },
+    "bounding_box": {
+      "type": "number",
+      "description": "Bounding box coordinates, default 0.5",
+      "title": "Bounding box"
+    },
+    "homogeneous_coordinates": {
+      "type": "boolean",
+      "description": "Output as homogeneous coordinates for cdd",
+      "title": "Homogeneous coordinates",
+      "default": false
+    },
+    "remove_command_line": {
+      "type": "boolean",
+      "description": "Remove command line from the first line of output",
+      "title": "Remove command line",
+      "default": false
+    },
+    "time_seed": {
+      "type": "boolean",
+      "description": "Use time as the random number seed (default is command line)",
+      "title": "Random seed by time",
+      "default": false
+    },
+    "integer_coordinates": {
+      "type": "boolean",
+      "description": "Print integer coordinates, default 'Bn' is 1e+06",
+      "title": "Integer coordinates",
+      "default": false
+    },
+    "offset": {
+      "type": "number",
+      "description": "Offset coordinates by n",
+      "title": "Offset coordinates"
+    },
+    "user_seed": {
+      "type": "number",
+      "description": "Use n as the random number seed",
+      "title": "Random seed by user"
+    },
+    "mesh_lattice": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lattice (Mesh) rotated by [n,-m,0], [m,n,0], [0,0,r], ...",
+      "title": "Mesh lattice"
+    }
+  },
+  "required": [
+    "@type",
+    "number_points"
+  ]
+}

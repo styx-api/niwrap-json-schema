@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_proc_filter_dwis",
+  "description": "Filter out user-found and user-defined bad volumes from DWI data sets.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_proc_filter_dwis"
+    },
+    "input_dwi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of a 4D file of DWIs (required).",
+      "title": "Input DWI"
+    },
+    "input_gradient": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Bvec/bmat file from the gradients. Required. One of these options must be used: -in_col_matA, -in_col_matT, -in_col_vec, -in_row_vec",
+      "title": "Input Gradient File"
+    },
+    "select_string": {
+      "type": "string",
+      "description": "A string of indices and index ranges for selecting which volumes/grads/bvals to keep. This string gets applied to the volume, bval|bvec|bmat files for an input set. Either this or -select_file is required.",
+      "title": "Select String"
+    },
+    "select_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A file containing a string of indices and index ranges for selecting which volumes/grads/bvals to keep. This string gets applied to the volume, bval|bvec|bmat files for an input set. Either this or -select is required.",
+      "title": "Select File"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Output prefix for all the volumes and text files. Required.",
+      "title": "Output Prefix"
+    },
+    "input_bvals": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "If the bvec/bmat is a file of unit-magnitude values, then the bvalues can be input.",
+      "title": "Input Bvals"
+    },
+    "unit_mag_out": {
+      "type": "boolean",
+      "description": "Ensure that the output grad information is unit magnitude.",
+      "title": "Unit Magnitude Output",
+      "default": false
+    },
+    "qc_prefix": {
+      "type": "string",
+      "description": "Set the prefix of the QC image files separately.",
+      "title": "QC Prefix"
+    },
+    "no_qc_view": {
+      "type": "boolean",
+      "description": "Turn off generating QC image files.",
+      "title": "No QC View",
+      "default": false
+    },
+    "no_cmd_out": {
+      "type": "boolean",
+      "description": "Don't save the command line call of this program and the location where it was run.",
+      "title": "No Command Output",
+      "default": false
+    },
+    "do_movie": {
+      "enum": [
+        "AGIF",
+        "MPEG"
+      ],
+      "description": "Output a movie of the newly created dataset (AGIF or MPEG).",
+      "title": "Do Movie"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dwi",
+    "input_gradient",
+    "select_string",
+    "output_prefix"
+  ]
+}

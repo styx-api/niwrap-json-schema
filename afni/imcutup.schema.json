@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "imcutup",
+  "description": "Breaks up larger images into smaller image files of user-defined size.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/imcutup"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix the output files with the provided string",
+      "title": "Prefix for output files"
+    },
+    "xynum": {
+      "type": "boolean",
+      "description": "Number the output images in x-first, then y (default behavior)",
+      "title": "X-first, then Y numbering",
+      "default": false
+    },
+    "yxnum": {
+      "type": "boolean",
+      "description": "Number the output images in y-first, then x",
+      "title": "Y-first, then X numbering",
+      "default": false
+    },
+    "xynum_format": {
+      "type": "boolean",
+      "description": "2D numbering in x.y format",
+      "title": "2D numbering x.y format",
+      "default": false
+    },
+    "yxnum_format": {
+      "type": "boolean",
+      "description": "2D numbering in y.x format",
+      "title": "2D numbering y.x format",
+      "default": false
+    },
+    "nx": {
+      "type": "integer",
+      "description": "Number of pixels along the x-dimension for the smaller images.",
+      "title": "Nx (pixels)"
+    },
+    "ny": {
+      "type": "integer",
+      "description": "Number of pixels along the y-dimension for the smaller images.",
+      "title": "Ny (pixels)"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image filename. Must be a single 2D image.",
+      "title": "Input file"
+    }
+  },
+  "required": [
+    "@type",
+    "nx",
+    "ny",
+    "input_file"
+  ]
+}

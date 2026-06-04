@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3danisosmooth",
+  "description": "Smooths a dataset using an anisotropic smoothing technique.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3danisosmooth"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset to be smoothed",
+      "title": "Input dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output dataset prefix name",
+      "title": "Output prefix"
+    },
+    "iterations": {
+      "type": "number",
+      "description": "Number of iterations (default=10)",
+      "title": "Number of iterations"
+    },
+    "2d_flag": {
+      "type": "boolean",
+      "description": "Smooth a slice at a time (default)",
+      "title": "2D smoothing flag",
+      "default": false
+    },
+    "3d_flag": {
+      "type": "boolean",
+      "description": "Smooth through slices",
+      "title": "3D smoothing flag",
+      "default": false
+    },
+    "mask_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use specified dataset as mask to include/exclude voxels",
+      "title": "Mask dataset"
+    },
+    "automask_flag": {
+      "type": "boolean",
+      "description": "Automatically compute mask for dataset",
+      "title": "Automask flag",
+      "default": false
+    },
+    "viewer_flag": {
+      "type": "boolean",
+      "description": "Show central axial slice image every iteration",
+      "title": "Viewer flag",
+      "default": false
+    },
+    "nosmooth_flag": {
+      "type": "boolean",
+      "description": "Do not do intermediate smoothing of gradients",
+      "title": "No intermediate smoothing flag",
+      "default": false
+    },
+    "sigma1": {
+      "type": "number",
+      "description": "Gaussian smoothing sigma before gradient computation (default=0.5)",
+      "title": "Sigma1"
+    },
+    "sigma2": {
+      "type": "number",
+      "description": "Gaussian smoothing sigma after gradient computation (default=1.0)",
+      "title": "Sigma2"
+    },
+    "deltat": {
+      "type": "number",
+      "description": "Pseudo-time step (default=0.25)",
+      "title": "DeltaT"
+    },
+    "savetempdata_flag": {
+      "type": "boolean",
+      "description": "Save temporary datasets each iteration",
+      "title": "Save temporary datasets flag",
+      "default": false
+    },
+    "save_temp_with_diff_measures_flag": {
+      "type": "boolean",
+      "description": "Save temporary datasets with different measures in a dataset",
+      "title": "Save temporary datasets with different measures flag",
+      "default": false
+    },
+    "phiding_flag": {
+      "type": "boolean",
+      "description": "Use Ding method for computing phi (default)",
+      "title": "Use Ding method for phi",
+      "default": false
+    },
+    "phiexp_flag": {
+      "type": "boolean",
+      "description": "Use exponential method for computing phi",
+      "title": "Use exponential method for phi",
+      "default": false
+    },
+    "noneg_flag": {
+      "type": "boolean",
+      "description": "Set negative voxels to 0",
+      "title": "Set negative voxels to 0",
+      "default": false
+    },
+    "setneg_value": {
+      "type": "number",
+      "description": "Set negative voxels to specified value",
+      "title": "Set negative voxels value"
+    },
+    "edgefraction": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Adjust the fraction of the anisotropic component added (0 to 1, default=0.5)",
+      "title": "Edge fraction"
+    },
+    "datum_type": {
+      "type": "string",
+      "description": "Specify type for output data (byte, short, float) [default=float]",
+      "title": "Datum type"
+    },
+    "matchorig_flag": {
+      "type": "boolean",
+      "description": "Match datum type and clip min/max to input data",
+      "title": "Match original datatype",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Print help message",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

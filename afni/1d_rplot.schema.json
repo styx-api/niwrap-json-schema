@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dRplot",
+  "description": "Program for plotting a 1D file",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dRplot"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input 1D file to plot",
+      "title": "Input File"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Output prefix. See also -save.",
+      "title": "Output Prefix"
+    },
+    "save_size": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Save figure size in pixels. Default is 2000 2000.",
+      "title": "Save Size"
+    },
+    "TR": {
+      "type": "number",
+      "description": "Sampling period, in seconds.",
+      "title": "Sampling Period"
+    },
+    "title": {
+      "type": "string",
+      "description": "Graph title. File name is used by default. Use NONE to be sure no title is used.",
+      "title": "Graph Title"
+    },
+    "input_type": {
+      "enum": [
+        "VOLREG",
+        "XMAT"
+      ],
+      "description": "Type of data in 1D file. Choose from 'VOLREG' or 'XMAT'.",
+      "title": "Input Type"
+    },
+    "legend_font_size": {
+      "type": "number",
+      "description": "Font size for legend text.",
+      "title": "Legend Font Size"
+    },
+    "left_y_margin_text": {
+      "type": "string",
+      "description": "Text to be placed at left Y margin. You need one string per column.",
+      "title": "Left Y Margin Text"
+    },
+    "right_y_margin_text": {
+      "type": "string",
+      "description": "Text to be placed at right Y margin. You need one string per column.",
+      "title": "Right Y Margin Text"
+    },
+    "x_axis_label": {
+      "type": "string",
+      "description": "Labels for the X axis.",
+      "title": "X Axis Label"
+    },
+    "y_axis_label": {
+      "type": "string",
+      "description": "Labels for the Y axis.",
+      "title": "Y Axis Label"
+    },
+    "x_axis_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Range of X axis. STEP is optional.",
+      "title": "X Axis Range"
+    },
+    "y_axis_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Range of Y axis. STEP is optional.",
+      "title": "Y Axis Range"
+    },
+    "plot_char": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Symbols for each column in input.",
+      "title": "Plot Character"
+    },
+    "group_labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Legends assigned to each group. Default is no labeling.",
+      "title": "Group Labels"
+    },
+    "legend_show": {
+      "type": "boolean",
+      "description": "Show legend.",
+      "title": "Show Legend",
+      "default": false
+    },
+    "legend_position": {
+      "enum": [
+        "bottomright",
+        "bottom",
+        "bottomleft",
+        "left",
+        "topleft",
+        "top",
+        "topright",
+        "right",
+        "center"
+      ],
+      "description": "Legend position. Choose from: bottomright, bottom, bottomleft, left, topleft, top, topright, right, center.",
+      "title": "Legend Position"
+    },
+    "save_plot": {
+      "type": "boolean",
+      "description": "Save plot and quit. No need for -prefix with this option.",
+      "title": "Save Plot",
+      "default": false
+    },
+    "column_name_show": {
+      "type": "boolean",
+      "description": "Show names of column in input.",
+      "title": "Show Column Names",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file"
+  ]
+}

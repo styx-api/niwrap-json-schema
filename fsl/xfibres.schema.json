@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "xfibres",
+  "description": "Part of FSL - estimates diffusion parameters for multiple fibres per voxel",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/xfibres"
+    },
+    "datafile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Data file (e.g., diffusion data)",
+      "title": "Data file"
+    },
+    "maskfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file defining brain voxels",
+      "title": "Mask file"
+    },
+    "bvecs": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "B vectors file",
+      "title": "B vectors file"
+    },
+    "bvals": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "B values file",
+      "title": "B values file"
+    },
+    "logdir": {
+      "type": "string",
+      "description": "Log directory (default is logdir)",
+      "title": "Log directory"
+    },
+    "forcedir": {
+      "type": "boolean",
+      "description": "Use the actual directory name given - i.e., don't add + to make a new directory",
+      "title": "Forced directory flag",
+      "default": false
+    },
+    "max_fibres": {
+      "type": "number",
+      "description": "Maximum number of fibres to fit in each voxel (default 1)",
+      "title": "Maximum fibres"
+    },
+    "model": {
+      "type": "number",
+      "description": "Model to use: 1=deconv. with sticks (default), 2=deconv. with sticks and a range of diffusivities, 3=deconv. with zeppelins",
+      "title": "Model"
+    },
+    "fudge": {
+      "type": "string",
+      "description": "ARD fudge factor",
+      "title": "Fudge factor"
+    },
+    "num_jumps": {
+      "type": "number",
+      "description": "Number of jumps to be made by MCMC (default 1250)",
+      "title": "Number of MCMC jumps"
+    },
+    "num_burnin": {
+      "type": "number",
+      "description": "Total number of jumps at start of MCMC to be discarded (default 1000)",
+      "title": "Number of burnin jumps"
+    },
+    "burnin_noard": {
+      "type": "number",
+      "description": "Number of burnin jumps before ARD is imposed (default 0)",
+      "title": "Burnin before ARD"
+    },
+    "sampleevery": {
+      "type": "number",
+      "description": "Number of jumps for each sample (MCMC) (default 25)",
+      "title": "Sample jumps"
+    },
+    "updateproposal": {
+      "type": "number",
+      "description": "Number of jumps for each update to the proposal density std (MCMC) (default 40)",
+      "title": "Update proposal jumps"
+    },
+    "seed": {
+      "type": "string",
+      "description": "Seed for pseudo-random number generator",
+      "title": "Random seed"
+    },
+    "noard": {
+      "type": "boolean",
+      "description": "Turn ARD off on all fibres",
+      "title": "No ARD flag",
+      "default": false
+    },
+    "allard": {
+      "type": "boolean",
+      "description": "Turn ARD on all fibres",
+      "title": "All ARD flag",
+      "default": false
+    },
+    "nospat": {
+      "type": "boolean",
+      "description": "Initialize with tensor, not spatially",
+      "title": "No spatial initialization",
+      "default": false
+    },
+    "nonlinear": {
+      "type": "boolean",
+      "description": "Initialize with nonlinear fitting",
+      "title": "Nonlinear initialization",
+      "default": false
+    },
+    "cnonlinear": {
+      "type": "boolean",
+      "description": "Initialize with constrained nonlinear fitting",
+      "title": "Constrained nonlinear initialization",
+      "default": false
+    },
+    "rician": {
+      "type": "boolean",
+      "description": "Use Rician noise modelling",
+      "title": "Rician noise modelling",
+      "default": false
+    },
+    "add_f0": {
+      "type": "boolean",
+      "description": "Add to the model an unattenuated signal compartment",
+      "title": "Add F0 compartment",
+      "default": false
+    },
+    "ard_f0": {
+      "type": "boolean",
+      "description": "Use ARD on F0",
+      "title": "ARD on F0",
+      "default": false
+    },
+    "rmean": {
+      "type": "number",
+      "maximum": 0.5,
+      "description": "Set the prior mean for R of model 3 (default: 0.13 - must be <0.5)",
+      "title": "Prior mean R"
+    },
+    "rstd": {
+      "type": "number",
+      "description": "Set the prior standard deviation for R of model 3 (default: 0.03)",
+      "title": "Prior standard deviation R"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "datafile",
+    "maskfile",
+    "bvecs",
+    "bvals"
+  ]
+}

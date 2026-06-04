@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dZcutup",
+  "description": "Cut slices off a dataset in its z-direction and write a new dataset",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dZcutup"
+    },
+    "keep_slices": {
+      "type": "string",
+      "description": "Keep slices numbered 'b' through 't', inclusive. This is a mandatory option. Slice numbers start at 0.",
+      "title": "Keep Slices"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Write result into dataset with the given prefix [default = 'zcutup']",
+      "title": "Output Prefix"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The input dataset (e.g., epi07+orig). You can use a sub-brick selector on the input dataset.",
+      "title": "Input Dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "keep_slices",
+    "dataset"
+  ]
+}

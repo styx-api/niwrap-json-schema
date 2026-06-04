@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@4Daverage",
+  "description": "Script for computing average 3D+time bricks using 3Dcalc",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@4Daverage"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix for the output 3D+t brick",
+      "title": "Output Prefix"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of 3D+t brick filenames to be averaged (e.g., brick1+orig, brick2+orig). Can use wildcards.",
+      "title": "Input Files"
+    }
+  },
+  "required": [
+    "@type",
+    "output_prefix",
+    "input_files"
+  ]
+}

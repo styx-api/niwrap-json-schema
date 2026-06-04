@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@djunct_4d_imager",
+  "description": "The program is useful for viewing the same slice across the 'time' dimension of a 4D data set.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@djunct_4d_imager"
+    },
+    "inset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "ULay dataset, probably 4D (required)",
+      "title": "Input Dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output files (required)",
+      "title": "Output Prefix"
+    },
+    "do_movie": {
+      "enum": [
+        "MPEG",
+        "AGIF"
+      ],
+      "description": "Specify type of movie file. Options: MPEG, AGIF",
+      "title": "Movie Type"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Keep the final intermediate files",
+      "title": "No Clean Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "inset",
+    "prefix"
+  ]
+}

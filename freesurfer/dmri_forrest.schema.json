@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dmri_forrest",
+  "description": "dmri_forrest is a tool for processing diffusion MRI data using a random forest-based method.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dmri_forrest"
+    },
+    "test_dir": {
+      "type": "string",
+      "description": "Directory containing the test subject data",
+      "title": "Test subject directory"
+    },
+    "train_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File listing training subject directories, one per line",
+      "title": "Training file"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input brain mask volume name, relative to subject directory",
+      "title": "Brain mask file"
+    },
+    "tract_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input tract label volume(s), relative to subject directory",
+      "title": "Tract label volumes"
+    },
+    "seg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input aparc+aseg volume name, relative to subject directory",
+      "title": "Segmentation file"
+    },
+    "diff_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input diffusion orientation volume name, relative to subject directory",
+      "title": "Diffusion orientation file"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging mode",
+      "title": "Debug flag",
+      "default": false
+    },
+    "checkopts": {
+      "type": "boolean",
+      "description": "Only check options and exit",
+      "title": "Check options flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help information",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "test_dir",
+    "train_file",
+    "mask_file",
+    "tract_files"
+  ]
+}

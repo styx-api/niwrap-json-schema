@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@radial_correlate",
+  "description": "Check datasets for correlation artifacts",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@radial_correlate"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "A list of EPI datasets",
+      "title": "Input datasets"
+    },
+    "results_dir": {
+      "type": "string",
+      "description": "Results directory for correlations",
+      "title": "Results directory"
+    },
+    "do_corr": {
+      "type": "string",
+      "description": "Create correlation volumes (yes/no)",
+      "title": "Create correlation volumes"
+    },
+    "do_clust": {
+      "type": "string",
+      "description": "Cluster correlation volumes (yes/no)",
+      "title": "Cluster correlation volumes"
+    },
+    "mask_dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify a mask dataset to replace automask",
+      "title": "Mask dataset"
+    },
+    "cthresh": {
+      "type": "number",
+      "description": "Threshold on correlation values",
+      "title": "Correlation threshold"
+    },
+    "frac_limit": {
+      "type": "number",
+      "description": "Minimum mask fraction surviving cluster",
+      "title": "Fraction limit"
+    },
+    "sphere_rad": {
+      "type": "number",
+      "description": "Generate correlations within voxel spheres",
+      "title": "Sphere radius"
+    },
+    "use_3dmerge": {
+      "type": "string",
+      "description": "Use 3dmerge rather than 3dLocalstat (yes/no)",
+      "title": "Use 3dmerge"
+    },
+    "percentile": {
+      "type": "number",
+      "description": "Percentile to use as threshold",
+      "title": "Percentile threshold"
+    },
+    "min_thr": {
+      "type": "number",
+      "description": "Minimum percentile threshold to be considered",
+      "title": "Minimum threshold"
+    },
+    "nfirst": {
+      "type": "number",
+      "description": "Number of initial TRs to remove",
+      "title": "Initial TRs to remove"
+    },
+    "ver": {
+      "type": "boolean",
+      "description": "Show version number",
+      "title": "Version flag",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Make verbose: set echo",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show help",
+      "title": "Help flag",
+      "default": false
+    },
+    "hist": {
+      "type": "boolean",
+      "description": "Show modification history",
+      "title": "History flag",
+      "default": false
+    },
+    "corr_mask": {
+      "type": "string",
+      "description": "Mask time series before correlation blurring (yes/no)",
+      "title": "Correlation mask"
+    },
+    "do_clean": {
+      "type": "string",
+      "description": "Clean up at end, leaving only correlations (yes/no)",
+      "title": "Clean up after"
+    },
+    "polort": {
+      "type": "number",
+      "description": "Detrend time series with given polynomial degree",
+      "title": "Polynomial degree"
+    },
+    "merge_frad": {
+      "type": "number",
+      "description": "Specify a radius fraction for 3dmerge blurring",
+      "title": "Merge Fraction radius"
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

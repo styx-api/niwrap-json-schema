@@ -1,0 +1,363 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tkregister2_cmdl",
+  "description": "tkregister2 is a tool to assist in the manual tuning of the linear registration between two volumes, mainly for the purpose of interacting with the FreeSurfer anatomical stream.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/tkregister2_cmdl"
+    },
+    "movable_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the movable volume.",
+      "title": "Movable volume"
+    },
+    "target_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the target volume.",
+      "title": "Target volume"
+    },
+    "fstarg_flag": {
+      "type": "boolean",
+      "description": "Target is relative to subjectid/mri.",
+      "title": "FSTARG flag",
+      "default": false
+    },
+    "reg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to input/output registration file.",
+      "title": "Registration file"
+    },
+    "check_reg_flag": {
+      "type": "boolean",
+      "description": "Only check, no --reg needed.",
+      "title": "Check registration flag",
+      "default": false
+    },
+    "regheader_flag": {
+      "type": "boolean",
+      "description": "Compute registration from headers.",
+      "title": "Regheader flag",
+      "default": false
+    },
+    "regheader_center_flag": {
+      "type": "boolean",
+      "description": "Same as --regheader but aligns volume centers.",
+      "title": "Regheader center flag",
+      "default": false
+    },
+    "fsl_targ_flag": {
+      "type": "boolean",
+      "description": "Use FSLDIR/data/standard/avg152T1.nii.gz.",
+      "title": "FSL target flag",
+      "default": false
+    },
+    "fsl_targ_lr_flag": {
+      "type": "boolean",
+      "description": "Use FSLDIR/data/standard/avg152T1_LR-marked.nii.gz.",
+      "title": "FSL target LR flag",
+      "default": false
+    },
+    "gca_subject": {
+      "type": "string",
+      "description": "Subject ID for linear GCA registration check.",
+      "title": "GCA subject"
+    },
+    "gca_skull_subject": {
+      "type": "string",
+      "description": "Subject ID for linear 'with skull' GCA registration check.",
+      "title": "GCA skull subject"
+    },
+    "no_zero_cras_flag": {
+      "type": "boolean",
+      "description": "Do not zero target cras (done with --fstal).",
+      "title": "No zero CRAS flag",
+      "default": false
+    },
+    "movbright": {
+      "type": "number",
+      "description": "Brightness of movable volume.",
+      "title": "Movable brightness"
+    },
+    "no_inorm_flag": {
+      "type": "boolean",
+      "description": "Turn off intensity normalization.",
+      "title": "No intensity normalization flag",
+      "default": false
+    },
+    "fmov": {
+      "type": "number",
+      "description": "Set movable volume brightness.",
+      "title": "Movable brightness factor"
+    },
+    "fmov_targ_flag": {
+      "type": "boolean",
+      "description": "Apply movable brightness to the target.",
+      "title": "Apply movable brightness to target flag",
+      "default": false
+    },
+    "plane": {
+      "type": "string",
+      "description": "Startup view plane: cor, sag, ax.",
+      "title": "View plane"
+    },
+    "slice": {
+      "type": "number",
+      "description": "Startup slice number.",
+      "title": "Slice number"
+    },
+    "volview": {
+      "type": "string",
+      "description": "Startup with targ or mov.",
+      "title": "Volume view"
+    },
+    "fov": {
+      "type": "number",
+      "description": "Window FOV in mm (default is 256).",
+      "title": "Field of view"
+    },
+    "movscale": {
+      "type": "number",
+      "description": "Scale size of movable volume by scale.",
+      "title": "Movable volume scale"
+    },
+    "surf": {
+      "type": "string",
+      "description": "Display surface as an overlay.",
+      "title": "Surface name"
+    },
+    "surf_rgb": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set surface color (0-255) for R G B.",
+      "title": "Surface RGB color"
+    },
+    "lh_only_flag": {
+      "type": "boolean",
+      "description": "Only load/display left hemisphere.",
+      "title": "Left hemisphere only flag",
+      "default": false
+    },
+    "rh_only_flag": {
+      "type": "boolean",
+      "description": "Only load/display right hemisphere.",
+      "title": "Right hemisphere only flag",
+      "default": false
+    },
+    "fstal_flag": {
+      "type": "boolean",
+      "description": "Set movable to be tal and reg to be taliarach.xfm.",
+      "title": "FSTAL flag",
+      "default": false
+    },
+    "talxfmname": {
+      "type": "string",
+      "description": "Set movable to be tal and reg to be talxfmname.",
+      "title": "Talairach transform name"
+    },
+    "ixfm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "MNI-style inverse registration input matrix.",
+      "title": "Inverse registration matrix file"
+    },
+    "xfm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "MNI-style registration input matrix.",
+      "title": "Registration matrix file"
+    },
+    "xfmout": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "MNI-style registration output matrix.",
+      "title": "Output registration matrix file"
+    },
+    "fsl": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "FSL-style registration input matrix.",
+      "title": "FSL registration matrix input file"
+    },
+    "fslregout": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "FSL-Style registration output matrix.",
+      "title": "FSL registration matrix output file"
+    },
+    "freeview": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "FreeView registration output matrix.",
+      "title": "FreeView registration matrix output file"
+    },
+    "vox2vox": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Vox2vox matrix in ascii.",
+      "title": "Vox2vox matrix file"
+    },
+    "lta": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Linear Transform Array file.",
+      "title": "Linear Transform Array file"
+    },
+    "lta_inv": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read in LTA and invert.",
+      "title": "Inverted LTA file"
+    },
+    "ltaout": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output a Linear Transform Array.",
+      "title": "Output LTA file"
+    },
+    "ltaout_inv_flag": {
+      "type": "boolean",
+      "description": "Invert transform in ltaoutfile.",
+      "title": "LTA output invert flag",
+      "default": false
+    },
+    "feat": {
+      "type": "string",
+      "description": "Check example_func2standard registration.",
+      "title": "FEAT directory"
+    },
+    "fsfeat": {
+      "type": "string",
+      "description": "Check reg/freesurfer/register.dat registration.",
+      "title": "FSFEAT directory"
+    },
+    "identity_flag": {
+      "type": "boolean",
+      "description": "Use identity as registration matrix.",
+      "title": "Identity registration matrix flag",
+      "default": false
+    },
+    "subject_id": {
+      "type": "string",
+      "description": "Set subject id.",
+      "title": "Subject ID"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Use specified directory as SUBJECTS_DIR.",
+      "title": "Subjects directory"
+    },
+    "nofix_flag": {
+      "type": "boolean",
+      "description": "Don't fix old tkregister matrices.",
+      "title": "No fix flag",
+      "default": false
+    },
+    "float2int": {
+      "type": "string",
+      "description": "Specify old tkregister float2int.",
+      "title": "Float to int specification"
+    },
+    "title": {
+      "type": "string",
+      "description": "Set window title.",
+      "title": "Window title"
+    },
+    "tag_flag": {
+      "type": "boolean",
+      "description": "Tag movable volume near the col/row origin.",
+      "title": "Tag flag",
+      "default": false
+    },
+    "mov_orientation": {
+      "type": "string",
+      "description": "Supply orientation string for movable volume.",
+      "title": "Movable volume orientation"
+    },
+    "targ_orientation": {
+      "type": "string",
+      "description": "Supply orientation string for target volume.",
+      "title": "Target volume orientation"
+    },
+    "int": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Use registration from intermediate volume.",
+      "title": "Intermediate volume & registration"
+    },
+    "double_window_size_flag": {
+      "type": "boolean",
+      "description": "Double window size.",
+      "title": "Double window size flag",
+      "default": false
+    },
+    "window_scale": {
+      "type": "number",
+      "description": "Scale window by specified scale.",
+      "title": "Window scale"
+    },
+    "det": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Save determinant of registration matrix to specified file.",
+      "title": "Determinant output file"
+    },
+    "aseg_flag": {
+      "type": "boolean",
+      "description": "Load aseg and hit 'd' to toggle.",
+      "title": "Load aseg flag",
+      "default": false
+    },
+    "aparc_flag": {
+      "type": "boolean",
+      "description": "Load aparc+aseg and hit 'c' to toggle.",
+      "title": "Load aparc+aseg flag",
+      "default": false
+    },
+    "wmparc_flag": {
+      "type": "boolean",
+      "description": "Load wmparc and hit 'c' to toggle.",
+      "title": "Load wmparc flag",
+      "default": false
+    },
+    "gdiagno": {
+      "type": "number",
+      "description": "Set debug level.",
+      "title": "Debug level"
+    },
+    "trans": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Translation (mm) to apply to registration matrix.",
+      "title": "Translation vector"
+    },
+    "rot": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Rotation angles (deg) to apply to registration matrix.",
+      "title": "Rotation angles"
+    },
+    "conf_targ_flag": {
+      "type": "boolean",
+      "description": "Conform target (assumes reg computed to conform target, eg, GCA).",
+      "title": "Conform target flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "movable_volume",
+    "target_volume"
+  ]
+}

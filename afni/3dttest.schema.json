@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dttest++",
+  "description": "Gosset (Student) t-test of sets of 3D datasets in AFNI",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dttest++"
+    },
+    "setA": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Set A in short form, e.g., 'a+tlrc[3]' b+tlrc[3] ...'",
+      "title": "-setA"
+    },
+    "setB": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Set B in short form, e.g., 'x+tlrc[3]' y+tlrc[3] ...'",
+      "title": "-setB"
+    },
+    "setA_long": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify an overall name for the set of datasets (Long form). Example: -setA Green sub001 a+tlrc[3] sub002 b+tlrc[3] ...",
+      "title": "-setA (Long Form)"
+    },
+    "setB_long": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify an overall name for the set of datasets (Long form). Example: -setB Blue sub001 x+tlrc[3] sub002 y+tlrc[3] ...",
+      "title": "-setB (Long Form)"
+    },
+    "covariates": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing covariates.",
+      "title": "-covariates"
+    },
+    "labelA": {
+      "type": "string",
+      "description": "Label for the set (for Set A). Limited to 12 characters.",
+      "title": "-labelA"
+    },
+    "labelB": {
+      "type": "string",
+      "description": "Label for the set (for Set B). Limited to 12 characters.",
+      "title": "-labelB"
+    },
+    "setweightA": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with voxel-wise weights for -setA datasets.",
+      "title": "-setweightA"
+    },
+    "setweightB": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with voxel-wise weights for -setB datasets.",
+      "title": "-setweightB"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output the prefix name of the dataset result. For surface-based datasets, use -prefix p.niml.dset or -prefix p.gii.dset",
+      "title": "-prefix"
+    },
+    "resid": {
+      "type": "string",
+      "description": "Residuals will be output into a dataset with the given prefix.",
+      "title": "-resid"
+    },
+    "paired": {
+      "type": "boolean",
+      "description": "Specify to use a paired-sample t-test to compare setA and setB. Both sets must have the same cardinality.",
+      "title": "-paired",
+      "default": false
+    },
+    "unpooled": {
+      "type": "boolean",
+      "description": "Specify separate variance estimates for setA and setB (not pooled together).",
+      "title": "-unpooled",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set mask for dataset analysis.",
+      "title": "-mask"
+    },
+    "exblur": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Add extra Gaussian blurring kernel FWHM (mm). Example: -exblur 6",
+      "title": "-exblur"
+    },
+    "randomsign": {
+      "type": "boolean",
+      "description": "Randomize signs of datasets. Used with output from -resid to generate null hypothesis statistics.",
+      "title": "-randomsign",
+      "default": false
+    },
+    "permute": {
+      "type": "boolean",
+      "description": "With -randomsign, adds inter-set permutation to randomization when both sets are used.",
+      "title": "-permute",
+      "default": false
+    },
+    "ETAC": {
+      "type": "boolean",
+      "description": "Apply the Equitable Thresholding And Clustering (ETAC) method for thresholding results.",
+      "title": "-ETAC",
+      "default": false
+    },
+    "ETAC_blur": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "List of multiple levels of spatial blurring for ETAC. Example: -ETAC_blur 4 6",
+      "title": "-ETAC_blur"
+    },
+    "ETAC_opt": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify options for ETAC. Example: -ETAC_opt NN=2:sid=2:hpow=0,2:pthr=0.01,0.005,0.002,0.01:name=Fred",
+      "title": "-ETAC_opt"
+    },
+    "seed": {
+      "type": "number",
+      "description": "Random number seed for -randomsign and -permute/ETAC.",
+      "title": "-seed"
+    }
+  },
+  "required": [
+    "@type",
+    "setA"
+  ]
+}

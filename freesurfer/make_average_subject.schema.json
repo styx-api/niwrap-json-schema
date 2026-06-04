@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "make_average_subject",
+  "description": "Creates an average subject by averaging surfaces, curvatures, and volumes from a set of subjects.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/make_average_subject"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subject names",
+      "title": "Subjects"
+    },
+    "fsgd_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Get subject list from a FreeSurfer Group Descriptor file",
+      "title": "FSGD file"
+    },
+    "subject_list_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file containing all subject names",
+      "title": "Subject list file"
+    },
+    "average_subject_name": {
+      "type": "string",
+      "description": "Name of the average subject",
+      "title": "Average subject name"
+    },
+    "sd_out": {
+      "type": "string",
+      "description": "Directory to put output under instead of SUBJECTS_DIR",
+      "title": "Output directory"
+    },
+    "no_link": {
+      "type": "boolean",
+      "description": "Do not link back to the original SUBJECTS_DIR with --sd-out",
+      "title": "No link flag",
+      "default": false
+    },
+    "sdir": {
+      "type": "string",
+      "description": "Use an alternative SUBJECTS_DIR instead of the default one in the environment",
+      "title": "Subjects directory"
+    },
+    "ico_order": {
+      "type": "number",
+      "description": "Change order of icosahedron",
+      "title": "Icosahedron order"
+    },
+    "transform_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of transform file",
+      "title": "Transform file"
+    },
+    "surface_registration": {
+      "type": "string",
+      "description": "Alternative registration surface name",
+      "title": "Surface registration"
+    },
+    "no_surfaces": {
+      "type": "boolean",
+      "description": "Do not make average surfaces",
+      "title": "No surfaces flag",
+      "default": false
+    },
+    "no_volumes": {
+      "type": "boolean",
+      "description": "Do not make average volumes",
+      "title": "No volumes flag",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "Overwrite existing average subject data",
+      "title": "Force flag",
+      "default": false
+    },
+    "keep_all_orig": {
+      "type": "boolean",
+      "description": "Concatenate all original volumes into mri/orig.all.mgz",
+      "title": "Keep all original flag",
+      "default": false
+    },
+    "no_symlink": {
+      "type": "boolean",
+      "description": "Do not use symbolic links with surfaces, copy files instead",
+      "title": "No symlink flag",
+      "default": false
+    },
+    "no_ribbon": {
+      "type": "boolean",
+      "description": "Do not create ribbon.mgz and aparc+aseg.mgz files",
+      "title": "No ribbon flag",
+      "default": false
+    },
+    "no_surf2surf": {
+      "type": "boolean",
+      "description": "Use old parametric surface mapping method",
+      "title": "No surf2surf flag",
+      "default": false
+    },
+    "rca_threads": {
+      "type": "number",
+      "description": "Number of threads to pass to recon-all",
+      "title": "RCA threads"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show short descriptive help",
+      "title": "Help flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Show script version info",
+      "title": "Version flag",
+      "default": false
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Enable command echo for debugging",
+      "title": "Echo flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Enable debug mode, same as --echo",
+      "title": "Debug flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subjects",
+    "average_subject_name"
+  ]
+}

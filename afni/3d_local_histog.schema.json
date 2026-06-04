@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLocalHistog",
+  "description": "This program computes a local histogram at each voxel in the input datasets.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLocalHistog"
+    },
+    "nbhd_option": {
+      "type": "string",
+      "description": "Defines the region around each voxel to be used for the statistics calculation. Available formats: 'SPHERE(r)', 'RECT(a,b,c)', 'RHDD(a)', 'TOHD(a)'.",
+      "title": "Neighborhood String"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use string 'ppp' as the prefix for the output dataset.",
+      "title": "Output Prefix"
+    },
+    "hsave": {
+      "type": "string",
+      "description": "Save the overall histogram into file 'sss'. This file will have 2 columns: value and count.",
+      "title": "Histogram Save File"
+    },
+    "lab_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use file 'LL' as a label file.",
+      "title": "Label File"
+    },
+    "exclude": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Exclude values from 'a' to 'b' from the counting. This option can be used more than once.",
+      "title": "Exclude Values"
+    },
+    "exc_nonlab": {
+      "type": "boolean",
+      "description": "If '-lab_file' is used, then exclude all values that are NOT in the label file (except for 0).",
+      "title": "Exclude Non-Labeled Values Flag",
+      "default": false
+    },
+    "mincount": {
+      "type": "number",
+      "description": "Exclude values which appear in the overall histogram fewer than 'mm' times.",
+      "title": "Minimum Count"
+    },
+    "probability": {
+      "type": "boolean",
+      "description": "Convert each count to a probability by dividing by the total number of counts at each voxel.",
+      "title": "Probability Flag",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Stop the highly informative progress reports.",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "input_datasets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input dataset(s) for the 3dLocalHistog tool",
+      "title": "Input Datasets"
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "input_datasets"
+  ]
+}

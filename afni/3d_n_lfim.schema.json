@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dNLfim",
+  "description": "Nonlinear regression for each voxel of the input AFNI 3d+time data set",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dNLfim"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of 3d+time data file for input",
+      "title": "Input file"
+    },
+    "signal_model": {
+      "type": "string",
+      "description": "Name of the nonlinear signal model",
+      "title": "Signal model"
+    },
+    "noise_model": {
+      "type": "string",
+      "description": "Name of the linear noise model",
+      "title": "Noise model"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use the 0 sub-brick of dataset 'mset' as a mask to indicate which voxels to analyze",
+      "title": "Mask file"
+    },
+    "ignore": {
+      "type": "integer",
+      "description": "Skip this number of initial images in the time series for regression analysis; default = 0",
+      "title": "Ignore initial images"
+    },
+    "intr": {
+      "type": "integer",
+      "description": "Set the TR of the input 3d+time dataset",
+      "title": "Input TR"
+    },
+    "tr": {
+      "type": "integer",
+      "description": "Directly set the TR of the time series model",
+      "title": "Time series TR"
+    },
+    "time_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "ASCII file containing each time point in the time series.",
+      "title": "Time file"
+    },
+    "sconstr": {
+      "type": "string",
+      "description": "Constraints for signal parameters; c <= gs[k] <= d",
+      "title": "Signal parameter constraints"
+    },
+    "nconstr": {
+      "type": "string",
+      "description": "Constraints for noise parameters; c+b[k] <= gn[k] <= d+b[k]",
+      "title": "Noise parameter constraints"
+    },
+    "nabs": {
+      "type": "boolean",
+      "description": "Use absolute constraints for noise parameters; c <= gn[k] <= d",
+      "title": "Absolute constraints flag",
+      "default": false
+    },
+    "nrand": {
+      "type": "integer",
+      "description": "Number of random test points; default=19999",
+      "title": "Number of random test points"
+    },
+    "nbest": {
+      "type": "integer",
+      "description": "Use b best test points to start; default=9",
+      "title": "Best test points to start"
+    },
+    "rmsmin": {
+      "type": "number",
+      "description": "Minimum RMS error to reject reduced model",
+      "title": "Minimum RMS error"
+    },
+    "fdisp": {
+      "type": "number",
+      "description": "Display results for those voxels whose F-statistic is greater than fval; default=999.0",
+      "title": "Display F-statistic threshold"
+    },
+    "progress": {
+      "type": "integer",
+      "description": "Display results every ival number of voxels",
+      "title": "Progress interval"
+    },
+    "voxel_count": {
+      "type": "boolean",
+      "description": "Display the current voxel index",
+      "title": "Voxel count flag",
+      "default": false
+    },
+    "simplex": {
+      "type": "boolean",
+      "description": "Use Nelder-Mead simplex method for least-square minimization (default)",
+      "title": "Nelder-Mead simplex method",
+      "default": false
+    },
+    "powell": {
+      "type": "boolean",
+      "description": "Use Powell's NEWUOA method instead of Nelder-Mead simplex method",
+      "title": "Powell's NEWUOA method",
+      "default": false
+    },
+    "both": {
+      "type": "boolean",
+      "description": "Use both Powell's and Nelder-Mead method",
+      "title": "Use both minimization methods",
+      "default": false
+    },
+    "freg": {
+      "type": "string",
+      "description": "Perform F-test for significance of the regression; output 'fift' is written to prefix filename fname",
+      "title": "F-test regression filename prefix"
+    },
+    "frsqr": {
+      "type": "string",
+      "description": "Calculate R^2 (coef. of multiple determination); store along with F-test for regression; output 'fift' is written to prefix filename fname",
+      "title": "R^2 calculation filename prefix"
+    },
+    "fsmax": {
+      "type": "string",
+      "description": "Estimate signed maximum of signal; store along with F-test for regression; output 'fift' is written to prefix filename fname",
+      "title": "Signed maximum signal estimate filename prefix"
+    },
+    "ftmax": {
+      "type": "string",
+      "description": "Estimate time of signed maximum; store along with F-test for regression; output 'fift' is written to prefix filename fname",
+      "title": "Time of signed maximum estimate filename prefix"
+    },
+    "fpsmax": {
+      "type": "string",
+      "description": "Calculate (signed) maximum percentage change of signal from baseline; output 'fift' is written to prefix filename fname",
+      "title": "Maximum percentage change filename prefix"
+    },
+    "farea": {
+      "type": "string",
+      "description": "Calculate area between signal and baseline; store with F-test for regression; output 'fift' is written to prefix filename fname",
+      "title": "Area between signal and baseline filename prefix"
+    },
+    "fparea": {
+      "type": "string",
+      "description": "Percentage area of signal relative to baseline; store with F-test for regression; output 'fift' is written to prefix filename fname",
+      "title": "Percentage area of signal filename prefix"
+    },
+    "fscoef": {
+      "type": "string",
+      "description": "Estimate kth signal parameter gs[k]; store along with F-test for regression; output 'fift' is written to prefix filename fname",
+      "title": "Signal parameter estimate filename prefix"
+    },
+    "fncoef": {
+      "type": "string",
+      "description": "Estimate kth noise parameter gn[k]; store along with F-test for regression; output 'fift' is written to prefix filename fname",
+      "title": "Noise parameter estimate filename prefix"
+    },
+    "tscoef": {
+      "type": "string",
+      "description": "Perform t-test for significance of kth signal parameter gs[k]; output 'fitt' is written to prefix filename fname",
+      "title": "T-test significance for signal parameter filename prefix"
+    },
+    "tncoef": {
+      "type": "string",
+      "description": "Perform t-test for significance of kth noise parameter gn[k]; output 'fitt' is written to prefix filename fname",
+      "title": "T-test significance for noise parameter filename prefix"
+    },
+    "bucket": {
+      "type": "string",
+      "description": "Create one AFNI 'bucket' dataset containing n sub-bricks; n=0 creates default output; output 'bucket' is written to prefixname",
+      "title": "AFNI 'bucket' dataset prefix"
+    },
+    "brick": {
+      "type": "string",
+      "description": "Specify sub-brick contents for 'bucket' dataset",
+      "title": "Sub-brick specification"
+    },
+    "nofdr": {
+      "type": "boolean",
+      "description": "Don't write the FDR (q vs. threshold) curves into the output dataset.",
+      "title": "No FDR flag",
+      "default": false
+    },
+    "sfit": {
+      "type": "string",
+      "description": "Prefix for output 3d+time signal model fit",
+      "title": "Signal fit prefix"
+    },
+    "snfit": {
+      "type": "string",
+      "description": "Prefix for output 3d+time signal+noise fit",
+      "title": "Signal+noise fit prefix"
+    },
+    "jobs": {
+      "type": "integer",
+      "description": "Run the program with 'J' jobs (sub-processes). 1 to 32.",
+      "title": "Number of jobs"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "signal_model",
+    "noise_model"
+  ]
+}

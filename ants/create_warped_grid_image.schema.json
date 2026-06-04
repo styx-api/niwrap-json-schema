@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateWarpedGridImage",
+  "description": "Create a warped grid image based on the specified deformation field.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/CreateWarpedGridImage"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "description": "The dimensionality of the input image.",
+      "title": "Image Dimension"
+    },
+    "deformation_field": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing the deformation field to be applied.",
+      "title": "Deformation Field"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "The filename of the output warped grid image.",
+      "title": "Output Image"
+    },
+    "directions": {
+      "type": "string",
+      "description": "Directions for the grid warping, e.g., '1x0x0'.",
+      "title": "Directions"
+    },
+    "grid_spacing": {
+      "type": "string",
+      "description": "Spacing of the grid, e.g., '10x10x10'.",
+      "title": "Grid Spacing"
+    },
+    "grid_sigma": {
+      "type": "string",
+      "description": "Sigma value for the grid smoothing, e.g., '1x1x1'.",
+      "title": "Grid Sigma"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "deformation_field",
+    "output_image"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PERFORM REDUCTION OPERATION ON A CIFTI FILE",
+  "description": "For the specified direction (default ROW), perform a reduction operation along that direction.  The direction can be either an integer starting from 1, or the strings 'ROW' or 'COLUMN'.  The reduction operators are as follows:\n\nMAX: the maximum value\nMIN: the minimum value\nINDEXMAX: the 1-based index of the maximum value\nINDEXMIN: the 1-based index of the minimum value\nSUM: add all values\nPRODUCT: multiply all values\nMEAN: the mean of the data\nSTDEV: the standard deviation (N denominator)\nSAMPSTDEV: the sample standard deviation (N-1 denominator)\nVARIANCE: the variance of the data\nTSNR: mean divided by sample standard deviation (N-1 denominator)\nCOV: sample standard deviation (N-1 denominator) divided by mean\nL2NORM: square root of sum of squares\nMEDIAN: the median of the data\nMODE: the mode of the data\nCOUNT_NONZERO: the number of nonzero elements in the data\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_reduce"
+    },
+    "cifti_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the cifti file to reduce"
+    },
+    "operation": {
+      "type": "string",
+      "description": "the reduction operator to use"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "the output cifti file"
+    },
+    "direction": {
+      "type": "string",
+      "description": "specify what direction to reduce along"
+    },
+    "exclude_outliers": {
+      "type": "object",
+      "properties": {
+        "sigma_below": {
+          "type": "number",
+          "description": "number of standard deviations below the mean to include"
+        },
+        "sigma_above": {
+          "type": "number",
+          "description": "number of standard deviations above the mean to include"
+        }
+      },
+      "required": [
+        "sigma_below",
+        "sigma_above"
+      ],
+      "description": "exclude non-numeric values and outliers by standard deviation"
+    },
+    "only_numeric": {
+      "type": "boolean",
+      "description": "exclude non-numeric values",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "cifti_in",
+    "operation",
+    "cifti_out"
+  ]
+}

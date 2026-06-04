@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "inspec",
+  "description": "Outputs information found from specfile.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/inspec"
+    },
+    "specfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Spec file to be read",
+      "title": "Spec file"
+    },
+    "newspecname": {
+      "type": "string",
+      "description": "Rewrite spec file",
+      "title": "New spec file name"
+    },
+    "detail": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 3,
+      "description": "Level of output detail. Default is 1 in general, 0 with -LRmerge. Available levels are 0, 1, 2, and 3.",
+      "title": "Output detail level"
+    },
+    "leftspec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Merge two spec files in a way that makes sense for viewing in SUMA",
+      "title": "Left spec file"
+    },
+    "rightspec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Merge two spec files in a way that makes sense for viewing in SUMA",
+      "title": "Right spec file"
+    },
+    "state_rm": {
+      "type": "string",
+      "description": "Get rid of state STATE_RM from the specfile",
+      "title": "Remove state"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "specfile"
+  ]
+}

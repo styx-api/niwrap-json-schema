@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ANATICOR",
+  "description": "Script to produce a residual time series cleaned by ANATICOR model",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@ANATICOR"
+    },
+    "ts": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Time series volume which should have already undergone preprocessing steps such as despiking, RetroIcor, RVT correction, time shifting, and volume registration.",
+      "title": "TimeSeriesVol"
+    },
+    "polort": {
+      "type": "string",
+      "description": "Polynomial for linear trend removal. Use the same order as for afni_proc.py",
+      "title": "polort"
+    },
+    "motion": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Head motion parameters from 3dvolreg, also created by afni_proc.py",
+      "title": "motion"
+    },
+    "aseg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Aseg file from FreeSurfer's segmentation. This aseg volume must be in register with the EPI time series.",
+      "title": "aseg"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use output (residual time series) for a prefix",
+      "title": "output"
+    },
+    "radius": {
+      "type": "number",
+      "description": "The radius of a local sphere mask in mm. Default is 15 mm for high resolution 1.7x1.7x3mm data.",
+      "title": "radius"
+    },
+    "view": {
+      "type": "string",
+      "description": "Set the view of the output data. Default is +orig. Choose from +orig, +acpc, or +tlrc.",
+      "title": "view"
+    },
+    "nuisance": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Other nuisance regressors. Each regressor is a column in .1D file",
+      "title": "nuisance"
+    },
+    "no_ventricles": {
+      "type": "boolean",
+      "description": "Do not include LVe regressor",
+      "title": "no_ventricles",
+      "default": false
+    },
+    "Rsq_WMe": {
+      "type": "boolean",
+      "description": "Produce an explained variance map for WMeLOCAL regressor.",
+      "title": "Rsq_WMe",
+      "default": false
+    },
+    "coverage": {
+      "type": "boolean",
+      "description": "Produce a spatial coverage map of WMeLOCAL regressor",
+      "title": "coverage",
+      "default": false
+    },
+    "verb": {
+      "type": "boolean",
+      "description": "Verbose flag",
+      "title": "verb",
+      "default": false
+    },
+    "dirty": {
+      "type": "boolean",
+      "description": "Keep temporary files",
+      "title": "dirty",
+      "default": false
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Echo each script command for debugging",
+      "title": "echo",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "ts",
+    "polort",
+    "motion",
+    "aseg",
+    "prefix"
+  ]
+}

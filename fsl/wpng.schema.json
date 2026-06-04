@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "wpng",
+  "description": "Simple PGM/PPM/PAM to PNG Converter",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/wpng"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input PNM file (binary PGM 'P5', PPM 'P6' or PAM 'P8')",
+      "title": "Input file"
+    },
+    "gamma": {
+      "type": "number",
+      "description": "Transfer-function exponent (``gamma'') of the image in floating-point format (e.g., ``0.45455''). If image looks correct on given display system, image gamma is equal to inverse of display-system exponent, i.e., 1 / (LUT * CRT) (where LUT = lookup-table exponent and CRT = CRT exponent; first varies, second is usually 2.2, all are positive)",
+      "title": "Gamma"
+    },
+    "bgcolor": {
+      "type": "string",
+      "description": "Desired background color for alpha-channel images, in 7-character hex RGB format (e.g., ``#ff7700'' for orange: same as HTML colors)",
+      "title": "Background color"
+    },
+    "text_flag": {
+      "type": "boolean",
+      "description": "Prompt interactively for text info (tEXt chunks)",
+      "title": "Text flag",
+      "default": false
+    },
+    "time_flag": {
+      "type": "boolean",
+      "description": "Include a tIME chunk (last modification time)",
+      "title": "Time flag",
+      "default": false
+    },
+    "interlace_flag": {
+      "type": "boolean",
+      "description": "Write interlaced PNG image",
+      "title": "Interlace flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

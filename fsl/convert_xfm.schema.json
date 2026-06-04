@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "convert_xfm",
+  "description": "convert_xfm is a utility that is used to convert between different transformation file formats. It can read and write ascii 4x4 matrices. In addition, it can be used to concatenate two transforms (using -concat with the second transform) or to find the inverse transformation (using -inverse).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/convert_xfm"
+    },
+    "out_file": {
+      "type": "string",
+      "description": "Final transformation matrix.",
+      "title": "Out file"
+    },
+    "invert_xfm": {
+      "type": "boolean",
+      "description": "Invert input transformation.",
+      "title": "Invert xfm",
+      "default": false
+    },
+    "concat_xfm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A File. Write joint transformation of two input matrices.",
+      "title": "Concat xfm"
+    },
+    "fix_scale_skew": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A File. Use secondary matrix to fix scale and skew.",
+      "title": "Fix scale skew"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input transformation matrix.",
+      "title": "In file"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dSEM",
+  "description": "Computes path coefficients for connection matrix in Structural Equation Modeling (SEM).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dSEM"
+    },
+    "theta": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Connection matrix 1D file with initial representation",
+      "title": "Theta File"
+    },
+    "correlation_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Correlation matrix 1D file",
+      "title": "Correlation Matrix"
+    },
+    "residual_variance": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Residual variance vector 1D file",
+      "title": "Residual Variance"
+    },
+    "degrees_of_freedom": {
+      "type": "number",
+      "description": "Degrees of freedom",
+      "title": "Degrees of Freedom"
+    },
+    "max_iterations": {
+      "type": "integer",
+      "description": "Maximum number of iterations for convergence (Default=10000). Values can range from 1 to any positive integer less than 10000.",
+      "title": "Maximum Iterations"
+    },
+    "number_random_trials": {
+      "type": "integer",
+      "description": "Number of random trials before optimization (Default = 100).",
+      "title": "Random Trials"
+    },
+    "limits": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Lower and upper limits for connection coefficients (Default = -1.0 to 1.0)",
+      "title": "Limits"
+    },
+    "calculate_cost": {
+      "type": "boolean",
+      "description": "No modeling at all, just calculate the cost function for the coefficients as given in the theta file.",
+      "title": "Calculate Cost Flag",
+      "default": false
+    },
+    "verbose": {
+      "type": "integer",
+      "description": "Print info every nnnnn steps",
+      "title": "Verbose"
+    },
+    "tree_growth": {
+      "type": "boolean",
+      "description": "Search for best model by growing a model for one additional coefficient from the previous model for n-1 coefficients.",
+      "title": "Tree Growth Flag",
+      "default": false
+    },
+    "model_search": {
+      "type": "boolean",
+      "description": "Search for best model by growing a model for one additional coefficient from the previous model for n-1 coefficients.",
+      "title": "Model Search Flag",
+      "default": false
+    },
+    "max_paths": {
+      "type": "integer",
+      "description": "Maximum number of paths to include (Default = 1000).",
+      "title": "Maximum Paths"
+    },
+    "stop_cost": {
+      "type": "number",
+      "description": "Stop searching for paths when cost function is below this value (Default = 0.1).",
+      "title": "Stop Cost"
+    },
+    "forest_growth": {
+      "type": "boolean",
+      "description": "Search over all possible models by comparing models at incrementally increasing number of path coefficients.",
+      "title": "Forest Growth Flag",
+      "default": false
+    },
+    "grow_all": {
+      "type": "boolean",
+      "description": "Search over all possible models by comparing models at incrementally increasing number of path coefficients.",
+      "title": "Grow All Flag",
+      "default": false
+    },
+    "leafpicker": {
+      "type": "boolean",
+      "description": "Expands the search optimization to look at multiple paths to avoid local minimum. This method is the default technique for tree growth and standard coefficient searches.",
+      "title": "Leafpicker Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "theta",
+    "correlation_matrix",
+    "residual_variance",
+    "degrees_of_freedom"
+  ]
+}

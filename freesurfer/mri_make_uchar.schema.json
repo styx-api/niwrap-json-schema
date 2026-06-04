@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_make_uchar",
+  "description": "Tool to adjust intensity of brain MRI images using a Talairach transformation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_make_uchar"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume file.",
+      "title": "Input Volume"
+    },
+    "talairach_xform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Talairach transformation file.",
+      "title": "Talairach Xform"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume file.",
+      "title": "Output Volume"
+    },
+    "first_percentile": {
+      "type": "number",
+      "description": "First percentile for histogram calculation (default 0.01).",
+      "title": "First Percentile"
+    },
+    "wm_percentile": {
+      "type": "number",
+      "description": "White matter percentile for histogram calculation (default 0.9).",
+      "title": "White Matter Percentile"
+    },
+    "max_radius": {
+      "type": "number",
+      "description": "Maximum radius for voxel consideration (default 50).",
+      "title": "Max Radius"
+    },
+    "cumulative_histo": {
+      "type": "string",
+      "description": "Cumulative histogram file.",
+      "title": "Cumulative Histogram"
+    },
+    "vradvol": {
+      "type": "string",
+      "description": "Volume file where everything outside MAX_R is set to 0.",
+      "title": "VRad Volume"
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "talairach_xform",
+    "output_volume"
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_normalize",
+  "description": "Normalize the white-matter, optionally based on control points. The input volume is converted into a new volume where white matter image values all range around 110.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_normalize"
+    },
+    "input_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input MRI volume file",
+      "title": "Input Volume"
+    },
+    "output_vol": {
+      "type": "string",
+      "description": "Output MRI volume file",
+      "title": "Output Volume"
+    },
+    "norm_iters": {
+      "type": "number",
+      "description": "Use n 3D normalization iterations (default=2)",
+      "title": "3D Normalization Iterations"
+    },
+    "disable_1d": {
+      "type": "boolean",
+      "description": "Disable 1D normalization",
+      "title": "Disable 1D Normalization",
+      "default": false
+    },
+    "nonmax_suppress": {
+      "type": "number",
+      "description": "Turn non-maximum suppression on (1) or off (0) when using interior of surfaces",
+      "title": "Non-Maximum Suppression"
+    },
+    "conform": {
+      "type": "boolean",
+      "description": "Interpolate and embed volume to be 256^3",
+      "title": "Conform Volume",
+      "default": false
+    },
+    "nonconform": {
+      "type": "boolean",
+      "description": "Do not conform the volume",
+      "title": "Non-Conform Volume",
+      "default": false
+    },
+    "gentle": {
+      "type": "boolean",
+      "description": "Perform kinder gentler normalization",
+      "title": "Gentle Normalization",
+      "default": false
+    },
+    "control_points": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use control points file (usually control.dat)",
+      "title": "Control Points File"
+    },
+    "fonly_control_points": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use only control points file",
+      "title": "Only Use Control Points File"
+    },
+    "lonly_labels": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use only control points in label file",
+      "title": "Only Use Labels"
+    },
+    "labels": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use control points in label file",
+      "title": "Label File"
+    },
+    "write_volumes": {
+      "type": "string",
+      "description": "Write control point (c) and bias field (b) volumes",
+      "title": "Write Control Point and Bias Field Volumes"
+    },
+    "intensity_above": {
+      "type": "number",
+      "description": "Use control point with intensity above target (default=25.0)",
+      "title": "Control Point Intensity Above"
+    },
+    "intensity_below": {
+      "type": "number",
+      "description": "Use control point with intensity below target (default=10.0)",
+      "title": "Control Point Intensity Below"
+    },
+    "intensity_gradient": {
+      "type": "number",
+      "description": "Use max intensity/mm gradient (default=1.000)",
+      "title": "Max Intensity Gradient"
+    },
+    "prune": {
+      "type": "boolean",
+      "description": "Turn pruning of control points on/off (default=off)",
+      "title": "Prune Control Points",
+      "default": false
+    },
+    "no_gentle_cp": {
+      "type": "boolean",
+      "description": "Do not use gentle normalization with control points file",
+      "title": "No Gentle Control Points",
+      "default": false
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file to use",
+      "title": "Mask File"
+    },
+    "atlas_transform": {
+      "type": "string",
+      "description": "Use atlas to exclude control points from being in non-brain regions",
+      "title": "Atlas Transform"
+    },
+    "noskull": {
+      "type": "boolean",
+      "description": "Do not consider skull regions",
+      "title": "No Skull",
+      "default": false
+    },
+    "monkey": {
+      "type": "boolean",
+      "description": "Turns off 1D, sets num_3d_iter=1",
+      "title": "Monkey Mode",
+      "default": false
+    },
+    "nosnr": {
+      "type": "boolean",
+      "description": "Disable SNR normalization",
+      "title": "Disable SNR Normalization",
+      "default": false
+    },
+    "sigma_smooth": {
+      "type": "number",
+      "description": "Smooth bias field with given sigma",
+      "title": "Sigma Smooth"
+    },
+    "aseg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Aseg file for processing",
+      "title": "Aseg File"
+    },
+    "debug_v": {
+      "type": "string",
+      "description": "For debugging",
+      "title": "Debug Vectors"
+    },
+    "debug_d": {
+      "type": "string",
+      "description": "For debugging",
+      "title": "Debug Gradients"
+    },
+    "renorm_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Load volume and use all points in it that are exactly 110 as control points",
+      "title": "Renormalization Volume"
+    },
+    "checknorm_vol": {
+      "type": "string",
+      "description": "Load volume and remove all control points that aren't in [min max]",
+      "title": "Check Normalization"
+    },
+    "load_read_cp": {
+      "type": "string",
+      "description": "For reading control points and bias field",
+      "title": "Read Control Points"
+    },
+    "cp_output_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output final control points as a volume (only with -aseg)",
+      "title": "Control Points Output Volume"
+    },
+    "surface_transform": {
+      "type": "string",
+      "description": "Normalize based on the skeleton of the interior of the transformed surface",
+      "title": "Surface and Transform"
+    },
+    "seed_value": {
+      "type": "number",
+      "description": "Set random number generator to seed N",
+      "title": "Random Seed Value"
+    },
+    "print_help": {
+      "type": "boolean",
+      "description": "Print usage",
+      "title": "Print Help",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_vol",
+    "output_vol"
+  ]
+}

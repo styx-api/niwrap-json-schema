@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfClust",
+  "description": "A program to perform clustering analysis surfaces",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SurfClust"
+    },
+    "specfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The surface spec file",
+      "title": "Spec file"
+    },
+    "input_surface": {
+      "type": "string",
+      "description": "The input surface name",
+      "title": "Input surface name"
+    },
+    "input_surf_name": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Full name of the input surface",
+      "title": "Input surface file"
+    },
+    "input_dataset": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "The input dataset and the index of the datacolumn to use (index 0 for 1st column). Values of 0 indicate inactive nodes.",
+      "title": "Input dataset"
+    },
+    "rmm": {
+      "type": "number",
+      "description": "Maximum distance between an activated node and the cluster to which it belongs.",
+      "title": "RMM radius"
+    },
+    "amm2": {
+      "type": "number",
+      "description": "Minimum area for clusters",
+      "title": "Minimum area"
+    },
+    "min_nodes": {
+      "type": "number",
+      "description": "Minimum nodes for clusters",
+      "title": "Minimum nodes"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output. Default is the prefix of the input dataset.",
+      "title": "Output prefix"
+    },
+    "out_clusterdset": {
+      "type": "boolean",
+      "description": "Output a clustered version of input dataset",
+      "title": "Output clustered dataset",
+      "default": false
+    },
+    "out_roidset": {
+      "type": "boolean",
+      "description": "Output an ROI dataset with the rank of its cluster",
+      "title": "Output ROI dataset",
+      "default": false
+    },
+    "out_fulllist": {
+      "type": "boolean",
+      "description": "Output a value for all nodes of input surface",
+      "title": "Output full list",
+      "default": false
+    },
+    "sort_none": {
+      "type": "boolean",
+      "description": "No sorting of ROI clusters",
+      "title": "Sort none",
+      "default": false
+    },
+    "sort_n_nodes": {
+      "type": "boolean",
+      "description": "Sorting based on number of nodes in cluster",
+      "title": "Sort by number of nodes",
+      "default": false
+    },
+    "sort_area": {
+      "type": "boolean",
+      "description": "Sorting based on area of clusters (default)",
+      "title": "Sort by area",
+      "default": false
+    },
+    "thresh_col": {
+      "type": "number",
+      "description": "Index of thresholding column. Default is column 0.",
+      "title": "Threshold column index"
+    },
+    "thresh": {
+      "type": "number",
+      "description": "Apply thresholding prior to clustering.",
+      "title": "Threshold value"
+    },
+    "athresh": {
+      "type": "number",
+      "description": "Apply absolute thresholding prior to clustering",
+      "title": "Absolute threshold value"
+    },
+    "ir_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Apply thresholding in range. A node n is considered if thresh_col[n] >= R0 && thresh_col[n] <= R1",
+      "title": "In range threshold"
+    },
+    "ex_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Apply thresholding outside of range. A node n is considered if thresh_col[n] < R0 || thresh_col[n] > R1",
+      "title": "Out of range threshold"
+    },
+    "prepend_node_index": {
+      "type": "boolean",
+      "description": "Force the output dataset to have node indices in column 0 of output.",
+      "title": "Prepend node index",
+      "default": false
+    },
+    "update": {
+      "type": "number",
+      "description": "Pacify me when perc of the data have been processed. perc is between 1% and 50%. Default is no update.",
+      "title": "Update percentage"
+    },
+    "no_cent": {
+      "type": "boolean",
+      "description": "Do not find the central nodes",
+      "title": "Do not find central nodes",
+      "default": false
+    },
+    "cent": {
+      "type": "boolean",
+      "description": "Do find the central nodes (default)",
+      "title": "Find central nodes",
+      "default": false
+    },
+    "novolreg": {
+      "type": "boolean",
+      "description": "Ignore any Rotate, Volreg, Tagalign, or WarpDrive transformations present in the Surface Volume.",
+      "title": "Ignore volume registrations",
+      "default": false
+    },
+    "noxform": {
+      "type": "boolean",
+      "description": "Same as -novolreg",
+      "title": "Ignore transformations",
+      "default": false
+    },
+    "set_env": {
+      "type": "string",
+      "description": "Set environment variable ENVname to be ENVvalue. Quotes are necessary.",
+      "title": "Set environment variable"
+    },
+    "trace": {
+      "type": "boolean",
+      "description": "Turns on In/Out debug and Memory tracing.",
+      "title": "Trace",
+      "default": false
+    },
+    "trace_extreme": {
+      "type": "boolean",
+      "description": "Turns on extreme tracing.",
+      "title": "Extreme trace",
+      "default": false
+    },
+    "no_memory_trace": {
+      "type": "boolean",
+      "description": "Turn off memory tracing.",
+      "title": "Turn off memory tracing",
+      "default": false
+    },
+    "yes_memory_trace": {
+      "type": "boolean",
+      "description": "Turn on memory tracing (default).",
+      "title": "Turn on memory tracing",
+      "default": false
+    },
+    "mini_help": {
+      "type": "boolean",
+      "description": "Mini help, same as -help in many cases.",
+      "title": "Mini help",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "The entire help output.",
+      "title": "Help",
+      "default": false
+    },
+    "extreme_help": {
+      "type": "boolean",
+      "description": "Extreme help, same as -help in majority of cases.",
+      "title": "Extreme help",
+      "default": false
+    },
+    "view_help": {
+      "type": "boolean",
+      "description": "Open help in text editor. AFNI will try to find a GUI editor on your machine. You can control which it should use by setting environment variable AFNI_GUI_EDITOR.",
+      "title": "Open help in editor",
+      "default": false
+    },
+    "web_help": {
+      "type": "boolean",
+      "description": "Open help in web browser. AFNI will try to find a browser. You can control which it should use by setting environment variable AFNI_GUI_EDITOR.",
+      "title": "Open help in web browser",
+      "default": false
+    },
+    "find_help": {
+      "type": "string",
+      "description": "Look for lines in this program's -help output that match (approximately) the given word.",
+      "title": "Find help keyword"
+    },
+    "raw_help": {
+      "type": "boolean",
+      "description": "Help string unedited.",
+      "title": "Raw help string",
+      "default": false
+    },
+    "spx_help": {
+      "type": "boolean",
+      "description": "Help string in sphinx format, but do not try to autoformat.",
+      "title": "Sphinx help",
+      "default": false
+    },
+    "aspx_help": {
+      "type": "boolean",
+      "description": "Help string in sphinx format with autoformatting of options.",
+      "title": "Autoformat sphinx help",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset",
+    "rmm"
+  ]
+}

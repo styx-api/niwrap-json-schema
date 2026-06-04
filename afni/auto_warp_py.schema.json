@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "auto_warp.py",
+  "description": "Nonlinear registration tool.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/auto_warp.py"
+    },
+    "base": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of reference or template volume",
+      "title": "Base Template Volume"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of dataset to be registered",
+      "title": "Input Dataset"
+    },
+    "skull_strip_input": {
+      "type": "boolean",
+      "description": "Do not skullstrip input dataset",
+      "title": "Skull Strip Input",
+      "default": false
+    },
+    "qblur": {
+      "type": "string",
+      "description": "Specify 3dQwarp blurs for base and source volumes",
+      "title": "QBlur"
+    },
+    "qworkhard": {
+      "type": "string",
+      "description": "Set the two values for 3dQwarp's -workhard option",
+      "title": "QWorkhard"
+    },
+    "qw_opts": {
+      "type": "string",
+      "description": "Pass all of OPTS as extra options directly to 3dQwarp",
+      "title": "QW Options"
+    },
+    "keep_rm_files": {
+      "type": "boolean",
+      "description": "Don't delete any of the temporary files created",
+      "title": "Keep Temporary Files",
+      "default": false
+    },
+    "prep_only": {
+      "type": "boolean",
+      "description": "Do preprocessing steps only without alignment",
+      "title": "Preprocessing Only",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help",
+      "default": false
+    },
+    "hview": {
+      "type": "boolean",
+      "description": "Display help message in a text editor",
+      "title": "Help in Editor",
+      "default": false
+    },
+    "limited_help": {
+      "type": "boolean",
+      "description": "Display limited help message",
+      "title": "Limited Help",
+      "default": false
+    },
+    "option_help": {
+      "type": "boolean",
+      "description": "Display help for all available options",
+      "title": "Option Help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Show version number and exit",
+      "title": "Version",
+      "default": false
+    },
+    "ver": {
+      "type": "boolean",
+      "description": "Show version number and exit",
+      "title": "Ver",
+      "default": false
+    },
+    "verb": {
+      "type": "boolean",
+      "description": "Be verbose in messages and options",
+      "title": "Verbose",
+      "default": false
+    },
+    "save_script": {
+      "type": "boolean",
+      "description": "Save executed script in given file",
+      "title": "Save Script",
+      "default": false
+    },
+    "skip_affine": {
+      "type": "boolean",
+      "description": "Skip the affine registration process",
+      "title": "Skip Affine",
+      "default": false
+    },
+    "skull_strip_base": {
+      "type": "boolean",
+      "description": "Do not skullstrip base/template dataset",
+      "title": "Skull Strip Base",
+      "default": false
+    },
+    "ex_mode": {
+      "type": "string",
+      "description": "Command execution mode: quiet, echo, dry_run, script",
+      "title": "Execution Mode"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Overwrite existing files",
+      "title": "Overwrite Files",
+      "default": false
+    },
+    "suffix": {
+      "type": "string",
+      "description": "Suffix to add to output files",
+      "title": "Output Suffix"
+    },
+    "child_anat": {
+      "type": "string",
+      "description": "Names of child anatomical datasets",
+      "title": "Child Anatomical Datasets"
+    },
+    "warp_dxyz": {
+      "type": "number",
+      "description": "Resolution used for computing warp (cubic only)",
+      "title": "Warp Resolution"
+    },
+    "affine_dxyz": {
+      "type": "number",
+      "description": "Resolution used for computing initial transform (cubic only)",
+      "title": "Affine Transform Resolution"
+    },
+    "affine_input_xmat": {
+      "type": "string",
+      "description": "Affine transform to put input in standard space. Special values are: 'AUTO' to use @auto_tlrc, 'ID' to do nothing, 'FILE.1D' for a pre-computed matrix FILE.1D",
+      "title": "Affine Input Transform"
+    },
+    "smooth_anat": {
+      "type": "boolean",
+      "description": "Smooth anatomy before registration",
+      "title": "Smooth Anatomy",
+      "default": false
+    },
+    "smooth_base": {
+      "type": "boolean",
+      "description": "Smooth template before registration",
+      "title": "Smooth Base",
+      "default": false
+    },
+    "unifize_input": {
+      "type": "boolean",
+      "description": "Unifize the input or not",
+      "title": "Unifize Input",
+      "default": false
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Set directory for output datasets",
+      "title": "Output Directory"
+    },
+    "followers": {
+      "type": "string",
+      "description": "Specify follower datasets",
+      "title": "Follower Datasets"
+    },
+    "affine_followers_xmat": {
+      "type": "string",
+      "description": "Specify follower datasets' affine transforms",
+      "title": "Affine Follower Transforms"
+    },
+    "skullstrip_opts": {
+      "type": "string",
+      "description": "3dSkullstrip miscellaneous options",
+      "title": "Skullstrip Options"
+    },
+    "at_opts": {
+      "type": "string",
+      "description": "@auto_tlrc miscellaneous options",
+      "title": "Auto TLRC Options"
+    }
+  },
+  "required": [
+    "@type",
+    "base",
+    "input"
+  ]
+}

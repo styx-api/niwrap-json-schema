@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_mat2d_plot.py",
+  "description": "Plots simple matrices output from 3dNetCorr (*.netcc) and 3dTrackID (*.grid).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_mat2d_plot.py"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of *.netcc or *.grid file with matrices to be plotted",
+      "title": "Input File"
+    },
+    "matrices": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of matrices to be plotted, identified by their parameter name. If no list is provided, then all matrices in the input file will be plotted.",
+      "title": "Matrices to Plot"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output basename for image(s). Note that this can include path information, but the name of each matrix and the file extension will be appended to it.",
+      "title": "Output Prefix"
+    },
+    "file_type": {
+      "type": "string",
+      "description": "Filetype, given as extension (e.g., png, jpg). Available filetypes depend slightly on your OS and setup.",
+      "title": "Output File Type"
+    },
+    "dpi": {
+      "type": "number",
+      "description": "Spatial resolution (dots per inch) of output images.",
+      "title": "DPI"
+    },
+    "min_colorbar": {
+      "type": "number",
+      "description": "Minimum value of the colorbar.",
+      "title": "Colorbar Minimum"
+    },
+    "max_colorbar": {
+      "type": "number",
+      "description": "Maximum value of the colorbar.",
+      "title": "Colorbar Maximum"
+    },
+    "fs_xticks": {
+      "type": "number",
+      "description": "Font size of ticks along the x-axis.",
+      "title": "X-ticks Font Size"
+    },
+    "fs_yticks": {
+      "type": "number",
+      "description": "Font size of ticks along the y-axis.",
+      "title": "Y-ticks Font Size"
+    },
+    "fs_title": {
+      "type": "number",
+      "description": "Font size of the title.",
+      "title": "Title Font Size"
+    },
+    "fs_cbar": {
+      "type": "number",
+      "description": "Font size of the colorbar.",
+      "title": "Colorbar Font Size"
+    },
+    "cbar_n_intervals": {
+      "type": "number",
+      "description": "Number of intervals on colorbars for enumeration purposes. This controls how many numbers appear along the colorbar (which would be NI +1).",
+      "title": "Colorbar Intervals"
+    },
+    "cbar": {
+      "type": "string",
+      "description": "Name of the colorbar to use. The available colormaps can be found online.",
+      "title": "Colorbar"
+    },
+    "cbar_width_perc": {
+      "type": "number",
+      "description": "Width of the colorbar as a percentage of the image.",
+      "title": "Colorbar Width Percentage"
+    },
+    "no_colorbar": {
+      "type": "boolean",
+      "description": "Disable the colorbar in the image.",
+      "title": "Disable Colorbar",
+      "default": false
+    },
+    "figsize_x": {
+      "type": "number",
+      "description": "Width of the created image in inches.",
+      "title": "Figure Width"
+    },
+    "figsize_y": {
+      "type": "number",
+      "description": "Height of the created image in inches.",
+      "title": "Figure Height"
+    },
+    "hold_image": {
+      "type": "boolean",
+      "description": "In addition to saving an image file, open the image and keep displaying it until a key is pressed in the terminal.",
+      "title": "Hold Image",
+      "default": false
+    },
+    "tight_layout": {
+      "type": "boolean",
+      "description": "Use matplotlib's tight layout functionality in arranging the plot.",
+      "title": "Tight Layout",
+      "default": false
+    },
+    "xticks_off": {
+      "type": "boolean",
+      "description": "Don't display labels along the x-axis.",
+      "title": "Disable X Ticks",
+      "default": false
+    },
+    "yticks_off": {
+      "type": "boolean",
+      "description": "Don't display labels along the y-axis.",
+      "title": "Disable Y Ticks",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Display the version number of the program.",
+      "title": "Version",
+      "default": false
+    },
+    "date": {
+      "type": "boolean",
+      "description": "Display the release/editing date of the current version.",
+      "title": "Date",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help in the terminal.",
+      "title": "Help",
+      "default": false
+    },
+    "help_view": {
+      "type": "boolean",
+      "description": "Display help in a separate text editor.",
+      "title": "Help View",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file"
+  ]
+}

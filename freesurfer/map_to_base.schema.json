@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "map_to_base",
+  "description": "Maps an image or surface from a time point directory (either cross-sectional or longitudinal) to the base space and outputs it in the appropriate base directory.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/map_to_base"
+    },
+    "baseid": {
+      "type": "string",
+      "description": "Identifier of the base.",
+      "title": "Base ID"
+    },
+    "tpid": {
+      "type": "string",
+      "description": "Identifier of the time point, without the '.long.baseid' suffix.",
+      "title": "Time Point ID"
+    },
+    "input_image": {
+      "type": "string",
+      "description": "Input image, e.g., norm.mgz, aseg.mgz, lh.white.",
+      "title": "Input Image"
+    },
+    "resample_type": {
+      "type": "string",
+      "description": "Resample type. 'interpolate' for norm, T1, orig; 'nearest' for aseg; 'surface' for surfaces.",
+      "title": "Resample Type"
+    },
+    "cross": {
+      "type": "string",
+      "description": "If '1', input is from cross sectionals; default is to use longitudinal directories.",
+      "title": "Cross Sectional Flag"
+    }
+  },
+  "required": [
+    "@type",
+    "baseid",
+    "tpid",
+    "input_image",
+    "resample_type"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ROI_decluster",
+  "description": "Script to remove small clusters or standalone voxels from an ROI/atlas dataset",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@ROI_decluster"
+    },
+    "input_dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Required input dataset. This dataset should be set of integer values. The program mostly assumes approximate isotropic voxels.",
+      "title": "Input Dataset"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Directory name for output. All output goes to this directory.",
+      "title": "Output Directory"
+    },
+    "nvox_thresh": {
+      "type": "number",
+      "description": "Number of voxels in a cluster to keep",
+      "title": "Voxel Threshold"
+    },
+    "frac_thresh": {
+      "type": "number",
+      "description": "Fraction of voxels in a cluster to keep [0.0-1.0]",
+      "title": "Fraction Threshold"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Base name of final output dataset, i.e. baseprefix.nii.gz",
+      "title": "Output Prefix"
+    },
+    "neighborhood_type": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3,
+      "description": "Neighborhood type using in finding mode: 1 - facing neighbors, 2 - edges, 3 - corners",
+      "title": "Neighborhood Type"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dset"
+  ]
+}

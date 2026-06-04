@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mean",
+  "description": "Diagnostic tool for analyzing and computing mean values for FSL data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/mean"
+    },
+    "datafile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Regressor data file",
+      "title": "Data file"
+    },
+    "maskfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file",
+      "title": "Mask file"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "debug_level": {
+      "type": "number",
+      "description": "Set debug level",
+      "title": "Debug level"
+    },
+    "timing_flag": {
+      "type": "boolean",
+      "description": "Turn timing on",
+      "title": "Timing flag",
+      "default": false
+    },
+    "log_dir": {
+      "type": "string",
+      "description": "Log directory (default is logdir)",
+      "title": "Log directory"
+    },
+    "forcedir_flag": {
+      "type": "boolean",
+      "description": "Use the actual directory name given - i.e. don't add + to make a new directory",
+      "title": "Force directory flag",
+      "default": false
+    },
+    "inference_tech": {
+      "type": "string",
+      "description": "Inference technique: mcmc or laplace (default is mcmc)",
+      "title": "Inference technique"
+    },
+    "num_jumps": {
+      "type": "number",
+      "description": "Number of jumps to be made by MCMC (default is 5000)",
+      "title": "Number of jumps"
+    },
+    "num_burnin": {
+      "type": "number",
+      "description": "Number of jumps at start of MCMC to be discarded (default is 500)",
+      "title": "Number of burn-in jumps"
+    },
+    "num_sample_every": {
+      "type": "number",
+      "description": "Number of jumps for each sample (MCMC) (default is 1)",
+      "title": "Number of jumps per sample"
+    },
+    "num_update_proposalevery": {
+      "type": "number",
+      "description": "Number of jumps for each update to the proposal density std (MCMC) (default is 40)",
+      "title": "Number of jumps per proposal update"
+    },
+    "acceptance_rate": {
+      "type": "number",
+      "description": "Acceptance rate to aim for (MCMC) (default is 0.6)",
+      "title": "Acceptance rate"
+    },
+    "seed": {
+      "type": "number",
+      "description": "Seed for pseudo random number generator",
+      "title": "Seed"
+    },
+    "error_precision": {
+      "type": "number",
+      "description": "Value to fix error precision to (default is -1, which means error precision is not fixed)",
+      "title": "Error precision"
+    },
+    "noamp_flag": {
+      "type": "boolean",
+      "description": "Turn off Analytical Marginalisation of error Precision",
+      "title": "No AMP flag",
+      "default": false
+    },
+    "prior_mean": {
+      "type": "number",
+      "description": "Prior mean",
+      "title": "Prior mean"
+    },
+    "prior_std": {
+      "type": "number",
+      "description": "Prior standard deviation",
+      "title": "Prior standard deviation"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "datafile",
+    "maskfile"
+  ]
+}

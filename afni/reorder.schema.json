@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@Reorder",
+  "description": "Reorder sub-bricks of a dataset based on event mapping. Works similarly to the Reorder plugin.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@Reorder"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset to reorder (e.g. EPI+tlrc)",
+      "title": "Input Dataset"
+    },
+    "mapfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "TR to event mapping file (e.g. events.txt)",
+      "title": "Map File"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output dataset",
+      "title": "Output Prefix"
+    },
+    "offset": {
+      "type": "number",
+      "description": "Offset mapfile TR indices by OFFSET (in TRs)",
+      "title": "Offset"
+    },
+    "save_work": {
+      "type": "boolean",
+      "description": "Do not delete work directory (reorder.work.dir) at the end",
+      "title": "Save Work Directory",
+      "default": false
+    },
+    "test": {
+      "type": "boolean",
+      "description": "Just report sub-bricks, do not create datasets",
+      "title": "Test Only",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show help message",
+      "title": "Help",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset",
+    "mapfile",
+    "prefix"
+  ]
+}

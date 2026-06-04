@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dMSE",
+  "description": "Computes voxelwise multi-scale entropy",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dMSE"
+    },
+    "polynomial_order": {
+      "type": "integer",
+      "minimum": -1,
+      "maximum": 3,
+      "description": "Remove polynomial trend of order 'm' (default is m=1; m=-1 means no detrending).",
+      "title": "Polynomial order"
+    },
+    "autoclip": {
+      "type": "boolean",
+      "description": "Clip off low-intensity regions in the dataset.",
+      "title": "Autoclip flag",
+      "default": false
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Use automask to clip low-intensity regions.",
+      "title": "Automask flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask to define 'in-brain' voxels.",
+      "title": "Mask"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output dataset (default is 'MSE').",
+      "title": "Output prefix"
+    },
+    "scales": {
+      "type": "number",
+      "description": "The number of scales to be used in the calculation (default is 5).",
+      "title": "Number of scales"
+    },
+    "entwin": {
+      "type": "number",
+      "description": "The window size used in the calculation (default is 2).",
+      "title": "Window size"
+    },
+    "rthresh": {
+      "type": "number",
+      "description": "The radius threshold for determining if values are the same in the SampleEn calculation, in fractions of the standard deviation (default is 0.5).",
+      "title": "Radius threshold"
+    },
+    "dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset (e.g., dset.nii.gz)",
+      "title": "Dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "dset"
+  ]
+}

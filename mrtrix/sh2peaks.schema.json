@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "sh2peaks",
+  "description": "Extract the peaks of a spherical harmonic function in each voxel.\n\nPeaks of the spherical harmonic function in each voxel are located by commencing a Newton search along each of a set of pre-specified directions\n\nThe spherical harmonic coefficients are stored according the conventions described the main documentation, which can be found at the following link: \nhttps://mrtrix.readthedocs.io/en/3.0.4/concepts/spherical_harmonics.html\n\nReferences:\n\nJeurissen, B.; Leemans, A.; Tournier, J.-D.; Jones, D.K.; Sijbers, J. Investigating the prevalence of complex fiber configurations in white matter tissue with diffusion magnetic resonance imaging. Human Brain Mapping, 2013, 34(11), 2747-2766",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/sh2peaks"
+    },
+    "num": {
+      "type": "integer",
+      "description": "the number of peaks to extract (default: 3).",
+      "title": "num"
+    },
+    "direction": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "phi": {
+            "type": "number",
+            "description": "the direction of a peak to estimate. The algorithm will attempt to find the same number of peaks as have been specified using this option.",
+            "title": "phi"
+          },
+          "theta": {
+            "type": "number",
+            "description": "the direction of a peak to estimate. The algorithm will attempt to find the same number of peaks as have been specified using this option.",
+            "title": "theta"
+          }
+        },
+        "required": [
+          "phi",
+          "theta"
+        ]
+      },
+      "description": "the direction of a peak to estimate. The algorithm will attempt to find the same number of peaks as have been specified using this option.",
+      "title": "direction"
+    },
+    "peaks": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the program will try to find the peaks that most closely match those in the image provided.",
+      "title": "peaks"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "only peak amplitudes greater than the threshold will be considered.",
+      "title": "threshold"
+    },
+    "seeds": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify a set of directions from which to start the multiple restarts of the optimisation (by default, the built-in 60 direction set is used)",
+      "title": "seeds"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "only perform computation within the specified binary brain mask image.",
+      "title": "mask"
+    },
+    "fast": {
+      "type": "boolean",
+      "description": "use lookup table to compute associated Legendre polynomials (faster, but approximate).",
+      "title": "fast",
+      "default": false
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "SH": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input image of SH coefficients.",
+      "title": "SH"
+    },
+    "output": {
+      "type": "string",
+      "description": "the output image. Each volume corresponds to the x, y & z component of each peak direction vector in turn.",
+      "title": "output"
+    }
+  },
+  "required": [
+    "@type",
+    "SH",
+    "output"
+  ]
+}

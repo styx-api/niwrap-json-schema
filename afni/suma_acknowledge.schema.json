@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@suma_acknowledge",
+  "description": "Demo script to create a graph dataset to show names of individuals and groups, potentially useful for acknowledgements in a talk.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@suma_acknowledge"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Required input text file with format for each line: first last groupname.",
+      "title": "Input file"
+    },
+    "surface_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Required surface to place nodes.",
+      "title": "Surface file"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Output prefix for graph dataset.",
+      "title": "Output prefix"
+    },
+    "center_flag": {
+      "type": "boolean",
+      "description": "Put center coord at x,y,z=0,0,0. Otherwise, uses average xyz in surface.",
+      "title": "Center flag",
+      "default": false
+    },
+    "subsurface_file": {
+      "type": "string",
+      "description": "Surface for surrounding members of group (use ld2, ld4, ld5, ld6, .... default is ld5).",
+      "title": "Subsurface file"
+    },
+    "scale_factor": {
+      "type": "number",
+      "description": "Scale xyz for group nodes (default is 1.0).",
+      "title": "Scale factor"
+    },
+    "reduce_factor": {
+      "type": "number",
+      "description": "Scale xyz offsets for member nodes (xyz/r), default is 10.",
+      "title": "Reduce factor"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "surface_file",
+    "output_prefix"
+  ]
+}

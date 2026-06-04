@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "abids_tool.py",
+  "description": "A tool to work with BIDS formatted datasets created with dcm2niix_afni or dcm2niix, mainly to pull information from the matching JSON file and refit the input dataset using 3drefit.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/abids_tool.py"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "At least one 3d+time dataset in NIFTI format.",
+      "title": "Input Files"
+    },
+    "tr_match": {
+      "type": "boolean",
+      "description": "Check if the TR in the json file matches the TR from input dataset header. (Returns 1 if match)",
+      "title": "TR Match",
+      "default": false
+    },
+    "add_tr": {
+      "type": "boolean",
+      "description": "Add the TR from the BIDS json file to the input dataset using 3drefit.",
+      "title": "Add TR",
+      "default": false
+    },
+    "add_slice_times": {
+      "type": "boolean",
+      "description": "Add the slice times from the BIDS json file to the input dataset using 3drefit.",
+      "title": "Add Slice Times",
+      "default": false
+    },
+    "copy_prefix": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Copy both the NIFTI dataset(s) and matching .json file(s) to PREFIX. Must have the same number of prefixes as datasets.",
+      "title": "Copy Prefix"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Show help information and exit.",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GENERATE CORRELATION OF ROWS IN A CIFTI FILE",
+  "description": "For each row (or each row inside an roi if -roi-override is specified), correlate to all other rows.  The -cifti-roi suboption to -roi-override may not be specified with any other -*-roi suboption, but you may specify the other -*-roi suboptions together.\n\nWhen using the -fisher-z option, the output is NOT a Z-score, it is artanh(r), to do further math on this output, consider using -cifti-math.\n\nRestricting the memory usage will make it calculate the output in chunks, and if the input file size is more than 70% of the memory limit, it will also read through the input file as rows are required, resulting in several passes through the input file (once per chunk).  Memory limit does not need to be an integer, you may also specify 0 to calculate a single output row at a time (this may be very slow).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_correlation"
+    },
+    "cifti": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "input cifti file"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "output cifti file"
+    },
+    "roi_override": {
+      "type": "object",
+      "properties": {
+        "left_roi": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "use an roi for left hempsphere"
+        },
+        "right_roi": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "use an roi for right hempsphere"
+        },
+        "cerebellum_roi": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "use an roi for cerebellum"
+        },
+        "vol_roi": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "use an roi for volume"
+        },
+        "cifti_roi": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "use a cifti file for combined rois"
+        }
+      },
+      "description": "perform correlation from a subset of rows to all rows"
+    },
+    "weights": {
+      "type": "string",
+      "description": "specify column weights"
+    },
+    "fisher_z": {
+      "type": "boolean",
+      "description": "apply fisher small z transform (ie, artanh) to correlation",
+      "default": false
+    },
+    "no_demean": {
+      "type": "boolean",
+      "description": "instead of correlation, do dot product of rows, then normalize by diagonal",
+      "default": false
+    },
+    "covariance": {
+      "type": "boolean",
+      "description": "compute covariance instead of correlation",
+      "default": false
+    },
+    "mem_limit": {
+      "type": "number",
+      "description": "restrict memory usage"
+    }
+  },
+  "required": [
+    "@type",
+    "cifti",
+    "cifti_out"
+  ]
+}

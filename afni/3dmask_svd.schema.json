@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dmaskSVD",
+  "description": "Computes the principal singular vector of the time series vectors extracted from the input dataset over the input mask",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dmaskSVD"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Input dataset"
+    },
+    "vnorm": {
+      "type": "boolean",
+      "description": "L2 normalize all time series before SVD",
+      "title": "Normalize time series flag",
+      "default": false
+    },
+    "sval": {
+      "type": "number",
+      "description": "Output singular vectors 0 .. a (default a=0 = first one only)",
+      "title": "Singular vector output"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Define the mask (default is entire dataset)",
+      "title": "Mask file"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Automatic mask definition",
+      "title": "Automask flag",
+      "default": false
+    },
+    "polort": {
+      "type": "number",
+      "description": "Remove polynomial trend (default 0 if not specified)",
+      "title": "Polynomial trend removal order"
+    },
+    "bandpass": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Bandpass filter (mutually exclusive with -polort)",
+      "title": "Bandpass filter"
+    },
+    "ort": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Time series to remove from the data before SVD-ization. You can give more than 1 '-ort' option. 'xx.1D' can contain more than 1 column.",
+      "title": "Removing orthogonals time series"
+    },
+    "alt_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alternative way to give the input dataset name",
+      "title": "Alternative input dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

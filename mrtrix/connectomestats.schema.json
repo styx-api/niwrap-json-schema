@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "connectomestats",
+  "description": "Connectome group-wise statistics at the edge level using non-parametric permutation testing.\n\nFor the TFNBS algorithm, default parameters for statistical enhancement have been set based on the work in: \nVinokur, L.; Zalesky, A.; Raffelt, D.; Smith, R.E. & Connelly, A. A Novel Threshold-Free Network-Based Statistics Method: Demonstration using Simulated Pathology. OHBM, 2015, 4144; \nand: \nVinokur, L.; Zalesky, A.; Raffelt, D.; Smith, R.E. & Connelly, A. A novel threshold-free network-based statistical method: Demonstration and parameter optimisation using in vivo simulated pathology. In Proc ISMRM, 2015, 2846. \nNote however that not only was the optimisation of these parameters not very precise, but the outcomes of statistical inference (for both this algorithm and the NBS method) can vary markedly for even small changes to enhancement parameters. Therefore the specificity of results obtained using either of these methods should be interpreted with caution.\n\nIn some software packages, a column of ones is automatically added to the GLM design matrix; the purpose of this column is to estimate the \"global intercept\", which is the predicted value of the observed variable if all explanatory variables were to be zero. However there are rare situations where including such a column would not be appropriate for a particular experimental design. Hence, in MRtrix3 statistical inference commands, it is up to the user to determine whether or not this column of ones should be included in their design matrix, and add it explicitly if necessary. The contrast matrix must also reflect the presence of this additional column.\n\nReferences:\n\n* If using the NBS algorithm: \nZalesky, A.; Fornito, A. & Bullmore, E. T. Network-based statistic: Identifying differences in brain networks. \nNeuroImage, 2010, 53, 1197-1207\n\n* If using the TFNBS algorithm: \nBaggio, H.C.; Abos, A.; Segura, B.; Campabadal, A.; Garcia-Diaz, A.; Uribe, C.; Compta, Y.; Marti, M.J.; Valldeoriola, F.; Junque, C. Statistical inference in brain graphs using threshold-free network-based statistics.HBM, 2018, 39, 2289-2302\n\n* If using the -nonstationary option: \nSalimi-Khorshidi, G.; Smith, S.M. & Nichols, T.E. Adjusting the effect of nonstationarity in cluster-based and TFCE inference. \nNeuroimage, 2011, 54(3), 2006-19",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/connectomestats"
+    },
+    "notest": {
+      "type": "boolean",
+      "description": "don't perform statistical inference; only output population statistics (effect size, stdev etc)",
+      "title": "notest",
+      "default": false
+    },
+    "errors": {
+      "type": "string",
+      "description": "specify nature of errors for shuffling; options are: ee,ise,both (default: ee)",
+      "title": "errors"
+    },
+    "exchange_within": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify blocks of observations within each of which data may undergo restricted exchange",
+      "title": "exchange_within"
+    },
+    "exchange_whole": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify blocks of observations that may be exchanged with one another (for independent and symmetric errors, sign-flipping will occur block-wise)",
+      "title": "exchange_whole"
+    },
+    "strong": {
+      "type": "boolean",
+      "description": "use strong familywise error control across multiple hypotheses",
+      "title": "strong",
+      "default": false
+    },
+    "nshuffles": {
+      "type": "integer",
+      "description": "the number of shuffles (default: 5000)",
+      "title": "nshuffles"
+    },
+    "permutations": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "manually define the permutations (relabelling). The input should be a text file defining a m x n matrix, where each relabelling is defined as a column vector of size m, and the number of columns, n, defines the number of permutations. Can be generated with the palm_quickperms function in PALM (http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/PALM). Overrides the -nshuffles option.",
+      "title": "permutations"
+    },
+    "nonstationarity": {
+      "type": "boolean",
+      "description": "perform non-stationarity correction",
+      "title": "nonstationarity",
+      "default": false
+    },
+    "skew_nonstationarity": {
+      "type": "number",
+      "description": "specify the skew parameter for empirical statistic calculation (default for this command is 1)",
+      "title": "skew_nonstationarity"
+    },
+    "nshuffles_nonstationarity": {
+      "type": "integer",
+      "description": "the number of shuffles to use when precomputing the empirical statistic image for non-stationarity correction (default: 5000)",
+      "title": "nshuffles_nonstationarity"
+    },
+    "permutations_nonstationarity": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "manually define the permutations (relabelling) for computing the emprical statistics for non-stationarity correction. The input should be a text file defining a m x n matrix, where each relabelling is defined as a column vector of size m, and the number of columns, n, defines the number of permutations. Can be generated with the palm_quickperms function in PALM (http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/PALM) Overrides the -nshuffles_nonstationarity option.",
+      "title": "permutations_nonstationarity"
+    },
+    "tfce_dh": {
+      "type": "number",
+      "description": "the height increment used in the tfce integration (default: 0.1)",
+      "title": "tfce_dh"
+    },
+    "tfce_e": {
+      "type": "number",
+      "description": "tfce extent exponent (default: 0.4)",
+      "title": "tfce_e"
+    },
+    "tfce_h": {
+      "type": "number",
+      "description": "tfce height exponent (default: 3)",
+      "title": "tfce_h"
+    },
+    "variance": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "define variance groups for the G-statistic; measurements for which the expected variance is equivalent should contain the same index",
+      "title": "variance"
+    },
+    "ftests": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "perform F-tests; input text file should contain, for each F-test, a row containing ones and zeros, where ones indicate the rows of the contrast matrix to be included in the F-test.",
+      "title": "ftests"
+    },
+    "fonly": {
+      "type": "boolean",
+      "description": "only assess F-tests; do not perform statistical inference on entries in the contrast matrix",
+      "title": "fonly",
+      "default": false
+    },
+    "column": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "add a column to the design matrix corresponding to subject edge-wise values (note that the contrast matrix must include an additional column for each use of this option); the text file provided via this option should contain a file name for each subject",
+      "title": "column"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "the t-statistic value to use in threshold-based clustering algorithms",
+      "title": "threshold"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "a text file listing the file names of the input connectomes",
+      "title": "input"
+    },
+    "algorithm": {
+      "type": "string",
+      "description": "the algorithm to use in network-based clustering/enhancement. Options are: nbs, tfnbs, none",
+      "title": "algorithm"
+    },
+    "design": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the design matrix",
+      "title": "design"
+    },
+    "contrast": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the contrast matrix",
+      "title": "contrast"
+    },
+    "output": {
+      "type": "string",
+      "description": "the filename prefix for all output.",
+      "title": "output"
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "algorithm",
+    "design",
+    "contrast",
+    "output"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "applyxfm4D",
+  "description": "Applies 4D transformation matrices to 4D volumes",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/applyxfm4D"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input 4D volume (e.g. img.nii.gz)",
+      "title": "Input volume"
+    },
+    "ref_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference volume (e.g. ref.nii.gz)",
+      "title": "Reference volume"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume after applying transformation (e.g. output.nii.gz)",
+      "title": "Output volume"
+    },
+    "transformation_matrix": {
+      "type": "string",
+      "description": "Transformation matrix file or directory",
+      "title": "Transformation matrix"
+    },
+    "interpolation_method": {
+      "type": "string",
+      "description": "Interpolation method; options are nearestneighbour (or nn), trilinear, spline, sinc; default is sinc",
+      "title": "Interpolation method"
+    },
+    "single_matrix_flag": {
+      "type": "boolean",
+      "description": "Flag to specify a single transformation matrix",
+      "title": "Single matrix flag",
+      "default": false
+    },
+    "four_digit_flag": {
+      "type": "boolean",
+      "description": "Flag to use four digits in naming files",
+      "title": "Four digit flag",
+      "default": false
+    },
+    "user_prefix": {
+      "type": "string",
+      "description": "User-defined prefix for output files",
+      "title": "User prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "ref_volume",
+    "output_volume",
+    "transformation_matrix"
+  ]
+}

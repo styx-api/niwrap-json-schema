@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_path2label",
+  "description": "Converts a path file to a label or a label file to a path file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_path2label"
+    },
+    "input_file": {
+      "type": "string",
+      "description": "Input file, either a path or label file.",
+      "title": "Input File"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output file, either a path or label file.",
+      "title": "Output File"
+    },
+    "single": {
+      "type": "boolean",
+      "description": "Only convert a single path, and do not use sentinel values.",
+      "title": "Single Path Flag",
+      "default": false
+    },
+    "path_to_label": {
+      "type": "boolean",
+      "description": "Treat input as a path and output a label.",
+      "title": "Path to Label Flag",
+      "default": false
+    },
+    "label_to_path": {
+      "type": "boolean",
+      "description": "Treat input as a label and output a path.",
+      "title": "Label to Path Flag",
+      "default": false
+    },
+    "connect": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Connect path; input and output must be paths; requires subject and hemi.",
+      "title": "Connect Flag"
+    },
+    "fill": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Fill already closed, connected path; input must be a path, output must be a label; requires subject, hemi, and seedvtx.",
+      "title": "Fill Flag"
+    },
+    "confillx": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Connect and fill path; input must be a path, output must be a label; requires surface_fname and seedvtx.",
+      "title": "Confillx Flag"
+    },
+    "confill": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Connect and fill path; input must be a path, output must be a label; requires subject, hemi, and seedvtx.",
+      "title": "Confill Flag"
+    },
+    "source_file": {
+      "type": "string",
+      "description": "The path file, if path2label.",
+      "title": "Source File Flag"
+    },
+    "dest_file": {
+      "type": "string",
+      "description": "The label file, if path2label.",
+      "title": "Destination File Flag"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file"
+  ]
+}

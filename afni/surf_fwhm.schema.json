@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfFWHM",
+  "description": "A program for calculating local and global FWHM.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SurfFWHM"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset for which the FWHM is to be calculated.",
+      "title": "Input file"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Node mask so that only nodes in the mask are used to obtain estimates.",
+      "title": "Node mask"
+    },
+    "surf_1": {
+      "type": "string",
+      "description": "Option for specifying the surface over which the input dataset is defined.",
+      "title": "Surface 1"
+    },
+    "surf_sphere": {
+      "type": "string",
+      "description": "Spherical version of -SURF_1 for Local FWHM estimates.",
+      "title": "Surface Sphere"
+    },
+    "clean": {
+      "type": "boolean",
+      "description": "Strip text from output to simplify parsing.",
+      "title": "Clean output",
+      "default": false
+    },
+    "detrend": {
+      "type": "number",
+      "description": "Detrend to order 'q'. If q is not given, the program picks q=NT/30.",
+      "title": "Detrend"
+    },
+    "detpoly": {
+      "type": "number",
+      "description": "Detrend with polynomials of order p.",
+      "title": "Detrend polynomial"
+    },
+    "detprefix": {
+      "type": "string",
+      "description": "Save the detrended file into a dataset with prefix 'd'.",
+      "title": "Detrend prefix"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix of output data set.",
+      "title": "Output prefix"
+    },
+    "vox_size": {
+      "type": "number",
+      "description": "Specify the nominal voxel size in mm.",
+      "title": "Voxel size"
+    },
+    "neighborhood": {
+      "type": "number",
+      "description": "Neighborhood radius R for local FWHM estimates.",
+      "title": "Neighborhood radius"
+    },
+    "ok_warn": {
+      "type": "boolean",
+      "description": "Flag to set the mode to ok_warn.",
+      "title": "OK Warn",
+      "default": false
+    },
+    "examples": {
+      "type": "boolean",
+      "description": "Show command line examples and quit.",
+      "title": "Examples",
+      "default": false
+    },
+    "slice": {
+      "type": "boolean",
+      "description": "Use the contours from planar intersections to estimate gradients. For testing and development purposes only.",
+      "title": "Slice",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file"
+  ]
+}

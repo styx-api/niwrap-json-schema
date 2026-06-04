@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_jacobian",
+  "description": "Compute the Jacobian of a morph with FreeSurfer",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_jacobian"
+    },
+    "morph_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "3D morph input file",
+      "title": "3D Morph File"
+    },
+    "template_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Template volume file",
+      "title": "Template Volume File"
+    },
+    "output_vol": {
+      "type": "string",
+      "description": "Output volume file",
+      "title": "Output Volume File"
+    },
+    "atlas_coord": {
+      "type": "boolean",
+      "description": "Output is written in atlas coordinate system",
+      "title": "Atlas Coordinate System Flag",
+      "default": false
+    },
+    "write_area_vols": {
+      "type": "boolean",
+      "description": "Writing area volumes",
+      "title": "Write Area Volumes Flag",
+      "default": false
+    },
+    "log_jacobian": {
+      "type": "boolean",
+      "description": "Taking log of Jacobian values before saving",
+      "title": "Log Jacobian Flag",
+      "default": false
+    },
+    "smooth_sigma": {
+      "type": "number",
+      "description": "Smoothing Jacobian volume with sigma",
+      "title": "Smoothing Sigma"
+    },
+    "zero_mean_log": {
+      "type": "boolean",
+      "description": "Make log Jacobian zero mean",
+      "title": "Zero Mean Log Flag",
+      "default": false
+    },
+    "tm3d": {
+      "type": "boolean",
+      "description": "The input morph (m3z) originated from tm3d (mri_cvs_register)",
+      "title": "TM3D Originated Flag",
+      "default": false
+    },
+    "help1": {
+      "type": "boolean",
+      "description": "Writing out help",
+      "title": "Help Flag 1",
+      "default": false
+    },
+    "help2": {
+      "type": "boolean",
+      "description": "Writing out help",
+      "title": "Help Flag 2",
+      "default": false
+    },
+    "dt": {
+      "type": "boolean",
+      "description": "DT option (description not provided in help text)",
+      "title": "DT Flag",
+      "default": false
+    },
+    "debug_voxel": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Debug voxel with specified Gx, Gy, Gz coordinates",
+      "title": "Debug Voxel Coordinates"
+    },
+    "remove": {
+      "type": "boolean",
+      "description": "Remove option (description not provided in help text)",
+      "title": "Remove Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "morph_file",
+    "template_vol",
+    "output_vol"
+  ]
+}

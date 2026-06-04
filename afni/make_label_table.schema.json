@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@MakeLabelTable",
+  "description": "Script used to create, modify, and transform label tables",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@MakeLabelTable"
+    },
+    "labeltable": {
+      "type": "string",
+      "description": "Name of output label table",
+      "title": "Label Table"
+    },
+    "atlas_pointlist": {
+      "type": "string",
+      "description": "Instead of a label table, produce an atlas point list",
+      "title": "Atlas Point List"
+    },
+    "lab_r": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Define a label with its minimum and maximum key values",
+      "title": "Label Range Definition"
+    },
+    "lab_v": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Define a label and its value",
+      "title": "Label Value Definition"
+    },
+    "lab_file_delim": {
+      "type": "string",
+      "description": "Set column delimiter for -lab_file option",
+      "title": "Label File Delimiter"
+    },
+    "lab_file": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify labels and keys from a text file",
+      "title": "Label File"
+    },
+    "dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Attach the label table (or atlas point list) to dataset",
+      "title": "Dataset"
+    },
+    "longnames": {
+      "type": "number",
+      "description": "Allow for another column of long names for regions",
+      "title": "Long Names Column Index"
+    },
+    "last_longname_col": {
+      "type": "number",
+      "description": "Limit long names to nth column",
+      "title": "Last Long Name Column Index"
+    },
+    "centers": {
+      "type": "boolean",
+      "description": "Compute center of mass location for each ROI",
+      "title": "Centers Flag",
+      "default": false
+    },
+    "centertype": {
+      "type": "string",
+      "description": "Different ways to compute centers (Icent, Dcent, cm)",
+      "title": "Center Type"
+    },
+    "centermask": {
+      "type": "string",
+      "description": "Calculate center of mass locations using a subset of voxels",
+      "title": "Center Mask"
+    },
+    "skip_novoxels": {
+      "type": "boolean",
+      "description": "Skip regions without voxels",
+      "title": "Skip No Voxels Flag",
+      "default": false
+    },
+    "all_labels": {
+      "type": "boolean",
+      "description": "Return a listing of all labels",
+      "title": "All Labels Flag",
+      "default": false
+    },
+    "all_keys": {
+      "type": "boolean",
+      "description": "Return a listing of all keys",
+      "title": "All Keys Flag",
+      "default": false
+    },
+    "lkeys": {
+      "type": "string",
+      "description": "Return the keys whose labels match a given label",
+      "title": "Label Keys"
+    },
+    "rkeys": {
+      "type": "string",
+      "description": "Return the range (min max) of keys whose labels match a given label",
+      "title": "Range Keys"
+    },
+    "klabel": {
+      "type": "string",
+      "description": "Return the label associated with a given key",
+      "title": "Key Label"
+    },
+    "match_label": {
+      "type": "string",
+      "description": "Return labels matching a given label",
+      "title": "Match Label"
+    },
+    "labeltable_of_dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dump the labeltable from a dataset",
+      "title": "Label Table of Dataset"
+    },
+    "word_label_match": {
+      "type": "boolean",
+      "description": "Use word matching for labels",
+      "title": "Word Label Match Flag",
+      "default": false
+    },
+    "quiet_death": {
+      "type": "boolean",
+      "description": "Do not give error messages when failing",
+      "title": "Quiet Death Flag",
+      "default": false
+    },
+    "lt_to_atlas_pl": {
+      "type": "string",
+      "description": "Transform Label Table to Atlas Point List",
+      "title": "Label Table to Atlas Point List"
+    },
+    "dset_lt_to_atlas_pl": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Get Label Table in dataset and write as an Atlas Point List",
+      "title": "Dataset Label Table to Atlas Point List"
+    },
+    "lt_to_csv": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Transform Label Table to CSV format",
+      "title": "Label Table to CSV"
+    },
+    "atlasize_labeled_dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Transform a labeled ROI dataset into an atlas",
+      "title": "Atlasize Labeled Dataset"
+    },
+    "atlas_file": {
+      "type": "string",
+      "description": "Specify the name of the NIML file where atlas attributes are stored",
+      "title": "Atlas File"
+    },
+    "atlas_name": {
+      "type": "string",
+      "description": "Name of the Atlas",
+      "title": "Atlas Name"
+    },
+    "atlas_description": {
+      "type": "string",
+      "description": "Description of the Atlas, which appears in AFNI's whereami window",
+      "title": "Atlas Description"
+    },
+    "replace": {
+      "type": "boolean",
+      "description": "Replace existing Atlas if the name already exists in the NIML file",
+      "title": "Replace Flag",
+      "default": false
+    },
+    "add_atlas_dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Add an existing atlas to an atlas file",
+      "title": "Add Atlas Dataset"
+    },
+    "h_web": {
+      "type": "boolean",
+      "description": "Open webpage with help for this program",
+      "title": "Help Web",
+      "default": false
+    },
+    "h_view": {
+      "type": "boolean",
+      "description": "Open -help output in a GUI editor",
+      "title": "Help View",
+      "default": false
+    },
+    "all_opts": {
+      "type": "boolean",
+      "description": "List all of the options for this script",
+      "title": "All Options",
+      "default": false
+    },
+    "h_find": {
+      "type": "string",
+      "description": "Search for lines containing a specific word in the help output",
+      "title": "Help Find"
+    }
+  },
+  "required": [
+    "@type",
+    "labeltable"
+  ]
+}

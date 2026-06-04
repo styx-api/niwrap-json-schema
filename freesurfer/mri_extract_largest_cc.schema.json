@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_extract_largest_CC",
+  "description": "This program extracts the largest connected component of the input volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_extract_largest_CC"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume.",
+      "title": "Input Volume"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume.",
+      "title": "Output Volume"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold for object.",
+      "title": "Threshold"
+    },
+    "hemisphere": {
+      "enum": [
+        "lh",
+        "rh"
+      ],
+      "description": "Set the target value corresponding to lh (255) or rh (127).",
+      "title": "Hemisphere"
+    },
+    "largest_cc_in_bg": {
+      "type": "boolean",
+      "description": "Find the largest CC in the background.",
+      "title": "Largest CC in Background Flag",
+      "default": false
+    },
+    "original_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Clone values from original volume into output (used with -I).",
+      "title": "Original Volume"
+    },
+    "label_value": {
+      "type": "number",
+      "description": "Perform connected components on voxels with specified label value.",
+      "title": "Label Value"
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "output_volume"
+  ]
+}

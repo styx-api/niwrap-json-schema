@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_exvivo_strip",
+  "description": "Tool for processing MRI volumes for ex vivo data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_exvivo_strip"
+    },
+    "invol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input MRI volume",
+      "title": "Input Volume"
+    },
+    "outvol": {
+      "type": "string",
+      "description": "Output MRI volume",
+      "title": "Output Volume"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemi to process",
+      "title": "Hemi"
+    },
+    "pred": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Write prediction volume",
+      "title": "Prediction Volume"
+    },
+    "norm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Write normalized volume",
+      "title": "Normalized Volume"
+    },
+    "fv": {
+      "type": "boolean",
+      "description": "Bring up freeview to show results",
+      "title": "FreeView Flag",
+      "default": false
+    },
+    "uthresh": {
+      "type": "number",
+      "description": "Specify threshold to erase above",
+      "title": "Threshold"
+    },
+    "border": {
+      "type": "number",
+      "description": "Number of border voxels to set threshold at",
+      "title": "Border"
+    },
+    "multichannel": {
+      "type": "boolean",
+      "description": "Specify that data has multiple channels",
+      "title": "Multichannel Flag",
+      "default": false
+    },
+    "model": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use alternative model file",
+      "title": "Model File"
+    },
+    "wts": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Weight filename",
+      "title": "Weights File"
+    },
+    "gpu": {
+      "type": "number",
+      "description": "GPU number - if not supplied, CPU is used",
+      "title": "GPU Number"
+    }
+  },
+  "required": [
+    "@type",
+    "invol",
+    "outvol",
+    "hemi"
+  ]
+}

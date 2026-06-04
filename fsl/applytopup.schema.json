@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "applytopup",
+  "description": "applytopup applies corrections to images using the field estimates produced by topup.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/applytopup"
+    },
+    "imain": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Comma separated list of names of input image (to be corrected)",
+      "title": "Input images"
+    },
+    "datain": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of text file with PE directions/times",
+      "title": "PE directions/times file"
+    },
+    "inindex": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Comma separated list of indices into --datain of the input image (to be corrected)",
+      "title": "Input index"
+    },
+    "topup": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of field/movements (from topup)",
+      "title": "Topup prefix"
+    },
+    "out": {
+      "type": "string",
+      "description": "Basename for output (warped) image",
+      "title": "Output basename"
+    },
+    "method": {
+      "enum": [
+        "jac",
+        "lsr"
+      ],
+      "description": "Use jacobian modulation (jac) or least-squares resampling (lsr), default=lsr.",
+      "title": "Method"
+    },
+    "interp": {
+      "enum": [
+        "trilinear",
+        "spline"
+      ],
+      "description": "Interpolation method {trilinear, spline}, default=spline",
+      "title": "Interpolation method"
+    },
+    "datatype": {
+      "enum": [
+        "char",
+        "short",
+        "int",
+        "float",
+        "double"
+      ],
+      "description": "Force output data type [char short int float double]",
+      "title": "Output data type"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "imain",
+    "datain",
+    "inindex",
+    "topup",
+    "out"
+  ]
+}

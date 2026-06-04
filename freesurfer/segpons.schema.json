@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "segpons",
+  "description": "Approximate segmentation of pons using MNI152 space registration.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/segpons"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject identifier.",
+      "title": "Subject"
+    },
+    "aseg": {
+      "type": "boolean",
+      "description": "Use and refine aseg (default, output will be aseg+pons.mgz).",
+      "title": "Aseg Flag",
+      "default": false
+    },
+    "apas": {
+      "type": "boolean",
+      "description": "Use aparc+aseg.mgz (output will be apas+pons.mgz).",
+      "title": "Apas Flag",
+      "default": false
+    },
+    "seg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify your own segmentation file.",
+      "title": "Segmentation File"
+    },
+    "no_refine": {
+      "type": "boolean",
+      "description": "Do not refine when using aseg.",
+      "title": "No Refine Flag",
+      "default": false
+    },
+    "pons152_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask of pons in MNI152 space.",
+      "title": "Pons152 Mask"
+    }
+  },
+  "required": [
+    "@type",
+    "subject"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FILTER CLUSTERS BY VOLUME",
+  "description": "Outputs a volume with nonzero integers for all voxels within a large enough cluster, and zeros elsewhere.  The integers denote cluster membership (by default, first cluster found will use value 1, second cluster 2, etc).  Cluster values are not reused across frames of the output, but instead keep counting up.  By default, values greater than <value-threshold> are considered to be in a cluster, use -less-than to test for values less than the threshold.  To apply this as a mask to the data, or to do more complicated thresholding, see -volume-math.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume_find_clusters"
+    },
+    "volume_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input volume"
+    },
+    "value_threshold": {
+      "type": "number",
+      "description": "threshold for data values"
+    },
+    "minimum_volume": {
+      "type": "number",
+      "description": "threshold for cluster volume, in mm^3"
+    },
+    "volume_out": {
+      "type": "string",
+      "description": "the output volume"
+    },
+    "less_than": {
+      "type": "boolean",
+      "description": "find values less than <value-threshold>, rather than greater",
+      "default": false
+    },
+    "roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "select a region of interest"
+    },
+    "subvolume": {
+      "type": "string",
+      "description": "select a single subvolume"
+    },
+    "size_ratio": {
+      "type": "number",
+      "description": "ignore clusters smaller than a given fraction of the largest cluster in map"
+    },
+    "distance": {
+      "type": "number",
+      "description": "ignore clusters further than a given distance from the largest cluster"
+    },
+    "start": {
+      "type": "integer",
+      "description": "start labeling clusters from a value other than 1"
+    }
+  },
+  "required": [
+    "@type",
+    "volume_in",
+    "value_threshold",
+    "minimum_volume",
+    "volume_out"
+  ]
+}

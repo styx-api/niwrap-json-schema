@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ScaleVolume",
+  "description": "A tool to scale the volume of datasets",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@ScaleVolume"
+    },
+    "input_dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset to scale",
+      "title": "Input Dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix of output",
+      "title": "Prefix"
+    },
+    "val_clip": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Min and Max of output dataset. Default V0 = 0 and V1 = 255",
+      "title": "Value Clip"
+    },
+    "perc_clip": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set lowest P0 percentile to Min and highest P1 percentile to Max. Default P0 = 2 and P1 = 98",
+      "title": "Percentile Clip"
+    },
+    "scale_by_mean": {
+      "type": "boolean",
+      "description": "Divide each sub-brick by mean of non-zero voxels",
+      "title": "Scale by Mean",
+      "default": false
+    },
+    "scale_by_median": {
+      "type": "boolean",
+      "description": "Divide each sub-brick by median of non-zero voxels",
+      "title": "Scale by Median",
+      "default": false
+    },
+    "norm": {
+      "type": "boolean",
+      "description": "For each time series T, Tnorm = (T - mean(T)) / stdev(T)",
+      "title": "Normalize",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Restrict to non-zero values of given mask dataset",
+      "title": "Mask"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dset",
+    "prefix"
+  ]
+}

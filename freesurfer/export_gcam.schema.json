@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "exportGcam",
+  "description": "A tool for exporting GCAM (Geodesic Coordinate-based Anatomic Mapping) morphs.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/exportGcam"
+    },
+    "fixed": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Fixed volume.",
+      "title": "Fixed Volume"
+    },
+    "moving": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Moving volume.",
+      "title": "Moving Volume"
+    },
+    "morph": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Morph.",
+      "title": "Morph"
+    },
+    "out_gcam": {
+      "type": "string",
+      "description": "Output GCAM (Geodesic Coordinate-based Anatomic Mapping).",
+      "title": "Output GCAM"
+    },
+    "zlib_buffer": {
+      "type": "number",
+      "description": "Zlib buffer pre-allocation multiplier.",
+      "title": "Zlib Buffer"
+    },
+    "bbox_threshold": {
+      "type": "number",
+      "description": "Threshold for bounding box. If absent, no bbox will be used.",
+      "title": "Bounding Box Threshold"
+    },
+    "interp_method": {
+      "enum": [
+        "linear",
+        "nearest"
+      ],
+      "description": "Interpolation method. Choices: linear, nearest. Default is linear.",
+      "title": "Interpolation Method"
+    },
+    "test": {
+      "type": "boolean",
+      "description": "Write out test files to verify the equivalence of tm3d and gcam morphs.",
+      "title": "Test Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "fixed",
+    "moving",
+    "morph",
+    "out_gcam"
+  ]
+}

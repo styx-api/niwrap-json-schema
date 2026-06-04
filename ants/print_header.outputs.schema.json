@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "PrintHeader",
+  "description": "Prints header information from a medical image file. When called with only an image, prints a full header dump including dimensions, bounding box, origin, spacing, intensity range and mean, canonical orientation code, direction cosine matrix, and all image metadata. When called with a specific information code, prints only that property.",
+  "properties": {
+    "root": {
+      "type": "string",
+      "x-styx-type": "path"
+    },
+    "output": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The requested header information. When a specific code is given, values are printed as 'x'-delimited strings (e.g. '1.0x1.0x1.0' for spacing). When no code is given, prints a formatted multi-line report of all header fields and metadata."
+    }
+  },
+  "required": [
+    "root",
+    "output"
+  ]
+}

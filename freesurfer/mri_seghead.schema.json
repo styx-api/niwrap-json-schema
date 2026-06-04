@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_seghead",
+  "description": "Binarizes an input volume to identify the head's voxels.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_seghead"
+    },
+    "input_volume": {
+      "type": "string",
+      "description": "Input volume identifier, e.g., T1.",
+      "title": "Input Volume ID"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume identifier.",
+      "title": "Output Volume ID"
+    },
+    "fill_value": {
+      "type": "number",
+      "description": "Fill value for binarizing the head (default 255).",
+      "title": "Fill Value"
+    },
+    "fhi_value": {
+      "type": "number",
+      "description": "FHI value used in type change operation (default 0.999).",
+      "title": "FHI Value"
+    },
+    "thresh1_value": {
+      "type": "number",
+      "description": "Threshold value for detecting the skin (e.g., 20).",
+      "title": "Threshold 1"
+    },
+    "thresh2_value": {
+      "type": "number",
+      "description": "Threshold value for the final binarization (e.g., 20).",
+      "title": "Threshold 2"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Single threshold value applied to both thresh1 and thresh2.",
+      "title": "Combined Threshold"
+    },
+    "nhitsmin_value": {
+      "type": "number",
+      "description": "Minimum number of consecutive hits needed to identify skin (default 2).",
+      "title": "Minimum Hits"
+    },
+    "hvoldat_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File to write the volume of the head in mm3 to an ASCII file.",
+      "title": "Head Volume Output File"
+    },
+    "signal_behind_head": {
+      "type": "boolean",
+      "description": "Consider signals behind the head in the binarization process.",
+      "title": "Signal Behind Head Flag",
+      "default": false
+    },
+    "rescale": {
+      "type": "boolean",
+      "description": "Rescale the input when converting to uchar.",
+      "title": "Rescale Input Flag",
+      "default": false
+    },
+    "fill_holes_islands": {
+      "type": "boolean",
+      "description": "Fill holes and remove islands in the binary volume.",
+      "title": "Fill Holes and Remove Islands Flag",
+      "default": false
+    },
+    "seed_point": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Seed point specified by column, row, slice for filling operation.",
+      "title": "Seed Point"
+    },
+    "or_mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file to include voxels in the binarization process.",
+      "title": "OR Mask File"
+    },
+    "gdiag_option": {
+      "type": "string",
+      "description": "Optional diagnostic option for internal use.",
+      "title": "Gdiag Option"
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "output_volume"
+  ]
+}

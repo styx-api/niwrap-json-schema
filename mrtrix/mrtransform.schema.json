@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mrtransform",
+  "description": "Apply spatial transformations to an image.\n\nIf a linear transform is applied without a template image the command will modify the image header transform matrix\n\nFOD reorientation (with apodised point spread functions) can be performed if the number of volumes in the 4th dimension equals the number of coefficients in an antipodally symmetric spherical harmonic series (e.g. 6, 15, 28 etc). For such data, the -reorient_fod yes/no option must be used to specify if reorientation is required.\n\nThe output image intensity can be modulated using the (local or global) volume change if a linear or nonlinear transformation is applied. 'FOD' modulation preserves the apparent fibre density across the fibre bundle width and can only be applied if FOD reorientation is used. Alternatively, non-directional scaling by the Jacobian determinant can be applied to any image type. \n\nIf a DW scheme is contained in the header (or specified separately), and the number of directions matches the number of volumes in the images, any transformation applied using the -linear option will also be applied to the directions.\n\nWhen the -template option is used to specify the target image grid, the image provided via this option will not influence the axis data strides of the output image; these are determined based on the input image, or the input to the -strides option.\n\nReferences:\n\n* If FOD reorientation is being performed:\nRaffelt, D.; Tournier, J.-D.; Crozier, S.; Connelly, A. & Salvado, O. Reorientation of fiber orientation distributions using apodized point spread functions. Magnetic Resonance in Medicine, 2012, 67, 844-855\n\n* If FOD modulation is being performed:\nRaffelt, D.; Tournier, J.-D.; Rose, S.; Ridgway, G.R.; Henderson, R.; Crozier, S.; Salvado, O.; Connelly, A.; Apparent Fibre Density: a novel measure for the analysis of diffusion-weighted magnetic resonance images. NeuroImage, 2012, 15;59(4), 3976-94",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/mrtransform"
+    },
+    "linear": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify a linear transform to apply, in the form of a 3x4 or 4x4 ascii file. Note the standard 'reverse' convention is used, where the transform maps points in the template image to the moving image. Note that the reverse convention is still assumed even if no -template image is supplied",
+      "title": "linear"
+    },
+    "flip": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "flip the specified axes, provided as a comma-separated list of indices (0:x, 1:y, 2:z).",
+      "title": "flip"
+    },
+    "inverse": {
+      "type": "boolean",
+      "description": "apply the inverse transformation",
+      "title": "inverse",
+      "default": false
+    },
+    "half": {
+      "type": "boolean",
+      "description": "apply the matrix square root of the transformation. This can be combined with the inverse option.",
+      "title": "half",
+      "default": false
+    },
+    "replace": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "replace the linear transform of the original image by that specified, rather than applying it to the original image. The specified transform can be either a template image, or a 3x4 or 4x4 ascii file.",
+      "title": "replace"
+    },
+    "identity": {
+      "type": "boolean",
+      "description": "set the header transform of the image to the identity matrix",
+      "title": "identity",
+      "default": false
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "reslice the input image to match the specified template image grid.",
+      "title": "template"
+    },
+    "midway_space": {
+      "type": "boolean",
+      "description": "reslice the input image to the midway space. Requires either the -template or -warp option. If used with -template and -linear option the input image will be resliced onto the grid halfway between the input and template. If used with the -warp option the input will be warped to the midway space defined by the grid of the input warp (i.e. half way between image1 and image2)",
+      "title": "midway_space",
+      "default": false
+    },
+    "interp": {
+      "type": "string",
+      "description": "set the interpolation method to use when reslicing (choices: nearest, linear, cubic, sinc. Default: cubic).",
+      "title": "interp"
+    },
+    "oversample": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "set the amount of over-sampling (in the target space) to perform when regridding. This is particularly relevant when downsamping a high-resolution image to a low-resolution image, to avoid aliasing artefacts. This can consist of a single integer, or a comma-separated list of 3 integers if different oversampling factors are desired along the different axes. Default is determined from ratio of voxel dimensions (disabled for nearest-neighbour interpolation).",
+      "title": "oversample"
+    },
+    "warp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "apply a non-linear 4D deformation field to warp the input image. Each voxel in the deformation field must define the scanner space position that will be used to interpolate the input image during warping (i.e. pull-back/reverse warp convention). If the -template image is also supplied the deformation field will be resliced first to the template image grid. If no -template option is supplied then the output image will have the same image grid as the deformation field. This option can be used in combination with the -affine option, in which case the affine will be applied first)",
+      "title": "warp"
+    },
+    "warp_full": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "warp the input image using a 5D warp file output from mrregister. Any linear transforms in the warp image header will also be applied. The -warp_full option must be used in combination with either the -template option or the -midway_space option. If a -template image is supplied then the full warp will be used. By default the image1->image2 transform will be applied, however the -from 2 option can be used to apply the image2->image1 transform. Use the -midway_space option to warp the input image to the midway space. The -from option can also be used to define which warp to use when transforming to midway space",
+      "title": "warp_full"
+    },
+    "from": {
+      "type": "integer",
+      "description": "used to define which space the input image is when using the -warp_mid option. Use -from 1 to warp from image1 or -from 2 to warp from image2",
+      "title": "from"
+    },
+    "modulate": {
+      "type": "string",
+      "description": "Valid choices are: fod and jac. \nfod: modulate FODs during reorientation to preserve the apparent fibre density across fibre bundle widths before and after the transformation. \njac: modulate the image intensity with the determinant of the Jacobian of the warp of linear transformation to preserve the total intensity before and after the transformation.",
+      "title": "modulate"
+    },
+    "directions": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "directions defining the number and orientation of the apodised point spread functions used in FOD reorientation (Default: 300 directions)",
+      "title": "directions"
+    },
+    "reorient_fod": {
+      "type": "string",
+      "description": "specify whether to perform FOD reorientation. This is required if the number of volumes in the 4th dimension corresponds to the number of coefficients in an antipodally symmetric spherical harmonic series with lmax >= 2 (i.e. 6, 15, 28, 45, 66 volumes).",
+      "title": "reorient_fod"
+    },
+    "grad": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in a text file. This should be supplied as a 4xN text file with each line is in the format [ X Y Z b ], where [ X Y Z ] describe the direction of the applied gradient, and b gives the b-value in units of s/mm^2. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+      "title": "grad"
+    },
+    "fslgrad": {
+      "type": "object",
+      "properties": {
+        "bvecs": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "title": "bvecs"
+        },
+        "bvals": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "title": "bvals"
+        }
+      },
+      "required": [
+        "bvecs",
+        "bvals"
+      ],
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+      "title": "fslgrad"
+    },
+    "export_grad_mrtrix": {
+      "type": "string",
+      "description": "export the diffusion-weighted gradient table to file in MRtrix format",
+      "title": "export_grad_mrtrix"
+    },
+    "export_grad_fsl": {
+      "type": "object",
+      "properties": {
+        "bvecs_path": {
+          "type": "string",
+          "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format",
+          "title": "bvecs_path"
+        },
+        "bvals_path": {
+          "type": "string",
+          "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format",
+          "title": "bvals_path"
+        }
+      },
+      "required": [
+        "bvecs_path",
+        "bvals_path"
+      ],
+      "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format",
+      "title": "export_grad_fsl"
+    },
+    "datatype": {
+      "type": "string",
+      "description": "specify output image data type. Valid choices are: float32, float32le, float32be, float64, float64le, float64be, int64, uint64, int64le, uint64le, int64be, uint64be, int32, uint32, int32le, uint32le, int32be, uint32be, int16, uint16, int16le, uint16le, int16be, uint16be, cfloat32, cfloat32le, cfloat32be, cfloat64, cfloat64le, cfloat64be, int8, uint8, bit.",
+      "title": "datatype"
+    },
+    "strides": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousString"
+            },
+            "obj": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "@type",
+            "obj"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousFile"
+            },
+            "obj": {
+              "type": "string",
+              "x-styx-type": "path"
+            }
+          },
+          "required": [
+            "@type",
+            "obj"
+          ]
+        }
+      ],
+      "description": "specify the strides of the output data in memory; either as a comma-separated list of (signed) integers, or as a template image from which the strides shall be extracted and used. The actual strides produced will depend on whether the output image format can support it.",
+      "title": "strides"
+    },
+    "nan": {
+      "type": "boolean",
+      "description": "Use NaN as the out of bounds value (Default: 0.0)",
+      "title": "nan",
+      "default": false
+    },
+    "no_reorientation": {
+      "type": "boolean",
+      "description": "deprecated, use -reorient_fod instead",
+      "title": "no_reorientation",
+      "default": false
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "input image to be transformed.",
+      "title": "input"
+    },
+    "output": {
+      "type": "string",
+      "description": "the output image.",
+      "title": "output"
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "output"
+  ]
+}

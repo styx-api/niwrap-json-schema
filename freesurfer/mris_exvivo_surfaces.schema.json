@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_exvivo_surfaces",
+  "description": "FreeSurfer tool to position tessellation of the cortical surface at the white and gray matter surfaces, and generate relevant surface files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_exvivo_surfaces"
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "Name of the subject",
+      "title": "Subject Name"
+    },
+    "hemisphere": {
+      "type": "string",
+      "description": "Hemisphere (e.g., lh or rh)",
+      "title": "Hemisphere"
+    },
+    "omit_self_intersection": {
+      "type": "boolean",
+      "description": "Omit self-intersection check and only generate gray/white surface.",
+      "title": "Omit Self Intersection Flag",
+      "default": false
+    },
+    "create_curvature_area": {
+      "type": "boolean",
+      "description": "Create curvature and area files from white matter surface.",
+      "title": "Create Curvature and Area Flag",
+      "default": false
+    },
+    "average_curvature": {
+      "type": "number",
+      "description": "Average curvature values a specified number of times.",
+      "title": "Average Curvature"
+    },
+    "white_only": {
+      "type": "boolean",
+      "description": "Only generate the white matter surface.",
+      "title": "White Matter Only Flag",
+      "default": false
+    },
+    "formalin": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Assume hemisphere is in formalin, with provided value indicating presence (0,1).",
+      "title": "Formalin Assumption"
+    }
+  },
+  "required": [
+    "@type",
+    "subject_name",
+    "hemisphere"
+  ]
+}

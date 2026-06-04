@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_curvature",
+  "description": "Compute the second fundamental form of a cortical surface to generate mean and Gaussian curvature.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_curvature"
+    },
+    "save_curvature_files": {
+      "type": "boolean",
+      "description": "Save curvature files (will only generate screen output without this option)",
+      "title": "Save Curvature Files",
+      "default": false
+    },
+    "max_principal_curvature": {
+      "type": "boolean",
+      "description": "Save 1st (max) principal curvature in ?h.<surface>.max file",
+      "title": "Max Principal Curvature",
+      "default": false
+    },
+    "mgh_output_format": {
+      "type": "boolean",
+      "description": "Save outputs in .mgz format",
+      "title": "MGH Output Format",
+      "default": false
+    },
+    "min_principal_curvature": {
+      "type": "boolean",
+      "description": "Save 2nd (min) principal curvature in ?h.<surface>.min file",
+      "title": "Min Principal Curvature",
+      "default": false
+    },
+    "iterative_averages": {
+      "type": "number",
+      "description": "Perform <avgs> iterative averages of curvature measure before saving",
+      "title": "Iterative Averages"
+    },
+    "neighborhood_size": {
+      "type": "number",
+      "description": "Set neighborhood size to nbrs",
+      "title": "Neighborhood Size"
+    },
+    "random_seed": {
+      "type": "number",
+      "description": "Set random number generator to seed N",
+      "title": "Random Seed"
+    },
+    "curvatures": {
+      "type": "string",
+      "description": "Stand-alone option to save H (mean), K (gaussian), k1, and k2 curvatures to stem.{curvname}.mgz",
+      "title": "Curvatures"
+    },
+    "H_curvature": {
+      "type": "string",
+      "description": "Stand-alone option to save H mean curvature to stem.H.mgz",
+      "title": "H Curvature"
+    },
+    "K_curvature": {
+      "type": "string",
+      "description": "Stand-alone option to save K gaussian curvature to stem.K.mgz",
+      "title": "K Curvature"
+    },
+    "k1_curvature": {
+      "type": "string",
+      "description": "Stand-alone option to save k1 (primary principle) curvature to stem.k1.mgz",
+      "title": "K1 Curvature"
+    },
+    "k2_curvature": {
+      "type": "string",
+      "description": "Stand-alone option to save k2 (secondary principle) curvature to stem.k2.mgz",
+      "title": "K2 Curvature"
+    },
+    "k1k2_curvature": {
+      "type": "string",
+      "description": "Stand-alone option to save k1 and k2 curvature to stem.{k1,k2}.mgz",
+      "title": "K1 and K2 Curvatures"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface file",
+      "title": "Input Surface"
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface"
+  ]
+}

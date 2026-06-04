@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dtifit",
+  "description": "DTIFIT - Fit a diffusion tensor model at each voxel",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/dtifit"
+    },
+    "data_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "DTI data file",
+      "title": "Data file"
+    },
+    "output_basename": {
+      "type": "string",
+      "description": "Output basename",
+      "title": "Output basename"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Bet binary mask file",
+      "title": "Mask file"
+    },
+    "bvec_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "B vectors file",
+      "title": "B vectors file"
+    },
+    "bval_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "B values file",
+      "title": "B values file"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "sse_flag": {
+      "type": "boolean",
+      "description": "Output sum of squared errors",
+      "title": "SSE flag",
+      "default": false
+    },
+    "wls_flag": {
+      "type": "boolean",
+      "description": "Fit the tensor with weighted least squares",
+      "title": "WLS flag",
+      "default": false
+    },
+    "kurt_flag": {
+      "type": "boolean",
+      "description": "Output mean kurtosis map (for multi-shell data)",
+      "title": "Kurt flag",
+      "default": false
+    },
+    "kurtdir_flag": {
+      "type": "boolean",
+      "description": "Output maps of kurtosis along each eigenvector: K1, K2, and K3 (for multi-shell data)",
+      "title": "Kurt direction flag",
+      "default": false
+    },
+    "littlebit_flag": {
+      "type": "boolean",
+      "description": "Only process small area of brain",
+      "title": "Little bit flag",
+      "default": false
+    },
+    "save_tensor_flag": {
+      "type": "boolean",
+      "description": "Save the elements of the tensor",
+      "title": "Save tensor flag",
+      "default": false
+    },
+    "zmin": {
+      "type": "number",
+      "description": "Minimum z",
+      "title": "Minimum z"
+    },
+    "zmax": {
+      "type": "number",
+      "description": "Maximum z",
+      "title": "Maximum z"
+    },
+    "ymin": {
+      "type": "number",
+      "description": "Minimum y",
+      "title": "Minimum y"
+    },
+    "ymax": {
+      "type": "number",
+      "description": "Maximum y",
+      "title": "Maximum y"
+    },
+    "xmin": {
+      "type": "number",
+      "description": "Minimum x",
+      "title": "Minimum x"
+    },
+    "xmax": {
+      "type": "number",
+      "description": "Maximum x",
+      "title": "Maximum x"
+    },
+    "gradnonlin_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Gradient Nonlinearity Tensor file",
+      "title": "Gradient nonlinearity tensor file"
+    },
+    "confound_regressors": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input confound regressors",
+      "title": "Confound regressors file"
+    }
+  },
+  "required": [
+    "@type",
+    "data_file",
+    "output_basename",
+    "mask_file",
+    "bvec_file",
+    "bval_file"
+  ]
+}

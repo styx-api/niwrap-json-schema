@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_multiscale_stats",
+  "description": "Compute the autocorrelation function of a curvature file using multiscale statistical techniques.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_multiscale_stats"
+    },
+    "output_subject": {
+      "type": "string",
+      "description": "The output subject identifier.",
+      "title": "Output Subject"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Specify which hemisphere to use.",
+      "title": "Hemisphere"
+    },
+    "surf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A spherical surface file suitable for computing geodesics.",
+      "title": "Surface"
+    },
+    "curv": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The curvature file to be processed.",
+      "title": "Curvature"
+    },
+    "class1_subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subjects from one class.",
+      "title": "Class 1 Subjects"
+    },
+    "class2_subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subjects from another class.",
+      "title": "Class 2 Subjects"
+    }
+  },
+  "required": [
+    "@type",
+    "output_subject",
+    "hemi",
+    "surf",
+    "curv",
+    "class1_subjects",
+    "class2_subjects"
+  ]
+}

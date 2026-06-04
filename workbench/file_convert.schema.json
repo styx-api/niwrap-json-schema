@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CHANGE VERSION OF FILE FORMAT",
+  "description": "You may only specify one top-level option.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/file_convert"
+    },
+    "border_version_convert": {
+      "type": "object",
+      "properties": {
+        "border_in": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the input border file"
+        },
+        "out_version": {
+          "type": "integer",
+          "description": "the format version to write as, 1 or 3 (2 doesn't exist)"
+        },
+        "border_out": {
+          "type": "string",
+          "description": "output - the output border file"
+        },
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "must be specified if the input is version 1"
+        }
+      },
+      "required": [
+        "border_in",
+        "out_version",
+        "border_out"
+      ],
+      "description": "write a border file with a different version"
+    },
+    "nifti_version_convert": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "the input nifti file"
+        },
+        "version": {
+          "type": "integer",
+          "description": "the nifti version to write as"
+        },
+        "output": {
+          "type": "string",
+          "description": "output - the output nifti file"
+        }
+      },
+      "required": [
+        "input",
+        "version",
+        "output"
+      ],
+      "description": "write a nifti file with a different version"
+    },
+    "cifti_version_convert": {
+      "type": "object",
+      "properties": {
+        "cifti_in": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the input cifti file"
+        },
+        "version": {
+          "type": "string",
+          "description": "the cifti version to write as"
+        },
+        "cifti_out": {
+          "type": "string",
+          "description": "output - the output cifti file"
+        }
+      },
+      "required": [
+        "cifti_in",
+        "version",
+        "cifti_out"
+      ],
+      "description": "write a cifti file with a different version"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "spharm_rm",
+  "description": "Part of FSL - Spherical harmonics removal tool to process neuroimaging data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/spharm_rm"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image filename",
+      "title": "Input File"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output image filename",
+      "title": "Output File"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask filename",
+      "title": "Mask File"
+    },
+    "number_of_terms": {
+      "type": "number",
+      "description": "Number of terms to remove (order is 1,x,y,z,z^2+(x^2+y^2)/2,zx,zy,xy,x^2-y^2)",
+      "title": "Number of Terms"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file"
+  ]
+}

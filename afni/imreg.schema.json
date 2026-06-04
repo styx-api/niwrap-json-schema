@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "imreg",
+  "description": "Registers each 2D image in 'image_sequence' to 'base_image'",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/imreg"
+    },
+    "base_image": {
+      "type": "string",
+      "description": "Base image or method to determine base image ('+AVER' or '+count')",
+      "title": "Base Image"
+    },
+    "image_sequence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Sequence of images to be registered",
+      "title": "Image Sequence"
+    },
+    "nowrite": {
+      "type": "boolean",
+      "description": "Don't write outputs, just print progress reports",
+      "title": "No Write Flag",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output file names",
+      "title": "Prefix"
+    },
+    "suffix": {
+      "type": "string",
+      "description": "Suffix for output file names",
+      "title": "Suffix"
+    },
+    "start": {
+      "type": "number",
+      "description": "Start index for output file names",
+      "title": "Start Index"
+    },
+    "step": {
+      "type": "number",
+      "description": "Step size for output file indices",
+      "title": "Step Size"
+    },
+    "flim": {
+      "type": "boolean",
+      "description": "Write output in mrilib floating point format",
+      "title": "MRILib Floating Point Format",
+      "default": false
+    },
+    "keepsize": {
+      "type": "boolean",
+      "description": "Preserve the original image size on output",
+      "title": "Keep Size Flag",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Don't write progress report messages",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Write lots of debugging output",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "dprefix": {
+      "type": "string",
+      "description": "Prefix for dx, dy, and phi files",
+      "title": "DPrefix"
+    },
+    "bilinear": {
+      "type": "boolean",
+      "description": "Use bilinear interpolation",
+      "title": "Bilinear Interpolation",
+      "default": false
+    },
+    "modes": {
+      "type": "string",
+      "description": "Interpolation modes during coarse, fine, and registration phases",
+      "title": "Interpolation Modes"
+    },
+    "mlcf": {
+      "type": "boolean",
+      "description": "Equivalent to '-modes bilinear bicubic Fourier'",
+      "title": "MLCF Flag",
+      "default": false
+    },
+    "wtim": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Weighting image file",
+      "title": "Weighting Image"
+    },
+    "dfspace": {
+      "type": "boolean",
+      "description": "Use difiterated differential spatial method",
+      "title": "Differential Spatial Alignment",
+      "default": false
+    },
+    "cmass": {
+      "type": "boolean",
+      "description": "Align centers of mass of the images",
+      "title": "Center of Mass Alignment",
+      "default": false
+    },
+    "fine": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Fine fit parameters: blur, dxy, dphi",
+      "title": "Fine Fit Parameters"
+    },
+    "nofine": {
+      "type": "boolean",
+      "description": "Turn off the 'fine' fit algorithm",
+      "title": "No Fine Fit Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "base_image",
+    "image_sequence"
+  ]
+}

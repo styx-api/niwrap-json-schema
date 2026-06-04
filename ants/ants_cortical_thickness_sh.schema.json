@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsCorticalThickness.sh",
+  "description": "This script performs T1 anatomical brain processing including brain extraction, brain n-tissue segmentation, cortical thickness estimation, and optional registration to a template.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsCorticalThickness.sh"
+    },
+    "image_dimension": {
+      "enum": [
+        2,
+        3
+      ],
+      "description": "2 or 3 for 2- or 3-dimensional image",
+      "title": "Image dimension"
+    },
+    "anatomical_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Structural intensity image, typically T1.",
+      "title": "Anatomical image"
+    },
+    "brain_template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Anatomical intensity template. This template is not skull-stripped.",
+      "title": "Brain segmentation template"
+    },
+    "brain_extraction_probability_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Brain probability mask in the segmentation template space. A binary mask is acceptable.",
+      "title": "Brain extraction probability mask"
+    },
+    "brain_segmentation_priors": {
+      "type": "string",
+      "description": "Tissue probability priors corresponding to the template image specified with the -e option. At least four priors must exist, corresponding to CSF, Cortical GM, WM, Subcortical GM.",
+      "title": "Brain segmentation priors"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Output prefix for the generated filenames.",
+      "title": "Output prefix"
+    },
+    "image_file_suffix": {
+      "type": "string",
+      "description": "Any of the standard ITK IO formats e.g. nrrd, nii.gz (default), mhd.",
+      "title": "Image file suffix"
+    },
+    "template_for_t1_registration": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Anatomical intensity template. This template must be skull-stripped.",
+      "title": "Template for T1 registration"
+    },
+    "extraction_registration_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Binary metric mask defined in the segmentation template space (-e). Only used in brain extraction registration.",
+      "title": "Extraction registration mask"
+    },
+    "keep_temporary_files": {
+      "type": "boolean",
+      "description": "Keep brain extraction/segmentation warps, etc (default = 0).",
+      "title": "Keep temporary files"
+    },
+    "denoise_anatomical_images": {
+      "type": "boolean",
+      "description": "Denoise anatomical images (default = 0).",
+      "title": "Denoise anatomical images"
+    },
+    "max_iterations_for_registration": {
+      "type": "string",
+      "description": "ANTS registration max iterations (default = 100x100x70x20).",
+      "title": "Max iterations for registration"
+    },
+    "atropos_prior_segmentation_weight": {
+      "type": "number",
+      "description": "Atropos spatial prior probability weight for the segmentation (default = 0.25).",
+      "title": "Atropos prior segmentation weight"
+    },
+    "number_of_segmentation_iterations": {
+      "type": "integer",
+      "description": "N4 -> Atropos -> N4 iterations during segmentation (default = 3).",
+      "title": "Number of segmentation iterations"
+    },
+    "posterior_formulation": {
+      "type": "string",
+      "description": "Atropos posterior formulation and whether or not to use mixture model proportions. e.g 'Socrates[ 1 ]' (default) or 'Aristotle[ 1 ]'.",
+      "title": "Posterior formulation"
+    },
+    "use_floating_point_precision": {
+      "type": "boolean",
+      "description": "Use single float precision in registrations (default = 0).",
+      "title": "Use floating-point precision"
+    },
+    "use_random_seeding": {
+      "type": "boolean",
+      "description": "Use random number generated from system clock (default = 1).",
+      "title": "Use random seeding"
+    },
+    "use_b_spline_smoothing": {
+      "type": "boolean",
+      "description": "Use B-spline SyN for registrations and B-spline exponential mapping in DiReCT (default = 0).",
+      "title": "Use B-spline smoothing"
+    },
+    "cortical_thickness_prior_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Cortical thickness prior image in the template space, with an estimated upper limit of cortical thickness at each voxel.",
+      "title": "Cortical thickness prior image"
+    },
+    "label_propagation": {
+      "type": "string",
+      "description": "Incorporate a distance prior on the posterior formulation.",
+      "title": "Label propagation"
+    },
+    "additional_priors_for_thickness": {
+      "type": "string",
+      "description": "Add segmentation classes for thickness estimation.",
+      "title": "Additional priors for thickness"
+    },
+    "use_quick_registration_parameters": {
+      "type": "boolean",
+      "description": "Use antsRegistrationSyNQuick.sh for registrations (default = 0).",
+      "title": "Use quick registration parameters"
+    },
+    "atropos_iterations": {
+      "type": "integer",
+      "description": "Number of iterations within Atropos (default = 5).",
+      "title": "Atropos iterations"
+    },
+    "script_stage_to_run": {
+      "type": "integer",
+      "description": "Which stage of ACT to run (default = 0, run all).",
+      "title": "Script stage to run"
+    },
+    "test_debug_mode": {
+      "type": "integer",
+      "description": "If > 0, runs a faster version of the script. Only for testing (default = 0).",
+      "title": "Test / debug mode"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "anatomical_image",
+    "brain_template",
+    "brain_extraction_probability_mask",
+    "brain_segmentation_priors",
+    "output_prefix"
+  ]
+}

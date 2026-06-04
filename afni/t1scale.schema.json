@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@T1scale",
+  "description": "Fix bias field shading in T1 by scaling it with PD image. You can also get a decent result even without the PD volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@T1scale"
+    },
+    "t1_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The T1 volume",
+      "title": "T1 Volume"
+    },
+    "pd_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The PD volume (aligned to T1)",
+      "title": "PD Volume"
+    },
+    "output_directory": {
+      "type": "string",
+      "description": "Directory where output gets dumped. Default is T1scale/",
+      "title": "Output Directory"
+    },
+    "align": {
+      "type": "boolean",
+      "description": "Align PD volume to T1. Without this option, PDvol is assumed in alignment with T1vol.",
+      "title": "Align PD with T1",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Create mask for the output. If not specified, the script will generate one with 3dAutomask on fattened PDvol.",
+      "title": "Mask Volume"
+    },
+    "head_mask": {
+      "type": "boolean",
+      "description": "Create mask using 3dSkullStrip's -head option.",
+      "title": "Head Mask",
+      "default": false
+    },
+    "unmasked_uni": {
+      "type": "boolean",
+      "description": "Do not apply masking to uniformized volume (default)",
+      "title": "Unmasked Uniformized Volume",
+      "default": false
+    },
+    "masked_uni": {
+      "type": "boolean",
+      "description": "Apply masking to uniformized volume",
+      "title": "Masked Uniformized Volume",
+      "default": false
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Set echo",
+      "title": "Echo Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display this help message and exit",
+      "title": "Help Flag",
+      "default": false
+    },
+    "h_web": {
+      "type": "boolean",
+      "description": "Open webpage with help for this program",
+      "title": "Web Help",
+      "default": false
+    },
+    "h_view": {
+      "type": "boolean",
+      "description": "Open -help output in a GUI editor",
+      "title": "Open Help in GUI",
+      "default": false
+    },
+    "all_opts": {
+      "type": "boolean",
+      "description": "List all of the options for this script",
+      "title": "List All Options",
+      "default": false
+    },
+    "h_find_word": {
+      "type": "string",
+      "description": "Search for lines containing WORD in -help output. Search is approximate.",
+      "title": "Find Word in Help"
+    }
+  },
+  "required": [
+    "@type",
+    "t1_volume"
+  ]
+}

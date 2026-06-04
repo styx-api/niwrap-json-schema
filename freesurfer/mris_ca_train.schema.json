@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_ca_train",
+  "description": "Creates a cortical parcellation atlas file based on one or more annotated subjects using probabilistic information.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_ca_train"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere: rh or lh",
+      "title": "Hemisphere"
+    },
+    "canonsurf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Canonical surface filename",
+      "title": "Canonical Surface"
+    },
+    "annot_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Annotation filename",
+      "title": "Annotation File"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subject ids",
+      "title": "Subject IDs"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Classifier array output file",
+      "title": "Output File"
+    },
+    "sdir": {
+      "type": "string",
+      "description": "Directory as subjects directory (default: $SUBJECTS_DIR)",
+      "title": "Subjects Directory"
+    },
+    "nbrs": {
+      "type": "number",
+      "description": "Neighborhood size (default=2)",
+      "title": "Neighborhood Size"
+    },
+    "orig": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of original surface (default=smoothwm)",
+      "title": "Original Surface File"
+    },
+    "norm1": {
+      "type": "boolean",
+      "description": "GCSA normalize input #1 after reading (default: disabled)",
+      "title": "Normalize Input 1",
+      "default": false
+    },
+    "norm2": {
+      "type": "boolean",
+      "description": "GCSA normalize input #2 after reading (default: disabled)",
+      "title": "Normalize Input 2",
+      "default": false
+    },
+    "norm3": {
+      "type": "boolean",
+      "description": "GCSA normalize input #3 after reading (default: disabled)",
+      "title": "Normalize Input 3",
+      "default": false
+    },
+    "ic": {
+      "type": "string",
+      "description": "Parameters passed to the classifier routine (default: -ic 7 4)",
+      "title": "Classifier Parameters"
+    },
+    "sulc": {
+      "type": "boolean",
+      "description": "Specify sulc as only input (default: sulcus and curvature)",
+      "title": "Sulcus Only",
+      "default": false
+    },
+    "sulconly": {
+      "type": "boolean",
+      "description": "Same as -sulc",
+      "title": "Sulcus Only Flag",
+      "default": false
+    },
+    "a": {
+      "type": "number",
+      "description": "Number of nearest neighbor smoothing iterations to apply to input 1 (default=5)",
+      "title": "Smoothing Iterations"
+    },
+    "parcellation_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Parcellation table input file (default: none)",
+      "title": "Parcellation Table"
+    },
+    "n": {
+      "type": "number",
+      "description": "Number of inputs (default=1,max=3)",
+      "title": "Number of Inputs"
+    },
+    "verbose": {
+      "type": "number",
+      "description": "Diagnostic level (default=0)",
+      "title": "Verbose Level"
+    },
+    "debug_vertex": {
+      "type": "number",
+      "description": "Debug diagnostic level for a specific vertex (default=0)",
+      "title": "Debug Vertex"
+    },
+    "gcs_means": {
+      "type": "string",
+      "description": "Extract likelihood means for all classes for given input",
+      "title": "GCS Means"
+    },
+    "gcs_priors": {
+      "type": "string",
+      "description": "Extract priors for all classes for given input",
+      "title": "GCS Priors"
+    },
+    "gcs_diff": {
+      "type": "string",
+      "description": "Determine whether GCSAs are different",
+      "title": "GCS Difference"
+    },
+    "nfill": {
+      "type": "number",
+      "description": "Set the max number of iterations for filling empty vertices",
+      "title": "Max Fill Iterations"
+    },
+    "no_fill": {
+      "type": "boolean",
+      "description": "Do not fill at all",
+      "title": "No Fill Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print help info",
+      "title": "Help Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version info",
+      "title": "Version Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "hemi",
+    "canonsurf",
+    "annot_file",
+    "subjects",
+    "output_file"
+  ]
+}

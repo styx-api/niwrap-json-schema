@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_proc_dwi_to_dt",
+  "description": "This program fits tensors and DT parameters, as well as the uncertainty of DT parameters needed for tractography.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_proc_dwi_to_dt"
+    },
+    "in_dwi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "4D volume of N DWIs. Required.",
+      "title": "Input DWI"
+    },
+    "in_gradmat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input text file of N gradient vectors or bmatrices.",
+      "title": "Gradient Matrix"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Set prefix for output DWI data.",
+      "title": "Output prefix"
+    },
+    "in_bvals": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional, if bvalue information is in a separate file from the b-vectors or matrices.",
+      "title": "Bvals"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional whole brain mask can be input; otherwise, automasking is performed.",
+      "title": "Mask"
+    },
+    "mask_from_struc": {
+      "type": "boolean",
+      "description": "Flag to make a mask using 3dSkullStrip+3dmask_tool from the structural file.",
+      "title": "Mask from structural file",
+      "default": false
+    },
+    "in_struc_res": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alignment of the output DWI to the REF data set via anatomical reference; a version of the anatomical that has been resampled to match the DWI set.",
+      "title": "Resampled anatomical reference"
+    },
+    "in_ref_orig": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use another data set to adjust the DWI and subsequent parameter dsets' orientation and origin.",
+      "title": "Reference data set"
+    },
+    "prefix_dti": {
+      "type": "string",
+      "description": "Set prefix for output DTI data; default is 'dt'. Do not include path information here.",
+      "title": "DTI Output prefix"
+    },
+    "flip_x": {
+      "type": "boolean",
+      "description": "Flip the DW gradients in the x-direction.",
+      "title": "Flip x",
+      "default": false
+    },
+    "flip_y": {
+      "type": "boolean",
+      "description": "Flip the DW gradients in the y-direction.",
+      "title": "Flip y",
+      "default": false
+    },
+    "flip_z": {
+      "type": "boolean",
+      "description": "Flip the DW gradients in the z-direction.",
+      "title": "Flip z",
+      "default": false
+    },
+    "no_flip": {
+      "type": "boolean",
+      "description": "Do not flip the DW gradients.",
+      "title": "No flip",
+      "default": false
+    },
+    "no_scale_out_1000": {
+      "type": "boolean",
+      "description": "Turn off scaling of physical length units by 1000 for tensor fitting.",
+      "title": "No scale out 1000",
+      "default": false
+    },
+    "no_reweight": {
+      "type": "boolean",
+      "description": "Turn off reweighting and refitting of tensors during estimation.",
+      "title": "No reweight",
+      "default": false
+    },
+    "no_cumulative_wts": {
+      "type": "boolean",
+      "description": "Turn off displaying overall weight factors for each gradient.",
+      "title": "No cumulative weights",
+      "default": false
+    },
+    "qc_fa_thr": {
+      "type": "number",
+      "description": "Set threshold for overlay FA volume in QC image.",
+      "title": "QC FA threshold"
+    },
+    "qc_fa_max": {
+      "type": "number",
+      "description": "Set cbar max for overlay FA volume in QC image.",
+      "title": "QC FA max"
+    },
+    "qc_fa_unc_max": {
+      "type": "number",
+      "description": "Set cbar max for overlay uncertainty (stdev) of FA in QC image.",
+      "title": "QC FA uncertainty max"
+    },
+    "qc_v12_unc_max": {
+      "type": "number",
+      "description": "Set cbar max for overlay uncertainty (stdev) of V1 towards V2 direction for DTs in QC image.",
+      "title": "QC V12 uncertainty max"
+    },
+    "qc_prefix": {
+      "type": "string",
+      "description": "Set the prefix of the QC image files separately.",
+      "title": "QC Prefix"
+    },
+    "no_qc_view": {
+      "type": "boolean",
+      "description": "Turn off generating QC image files.",
+      "title": "No QC View",
+      "default": false
+    },
+    "no_cmd_out": {
+      "type": "boolean",
+      "description": "Don't save the command line call of this program and the location where it was run.",
+      "title": "No Command Output",
+      "default": false
+    },
+    "workdir": {
+      "type": "string",
+      "description": "Specify a working directory, which can be removed.",
+      "title": "Working Directory"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Do not remove the working directory.",
+      "title": "No Clean",
+      "default": false
+    },
+    "uncert_off": {
+      "type": "boolean",
+      "description": "Don't perform uncertainty calculation.",
+      "title": "Uncertainty Off",
+      "default": false
+    },
+    "uncert_iters": {
+      "type": "number",
+      "description": "Set the number of Monte Carlo iterations for the uncertainty calculation (default: 300).",
+      "title": "Uncertainty Iterations"
+    },
+    "uncert_extra_cmds": {
+      "type": "string",
+      "description": "Extra commands for the uncertainty calculations.",
+      "title": "Uncertainty Extra Commands"
+    },
+    "check_abs_min": {
+      "type": "number",
+      "description": "Help the program push through finding tiny negative values in columns that should contain numbers >=0. Provide a tolerance value VVV.",
+      "title": "Check Abs Min"
+    }
+  },
+  "required": [
+    "@type",
+    "in_dwi",
+    "in_gradmat",
+    "prefix"
+  ]
+}

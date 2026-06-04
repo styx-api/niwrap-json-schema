@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "distancemap",
+  "description": "A tool to calculate distance maps using FSL",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/distancemap"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image filename (calc distance to non-zero voxels)",
+      "title": "Input image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Output image filename",
+      "title": "Output image"
+    },
+    "mask_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask image filename (only calc values at these voxels)",
+      "title": "Mask image"
+    },
+    "second_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second image filename (calc closest distance of this and primary input image, using non-zero voxels, negative distances mean this secondary image is the closer one)",
+      "title": "Second image"
+    },
+    "local_maxima_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Local maxima output image filename",
+      "title": "Local maxima image"
+    },
+    "segmented_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Segmented output image filename (unique value per segment is local maxima label)",
+      "title": "Segmented image"
+    },
+    "invert_flag": {
+      "type": "boolean",
+      "description": "Invert input image",
+      "title": "Invert flag",
+      "default": false
+    },
+    "interpolate_values": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for values to interpolate (sparse sampling interpolation)",
+      "title": "Interpolate values"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_image",
+    "output_image"
+  ]
+}

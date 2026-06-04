@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ROI2dataset",
+  "description": "Transforms a series of ROI files to a node dataset",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/ROI2dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix of output dataset.",
+      "title": "Prefix"
+    },
+    "input_rois": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "ROI files to turn into a data set (space-separated list). This parameter MUST be the last one on command line.",
+      "title": "Input ROI files"
+    },
+    "keep_separate": {
+      "type": "boolean",
+      "description": "Output one column (sub-brick) for each ROI value.",
+      "title": "Keep separate flag",
+      "default": false
+    },
+    "nodelist": {
+      "type": "string",
+      "description": "Prefix for a set of .1D files that contain a list of node indices in the order they appear in an ROI.",
+      "title": "Nodelist"
+    },
+    "nodelist_nodups": {
+      "type": "string",
+      "description": "Prefix for a set of .1D files that contain a list of node indices in the order they appear in an ROI, with duplicate nodes removed.",
+      "title": "Nodelist without duplicates"
+    },
+    "nodelist_with_roival": {
+      "type": "boolean",
+      "description": "Also add the ROI value as a second column in .1D files output by -nodelist.",
+      "title": "Nodelist with ROI value",
+      "default": false
+    },
+    "label_dset": {
+      "type": "string",
+      "description": "Write a label dataset instead of a simple dataset. Sets output format to NIML.",
+      "title": "Label dataset"
+    },
+    "output_format": {
+      "type": "string",
+      "description": "Output format of dataset. One of: ni_bi, ni_as, 1D",
+      "title": "Output format"
+    },
+    "domain_parent_id": {
+      "type": "string",
+      "description": "Idcode of domain parent. Only ROIs with the same domain parent are included in the output.",
+      "title": "Domain parent ID"
+    },
+    "pad_to_node": {
+      "type": "number",
+      "description": "Output a full dataset from node 0 to node max_index (total of max_index + 1 nodes).",
+      "title": "Pad to node"
+    },
+    "pad_label": {
+      "type": "number",
+      "description": "Use padding_label (an integer) to label nodes not part of any ROI. Default is 0.",
+      "title": "Pad label"
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "input_rois"
+  ]
+}

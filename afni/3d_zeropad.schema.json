@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dZeropad",
+  "description": "Adds planes of zeros to a dataset (i.e., pads it out). Negative 'add' count means to cut a dataset down in size.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dZeropad"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Input dataset"
+    },
+    "I": {
+      "type": "number",
+      "description": "Adds 'n' planes of zero at the Inferior edge",
+      "title": "Inferior padding"
+    },
+    "S": {
+      "type": "number",
+      "description": "Adds 'n' planes of zero at the Superior edge",
+      "title": "Superior padding"
+    },
+    "A": {
+      "type": "number",
+      "description": "Adds 'n' planes of zero at the Anterior edge",
+      "title": "Anterior padding"
+    },
+    "P": {
+      "type": "number",
+      "description": "Adds 'n' planes of zero at the Posterior edge",
+      "title": "Posterior padding"
+    },
+    "L": {
+      "type": "number",
+      "description": "Adds 'n' planes of zero at the Left edge",
+      "title": "Left padding"
+    },
+    "R": {
+      "type": "number",
+      "description": "Adds 'n' planes of zero at the Right edge",
+      "title": "Right padding"
+    },
+    "z": {
+      "type": "number",
+      "description": "Adds 'n' planes of zeros on EACH of the dataset z-axis (slice-direction) faces",
+      "title": "z-axis padding"
+    },
+    "RL": {
+      "type": "number",
+      "description": "Add/cut planes symmetrically to make the resulting volume have 'a' slices in the Right/Left direction",
+      "title": "Right/Left symmetric padding"
+    },
+    "AP": {
+      "type": "number",
+      "description": "Add/cut planes symmetrically to make the resulting volume have 'b' slices in the Anterior/Posterior direction",
+      "title": "Anterior/Posterior symmetric padding"
+    },
+    "IS": {
+      "type": "number",
+      "description": "Add/cut planes symmetrically to make the resulting volume have 'c' slices in the Inferior/Superior direction",
+      "title": "Inferior/Superior symmetric padding"
+    },
+    "pad2even": {
+      "type": "boolean",
+      "description": "Add 0 or 1 plane in each of the R/A/S directions, giving each axis an even number of slices",
+      "title": "Pad to evens",
+      "default": false
+    },
+    "mm_flag": {
+      "type": "boolean",
+      "description": "Pad counts 'n' are in mm instead of slices.",
+      "title": "Padding in mm",
+      "default": false
+    },
+    "master_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Match the volume described in dataset 'mset'. 'mset' must have the same orientation and grid spacing as dataset to be padded.",
+      "title": "Master dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Write result into dataset with prefix 'ppp'. Default is 'zeropad'.",
+      "title": "Output prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset"
+  ]
+}

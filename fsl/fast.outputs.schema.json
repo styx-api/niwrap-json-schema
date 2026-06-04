@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "fast",
+  "description": "FAST (FMRIB's Automated Segmentation Tool) segments a 3D image of the brain into different tissue types (Grey Matter, White Matter, CSF, etc.), whilst also correcting for spatial intensity variations (also known as bias field or RF inhomogeneities). The underlying method is based on a hidden Markov random field model and an associated Expectation-Maximization algorithm. The whole process is fully automated and can also produce a bias field-corrected input image and a probabilistic and/or partial volume tissue segmentation. It is robust and reliable, compared to most finite mixture model-based methods, which are sensitive to noise.",
+  "properties": {
+    "root": {
+      "type": "string",
+      "x-styx-type": "path"
+    },
+    "tissue_class_map": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-styx-type": "path",
+      "description": "Path/name of binary segmented volume file one val for each class _seg."
+    },
+    "partial_volume_map": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-styx-type": "path",
+      "description": "Path/name of partial volume file _pveseg."
+    },
+    "mixeltype": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-styx-type": "path",
+      "description": "Path/name of mixeltype volume file _mixeltype."
+    },
+    "bias_field": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-styx-type": "path",
+      "description": "Estimated bias field (if -b flag is set)."
+    },
+    "restored_image": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-styx-type": "path",
+      "description": "Bias-corrected image (if -B flag is set)."
+    }
+  },
+  "required": [
+    "root",
+    "tissue_class_map",
+    "partial_volume_map",
+    "mixeltype",
+    "bias_field",
+    "restored_image"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dfractionize",
+  "description": "For each voxel in the output dataset, computes the fraction of it that is occupied by nonzero voxels from the input.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dfractionize"
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use dataset as a template for the output. The output dataset will be on the same grid as this dataset.",
+      "title": "Template Dataset"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use dataset for the input. Only the sub-brick #0 of the input is used.",
+      "title": "Input Dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output dataset.",
+      "title": "Output Prefix"
+    },
+    "clip": {
+      "type": "number",
+      "description": "Clip off voxels that are less than the specified occupancy fraction.",
+      "title": "Clip Fraction"
+    },
+    "warp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset that provides a transformation (warp) from +orig coordinates to the coordinates of the input dataset.",
+      "title": "Warp Dataset"
+    },
+    "preserve": {
+      "type": "boolean",
+      "description": "Preserve the nonzero values of input voxels in the output dataset rather than creating a fractional mask.",
+      "title": "Preserve Nonzero Values Flag",
+      "default": false
+    },
+    "vote": {
+      "type": "boolean",
+      "description": "Vote for which input value to preserve when using the preserve flag.",
+      "title": "Vote for Preservation Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "template",
+    "input"
+  ]
+}

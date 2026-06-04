@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gcatrain",
+  "description": "GCA training tool for building a GCA from a group of manually labeled subjects.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/gcatrain"
+    },
+    "gcadir": {
+      "type": "string",
+      "description": "Directory for the new SUBJECTS_DIR.",
+      "title": "GCA Directory"
+    },
+    "subjectlistfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The list of subjects to include.",
+      "title": "Subject List File"
+    },
+    "init_subject_transform": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Initialization subject and its talairach transform.",
+      "title": "Initialization Subject and Transform"
+    },
+    "seg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Segmentation file (e.g. seg_edited.mgz).",
+      "title": "Segmentation File"
+    },
+    "source_subjects_dir": {
+      "type": "string",
+      "description": "Source SUBJECTS_DIR for data.",
+      "title": "Source Subjects Directory"
+    },
+    "num_iters": {
+      "type": "number",
+      "description": "Number of iterations.",
+      "title": "Number of Iterations"
+    },
+    "num_threads": {
+      "type": "number",
+      "description": "Number of threads to use.",
+      "title": "Number of Threads"
+    },
+    "exclude_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File listing subjects to exclude, useful for jackknifing.",
+      "title": "Exclude File"
+    },
+    "exclude_subject": {
+      "type": "string",
+      "description": "Exclude a single subject, useful for jackknifing.",
+      "title": "Exclude Subject"
+    },
+    "symmetric_atlas": {
+      "type": "boolean",
+      "description": "Create a symmetric atlas.",
+      "title": "Symmetric Atlas Flag",
+      "default": false
+    },
+    "color_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Colortable for segmentation labels (not needed).",
+      "title": "Colortable"
+    },
+    "no_submit": {
+      "type": "boolean",
+      "description": "Run serially without pbsubmit.",
+      "title": "No Submit Flag",
+      "default": false
+    },
+    "mail_flag": {
+      "type": "boolean",
+      "description": "Mail to user when jobs are pbsubmitted or finished.",
+      "title": "Mail Flag",
+      "default": false
+    },
+    "no_strict": {
+      "type": "boolean",
+      "description": "Do not require FS build stamps to match across iterations.",
+      "title": "No Strict Flag",
+      "default": false
+    },
+    "gcareg_iters": {
+      "type": "boolean",
+      "description": "Set to 1 for testing.",
+      "title": "GCA Registration Iters Flag",
+      "default": false
+    },
+    "prep_only": {
+      "type": "boolean",
+      "description": "Execute preparation steps only.",
+      "title": "Prep Only Flag",
+      "default": false
+    },
+    "nu10_flag": {
+      "type": "boolean",
+      "description": "Run with nu10 settings.",
+      "title": "NU10 Flag",
+      "default": false
+    },
+    "nu12_flag": {
+      "type": "boolean",
+      "description": "Run with nu12 settings (default).",
+      "title": "NU12 Flag",
+      "default": false
+    },
+    "no_emreg": {
+      "type": "boolean",
+      "description": "Do not use mri_em_register.",
+      "title": "No EM Register Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "gcadir",
+    "subjectlistfile",
+    "init_subject_transform",
+    "seg_file",
+    "source_subjects_dir"
+  ]
+}

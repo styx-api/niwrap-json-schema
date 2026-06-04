@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_defects_pointset",
+  "description": "Produces a pointset file containing the locations of each topological defect in a surface",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_defects_pointset"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface",
+      "title": "Surface file"
+    },
+    "defects": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input defect label (must match the surface dimensions)",
+      "title": "Defects file"
+    },
+    "out": {
+      "type": "string",
+      "description": "Output pointset file (json)",
+      "title": "Output pointset file"
+    },
+    "label": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Restrict pointset to this label (must be in input surface space)",
+      "title": "Label file"
+    },
+    "control": {
+      "type": "boolean",
+      "description": "Save output in old control point format (v6 compatible)",
+      "title": "Control point format flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "defects",
+    "out"
+  ]
+}

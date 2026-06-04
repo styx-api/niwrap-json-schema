@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "from3d",
+  "description": "Extract 2D image files from a 3D AFNI dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/from3d"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print out verbose information during the run",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "nsize": {
+      "type": "boolean",
+      "description": "Adjust size of 2D data file to be NxN, by padding with zeros, where N is a power of 2.",
+      "title": "N-size flag",
+      "default": false
+    },
+    "raw": {
+      "type": "boolean",
+      "description": "Write images in 'raw' format (just the data bytes). There will be no header information saying what the image dimensions are.",
+      "title": "Raw format flag",
+      "default": false
+    },
+    "float": {
+      "type": "boolean",
+      "description": "Write images as floats, no matter what they are in the dataset itself.",
+      "title": "Float format flag",
+      "default": false
+    },
+    "zfirst": {
+      "type": "number",
+      "description": "Set 'num' = number of first z slice to be extracted (default = 1).",
+      "title": "First Z slice"
+    },
+    "zlast": {
+      "type": "number",
+      "description": "Set 'num' = number of last z slice to be extracted (default = largest).",
+      "title": "Last Z slice"
+    },
+    "tfirst": {
+      "type": "number",
+      "description": "Set 'num' = number of first time slice to be extracted (default = 1).",
+      "title": "First time slice"
+    },
+    "tlast": {
+      "type": "number",
+      "description": "Set 'num' = number of last time slice to be extracted (default = largest).",
+      "title": "Last time slice"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read 3D dataset from file 'fname'",
+      "title": "Input file"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Write 2D images using prefix 'rname'",
+      "title": "Output prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "prefix"
+  ]
+}

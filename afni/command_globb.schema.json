@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@CommandGlobb",
+  "description": "A command-line tool to execute a specified program command line on a list of input bricks.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@CommandGlobb"
+    },
+    "program_command": {
+      "type": "string",
+      "description": "The entire command line for the program desired. The command is best put between single quotes, do not use the \\ to break a long line within the quotes.",
+      "title": "Program Command Line"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "The output directory where the results will be saved.",
+      "title": "Output Directory"
+    },
+    "extension": {
+      "type": "string",
+      "description": "If the program requires a -prefix option, then you can specify the extension which will get appended to the Brick names before +orig.",
+      "title": "Output Extension Prefix"
+    },
+    "brick_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "A list of bricks (or anything) on which the program command will be executed.",
+      "title": "Brick List"
+    }
+  },
+  "required": [
+    "@type",
+    "program_command",
+    "output_dir",
+    "brick_list"
+  ]
+}

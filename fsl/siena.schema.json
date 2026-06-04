@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "siena",
+  "description": "Structural Image Evaluation, using Normalization, of Atrophy tool for evaluating brain atrophy between two timepoints",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/siena"
+    },
+    "input1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First input image (e.g. timepoint 1 image, img1.nii.gz)",
+      "title": "First input image"
+    },
+    "input2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second input image (e.g. timepoint 2 image, img2.nii.gz)",
+      "title": "Second input image"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Set output directory (default output is <input1>_to_<input2>_siena)",
+      "title": "Output directory"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Debug (don't delete intermediate files)",
+      "title": "Debug flag",
+      "default": false
+    },
+    "bet_options": {
+      "type": "string",
+      "description": "Options to pass to BET brain extraction (inside double-quotes), e.g. -B \"-f 0.3\"",
+      "title": "BET options"
+    },
+    "two_class_seg_flag": {
+      "type": "boolean",
+      "description": "Two-class segmentation (don't segment grey and white matter separately)",
+      "title": "Two-class segmentation flag",
+      "default": false
+    },
+    "t2_weighted_flag": {
+      "type": "boolean",
+      "description": "T2-weighted input image (default T1-weighted)",
+      "title": "T2-weighted input flag",
+      "default": false
+    },
+    "standard_space_mask_flag": {
+      "type": "boolean",
+      "description": "Use standard-space masking as well as BET",
+      "title": "Standard-space masking flag",
+      "default": false
+    },
+    "upper_ignore": {
+      "type": "number",
+      "description": "Ignore from t (mm) upwards in MNI152/Talairach space",
+      "title": "Upper ignore threshold"
+    },
+    "lower_ignore": {
+      "type": "number",
+      "description": "Ignore from b (mm) downwards in MNI152/Talairach space (b should probably be negative)",
+      "title": "Lower ignore threshold"
+    },
+    "sienadiff_options": {
+      "type": "string",
+      "description": "Options to pass to siena_diff timepoint differencing (inside double-quotes), e.g. -S \"-s -i 20\"",
+      "title": "Siena_diff options"
+    },
+    "ventricle_analysis_flag": {
+      "type": "boolean",
+      "description": "Run ventricle analysis (VIENA)",
+      "title": "Ventricle analysis flag",
+      "default": false
+    },
+    "ventricle_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional user-supplied ventricle mask (default is /usr/local/fsl/data/standard/MNI152_T1_2mm_VentricleMask)",
+      "title": "Ventricle mask"
+    }
+  },
+  "required": [
+    "@type",
+    "input1",
+    "input2"
+  ]
+}

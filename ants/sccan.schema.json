@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "sccan",
+  "description": "A tool for sparse statistical analysis on images : scca, pscca (with options), mscca. Can also convert an imagelist/mask pair to a binary matrix image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/sccan"
+    },
+    "output": {
+      "type": "string",
+      "description": "Output dependent on which option is called.",
+      "title": "Output"
+    },
+    "n_permutations": {
+      "type": "integer",
+      "description": "Number of permutations to use in scca.",
+      "title": "Number of Permutations"
+    },
+    "smoother": {
+      "type": "integer",
+      "description": "Smoothing function for variates.",
+      "title": "Smoother"
+    },
+    "row_sparseness": {
+      "type": "integer",
+      "description": "Row sparseness - if (+) then keep values (+) otherwise allow +/- values --- always L1.",
+      "title": "Row Sparseness"
+    },
+    "iterations": {
+      "type": "integer",
+      "minimum": 20,
+      "description": "Max iterations for scca optimization (min 20).",
+      "title": "Iterations"
+    },
+    "n_eigenvectors": {
+      "type": "integer",
+      "description": "Number of eigenvectors to compute in scca/spca.",
+      "title": "Number of Eigenvectors"
+    },
+    "robustify": {
+      "type": "integer",
+      "description": "Rank-based scca.",
+      "title": "Robustify"
+    },
+    "covering": {
+      "type": "integer",
+      "description": "Try to make the decomposition cover the whole domain, if possible.",
+      "title": "Covering"
+    },
+    "uselong": {
+      "type": "integer",
+      "description": "Use longitudinal formulation (> 0) or not (<= 0).",
+      "title": "Use Longitudinal Formulation"
+    },
+    "l1": {
+      "type": "number",
+      "description": "Use l1 (> 0) or l0 (< 0) penalty, also sets gradient step size.",
+      "title": "L1 Penalty"
+    },
+    "pclusterthresh": {
+      "type": "number",
+      "description": "Cluster threshold on view P.",
+      "title": "P Cluster Threshold"
+    },
+    "qclusterthresh": {
+      "type": "number",
+      "description": "Cluster threshold on view Q.",
+      "title": "Q Cluster Threshold"
+    },
+    "ridge_cca": {
+      "type": "number",
+      "description": "Ridge cca.",
+      "title": "Ridge CCA"
+    },
+    "initialization": {
+      "type": "string",
+      "description": "Initialization file list for Eigenanatomy - must also pass mask option.",
+      "title": "Initialization"
+    },
+    "initialization2": {
+      "type": "string",
+      "description": "Initialization file list for SCCAN-Eigenanatomy - must also pass mask option.",
+      "title": "Initialization 2"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file for Eigenanatomy initialization.",
+      "title": "Mask"
+    },
+    "mask2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file for Eigenanatomy initialization 2.",
+      "title": "Mask 2"
+    },
+    "partial_scca_option": {
+      "type": "string",
+      "description": "Choices for pscca: PQ, PminusRQ, PQminusR, PminusRQminusR.",
+      "title": "Partial SCCA Option"
+    },
+    "prior_weight": {
+      "type": "number",
+      "description": "Scalar value weight on prior between 0 (prior is weak) and 1 (prior is strong). Only engaged if initialization is used.",
+      "title": "Prior Weight"
+    },
+    "get_small": {
+      "type": "number",
+      "description": "Find smallest eigenvectors.",
+      "title": "Get Small"
+    },
+    "verbose": {
+      "type": "number",
+      "description": "Set whether output is verbose.",
+      "title": "Verbose"
+    },
+    "imageset_to_matrix": {
+      "type": "string",
+      "description": "Takes a list of image files names (one per line) and converts it to a 2D matrix/image in binary or csv format.",
+      "title": "Imageset to Matrix"
+    },
+    "timeseriesimage_to_matrix": {
+      "type": "string",
+      "description": "Takes a timeseries (4D) image and converts it to a 2D matrix csv format.",
+      "title": "Timeseries Image to Matrix"
+    },
+    "vector_to_image": {
+      "type": "string",
+      "description": "Converts the 1st column vector in a csv file back to an image.",
+      "title": "Vector to Image"
+    },
+    "imageset_to_projections": {
+      "type": "string",
+      "description": "Takes a list of image and projection files names and writes them to a csv file.",
+      "title": "Imageset to Projections"
+    },
+    "scca": {
+      "type": "string",
+      "description": "Matrix-based scca operations for 2 and 3 views.",
+      "title": "SCCA"
+    },
+    "svd": {
+      "type": "string",
+      "description": "A sparse SVD implementation.",
+      "title": "SVD"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

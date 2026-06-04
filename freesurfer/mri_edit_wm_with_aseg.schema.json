@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_edit_wm_with_aseg",
+  "description": "A tool for editing white matter with anatomical segmentation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_edit_wm_with_aseg"
+    },
+    "input_wm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input white matter file",
+      "title": "Input white matter file"
+    },
+    "input_t1_brain": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input T1/brain file",
+      "title": "Input T1/brain file"
+    },
+    "aseg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Anatomical segmentation file",
+      "title": "Anatomical segmentation file"
+    },
+    "output_wm": {
+      "type": "string",
+      "description": "Output white matter file",
+      "title": "Output file"
+    },
+    "fillven": {
+      "type": "boolean",
+      "description": "Fill ventricular system",
+      "title": "Fill ven flag",
+      "default": false
+    },
+    "fix_scm_ha": {
+      "type": "integer",
+      "description": "Remove voxels in amygdala, ILV, and parts of hippocampus",
+      "title": "Fix SCM-HA"
+    },
+    "fix_scm_ha_only": {
+      "type": "string",
+      "description": "Standalone: fix SCM using aseg.presurf.mgz",
+      "title": "Fix SCM-HA only"
+    },
+    "keep": {
+      "type": "boolean",
+      "description": "Keep edits as found in output volume",
+      "title": "Keep flag",
+      "default": false
+    },
+    "keep_in": {
+      "type": "boolean",
+      "description": "Keep edits as found in input volume",
+      "title": "Keep in flag",
+      "default": false
+    },
+    "lh": {
+      "type": "boolean",
+      "description": "Erase right hemisphere labels from output",
+      "title": "Left hemisphere flag",
+      "default": false
+    },
+    "rh": {
+      "type": "boolean",
+      "description": "Erase left hemisphere labels from output",
+      "title": "Right hemisphere flag",
+      "default": false
+    },
+    "fix_ento_wm": {
+      "type": "string",
+      "description": "Insert lhval rhval where {3,4}006 and {3,4}201 in entowm volume",
+      "title": "Fix ento-WM"
+    },
+    "sa_fix_ento_wm": {
+      "type": "string",
+      "description": "Standalone version of fix ento-WM",
+      "title": "Standalone fix ento-WM"
+    },
+    "debug_voxel": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify a voxel to edit with coordinates Gx Gy Gz",
+      "title": "Debug voxel"
+    }
+  },
+  "required": [
+    "@type",
+    "input_wm",
+    "input_t1_brain",
+    "aseg",
+    "output_wm"
+  ]
+}

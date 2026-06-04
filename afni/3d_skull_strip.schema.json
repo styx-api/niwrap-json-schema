@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dSkullStrip",
+  "description": "A program to extract the brain from surrounding tissue from MRI T1-weighted images.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dSkullStrip"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file to 3dskullstrip.",
+      "title": "In file"
+    },
+    "num_threads": {
+      "type": "integer",
+      "description": "Set number of threads.",
+      "title": "Num threads"
+    },
+    "outputtype": {
+      "enum": [
+        "NIFTI",
+        "AFNI",
+        "NIFTI_GZ"
+      ],
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype.",
+      "title": "Outputtype"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

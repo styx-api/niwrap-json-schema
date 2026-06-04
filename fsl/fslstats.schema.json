@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslstats",
+  "description": "FSL tool for calculating statistics on image data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fslstats"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image file (e.g., image.nii.gz)",
+      "title": "Input file"
+    },
+    "index_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Generate separate n submasks from indexMask, for indexvalues 1..n where n is the maximum index value in indexMask, and generate statistics for each submask",
+      "title": "Index mask"
+    },
+    "lower_threshold": {
+      "type": "number",
+      "description": "Set lower threshold",
+      "title": "Lower threshold"
+    },
+    "upper_threshold": {
+      "type": "number",
+      "description": "Set upper threshold",
+      "title": "Upper threshold"
+    },
+    "robust_intensity_flag": {
+      "type": "boolean",
+      "description": "Output robust min and max intensity",
+      "title": "Robust intensity flag",
+      "default": false
+    },
+    "minmax_intensity_flag": {
+      "type": "boolean",
+      "description": "Output min and max intensity",
+      "title": "Min-max intensity flag",
+      "default": false
+    },
+    "voxels_volume_flag": {
+      "type": "boolean",
+      "description": "Output voxels and volume",
+      "title": "Voxels and volume flag",
+      "default": false
+    },
+    "nonzero_voxels_volume_flag": {
+      "type": "boolean",
+      "description": "Output voxels and volume (for nonzero voxels)",
+      "title": "Nonzero voxels and volume flag",
+      "default": false
+    },
+    "mean_flag": {
+      "type": "boolean",
+      "description": "Output mean",
+      "title": "Mean flag",
+      "default": false
+    },
+    "nonzero_mean_flag": {
+      "type": "boolean",
+      "description": "Output mean (for nonzero voxels)",
+      "title": "Nonzero mean flag",
+      "default": false
+    },
+    "std_dev_flag": {
+      "type": "boolean",
+      "description": "Output standard deviation",
+      "title": "Standard deviation flag",
+      "default": false
+    },
+    "nonzero_std_dev_flag": {
+      "type": "boolean",
+      "description": "Output standard deviation (for nonzero voxels)",
+      "title": "Nonzero standard deviation flag",
+      "default": false
+    },
+    "smallest_roi_flag": {
+      "type": "boolean",
+      "description": "Output smallest ROI containing nonzero voxels",
+      "title": "Smallest ROI flag",
+      "default": false
+    },
+    "max_coords_flag": {
+      "type": "boolean",
+      "description": "Output coordinates of maximum voxel",
+      "title": "Max coordinates flag",
+      "default": false
+    },
+    "min_coords_flag": {
+      "type": "boolean",
+      "description": "Output coordinates of minimum voxel",
+      "title": "Min coordinates flag",
+      "default": false
+    },
+    "cog_mm_flag": {
+      "type": "boolean",
+      "description": "Output center-of-gravity (cog) in mm coordinates",
+      "title": "Center of gravity in mm flag",
+      "default": false
+    },
+    "cog_voxel_flag": {
+      "type": "boolean",
+      "description": "Output center-of-gravity (cog) in voxel coordinates",
+      "title": "Center of gravity in voxel flag",
+      "default": false
+    },
+    "percentile": {
+      "type": "number",
+      "description": "Output nth percentile",
+      "title": "Nth percentile"
+    },
+    "nonzero_percentile": {
+      "type": "number",
+      "description": "Output nth percentile (for nonzero voxels)",
+      "title": "Nth percentile for nonzero voxels"
+    },
+    "absolute_values_flag": {
+      "type": "boolean",
+      "description": "Use absolute values of all image intensities",
+      "title": "Absolute values flag",
+      "default": false
+    },
+    "nan_as_zero_flag": {
+      "type": "boolean",
+      "description": "Treat NaN or Inf as zero for subsequent stats",
+      "title": "NaN as zero flag",
+      "default": false
+    },
+    "mask_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use the specified image for masking - overrides lower and upper thresholds",
+      "title": "Mask image"
+    },
+    "difference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Take the difference between the base image and the image specified here",
+      "title": "Difference image"
+    },
+    "hist_bins": {
+      "type": "number",
+      "description": "Output a histogram for the thresholded/masked voxels only with specified number of bins",
+      "title": "Histogram bins"
+    },
+    "hist_bins_min_max": {
+      "type": "string",
+      "description": "Output a histogram for the thresholded/masked voxels only with specified number of bins and histogram limits of min and max",
+      "title": "Histogram bins with limits"
+    },
+    "timeseries_flag": {
+      "type": "boolean",
+      "description": "Separate output line for each 3D volume of a 4D timeseries",
+      "title": "Timeseries flag",
+      "default": false
+    },
+    "mean_entropy_flag": {
+      "type": "boolean",
+      "description": "Output mean entropy; mean(-i*ln(i))",
+      "title": "Mean entropy flag",
+      "default": false
+    },
+    "nonzero_mean_entropy_flag": {
+      "type": "boolean",
+      "description": "Output mean entropy (of nonzero voxels)",
+      "title": "Nonzero mean entropy flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file"
+  ]
+}

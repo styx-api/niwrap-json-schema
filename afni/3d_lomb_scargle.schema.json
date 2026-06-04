@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLombScargle",
+  "description": "Make a periodogram or amplitude-spectrum of a time series that has a non-constant sampling rate",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLombScargle"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output prefix name for data volume, time point 1D file, and frequency 1D file",
+      "title": "Prefix"
+    },
+    "inset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Time series of volumes, a 4D volumetric data set",
+      "title": "Input file"
+    },
+    "censor_1d": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Single row or column of 1s (keep) and 0s (censored) describing which volumes of FILE are kept in the sampling and which are censored out, respectively. The length of the list of numbers must be of the same length as the number of volumes in FILE. If not entered, then the program will look for subbricks of all-zeros and assume those are censored out.",
+      "title": "Censor file"
+    },
+    "censor_string": {
+      "type": "string",
+      "description": "AFNI-style selector string of volumes to *keep* in the analysis. Such as: '[0..4,7,10..$]'.",
+      "title": "Censor string"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional, mask of volume to analyze; additionally, any voxel with uniformly zero values across time will produce a zero-spectrum",
+      "title": "Mask file"
+    },
+    "out_pow_spec": {
+      "type": "boolean",
+      "description": "Switch to output the amplitude spectrum of the freqs instead of the periodogram. In the formulation used here, for a time series of length N, the power spectral value S is related to the amplitude value X as: S = (X)**2. (Without this opt, default output is amplitude spectrum.)",
+      "title": "Output power spectrum flag",
+      "default": false
+    },
+    "nyquist_multiplier": {
+      "type": "integer",
+      "description": "L-S periodograms can include frequencies above what would typically be considered Nyquist. By default, the maximum frequency will be what f_N *would* have been if no censoring of points had occurred. Acceptable values are >0. (This sets the 'hifac' parameter).",
+      "title": "Nyquist multiplier"
+    },
+    "nifti": {
+      "type": "boolean",
+      "description": "Switch to output *.nii.gz volume file (default format is BRIK/HEAD).",
+      "title": "NIFTI flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "inset"
+  ]
+}

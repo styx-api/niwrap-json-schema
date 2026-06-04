@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fscalc",
+  "description": "A frontend tool to perform mathematical operations on volumes/surfaces of data using mris_calc.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/fscalc"
+    },
+    "input1": {
+      "type": "string",
+      "description": "First input image or constant.",
+      "title": "Input file 1"
+    },
+    "operation": {
+      "type": "string",
+      "description": "Operation to perform between input volumes.",
+      "title": "Operation"
+    },
+    "input2": {
+      "type": "string",
+      "description": "Second input image or constant. Optional for some unary operations.",
+      "title": "Input file 2"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output volume file.",
+      "title": "Output file"
+    },
+    "output_data_type": {
+      "type": "string",
+      "description": "Specify output data type (uchar, short, int, float).",
+      "title": "Output data type"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Enable debug mode.",
+      "title": "Debug flag",
+      "default": false
+    },
+    "tmpdir": {
+      "type": "string",
+      "description": "Temporary directory for processing.",
+      "title": "Temporary directory"
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "description": "Prevent cleanup of temporary files.",
+      "title": "No cleanup flag",
+      "default": false
+    },
+    "log_file": {
+      "type": "string",
+      "description": "Specify a log file for operation log.",
+      "title": "Log file"
+    }
+  },
+  "required": [
+    "@type",
+    "input1",
+    "operation",
+    "output_file"
+  ]
+}

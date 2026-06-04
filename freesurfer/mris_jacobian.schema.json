@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_jacobian",
+  "description": "This program computes the Jacobian of a surface mapping.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_jacobian"
+    },
+    "original_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The original surface file.",
+      "title": "Original Surface"
+    },
+    "mapped_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The mapped surface file.",
+      "title": "Mapped Surface"
+    },
+    "jacobian_file": {
+      "type": "string",
+      "description": "The output file name for the Jacobian.",
+      "title": "Jacobian File"
+    },
+    "log": {
+      "type": "boolean",
+      "description": "Compute and write out log of Jacobian.",
+      "title": "Log Flag",
+      "default": false
+    },
+    "noscale": {
+      "type": "boolean",
+      "description": "Don't scale Jacobian by total surface areas.",
+      "title": "No Scale Flag",
+      "default": false
+    },
+    "invert": {
+      "type": "boolean",
+      "description": "Compute -1/Jacobian for Jacobian < 1.",
+      "title": "Invert Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "original_surface",
+    "mapped_surface",
+    "jacobian_file"
+  ]
+}

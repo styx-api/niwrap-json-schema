@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dMean",
+  "description": "Takes the voxel-by-voxel mean of all input datasets; designed to be faster than 3dcalc.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dMean"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input datasets",
+      "title": "Input Files"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print out some information along the way",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Sets the prefix of the output dataset",
+      "title": "Prefix"
+    },
+    "datum": {
+      "type": "string",
+      "description": "Sets the datum of the output dataset",
+      "title": "Datum"
+    },
+    "fscale": {
+      "type": "boolean",
+      "description": "Force scaling of the output to the maximum integer range",
+      "title": "Force Scale Flag",
+      "default": false
+    },
+    "gscale": {
+      "type": "boolean",
+      "description": "Force scaling of the output to the maximum integer range, with uniform scaling factor for each sub-brick",
+      "title": "Global Scale Flag",
+      "default": false
+    },
+    "nscale": {
+      "type": "boolean",
+      "description": "Don't do any scaling on output to byte or short datasets. Only use if you want the output dataset to be integer-valued.",
+      "title": "No Scale Flag",
+      "default": false
+    },
+    "non_zero": {
+      "type": "boolean",
+      "description": "Use only non-zero values for calculation of mean, min, max, sum, squares",
+      "title": "Non-zero Values Flag",
+      "default": false
+    },
+    "stdev": {
+      "type": "boolean",
+      "description": "Calculate the standard deviation, sqrt(variance), instead of the mean (cannot be used with -sqr, -sum or -non_zero)",
+      "title": "Standard Deviation Flag",
+      "default": false
+    },
+    "sqr": {
+      "type": "boolean",
+      "description": "Average the squares, instead of the values",
+      "title": "Average Squares Flag",
+      "default": false
+    },
+    "sum": {
+      "type": "boolean",
+      "description": "Just take the sum (don't divide by number of datasets)",
+      "title": "Sum Flag",
+      "default": false
+    },
+    "count": {
+      "type": "boolean",
+      "description": "Compute only the count of non-zero voxels",
+      "title": "Count Flag",
+      "default": false
+    },
+    "max": {
+      "type": "boolean",
+      "description": "Find the maximum at each voxel",
+      "title": "Max Flag",
+      "default": false
+    },
+    "min": {
+      "type": "boolean",
+      "description": "Find the minimum at each voxel",
+      "title": "Min Flag",
+      "default": false
+    },
+    "absmax": {
+      "type": "boolean",
+      "description": "Find maximum absolute value at each voxel",
+      "title": "Absolute Max Flag",
+      "default": false
+    },
+    "signed_absmax": {
+      "type": "boolean",
+      "description": "Find extremes with maximum absolute value but preserve sign",
+      "title": "Signed Absolute Max Flag",
+      "default": false
+    },
+    "mask_inter": {
+      "type": "boolean",
+      "description": "Create a simple intersection mask",
+      "title": "Intersection Mask Flag",
+      "default": false
+    },
+    "mask_union": {
+      "type": "boolean",
+      "description": "Create a simple union mask",
+      "title": "Union Mask Flag",
+      "default": false
+    },
+    "weightset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Sum of N dsets will be weighted by N volume WSET. This weight dataset must be of type float.",
+      "title": "Weightset"
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

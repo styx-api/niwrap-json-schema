@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ROIgrow",
+  "description": "A program to expand an ROI on the surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/ROIgrow"
+    },
+    "input_surface": {
+      "type": "string",
+      "description": "Specify input surface. You can also use -t* and -spec and -surf methods to input surfaces.",
+      "title": "Input Surface"
+    },
+    "roi_labels": {
+      "type": "string",
+      "description": "Data column containing integer labels of ROIs. Each integer label gets grown separately.",
+      "title": "ROI Labels"
+    },
+    "lim_distance": {
+      "type": "number",
+      "description": "Distance to cover from each node. The units of LIM are those of the surface's node coordinates. Distances are calculated along the surface's mesh.",
+      "title": "Limit Distance"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix of 1D output dataset. Default is ROIgrow",
+      "title": "Output Prefix"
+    },
+    "full_list": {
+      "type": "boolean",
+      "description": "Output a row for each node on the surface. Nodes not in the grown ROI, receive a 0 for a label. This option is ONLY for use with -roi_labels.",
+      "title": "Full List Flag",
+      "default": false
+    },
+    "grow_from_edge": {
+      "type": "boolean",
+      "description": "Grow ROIs from their edges rather than the brute force default. This might make the program faster on large ROIs and large surfaces.",
+      "title": "Grow From Edge Flag",
+      "default": false
+    },
+    "insphere_diameter": {
+      "type": "number",
+      "description": "Diameter of the sphere inside which nodes are added instead of growing along the surface.",
+      "title": "Insphere Diameter"
+    },
+    "inbox_edges": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Use a box of edge widths E1, E2, E3 instead of DIA.",
+      "title": "Inbox Edges"
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface",
+    "roi_labels",
+    "lim_distance"
+  ]
+}

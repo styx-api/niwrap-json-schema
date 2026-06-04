@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "imstat",
+  "description": "Calculation of statistics of one or more images",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/imstat"
+    },
+    "no_label": {
+      "type": "boolean",
+      "description": "Don't write labels on each file's summary line",
+      "title": "No Label Flag",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Don't print statistics for each file",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "pixstat_prefix": {
+      "type": "string",
+      "description": "If more than one image file is given, then 'prefix.mean' and 'prefix.sdev' will be written as the pixel-wise statistics images of the whole collection. These images will be in the 'flim' floating point format. [This option only works on 2D images!]",
+      "title": "Pixel-wise Statistics Prefix"
+    },
+    "image_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input image file(s)",
+      "title": "Image Files"
+    }
+  },
+  "required": [
+    "@type",
+    "image_files"
+  ]
+}

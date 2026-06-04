@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dBlurInMask",
+  "description": "Blurs a dataset spatially inside a mask",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dBlurInMask"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset to be smoothed and output",
+      "title": "Input Dataset"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix for output dataset",
+      "title": "Output Dataset Prefix"
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "Amount of smoothness to add to the dataset (in mm)",
+      "title": "FWHM Smoothness"
+    },
+    "fwhm_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset containing the amount of smoothness for each voxel",
+      "title": "FWHM Dataset"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask dataset for blurring; voxels NOT in the mask will be zeroed in the output",
+      "title": "Mask Dataset"
+    },
+    "multi_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Multi-mask dataset; each distinct nonzero value is treated as a separate mask",
+      "title": "Multi-Mask Dataset"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Create an automask from the input dataset",
+      "title": "Automask Flag",
+      "default": false
+    },
+    "preserve": {
+      "type": "boolean",
+      "description": "Preserve original values in the dataset outside the mask",
+      "title": "Preserve Flag",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Don't be verbose with progress reports",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "float": {
+      "type": "boolean",
+      "description": "Save dataset as floats",
+      "title": "Float Flag",
+      "default": false
+    },
+    "fwhm_xyz": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Add different amounts of smoothness in the 3 spatial directions",
+      "title": "FWHM XYZ Smoothness"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_prefix",
+    "fwhm"
+  ]
+}

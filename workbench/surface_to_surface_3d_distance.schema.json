@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "COMPUTE DISTANCE BETWEEN CORRESPONDING VERTICES",
+  "description": "Computes the vector difference between the vertices of each surface with the same index, as (comp - ref), and output the magnitudes, and optionally the displacement vectors.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/surface_to_surface_3d_distance"
+    },
+    "surface_comp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the surface to compare to the reference"
+    },
+    "surface_ref": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the surface to use as the reference"
+    },
+    "dists_out": {
+      "type": "string",
+      "description": "the output distances"
+    },
+    "vectors": {
+      "type": "object",
+      "properties": {
+        "vectors_out": {
+          "type": "string",
+          "description": "the output vectors"
+        }
+      },
+      "required": [
+        "vectors_out"
+      ],
+      "description": "output the displacement vectors"
+    }
+  },
+  "required": [
+    "@type",
+    "surface_comp",
+    "surface_ref",
+    "dists_out"
+  ]
+}

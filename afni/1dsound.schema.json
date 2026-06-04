@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dsound",
+  "description": "Program to create a sound file from a 1D file (column of numbers).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dsound"
+    },
+    "tsfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The input 1D time series file containing the data to transform into sound.",
+      "title": "Time series file"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output filename, which will have '.au' extension.",
+      "title": "Output prefix"
+    },
+    "encoding_16PCM": {
+      "type": "boolean",
+      "description": "Output in 16-bit linear PCM encoding (uncompressed).",
+      "title": "16-bit PCM encoding",
+      "default": false
+    },
+    "encoding_8PCM": {
+      "type": "boolean",
+      "description": "Output in 8-bit linear PCM encoding.",
+      "title": "8-bit PCM encoding",
+      "default": false
+    },
+    "encoding_8ulaw": {
+      "type": "boolean",
+      "description": "Output in 8-bit mu-law encoding.",
+      "title": "8-bit mu-law encoding",
+      "default": false
+    },
+    "tper_option": {
+      "type": "number",
+      "minimum": 0.01,
+      "maximum": 1,
+      "description": "Time in seconds per time point in 'tsfile'. Allowed range is 0.01 to 1.0 (inclusive). [default is 0.2s]",
+      "title": "Time per X-mod"
+    },
+    "fm_option": {
+      "type": "boolean",
+      "description": "Output sound is frequency modulated between 110 and 1760 Hz from min to max in the input 1D file.",
+      "title": "Frequency modulation",
+      "default": false
+    },
+    "notes_option": {
+      "type": "boolean",
+      "description": "Output sound is a sequence of notes, low to high pitch based on min to max in the input 1D file. Uses pentatonic scale.",
+      "title": "Notes option",
+      "default": false
+    },
+    "notewave_option": {
+      "type": "string",
+      "description": "Shape of the notes used. Select from [sine, sqsine, square, triangle].",
+      "title": "Note wave shape"
+    },
+    "despike_option": {
+      "type": "boolean",
+      "description": "Apply a simple despiking algorithm to avoid artifacts from large/small values in the input.",
+      "title": "Despike",
+      "default": false
+    },
+    "play_option": {
+      "type": "boolean",
+      "description": "Plays the sound file after it is written.",
+      "title": "Play",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "tsfile"
+  ]
+}

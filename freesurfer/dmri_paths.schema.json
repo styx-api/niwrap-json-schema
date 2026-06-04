@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dmri_paths",
+  "description": "Tool for diffusion MRI path analysis.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dmri_paths"
+    },
+    "indir": {
+      "type": "string",
+      "description": "Input subject directory (optional), specify multiple for longitudinal data.",
+      "title": "Input Subject Directory"
+    },
+    "outdir": {
+      "type": "string",
+      "description": "Output directory (one per path).",
+      "title": "Output Directory"
+    },
+    "dwi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "DWI volume series.",
+      "title": "DWI Volume Series"
+    },
+    "grad": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file of diffusion gradients.",
+      "title": "Diffusion Gradients"
+    },
+    "bval": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file of diffusion b-values.",
+      "title": "Diffusion b-values"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask volume.",
+      "title": "Mask Volume"
+    },
+    "bpdir": {
+      "type": "string",
+      "description": "BEDPOST directory.",
+      "title": "BEDPOST Directory"
+    },
+    "ntr": {
+      "type": "number",
+      "description": "Max number of tracts per voxel (default 1).",
+      "title": "Max Number of Tracts per Voxel"
+    },
+    "fmin": {
+      "type": "number",
+      "description": "Tract volume fraction threshold (default 0).",
+      "title": "Tract Volume Fraction Threshold"
+    },
+    "basereg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Base-to-DWI registration, needed for longitudinal data only (.mat, as many as input directories).",
+      "title": "Base-to-DWI Registration"
+    },
+    "basemask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Base template mask volume.",
+      "title": "Base Template Mask Volume"
+    },
+    "roi1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "End ROI 1 (volume or label, one per path).",
+      "title": "End ROI 1"
+    },
+    "roi2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "End ROI 2 (volume or label, one per path).",
+      "title": "End ROI 2"
+    },
+    "roimesh1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mesh for end ROI 1 (for label ROIs).",
+      "title": "Mesh for End ROI 1"
+    },
+    "roimesh2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mesh for end ROI 2 (for label ROIs).",
+      "title": "Mesh for End ROI 2"
+    },
+    "roiref1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference volume for end ROI 1 (for label ROIs).",
+      "title": "Reference Volume for End ROI 1"
+    },
+    "roiref2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference volume for end ROI 2 (for label ROIs).",
+      "title": "Reference Volume for End ROI 2"
+    },
+    "prior": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Spatial path priors (negative log-likelihoods off and on the path, one pair per path).",
+      "title": "Spatial Path Priors"
+    },
+    "nprior": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Near-neighbor label priors (negative log-likelihood and list of labels, one pair per path).",
+      "title": "Near-neighbor Label Priors"
+    },
+    "nset": {
+      "type": "number",
+      "description": "Subset of near-neighbor label priors (default all).",
+      "title": "Subset of Near-neighbor Label Priors"
+    },
+    "lprior": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Local-neighbor label priors (negative log-likelihood and list of labels, one pair per path).",
+      "title": "Local-neighbor Label Priors"
+    },
+    "lset": {
+      "type": "number",
+      "description": "Subset of local-neighbor label priors (default all).",
+      "title": "Subset of Local-neighbor Label Priors"
+    },
+    "seg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Segmentation map of test subject, specify multiple for longitudinal data.",
+      "title": "Segmentation Map"
+    },
+    "tprior": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path tangent vector priors (negative log-likelihood, one per path).",
+      "title": "Path Tangent Vector Priors"
+    },
+    "cprior": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path curvature priors (negative log-likelihood, one per path).",
+      "title": "Path Curvature Priors"
+    },
+    "reg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "DWI-to-atlas affine registration (.mat).",
+      "title": "DWI-to-Atlas Affine Registration"
+    },
+    "regnl": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "DWI-to-atlas nonlinear registration (.m3z).",
+      "title": "DWI-to-Atlas Nonlinear Registration"
+    },
+    "init": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file of initial control points (one per path).",
+      "title": "Initial Control Points"
+    },
+    "nb": {
+      "type": "number",
+      "description": "Number of burn-in samples (default 5000).",
+      "title": "Number of Burn-in Samples"
+    },
+    "ns": {
+      "type": "number",
+      "description": "Number of post-burn-in samples (default 5000).",
+      "title": "Number of Post-burn-in Samples"
+    },
+    "nk": {
+      "type": "number",
+      "description": "Keep every nk-th sample (default 10).",
+      "title": "Sample Interval"
+    },
+    "nu": {
+      "type": "number",
+      "description": "Update proposal every nu-th sample (default 40).",
+      "title": "Proposal Update Interval"
+    },
+    "sdp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file with initial proposal standard deviations for control point perturbations.",
+      "title": "Initial Proposal SDs"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging.",
+      "title": "Debug Mode",
+      "default": false
+    },
+    "checkopts": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit.",
+      "title": "Check Options",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print out version and exit.",
+      "title": "Print Version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

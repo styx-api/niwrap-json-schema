@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTqual",
+  "description": "Computes a quality index for each sub-brick in a 3D+time dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTqual"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input 3D+time dataset",
+      "title": "Dataset"
+    },
+    "spearman": {
+      "type": "boolean",
+      "description": "Quality index is 1 minus the Spearman (rank) correlation coefficient of each sub-brick with the median sub-brick (default method).",
+      "title": "Spearman correlation flag",
+      "default": false
+    },
+    "quadrant": {
+      "type": "boolean",
+      "description": "Quality index is 1 minus the quadrant correlation coefficient as the quality index.",
+      "title": "Quadrant correlation flag",
+      "default": false
+    },
+    "autoclip": {
+      "type": "boolean",
+      "description": "Clip off low-intensity regions in the median sub-brick, only compute correlation between high-intensity voxels.",
+      "title": "Autoclip flag",
+      "default": false
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Automatically mask and compute correlation only across high-intensity (presumably brain) voxels.",
+      "title": "Automask flag",
+      "default": false
+    },
+    "clip": {
+      "type": "number",
+      "description": "Clip off values below given threshold in the median sub-brick.",
+      "title": "Clip value"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Compute correlation only across masked voxels from the given dataset.",
+      "title": "Mask dataset"
+    },
+    "range": {
+      "type": "boolean",
+      "description": "Print the median-3.5*MAD and median+3.5*MAD values with each quality index for plotting.",
+      "title": "Range flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "dataset"
+  ]
+}

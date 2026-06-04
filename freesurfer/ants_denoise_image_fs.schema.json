@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AntsDenoiseImageFs",
+  "description": "Denoises an image with a spatially adaptive filter. This program wraps the AntsDenoiseImage utility available in the ANTs package.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/AntsDenoiseImageFs"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume file",
+      "title": "Input Image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Denoised volume file",
+      "title": "Output Image",
+      "default": "output.nii"
+    },
+    "rician_flag": {
+      "type": "boolean",
+      "description": "Enable Rician noise model (otherwise Gaussian is used)",
+      "title": "Rician Noise Model Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_image"
+  ]
+}

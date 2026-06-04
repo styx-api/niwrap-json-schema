@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@simulate_motion",
+  "description": "Create simulated motion time series in an EPI dataset based on the provided motion parameters and an input volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@simulate_motion"
+    },
+    "epi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input EPI volume or time series (only a volreg base is needed, though more is okay).",
+      "title": "EPI dataset"
+    },
+    "motion_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Motion parameter file (as output by 3dvolreg).",
+      "title": "Motion parameters file"
+    },
+    "epi_timing": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Provide EPI dataset with slice timing.",
+      "title": "EPI timing dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for data results (default = motion_sim.NUM_TRS).",
+      "title": "Prefix for results"
+    },
+    "save_workdir": {
+      "type": "boolean",
+      "description": "Do not remove the 'work' directory.",
+      "title": "Save work directory",
+      "default": false
+    },
+    "test": {
+      "type": "boolean",
+      "description": "Only test running the program, do not create a simulated motion dataset.",
+      "title": "Test mode",
+      "default": false
+    },
+    "verb_level": {
+      "type": "number",
+      "description": "Specify a verbose level (default = 1).",
+      "title": "Verbose level"
+    },
+    "vr_base": {
+      "type": "number",
+      "description": "0-based index of volreg base in EPI dataset.",
+      "title": "Volreg base index"
+    },
+    "warp_method": {
+      "type": "string",
+      "description": "Specify a method for forward alignment/transform.",
+      "title": "Warp method"
+    },
+    "warp_1D": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify a 12 parameter affine transformation.",
+      "title": "Affine transformation file"
+    },
+    "warp_master": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify a grid master dataset for the -warp_1D transform.",
+      "title": "Warp master dataset"
+    },
+    "wsinc5": {
+      "type": "boolean",
+      "description": "Use wsinc5 interpolation in 3dAllineate.",
+      "title": "wsinc5 interpolation",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show help message.",
+      "title": "Help",
+      "default": false
+    },
+    "hist": {
+      "type": "boolean",
+      "description": "Show program modification history.",
+      "title": "History",
+      "default": false
+    },
+    "todo": {
+      "type": "boolean",
+      "description": "Show current todo list.",
+      "title": "Todo list",
+      "default": false
+    },
+    "ver": {
+      "type": "boolean",
+      "description": "Show program version.",
+      "title": "Version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "epi",
+    "motion_file"
+  ]
+}

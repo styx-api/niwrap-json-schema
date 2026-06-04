@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "conf2hires",
+  "description": "Places the surfaces on high resolution T1 (and maybe T2) volumes based on an initial placement on a conformed volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/conf2hires"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject identifier",
+      "title": "Subject"
+    },
+    "t2": {
+      "type": "boolean",
+      "description": "Enable T2 processing",
+      "title": "T2 Flag",
+      "default": false
+    },
+    "no_t2": {
+      "type": "boolean",
+      "description": "Disable T2 processing (default)",
+      "title": "No T2 Flag",
+      "default": false
+    },
+    "mm_norm_sigma": {
+      "type": "number",
+      "description": "Smoothing level for T2 mri_normalize (default is 8)",
+      "title": "MM Norm Sigma"
+    },
+    "flair": {
+      "type": "boolean",
+      "description": "Enable FLAIR processing",
+      "title": "FLAIR Flag",
+      "default": false
+    },
+    "no_flair": {
+      "type": "boolean",
+      "description": "Disable FLAIR processing (default)",
+      "title": "No FLAIR Flag",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads to use",
+      "title": "Threads"
+    },
+    "copy_bias_from_conf": {
+      "type": "boolean",
+      "description": "Copy bias field from conformed instead of computing directly",
+      "title": "Copy Bias From Conf",
+      "default": false
+    },
+    "norm_opts_rca": {
+      "type": "boolean",
+      "description": "Compute bias directly using recon-all opts to mri_normalize",
+      "title": "Norm Opts RCA Flag",
+      "default": false
+    },
+    "cubic": {
+      "type": "boolean",
+      "description": "Use cubic normalization (applies with --copy-bias-from-conf)",
+      "title": "Cubic Flag",
+      "default": false
+    },
+    "trilin": {
+      "type": "boolean",
+      "description": "Use trilinear normalization (default, applies with --copy-bias-from-conf)",
+      "title": "Trilin Flag",
+      "default": false
+    },
+    "dev": {
+      "type": "boolean",
+      "description": "Use mris_make_surfaces.dev",
+      "title": "Dev Flag",
+      "default": false
+    },
+    "no_dev": {
+      "type": "boolean",
+      "description": "Do not use mris_make_surfaces.dev (default)",
+      "title": "No Dev Flag",
+      "default": false
+    },
+    "bbr_con": {
+      "type": "string",
+      "description": "Set BBR contrast type (default t2)",
+      "title": "BBR Contrast Type"
+    },
+    "bbr_t1": {
+      "type": "boolean",
+      "description": "Set BBR contrast type to t1",
+      "title": "BBR T1 Flag",
+      "default": false
+    },
+    "bbr_t2": {
+      "type": "boolean",
+      "description": "Set BBR contrast type to t2",
+      "title": "BBR T2 Flag",
+      "default": false
+    },
+    "first_peak_d1": {
+      "type": "boolean",
+      "description": "Refine surface targets in MRIScomputeBorderValues() using first peak method D1",
+      "title": "First Peak D1 Flag",
+      "default": false
+    },
+    "first_peak_d2": {
+      "type": "boolean",
+      "description": "Refine surface targets in MRIScomputeBorderValues() using first peak method D2",
+      "title": "First Peak D2 Flag",
+      "default": false
+    },
+    "stopmask": {
+      "type": "string",
+      "description": "Specify stop mask",
+      "title": "Stop Mask"
+    },
+    "expert": {
+      "type": "string",
+      "description": "Use expert options",
+      "title": "Expert Options"
+    },
+    "force_update": {
+      "type": "boolean",
+      "description": "Force update of final surfaces",
+      "title": "Force Update Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject"
+  ]
+}

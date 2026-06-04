@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "run_fastsurfer.sh",
+  "description": "run_fastsurfer.sh takes a T1 full head image and creates segmentation using FastSurferVINN and surfaces using recon-surf",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fastsurfer/run_fastsurfer.sh"
+    },
+    "sid": {
+      "type": "string",
+      "description": "Subject ID to create directory inside SUBJECTS_DIR",
+      "title": "Subject ID"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Output directory SUBJECTS_DIR",
+      "title": "Subjects Directory"
+    },
+    "t1_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T1 full head input (not bias corrected). Requires an ABSOLUTE Path!",
+      "title": "T1 Input"
+    },
+    "fs_license": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to FreeSurfer license key file",
+      "title": "FreeSurfer License"
+    },
+    "asegdkt_segfile": {
+      "type": "string",
+      "description": "Name of the segmentation file including aparc+DKTatlas-aseg segmentations",
+      "title": "Segmentation File"
+    },
+    "vox_size": {
+      "type": "string",
+      "description": "Forces processing at a specific voxel size (0.7-1 or 'min')",
+      "title": "Voxel Size"
+    },
+    "seg_only": {
+      "type": "boolean",
+      "description": "Run only FastSurferVINN",
+      "title": "Segmentation Only",
+      "default": false
+    },
+    "seg_log": {
+      "type": "string",
+      "description": "Log-file for the segmentation",
+      "title": "Segmentation Log"
+    },
+    "conformed_name": {
+      "type": "string",
+      "description": "Name of the file for the conformed input image",
+      "title": "Conformed Image Name"
+    },
+    "norm_name": {
+      "type": "string",
+      "description": "Name of the biasfield corrected image",
+      "title": "Normalized Image Name"
+    },
+    "t2_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional T2 full head input",
+      "title": "T2 Input"
+    },
+    "reg_mode": {
+      "enum": [
+        "none",
+        "coreg",
+        "robust"
+      ],
+      "description": "Registration method for T1 and T2 images",
+      "title": "Registration Mode"
+    },
+    "threads": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Set openMP and ITK threads",
+      "title": "Number of Threads"
+    },
+    "device": {
+      "type": "string",
+      "description": "Device for inference (cpu/cuda)",
+      "title": "Processing Device"
+    },
+    "viewagg_device": {
+      "type": "string",
+      "description": "Device for view aggregation",
+      "title": "View Aggregation Device"
+    },
+    "batch_size": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Batch size for inference",
+      "title": "Batch Size"
+    },
+    "python_cmd": {
+      "type": "string",
+      "description": "Command for python",
+      "title": "Python Command"
+    },
+    "surf_only": {
+      "type": "boolean",
+      "description": "Run surface pipeline only",
+      "title": "Surface Only",
+      "default": false
+    },
+    "no_biasfield": {
+      "type": "boolean",
+      "description": "Deactivate bias field correction and partial volume-corrected stats",
+      "title": "No Biasfield",
+      "default": false
+    },
+    "tal_reg": {
+      "type": "boolean",
+      "description": "Perform talairach registration for eTIV estimates",
+      "title": "Talairach Registration",
+      "default": false
+    },
+    "no_asegdkt": {
+      "type": "boolean",
+      "description": "Skip the asegdkt segmentation",
+      "title": "Skip ASEGDKT",
+      "default": false
+    },
+    "no_cereb": {
+      "type": "boolean",
+      "description": "Skip the cerebellum segmentation",
+      "title": "Skip Cerebellum",
+      "default": false
+    },
+    "cereb_segfile": {
+      "type": "string",
+      "description": "Name of DL-based segmentation file of the cerebellum",
+      "title": "Cerebellum Segmentation File"
+    },
+    "no_hypothal": {
+      "type": "boolean",
+      "description": "Skip the hypothalamus segmentation",
+      "title": "Skip Hypothalamus",
+      "default": false
+    },
+    "qc_snap": {
+      "type": "boolean",
+      "description": "Create QC snapshots in subjects directory",
+      "title": "QC Snapshots",
+      "default": false
+    },
+    "three_t": {
+      "type": "boolean",
+      "description": "Use the 3T atlas for talairach registration",
+      "title": "3T Atlas",
+      "default": false
+    },
+    "parallel": {
+      "type": "boolean",
+      "description": "Run both hemispheres in parallel",
+      "title": "Parallel Processing",
+      "default": false
+    },
+    "ignore_fs_version": {
+      "type": "boolean",
+      "description": "Switch on to avoid check for FreeSurfer version",
+      "title": "Ignore FreeSurfer Version",
+      "default": false
+    },
+    "fstess": {
+      "type": "boolean",
+      "description": "Switch on mri_tesselate for surface creation",
+      "title": "Use mri_tesselate",
+      "default": false
+    },
+    "fsqsphere": {
+      "type": "boolean",
+      "description": "Use FreeSurfer iterative inflation for qsphere",
+      "title": "FreeSurfer Iterative Inflation",
+      "default": false
+    },
+    "fsaparc": {
+      "type": "boolean",
+      "description": "Additionally create FS aparc segmentations and ribbon",
+      "title": "Create FS aparc",
+      "default": false
+    },
+    "no_fs_t1": {
+      "type": "boolean",
+      "description": "Do not generate T1.mgz",
+      "title": "Skip T1.mgz",
+      "default": false
+    },
+    "no_surfreg": {
+      "type": "boolean",
+      "description": "Do not run Surface registration with FreeSurfer",
+      "title": "Skip Surface Registration",
+      "default": false
+    },
+    "allow_root": {
+      "type": "boolean",
+      "description": "Allow execution as root user",
+      "title": "Allow Root",
+      "default": false
+    },
+    "version": {
+      "type": "string",
+      "description": "Print version information",
+      "title": "Version Information"
+    }
+  },
+  "required": [
+    "@type",
+    "sid",
+    "subjects_dir",
+    "t1_input"
+  ]
+}

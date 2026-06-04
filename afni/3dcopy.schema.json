@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dcopy",
+  "description": "3dcopy copies datasets with or without altering prefixes and converting formats.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dcopy"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print progress reports.",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "denote": {
+      "type": "boolean",
+      "description": "Remove any Notes from the file.",
+      "title": "Denote Flag",
+      "default": false
+    },
+    "old_prefix": {
+      "type": "object",
+      "properties": {
+        "old_prefix": {
+          "type": "string",
+          "description": "Old dataset prefix (and view if specific dataset view is to be copied).",
+          "title": "Old Prefix"
+        },
+        "view": {
+          "type": "string",
+          "description": "Specified view (orig, acpc, tlrc).",
+          "title": "Specified View"
+        }
+      },
+      "required": [
+        "old_prefix"
+      ]
+    },
+    "new_prefix": {
+      "type": "string",
+      "description": "New dataset prefix or directory path.",
+      "title": "New Prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "old_prefix",
+    "new_prefix"
+  ]
+}

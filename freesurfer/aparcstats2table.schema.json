@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "aparcstats2table",
+  "description": "Converts a cortical stats file into a table format with subjects as rows and parcellations as columns.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/aparcstats2table"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subject IDs.",
+      "title": "Subjects"
+    },
+    "subjectsfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing list of subjects (one per line).",
+      "title": "Subjects File"
+    },
+    "qdec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "QDEC table file with subject IDs.",
+      "title": "QDEC Table"
+    },
+    "qdec_long": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Longitudinal QDEC table with subject templates.",
+      "title": "Longitudinal QDEC Table"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere being analyzed (lh or rh required).",
+      "title": "Hemisphere"
+    },
+    "tablefile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output table file.",
+      "title": "Output Table File"
+    },
+    "parcellation": {
+      "type": "string",
+      "description": "Parcellation atlas (default: aparc).",
+      "title": "Parcellation Atlas"
+    },
+    "measure": {
+      "type": "string",
+      "description": "Measure type (e.g., area, volume, thickness).",
+      "title": "Measurement Type"
+    },
+    "delimiter": {
+      "type": "string",
+      "description": "Delimiter between measures in the table (default: tab).",
+      "title": "Delimiter"
+    },
+    "skip_missing": {
+      "type": "boolean",
+      "description": "Skip subjects if input is not found.",
+      "title": "Skip Missing Subjects",
+      "default": false
+    },
+    "parcid_only": {
+      "type": "boolean",
+      "description": "Write only ROI names without pre/appended hemi/measure.",
+      "title": "Parcellation ID Only",
+      "default": false
+    },
+    "common_parcs": {
+      "type": "boolean",
+      "description": "Output only common parcellations across all subjects.",
+      "title": "Common Parcellations",
+      "default": false
+    },
+    "parcs_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File specifying which parcellations to output.",
+      "title": "Parcellations File"
+    },
+    "report_rois": {
+      "type": "boolean",
+      "description": "Print ROI information for each subject.",
+      "title": "Report ROIs",
+      "default": false
+    },
+    "transpose": {
+      "type": "boolean",
+      "description": "Transpose the table (subjects in columns).",
+      "title": "Transpose Table",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Increase verbosity.",
+      "title": "Debug Mode",
+      "default": false
+    },
+    "etiv": {
+      "type": "boolean",
+      "description": "Report volume as percent estimated total intracranial volume.",
+      "title": "Estimated Total Intracranial Volume",
+      "default": false
+    },
+    "scale": {
+      "type": "number",
+      "description": "Scale factor for output values.",
+      "title": "Scale Factor"
+    }
+  },
+  "required": [
+    "@type",
+    "hemi",
+    "tablefile"
+  ]
+}

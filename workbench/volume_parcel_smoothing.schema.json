@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SMOOTH PARCELS IN A VOLUME SEPARATELY",
+  "description": "The volume is smoothed within each label in the label volume using data only from within the label.  Equivalent to running volume smoothing with ROIs matching each label separately, then adding the resulting volumes, but faster.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume_parcel_smoothing"
+    },
+    "data_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the volume to smooth"
+    },
+    "label_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "a label volume containing the parcels to smooth"
+    },
+    "kernel": {
+      "type": "number",
+      "description": "the size of the gaussian smoothing kernel in mm, as sigma by default"
+    },
+    "volume_out": {
+      "type": "string",
+      "description": "the output volume"
+    },
+    "fwhm": {
+      "type": "boolean",
+      "description": "smoothing kernel size is FWHM, not sigma",
+      "default": false
+    },
+    "fix_zeros": {
+      "type": "boolean",
+      "description": "treat zero values as not being data",
+      "default": false
+    },
+    "subvolume": {
+      "type": "string",
+      "description": "select a single subvolume to smooth"
+    }
+  },
+  "required": [
+    "@type",
+    "data_volume",
+    "label_volume",
+    "kernel",
+    "volume_out"
+  ]
+}

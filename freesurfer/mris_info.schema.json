@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_info",
+  "description": "Prints out information about a surface file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_info"
+    },
+    "surfacefile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface file to process",
+      "title": "Surface file"
+    },
+    "outfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Save some data to outfile",
+      "title": "Outfile"
+    },
+    "subject_hemi_surfname": {
+      "type": "string",
+      "description": "Instead of surfacefile",
+      "title": "Subject hemi surfname"
+    },
+    "talairach_xfm_flag": {
+      "type": "boolean",
+      "description": "Apply talairach xfm before reporting info",
+      "title": "Talairach XFM flag",
+      "default": false
+    },
+    "rescale_flag": {
+      "type": "boolean",
+      "description": "Rescale group surface to match average metrics",
+      "title": "Rescale flag",
+      "default": false
+    },
+    "patchfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Load patch before reporting",
+      "title": "Patch file"
+    },
+    "vertex_number": {
+      "type": "number",
+      "description": "Print out vertex information for vertex vnum",
+      "title": "Vertex number"
+    },
+    "extended_vertex_number": {
+      "type": "number",
+      "description": "Print out extended vertex information for vertex vnum",
+      "title": "Extended vertex number"
+    },
+    "curvfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Check if curvature file vertices match surface vertices",
+      "title": "Curvature file"
+    },
+    "annotfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Check if annotation file vertices match surface vertices; dump colortable",
+      "title": "Annotation file"
+    },
+    "area_stats_flag": {
+      "type": "boolean",
+      "description": "Compute stats on triangle area (n, mean, std, min, max)",
+      "title": "Area stats flag",
+      "default": false
+    },
+    "edge_stats_id": {
+      "type": "string",
+      "description": "Compute stats on edge metric (n, mean, std, min, max); id=0=length, id=1=dot, id=2=angle, id<0= all",
+      "title": "Edge metric ID"
+    },
+    "edge_number": {
+      "type": "number",
+      "description": "Print out extended information about edge",
+      "title": "Edge number"
+    },
+    "vtxno": {
+      "type": "string",
+      "description": "Write Matlab file to plot vertex neighborhood",
+      "title": "Vertex number for Matlab"
+    },
+    "matrix_format": {
+      "type": "string",
+      "description": "Set format for matrix printing (e.g., %12.8f)",
+      "title": "Matrix format"
+    },
+    "quality_stats_flag": {
+      "type": "boolean",
+      "description": "Print out surface quality stats",
+      "title": "Quality stats flag",
+      "default": false
+    },
+    "intersections_flag": {
+      "type": "boolean",
+      "description": "Print the number of vertices that belong to a face that intersects another face",
+      "title": "Intersections flag",
+      "default": false
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Only compute edge and area stats using vertices in mask",
+      "title": "Mask file"
+    },
+    "label_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Only compute edge and area stats using vertices in label",
+      "title": "Label file"
+    },
+    "edge_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Print edge info for all edges into file",
+      "title": "Edge file"
+    },
+    "nogifti_flag": {
+      "type": "boolean",
+      "description": "No dump of GIFTI struct, read .gii as surface instead",
+      "title": "No GIFTI display flag",
+      "default": false
+    },
+    "version_flag": {
+      "type": "boolean",
+      "description": "Print version and exits",
+      "title": "Version flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "No clue what this does",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "surfacefile"
+  ]
+}

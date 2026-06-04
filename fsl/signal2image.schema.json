@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "signal2image",
+  "description": "A tool for converting MR signal data to images using specified k-space coordinates and pulse sequences.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/signal2image"
+    },
+    "pulse_sequence": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "8-column pulse_sequence matrix. Expects to find all other pulse sequence files in the same directory.",
+      "title": "Pulse Sequence File"
+    },
+    "input_signal": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input signal file.",
+      "title": "Input Signal File"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Output image file.",
+      "title": "Output Image File"
+    },
+    "kspace_coordinates": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "K-space coordinates file.",
+      "title": "K-space Coordinates File"
+    },
+    "output_kspace": {
+      "type": "string",
+      "description": "Output k-space file.",
+      "title": "Output K-space File"
+    },
+    "abs_flag": {
+      "type": "boolean",
+      "description": "Save absolute magnitude and phase.",
+      "title": "Absolute Magnitude and Phase Flag",
+      "default": false
+    },
+    "homodyne_flag": {
+      "type": "boolean",
+      "description": "Do the homodyne reconstruction.",
+      "title": "Homodyne Reconstruction Flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages.",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "apodize_flag": {
+      "type": "boolean",
+      "description": "Do apodization.",
+      "title": "Apodization Flag",
+      "default": false
+    },
+    "cutoff": {
+      "type": "number",
+      "description": "Apodization with this cutoff; default 100.",
+      "title": "Apodization Cutoff"
+    },
+    "rolloff": {
+      "type": "number",
+      "description": "Apodization with this rolloff; default 10.",
+      "title": "Apodization Rolloff"
+    },
+    "save_flag": {
+      "type": "boolean",
+      "description": "Save window as ASCII matrix (DEBUG!)",
+      "title": "Save Window as ASCII Matrix Flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "pulse_sequence"
+  ]
+}

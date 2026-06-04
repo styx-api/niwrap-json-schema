@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CORRELATE A CIFTI FILE WITH ANOTHER CIFTI FILE",
+  "description": "Correlates every row in <cifti-a> with every row in <cifti-b>.  The mapping along columns in <cifti-b> becomes the mapping along rows in the output.\n\nWhen using the -fisher-z option, the output is NOT a Z-score, it is artanh(r), to do further math on this output, consider using -cifti-math.\n\nRestricting the memory usage will make it calculate the output in chunks, by reading through <cifti-b> multiple times.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_cross_correlation"
+    },
+    "cifti_a": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "first input cifti file"
+    },
+    "cifti_b": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "second input cifti file"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "output cifti file"
+    },
+    "weights": {
+      "type": "string",
+      "description": "specify column weights"
+    },
+    "fisher_z": {
+      "type": "boolean",
+      "description": "apply fisher small z transform (ie, artanh) to correlation",
+      "default": false
+    },
+    "mem_limit": {
+      "type": "number",
+      "description": "restrict memory usage"
+    }
+  },
+  "required": [
+    "@type",
+    "cifti_a",
+    "cifti_b",
+    "cifti_out"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_prepare_fieldmap",
+  "description": "Prepares a fieldmap suitable for FEAT from SIEMENS data and saves output in rad/s format.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fsl_prepare_fieldmap"
+    },
+    "scanner": {
+      "type": "string",
+      "description": "Scanner type (must be SIEMENS)",
+      "title": "Scanner"
+    },
+    "phase_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Phase image file",
+      "title": "Phase image"
+    },
+    "magnitude_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Magnitude image file (should be Brain Extracted)",
+      "title": "Magnitude image"
+    },
+    "out_image": {
+      "type": "string",
+      "description": "Output fieldmap image file",
+      "title": "Output image"
+    },
+    "delta_te": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Echo time difference of the fieldmap sequence in milliseconds",
+      "title": "Delta TE"
+    },
+    "nocheck_flag": {
+      "type": "boolean",
+      "description": "Suppress automatic sanity checking of image size/range/dimensions",
+      "title": "No check flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "scanner",
+    "phase_image",
+    "magnitude_image",
+    "out_image",
+    "delta_te"
+  ]
+}

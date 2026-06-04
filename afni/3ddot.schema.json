@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3ddot",
+  "description": "Computes correlation coefficients between sub-brick pairs",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3ddot"
+    },
+    "input_datasets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of input datasets to be used (e.g. img1+orig, img2+orig)",
+      "title": "Input Datasets"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset to be used as a mask; only voxels with nonzero values will be averaged",
+      "title": "Mask Dataset"
+    },
+    "mrange": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Restrict mask values to those between a and b (inclusive) for masking purposes",
+      "title": "Mask Range"
+    },
+    "demean": {
+      "type": "boolean",
+      "description": "Remove the mean from each volume prior to computing the correlation",
+      "title": "Demean Flag",
+      "default": false
+    },
+    "docor": {
+      "type": "boolean",
+      "description": "Return the correlation coefficient (default)",
+      "title": "Correlation Coefficient Flag",
+      "default": false
+    },
+    "dodot": {
+      "type": "boolean",
+      "description": "Return the dot product (unscaled)",
+      "title": "Dot Product Flag",
+      "default": false
+    },
+    "docoef": {
+      "type": "boolean",
+      "description": "Return the least square fit coefficients {a,b}",
+      "title": "Least Square Fit Coefficient Flag",
+      "default": false
+    },
+    "dosums": {
+      "type": "boolean",
+      "description": "Return xbar, ybar, variance, covariance, and correlation coefficient",
+      "title": "Statistics Summary Flag",
+      "default": false
+    },
+    "doeta2": {
+      "type": "boolean",
+      "description": "Return eta-squared (Cohen, NeuroImage 2008)",
+      "title": "Eta-Squared Flag",
+      "default": false
+    },
+    "dodice": {
+      "type": "boolean",
+      "description": "Return the Dice coefficient (the Sorensen-Dice index)",
+      "title": "Dice Coefficient Flag",
+      "default": false
+    },
+    "show_labels": {
+      "type": "boolean",
+      "description": "Print sub-brick labels to help identify what is being correlated",
+      "title": "Show Labels Flag",
+      "default": false
+    },
+    "upper": {
+      "type": "boolean",
+      "description": "Compute upper triangular matrix",
+      "title": "Upper Triangular Matrix Flag",
+      "default": false
+    },
+    "full": {
+      "type": "boolean",
+      "description": "Compute the whole matrix",
+      "title": "Full Matrix Flag",
+      "default": false
+    },
+    "1D": {
+      "type": "boolean",
+      "description": "Add comment headings for the 1D format",
+      "title": "1D Format Flag",
+      "default": false
+    },
+    "NIML": {
+      "type": "boolean",
+      "description": "Write output in NIML 1D format",
+      "title": "NIML Format Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_datasets"
+  ]
+}

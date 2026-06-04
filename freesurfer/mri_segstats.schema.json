@@ -1,0 +1,344 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_segstats",
+  "description": "Calculates measures and stats derived from brain segmentation data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_segstats"
+    },
+    "segvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input segmentation volume. This volume's voxel values indicate a segmentation or class.",
+      "title": "Segmentation volume"
+    },
+    "annot_subject": {
+      "type": "string",
+      "description": "Create a segmentation from hemi.parc.annot. Subject is the name of the subject.",
+      "title": "Annotation subject"
+    },
+    "annot_hemisphere": {
+      "type": "string",
+      "title": "Annotation hemisphere"
+    },
+    "annot_parcellation": {
+      "type": "string",
+      "title": "Annotation parcellation"
+    },
+    "slabel_subject": {
+      "type": "string",
+      "description": "Create a segmentation from the given surface label. The points in the label are given a value of 1; 0 for outside.",
+      "title": "Surface label subject"
+    },
+    "slabel_hemisphere": {
+      "type": "string",
+      "title": "Surface label hemisphere"
+    },
+    "slabel_label": {
+      "type": "string",
+      "x-styx-type": "path",
+      "title": "Surface label file"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "ASCII file in which summary statistics are saved.",
+      "title": "Output file"
+    },
+    "partial_vol_comp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use pvvol to compensate for partial voluming, resulting in more accurate volumes.",
+      "title": "Partial volume compensation volume"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume from which to compute more statistics.",
+      "title": "Input volume"
+    },
+    "seg_erode": {
+      "type": "number",
+      "description": "Erode segmentation boundaries by Nerodes.",
+      "title": "Erode segmentation"
+    },
+    "frame": {
+      "type": "number",
+      "description": "Report statistics of the input volume at the specified 0-based frame number.",
+      "title": "Frame number"
+    },
+    "robust": {
+      "type": "number",
+      "description": "Compute stats after excluding a percentage of high and low values.",
+      "title": "Robust percentage"
+    },
+    "square_input": {
+      "type": "boolean",
+      "description": "Compute the square of the input before computing stats.",
+      "title": "Square input",
+      "default": false
+    },
+    "sqrt_input": {
+      "type": "boolean",
+      "description": "Compute the square root of the input before computing stats.",
+      "title": "Square root input",
+      "default": false
+    },
+    "multiply_input": {
+      "type": "number",
+      "description": "Multiply input by value.",
+      "title": "Multiply input"
+    },
+    "divide_input": {
+      "type": "number",
+      "description": "Divide input by value.",
+      "title": "Divide input"
+    },
+    "snr_column": {
+      "type": "boolean",
+      "description": "Save mean/std as extra column in output table.",
+      "title": "Save SNR column",
+      "default": false
+    },
+    "absolute_value": {
+      "type": "boolean",
+      "description": "Compute absolute value of input before spatial average.",
+      "title": "Absolute value",
+      "default": false
+    },
+    "accumulate_mean": {
+      "type": "boolean",
+      "description": "Save mean*nvoxels instead of mean.",
+      "title": "Accumulate mean",
+      "default": false
+    },
+    "color_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "FreeSurfer color table file to specify how each segmentation index is mapped to a segmentation name and color.",
+      "title": "Color table file"
+    },
+    "default_color_table": {
+      "type": "boolean",
+      "description": "Use default color table from FreeSurferColorLUT.txt.",
+      "title": "Use default color table",
+      "default": false
+    },
+    "gca_color_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Get color table from the given GCA file.",
+      "title": "GCA color table file"
+    },
+    "ids": {
+      "type": "string",
+      "description": "Specify numeric segmentation ids.",
+      "title": "Segmentation IDs"
+    },
+    "exclude_ids": {
+      "type": "string",
+      "description": "Exclude the given segmentation id(s) from report.",
+      "title": "Exclude IDs"
+    },
+    "exclude_gm_wm": {
+      "type": "boolean",
+      "description": "Exclude cortical gray and white matter based on predefined IDs.",
+      "title": "Exclude cortical GM and WM",
+      "default": false
+    },
+    "surf_wm_vol": {
+      "type": "boolean",
+      "description": "Compute cortical matter volume based on the white surface volume.",
+      "title": "Surface-based WM volume",
+      "default": false
+    },
+    "surf_ctx_vol": {
+      "type": "boolean",
+      "description": "Compute cortical volumes from surface.",
+      "title": "Surface-based cortex volume",
+      "default": false
+    },
+    "no_global_stats": {
+      "type": "boolean",
+      "description": "Turns off computation of global stats.",
+      "title": "No global stats",
+      "default": false
+    },
+    "empty_segments": {
+      "type": "boolean",
+      "description": "Report on segmentations listed in the color table even if they are not found in the segmentation volume.",
+      "title": "Report empty segmentations",
+      "default": false
+    },
+    "ctab_output": {
+      "type": "string",
+      "description": "Create an output color table with just the segmentations reported.",
+      "title": "Output color table"
+    },
+    "mask_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Exclude voxels that are not in the mask. Voxels to be excluded are assigned a segid of 0.",
+      "title": "Mask volume"
+    },
+    "mask_threshold": {
+      "type": "number",
+      "description": "Exclude voxels that are below thresh, above -thresh, or between -thresh and +thresh.",
+      "title": "Mask threshold"
+    },
+    "mask_sign": {
+      "type": "string",
+      "description": "Specify sign for masking threshold. Choices are abs, pos, and neg.",
+      "title": "Mask sign"
+    },
+    "mask_frame": {
+      "type": "number",
+      "description": "Derive the mask volume from the specified 0-based frame.",
+      "title": "Mask frame"
+    },
+    "invert_mask": {
+      "type": "boolean",
+      "description": "After applying all the masking criteria, invert the mask.",
+      "title": "Invert mask",
+      "default": false
+    },
+    "mask_erode": {
+      "type": "number",
+      "description": "Erode mask by specified number of iterations.",
+      "title": "Erode mask"
+    },
+    "brain_vol_seg": {
+      "type": "boolean",
+      "description": "Get volume of brain as the sum of the volumes of the segmentations that are in the brain.",
+      "title": "Brain volume from segmentation",
+      "default": false
+    },
+    "brain_mask_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Load brain mask and compute brain volume from non-zero voxels.",
+      "title": "Brain mask volume"
+    },
+    "subcortical_gray": {
+      "type": "boolean",
+      "description": "Compute volume of subcortical gray matter.",
+      "title": "Subcortical gray matter volume",
+      "default": false
+    },
+    "total_gray": {
+      "type": "boolean",
+      "description": "Compute volume of total gray matter.",
+      "title": "Total gray matter volume",
+      "default": false
+    },
+    "intracranial_volume": {
+      "type": "boolean",
+      "description": "Compute intracranial volume from talairach.xfm.",
+      "title": "Intracranial volume",
+      "default": false
+    },
+    "intracranial_volume_only": {
+      "type": "boolean",
+      "description": "Compute intracranial volume from talairach.xfm and exit.",
+      "title": "Intracranial volume only",
+      "default": false
+    },
+    "old_intracranial_volume_only": {
+      "type": "boolean",
+      "description": "Compute intracranial volume from talairach_with_skull.lta and exit.",
+      "title": "Old intracranial volume only",
+      "default": false
+    },
+    "talairach_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify path to talairach.xfm file for eTIV.",
+      "title": "Talairach transform file"
+    },
+    "xfm_to_etiv": {
+      "type": "string",
+      "description": "Convert xfm to eTIV and write to output file.",
+      "title": "Transform to eTIV"
+    },
+    "euler_hole_count": {
+      "type": "boolean",
+      "description": "Write out number of defect holes based on the Euler number.",
+      "title": "Euler hole count",
+      "default": false
+    },
+    "avg_waveform": {
+      "type": "string",
+      "description": "Compute the average waveform and save to text file.",
+      "title": "Average waveform file"
+    },
+    "sum_waveform": {
+      "type": "string",
+      "description": "Compute the sum waveform and save to text file.",
+      "title": "Sum waveform file"
+    },
+    "avg_waveform_vol": {
+      "type": "string",
+      "description": "Compute average waveform and save to MRI volume.",
+      "title": "Average waveform volume file"
+    },
+    "remove_avgwf_mean": {
+      "type": "boolean",
+      "description": "Remove temporal mean from avgwf and avgwfvol.",
+      "title": "Remove avgwf temporal mean",
+      "default": false
+    },
+    "spatial_frame_avg": {
+      "type": "string",
+      "description": "Save mean across space and frame.",
+      "title": "Spatial frame average file"
+    },
+    "voxel_crs": {
+      "type": "string",
+      "description": "Replace segmentation with all 0s except at specified voxel.",
+      "title": "Voxel CRS"
+    },
+    "replace_ids": {
+      "type": "string",
+      "description": "Replace segmentation ID1 with ID2.",
+      "title": "Replace segmentation IDs"
+    },
+    "replace_ids_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Replace segmentations based on pairs in file.",
+      "title": "Replace IDs file"
+    },
+    "gtm_default_seg_merge": {
+      "type": "boolean",
+      "description": "Replace segmentations based on GTM default.",
+      "title": "GTM default segmentation merge",
+      "default": false
+    },
+    "gtm_default_seg_merge_choroid": {
+      "type": "boolean",
+      "description": "Replace segmentations based on GTM default excluding choroid.",
+      "title": "GTM default segmentation merge choroid",
+      "default": false
+    },
+    "qa_stats_file": {
+      "type": "string",
+      "description": "Compute stats useful for quality control.",
+      "title": "QA statistics file"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Set SUBJECTS_DIR environment variable.",
+      "title": "Subjects directory"
+    },
+    "random_seed": {
+      "type": "number",
+      "description": "Set random number generator seed value.",
+      "title": "Random seed"
+    }
+  },
+  "required": [
+    "@type",
+    "segvol",
+    "output_file"
+  ]
+}

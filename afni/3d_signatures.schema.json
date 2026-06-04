@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dSignatures",
+  "description": "3dSignatures analysis tool for 3D genome organization",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dSignatures"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file containing 3D genome data (e.g. genome_data.txt)",
+      "title": "Input file"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Output file to store analysis results (e.g. analysis_results.txt)",
+      "title": "Output file"
+    },
+    "segmentation": {
+      "type": "boolean",
+      "description": "Flag to apply genome segmentation",
+      "title": "Segmentation flag",
+      "default": false
+    },
+    "filter": {
+      "type": "boolean",
+      "description": "Flag to apply data filtering",
+      "title": "Filter flag",
+      "default": false
+    },
+    "threshold": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Threshold level for data filtering; default=0.5",
+      "title": "Threshold"
+    },
+    "smoothing": {
+      "type": "number",
+      "description": "Apply smoothing with specified kernel size",
+      "title": "Smoothing kernel size"
+    }
+  },
+  "required": [
+    "@type",
+    "infile",
+    "outfile"
+  ]
+}

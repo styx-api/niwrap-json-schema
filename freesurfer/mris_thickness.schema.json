@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_thickness",
+  "description": "Measures the thickness of the cortical surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_thickness"
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "The subject name for processing.",
+      "title": "Subject Name"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "The hemisphere to process (e.g., lh or rh).",
+      "title": "Hemisphere"
+    },
+    "thickness_file": {
+      "type": "string",
+      "description": "Output file for thickness measurements.",
+      "title": "Thickness File"
+    },
+    "max_threshold": {
+      "type": "number",
+      "description": "Use a maximum threshold for thickness (default is 5mm).",
+      "title": "Max Threshold"
+    },
+    "fill_holes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Fill in thickness in holes in the cortex label using fsaverage cortex label.",
+      "title": "Fill Holes"
+    },
+    "thickness_from_seg": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Compute thickness from segmentation. Requires the following parameters: surf label, seg.mgz, dmaxmm, ddeltamm, and output.mgz.",
+      "title": "Thickness From Seg"
+    },
+    "vector": {
+      "type": "boolean",
+      "description": "Compute the thickness using a variationally derived vector field.",
+      "title": "Vector Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject_name",
+    "hemi",
+    "thickness_file"
+  ]
+}

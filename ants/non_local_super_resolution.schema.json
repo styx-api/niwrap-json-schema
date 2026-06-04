@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NonLocalSuperResolution",
+  "description": "Non-local super resolution described in the papers by JV Manjon et al., focusing on MRI superresolution using self-similarity and image priors.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/NonLocalSuperResolution"
+    },
+    "image_dimensionality": {
+      "enum": [
+        2,
+        3,
+        4
+      ],
+      "description": "This option forces the image to be treated as a specified-dimensional image. If not specified, the program tries to infer the dimensionality from the input image.",
+      "title": "Image Dimensionality"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A low-resolution input image to be superresoluted.",
+      "title": "Input Image"
+    },
+    "interpolated_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "An interpolated version of the low-resolution image (such as B-spline). Specify either this option or a high-resolution multi-modal counterpart (cf the -k option).",
+      "title": "Interpolated Image"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A high-resolution reference multi-modal image. Assumed to be in the same space as the low-resolution input image. Specify either this option or an interpolated version (cf the -j option).",
+      "title": "Reference Image"
+    },
+    "patch_radius": {
+      "enum": [
+        1,
+        "1x1x1"
+      ],
+      "description": "Patch radius. Default = 1x1x1.",
+      "title": "Patch Radius"
+    },
+    "search_radius": {
+      "enum": [
+        3,
+        "3x3x3"
+      ],
+      "description": "Search radius. Default = 3x3x3.",
+      "title": "Search Radius"
+    },
+    "intensity_difference_sigma": {
+      "type": "number",
+      "description": "Intensity difference sigma. Default = 1.0.",
+      "title": "Intensity Difference Sigma"
+    },
+    "patch_similarity_sigma": {
+      "type": "number",
+      "description": "Patch similarity sigma. Default = 1.0.",
+      "title": "Patch Similarity Sigma"
+    },
+    "scale_levels": {
+      "type": "string",
+      "description": "Scale levels. Default = 32x16x8x2x1.",
+      "title": "Scale Levels"
+    },
+    "interpolation": {
+      "enum": [
+        "Linear",
+        "NearestNeighbor",
+        "Gaussian",
+        "BSpline",
+        "CosineWindowedSinc",
+        "WelchWindowedSinc",
+        "HammingWindowedSinc",
+        "LanczosWindowedSinc"
+      ],
+      "description": "Several interpolation options are available in ITK.",
+      "title": "Interpolation"
+    },
+    "output": {
+      "type": "string",
+      "description": "The output consists of the noise corrected version of the input image. Optionally, one can also output the estimated noise image.",
+      "title": "Output"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose output.",
+      "title": "Verbose"
+    }
+  },
+  "required": [
+    "@type",
+    "input_image",
+    "output"
+  ]
+}

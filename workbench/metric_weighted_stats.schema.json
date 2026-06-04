@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WEIGHTED SPATIAL STATISTICS ON A METRIC FILE",
+  "description": "For each column of the input, a line of text is printed, resulting from the specified operation.  You must specify exactly one of -area-surface or -weight-metric.  Use -column to only give output for a single column.  If the -roi option is used without -match-maps, then each line will contain as many numbers as there are maps in the ROI file, separated by tab characters.  Exactly one of -mean, -stdev, -percentile or -sum must be specified.\n\nUsing -sum with -area-surface (or -weight-metric with a metric containing similar data) is equivalent to integrating with respect to surface area.  For example, if you want to find the surface area within an roi, do this:\n\n$ wb_command -metric-weighted-stats roi.func.gii -sum -area-surface midthickness.surf.gii",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric_weighted_stats"
+    },
+    "metric_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input metric"
+    },
+    "area_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "use vertex areas as weights"
+    },
+    "weight_metric": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "use weights from a metric file"
+    },
+    "column": {
+      "type": "string",
+      "description": "only display output for one column"
+    },
+    "roi": {
+      "type": "object",
+      "properties": {
+        "roi_metric": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the roi, as a metric file"
+        },
+        "match_maps": {
+          "type": "boolean",
+          "description": "each column of input uses the corresponding column from the roi file",
+          "default": false
+        }
+      },
+      "required": [
+        "roi_metric"
+      ],
+      "description": "only consider data inside an roi"
+    },
+    "mean": {
+      "type": "boolean",
+      "description": "compute weighted mean",
+      "default": false
+    },
+    "stdev": {
+      "type": "object",
+      "properties": {
+        "sample": {
+          "type": "boolean",
+          "description": "estimate population stdev from the sample",
+          "default": false
+        }
+      },
+      "description": "compute weighted standard deviation"
+    },
+    "percentile": {
+      "type": "number",
+      "description": "compute weighted percentile"
+    },
+    "sum": {
+      "type": "boolean",
+      "description": "compute weighted sum",
+      "default": false
+    },
+    "show_map_name": {
+      "type": "boolean",
+      "description": "print map index and name before each output",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "metric_in"
+  ]
+}

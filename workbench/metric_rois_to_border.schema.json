@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DRAW BORDERS AROUND METRIC ROIS",
+  "description": "For each ROI column, finds all edges on the mesh that cross the boundary of the ROI, and draws borders through them.  By default, this is done on all columns in the input file, using the map name as the name for the border.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric_rois_to_border"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the surface to use for neighbor information"
+    },
+    "metric": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input metric containing ROIs"
+    },
+    "class_name": {
+      "type": "string",
+      "description": "the name to use for the class of the output borders"
+    },
+    "border_out": {
+      "type": "string",
+      "description": "the output border file"
+    },
+    "placement": {
+      "type": "number",
+      "description": "set how far along the edge border points are drawn"
+    },
+    "column": {
+      "type": "string",
+      "description": "select a single column"
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "metric",
+    "class_name",
+    "border_out"
+  ]
+}

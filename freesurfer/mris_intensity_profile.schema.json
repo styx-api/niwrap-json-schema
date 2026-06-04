@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_intensity_profile",
+  "description": "This program computes the intensity profile of the cortical ribbon and writes the resulting measurement into a 'curvature' file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_intensity_profile"
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "Name of the subject.",
+      "title": "Subject Name"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere (e.g. lh or rh).",
+      "title": "Hemisphere"
+    },
+    "volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Volume file to be processed.",
+      "title": "Volume"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output file where the measurement is saved.",
+      "title": "Output File"
+    },
+    "write_surf": {
+      "type": "string",
+      "description": "Write the variational pial surface target locations.",
+      "title": "Write Surf"
+    },
+    "sdir": {
+      "type": "string",
+      "description": "Specifies the SUBJECTS_DIR.",
+      "title": "Subjects Directory"
+    },
+    "white": {
+      "type": "string",
+      "description": "Specifies the WHITE surface filename.",
+      "title": "White Surface Filename"
+    },
+    "pial": {
+      "type": "string",
+      "description": "Specifies the PIAL surface filename.",
+      "title": "Pial Surface Filename"
+    },
+    "normalize_flag": {
+      "type": "boolean",
+      "description": "Normalized sampling with respect to thickness.",
+      "title": "Normalize Flag",
+      "default": false
+    },
+    "mean": {
+      "type": "string",
+      "description": "Outputs the mean profile-integral to the specified file (output is in curv format).",
+      "title": "Mean Profile Integral"
+    },
+    "xform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the registration transformation that maps the T1 volume to the input volume to be sampled.",
+      "title": "Registration Xform"
+    },
+    "src": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Source volume used when computing the registration transformation.",
+      "title": "Source Volume"
+    },
+    "dst": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Destination volume used when computing the registration transformation.",
+      "title": "Destination Volume"
+    },
+    "invert_flag": {
+      "type": "boolean",
+      "description": "Apply the registration transformation inversely.",
+      "title": "Invert Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject_name",
+    "hemi",
+    "volume",
+    "output_file"
+  ]
+}

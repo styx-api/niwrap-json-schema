@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dnorm",
+  "description": "Normalize columns of a 1D file (AFNI ASCII list of numbers)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dnorm"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input AFNI *.1D file (ASCII list of numbers arranged in columns); if '-' input will be read from stdin.",
+      "title": "Input file"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Output AFNI *.1D file (normalized); if '-' output will be written to stdout.",
+      "title": "Output file"
+    },
+    "norm1": {
+      "type": "boolean",
+      "description": "Normalize so sum of absolute values is 1 (L_1 norm)",
+      "title": "L_1 norm flag",
+      "default": false
+    },
+    "normx": {
+      "type": "boolean",
+      "description": "Normalize so that max absolute value is 1 (L_infinity norm)",
+      "title": "L_infinity norm flag",
+      "default": false
+    },
+    "demean": {
+      "type": "boolean",
+      "description": "Subtract each column's mean before normalizing",
+      "title": "Demean flag",
+      "default": false
+    },
+    "demed": {
+      "type": "boolean",
+      "description": "Subtract each column's median before normalizing",
+      "title": "Demedian flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "infile",
+    "outfile"
+  ]
+}

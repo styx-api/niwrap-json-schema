@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_annotation2label",
+  "description": "Convert an annotation into multiple label files or into a segmentation volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_annotation2label"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Source subject",
+      "title": "Subject"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere (lh or rh) with surface",
+      "title": "Hemisphere"
+    },
+    "lobes": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Create an annotation based on cortical lobes, saved to <LobesFile>.",
+      "title": "Lobes file"
+    },
+    "lobes_strict": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use a stricter lobe definition with precentral added to 'frontal' and postcentral with 'parietal', saved to <LobesFile>.",
+      "title": "Lobes strict file"
+    },
+    "lobes_strict_phcg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use a stricter lobe definition with an additional lobe 'parahippocampalgyrus', saved to <LobesFile>.",
+      "title": "Lobes strict PHCG file"
+    },
+    "label": {
+      "type": "number",
+      "description": "Extract only single label.",
+      "title": "Label"
+    },
+    "labelbase": {
+      "type": "string",
+      "description": "Output will be base-XXX.label.",
+      "title": "Label base"
+    },
+    "outdir": {
+      "type": "string",
+      "description": "Output will be in dir/hemi.name.label.",
+      "title": "Output directory"
+    },
+    "seg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output will be a segmentation volume.",
+      "title": "Segmentation file"
+    },
+    "segbase": {
+      "type": "number",
+      "description": "Add base to the annotation number to get segmentation value.",
+      "title": "Segmentation base"
+    },
+    "ctab": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Color table, like FreeSurferColorLUT.txt.",
+      "title": "Color table"
+    },
+    "border": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output will be a binary overlay of the parc borders.",
+      "title": "Border file"
+    },
+    "border_annot": {
+      "type": "string",
+      "description": "Default goes in subject/label.",
+      "title": "Border annotation"
+    },
+    "annotation": {
+      "type": "string",
+      "description": "As found in SUBJDIR/labels <aparc>.",
+      "title": "Annotation"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Specify SUBJECTS_DIR on the command line.",
+      "title": "Subjects directory"
+    },
+    "surface": {
+      "type": "string",
+      "description": "Name of surface <white>. Only affect xyz in label.",
+      "title": "Surface"
+    },
+    "stat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface overlay file (curv or volume format).",
+      "title": "Stat file"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help.",
+      "title": "Help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Display version.",
+      "title": "Version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject",
+    "hemi"
+  ]
+}

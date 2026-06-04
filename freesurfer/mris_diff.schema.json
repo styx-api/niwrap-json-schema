@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_diff",
+  "description": "A tool for comparing differences between surface files in FreeSurfer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_diff"
+    },
+    "surface1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First surface file",
+      "title": "Surface 1"
+    },
+    "surface2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second surface file",
+      "title": "Surface 2"
+    },
+    "subject1": {
+      "type": "string",
+      "description": "Subject 1 name",
+      "title": "Subject 1"
+    },
+    "subject2": {
+      "type": "string",
+      "description": "Subject 2 name",
+      "title": "Subject 2"
+    },
+    "subj_dir1": {
+      "type": "string",
+      "description": "Directory for Subject 1 (default is SUBJECTS_DIR)",
+      "title": "Subject Directory 1"
+    },
+    "subj_dir2": {
+      "type": "string",
+      "description": "Directory for Subject 2 (default is SUBJECTS_DIR)",
+      "title": "Subject Directory 2"
+    },
+    "hemisphere": {
+      "type": "string",
+      "description": "Hemisphere (rh or lh)",
+      "title": "Hemisphere"
+    },
+    "surf": {
+      "type": "string",
+      "description": "Compare surface",
+      "title": "Surface"
+    },
+    "curv": {
+      "type": "string",
+      "description": "Compare curvature",
+      "title": "Curvature"
+    },
+    "aparc": {
+      "type": "string",
+      "description": "Compare aparc annotation",
+      "title": "Aparc"
+    },
+    "aparc2": {
+      "type": "string",
+      "description": "Optional different name to compare to aparc",
+      "title": "Aparc2"
+    },
+    "simple": {
+      "type": "boolean",
+      "description": "Simple comparison of two surfaces to just report differences",
+      "title": "Simple Comparison",
+      "default": false
+    },
+    "simple_patch": {
+      "type": "boolean",
+      "description": "Simple comparison of two patches",
+      "title": "Simple Patch Comparison",
+      "default": false
+    },
+    "thresh": {
+      "type": "number",
+      "description": "Threshold (default=0) [Note: Not currently implemented!]",
+      "title": "Threshold"
+    },
+    "maxerrs": {
+      "type": "number",
+      "description": "Stop looping after N errors (default=10)",
+      "title": "Max Errors"
+    },
+    "renumbered": {
+      "type": "boolean",
+      "description": "Vertices or faces may have been renumbered and a few deleted",
+      "title": "Renumbered",
+      "default": false
+    },
+    "worst_bucket": {
+      "type": "string",
+      "description": "Compute the worst histogram bucket each vertex is in",
+      "title": "Worst Bucket"
+    },
+    "grid": {
+      "type": "string",
+      "description": "Label the vertices of edges that span a grid based on the provided spacing float",
+      "title": "Grid"
+    },
+    "no_check_xyz": {
+      "type": "boolean",
+      "description": "Do not check vertex xyz",
+      "title": "No Check XYZ",
+      "default": false
+    },
+    "no_check_nxyz": {
+      "type": "boolean",
+      "description": "Do not check vertex normals",
+      "title": "No Check NXYZ",
+      "default": false
+    },
+    "xyz_rms": {
+      "type": "string",
+      "description": "Compute and save RMS diff between xyz",
+      "title": "XYZ RMS"
+    },
+    "angle_rms": {
+      "type": "string",
+      "description": "Compute angle on sphere between xyz",
+      "title": "Angle RMS"
+    },
+    "seed": {
+      "type": "number",
+      "description": "Set random seed for degenerate normals",
+      "title": "Seed"
+    },
+    "min_dist": {
+      "type": "string",
+      "description": "Compute vertex-by-vertex RMS distance between surfaces",
+      "title": "Minimum Distance"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Enable debugging output",
+      "title": "Debug",
+      "default": false
+    },
+    "gdiag_no": {
+      "type": "number",
+      "description": "Specify Gdiag_no",
+      "title": "Gdiag No"
+    },
+    "check_opts": {
+      "type": "boolean",
+      "description": "Only check options and exit",
+      "title": "Check Options",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help information",
+      "title": "Help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Display version information",
+      "title": "Version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "surface1",
+    "surface2",
+    "subject1",
+    "subject2",
+    "hemisphere"
+  ]
+}

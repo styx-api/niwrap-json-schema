@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dsvm_linpredict",
+  "description": "Linear prediction for weights from 3dsvm",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dsvm_linpredict"
+    },
+    "mask_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset to be used as a mask. Only voxels with nonzero values in 'mset' will be averaged from 'dataset'. The mask dataset and the input dataset must have the same number of voxels.",
+      "title": "Mask dataset"
+    },
+    "weight_vector": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Weight vector dataset",
+      "title": "Weight vector"
+    },
+    "input_dataset": {
+      "type": "string",
+      "description": "Input dataset, potentially with sub-brick and/or sub-range selectors",
+      "title": "Input dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "weight_vector",
+    "input_dataset"
+  ]
+}

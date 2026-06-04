@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_probe_ima",
+  "description": "Query Siemens IMA files to extract header information",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_probe_ima"
+    },
+    "ima_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the IMA file to be probed.",
+      "title": "IMA File"
+    },
+    "key_string": {
+      "type": "string",
+      "description": "String from dictionary to query the IMA file.",
+      "title": "Key String"
+    },
+    "offset_type_len": {
+      "type": "string",
+      "description": "Offset, type, and string length for querying. Type can be short, int, long, float, double, or string.",
+      "title": "Offset Type and Length"
+    },
+    "attribute_name": {
+      "type": "string",
+      "description": "Name of the file information attribute to query.",
+      "title": "Attribute Name"
+    },
+    "fileinfo": {
+      "type": "boolean",
+      "description": "Dump the interpreted file information.",
+      "title": "File Info Flag",
+      "default": false
+    },
+    "dictionary": {
+      "type": "boolean",
+      "description": "Dump the dictionary without the need of an IMA file.",
+      "title": "Dictionary Flag",
+      "default": false
+    },
+    "ob_stem": {
+      "type": "string",
+      "description": "Dump binary pixel data into bshort with stem prefix.",
+      "title": "Output Binary Stem"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show help message and exit.",
+      "title": "Help Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version and exit.",
+      "title": "Version Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "ima_file"
+  ]
+}

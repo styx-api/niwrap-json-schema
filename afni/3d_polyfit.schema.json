@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dPolyfit",
+  "description": "Fits a polynomial in space to the input dataset and outputs that fitted dataset. You can also add your own basis datasets to the fitting mix.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dPolyfit"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset (e.g., data.nii.gz)",
+      "title": "Input dataset"
+    },
+    "poly_order": {
+      "type": "integer",
+      "minimum": -1,
+      "maximum": 9,
+      "description": "Maximum polynomial order (0..9); [default=3]; [n=0 is the constant 1]; [n=-1 means only use volumes from '-base']",
+      "title": "Polynomial order"
+    },
+    "blur": {
+      "type": "number",
+      "description": "Gaussian blur input dataset (inside mask) with FWHM='f' (mm)",
+      "title": "Blur FWHM"
+    },
+    "median_radius": {
+      "type": "number",
+      "description": "Radius (voxels) of preliminary median filter of input; default is no blurring",
+      "title": "Median filter radius"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Use 'pp' for prefix of output dataset (the fit); default prefix is 'Polyfit'; use NULL to skip this output",
+      "title": "Output prefix"
+    },
+    "resid_prefix": {
+      "type": "string",
+      "description": "Use 'rr' for the prefix of the residual dataset; default is not to output residuals",
+      "title": "Residual prefix"
+    },
+    "coeff_output": {
+      "type": "string",
+      "description": "Save coefficients of fit into text file cc.1D; default is not to save these coefficients",
+      "title": "Coefficient output"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Create a mask (a la 3dAutomask)",
+      "title": "Automask flag",
+      "default": false
+    },
+    "mask_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Create a mask from nonzero voxels in 'mset'; default is not to use a mask",
+      "title": "Mask dataset"
+    },
+    "mean_scale": {
+      "type": "boolean",
+      "description": "Scale the mean value of the fit (inside the mask) to 1; probably this option is not useful for anything",
+      "title": "Mean scale flag",
+      "default": false
+    },
+    "clip_box": {
+      "type": "boolean",
+      "description": "Clip fit values outside the rectilinear box containing the mask to the edge of that box, to avoid weird artifacts",
+      "title": "Clip box flag",
+      "default": false
+    },
+    "fit_method": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2,
+      "description": "Set 'mm' to 2 for least squares fit; set it to 1 for L1 fit [default method=2]; [Note that L1 fitting is slower than L2 fitting]",
+      "title": "Fit method"
+    },
+    "base_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "In addition to the polynomial fit, also use the volumes in dataset 'bb' as extra basis functions",
+      "title": "Base dataset"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print fun and useful progress reports",
+      "title": "Verbose flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

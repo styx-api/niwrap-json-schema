@@ -1,0 +1,1590 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslmaths",
+  "description": "FSL utility for image arithmetic, statistics, and mathematical operations",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fslmaths"
+    },
+    "datatype_internal": {
+      "enum": [
+        "char",
+        "short",
+        "int",
+        "float",
+        "double",
+        "input"
+      ],
+      "description": "Datatype used internally for calculations",
+      "title": "Internal datatype"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input images for processing",
+      "title": "Input images"
+    },
+    "operations": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_add"
+              },
+              "add": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "add"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_sub"
+              },
+              "sub": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "sub"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_mul"
+              },
+              "mul": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "const": "mul_value"
+                      },
+                      "value": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "@type",
+                      "value"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "@type": {
+                        "const": "mul_image"
+                      },
+                      "image": {
+                        "type": "string",
+                        "x-styx-type": "path"
+                      }
+                    },
+                    "required": [
+                      "@type",
+                      "image"
+                    ]
+                  }
+                ]
+              }
+            },
+            "required": [
+              "@type",
+              "mul"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_div"
+              },
+              "div": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "div"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_rem"
+              },
+              "rem": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "rem"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_mas"
+              },
+              "mas": {
+                "type": "string",
+                "x-styx-type": "path"
+              }
+            },
+            "required": [
+              "@type",
+              "mas"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_thr"
+              },
+              "thr": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "thr"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_thrp"
+              },
+              "thrp": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "thrp"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_thrP"
+              },
+              "thrP": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "thrP"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_uthr"
+              },
+              "uthr": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "uthr"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_uthrp"
+              },
+              "uthrp": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "uthrp"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_uthrP"
+              },
+              "uthrP": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "uthrP"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_max"
+              },
+              "max": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "max"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_min"
+              },
+              "min": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "min"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_seed"
+              },
+              "seed": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "seed"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_restart"
+              },
+              "restart": {
+                "type": "string",
+                "x-styx-type": "path"
+              }
+            },
+            "required": [
+              "@type",
+              "restart"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_save"
+              },
+              "save": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "save"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_exp"
+              },
+              "exp": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "exp"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_log"
+              },
+              "log": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "log"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_sin"
+              },
+              "sin": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "sin"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_cos"
+              },
+              "cos": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "cos"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_tan"
+              },
+              "tan": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "tan"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_asin"
+              },
+              "asin": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "asin"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_acos"
+              },
+              "acos": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "acos"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_atan"
+              },
+              "atan": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "atan"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_sqr"
+              },
+              "sqr": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "sqr"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_sqrt"
+              },
+              "sqrt": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "sqrt"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_recip"
+              },
+              "recip": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "recip"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_abs"
+              },
+              "abs": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "abs"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_bin"
+              },
+              "bin": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "bin"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_binv"
+              },
+              "binv": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "binv"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_fillh"
+              },
+              "fillh": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "fillh"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_fillh26"
+              },
+              "fillh26": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "fillh26"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_index"
+              },
+              "index": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "index"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_grid"
+              },
+              "grid": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "required": [
+              "@type",
+              "grid"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_edge"
+              },
+              "edge": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "edge"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_tfce"
+              },
+              "tfce": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "required": [
+              "@type",
+              "tfce"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_tfceS"
+              },
+              "tfceS": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "required": [
+              "@type",
+              "tfceS"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_nan"
+              },
+              "nan": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "nan"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_nanm"
+              },
+              "nanm": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "nanm"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_rand"
+              },
+              "rand": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "rand"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_randn"
+              },
+              "randn": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "randn"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_inm"
+              },
+              "inm": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "inm"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_ing"
+              },
+              "ing": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "ing"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_range"
+              },
+              "range": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "range"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_tensor_decomp"
+              },
+              "tensor_decomp": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "tensor_decomp"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_3D"
+              },
+              "operation_kernel_3D": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "operation_kernel_3D"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_2D"
+              },
+              "operation_kernel_2D": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "operation_kernel_2D"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_box"
+              },
+              "kernel_box": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "kernel_box"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_boxv"
+              },
+              "kernel_boxv": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "kernel_boxv"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_boxv3"
+              },
+              "kernel_boxv3": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "required": [
+              "@type",
+              "kernel_boxv3"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_gauss"
+              },
+              "kernel_gauss": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "kernel_gauss"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_sphere"
+              },
+              "kernel_sphere": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "kernel_sphere"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_kernel_file"
+              },
+              "kernel_file": {
+                "type": "string",
+                "x-styx-type": "path"
+              }
+            },
+            "required": [
+              "@type",
+              "kernel_file"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_dilM"
+              },
+              "dilM": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "dilM"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_dilD"
+              },
+              "dilD": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "dilD"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_dilF"
+              },
+              "dilF": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "dilF"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_dilall"
+              },
+              "dilall": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "dilall"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_ero"
+              },
+              "ero": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "ero"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_eroF"
+              },
+              "eroF": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "eroF"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_fmedian"
+              },
+              "fmedian": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "fmedian"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_fmean"
+              },
+              "fmean": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "fmean"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_fmeanu"
+              },
+              "fmeanu": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "fmeanu"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_s"
+              },
+              "s": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "s"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_subsamp2"
+              },
+              "subsamp2": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "subsamp2"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_subsamp2offc"
+              },
+              "subsamp2offc": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "subsamp2offc"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tmean"
+              },
+              "Tmean": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Tmean"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xmean"
+              },
+              "Xmean": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Xmean"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Ymean"
+              },
+              "Ymean": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Ymean"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zmean"
+              },
+              "Zmean": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Zmean"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tstd"
+              },
+              "Tstd": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Tstd"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xstd"
+              },
+              "Xstd": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Xstd"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Ystd"
+              },
+              "Ystd": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Ystd"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zstd"
+              },
+              "Zstd": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Zstd"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tmax"
+              },
+              "Tmax": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Tmax"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xmax"
+              },
+              "Xmax": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Xmax"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Ymax"
+              },
+              "Ymax": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Ymax"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zmax"
+              },
+              "Zmax": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Zmax"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tmaxn"
+              },
+              "Tmaxn": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Tmaxn"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xmaxn"
+              },
+              "Xmaxn": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Xmaxn"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Ymaxn"
+              },
+              "Ymaxn": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Ymaxn"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zmaxn"
+              },
+              "Zmaxn": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Zmaxn"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tmin"
+              },
+              "Tmin": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Tmin"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xmin"
+              },
+              "Xmin": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Xmin"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Ymin"
+              },
+              "Ymin": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Ymin"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zmin"
+              },
+              "Zmin": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Zmin"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tmedian"
+              },
+              "Tmedian": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Tmedian"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xmedian"
+              },
+              "Xmedian": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Xmedian"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Ymedian"
+              },
+              "Ymedian": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Ymedian"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zmedian"
+              },
+              "Zmedian": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Zmedian"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tperc"
+              },
+              "Tperc": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "Tperc"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Xperc"
+              },
+              "Xperc": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "Xperc"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Yperc"
+              },
+              "Yperc": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "Yperc"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Zperc"
+              },
+              "Zperc": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "@type",
+              "Zperc"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_Tar1"
+              },
+              "Tar1": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "@type",
+              "Tar1"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_roi"
+              },
+              "roi": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "required": [
+              "@type",
+              "roi"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_bptf"
+              },
+              "bptf": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "required": [
+              "@type",
+              "bptf"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@type": {
+                "const": "operation_roc"
+              },
+              "roc": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "required": [
+              "@type",
+              "roc"
+            ]
+          }
+        ]
+      },
+      "description": "Operations to perform on input images",
+      "title": "Operations"
+    },
+    "output": {
+      "type": "string",
+      "description": "Output image file",
+      "title": "Output"
+    },
+    "output_datatype": {
+      "enum": [
+        "char",
+        "short",
+        "int",
+        "float",
+        "double",
+        "input"
+      ],
+      "description": "Datatype used for the output image",
+      "title": "Output datatype"
+    }
+  },
+  "required": [
+    "@type",
+    "input_files",
+    "operations",
+    "output"
+  ]
+}

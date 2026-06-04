@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dQwarp",
+  "description": "Computes a nonlinearly warped version of source_dataset to match base_dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dQwarp"
+    },
+    "base_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Base dataset",
+      "title": "Base Dataset"
+    },
+    "source_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Source dataset",
+      "title": "Source Dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output datasets",
+      "title": "Output Prefix"
+    },
+    "no_warp": {
+      "type": "boolean",
+      "description": "Do not save the _WARP file",
+      "title": "No Warp",
+      "default": false
+    },
+    "inverse_warp": {
+      "type": "boolean",
+      "description": "Compute and save the _WARPINV file",
+      "title": "Inverse Warp",
+      "default": false
+    },
+    "no_dataset": {
+      "type": "boolean",
+      "description": "Do not save the warped source dataset",
+      "title": "No Dataset",
+      "default": false
+    },
+    "a_warp": {
+      "type": "boolean",
+      "description": "Output the nonlinear warp when -allineate is used",
+      "title": "Affine Warp",
+      "default": false
+    },
+    "pcl": {
+      "type": "boolean",
+      "description": "Clipped Pearson correlation (default method)",
+      "title": "Clipped Pearson Correlation",
+      "default": false
+    },
+    "pear": {
+      "type": "boolean",
+      "description": "Use strict Pearson correlation for matching",
+      "title": "Pearson Correlation",
+      "default": false
+    },
+    "hel": {
+      "type": "boolean",
+      "description": "Use Hellinger metric for matching",
+      "title": "Hellinger Metric",
+      "default": false
+    },
+    "mi": {
+      "type": "boolean",
+      "description": "Use Mutual Information for matching",
+      "title": "Mutual Information",
+      "default": false
+    },
+    "nmi": {
+      "type": "boolean",
+      "description": "Use Normalized Mutual Information for matching",
+      "title": "Normalized Mutual Information",
+      "default": false
+    },
+    "lpc": {
+      "type": "boolean",
+      "description": "Use Local Pearson correlation (signed) for matching",
+      "title": "Local Pearson Correlation (Signed)",
+      "default": false
+    },
+    "lpa": {
+      "type": "boolean",
+      "description": "Use Local Pearson correlation (absolute value) for matching",
+      "title": "Local Pearson Correlation (Absolute Value)",
+      "default": false
+    },
+    "noneg": {
+      "type": "boolean",
+      "description": "Replace negative values in either input volume with 0",
+      "title": "Replace Negative Values",
+      "default": false
+    },
+    "nopenalty": {
+      "type": "boolean",
+      "description": "Don't use a penalty on the cost functional",
+      "title": "No Penalty",
+      "default": false
+    },
+    "minpatch": {
+      "type": "number",
+      "description": "Set the minimum patch size for warp searching",
+      "title": "Minimum Patch Size"
+    },
+    "maxlev": {
+      "type": "number",
+      "description": "Set the maximum refinement level",
+      "title": "Maximum Refinement Level"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print out very verbose progress messages",
+      "title": "Verbose",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Cut out most progress messages",
+      "title": "Quiet",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "base_dataset",
+    "source_dataset",
+    "prefix"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_autodet_gwstats",
+  "description": "Manages the computation of the gray/white statistics used to place the white and pial surfaces.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_autodet_gwstats"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output text file with stats",
+      "title": "Output file"
+    },
+    "t1w_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T1 weighted volume (usually brain.finalsurfs.mgz)",
+      "title": "T1 weighted volume"
+    },
+    "wm_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "White matter volume (usually wm.mgz)",
+      "title": "White matter volume"
+    },
+    "surf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface (usually ?h.orig)",
+      "title": "Surface"
+    },
+    "lhsurf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Left hemisphere surface",
+      "title": "Left hemisphere surface"
+    },
+    "rhsurf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Right hemisphere surface",
+      "title": "Right hemisphere surface"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject: reads in brain.finalsurfs.mgz, wm.mgz, lh.orig and rh.orig",
+      "title": "Subject"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "SUBJECTS_DIR",
+      "title": "Subjects directory"
+    },
+    "min_border_white": {
+      "type": "number",
+      "description": "Minimum border white (MinBW)",
+      "title": "Min border white"
+    },
+    "max_border_white": {
+      "type": "number",
+      "description": "Maximum border white (MaxBW)",
+      "title": "Max border white"
+    },
+    "min_gray_at_white_border": {
+      "type": "number",
+      "description": "Minimum gray at white border (MinGWB)",
+      "title": "Min gray at white border"
+    },
+    "max_gray": {
+      "type": "number",
+      "description": "Maximum gray (MaxG)",
+      "title": "Max gray"
+    },
+    "max_gray_at_csf_border": {
+      "type": "number",
+      "description": "Maximum gray at CSF border (MaxGCSFB)",
+      "title": "Max gray at CSF border"
+    },
+    "min_gray_at_csf_border": {
+      "type": "number",
+      "description": "Minimum gray at CSF border (MinGCSFB)",
+      "title": "Min gray at CSF border"
+    },
+    "max_csf": {
+      "type": "number",
+      "description": "Maximum CSF (MaxCSF)",
+      "title": "Max CSF"
+    }
+  },
+  "required": [
+    "@type",
+    "output_file",
+    "t1w_volume",
+    "wm_volume",
+    "surf",
+    "subject",
+    "subjects_dir"
+  ]
+}

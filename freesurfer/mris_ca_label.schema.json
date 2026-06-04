@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_ca_label",
+  "description": "Produces an annotation file in which each cortical surface vertex is assigned a neuroanatomical label using a previously-prepared atlas file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_ca_label"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject ID for labeling",
+      "title": "Subject ID"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere (rh or lh)",
+      "title": "Hemisphere"
+    },
+    "canonsurf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the spherical surface file that describes the registration of a subject's vertices to the average surface",
+      "title": "Canonical Surface File"
+    },
+    "classifier": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify classifier array input file",
+      "title": "Classifier Array Input File"
+    },
+    "outputfile": {
+      "type": "string",
+      "description": "Output annotated surface file listing the region label for each vertex",
+      "title": "Annotated Surface Output File"
+    },
+    "seed": {
+      "type": "number",
+      "description": "Specify the seed for the random number generator",
+      "title": "Seed"
+    },
+    "sdir": {
+      "type": "string",
+      "description": "Specify a subjects directory (default=$SUBJECTS_DIR)",
+      "title": "Subjects Directory"
+    },
+    "orig": {
+      "type": "string",
+      "description": "Specify filename of original surface (default=smoothwm)",
+      "title": "Original Surface Filename"
+    },
+    "long_flag": {
+      "type": "boolean",
+      "description": "Refines the initial labeling read-in from -r (default: disabled)",
+      "title": "Longitudinal Refinement Flag",
+      "default": false
+    },
+    "r": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing precomputed parcellation",
+      "title": "Precomputed Parcellation File"
+    },
+    "novar_flag": {
+      "type": "boolean",
+      "description": "Sets all covariance matrices to the identity (default: disabled)",
+      "title": "No Variance Flag",
+      "default": false
+    },
+    "nbrs": {
+      "type": "number",
+      "description": "Neighborhood size (default=2)",
+      "title": "Neighborhood Size"
+    },
+    "f": {
+      "type": "number",
+      "description": "Applies mode filter <number> times before writing output (default=10)",
+      "title": "Mode Filter Applications"
+    },
+    "t": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify parcellation table input file (default: none)",
+      "title": "Parcellation Table Input File"
+    },
+    "p": {
+      "type": "string",
+      "description": "Output file containing label probability for each vertex.",
+      "title": "Label Probability Output File"
+    },
+    "v": {
+      "type": "number",
+      "description": "Diagnostic level (default=0)",
+      "title": "Diagnostic Level"
+    },
+    "w": {
+      "type": "string",
+      "description": "Writes-out snapshots of gibbs process every <number> iterations to <filename> (default=disabled)",
+      "title": "Gibbs Process Snapshots"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Print help information",
+      "title": "Help Flag",
+      "default": false
+    },
+    "version_flag": {
+      "type": "boolean",
+      "description": "Print version information",
+      "title": "Version Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject",
+    "hemi",
+    "canonsurf",
+    "classifier",
+    "outputfile"
+  ]
+}

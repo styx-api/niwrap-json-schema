@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "aiv",
+  "description": "AFNI Image Viewer program. Shows the 2D images on the command line in an AFNI-like image viewer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/aiv"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print out the image filenames for progress tracking.",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Run the program in quiet mode.",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "title": {
+      "type": "string",
+      "description": "Specify the window title.",
+      "title": "Window Title"
+    },
+    "port": {
+      "type": "number",
+      "minimum": 1024,
+      "maximum": 65535,
+      "description": "Listen to TCP/IP port for incoming images.",
+      "title": "TCP/IP Port"
+    },
+    "pad": {
+      "type": "string",
+      "description": "Pad all input images to be the same size.",
+      "title": "Pad Input Images"
+    },
+    "input_images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input image files (e.g., img1.jpg, img2.bmp).",
+      "title": "Input Images"
+    }
+  },
+  "required": [
+    "@type",
+    "input_images"
+  ]
+}

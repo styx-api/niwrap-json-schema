@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1deval",
+  "description": "Evaluates an expression that may include columns of data from one or more text files and writes the result to stdout.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1deval"
+    },
+    "del": {
+      "type": "number",
+      "description": "Use 'd' as the step for a single undetermined variable in the expression.",
+      "title": "Step for undetermined variable"
+    },
+    "start": {
+      "type": "number",
+      "description": "Start at value 's' for a single undetermined variable in the expression.",
+      "title": "Start value"
+    },
+    "num": {
+      "type": "number",
+      "description": "Evaluate the expression 'n' times.",
+      "title": "Number of evaluations"
+    },
+    "index": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read index column from file i.1D and write it out as 1st column of output.",
+      "title": "Index column file"
+    },
+    "1D": {
+      "type": "boolean",
+      "description": "Write output in the form of a single '1D:' string suitable for input on the command line of another program.",
+      "title": "1D formatted output",
+      "default": false
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Read time series file and assign it to the symbol 'a'. Letters 'a' to 'z' may be used as symbols.",
+      "title": "Symbols assignment"
+    },
+    "symbol_values": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Assign a fixed numerical value to the symbol 'a'. Letters 'a' to 'z' may be used as symbols.",
+      "title": "Symbols fixed values"
+    },
+    "expression": {
+      "type": "string",
+      "description": "Expression to evaluate.",
+      "title": "Expression"
+    }
+  },
+  "required": [
+    "@type",
+    "expression"
+  ]
+}

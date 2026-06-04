@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dToyProg",
+  "description": "A program to illustrate dataset creation and manipulation in C using AFNI's API.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dToyProg"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference dataset",
+      "title": "Input dataset"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix of the output datasets",
+      "title": "Output prefix"
+    },
+    "mask_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Restrict analysis to non-zero voxels in the mask dataset",
+      "title": "Mask dataset"
+    },
+    "output_datum": {
+      "enum": [
+        "float",
+        "short"
+      ],
+      "description": "Output datum type for one of the datasets. Choose from 'float' or 'short'. Default is 'float'.",
+      "title": "Output datum type"
+    },
+    "mini_help": {
+      "type": "boolean",
+      "description": "Mini help, at time, same as -help in many cases.",
+      "title": "Mini help flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "The entire help output.",
+      "title": "Help flag",
+      "default": false
+    },
+    "extreme_help": {
+      "type": "boolean",
+      "description": "Extreme help, same as -help in majority of cases.",
+      "title": "Extreme help flag",
+      "default": false
+    },
+    "help_view": {
+      "type": "boolean",
+      "description": "Open help in text editor. AFNI will try to find a GUI editor on your machine. You can control which it should use by setting environment variable AFNI_GUI_EDITOR.",
+      "title": "Help view flag",
+      "default": false
+    },
+    "help_web": {
+      "type": "boolean",
+      "description": "Open help in web browser. AFNI will try to find a browser on your machine. You can control which it should use by setting environment variable AFNI_GUI_EDITOR.",
+      "title": "Help web flag",
+      "default": false
+    },
+    "help_find": {
+      "type": "string",
+      "description": "Look for lines in this program's -help output that match (approximately) WORD.",
+      "title": "Help find flag"
+    },
+    "help_raw": {
+      "type": "boolean",
+      "description": "Help string unedited.",
+      "title": "Help raw flag",
+      "default": false
+    },
+    "help_spx": {
+      "type": "boolean",
+      "description": "Help string in sphinx loveliness, but do not try to autoformat.",
+      "title": "Help sphinx flag",
+      "default": false
+    },
+    "help_aspx": {
+      "type": "boolean",
+      "description": "Help string in sphinx with autoformatting of options, etc.",
+      "title": "Help autoformat sphinx flag",
+      "default": false
+    },
+    "help_all_opts": {
+      "type": "boolean",
+      "description": "Try to identify all options for the program from the output of its -help option. Some options might be missed and others misidentified. Use this output for hints only.",
+      "title": "All options flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

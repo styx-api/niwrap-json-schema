@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@ROI_modal_grow",
+  "description": "Script to grow a set of regions in a volumetric dataset using modal smoothing.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@ROI_modal_grow"
+    },
+    "input_dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Required input dataset. This dataset should be a set of integer values, assuming approximate isotropic voxels.",
+      "title": "Input dataset"
+    },
+    "niters": {
+      "type": "number",
+      "description": "Number of iterations for modal growth, generally making sense for values from about 1-10.",
+      "title": "Number of iterations"
+    },
+    "outdir": {
+      "type": "string",
+      "description": "Directory name for output. All output goes to this directory. Default is rmgrow.",
+      "title": "Output directory"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask dataset at the same grid as the input dataset. Could be a dilated version of the original mask or a larger region like a cortical ribbon mask. Not required but often desirable.",
+      "title": "Mask dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Base name of the final output dataset, i.e., baseprefix.nii.gz. Default is rmg, so output would be rmg.nii.gz.",
+      "title": "Output prefix"
+    },
+    "neighborhood_type": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3,
+      "description": "Neighborhood type used in finding mode. 1 - facing neighbors, 2 - edges, 3 - corners.",
+      "title": "Neighborhood type"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dset",
+    "niters"
+  ]
+}

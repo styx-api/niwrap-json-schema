@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsRegistrationSyN.sh",
+  "description": "Script for simplified symmetric image registration using ANTs.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsRegistrationSyN.sh"
+    },
+    "image_dimension": {
+      "enum": [
+        2,
+        3
+      ],
+      "description": "Image dimension: 2 or 3 (for 2 or 3-dimensional registration of a single volume)",
+      "title": "Image Dimension"
+    },
+    "fixed_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Fixed image(s) or source image(s) or reference image(s)",
+      "title": "Fixed Image"
+    },
+    "moving_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Moving image(s) or target image(s)",
+      "title": "Moving Image"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "A prefix that is prepended to all output files",
+      "title": "Output Prefix"
+    },
+    "threads": {
+      "type": "integer",
+      "description": "Number of threads (default = ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS if defined, otherwise 1)",
+      "title": "Number of Threads"
+    },
+    "initial_transform": {
+      "type": "object",
+      "properties": {
+        "initial_transform": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Initial transform(s) --- order specified on the command line matters",
+          "title": "Initial Transform"
+        }
+      }
+    },
+    "transform_type": {
+      "enum": [
+        "t",
+        "r",
+        "a",
+        "s",
+        "sr",
+        "so",
+        "b",
+        "br",
+        "bo"
+      ],
+      "description": "Transform type (default = 's'). Options:\n - t: translation (1 stage)\n - r: rigid (1 stage)\n - a: rigid + affine (2 stages)\n - s: rigid + affine + deformable syn (3 stages)\n - sr: rigid + deformable syn (2 stages)\n - so: deformable syn only (1 stage)\n - b: rigid + affine + deformable b-spline syn (3 stages)\n - br: rigid + deformable b-spline syn (2 stages)\n - bo: deformable b-spline syn only (1 stage)",
+      "title": "Transform Type"
+    },
+    "radius": {
+      "type": "integer",
+      "description": "Radius for cross correlation metric used during SyN stage (default = 4)",
+      "title": "Radius for Cross Correlation Metric"
+    },
+    "spline_distance": {
+      "type": "integer",
+      "description": "Spline distance for deformable B-spline SyN transform (default = 26)",
+      "title": "Spline Distance for Deformable B-spline SyN Transform"
+    },
+    "gradient_step": {
+      "type": "number",
+      "description": "Gradient step size for SyN and B-spline SyN (default = 0.1)",
+      "title": "Gradient Step Size for SyN and B-spline SyN"
+    },
+    "masks": {
+      "type": "string",
+      "description": "Mask(s) for the fixed image space, or for the fixed and moving image space in the format 'fixedMask,MovingMask'. Use -x once to specify mask(s) to be used for all stages or use -x for each 'stage' (cf -t option). If no mask is to be used for a particular stage, the keyword 'NULL' should be used in place of file names.",
+      "title": "Masks"
+    },
+    "precision_type": {
+      "enum": [
+        "f",
+        "d"
+      ],
+      "description": "Precision type (default = 'd'). Options:\n - f: float\n - d: double",
+      "title": "Precision Type"
+    },
+    "use_histogram_matching": {
+      "type": "boolean",
+      "description": "Use histogram matching (default = 0). Options:\n - 0: false\n - 1: true",
+      "title": "Use Histogram Matching"
+    },
+    "use_repro_mode": {
+      "type": "boolean",
+      "description": "Use 'repro' mode for exact reproducibility of output. Uses GC metric for linear stages and a fixed random seed (default = 0). Options:\n - 0: false\n - 1: true",
+      "title": "Use 'Repro' Mode for Exact Reproducibility"
+    },
+    "collapse_output_transforms": {
+      "type": "boolean",
+      "description": "Collapse output transforms (default = 1). Options:\n - 0: false\n - 1: true",
+      "title": "Collapse Output Transforms"
+    },
+    "random_seed": {
+      "type": "integer",
+      "description": "Fix random seed to an int value",
+      "title": "Random Seed"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "fixed_image",
+    "moving_image",
+    "output_prefix",
+    "initial_transform"
+  ]
+}

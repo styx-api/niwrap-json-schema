@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "plugout_ijk",
+  "description": "Connects to AFNI and sends (i,j,k) dataset indices to control the viewpoint.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/plugout_ijk"
+    },
+    "host": {
+      "type": "string",
+      "description": "Connect to AFNI running on the specified computer using TCP/IP.",
+      "title": "Host name"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose mode.",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "port": {
+      "type": "number",
+      "description": "Use TCP/IP port number 'pp'.",
+      "title": "Port number"
+    },
+    "name": {
+      "type": "string",
+      "description": "Use the string 'sss' for the name that AFNI assigns to this plugout.",
+      "title": "Plugout name"
+    },
+    "port_offset": {
+      "type": "number",
+      "minimum": 1025,
+      "maximum": 65500,
+      "description": "Provide a port offset to allow multiple instances of communicating programs to operate on the same machine.",
+      "title": "Port offset"
+    },
+    "port_quiet": {
+      "type": "number",
+      "description": "Provide a port offset like -np, but more quiet in the face of adversity.",
+      "title": "Port offset quiet"
+    },
+    "port_bloc_offset": {
+      "type": "number",
+      "maximum": 4000,
+      "description": "Provide a port offset block for easier port management.",
+      "title": "Port bloc offset"
+    },
+    "max_bloc": {
+      "type": "boolean",
+      "description": "Print the current value of MAX_BLOC and exit.",
+      "title": "Max port bloc",
+      "default": false
+    },
+    "max_bloc_quiet": {
+      "type": "boolean",
+      "description": "Print MAX_BLOC value only and exit.",
+      "title": "Max port bloc quiet",
+      "default": false
+    },
+    "num_assigned_ports": {
+      "type": "boolean",
+      "description": "Print the number of assigned ports used by AFNI then quit.",
+      "title": "Number of assigned ports",
+      "default": false
+    },
+    "num_assigned_ports_quiet": {
+      "type": "boolean",
+      "description": "Prints the number of assigned ports quietly.",
+      "title": "Number of assigned ports quiet",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

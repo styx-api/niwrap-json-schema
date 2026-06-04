@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "abids_json_tool.py",
+  "description": "This script helps to manipulate json files in various ways.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/abids_json_tool.py"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "One file to convert. Enter NULL with -add_json to create new json file.",
+      "title": "Input file"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output file name.",
+      "title": "Prefix"
+    },
+    "txt2json": {
+      "type": "boolean",
+      "description": "Convert from ':' separated text file to json formatted file.",
+      "title": "TXT to JSON",
+      "default": false
+    },
+    "json2txt": {
+      "type": "boolean",
+      "description": "Convert from json formatted file to ':' separated text file.",
+      "title": "JSON to TXT",
+      "default": false
+    },
+    "add_json": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Add an attribute to the end of the specified json file.",
+      "title": "Add JSON"
+    },
+    "del_json": {
+      "type": "string",
+      "description": "Remove attribute (KEY) from the -input json file.",
+      "title": "Delete JSON"
+    },
+    "force_add": {
+      "type": "boolean",
+      "description": "Use with -add_json to overwrite an existing attribute in the specified json file.",
+      "title": "Force add",
+      "default": false
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Use caution as this will overwrite the -prefix file if it exists!!",
+      "title": "Overwrite",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show this help and exit.",
+      "title": "Help",
+      "default": false
+    },
+    "delimiter_major": {
+      "type": "string",
+      "description": "Specify the new (major) delimiter to separate keys and values when using '-txt2json' opt.",
+      "title": "Major Delimiter"
+    },
+    "delimiter_minor": {
+      "type": "string",
+      "description": "Specify the new (minor) delimiter to separate value items when using '-txt2json' opt.",
+      "title": "Minor Delimiter"
+    },
+    "literal_keys": {
+      "type": "boolean",
+      "description": "Do not replace spaces with '_', nor parentheses and brackets with ''.",
+      "title": "Literal Keys",
+      "default": false
+    },
+    "values_stay_str": {
+      "type": "boolean",
+      "description": "Each numeric or str item gets saved as a str; otherwise, guess at int and float.",
+      "title": "Values Stay String",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "prefix"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dReHo",
+  "description": "3dReHo calculates Kendall's W per voxel using neighborhood voxels from 4D time series data set.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dReHo"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output file name part.",
+      "title": "Prefix"
+    },
+    "inset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Time series input file.",
+      "title": "Input Time Series File"
+    },
+    "nneigh": {
+      "type": "string",
+      "description": "Number of voxels in neighborhood, inclusive; can be 7 (for facewise neighbors), 19 (for face- and edge-wise neighbors), 27 (for face-, edge-, and node-wise neighbors). Default is 27.",
+      "title": "Neighborhood Voxel Count"
+    },
+    "chi_sq": {
+      "type": "boolean",
+      "description": "Switch to output Friedman chi-square value per voxel as a subbrick.",
+      "title": "Friedman Chi-Square Output Flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Include a whole brain mask within which to calculate ReHo. Otherwise, data should be masked already.",
+      "title": "Mask File"
+    },
+    "neigh_rad": {
+      "type": "number",
+      "description": "Radius R of a desired neighborhood for voxelwise control, must be a floating point number >1. Examples: R=2.0 -> V=33, R=2.3 -> V=57, etc.",
+      "title": "Neighborhood Radius"
+    },
+    "neigh_x": {
+      "type": "number",
+      "description": "Semi-radius length A for ellipsoidal neighborhood.",
+      "title": "Neighborhood Semi-radius X"
+    },
+    "neigh_y": {
+      "type": "number",
+      "description": "Semi-radius length B for ellipsoidal neighborhood.",
+      "title": "Neighborhood Semi-radius Y"
+    },
+    "neigh_z": {
+      "type": "number",
+      "description": "Semi-radius length C for ellipsoidal neighborhood.",
+      "title": "Neighborhood Semi-radius Z"
+    },
+    "box_rad": {
+      "type": "number",
+      "description": "Cubic box radius BR centered on a given voxel for neighborhood control. Examples: BR=1 -> V=27, BR=2 -> V=125, etc.",
+      "title": "Cubic Box Radius"
+    },
+    "box_x": {
+      "type": "number",
+      "description": "Box volume neighborhood dimension X. Values put in get added in the +/- directions of each axis.",
+      "title": "Box Volume X"
+    },
+    "box_y": {
+      "type": "number",
+      "description": "Box volume neighborhood dimension Y. Values put in get added in the +/- directions of each axis.",
+      "title": "Box Volume Y"
+    },
+    "box_z": {
+      "type": "number",
+      "description": "Box volume neighborhood dimension Z. Values put in get added in the +/- directions of each axis.",
+      "title": "Box Volume Z"
+    },
+    "in_rois": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input a set of ROIs, each labeled with distinct integers. ReHo will be calculated per ROI.",
+      "title": "ROIs Input File"
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "inset"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_estimate_wm",
+  "description": "Tool to estimate white matter surfaces using MRI data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_estimate_wm"
+    },
+    "subjs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subjects to process.",
+      "title": "Subjects"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere to reconstruct (lh or rh).",
+      "title": "Hemisphere"
+    },
+    "sdir": {
+      "type": "string",
+      "description": "Override SUBJECTS_DIR.",
+      "title": "Subjects Directory"
+    },
+    "model": {
+      "type": "string",
+      "description": "Override default model.",
+      "title": "Model"
+    },
+    "suffix": {
+      "type": "string",
+      "description": "Suffix of output surface (default is 'topofit').",
+      "title": "Output Surface Suffix"
+    },
+    "gpu": {
+      "type": "boolean",
+      "description": "Use the GPU.",
+      "title": "GPU flag",
+      "default": false
+    },
+    "rsi": {
+      "type": "boolean",
+      "description": "Remove self-intersecting faces during the deformation.",
+      "title": "Remove self-intersecting faces",
+      "default": false
+    },
+    "single_iter": {
+      "type": "boolean",
+      "description": "Prevent deformation steps from running more than once.",
+      "title": "Single iteration",
+      "default": false
+    },
+    "vol": {
+      "type": "string",
+      "description": "Subject volume to use as input.",
+      "title": "Volume"
+    }
+  },
+  "required": [
+    "@type",
+    "subjs",
+    "hemi"
+  ]
+}

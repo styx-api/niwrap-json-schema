@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WarpTimeSeriesImageMultiTransform",
+  "description": "WarpTimeSeriesImageMultiTransform is a tool used to apply a series of transformations to a time series image, either forward or reverse, using affine transforms and warps.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/WarpTimeSeriesImageMultiTransform"
+    },
+    "image_dimension": {
+      "enum": [
+        3,
+        4
+      ],
+      "description": "The dimensionality of the input images (3D or 4D).",
+      "title": "Image Dimension"
+    },
+    "moving_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The image to which the transformation will be applied. It can be a 3D image with vector voxels or a 4D image with scalar voxels.",
+      "title": "Moving Image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "The output image after transformation. It is resampled based on the reference image domain.",
+      "title": "Output Image"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The reference image that defines the space into which the input image will be warped.",
+      "title": "Reference Image"
+    },
+    "transforms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "A list of transformation files, such as affine transformation matrices and warps, applied in sequence.",
+      "title": "Transforms"
+    },
+    "interpolation": {
+      "enum": [
+        "NearestNeighbor",
+        "BSpline"
+      ],
+      "description": "Specifies the type of interpolation to use: Nearest Neighbor or 3rd order B-Spline.",
+      "title": "Interpolation"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "moving_image",
+    "output_image",
+    "reference_image",
+    "transforms"
+  ]
+}

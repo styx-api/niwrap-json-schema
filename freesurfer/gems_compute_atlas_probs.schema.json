@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gems_compute_atlas_probs",
+  "description": "Tool to compute atlas probabilities using SAMSEG results.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/gems_compute_atlas_probs"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Directory with saved SAMSEG runs with --history flag.",
+      "title": "Subjects Directory"
+    },
+    "mesh_collections": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Mesh collection file(s).",
+      "title": "Mesh Collections"
+    },
+    "out_dir": {
+      "type": "string",
+      "description": "Output directory.",
+      "title": "Output Directory"
+    },
+    "segmentations_dir": {
+      "type": "string",
+      "description": "Directory with GT segmentations.",
+      "title": "Segmentations Directory"
+    },
+    "gt_from_fs": {
+      "type": "boolean",
+      "description": "GT from FreeSurfer segmentations.",
+      "title": "GT from FS Flag",
+      "default": false
+    },
+    "segmentation_name": {
+      "type": "string",
+      "description": "Filename of the segmentations, assumed to be the same for each subject.",
+      "title": "Segmentation Filename"
+    },
+    "multi_structure": {
+      "type": "boolean",
+      "description": "Estimate alphas from more than 1 structure.",
+      "title": "Multi-structure Flag",
+      "default": false
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Label numbers for multi-structure estimation.",
+      "title": "Labels"
+    },
+    "from_samseg": {
+      "type": "boolean",
+      "description": "SAMSEG runs obtained from command samseg instead of run_samseg.",
+      "title": "From SAMSEG Flag",
+      "default": false
+    },
+    "em_iterations": {
+      "type": "number",
+      "description": "Number of EM iterations.",
+      "title": "EM Iterations"
+    },
+    "show_figs": {
+      "type": "boolean",
+      "description": "Show figures during the run.",
+      "title": "Show Figures Flag",
+      "default": false
+    },
+    "save_figs": {
+      "type": "boolean",
+      "description": "Save rasterized prior of each subject.",
+      "title": "Save Figures Flag",
+      "default": false
+    },
+    "save_average_figs": {
+      "type": "boolean",
+      "description": "Save average rasterized prior.",
+      "title": "Save Average Figures Flag",
+      "default": false
+    },
+    "subjects_file": {
+      "type": "string",
+      "description": "Text file with list of subjects.",
+      "title": "Subjects File"
+    },
+    "labels_file": {
+      "type": "string",
+      "description": "Text file with list of labels (instead of --labels).",
+      "title": "Labels File"
+    },
+    "samseg_subdir": {
+      "type": "string",
+      "description": "Name of samseg subdir in subject/mri folder.",
+      "title": "SAMSEG Subdir"
+    }
+  },
+  "required": [
+    "@type",
+    "subjects_dir",
+    "mesh_collections",
+    "out_dir"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dAFNItoNIFTI",
+  "description": "Converts an AFNI dataset to a NIfTI-1.1 file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dAFNItoNIFTI"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input AFNI dataset",
+      "title": "Input Dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output NIfTI file prefix",
+      "title": "Prefix"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print progress messages (increases verbosity if repeated)",
+      "title": "Verbose",
+      "default": false
+    },
+    "force_float": {
+      "type": "boolean",
+      "description": "Force the output dataset to be 32-bit floats",
+      "title": "Force Float",
+      "default": false
+    },
+    "pure": {
+      "type": "boolean",
+      "description": "Do not write an AFNI extension field into the output file",
+      "title": "Pure",
+      "default": false
+    },
+    "denote": {
+      "type": "boolean",
+      "description": "Remove text notes from AFNI extension field that might contain identifying information",
+      "title": "Denote",
+      "default": false
+    },
+    "oldid": {
+      "type": "boolean",
+      "description": "Retain the input dataset's AFNI ID code",
+      "title": "Old ID",
+      "default": false
+    },
+    "newid": {
+      "type": "boolean",
+      "description": "Assign a new AFNI ID code to the dataset (default action)",
+      "title": "New ID",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

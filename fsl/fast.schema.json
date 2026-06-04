@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fast",
+  "description": "FAST (FMRIB's Automated Segmentation Tool) segments a 3D image of the brain into different tissue types (Grey Matter, White Matter, CSF, etc.), whilst also correcting for spatial intensity variations (also known as bias field or RF inhomogeneities). The underlying method is based on a hidden Markov random field model and an associated Expectation-Maximization algorithm. The whole process is fully automated and can also produce a bias field-corrected input image and a probabilistic and/or partial volume tissue segmentation. It is robust and reliable, compared to most finite mixture model-based methods, which are sensitive to noise.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fast"
+    },
+    "number_classes": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "number of tissue-type classes; default=3",
+      "title": "Number classes"
+    },
+    "bias_iters": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "number of main-loop iterations during bias-field removal; default=4",
+      "title": "Bias iters"
+    },
+    "bias_lowpass": {
+      "type": "number",
+      "minimum": 0,
+      "description": "bias field smoothing extent (FWHM) in mm; default=20",
+      "title": "Bias lowpass"
+    },
+    "img_type": {
+      "enum": [
+        1,
+        2,
+        3
+      ],
+      "description": "type of image 1=T1, 2=T2, 3=PD; default=T1",
+      "title": "Img type"
+    },
+    "init_seg_smooth": {
+      "type": "number",
+      "description": "initial segmentation spatial smoothness (during bias field estimation); default=0.02",
+      "title": "Init seg smooth"
+    },
+    "segments": {
+      "type": "boolean",
+      "description": "outputs a separate binary image for each tissue type",
+      "title": "Segments",
+      "default": false
+    },
+    "init_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "initialise using priors; you must supply a FLIRT transform",
+      "title": "Init transform"
+    },
+    "other_priors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Alternative prior images (requires 3 files: prior1 prior2 prior3).",
+      "title": "Other priors"
+    },
+    "output_biasfield": {
+      "type": "boolean",
+      "description": "Output estimated bias field.",
+      "title": "Output biasfield",
+      "default": false
+    },
+    "output_biascorrected": {
+      "type": "boolean",
+      "description": "Output restored image (bias-corrected image).",
+      "title": "Output biascorrected",
+      "default": false
+    },
+    "no_bias": {
+      "type": "boolean",
+      "description": "Do not remove bias field.",
+      "title": "No bias",
+      "default": false
+    },
+    "channels": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "number of input images (channels); default 1",
+      "title": "Channels"
+    },
+    "out_basename": {
+      "type": "string",
+      "description": "Base name of output files.",
+      "title": "Out basename"
+    },
+    "use_priors": {
+      "type": "boolean",
+      "description": "Use priors throughout (requires -a option).",
+      "title": "Use priors",
+      "default": false
+    },
+    "no_pve": {
+      "type": "boolean",
+      "description": "Turn off pve (partial volume estimation).",
+      "title": "No pve",
+      "default": false
+    },
+    "segment_iters": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "number of segmentation-initialisation iterations; default=15",
+      "title": "Segment iters"
+    },
+    "mixel_smooth": {
+      "type": "number",
+      "description": "spatial smoothness for mixeltype; default=0.3",
+      "title": "Mixel smooth"
+    },
+    "hyper": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "segmentation spatial smoothness (0.0 to 1.0); default=0.1",
+      "title": "Hyper"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages.",
+      "title": "Verbose",
+      "default": false
+    },
+    "manual_seg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename containing intensities.",
+      "title": "Manual seg"
+    },
+    "iters_afterbias": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "number of main-loop iterations after bias-field removal; default=4",
+      "title": "Iters afterbias"
+    },
+    "output_probabilities": {
+      "type": "boolean",
+      "description": "outputs individual probability maps",
+      "title": "Output probabilities",
+      "default": false
+    },
+    "in_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Image, or multi-channel set of images, to be segmented.",
+      "title": "In files"
+    }
+  },
+  "required": [
+    "@type",
+    "in_files"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CORRELATE PAIRED ROWS BETWEEN TWO CIFTI FILES",
+  "description": "For each row in <cifti-a>, correlate it with the same row in <cifti-b>, and put the result in the same row of <cifti-out>, which has only one column.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_pairwise_correlation"
+    },
+    "cifti_a": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "first input cifti file"
+    },
+    "cifti_b": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "second input cifti file"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "output cifti file"
+    },
+    "fisher_z": {
+      "type": "boolean",
+      "description": "apply fisher small z transform (ie, artanh) to correlation",
+      "default": false
+    },
+    "override_mapping_check": {
+      "type": "boolean",
+      "description": "don't check the mappings for compatibility, only check length",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "cifti_a",
+    "cifti_b",
+    "cifti_out"
+  ]
+}

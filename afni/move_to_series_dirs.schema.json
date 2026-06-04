@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@move.to.series.dirs",
+  "description": "Partition DICOM files into series directories by copying or moving them to new series directories.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@move.to.series.dirs"
+    },
+    "action": {
+      "enum": [
+        "copy",
+        "move"
+      ],
+      "description": "Specify action to perform: copy or move. Default is copy.",
+      "title": "Action"
+    },
+    "dprefix": {
+      "type": "string",
+      "description": "Specify directory root for output series directories. Default is current directory.",
+      "title": "Directory Prefix"
+    },
+    "tag": {
+      "type": "string",
+      "description": "Specify the DICOM tag to use for partitioning. Default is 0020,0011 (REL Series Number).",
+      "title": "DICOM Tag"
+    },
+    "test": {
+      "type": "boolean",
+      "description": "Run in test mode, only show what would be done without actually moving any files.",
+      "title": "Test Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show help information.",
+      "title": "Help Flag",
+      "default": false
+    },
+    "hist": {
+      "type": "boolean",
+      "description": "Show modification history.",
+      "title": "History Flag",
+      "default": false
+    },
+    "ver": {
+      "type": "boolean",
+      "description": "Show version number.",
+      "title": "Version Flag",
+      "default": false
+    },
+    "dicom_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify input DICOM files (e.g., IMG*)",
+      "title": "DICOM Files"
+    }
+  },
+  "required": [
+    "@type",
+    "dicom_files"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dbucket",
+  "description": "Concatenate sub-bricks from input datasets into one big bucket dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dbucket"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use 'pname' for the output dataset prefix name.",
+      "title": "Prefix"
+    },
+    "output": {
+      "type": "string",
+      "description": "Use 'pname' for the output dataset prefix name.",
+      "title": "Output"
+    },
+    "session": {
+      "type": "string",
+      "description": "Use 'dir' for the output dataset session directory. [default='./'=current working directory]",
+      "title": "Session"
+    },
+    "glueto": {
+      "type": "string",
+      "description": "Append bricks to the end of the 'fname' dataset.",
+      "title": "Glue to"
+    },
+    "aglueto": {
+      "type": "string",
+      "description": "If fname dataset does not exist, create it (like -prefix). Otherwise append to fname (like -glueto).",
+      "title": "A-Glue to"
+    },
+    "dry": {
+      "type": "boolean",
+      "description": "Execute a 'dry run'; only print out what would be done.",
+      "title": "Dry run",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print out some verbose output as the program proceeds.",
+      "title": "Verbose",
+      "default": false
+    },
+    "fbuc": {
+      "type": "boolean",
+      "description": "Create a functional bucket.",
+      "title": "Functional Bucket",
+      "default": false
+    },
+    "abuc": {
+      "type": "boolean",
+      "description": "Create an anatomical bucket. If neither of these options is given, the output type is determined from the first input type.",
+      "title": "Anatomical Bucket",
+      "default": false
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Input datasets with optional sub-brick selection.",
+      "title": "Input Files"
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

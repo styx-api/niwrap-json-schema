@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "long_qdec_table",
+  "description": "Tool to operate on longitudinal QDEC tables.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/long_qdec_table"
+    },
+    "qdec_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "QDEC table file specifying the subjects and time points",
+      "title": "QDEC Table"
+    },
+    "split": {
+      "type": "string",
+      "description": "Split table based on column (e.g., use 'fsid-base' to separate subjects)",
+      "title": "Split Column"
+    },
+    "cross_flag": {
+      "type": "boolean",
+      "description": "Collapse table to cross sectional (one line per subject)",
+      "title": "Cross Table Flag",
+      "default": false
+    },
+    "sort": {
+      "type": "string",
+      "description": "Sort table based on column within subject (e.g., 'age')",
+      "title": "Sort Column"
+    },
+    "out": {
+      "type": "string",
+      "description": "Output file name for operations producing a single table",
+      "title": "Output File Name"
+    }
+  },
+  "required": [
+    "@type",
+    "qdec_table"
+  ]
+}

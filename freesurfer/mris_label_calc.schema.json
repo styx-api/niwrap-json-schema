@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_label_calc",
+  "description": "Tool for surface label calculations",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_label_calc"
+    },
+    "command": {
+      "enum": [
+        "union",
+        "intersect",
+        "invert",
+        "erode",
+        "dilate"
+      ],
+      "description": "Command to perform on input labels",
+      "title": "Command"
+    },
+    "input1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First input label file",
+      "title": "Input1"
+    },
+    "input2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second input label file (used for 'invert', 'erode', 'dilate' operations)",
+      "title": "Input2"
+    },
+    "output": {
+      "type": "string",
+      "description": "Output label file",
+      "title": "Output"
+    },
+    "iterations": {
+      "type": "integer",
+      "description": "Number of times to erode or dilate label",
+      "title": "Iterations"
+    }
+  },
+  "required": [
+    "@type",
+    "command",
+    "input1",
+    "input2",
+    "output"
+  ]
+}

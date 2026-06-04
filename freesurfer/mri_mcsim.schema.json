@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_mcsim",
+  "description": "Monte Carlo simulation tool for surface-based multiple comparisons",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_mcsim"
+    },
+    "top_output_dir": {
+      "type": "string",
+      "description": "Top output directory",
+      "title": "Top Output Directory"
+    },
+    "base_name": {
+      "type": "string",
+      "description": "Base name for CSD files",
+      "title": "Base Name"
+    },
+    "surface": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Subject name and hemisphere for the surface (e.g., subjectname lh)",
+      "title": "Surface Subject and Hemisphere"
+    },
+    "num_repetitions": {
+      "type": "number",
+      "description": "Number of repetitions for the simulation",
+      "title": "Number of Repetitions"
+    },
+    "fwhm_values": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Full Width at Half Maximum values for smoothing",
+      "title": "FWHM Values"
+    },
+    "fwhm_max": {
+      "type": "number",
+      "description": "Maximum FWHM for simulation (default 30)",
+      "title": "FWHM Max"
+    },
+    "avg_vertex_area": {
+      "type": "boolean",
+      "description": "Report cluster area based on average vertex area",
+      "title": "Average Vertex Area Flag",
+      "default": false
+    },
+    "random_seed": {
+      "type": "number",
+      "description": "Random seed value (default is based on Time of Day)",
+      "title": "Random Seed"
+    },
+    "label_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Label file for masking (default is ?h.cortex.label)",
+      "title": "Label File"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file instead of label",
+      "title": "Mask File"
+    },
+    "no_label": {
+      "type": "boolean",
+      "description": "Do not use a label to mask",
+      "title": "No Label Flag",
+      "default": false
+    },
+    "no_save_mask": {
+      "type": "boolean",
+      "description": "Do not save mask to output",
+      "title": "No Save Mask Flag",
+      "default": false
+    },
+    "surface_name": {
+      "type": "string",
+      "description": "Surface name (default is white)",
+      "title": "Surface Name"
+    },
+    "log_file": {
+      "type": "string",
+      "description": "Log file for the output",
+      "title": "Log File"
+    },
+    "done_file": {
+      "type": "string",
+      "description": "Done file to create when finished",
+      "title": "Done File"
+    },
+    "stop_file": {
+      "type": "string",
+      "description": "Stop file (default is ourdir/mri_mcsim.stop)",
+      "title": "Stop File"
+    },
+    "save_file": {
+      "type": "string",
+      "description": "Save file (default is ourdir/mri_mcsim.save)",
+      "title": "Save File"
+    },
+    "save_iter": {
+      "type": "boolean",
+      "description": "Save output after each iteration",
+      "title": "Save Iterations Flag",
+      "default": false
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Subjects directory",
+      "title": "Subjects Directory"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "check_opts": {
+      "type": "boolean",
+      "description": "Check options do not run",
+      "title": "Check Options Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Display version and exit",
+      "title": "Version Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "top_output_dir",
+    "base_name",
+    "surface",
+    "num_repetitions"
+  ]
+}

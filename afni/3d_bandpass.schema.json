@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dBandpass",
+  "description": "Program to lowpass and/or highpass each voxel time series in a dataset, offering more/different options than Fourier.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dBandpass"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output file.",
+      "title": "Prefix"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Create a mask from the input dataset.",
+      "title": "Automask",
+      "default": false
+    },
+    "blur": {
+      "type": "number",
+      "description": "Blur (inside the mask only) with a filter width (fwhm) of 'fff' millimeters.",
+      "title": "Blur"
+    },
+    "despike": {
+      "type": "boolean",
+      "description": "Despike each time series before other processing. hopefully, you don't actually need to do this, which is why it is optional.",
+      "title": "Despike",
+      "default": false
+    },
+    "highpass": {
+      "type": "number",
+      "description": "Highpass.",
+      "title": "Highpass"
+    },
+    "lowpass": {
+      "type": "number",
+      "description": "Lowpass.",
+      "title": "Lowpass"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file to 3dbandpass.",
+      "title": "In file"
+    },
+    "localPV": {
+      "type": "number",
+      "description": "Replace each vector by the local principal vector (aka first singular vector) from a neighborhood of radius 'rrr' millimeters. note that the pv time series is l2 normalized. this option is mostly for bob cox to have fun with.",
+      "title": "Localpv"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file.",
+      "title": "Mask"
+    },
+    "nfft": {
+      "type": "integer",
+      "description": "Set the fft length [must be a legal value].",
+      "title": "Nfft"
+    },
+    "no_detrend": {
+      "type": "boolean",
+      "description": "Skip the quadratic detrending of the input that occurs before the fft-based bandpassing. you would only want to do this if the dataset had been detrended already in some other program.",
+      "title": "No detrend",
+      "default": false
+    },
+    "normalize": {
+      "type": "boolean",
+      "description": "Make all output time series have l2 norm = 1 (i.e., sum of squares = 1).",
+      "title": "Normalize",
+      "default": false
+    },
+    "notrans": {
+      "type": "boolean",
+      "description": "Don't check for initial positive transients in the data. the test is a little slow, so skipping it is ok, if you know the data time series are transient-free.",
+      "title": "Notrans",
+      "default": false
+    },
+    "orthogonalize_dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Orthogonalize each voxel to the corresponding voxel time series in dataset 'fset', which must have the same spatial and temporal grid structure as the main input dataset. at present, only one '-dsort' option is allowed.",
+      "title": "Orthogonalize dset"
+    },
+    "orthogonalize_file": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Also orthogonalize input to columns in f.1d. multiple '-ort' options are allowed.",
+      "title": "Orthogonalize file"
+    },
+    "outputtype": {
+      "enum": [
+        "NIFTI",
+        "AFNI",
+        "NIFTI_GZ"
+      ],
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype.",
+      "title": "Outputtype"
+    },
+    "tr": {
+      "type": "number",
+      "description": "Set time step (tr) in sec [default=from dataset header].",
+      "title": "Tr"
+    }
+  },
+  "required": [
+    "@type",
+    "highpass",
+    "lowpass",
+    "in_file"
+  ]
+}

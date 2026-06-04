@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "imaver",
+  "description": "Computes the mean and standard deviation, pixel-by-pixel, of a whole bunch of images.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/imaver"
+    },
+    "out_ave": {
+      "type": "string",
+      "description": "Output average image file. Use '-' to skip output.",
+      "title": "Output Average Image"
+    },
+    "out_sig": {
+      "type": "string",
+      "description": "Output standard deviation image file. Use '-' to skip output.",
+      "title": "Output Standard Deviation Image"
+    },
+    "input_images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input image files for processing",
+      "title": "Input Images"
+    }
+  },
+  "required": [
+    "@type",
+    "input_images"
+  ]
+}

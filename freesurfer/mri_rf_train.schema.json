@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_rf_train",
+  "description": "Trains GCA data with multiple subjects using MRI data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_rf_train"
+    },
+    "seg_volume": {
+      "type": "string",
+      "description": "Segmentation volume (path relative to $subject/mri).",
+      "title": "Segmentation Volume"
+    },
+    "atlas_transform": {
+      "type": "string",
+      "description": "Atlas transform (path relative to $subject/mri/transforms).",
+      "title": "Atlas Transform"
+    },
+    "mask_volume": {
+      "type": "string",
+      "description": "Use volname as a mask (path relative to $subject/mri).",
+      "title": "Mask Volume"
+    },
+    "node_spacing": {
+      "type": "number",
+      "description": "Spacing of classifiers in canonical space.",
+      "title": "Node Spacing"
+    },
+    "prior_spacing": {
+      "type": "number",
+      "description": "Spacing of class priors in canonical space.",
+      "title": "Prior Spacing"
+    },
+    "input_training_data": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specifying training data (path relative to $subject/mri). Can specify multiple inputs. If not specified, 'orig' is used.",
+      "title": "Input Training Data"
+    },
+    "sanity_check": {
+      "type": "boolean",
+      "description": "Conduct sanity-check of labels for obvious edit errors.",
+      "title": "Sanity Check",
+      "default": false
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Input subjects.",
+      "title": "Subjects"
+    },
+    "output_rfa": {
+      "type": "string",
+      "description": "Output RFA filename.",
+      "title": "Output RFA Filename"
+    }
+  },
+  "required": [
+    "@type",
+    "seg_volume",
+    "atlas_transform",
+    "subjects",
+    "output_rfa"
+  ]
+}

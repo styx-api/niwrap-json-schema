@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_compute_volume_fractions",
+  "description": "Computes volume fractions based on a given surface and volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_compute_volume_fractions"
+    },
+    "volume_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume file.",
+      "title": "Volume file"
+    },
+    "surface_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface file.",
+      "title": "Surface file"
+    },
+    "accuracy": {
+      "type": "number",
+      "description": "Required accuracy.",
+      "title": "Accuracy"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output volume file for the fractions.",
+      "title": "Output file"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging.",
+      "title": "Debug flag",
+      "default": false
+    },
+    "checkopts": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit.",
+      "title": "Check options flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "volume_file",
+    "surface_file",
+    "accuracy",
+    "output_file"
+  ]
+}

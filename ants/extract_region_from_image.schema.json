@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExtractRegionFromImage",
+  "description": "ExtractRegionFromImage can be used to extract a specific region from a given image. The region can be specified via indices, label, or another domain image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/ExtractRegionFromImage"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "description": "The dimensionality of the image.",
+      "title": "Image Dimension"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the input image from which the region will be extracted.",
+      "title": "Input Image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Path to the output image where the extracted region will be saved.",
+      "title": "Output Image"
+    },
+    "region_specification": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "region_min_max_index"
+            },
+            "min_index": {
+              "type": "string"
+            },
+            "max_index": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "@type",
+            "min_index",
+            "max_index"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "region_label"
+            },
+            "label": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "@type",
+            "label"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "region_domain_image"
+            },
+            "domain_image": {
+              "type": "string",
+              "x-styx-type": "path"
+            }
+          },
+          "required": [
+            "@type",
+            "domain_image"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "region_label_with_image"
+            },
+            "label": {
+              "type": "string"
+            },
+            "label_image": {
+              "type": "string",
+              "x-styx-type": "path"
+            }
+          },
+          "required": [
+            "@type",
+            "label",
+            "label_image"
+          ]
+        }
+      ],
+      "description": "Specify the region to extract using indices, label, domain image, or label with label image.",
+      "title": "Region Specification"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "input_image",
+    "output_image",
+    "region_specification"
+  ]
+}

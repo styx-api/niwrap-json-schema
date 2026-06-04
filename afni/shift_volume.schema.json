@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@Shift_Volume",
+  "description": "Tool to shift a dataset in the RAI coordinate system or between MNI anatomical space and MNI space.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@Shift_Volume"
+    },
+    "rai_shift_vector": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Move dataset by dR, dA, dI mm (RAI coordinate system)",
+      "title": "RAI Shift Vector"
+    },
+    "mni_anat_to_mni": {
+      "type": "boolean",
+      "description": "Move dataset from MNI Anatomical space to MNI space (equivalent to -rai_shift 0 -4 -5)",
+      "title": "MNI Anatomical to MNI Space",
+      "default": false
+    },
+    "mni_to_mni_anat": {
+      "type": "boolean",
+      "description": "Move dataset from MNI space to MNI Anatomical space (equivalent to -rai_shift 0 4 5)",
+      "title": "MNI to MNI Anatomical Space",
+      "default": false
+    },
+    "dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset, typically an anatomical dataset to be aligned to BASE.",
+      "title": "Input Dataset"
+    },
+    "no_cp": {
+      "type": "boolean",
+      "description": "Do not create new data, shift the existing ones (use with caution).",
+      "title": "No Copy Flag",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output dataset.",
+      "title": "Output Prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "dset",
+    "prefix"
+  ]
+}

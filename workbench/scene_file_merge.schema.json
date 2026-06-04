@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "REARRANGE SCENES INTO A NEW FILE",
+  "description": "Takes one or more scene files and constructs a new scene file by concatenating specified scenes from them.\n\nExample: wb_command -scene-file-merge out.scene -scene-file first.scene -scene 1 -scene-file second.scene\n\nThis example would take the first scene from first.scene, followed by all scenes from second.scene, and write these scenes to out.scene.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/scene_file_merge"
+    },
+    "scene_file_out": {
+      "type": "string",
+      "description": "output - the output scene file"
+    },
+    "scene_file": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scene_file": {
+            "type": "string",
+            "description": "the input scene file"
+          },
+          "scene": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "scene": {
+                  "type": "string",
+                  "description": "the scene number or name"
+                },
+                "up_to": {
+                  "type": "object",
+                  "properties": {
+                    "last_column": {
+                      "type": "string",
+                      "description": "the number or name of the last scene to include"
+                    },
+                    "reverse": {
+                      "type": "boolean",
+                      "description": "use the range in reverse order",
+                      "default": false
+                    }
+                  },
+                  "required": [
+                    "last_column"
+                  ],
+                  "description": "use an inclusive range of scenes"
+                }
+              },
+              "required": [
+                "scene"
+              ]
+            },
+            "description": "specify a scene to use"
+          }
+        },
+        "required": [
+          "scene_file",
+          "scene"
+        ]
+      },
+      "description": "specify a scene file to use scenes from"
+    }
+  },
+  "required": [
+    "@type",
+    "scene_file_out",
+    "scene_file"
+  ]
+}

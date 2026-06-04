@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dAutoTcorrelate",
+  "description": "Computes the correlation coefficient between the time series of each pair of voxels in the input dataset",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dAutoTcorrelate"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Input Dataset"
+    },
+    "pearson": {
+      "type": "boolean",
+      "description": "Correlation is the normal Pearson (product moment) correlation coefficient [default]",
+      "title": "Pearson Correlation Flag",
+      "default": false
+    },
+    "eta2": {
+      "type": "boolean",
+      "description": "Output is eta^2 measure from Cohen et al., NeuroImage, 2008",
+      "title": "Eta^2 Measure Flag",
+      "default": false
+    },
+    "polort": {
+      "type": "integer",
+      "description": "Remove polynomial trend of order 'm', for m=-1..3.",
+      "title": "Polynomial Trend Removal Order"
+    },
+    "autoclip": {
+      "type": "boolean",
+      "description": "Clip off low-intensity regions in the dataset",
+      "title": "Autoclip Flag",
+      "default": false
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Apply automask to the dataset",
+      "title": "Automask Flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask of both 'source' and 'target' voxels",
+      "title": "Mask File"
+    },
+    "mask_only_targets": {
+      "type": "boolean",
+      "description": "Provide output for all voxels",
+      "title": "Mask Only Targets Flag",
+      "default": false
+    },
+    "mask_source": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Provide output for voxels only in specified mask",
+      "title": "Mask Source"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Save output into dataset with specified prefix",
+      "title": "Output Prefix"
+    },
+    "out1d": {
+      "type": "string",
+      "description": "Save output in a text file in 1D format",
+      "title": "Output 1D File"
+    },
+    "time": {
+      "type": "boolean",
+      "description": "Mark output as a 3D+time dataset",
+      "title": "Time Dataset Flag",
+      "default": false
+    },
+    "mmap": {
+      "type": "boolean",
+      "description": "Write .BRIK results to disk directly using Unix mmap()",
+      "title": "Mmap Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

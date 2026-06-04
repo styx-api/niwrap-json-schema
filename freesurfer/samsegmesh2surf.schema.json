@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "samsegmesh2surf",
+  "description": "Generate Freesurfer surface from a SAMSEG atlas mesh file and generate priors at each vertex as overlay MRI volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/samsegmesh2surf"
+    },
+    "atlas_mesh": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input SAMSEG atlas mesh collection file",
+      "title": "Atlas Mesh Collection"
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input atlas template volume",
+      "title": "Template Atlas Volume"
+    },
+    "lta_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input LTA transform to be applied to surface",
+      "title": "LTA Transform"
+    },
+    "output_surface": {
+      "type": "string",
+      "description": "Output FreeSurfer surface file",
+      "title": "Output Surface"
+    },
+    "output_priors": {
+      "type": "string",
+      "description": "Output priors as MRI volume",
+      "title": "Output Priors MRI"
+    },
+    "invert_flag": {
+      "type": "boolean",
+      "description": "Invert LTA transform",
+      "title": "Invert Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "atlas_mesh"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dXYZcat",
+  "description": "Catenates datasets spatially.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dXYZcat"
+    },
+    "direction": {
+      "type": "string",
+      "description": "Catenate along direction 'Q' (X, Y, Z, or their synonyms I, J, K).",
+      "title": "Direction"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use 'pname' for the output dataset prefix name.",
+      "title": "Output prefix"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print out some verbositiness as the program proceeds.",
+      "title": "Verbose",
+      "default": false
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input datasets to concatenate.",
+      "title": "Input datasets"
+    }
+  },
+  "required": [
+    "@type",
+    "datasets"
+  ]
+}

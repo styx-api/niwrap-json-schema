@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "extract_seg_waveform",
+  "description": "This program extracts an average waveform from an input volume where the average is computed over the voxels in the given segmentation indices. The input volume is mapped to the space of the segmentation given the registration, and if a voxel shift map (VSM) is supplied, it is applied simultaneously as part of the transform.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/extract_seg_waveform"
+    },
+    "seg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Segmentation file",
+      "title": "Segmentation File"
+    },
+    "seg_indices": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Segmentation indices, one or more indices can be specified",
+      "title": "Segmentation Indices"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume",
+      "title": "Input Volume"
+    },
+    "reg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Registration file (.lta)",
+      "title": "Registration File"
+    },
+    "vsm_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Voxel shift map for B0 distortion correction",
+      "title": "Voxel Shift Map"
+    },
+    "regheader_flag": {
+      "type": "boolean",
+      "description": "Uses the header information in the registration file",
+      "title": "Registration Header Flag",
+      "default": false
+    },
+    "demean_flag": {
+      "type": "boolean",
+      "description": "Remove mean, first, and second order trends",
+      "title": "Demean Flag",
+      "default": false
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output waveform file",
+      "title": "Output File"
+    }
+  },
+  "required": [
+    "@type",
+    "seg_file",
+    "seg_indices",
+    "input_volume",
+    "reg_file",
+    "output_file"
+  ]
+}

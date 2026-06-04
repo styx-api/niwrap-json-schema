@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfPatch",
+  "description": "Creates a patch of surface formed by nodes in a nodefile and optionally calculates the volume between the same patch on two isotopic surfaces.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SurfPatch"
+    },
+    "spec_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Spec file containing input surfaces",
+      "title": "Spec File"
+    },
+    "surf_A": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface A",
+      "title": "Input Surface A"
+    },
+    "surf_B": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface B",
+      "title": "Input Surface B"
+    },
+    "nodefile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing nodes defining the patch",
+      "title": "Node File"
+    },
+    "inode": {
+      "type": "number",
+      "description": "Index of the column containing the nodes",
+      "title": "Node Column Index"
+    },
+    "ilabel": {
+      "type": "number",
+      "description": "Index of the column containing labels of the nodes in column inode",
+      "title": "Label Column Index"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix of output patch",
+      "title": "Output Prefix"
+    },
+    "hits": {
+      "type": "number",
+      "description": "Minimum number of nodes specified for a triangle to be made a part of the patch (1 <= min_hits <= 3); default is 2",
+      "title": "Minimum Hits"
+    },
+    "masklabel": {
+      "type": "string",
+      "description": "Only nodes that are labeled with this label are considered for the patch",
+      "title": "Mask Label"
+    },
+    "vol": {
+      "type": "boolean",
+      "description": "Calculate the volume formed by the patch on surf_A and surf_B. Requires only two surfaces specified with surf_A and surf_B.",
+      "title": "Calculate Volume",
+      "default": false
+    },
+    "vol_only": {
+      "type": "boolean",
+      "description": "Only calculate the volume, don't write out patches.",
+      "title": "Volume Only",
+      "default": false
+    },
+    "patch2surf": {
+      "type": "boolean",
+      "description": "Turn surface patch into a surface where only nodes used in forming the mesh are preserved.",
+      "title": "Patch to Surface",
+      "default": false
+    },
+    "coord_gain": {
+      "type": "number",
+      "description": "Multiply node coordinates by a gain. Useful for enlarging tiny patches for easier viewing in SUMA.",
+      "title": "Coordinate Gain"
+    },
+    "check_bowtie": {
+      "type": "boolean",
+      "description": "Check if the patch has a section hanging by one node to the rest of the mesh. Default when -vol or -vol_only are used.",
+      "title": "Check Bowtie",
+      "default": false
+    },
+    "fix_bowtie": {
+      "type": "boolean",
+      "description": "Modify patch to eliminate bowties.",
+      "title": "Fix Bowtie",
+      "default": false
+    },
+    "ok_bowtie": {
+      "type": "boolean",
+      "description": "Do not check for, or fix bowties. Default when -vol* are not used.",
+      "title": "OK Bowtie",
+      "default": false
+    },
+    "adjust_contour": {
+      "type": "boolean",
+      "description": "Shrink patch contours at nodes that were not in nodefile.",
+      "title": "Adjust Contour",
+      "default": false
+    },
+    "do_not_adjust_contour": {
+      "type": "boolean",
+      "description": "Do not adjust contours. This is the default.",
+      "title": "Do Not Adjust Contour",
+      "default": false
+    },
+    "stitched_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Write out the stitched surface used to calculate the volume.",
+      "title": "Stitched Surface"
+    },
+    "flip_orientation": {
+      "type": "boolean",
+      "description": "Change orientation of triangles before writing surfaces.",
+      "title": "Flip Orientation",
+      "default": false
+    },
+    "verbosity": {
+      "type": "number",
+      "description": "Set verbosity level, 1 is the default.",
+      "title": "Verbosity Level"
+    }
+  },
+  "required": [
+    "@type",
+    "spec_file",
+    "surf_A",
+    "surf_B",
+    "nodefile",
+    "inode",
+    "ilabel",
+    "prefix"
+  ]
+}

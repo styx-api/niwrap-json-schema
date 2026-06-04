@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "run_samseg",
+  "description": "SAMSEG (Sequence Adaptive Multimodal SEGmentation) is a tool for automated segmentation of brain MRI data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/run_samseg"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Target directory for output.",
+      "title": "Output Directory"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input image(s) for segmentation.",
+      "title": "Input Image Files"
+    },
+    "input_mode": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Output basenames for the input image mode.",
+      "title": "Input Image Mode"
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads to use.",
+      "title": "Number of Threads"
+    },
+    "reg_only": {
+      "type": "boolean",
+      "description": "Only perform initial affine registration.",
+      "title": "Registration Only",
+      "default": false
+    },
+    "reg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Skip initial affine registration and read transform from file.",
+      "title": "Registration File"
+    },
+    "init_reg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Initial affine registration.",
+      "title": "Initial Registration File"
+    },
+    "atlas_dir": {
+      "type": "string",
+      "description": "Point to an alternative atlas directory.",
+      "title": "Atlas Directory"
+    },
+    "gmm_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Point to an alternative GMM file.",
+      "title": "GMM File"
+    },
+    "ignore_unknown": {
+      "type": "boolean",
+      "description": "Ignore final priors corresponding to unknown class.",
+      "title": "Ignore Unknown",
+      "default": false
+    },
+    "options_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Override advanced options via a JSON file.",
+      "title": "Options File"
+    },
+    "pallidum_separate": {
+      "type": "boolean",
+      "description": "Move pallidum outside of global white matter class.",
+      "title": "Pallidum Separate",
+      "default": false
+    },
+    "mesh_stiffness": {
+      "type": "number",
+      "description": "Override mesh stiffness.",
+      "title": "Mesh Stiffness"
+    },
+    "smooth_wm_cortex_priors": {
+      "type": "number",
+      "description": "Sigma value to smooth the WM and cortex atlas priors.",
+      "title": "Smooth WM Cortex Priors"
+    },
+    "bias_field_smoothing_kernel": {
+      "type": "number",
+      "description": "Distance in mm of sinc function center to first zero crossing.",
+      "title": "Bias Field Smoothing Kernel"
+    },
+    "lesion": {
+      "type": "boolean",
+      "description": "Enable lesion segmentation (requires tensorflow).",
+      "title": "Enable Lesion Segmentation",
+      "default": false
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Lesion threshold for final segmentation.",
+      "title": "Lesion Threshold"
+    },
+    "samples": {
+      "type": "number",
+      "description": "Number of samples for lesion segmentation.",
+      "title": "Number of Samples"
+    },
+    "burnin": {
+      "type": "number",
+      "description": "Number of burn-in samples for lesion segmentation.",
+      "title": "Burn-in Samples"
+    },
+    "lesion_pseudo_samples": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Lesion pseudo samples mean and variance.",
+      "title": "Lesion Pseudo Samples"
+    },
+    "lesion_rho": {
+      "type": "number",
+      "description": "Lesion ratio.",
+      "title": "Lesion Ratio"
+    },
+    "lesion_mask_structure": {
+      "type": "string",
+      "description": "Intensity mask brain structure.",
+      "title": "Lesion Mask Structure"
+    },
+    "lesion_mask_pattern": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Lesion mask pattern for each input volume.",
+      "title": "Lesion Mask Pattern"
+    },
+    "random_seed": {
+      "type": "number",
+      "description": "Random seed.",
+      "title": "Random Seed"
+    },
+    "dissection_photo": {
+      "type": "string",
+      "description": "Specify hemispheres: left, right, or both.",
+      "title": "Dissection Photo"
+    },
+    "history": {
+      "type": "boolean",
+      "description": "Save history of segmentation.",
+      "title": "Save History",
+      "default": false
+    },
+    "save_posteriors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Save posterior volumes.",
+      "title": "Save Posteriors"
+    },
+    "save_probabilities": {
+      "type": "boolean",
+      "description": "Save modal class probabilities.",
+      "title": "Save Probabilities",
+      "default": false
+    },
+    "showfigs": {
+      "type": "boolean",
+      "description": "Show figures during run.",
+      "title": "Show Figures",
+      "default": false
+    },
+    "save_mesh": {
+      "type": "boolean",
+      "description": "Save final mesh in template space.",
+      "title": "Save Mesh",
+      "default": false
+    },
+    "save_warp": {
+      "type": "boolean",
+      "description": "Save image->template warp field.",
+      "title": "Save Warp",
+      "default": false
+    },
+    "movie": {
+      "type": "boolean",
+      "description": "Show history as controlled time sequence.",
+      "title": "Movie Mode",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "output_dir",
+    "input_files"
+  ]
+}

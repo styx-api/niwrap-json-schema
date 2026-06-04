@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@measure_erosion_thick",
+  "description": "Compute thickness of mask using erosion method.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@measure_erosion_thick"
+    },
+    "maskset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask dataset for input.",
+      "title": "Maskset"
+    },
+    "surfset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface dataset onto which to map thickness (probably a pial/gray matter surface).",
+      "title": "Surfset"
+    },
+    "outdir": {
+      "type": "string",
+      "description": "Output directory. If not specified, erosion_thickdir is used.",
+      "title": "Output Directory"
+    },
+    "resample": {
+      "type": "string",
+      "description": "Resample input to mm in millimeters (put a number here). Recommended for most 1mm data.",
+      "title": "Resample"
+    },
+    "surfsmooth": {
+      "type": "number",
+      "description": "Smooth surface map of thickness by mm millimeters. Default is 8 mm.",
+      "title": "Surface Smooth"
+    },
+    "smoothmm": {
+      "type": "number",
+      "description": "Smooth volume by mm FWHM in mask. Default is 2*voxelsize of mask or resampled mask.",
+      "title": "Volume Smooth"
+    },
+    "maxthick": {
+      "type": "number",
+      "description": "Search for maximum thickness value of mm millimeters. Default is 6 mm.",
+      "title": "Maximum Thickness"
+    },
+    "depthsearch": {
+      "type": "number",
+      "description": "Map to surface by looking for max along mm millimeter normal vectors. Default is 3 mm.",
+      "title": "Depth Search"
+    },
+    "keep_temp_files": {
+      "type": "boolean",
+      "description": "Do not delete the intermediate files (for testing).",
+      "title": "Keep Temporary Files",
+      "default": false
+    },
+    "surfsmooth_method": {
+      "type": "string",
+      "description": "Heat method used for smoothing surfaces. Default is HEAT_07 but HEAT_05 is also useful for models.",
+      "title": "Surface Smooth Method"
+    }
+  },
+  "required": [
+    "@type",
+    "maskset",
+    "surfset"
+  ]
+}

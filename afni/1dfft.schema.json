@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dfft",
+  "description": "Compute the absolute value of the FFT of input columns from an AFNI 1D file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dfft"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input .1D file containing an ASCII list of numbers arranged in columns.",
+      "title": "Input file"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Output file to store the FFT results.",
+      "title": "Output file"
+    },
+    "ignore": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Skip the first 'sss' lines in the input file. [default = no skipping]",
+      "title": "Ignore lines"
+    },
+    "use": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Use only 'uuu' lines of the input file. [default = use them all]",
+      "title": "Use lines"
+    },
+    "nfft": {
+      "type": "number",
+      "minimum": 1,
+      "description": "Set FFT length to 'nnn'. [default = length of data (# of lines used)]",
+      "title": "FFT length"
+    },
+    "tocx": {
+      "type": "boolean",
+      "description": "Save Re and Im parts of transform in 2 columns.",
+      "title": "Save Re and Im parts flag",
+      "default": false
+    },
+    "fromcx": {
+      "type": "boolean",
+      "description": "Convert 2 column complex input into 1 column real output. Note: This will not work if the original data FFT length was an odd number.",
+      "title": "Convert complex to real flag",
+      "default": false
+    },
+    "hilbert": {
+      "type": "boolean",
+      "description": "When -fromcx is used, the inverse FFT will do the Hilbert transform instead.",
+      "title": "Hilbert transform flag",
+      "default": false
+    },
+    "nodetrend": {
+      "type": "boolean",
+      "description": "Skip the detrending of the input.",
+      "title": "No detrend flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "infile",
+    "outfile"
+  ]
+}

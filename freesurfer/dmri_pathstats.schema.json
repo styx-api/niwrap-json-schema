@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dmri_pathstats",
+  "description": "Compute path statistics for diffusion MRI data based on input .trk file and optional various measures.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dmri_pathstats"
+    },
+    "intrk": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input .trk file",
+      "title": "Input TRK file"
+    },
+    "rois": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input labeling ROIs for .trk file (optional)",
+      "title": "ROIs file"
+    },
+    "intrc": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input tracula directory",
+      "title": "Input tracula directory"
+    },
+    "meas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input microstructural measure volume(s) (optional)",
+      "title": "Microstructural measure volumes"
+    },
+    "measname": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Name(s) of microstructural measure(s) (as many as volumes)",
+      "title": "Measure names"
+    },
+    "dtbase": {
+      "type": "string",
+      "description": "Base name of input dtifit volumes (optional)",
+      "title": "DTI base name"
+    },
+    "path": {
+      "type": "string",
+      "description": "Name of pathway (optional, written to output files)",
+      "title": "Pathway name"
+    },
+    "subj": {
+      "type": "string",
+      "description": "Name of subject (optional, written to output files)",
+      "title": "Subject name"
+    },
+    "out": {
+      "type": "string",
+      "description": "Output text file for overall path measures",
+      "title": "Overall path measures file"
+    },
+    "outvox": {
+      "type": "string",
+      "description": "Output text file for voxel-by-voxel measures along path (optional)",
+      "title": "Voxel-by-voxel measures file"
+    },
+    "median": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output .trk file of median streamline (optional)",
+      "title": "Median streamline file"
+    },
+    "ends": {
+      "type": "string",
+      "description": "Base name of output volumes of streamline ends (optional)",
+      "title": "Ends base name"
+    },
+    "ref": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference volume (needed only if using --ends without --dtbase)",
+      "title": "Reference volume"
+    },
+    "pthr": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Lower threshold on path posterior distribution, as a portion of the maximum (range: 0-1, default: 0.2)",
+      "title": "Path posterior threshold"
+    },
+    "fthr": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Lower threshold on FA (range: 0-1, default: no threshold)",
+      "title": "FA threshold"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug",
+      "default": false
+    },
+    "checkopts": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit",
+      "title": "Check options flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print out information on how to use this program",
+      "title": "Help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print out version and exit",
+      "title": "Version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "intrk",
+    "intrc"
+  ]
+}

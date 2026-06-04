@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mksurfatlas",
+  "description": "Creates an atlas using mris_make_template. The atlas can then be used to create the surface registration for each subject based on this atlas.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mksurfatlas"
+    },
+    "atlas": {
+      "type": "string",
+      "description": "Save results to this file (tif file).",
+      "title": "Atlas file"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere to process.",
+      "title": "Hemisphere"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Subject(s) to process. Multiple subjects can be specified by repeating the flag.",
+      "title": "Subjects"
+    },
+    "surfval": {
+      "type": "string",
+      "description": "Surface values file. Looks for subject/surfvaldir/hemi.surfval.",
+      "title": "Surface values file"
+    },
+    "surfvaldir": {
+      "type": "string",
+      "description": "Directory for surface values; default is 'label'.",
+      "title": "Surface values directory"
+    },
+    "regsurf": {
+      "type": "string",
+      "description": "Registration surface; default is 'sphere'.",
+      "title": "Registration surface"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging.",
+      "title": "Debug flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version and exit.",
+      "title": "Version flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print help and exit.",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "atlas",
+    "hemi",
+    "subjects",
+    "surfval"
+  ]
+}

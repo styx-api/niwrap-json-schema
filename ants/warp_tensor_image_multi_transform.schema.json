@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WarpTensorImageMultiTransform",
+  "description": "WarpTensorImageMultiTransform is used to apply transformations including affine and deformation fields to an image, supporting various interpolation techniques, image header reslicing, and compatibility with ANTS-generated transformations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/WarpTensorImageMultiTransform"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "description": "Dimensionality of the image (e.g., 2D or 3D).",
+      "title": "Image Dimension"
+    },
+    "moving_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The moving image that will be transformed.",
+      "title": "Moving Image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Path for saving the transformed output image.",
+      "title": "Output Image"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference image for reslicing or defining the transformation domain.",
+      "title": "Reference Image"
+    },
+    "tightest_bounding_box": {
+      "type": "boolean",
+      "description": "Compute the tightest bounding box using all affine transformations.",
+      "title": "Tightest Bounding Box",
+      "default": false
+    },
+    "reslice_by_header": {
+      "type": "boolean",
+      "description": "Use the orientation matrix and origin encoded in the image file header for reslicing.",
+      "title": "Reslice by Header",
+      "default": false
+    },
+    "use_nearest_neighbor": {
+      "type": "boolean",
+      "description": "Use Nearest Neighbor Interpolator for the transformation.",
+      "title": "Use Nearest Neighbor Interpolation",
+      "default": false
+    },
+    "transforms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of transformations to apply, which can include deformation fields or affine transforms.",
+      "title": "Transforms"
+    },
+    "ants_prefix": {
+      "type": "string",
+      "description": "Prefix for ANTS-generated deformation and affine transformation files.",
+      "title": "ANTS Prefix"
+    },
+    "ants_prefix_invert": {
+      "type": "string",
+      "description": "Prefix for inverting ANTS-generated affine and deformation transformations.",
+      "title": "ANTS Prefix Invert"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "moving_image",
+    "output_image",
+    "transforms"
+  ]
+}

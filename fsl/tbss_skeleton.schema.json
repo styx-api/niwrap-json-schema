@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tbss_skeleton",
+  "description": "A tool for defining a 'skeleton' of white matter tracts in the brain to help compare them across subjects.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/tbss_skeleton"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image",
+      "title": "Input Image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Output skeleton image",
+      "title": "Output Image"
+    },
+    "skeleton_params": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Skeletonization parameters: <skel_thresh> <distancemap> <search_rule_mask> <4Ddata> <projected_4Ddata>",
+      "title": "Skeleton Parameters"
+    },
+    "alt_4d": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alternative 4D data (e.g., L1)",
+      "title": "Alternative 4D Data"
+    },
+    "alt_skeleton": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alternative skeleton",
+      "title": "Alternative Skeleton"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Switch on debugging image outputs",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "debug2_flag": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "De-project skelpoints points on skeleton back to all_FA space",
+      "title": "Debug2 Points File"
+    }
+  },
+  "required": [
+    "@type",
+    "input_image"
+  ]
+}

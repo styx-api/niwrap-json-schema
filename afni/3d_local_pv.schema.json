@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLocalPV",
+  "description": "Computes the Singular Value Decomposition (SVD) of the time series from a neighborhood of each voxel in a 3D+time dataset, which serves as a smoothing method for the dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLocalPV"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input time series dataset",
+      "title": "Input Dataset"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Restrict operations to this mask",
+      "title": "Mask Dataset"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Create a mask from the time series dataset",
+      "title": "Automask flag",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Save SVD vector result into this new dataset [default = 'LocalPV']",
+      "title": "Prefix for SVD result"
+    },
+    "prefix2": {
+      "type": "string",
+      "description": "Save second principal vector into this new dataset [default = don't save it]",
+      "title": "Prefix for second principal vector"
+    },
+    "evprefix": {
+      "type": "string",
+      "description": "Save singular value at each voxel into this dataset [default = don't save]",
+      "title": "Prefix for singular value"
+    },
+    "neighborhood": {
+      "type": "string",
+      "description": "Neighborhood definition (e.g., 'SPHERE(5)', 'TOHD(7)', etc.)",
+      "title": "Neighborhood"
+    },
+    "despike": {
+      "type": "boolean",
+      "description": "Remove time series spikes from input dataset",
+      "title": "Despike flag",
+      "default": false
+    },
+    "polort": {
+      "type": "number",
+      "description": "Detrending",
+      "title": "Polort"
+    },
+    "vnorm": {
+      "type": "boolean",
+      "description": "Normalize data vectors [strongly recommended]",
+      "title": "Vnorm flag",
+      "default": false
+    },
+    "vproj": {
+      "type": "string",
+      "description": "Project central data time series onto local SVD vector; if followed by '2', then the central data time series will be projected on the 2-dimensional subspace spanned by the first 2 principal SVD vectors. [default: just output principal singular vector]",
+      "title": "Vproj"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

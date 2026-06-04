@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "predict_v1.sh",
+  "description": "A script for predicting brain images using registration",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/predict_v1.sh"
+    },
+    "template": {
+      "type": "string",
+      "description": "Target image for registration (exvivo or invivo [default])",
+      "title": "Registration Template"
+    },
+    "inflated_surface_flag": {
+      "type": "boolean",
+      "description": "Don't use inflated surface as initial registration (backward compatibility)",
+      "title": "Inflated Surface Flag",
+      "default": false
+    },
+    "hemisphere": {
+      "type": "string",
+      "description": "Hemisphere (rh or lh) default is both hemispheres",
+      "title": "Hemisphere"
+    },
+    "print_mode_flag": {
+      "type": "boolean",
+      "description": "Print mode (do not run commands, just print them)",
+      "title": "Print Mode Flag",
+      "default": false
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Subjects for prediction",
+      "title": "Subjects"
+    },
+    "usage_flag": {
+      "type": "boolean",
+      "description": "Print usage",
+      "title": "Usage Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subjects"
+  ]
+}

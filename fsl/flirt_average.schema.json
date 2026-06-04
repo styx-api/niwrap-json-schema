@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "flirt_average",
+  "description": "Averages multiple input images after linear registration (FLIRT).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/flirt_average"
+    },
+    "ninputs": {
+      "type": "integer",
+      "minimum": 2,
+      "description": "Number of input images",
+      "title": "Number of inputs"
+    },
+    "input1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First input image (e.g. rawT1_1.nii.gz)",
+      "title": "Input file 1"
+    },
+    "input2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second input image (e.g. rawT1_2.nii.gz)",
+      "title": "Input file 2"
+    },
+    "input3": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Third input image (e.g. rawT1_3.nii.gz)",
+      "title": "Input file 3"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output image (e.g. averageT1.nii.gz)",
+      "title": "Output file"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference image to use instead of first input",
+      "title": "Reference image"
+    },
+    "flirt_options": {
+      "type": "string",
+      "description": "Options to be passed to FLIRT",
+      "title": "FLIRT options"
+    }
+  },
+  "required": [
+    "@type",
+    "ninputs",
+    "input1",
+    "input2",
+    "output_file"
+  ]
+}

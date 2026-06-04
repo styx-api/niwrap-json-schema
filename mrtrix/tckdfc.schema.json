@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tckdfc",
+  "description": "Perform the Track-Weighted Dynamic Functional Connectivity (TW-dFC) method.\n\nThis command generates a Track-Weighted Image (TWI), where the contribution from each streamline to the image is the Pearson correlation between the fMRI time series at the streamline endpoints.\n\nThe output image can be generated in one of two ways (note that one of these two command-line options MUST be provided): \n\n- \"Static\" functional connectivity (-static option): Each streamline contributes to a static 3D output image based on the correlation between the signals at the streamline endpoints using the entirety of the input time series.\n\n- \"Dynamic\" functional connectivity (-dynamic option): The output image is a 4D image, with the same number of volumes as the input fMRI time series. For each volume, the contribution from each streamline is calculated based on a finite-width sliding time window, centred at the timepoint corresponding to that volume.\n\nNote that the -backtrack option in this command is similar, but not precisely equivalent, to back-tracking as can be used with Anatomically-Constrained Tractography (ACT) in the tckgen command. However, here the feature does not change the streamlines trajectories in any way; it simply enables detection of the fact that the input fMRI image may not contain a valid timeseries underneath the streamline endpoint, and where this occurs, searches from the streamline endpoint inwards along the streamline trajectory in search of a valid timeseries to sample from the input image.\n\nReferences:\n\nCalamante, F.; Smith, R.E.; Liang, X.; Zalesky, A.; Connelly, A Track-weighted dynamic functional connectivity (TW-dFC): a new method to study time-resolved functional connectivity. Brain Struct Funct, 2017, doi: 10.1007/s00429-017-1431-1",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/tckdfc"
+    },
+    "static": {
+      "type": "boolean",
+      "description": "generate a \"static\" (3D) output image.",
+      "title": "static",
+      "default": false
+    },
+    "dynamic": {
+      "type": "object",
+      "properties": {
+        "shape": {
+          "type": "string",
+          "description": "generate a \"dynamic\" (4D) output image; must additionally provide the shape and width (in volumes) of the sliding window.",
+          "title": "shape"
+        },
+        "width": {
+          "type": "integer",
+          "description": "generate a \"dynamic\" (4D) output image; must additionally provide the shape and width (in volumes) of the sliding window.",
+          "title": "width"
+        }
+      },
+      "required": [
+        "shape",
+        "width"
+      ],
+      "description": "generate a \"dynamic\" (4D) output image; must additionally provide the shape and width (in volumes) of the sliding window.",
+      "title": "dynamic"
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "an image file to be used as a template for the output (the output image will have the same transform and field of view).",
+      "title": "template"
+    },
+    "vox": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "provide either an isotropic voxel size (in mm), or comma-separated list of 3 voxel dimensions.",
+      "title": "vox"
+    },
+    "stat_vox": {
+      "type": "string",
+      "description": "define the statistic for choosing the final voxel intensities for a given contrast type given the individual values from the tracks passing through each voxel\nOptions are: sum, min, mean, max (default: mean)",
+      "title": "stat_vox"
+    },
+    "backtrack": {
+      "type": "boolean",
+      "description": "if no valid timeseries is found at the streamline endpoint, back-track along the streamline trajectory until a valid timeseries is found",
+      "title": "backtrack",
+      "default": false
+    },
+    "upsample": {
+      "type": "integer",
+      "description": "upsample the tracks by some ratio using Hermite interpolation before mapping (if omitted, an appropriate ratio will be determined automatically)",
+      "title": "upsample"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "tracks": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input track file.",
+      "title": "tracks"
+    },
+    "fmri": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the pre-processed fMRI time series",
+      "title": "fmri"
+    },
+    "output": {
+      "type": "string",
+      "description": "the output TW-dFC image",
+      "title": "output"
+    }
+  },
+  "required": [
+    "@type",
+    "tracks",
+    "fmri",
+    "output"
+  ]
+}

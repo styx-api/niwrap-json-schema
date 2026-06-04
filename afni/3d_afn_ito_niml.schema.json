@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dAFNItoNIML",
+  "description": "Dumps AFNI dataset header information to stdout in NIML format. Mostly for debugging and testing purposes!",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dAFNItoNIML"
+    },
+    "dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "AFNI dataset",
+      "title": "Dataset"
+    },
+    "data": {
+      "type": "boolean",
+      "description": "Also put the data into the output (will be huge).",
+      "title": "Data flag",
+      "default": false
+    },
+    "ascii": {
+      "type": "boolean",
+      "description": "Format in ASCII, not binary (even huger).",
+      "title": "ASCII flag",
+      "default": false
+    },
+    "tcp": {
+      "type": "string",
+      "description": "Instead of stdout, send the dataset to a socket. Implies '-data' as well.",
+      "title": "TCP host:port"
+    }
+  },
+  "required": [
+    "@type",
+    "dset"
+  ]
+}

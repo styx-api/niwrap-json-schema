@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_surf2volseg",
+  "description": "Tool that cleans up presurf aseg cortex and WM, maps cortical labels from an annotation into a volume, and labels cerebral WM with closest cortical label.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_surf2volseg"
+    },
+    "input_segmentation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Full path of input segmentation.",
+      "title": "Input segmentation file"
+    },
+    "output_segmentation": {
+      "type": "string",
+      "description": "Output segmentation file.",
+      "title": "Output segmentation file"
+    },
+    "source_segmentation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Source subcortical volume segmentation file (instead of using subcortical segs in input segmentation).",
+      "title": "Source segmentation file"
+    },
+    "lh_white_surf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "White surface for left hemisphere.",
+      "title": "Left hemisphere white surface"
+    },
+    "lh_pial_surf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Pial surface for left hemisphere.",
+      "title": "Left hemisphere pial surface"
+    },
+    "rh_white_surf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "White surface for right hemisphere.",
+      "title": "Right hemisphere white surface"
+    },
+    "rh_pial_surf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Pial surface for right hemisphere.",
+      "title": "Right hemisphere pial surface"
+    },
+    "lh_cortex_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask for left hemisphere cortex (usually lh.cortex.label).",
+      "title": "Left hemisphere cortex mask"
+    },
+    "rh_cortex_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask for right hemisphere cortex (usually rh.cortex.label).",
+      "title": "Right hemisphere cortex mask"
+    },
+    "fix_presurf_ribbon": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Fix the cortical and WM labels in the input segmentation using ribbon file.",
+      "title": "Fix cortical and WM labels with ribbon"
+    },
+    "label_cortex": {
+      "type": "boolean",
+      "description": "Relabel cortex in the input segmentation with surface annotation.",
+      "title": "Label cortex flag",
+      "default": false
+    },
+    "label_wm": {
+      "type": "boolean",
+      "description": "Relabel cerebral WM in the input segmentation with surface annotation.",
+      "title": "Label WM flag",
+      "default": false
+    },
+    "label_wm_unknown": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Relabel unknown WM as lhval and rhval (default is 5001 and 5002).",
+      "title": "Label unknown WM values"
+    },
+    "lh_annotation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Left hemisphere annotation for --label-cortex and --label-wm.",
+      "title": "Left hemisphere annotation file"
+    },
+    "rh_annotation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Right hemisphere annotation for --label-cortex and --label-wm.",
+      "title": "Right hemisphere annotation file"
+    },
+    "wmparc_dmax": {
+      "type": "number",
+      "description": "Max distance (mm) from cortex to be labeled as gyral WM.",
+      "title": "WMPARC max distance"
+    },
+    "rip_unknown": {
+      "type": "boolean",
+      "description": "Do not label WM based on 'unknown' cortical label.",
+      "title": "Rip unknown WM flag",
+      "default": false
+    },
+    "hypo_as_wm": {
+      "type": "boolean",
+      "description": "Label hypointensities as WM (when fixing with ribbon).",
+      "title": "Hypointensities as WM flag",
+      "default": false
+    },
+    "hashres": {
+      "type": "number",
+      "description": "Surface hash table resolution.",
+      "title": "Hash table resolution"
+    },
+    "nhops": {
+      "type": "number",
+      "description": "Number of surface hops when searching for a nearby annotation.",
+      "title": "Number of hops"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Print out information on how to use this program.",
+      "title": "Help flag",
+      "default": false
+    },
+    "version_flag": {
+      "type": "boolean",
+      "description": "Print out version and exit.",
+      "title": "Version flag",
+      "default": false
+    },
+    "crs_test": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Test labeling of only the voxel given by column, row, slice (debugging).",
+      "title": "CRS test coordinates"
+    },
+    "ctab_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Embed color table in the output.",
+      "title": "Color table file"
+    },
+    "threads_number": {
+      "type": "number",
+      "description": "Run in parallel with the specified number of threads.",
+      "title": "Number of threads"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

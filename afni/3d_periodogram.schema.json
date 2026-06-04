@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dPeriodogram",
+  "description": "Computes the periodogram of each voxel time series. The periodogram is a crude estimate of the power spectrum.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dPeriodogram"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output dataset",
+      "title": "Output prefix"
+    },
+    "taper": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Fraction of data to taper",
+      "title": "Taper fraction"
+    },
+    "nfft": {
+      "type": "number",
+      "description": "Set FFT length to a specific number of points",
+      "title": "FFT length"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset"
+  ]
+}

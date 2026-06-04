@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "whirlgif",
+  "description": "GIF animation tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/whirlgif"
+    },
+    "outfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the output file",
+      "title": "Output file"
+    },
+    "loop_count": {
+      "type": "integer",
+      "description": "Specify the loop count for the animation",
+      "title": "Loop count"
+    },
+    "delay_time": {
+      "type": "integer",
+      "description": "Specify the delay time between frames",
+      "title": "Delay time"
+    },
+    "disp_flag": {
+      "enum": [
+        "none",
+        "back",
+        "prev",
+        "not"
+      ],
+      "description": "Specify the disposal method for frames",
+      "title": "Disposal method"
+    },
+    "list_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input list file containing names of images to be used for animation",
+      "title": "List file"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input image files for the animation",
+      "title": "Input files"
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

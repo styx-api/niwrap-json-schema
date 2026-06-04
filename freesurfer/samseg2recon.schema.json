@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "samseg2recon",
+  "description": "Creates and populates a subjects directory for use with recon-all from SAMSEG outputs.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/samseg2recon"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject identifier",
+      "title": "Subject"
+    },
+    "samseg_dir": {
+      "type": "string",
+      "description": "Output directory from samseg or samseg-long. Defaults to subject/mri/samseg if not supplied",
+      "title": "Samseg Directory"
+    },
+    "no_cc": {
+      "type": "boolean",
+      "description": "Do not do corpus callosum segmentation",
+      "title": "No Corpus Callosum Segmentation",
+      "default": false
+    },
+    "fill": {
+      "type": "boolean",
+      "description": "Use samseg to create the filled.mgz used for tessellation",
+      "title": "Use Samseg Fill",
+      "default": false
+    },
+    "normalization2": {
+      "type": "boolean",
+      "description": "Seg brain.mgz to norm.mgz",
+      "title": "Normalization to Norm",
+      "default": false
+    },
+    "uchar": {
+      "type": "boolean",
+      "description": "Convert to uchar",
+      "title": "Convert to Uchar",
+      "default": false
+    },
+    "no_keep_exc": {
+      "type": "boolean",
+      "description": "Do not keep extracerebral segmentations",
+      "title": "No Extracerebral Kept",
+      "default": false
+    },
+    "long_tp": {
+      "type": "number",
+      "description": "Process specific time point (TP) number from samsegdir",
+      "title": "Longitudinal Time Point"
+    },
+    "base": {
+      "type": "boolean",
+      "description": "Process base, will find folder called base in samsegdir",
+      "title": "Process Base",
+      "default": false
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use provided mask as brainmask instead of computing from seg",
+      "title": "Brain Mask File"
+    },
+    "from_recon_all": {
+      "type": "boolean",
+      "description": "Indicates execution from recon-all, preventing overwrite of rawavg.mgz and orig.mgz",
+      "title": "Execution from Recon-all",
+      "default": false
+    },
+    "force_update": {
+      "type": "boolean",
+      "description": "Force update of the subject directory",
+      "title": "Force Update",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject"
+  ]
+}

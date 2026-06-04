@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dSurf2Vol",
+  "description": "Map data from a surface domain to an AFNI volume domain",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dSurf2Vol"
+    },
+    "spec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "SUMA spec file",
+      "title": "Spec file"
+    },
+    "surface_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "AFNI surface volume dataset",
+      "title": "Surface volume"
+    },
+    "surf_a": {
+      "type": "string",
+      "description": "Specify surface A from spec file",
+      "title": "Surface A"
+    },
+    "surf_b": {
+      "type": "string",
+      "description": "Specify surface B from spec file",
+      "title": "Surface B"
+    },
+    "grid_parent": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "AFNI grid parent dataset",
+      "title": "Grid parent"
+    },
+    "map_func": {
+      "type": "string",
+      "description": "Surface to dataset function",
+      "title": "Map function"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output dataset",
+      "title": "Output prefix"
+    },
+    "surf_xyz_1d": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "1D coordinate file",
+      "title": "Surface XYZ 1D"
+    },
+    "sdata_1d": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "1D sub-surface data file",
+      "title": "Surface data 1D"
+    },
+    "sdata": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "NIML or GIFTI formatted dataset",
+      "title": "Surface data"
+    },
+    "f_steps": {
+      "type": "number",
+      "description": "Partition segments into this many steps",
+      "title": "Filter steps"
+    },
+    "f_index": {
+      "type": "string",
+      "description": "Index by points or voxels",
+      "title": "Filter index type"
+    },
+    "f_p1_fr": {
+      "type": "number",
+      "description": "Offset p1 by a fraction of the length",
+      "title": "Filter p1 fraction"
+    },
+    "f_pn_fr": {
+      "type": "number",
+      "description": "Offset pn by a fraction of the length",
+      "title": "Filter pn fraction"
+    },
+    "f_p1_mm": {
+      "type": "number",
+      "description": "Offset p1 by a distance in mm",
+      "title": "Filter p1 millimeter"
+    },
+    "f_pn_mm": {
+      "type": "number",
+      "description": "Offset pn by a distance in mm",
+      "title": "Filter pn millimeter"
+    },
+    "stop_gap": {
+      "type": "boolean",
+      "description": "Stop when a zero gap has been hit",
+      "title": "Stop gap flag",
+      "default": false
+    },
+    "cmask": {
+      "type": "string",
+      "description": "Command for dataset mask",
+      "title": "Dataset mask"
+    },
+    "data_expr": {
+      "type": "string",
+      "description": "Apply expression to surface input",
+      "title": "Data expression"
+    },
+    "datum": {
+      "type": "string",
+      "description": "Set data type in output dataset",
+      "title": "Data type"
+    },
+    "debug": {
+      "type": "integer",
+      "description": "Verbose output level",
+      "title": "Debug level"
+    },
+    "dnode": {
+      "type": "integer",
+      "description": "Extra output for specified node",
+      "title": "Debug node"
+    },
+    "dvoxel": {
+      "type": "integer",
+      "description": "Extra output for specified voxel",
+      "title": "Debug voxel"
+    },
+    "noscale": {
+      "type": "boolean",
+      "description": "No scale factor in output dataset",
+      "title": "No Scale Flag",
+      "default": false
+    },
+    "sxyz_orient_as_gpar": {
+      "type": "boolean",
+      "description": "Assume grid parent orientation for surface xyz",
+      "title": "Surface XYZ orientation flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "spec",
+    "surface_volume",
+    "surf_a",
+    "grid_parent",
+    "map_func",
+    "prefix"
+  ]
+}

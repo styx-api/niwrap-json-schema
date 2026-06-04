@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "make_random_timing.py",
+  "description": "Create random stimulus timing files for use with AFNI 3dDeconvolve.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/make_random_timing.py"
+    },
+    "num_runs": {
+      "type": "number",
+      "minimum": 1,
+      "description": "Set the number of runs.",
+      "title": "Number of Runs"
+    },
+    "run_time": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 1,
+      "description": "Set the total time per run (in seconds).",
+      "title": "Run Time (seconds)"
+    },
+    "num_stim": {
+      "type": "number",
+      "minimum": 1,
+      "description": "Set the number of stimulus classes.",
+      "title": "Number of Stimulus Classes"
+    },
+    "num_reps": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 1,
+      "description": "Set the number of repetitions per class (or across runs).",
+      "title": "Number of Repetitions"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Set the prefix for output filenames.",
+      "title": "Output Filename Prefix"
+    },
+    "stim_dur": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set the duration for a single stimulus (in seconds).",
+      "title": "Stimulus Duration"
+    },
+    "across_runs": {
+      "type": "boolean",
+      "description": "Distribute stimuli across all runs at once.",
+      "title": "Distribute Stimuli Across Runs",
+      "default": false
+    },
+    "max_consec": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify maximum consecutive stimuli per class.",
+      "title": "Maximum Consecutive Stimuli"
+    },
+    "max_rest": {
+      "type": "number",
+      "description": "Specify maximum rest between stimuli.",
+      "title": "Maximum Rest"
+    },
+    "min_rest": {
+      "type": "number",
+      "description": "Specify extra rest after each stimulus.",
+      "title": "Minimum Rest"
+    },
+    "not_first": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify classes that should not start a run.",
+      "title": "Classes Not to Start a Run"
+    },
+    "not_last": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify classes that should not end a run.",
+      "title": "Classes Not to End a Run"
+    },
+    "offset": {
+      "type": "number",
+      "description": "Specify an offset to add to every stim time.",
+      "title": "Time Offset"
+    },
+    "ordered_stimuli": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify a partial ordering of stimuli.",
+      "title": "Ordered Stimuli"
+    },
+    "pre_stim_rest": {
+      "type": "number",
+      "description": "Specify minimum rest period to start each run.",
+      "title": "Pre-Stimulus Rest"
+    },
+    "post_stim_rest": {
+      "type": "number",
+      "description": "Specify minimum rest period to end each run.",
+      "title": "Post-Stimulus Rest"
+    },
+    "save_3dd_cmd": {
+      "type": "string",
+      "description": "Save a 3dDeconvolve -nodata example.",
+      "title": "Save 3dDeconvolve Command"
+    },
+    "seed": {
+      "type": "number",
+      "description": "Specify a seed for random number generation.",
+      "title": "Random Seed"
+    },
+    "stim_labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify labels for the stimulus classes.",
+      "title": "Stimulus Labels"
+    },
+    "t_digits": {
+      "type": "number",
+      "description": "Set the number of decimal places for times.",
+      "title": "Decimal Places for Times"
+    },
+    "t_gran": {
+      "type": "number",
+      "description": "Set the time granularity.",
+      "title": "Time Granularity"
+    },
+    "tr": {
+      "type": "number",
+      "description": "Set the scanner TR.",
+      "title": "Scanner TR"
+    },
+    "tr_locked": {
+      "type": "boolean",
+      "description": "Make stimuli timing locked to the accompanying TR.",
+      "title": "TR-Locked",
+      "default": false
+    },
+    "verb": {
+      "type": "number",
+      "description": "Set the verbose level.",
+      "title": "Verbose Level"
+    },
+    "show_timing_stats": {
+      "type": "boolean",
+      "description": "Show statistics from the timing.",
+      "title": "Show Timing Statistics",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "num_runs",
+    "run_time",
+    "num_stim",
+    "num_reps",
+    "prefix"
+  ]
+}

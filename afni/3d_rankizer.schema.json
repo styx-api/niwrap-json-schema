@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dRankizer",
+  "description": "Tool to rank each voxel as sorted into increasing value. Ties get the average rank.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dRankizer"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input MRI dataset",
+      "title": "Input dataset"
+    },
+    "base_rank": {
+      "type": "number",
+      "description": "Set the 'base' rank instead of 1",
+      "title": "Base rank"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use the specified dataset as a mask. Only voxels with nonzero values in this mask will be used from the input dataset. Voxels outside the mask will get rank 0.",
+      "title": "Mask dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Write results into float-format output dataset",
+      "title": "Output prefix"
+    },
+    "percentize": {
+      "type": "boolean",
+      "description": "Divide rank by the number of voxels in the dataset and multiply by 100.0",
+      "title": "Percentize",
+      "default": false
+    },
+    "percentize_mask": {
+      "type": "boolean",
+      "description": "Divide rank by the number of voxels in the mask and multiply by 100.0",
+      "title": "Percentize with mask",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "dataset",
+    "prefix"
+  ]
+}

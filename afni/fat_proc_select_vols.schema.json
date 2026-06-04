@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_proc_select_vols",
+  "description": "Tool for building a selector string for AFNI subbricks and/or 1D text files",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_proc_select_vols"
+    },
+    "dwi_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input DWI dataset",
+      "title": "DWI Input"
+    },
+    "img_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "2D image of the DWI dataset",
+      "title": "Image Input"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output prefix for files",
+      "title": "Output Prefix"
+    },
+    "in_bads": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A single column file of integers representing bad volumes indices (optional)",
+      "title": "Input Bads"
+    },
+    "apply_to_vols": {
+      "type": "boolean",
+      "description": "Apply the created selection of good volumes to the DWI dataset",
+      "title": "Apply To Vols",
+      "default": false
+    },
+    "do_movie": {
+      "type": "string",
+      "description": "Output a movie of the newly created dataset. Only 'AGIF' or 'MPEG' arguments can be used.",
+      "title": "Do Movie"
+    },
+    "workdir": {
+      "type": "string",
+      "description": "Specify a working directory",
+      "title": "Working Directory"
+    },
+    "no_cmd_out": {
+      "type": "boolean",
+      "description": "Don't save the command line call of this program and the location where it was run",
+      "title": "No Command Output",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "dwi_input",
+    "img_input",
+    "prefix"
+  ]
+}

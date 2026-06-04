@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "map_TrackID",
+  "description": "Maps the track file (*.trk) output of 3dTrackID to another space using the 1Dmatrix_save info of 3dAllineate.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/map_TrackID"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output track file.",
+      "title": "Output prefix"
+    },
+    "in_trk": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The name of the *.trk file to be mapped.",
+      "title": "Input track file"
+    },
+    "in_map": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Single line of matrix values for the transformation.",
+      "title": "Input map file"
+    },
+    "reference": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "3D data set in the space to which the TRK file is being mapped.",
+      "title": "Reference file"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose output.",
+      "title": "Verbose output",
+      "default": false
+    },
+    "orig_zero": {
+      "type": "boolean",
+      "description": "Put (0,0,0) as the origin in the output *.trk file.",
+      "title": "Zero origin",
+      "default": false
+    },
+    "line_only_num": {
+      "type": "boolean",
+      "description": "If your 1D_MATR file is just 12 numbers in a row.",
+      "title": "Line only numbers",
+      "default": false
+    },
+    "already_inv": {
+      "type": "boolean",
+      "description": "If you have inverted the mapping or use another program than 3dAllineate.",
+      "title": "Already inverted transformation",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "in_trk",
+    "in_map",
+    "reference"
+  ]
+}

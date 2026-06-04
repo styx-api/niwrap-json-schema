@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_sub_mgh",
+  "description": "Wrapper for job control system such as SGE, modified for compatibility with the PBS queueing system.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/fsl_sub_mgh"
+    },
+    "estimated_time": {
+      "type": "integer",
+      "description": "Estimated job length in minutes, used to auto-set queue name",
+      "title": "Estimated job time"
+    },
+    "queue_name": {
+      "type": "string",
+      "description": "Queue name. Possible values are 'verylong.q', 'long.q' and 'short.q'. Default is 'long.q'.",
+      "title": "Queue name"
+    },
+    "architecture": {
+      "type": "string",
+      "description": "Architecture [e.g., darwin or lx24-amd64]",
+      "title": "Architecture"
+    },
+    "job_priority": {
+      "type": "integer",
+      "description": "Job priority [0:-1024]. Default is 0.",
+      "title": "Job priority"
+    },
+    "email_address": {
+      "type": "string",
+      "description": "Email address to send notifications. Default is root@fmrib.ox.ac.uk.",
+      "title": "Email address"
+    },
+    "hold_job": {
+      "type": "string",
+      "description": "Job ID to place a hold on this task until completion.",
+      "title": "Hold job ID"
+    },
+    "task_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Task file of commands to execute in parallel.",
+      "title": "Task file"
+    },
+    "job_name": {
+      "type": "string",
+      "description": "Specify job name as it will appear on the queue.",
+      "title": "Job name"
+    },
+    "log_dir": {
+      "type": "string",
+      "description": "Output directory for log files.",
+      "title": "Log directory"
+    },
+    "mail_options": {
+      "type": "string",
+      "description": "Change the SGE mail options.",
+      "title": "Mail options"
+    },
+    "flags_in_scripts": {
+      "type": "boolean",
+      "description": "Use flags embedded in scripts to set SGE queuing options.",
+      "title": "Flags in scripts flag",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose mode.",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "shell_path": {
+      "type": "string",
+      "description": "Change the PBS shell option.",
+      "title": "Shell path"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

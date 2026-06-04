@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CONVERT A WARPFIELD BETWEEN CONVENTIONS",
+  "description": "NIFTI world warpfields can be used directly on mm coordinates via sampling the three subvolumes at the coordinate and adding the sampled values to the coordinate vector.  They use the NIFTI coordinate system, that is, X is left to right, Y is posterior to anterior, and Z is inferior to superior.\n\nNOTE: this command does not invert the warpfield, and to warp a surface, you must use the inverse of the warpfield that warps the corresponding volume.\n\nThe ITK format is used by ANTS.\n\nYou must specify exactly one -from option, but you may specify multiple -to options, and -to-fnirt may be specified more than once.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/convert_warpfield"
+    },
+    "from_world": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "the input warpfield"
+        },
+        "absolute": {
+          "type": "boolean",
+          "description": "warpfield was written in absolute convention, rather than relative",
+          "default": false
+        }
+      },
+      "required": [
+        "input"
+      ],
+      "description": "input is a NIFTI 'world' warpfield"
+    },
+    "from_itk": {
+      "type": "string",
+      "description": "input is an ITK warpfield"
+    },
+    "from_fnirt": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "the input warpfield"
+        },
+        "source_volume": {
+          "type": "string",
+          "description": "the source volume used when generating the input warpfield"
+        },
+        "absolute": {
+          "type": "boolean",
+          "description": "warpfield was written in absolute convention, rather than relative",
+          "default": false
+        }
+      },
+      "required": [
+        "input",
+        "source_volume"
+      ],
+      "description": "input is a fnirt warpfield"
+    },
+    "to_world": {
+      "type": "string",
+      "description": "write output as a NIFTI 'world' warpfield"
+    },
+    "to_itk": {
+      "type": "string",
+      "description": "write output as an ITK warpfield"
+    },
+    "to_fnirt": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "description": "output - the output warpfield"
+          },
+          "source_volume": {
+            "type": "string",
+            "description": "the volume you want to apply the warpfield to"
+          }
+        },
+        "required": [
+          "output",
+          "source_volume"
+        ]
+      },
+      "description": "write output as a fnirt warpfield"
+    }
+  },
+  "required": [
+    "@type",
+    "to_fnirt"
+  ]
+}

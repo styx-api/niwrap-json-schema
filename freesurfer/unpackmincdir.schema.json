@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "unpackmincdir",
+  "description": "Tool for unpacking directories with MINC files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/unpackmincdir"
+    },
+    "source_directory": {
+      "type": "string",
+      "description": "Source directory containing the MINC files.",
+      "title": "Source Directory"
+    },
+    "target_directory": {
+      "type": "string",
+      "description": "Target directory to unpack the contents to.",
+      "title": "Target Directory"
+    },
+    "scan_sequence_info": {
+      "type": "string",
+      "description": "Scan sequence directives file, e.g., freesurfer_alpha/scanseq.info.",
+      "title": "Scan Sequence Info"
+    },
+    "functional_sequence": {
+      "type": "string",
+      "description": "Use seqname for functionals (example: ep2d_fid_ts_20b2604).",
+      "title": "Functional Sequence"
+    },
+    "functional_subdirectory": {
+      "type": "string",
+      "description": "Functional subdirectory, e.g., bold.",
+      "title": "Functional Subdirectory"
+    },
+    "minc_only": {
+      "type": "boolean",
+      "description": "Do not unpack into bshorts.",
+      "title": "MINC Only Flag",
+      "default": false
+    },
+    "no_copy": {
+      "type": "boolean",
+      "description": "Create directories but do not copy/convert data.",
+      "title": "No Copy Flag",
+      "default": false
+    },
+    "umask": {
+      "type": "string",
+      "description": "Unix file permission mask (default: 22).",
+      "title": "Umask"
+    }
+  },
+  "required": [
+    "@type",
+    "source_directory",
+    "target_directory"
+  ]
+}

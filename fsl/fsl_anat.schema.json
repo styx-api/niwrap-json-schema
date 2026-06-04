@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_anat",
+  "description": "A wrapper for FSL tools to process anatomical scans.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fsl_anat"
+    },
+    "structural_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input image (for one image only)",
+      "title": "Structural Image"
+    },
+    "existing_anat_dir": {
+      "type": "string",
+      "description": "Directory name for existing .anat directory where this script will be run in place",
+      "title": "Existing Anat Directory"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Basename of directory for output (default is input image basename followed by .anat)",
+      "title": "Output Directory"
+    },
+    "clobber_flag": {
+      "type": "boolean",
+      "description": "If .anat directory exists (as specified by -o or default from -i) then delete it and make a new one",
+      "title": "Clobber Flag",
+      "default": false
+    },
+    "strongbias_flag": {
+      "type": "boolean",
+      "description": "Used for images with very strong bias fields",
+      "title": "Strong Bias Flag",
+      "default": false
+    },
+    "weakbias_flag": {
+      "type": "boolean",
+      "description": "Used for images with smoother, more typical, bias fields (default setting)",
+      "title": "Weak Bias Flag",
+      "default": false
+    },
+    "noreorient_flag": {
+      "type": "boolean",
+      "description": "Turn off step that does reorientation to standard (fslreorient2std)",
+      "title": "No Reorient Flag",
+      "default": false
+    },
+    "nocrop_flag": {
+      "type": "boolean",
+      "description": "Turn off step that does automated cropping (robustfov)",
+      "title": "No Crop Flag",
+      "default": false
+    },
+    "nobias_flag": {
+      "type": "boolean",
+      "description": "Turn off steps that do bias field correction (via FAST)",
+      "title": "No Bias Correction Flag",
+      "default": false
+    },
+    "noreg_flag": {
+      "type": "boolean",
+      "description": "Turn off steps that do registration to standard (FLIRT and FNIRT)",
+      "title": "No Registration Flag",
+      "default": false
+    },
+    "nononlinreg_flag": {
+      "type": "boolean",
+      "description": "Turn off step that does non-linear registration (FNIRT)",
+      "title": "No Non-linear Registration Flag",
+      "default": false
+    },
+    "noseg_flag": {
+      "type": "boolean",
+      "description": "Turn off step that does tissue-type segmentation (FAST)",
+      "title": "No Segmentation Flag",
+      "default": false
+    },
+    "nosubcortseg_flag": {
+      "type": "boolean",
+      "description": "Turn off step that does sub-cortical segmentation (FIRST)",
+      "title": "No Sub-cortical Segmentation Flag",
+      "default": false
+    },
+    "bias_smoothing": {
+      "type": "number",
+      "description": "Specify the value for bias field smoothing (the -l option in FAST)",
+      "title": "Bias Smoothing Value"
+    },
+    "image_type": {
+      "type": "string",
+      "description": "Specify the type of image (choose one of T1 T2 PD - default is T1)",
+      "title": "Image Type"
+    },
+    "nosearch_flag": {
+      "type": "boolean",
+      "description": "Specify that linear registration uses the -nosearch option (FLIRT)",
+      "title": "No Search Flag",
+      "default": false
+    },
+    "bet_f_param": {
+      "type": "number",
+      "description": "Specify f parameter for BET (only used if not running non-linear reg and also wanting brain extraction done)",
+      "title": "BET f Parameter"
+    },
+    "nocleanup_flag": {
+      "type": "boolean",
+      "description": "Do not remove intermediate files",
+      "title": "No Cleanup Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

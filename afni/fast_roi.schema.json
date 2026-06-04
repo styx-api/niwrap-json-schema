@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@fast_roi",
+  "description": "Creates Atlas-based ROI masked in ANAT's original space. The script executes rapidly for realtime fMRI applications.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@fast_roi"
+    },
+    "region": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Symbolic atlas-based region name. Use repeated instances to specify a mask of numerous regions. Each region is assigned a power of 2 integer in the output mask.",
+      "title": "Region"
+    },
+    "drawn_roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A user drawn ROI in standard (tlrc) space. This ROI gets added with the REGION ROI.",
+      "title": "Drawn ROI"
+    },
+    "anat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "ANAT is the volume to be put in standard space. If ANAT is already in TLRC space, there is no need for -base option.",
+      "title": "Anatomical Volume"
+    },
+    "anat_ns": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Same as -anat, but indicates that the skull has been removed already.",
+      "title": "Anatomical Volume No Skull"
+    },
+    "base": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the reference TLRC volume.",
+      "title": "TLRC Base"
+    },
+    "roi_grid": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The volume that defines the final ROI's grid.",
+      "title": "ROI Grid"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix used to tag the names the ROIs output.",
+      "title": "Prefix"
+    },
+    "time": {
+      "type": "boolean",
+      "description": "Output elapsed time reports.",
+      "title": "Time Flag",
+      "default": false
+    },
+    "twopass": {
+      "type": "boolean",
+      "description": "Make TLRC transformation more robust. Use it if TLRC transform step fails.",
+      "title": "Two-pass Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Output help message.",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "region",
+    "anat",
+    "base",
+    "roi_grid",
+    "prefix"
+  ]
+}

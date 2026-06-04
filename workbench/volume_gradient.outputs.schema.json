@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "GRADIENT OF A VOLUME FILE",
+  "description": "Computes the gradient of the volume by doing linear regressions for each voxel, considering only its face neighbors unless too few face neighbors exist.  The gradient vector is constructed from the partial derivatives of the resulting linear function, and the magnitude of this vector is the output.  If specified, the volume vector output is arranged with the x, y, and z components from a subvolume as consecutive subvolumes.",
+  "properties": {
+    "root": {
+      "type": "string",
+      "x-styx-type": "path"
+    },
+    "volume_out": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the output gradient magnitude volume"
+    },
+    "vector_volume_out": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-styx-type": "path",
+      "description": "the vectors as a volume file"
+    }
+  },
+  "required": [
+    "root",
+    "volume_out",
+    "vector_volume_out"
+  ]
+}

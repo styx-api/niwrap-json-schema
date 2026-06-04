@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WEIGHTED SPATIAL STATISTICS ON A VOLUME FILE",
+  "description": "For each subvolume of the input, a line of text is printed, resulting from the specified operation.  If -weight-volume is not specified, each voxel's volume is used.  Use -subvolume to only give output for a single subvolume.  If the -roi option is used without -match-maps, then each line will contain as many numbers as there are maps in the ROI file, separated by tab characters.  Exactly one of -mean, -stdev, -percentile or -sum must be specified.\n\nUsing -sum without -weight-volume is equivalent to integrating with respect to volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume_weighted_stats"
+    },
+    "volume_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input volume"
+    },
+    "weight_volume": {
+      "type": "object",
+      "properties": {
+        "weight_volume": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "volume file containing the weights"
+        },
+        "match_maps": {
+          "type": "boolean",
+          "description": "each subvolume of input uses the corresponding subvolume from the weights file",
+          "default": false
+        }
+      },
+      "required": [
+        "weight_volume"
+      ],
+      "description": "use weights from a volume file"
+    },
+    "subvolume": {
+      "type": "string",
+      "description": "only display output for one subvolume"
+    },
+    "roi": {
+      "type": "object",
+      "properties": {
+        "roi_volume": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the roi, as a volume file"
+        },
+        "match_maps": {
+          "type": "boolean",
+          "description": "each subvolume of input uses the corresponding subvolume from the roi file",
+          "default": false
+        }
+      },
+      "required": [
+        "roi_volume"
+      ],
+      "description": "only consider data inside an roi"
+    },
+    "mean": {
+      "type": "boolean",
+      "description": "compute weighted mean",
+      "default": false
+    },
+    "stdev": {
+      "type": "object",
+      "properties": {
+        "sample": {
+          "type": "boolean",
+          "description": "estimate population stdev from the sample",
+          "default": false
+        }
+      },
+      "description": "compute weighted standard deviation"
+    },
+    "percentile": {
+      "type": "number",
+      "description": "compute weighted percentile"
+    },
+    "sum": {
+      "type": "boolean",
+      "description": "compute weighted sum",
+      "default": false
+    },
+    "show_map_name": {
+      "type": "boolean",
+      "description": "print map index and name before each output",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "volume_in"
+  ]
+}

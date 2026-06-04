@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MultiplyImages",
+  "description": "Multiply 2 images; 2nd image file may also be floating point numerical value, and program will act accordingly -- i.e. read as a number. Program handles vector and tensor images as well",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/MultiplyImages"
+    },
+    "dimension": {
+      "enum": [
+        3,
+        2
+      ],
+      "description": "3 or 2. Image dimension (2 or 3).",
+      "title": "Dimension"
+    },
+    "first_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Image 1.",
+      "title": "First input"
+    },
+    "second_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "file or string or a float. Image 2 or multiplication weight.",
+      "title": "Second input"
+    },
+    "second_input_2": {
+      "type": "number",
+      "description": "file or string or a float. Image 2 or multiplication weight.",
+      "title": "Second input"
+    },
+    "output_product_image": {
+      "type": "string",
+      "description": "Outputfname.nii.gz: the name of the resulting image.",
+      "title": "Output product image"
+    },
+    "num_threads": {
+      "type": "integer",
+      "description": "Number of itk threads to use.",
+      "title": "Num threads"
+    }
+  },
+  "required": [
+    "@type",
+    "dimension",
+    "first_input",
+    "output_product_image"
+  ]
+}

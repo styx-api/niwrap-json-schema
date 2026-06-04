@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfToSurf",
+  "description": "Interpolate data from one surface to another",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SurfToSurf"
+    },
+    "input_surface_1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First input surface file (S1)",
+      "title": "Input Surface 1"
+    },
+    "input_surface_2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second input surface file (S2)",
+      "title": "Input Surface 2"
+    },
+    "surface_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the surface volume (SV1)",
+      "title": "Surface Volume"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Specify prefix for the output file",
+      "title": "Output Prefix"
+    },
+    "output_params": {
+      "type": "string",
+      "description": "List of mapping parameters to include in output",
+      "title": "Output Parameters"
+    },
+    "node_indices": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "1D file containing node indices of S1 to consider",
+      "title": "Node Indices"
+    },
+    "proj_dir": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "1D file containing projection directions",
+      "title": "Projection Directions"
+    },
+    "data": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "1D file containing data to be interpolated",
+      "title": "Data"
+    },
+    "node_debug": {
+      "type": "number",
+      "description": "Node index for debugging purposes",
+      "title": "Node Debug"
+    },
+    "debug_level": {
+      "type": "number",
+      "description": "Debugging level",
+      "title": "Debug Level"
+    },
+    "make_consistent": {
+      "type": "boolean",
+      "description": "Force a consistency check and correct triangle orientation",
+      "title": "Make Consistent",
+      "default": false
+    },
+    "dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset file for data interpolation; mutually exclusive with -data",
+      "title": "Dataset"
+    },
+    "mapfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing mapping parameters between surfaces S2 and S1",
+      "title": "Mapfile"
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface_1",
+    "input_surface_2"
+  ]
+}

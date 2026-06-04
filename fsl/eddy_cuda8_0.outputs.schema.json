@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "eddy_cuda8.0",
+  "description": "A tool for correcting eddy currents and movements in diffusion data",
+  "properties": {
+    "root": {
+      "type": "string",
+      "x-styx-type": "path"
+    },
+    "out": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output file containing the corrected images"
+    },
+    "eddy_parameters": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file containing subject movement and EC-induced field parameters for each volume"
+    },
+    "rotated_bvecs": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing the reoriented b-vectors for diffusion analysis"
+    },
+    "rotated_bvecs_slr": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with rotated b-vectors for least-squares reconstruction"
+    },
+    "command_txt": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file documenting the command line used to run eddy"
+    },
+    "input_parameters": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "List of all parameters used by eddy"
+    },
+    "movement_rms": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Summary of total movement for each volume"
+    },
+    "restricted_movement_rms": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Estimates movement RMS while disregarding translation in the PE direction"
+    },
+    "shell_alignment_parameters": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file with rigid body movement parameters between different shells"
+    },
+    "shell_PE_translation_parameters": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Translation parameters along the PE direction between different shells"
+    },
+    "outlier_report": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Report of detected outlier slices"
+    },
+    "outlier_map": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Numeric matrix indicating outlier slices"
+    },
+    "outlier_n_stdev_map": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Map of the number of standard deviations for outliers"
+    },
+    "outlier_n_sqr_stdev_map": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Map of the number of squared standard deviations for outliers"
+    },
+    "outlier_free_data": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Original data with outlier slices replaced, only if --repol was set"
+    },
+    "movement_over_time": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file with movement parameters over time, only if --mporder > 0"
+    },
+    "mbs_first_order_fields": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "4D image file of partial derivative fields, only if --estimate_move_by_susceptibility is set"
+    },
+    "cnr_maps": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "4D image file with SNR and CNR maps, only if --cnr_maps is set"
+    },
+    "residuals": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "4D image file of residuals, only if --residuals is set"
+    }
+  },
+  "required": [
+    "root",
+    "out",
+    "eddy_parameters",
+    "rotated_bvecs",
+    "rotated_bvecs_slr",
+    "command_txt",
+    "input_parameters",
+    "movement_rms",
+    "restricted_movement_rms",
+    "shell_alignment_parameters",
+    "shell_PE_translation_parameters",
+    "outlier_report",
+    "outlier_map",
+    "outlier_n_stdev_map",
+    "outlier_n_sqr_stdev_map",
+    "outlier_free_data",
+    "movement_over_time",
+    "mbs_first_order_fields",
+    "cnr_maps",
+    "residuals"
+  ]
+}

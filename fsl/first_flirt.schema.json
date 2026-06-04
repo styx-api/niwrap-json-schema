@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "first_flirt",
+  "description": "FLIRT-based image registration tool with additional options for brain extraction and weighting masks",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/first_flirt"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image (e.g. subject10rawT1.nii.gz)",
+      "title": "Input Image"
+    },
+    "output_basename": {
+      "type": "string",
+      "description": "Output basename for the results (e.g. subject10rawT1_to_std_sub)",
+      "title": "Output Basename"
+    },
+    "already_brain_extracted_flag": {
+      "type": "boolean",
+      "description": "Input is already brain extracted",
+      "title": "Already Brain Extracted",
+      "default": false
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Debug mode: don't delete intermediate files",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "inweight_flag": {
+      "type": "boolean",
+      "description": "Use a weighting mask on the first registration",
+      "title": "Inweight Mask",
+      "default": false
+    },
+    "strucweight_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use a specific structure weighting mask (in standard space) for an optional third-stage registration step (e.g. maskimage.nii.gz)",
+      "title": "Structure Weighting Mask"
+    },
+    "cort_flag": {
+      "type": "boolean",
+      "description": "Use a weighting mask of the whole brain on the first registration for specific models",
+      "title": "Cortical Weighting Mask",
+      "default": false
+    },
+    "cost_function": {
+      "type": "string",
+      "description": "Specify the cost function to be used by all FLIRT calls",
+      "title": "Cost Function"
+    }
+  },
+  "required": [
+    "@type",
+    "input_image",
+    "output_basename"
+  ]
+}

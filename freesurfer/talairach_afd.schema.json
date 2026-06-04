@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "talairach_afd",
+  "description": "Detects Talairach alignment failures",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/talairach_afd"
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "Specify subject's name",
+      "title": "Subject Name"
+    },
+    "xfm_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the talairach.xfm file to check",
+      "title": "XFM File"
+    },
+    "p_value_threshold": {
+      "type": "number",
+      "description": "Threshold the p-values at #; Talairach transforms for subjects with p-values <= T are considered as very unlikely",
+      "title": "P-Value Threshold"
+    },
+    "afd_directory": {
+      "type": "string",
+      "description": "Specify directory containing .afd data files",
+      "title": "AFD Directory"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Enable verbose output",
+      "title": "Verbose Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "lpcregister",
+  "description": "Registers a volume to its FreeSurfer anatomical using Local Pearson Correlation (LPC) (the AFNI lpc_align.py program). Creates a FreeSurfer register.dat file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/lpcregister"
+    },
+    "subject_id": {
+      "type": "string",
+      "description": "Subject ID found in SUBJECTS_DIR. The reference volume is the mri/brain volume (modifiable with --fsvol). Converted to analyze using mri_convert.",
+      "title": "Subject ID"
+    },
+    "mov_volume": {
+      "type": "string",
+      "description": "Volume identifier of the movable volume. Must be specified suitably for mri_convert. Uses first frame unless --frame is specified.",
+      "title": "Movable Volume"
+    },
+    "reg_file": {
+      "type": "string",
+      "description": "Output registration file mapping RAS in the reference to RAS in the movable. The file/matrix format is understood by freesurfer.",
+      "title": "Registration File"
+    },
+    "dof_9": {
+      "type": "boolean",
+      "description": "Use 9 degrees of freedom; default is 6.",
+      "title": "9 DOF Flag",
+      "default": false
+    },
+    "dof_12": {
+      "type": "boolean",
+      "description": "Use 12 degrees of freedom; default is 6.",
+      "title": "12 DOF Flag",
+      "default": false
+    },
+    "frame_number": {
+      "type": "number",
+      "description": "Specify the frame number other than the first. For SPM analyze, specify the file corresponding to the desired frame as each file only has one frame.",
+      "title": "Frame Number"
+    },
+    "mid_frame": {
+      "type": "boolean",
+      "description": "Register to the middle frame of the mov volume as the template. Cannot be used with --frame.",
+      "title": "Mid Frame Flag",
+      "default": false
+    },
+    "fsvol": {
+      "type": "string",
+      "description": "Use FreeSurfer volume id; default is brainmask.",
+      "title": "FreeSurfer Volume"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume file for resampled mov.",
+      "title": "Output Volume"
+    },
+    "tmp_dir": {
+      "type": "string",
+      "description": "Specify temporary directory (implies --nocleanup).",
+      "title": "Temporary Directory"
+    },
+    "no_cleanup": {
+      "type": "boolean",
+      "description": "Do not delete temporary files.",
+      "title": "No Cleanup Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print the version and exit.",
+      "title": "Version Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print help information and exit.",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject_id",
+    "mov_volume",
+    "reg_file"
+  ]
+}

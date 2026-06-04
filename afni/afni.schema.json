@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "afni",
+  "description": "Tool for reading in sessions of 3D datasets and visualizing them",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/afni"
+    },
+    "session_directories": {
+      "type": "string",
+      "description": "Input session directories containing the datasets",
+      "title": "Session Directories"
+    },
+    "bysub": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Gather all datasets corresponding to a single subject identifier",
+      "title": "By Subject"
+    },
+    "all_dsets": {
+      "type": "boolean",
+      "description": "Read in all datasets from all listed folders together",
+      "title": "All datasets",
+      "default": false
+    },
+    "purge": {
+      "type": "boolean",
+      "description": "Conserve memory by purging unused datasets",
+      "title": "Purge Unused Datasets",
+      "default": false
+    },
+    "posfunc": {
+      "type": "boolean",
+      "description": "Start up the color 'pbar' to use only positive function values",
+      "title": "Positive Function Values",
+      "default": false
+    },
+    "recursive": {
+      "type": "boolean",
+      "description": "Recursively search each session_directory for more session subdirectories",
+      "title": "Recursive Search",
+      "default": false
+    },
+    "no1D": {
+      "type": "boolean",
+      "description": "Tells AFNI not to read *.1D timeseries files",
+      "title": "No 1D timeseries",
+      "default": false
+    },
+    "nocsv": {
+      "type": "boolean",
+      "description": "Tells AFNI not to read *.csv files",
+      "title": "No CSV files",
+      "default": false
+    },
+    "notsv": {
+      "type": "boolean",
+      "description": "Tells AFNI not to read *.tsv files",
+      "title": "No TSV files",
+      "default": false
+    },
+    "unique": {
+      "type": "boolean",
+      "description": "Create a unique set of colors for each AFNI controller window",
+      "title": "Unique Colors",
+      "default": false
+    },
+    "orient": {
+      "type": "string",
+      "description": "Orientation code for displaying x-y-z coordinates",
+      "title": "Orientation Code"
+    },
+    "noplugins": {
+      "type": "boolean",
+      "description": "Do not load plugins",
+      "title": "No Plugins",
+      "default": false
+    },
+    "seehidden": {
+      "type": "boolean",
+      "description": "Show hidden plugins",
+      "title": "Show Hidden Plugins",
+      "default": false
+    },
+    "allow_all_plugins": {
+      "type": "boolean",
+      "description": "Do not hide plugins",
+      "title": "Allow All Plugins",
+      "default": false
+    },
+    "yesplugouts": {
+      "type": "boolean",
+      "description": "Listen for plugouts",
+      "title": "Enable Plugouts",
+      "default": false
+    },
+    "debug_plugouts": {
+      "type": "boolean",
+      "description": "Plugout code prints lots of messages (for debugging)",
+      "title": "Debug Plugouts",
+      "default": false
+    },
+    "noplugouts": {
+      "type": "boolean",
+      "description": "Do not listen for plugouts",
+      "title": "Disable Plugouts",
+      "default": false
+    },
+    "skip_afnirc": {
+      "type": "boolean",
+      "description": "Do not read .afnirc file",
+      "title": "Skip .afnirc",
+      "default": false
+    },
+    "layout": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read initial windows layout from a file",
+      "title": "Layout file"
+    },
+    "niml": {
+      "type": "boolean",
+      "description": "Turn on listening for NIML-formatted data from SUMA",
+      "title": "NIML Data",
+      "default": false
+    },
+    "np": {
+      "type": "integer",
+      "description": "Provide a port offset for multiple instances",
+      "title": "Port Offset"
+    },
+    "npq": {
+      "type": "integer",
+      "description": "Like -np but quieter in case of errors",
+      "title": "Port Offset Quiet"
+    },
+    "npb": {
+      "type": "integer",
+      "description": "Provide a block of port numbers",
+      "title": "Port Offset Block"
+    },
+    "com": {
+      "type": "string",
+      "description": "Specify command strings to drive AFNI on startup",
+      "title": "Command String"
+    },
+    "comsep": {
+      "type": "string",
+      "description": "Character to use as a separator for commands",
+      "title": "Command Separator"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

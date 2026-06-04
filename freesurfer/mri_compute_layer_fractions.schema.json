@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_compute_layer_fractions",
+  "description": "This program computes volumetric partial volume fractions from laminar surfaces using FreeSurfer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_compute_layer_fractions"
+    },
+    "reg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input registration file",
+      "title": "Registration file"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume file",
+      "title": "Input volume"
+    },
+    "output_stem": {
+      "type": "string",
+      "description": "Output stem for generated files",
+      "title": "Output stem"
+    },
+    "output_directory": {
+      "type": "string",
+      "description": "Output directory specified by SUBJECTS_DIR",
+      "title": "Subjects Directory"
+    },
+    "aseg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input ASEG file for synthesis",
+      "title": "ASEG file"
+    },
+    "target_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Target volume for analysis",
+      "title": "Target volume"
+    },
+    "hemi_flag": {
+      "type": "boolean",
+      "description": "Specify hemisphere processing",
+      "title": "Hemi flag",
+      "default": false
+    },
+    "fs_names_flag": {
+      "type": "boolean",
+      "description": "Flag to use FreeSurfer names",
+      "title": "FS names flag",
+      "default": false
+    },
+    "subject_id": {
+      "type": "string",
+      "description": "Subject ID for processing",
+      "title": "Subject ID"
+    },
+    "n_layers": {
+      "type": "number",
+      "description": "Number of layers for volume fraction computation",
+      "title": "Number of layers"
+    },
+    "synth_flag": {
+      "type": "boolean",
+      "description": "Flag to combine with the ASEG for a single segmentation volume",
+      "title": "Synthesis flag",
+      "default": false
+    },
+    "thickness": {
+      "type": "number",
+      "description": "Specify cortical thickness fraction",
+      "title": "Cortical thickness fraction"
+    },
+    "random_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify random volume file",
+      "title": "Random file"
+    },
+    "identity_file": {
+      "type": "string",
+      "description": "Specify identity file",
+      "title": "Identity file"
+    }
+  },
+  "required": [
+    "@type",
+    "reg_file",
+    "input_volume",
+    "output_stem"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fs_time",
+  "description": "A frontend for the unix /usr/bin/time program to track resource usage by a process.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/fs_time"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Save resource info into output file.",
+      "title": "Output File"
+    },
+    "key": {
+      "type": "string",
+      "description": "Specify a key for the resource information.",
+      "title": "Key"
+    },
+    "load_avg": {
+      "type": "boolean",
+      "description": "Report on load averages as from uptime.",
+      "title": "Load Average Flag",
+      "default": false
+    },
+    "command": {
+      "type": "string",
+      "description": "The command to be timed with fs_time.",
+      "title": "Command"
+    },
+    "args": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Arguments for the command.",
+      "title": "Arguments"
+    }
+  },
+  "required": [
+    "@type",
+    "command"
+  ]
+}

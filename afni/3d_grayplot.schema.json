@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dGrayplot",
+  "description": "Make a grayplot from a 3D+time dataset, like a carpet plot. Result is saved to a PNG image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dGrayplot"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Input dataset"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of mask dataset. Voxels that are 0 in the mask will not be processed.",
+      "title": "Mask dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Name for the output file. Default is Grayplot.png",
+      "title": "Output file"
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Output size of image in pixels: [width height]. Defaults are width=1024 and height=512.",
+      "title": "Output dimensions"
+    },
+    "resample_old": {
+      "type": "boolean",
+      "description": "Original resampling method for processed dataset.",
+      "title": "Old resampling method",
+      "default": false
+    },
+    "polort": {
+      "type": "number",
+      "description": "Order of polynomials for detrending. Default is 2. Use '-1' if data is already detrended and de-meaned.",
+      "title": "Polynomial order"
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "FWHM of blurring radius to use in the dataset before making the image. Default is 0 mm.",
+      "title": "Blurring FWHM"
+    },
+    "pvorder": {
+      "type": "boolean",
+      "description": "Order the voxels by how well they match the two leading principal components of their partition.",
+      "title": "PV order",
+      "default": false
+    },
+    "LJorder": {
+      "type": "boolean",
+      "description": "Order the voxels by their Ljung-Box statistics, a measure of temporal correlation.",
+      "title": "LJ order",
+      "default": false
+    },
+    "peelorder": {
+      "type": "boolean",
+      "description": "Order the voxels by how many 'peel' steps are needed to get from the partition boundary to the voxel.",
+      "title": "Peel order",
+      "default": false
+    },
+    "ijkorder": {
+      "type": "boolean",
+      "description": "Default intra-partition ordering by dataset 3D index ('ijk').",
+      "title": "IJK order",
+      "default": false
+    },
+    "range": {
+      "type": "number",
+      "description": "Set the range of the data to be plotted. Value of 0 is middle-gray, +X is white, -X is black.",
+      "title": "Data range"
+    },
+    "percent": {
+      "type": "boolean",
+      "description": "Scale values to percent differences from the mean of each voxel timeseries. Suitable for raw time series datasets.",
+      "title": "Percent scaling",
+      "default": false
+    },
+    "raw_with_bounds": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Map values <= A to black, values >= B to white, and intermediate values to grays.",
+      "title": "Raw with bounds"
+    }
+  },
+  "required": [
+    "@type",
+    "input"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_surface_stats",
+  "description": "Computes the group-wise mean and standard deviation of thickness differences at every vertex of the template surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_surface_stats"
+    },
+    "nsmooth": {
+      "type": "number",
+      "description": "Specify number of smoothing steps",
+      "title": "Number of Smoothing Steps"
+    },
+    "surf_name": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set the surface filename",
+      "title": "Surface Filename"
+    },
+    "mask_name": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set the filename for surface mask",
+      "title": "Mask Filename"
+    },
+    "out_name": {
+      "type": "string",
+      "description": "Set the output filename (standard deviation of data)",
+      "title": "Output Filename"
+    },
+    "mean": {
+      "type": "string",
+      "description": "Set the output filename for mean",
+      "title": "Mean Output Filename"
+    },
+    "absmean": {
+      "type": "string",
+      "description": "Set the output filename for absolute mean",
+      "title": "Absolute Mean Output Filename"
+    },
+    "absstd": {
+      "type": "string",
+      "description": "Set the output filename for standard deviation of absolute mean",
+      "title": "Absolute Standard Deviation Output Filename"
+    },
+    "zscore": {
+      "type": "string",
+      "description": "Set the output filename for z-score (only if first_group_size > 0)",
+      "title": "Z-Score Output Filename"
+    },
+    "first_group_size": {
+      "type": "number",
+      "description": "Specify how many subjects at the beginning belong to first group",
+      "title": "First Group Size"
+    },
+    "src_type": {
+      "type": "string",
+      "description": "Input surface data format (default = paint)",
+      "title": "Source Type"
+    },
+    "trg_type": {
+      "type": "string",
+      "description": "Output format (default = paint)",
+      "title": "Target Type"
+    },
+    "debug": {
+      "type": "number",
+      "description": "Specify which surface vertex number to debug",
+      "title": "Debug Vertex Number"
+    },
+    "data_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of input data files for computation",
+      "title": "Input Data Files"
+    }
+  },
+  "required": [
+    "@type",
+    "surf_name",
+    "out_name",
+    "data_files"
+  ]
+}

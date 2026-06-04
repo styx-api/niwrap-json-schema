@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CREATE DLABEL FROM PARCELLATED FILE",
+  "description": "This command will output a dlabel file, useful for doing the same parcellation to another dense file.\n\nFor ptseries, pscalar, plabel, pconn, and pdconn, using COLUMN for <direction> will work.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_parcel_mapping_to_label"
+    },
+    "cifti_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input parcellated file"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which dimension to take the parcel map from, ROW or COLUMN"
+    },
+    "template_cifti": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "a cifti file with the desired dense mapping along column"
+    },
+    "dlabel_out": {
+      "type": "string",
+      "description": "the output dense label file"
+    }
+  },
+  "required": [
+    "@type",
+    "cifti_in",
+    "direction",
+    "template_cifti",
+    "dlabel_out"
+  ]
+}

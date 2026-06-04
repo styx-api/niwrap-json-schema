@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "long_stats_combine",
+  "description": "Adds columns from stats into longitudinal qdec table, using longitudinally processed results.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/long_stats_combine"
+    },
+    "qdec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "QDEC table file specifying the subjects and time points. File has first columns: fsid  fsid-base",
+      "title": "QDEC Table File"
+    },
+    "stats": {
+      "type": "string",
+      "description": "The stats file, e.g. aseg.stats or lh.aparc.stats",
+      "title": "Stats File"
+    },
+    "measure": {
+      "type": "string",
+      "description": "The stats measure (e.g. volume, thickness, mean, std)",
+      "title": "Measure"
+    },
+    "subject_dir": {
+      "type": "string",
+      "description": "Full path to FreeSurfer subjects directory",
+      "title": "Subject Directory"
+    },
+    "output_qdec": {
+      "type": "string",
+      "description": "File name of output long qdec table",
+      "title": "Output QDEC Table"
+    },
+    "output_stats": {
+      "type": "string",
+      "description": "File name to output stacked stats table (all subjects, all time points)",
+      "title": "Output Stats Table"
+    },
+    "input_stats": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File name of stacked stats table (same order as qdec), instead of using --stats and --meas",
+      "title": "Input Stacked Stats Table"
+    },
+    "cross_sectional": {
+      "type": "boolean",
+      "description": "Use cross sectional results (for testing only)",
+      "title": "Cross Sectional Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "qdec",
+    "stats",
+    "measure",
+    "subject_dir",
+    "output_qdec"
+  ]
+}

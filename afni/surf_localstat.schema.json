@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfLocalstat",
+  "description": "Compute local statistics on a surface mesh",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SurfLocalstat"
+    },
+    "hood": {
+      "type": "number",
+      "description": "Neighborhood of nodes within the specified radius R.",
+      "title": "Neighborhood Radius"
+    },
+    "nbhd_rad": {
+      "type": "number",
+      "description": "Distance from node n as measured by the shortest distance along the mesh.",
+      "title": "Neighborhood Radius (Alternative)"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix of output data set.",
+      "title": "Output prefix"
+    },
+    "stat": {
+      "enum": [
+        "mean",
+        "mode",
+        "num",
+        "FWHM",
+        "ALL"
+      ],
+      "description": "Compute the specified statistic on the values extracted from the region around each voxel. Options: mean, mode, num, FWHM, ALL.",
+      "title": "Statistic to compute"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset.",
+      "title": "Input dataset"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input GIFTI surface file.",
+      "title": "Surface file"
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "stat",
+    "input_dataset",
+    "surface"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tfim",
+  "description": "MCW TFIM: t-tests on sets of functional images",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/tfim"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output filenames. Default is 'tfim'.",
+      "title": "Output prefix"
+    },
+    "pthresh": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Significance level (per voxel) to threshold the output with. Voxels with t-statistic less significant than this will have their diff output zeroed. Default is no threshold.",
+      "title": "p-threshold"
+    },
+    "eqcorr": {
+      "type": "number",
+      "description": "Write out the equivalent correlation statistic. The number 'dval' is the value to use for 'dof'. Default is not to write this file.",
+      "title": "Equivalent correlation statistic"
+    },
+    "paired": {
+      "type": "boolean",
+      "description": "Compare -set1 and -set2 using a paired sample t-test. Illegal with the -base1 option.",
+      "title": "Paired sample t-test",
+      "default": false
+    },
+    "set1_images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "First set of image files.",
+      "title": "Set 1 Images"
+    },
+    "set2_images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Second set of image files.",
+      "title": "Set 2 Images"
+    },
+    "base1_value": {
+      "type": "number",
+      "description": "Base value for the first set of images. Used for Usage 2.",
+      "title": "Base value"
+    }
+  },
+  "required": [
+    "@type",
+    "set1_images",
+    "set2_images"
+  ]
+}

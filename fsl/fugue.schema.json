@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fugue",
+  "description": "FMRIB's Utility for Geometric Unwarping of EPIs",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fugue"
+    },
+    "asym_se_time": {
+      "type": "number",
+      "description": "Set the fieldmap asymmetric spin echo time (sec).",
+      "title": "Asym se time"
+    },
+    "despike_2dfilter": {
+      "type": "boolean",
+      "description": "Apply a 2d de-spiking filter.",
+      "title": "Despike 2dfilter",
+      "default": false
+    },
+    "despike_threshold": {
+      "type": "number",
+      "description": "Specify the threshold for de-spiking (default=3.0).",
+      "title": "Despike threshold"
+    },
+    "dwell_time": {
+      "type": "number",
+      "description": "Set the epi dwell time per phase-encode line - same as echo spacing - (sec).",
+      "title": "Dwell time"
+    },
+    "dwell_to_asym_ratio": {
+      "type": "number",
+      "description": "Set the dwell to asym time ratio.",
+      "title": "Dwell to asym ratio"
+    },
+    "fmap_in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for loading fieldmap (rad/s).",
+      "title": "Fmap in file"
+    },
+    "fmap_out_file": {
+      "type": "string",
+      "description": "Filename for saving fieldmap (rad/s).",
+      "title": "Fmap out file"
+    },
+    "forward_warping": {
+      "type": "boolean",
+      "description": "Apply forward warping instead of unwarping.",
+      "title": "Forward warping",
+      "default": false
+    },
+    "fourier_order": {
+      "type": "integer",
+      "description": "Apply fourier (sinusoidal) fitting of order n.",
+      "title": "Fourier order"
+    },
+    "icorr": {
+      "type": "boolean",
+      "description": "Apply intensity correction to unwarping (pixel shift method only).",
+      "title": "Icorr",
+      "default": false
+    },
+    "icorr_only": {
+      "type": "boolean",
+      "description": "Apply intensity correction only.",
+      "title": "Icorr only",
+      "default": false
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input volume.",
+      "title": "In file"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for loading valid mask.",
+      "title": "Mask file"
+    },
+    "median_2dfilter": {
+      "type": "boolean",
+      "description": "Apply 2d median filtering.",
+      "title": "Median 2dfilter",
+      "default": false
+    },
+    "no_extend": {
+      "type": "boolean",
+      "description": "Do not apply rigid-body extrapolation to the fieldmap.",
+      "title": "No extend",
+      "default": false
+    },
+    "no_gap_fill": {
+      "type": "boolean",
+      "description": "Do not apply gap-filling measure to the fieldmap.",
+      "title": "No gap fill",
+      "default": false
+    },
+    "nokspace": {
+      "type": "boolean",
+      "description": "Do not use k-space forward warping.",
+      "title": "Nokspace",
+      "default": false
+    },
+    "output_type": {
+      "enum": [
+        "NIFTI",
+        "NIFTI_PAIR",
+        "NIFTI_GZ",
+        "NIFTI_PAIR_GZ"
+      ],
+      "description": "'nifti' or 'nifti_pair' or 'nifti_gz' or 'nifti_pair_gz'. Fsl output type.",
+      "title": "Output type"
+    },
+    "pava": {
+      "type": "boolean",
+      "description": "Apply monotonic enforcement via pava.",
+      "title": "Pava",
+      "default": false
+    },
+    "phase_conjugate": {
+      "type": "boolean",
+      "description": "Apply phase conjugate method of unwarping.",
+      "title": "Phase conjugate",
+      "default": false
+    },
+    "phasemap_in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for input phase image.",
+      "title": "Phasemap in file"
+    },
+    "poly_order": {
+      "type": "integer",
+      "description": "Apply polynomial fitting of order n.",
+      "title": "Poly order"
+    },
+    "save_unmasked_fmap": {
+      "type": "boolean",
+      "description": "Saves the unmasked fieldmap when using --savefmap.",
+      "title": "Save unmasked fmap",
+      "default": false
+    },
+    "save_unmasked_shift": {
+      "type": "boolean",
+      "description": "Saves the unmasked shiftmap when using --saveshift.",
+      "title": "Save unmasked shift",
+      "default": false
+    },
+    "shift_in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for reading pixel shift volume.",
+      "title": "Shift in file"
+    },
+    "shift_out_file": {
+      "type": "string",
+      "description": "Filename for saving pixel shift volume.",
+      "title": "Shift out file"
+    },
+    "smooth2d": {
+      "type": "number",
+      "description": "Apply 2d gaussian smoothing of sigma n (in mm).",
+      "title": "Smooth2d"
+    },
+    "smooth3d": {
+      "type": "number",
+      "description": "Apply 3d gaussian smoothing of sigma n (in mm).",
+      "title": "Smooth3d"
+    },
+    "unwarp_direction": {
+      "enum": [
+        "x",
+        "y",
+        "z",
+        "x-",
+        "y-",
+        "z-"
+      ],
+      "description": "'x' or 'y' or 'z' or 'x-' or 'y-' or 'z-'. Specifies direction of warping (default y).",
+      "title": "Unwarp direction"
+    },
+    "unwarped_file": {
+      "type": "string",
+      "description": "Apply unwarping and save as filename.",
+      "title": "Unwarped file"
+    },
+    "warped_file": {
+      "type": "string",
+      "description": "Apply forward warping and save as filename.",
+      "title": "Warped file"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

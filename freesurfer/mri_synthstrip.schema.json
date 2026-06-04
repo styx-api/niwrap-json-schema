@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_synthstrip",
+  "description": "Robust, universal skull-stripping for brain images of any type.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_synthstrip"
+    },
+    "image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image to skullstrip.",
+      "title": "Input image"
+    },
+    "output_image": {
+      "type": "object",
+      "properties": {
+        "output_image": {
+          "type": "string",
+          "description": "Save stripped image to path.",
+          "title": "Output image"
+        }
+      }
+    },
+    "mask": {
+      "type": "object",
+      "properties": {
+        "mask": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Save binary brain mask to path.",
+          "title": "Output brain mask"
+        }
+      }
+    },
+    "gpu": {
+      "type": "object",
+      "properties": {
+        "gpu": {
+          "type": "boolean",
+          "description": "Use the GPU.",
+          "title": "Use GPU",
+          "default": false
+        }
+      }
+    },
+    "border": {
+      "type": "object",
+      "properties": {
+        "border": {
+          "type": "number",
+          "description": "Mask border threshold in mm. Default is 1.",
+          "title": "Mask border threshold"
+        }
+      }
+    },
+    "exclude_csf": {
+      "type": "object",
+      "properties": {
+        "exclude_csf": {
+          "type": "boolean",
+          "description": "Exclude CSF from brain border.",
+          "title": "Exclude CSF",
+          "default": false
+        }
+      }
+    },
+    "model_weights": {
+      "type": "object",
+      "properties": {
+        "model_weights": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Alternative model weights.",
+          "title": "Model weights"
+        }
+      }
+    }
+  },
+  "required": [
+    "@type",
+    "image",
+    "output_image",
+    "mask",
+    "gpu",
+    "border",
+    "exclude_csf",
+    "model_weights"
+  ]
+}

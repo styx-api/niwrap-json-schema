@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "reg_jacobian",
+  "description": "Tool to compute the Jacobian determinant map from a deformation field or control point lattice.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "niftyreg/reg_jacobian"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the reference image",
+      "title": "Reference Image"
+    },
+    "deformation_field": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the deformation field (from reg_transform)",
+      "title": "Deformation Field"
+    },
+    "control_point_lattice": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the control point position lattice (from reg_f3d)",
+      "title": "Control Point Lattice"
+    },
+    "output_jacobian": {
+      "type": "string",
+      "description": "Filename of the Jacobian determinant map",
+      "title": "Jacobian Determinant Map"
+    },
+    "output_jacobian_matrix": {
+      "type": "string",
+      "description": "Filename of the Jacobian matrix map (9 or 4 values stored as a 5D nifti)",
+      "title": "Jacobian Matrix Map"
+    },
+    "output_log_jacobian": {
+      "type": "string",
+      "description": "Filename of the Log of the Jacobian determinant map",
+      "title": "Log of the Jacobian Determinant Map"
+    },
+    "affine_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the affine matrix to modulate the Jacobian determinant map",
+      "title": "Affine Matrix"
+    }
+  },
+  "required": [
+    "@type",
+    "reference_image"
+  ]
+}

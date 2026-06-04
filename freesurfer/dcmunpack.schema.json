@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dcmunpack",
+  "description": "Sorts and converts a directory of DICOM files (Siemens, GE, Philips) into an output hierarchy with nifti (nii), mgh, mgz, or analyze output formats.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dcmunpack"
+    },
+    "src": {
+      "type": "string",
+      "description": "Dicom source directory. You can specify more than one.",
+      "title": "Source Directory"
+    },
+    "targ": {
+      "type": "string",
+      "description": "Output directory. Do not need to include when just getting information about what is in the directory.",
+      "title": "Target Directory"
+    },
+    "run": {
+      "type": "string",
+      "description": "Specify unpacking rules for a given run (series). Eg, \"-run 3 bold nii f.nii\".",
+      "title": "Run Specification"
+    },
+    "auto_runseq": {
+      "type": "string",
+      "description": "Save all scans in the targetdir as runo.seqname.format.",
+      "title": "Auto Run Sequence"
+    },
+    "keep_scouts": {
+      "type": "boolean",
+      "description": "Unpack series with 'scout' or 'setter' in the name.",
+      "title": "Keep Scouts Flag",
+      "default": false
+    },
+    "scanonly": {
+      "type": "string",
+      "description": "Only scan the directory and put result in file.",
+      "title": "Scan Only"
+    },
+    "one_per_dir": {
+      "type": "boolean",
+      "description": "Assume that there is only one dicom series in each subdir.",
+      "title": "One Per Directory Flag",
+      "default": false
+    },
+    "ext": {
+      "type": "string",
+      "description": "Input extension (eg, dcm).",
+      "title": "File Extension"
+    },
+    "pre": {
+      "type": "string",
+      "description": "Input prefix (i.e., input file name init string).",
+      "title": "File Prefix"
+    },
+    "pat": {
+      "type": "string",
+      "description": "Input pattern (i.e., string that occurs in the middle of file name).",
+      "title": "File Pattern"
+    },
+    "no_infodump": {
+      "type": "boolean",
+      "description": "Do not create the fname-infodump.dat file.",
+      "title": "No Infodump Flag",
+      "default": false
+    },
+    "generic": {
+      "type": "boolean",
+      "description": "Do not use FSFAST hierarchy.",
+      "title": "Generic Flag",
+      "default": false
+    },
+    "copy_only": {
+      "type": "boolean",
+      "description": "Only copy dicom files to output directory (implies -no-convert).",
+      "title": "Copy Only Flag",
+      "default": false
+    },
+    "no_convert": {
+      "type": "boolean",
+      "description": "Do not convert to output format.",
+      "title": "No Convert Flag",
+      "default": false
+    },
+    "force_update": {
+      "type": "boolean",
+      "description": "Convert even if output is newer than the input dicom.",
+      "title": "Force Update Flag",
+      "default": false
+    },
+    "max": {
+      "type": "boolean",
+      "description": "Print out max in given dicom file.",
+      "title": "Max Flag",
+      "default": false
+    },
+    "base": {
+      "type": "boolean",
+      "description": "Report filename without path.",
+      "title": "Base Flag",
+      "default": false
+    },
+    "key_string": {
+      "type": "string",
+      "description": "Put keystring before each run line (good for searching).",
+      "title": "Key String"
+    },
+    "index_out": {
+      "type": "string",
+      "description": "Save index of files to index.out.dat (for re-use).",
+      "title": "Index Out"
+    },
+    "index_in": {
+      "type": "string",
+      "description": "Read index of files (can make things much faster on 2nd run).",
+      "title": "Index In"
+    },
+    "it_dicom": {
+      "type": "boolean",
+      "description": "Add -it dicom to mri_convert cmd line.",
+      "title": "IT DICOM Flag",
+      "default": false
+    },
+    "no_exit_on_error": {
+      "type": "boolean",
+      "description": "Continue to unpack data even if there is an error in conversion.",
+      "title": "No Exit on Error Flag",
+      "default": false
+    },
+    "run_skip": {
+      "type": "string",
+      "description": "Skip a given run (good when using -auto-runseq).",
+      "title": "Run Skip"
+    },
+    "no_rescale_dicom": {
+      "type": "boolean",
+      "description": "Turn off DICOM rescaling based on tags (0028,1052) (0028,1053).",
+      "title": "No Rescale DICOM Flag",
+      "default": false
+    },
+    "rescale_dicom": {
+      "type": "boolean",
+      "description": "Turn DICOM rescaling on.",
+      "title": "Rescale DICOM Flag",
+      "default": false
+    },
+    "no_dwi": {
+      "type": "boolean",
+      "description": "Turn off trying to read DWI parameters.",
+      "title": "No DWI Flag",
+      "default": false
+    },
+    "iid": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set -iid to mri_convert.",
+      "title": "IID"
+    },
+    "ijd": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set -ijd to mri_convert.",
+      "title": "IJD"
+    },
+    "ikd": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set -ikd to mri_convert.",
+      "title": "IKD"
+    },
+    "extra_info": {
+      "type": "boolean",
+      "description": "Add session info to each line of the info file (pat, date, man, scan, field, serno).",
+      "title": "Extra Info Flag",
+      "default": false
+    },
+    "first_dicom": {
+      "type": "boolean",
+      "description": "Copy first dicom file into output folder.",
+      "title": "First DICOM Flag",
+      "default": false
+    },
+    "no_dcm2niix": {
+      "type": "boolean",
+      "description": "Turn off dcm2niix conversion.",
+      "title": "No DCM2NIIX Flag",
+      "default": false
+    },
+    "phase": {
+      "type": "boolean",
+      "description": "Add the string _phase to volumes that are phase images based on ImageType.",
+      "title": "Phase Flag",
+      "default": false
+    },
+    "fips": {
+      "type": "string",
+      "description": "Fips parameters: project, site, birnid, visit.",
+      "title": "Fips Fields"
+    },
+    "fips_run": {
+      "type": "string",
+      "description": "Fips-run parameters: run paradigm.",
+      "title": "Fips Run"
+    },
+    "xml_only": {
+      "type": "boolean",
+      "description": "For fips, only create xml file, do not convert to output.",
+      "title": "XML Only Flag",
+      "default": false
+    },
+    "log": {
+      "type": "string",
+      "description": "Log output to a file.",
+      "title": "Log File"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Enable debug mode.",
+      "title": "Debug Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "src"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dDFT",
+  "description": "Performs Discrete Fourier Transform (DFT) along the time axis of a complex- or float-valued dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dDFT"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset (complex- or float-valued)",
+      "title": "Input file"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output file",
+      "title": "Output file prefix"
+    },
+    "abs_output": {
+      "type": "boolean",
+      "description": "Output float dataset = abs(DFT)",
+      "title": "Absolute value output flag",
+      "default": false
+    },
+    "nfft": {
+      "type": "number",
+      "description": "DFT length (must be >= number of time points)",
+      "title": "DFT length"
+    },
+    "detrend": {
+      "type": "boolean",
+      "description": "Least-squares remove linear drift before DFT",
+      "title": "Detrend flag",
+      "default": false
+    },
+    "taper": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Fraction (0 <= f <= 1) of data to taper at ends (Hamming taper)",
+      "title": "Taper fraction"
+    },
+    "inverse": {
+      "type": "boolean",
+      "description": "Perform the inverse DFT",
+      "title": "Inverse DFT flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "infile",
+    "prefix"
+  ]
+}

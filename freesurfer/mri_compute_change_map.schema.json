@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_compute_change_map",
+  "description": "Compute the change map between two MRI volumes",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_compute_change_map"
+    },
+    "mean_filter": {
+      "type": "boolean",
+      "description": "Apply mean filter to the output before writing",
+      "title": "Mean Filter Flag",
+      "default": false
+    },
+    "gaussian_sigma": {
+      "type": "number",
+      "description": "Smooth with Gaussian filter of specified sigma before writing",
+      "title": "Gaussian Sigma"
+    },
+    "volume1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First volume (e.g. volume1.mgz)",
+      "title": "Volume 1"
+    },
+    "volume2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second volume, transformed into the space of Volume 1 (e.g. volume2.mgz)",
+      "title": "Volume 2"
+    },
+    "transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Transform that takes Volume 2 coordinates into Volume 1 space",
+      "title": "Transform"
+    },
+    "outvolume": {
+      "type": "string",
+      "description": "Output change map volume (e.g. change_map.mgz)",
+      "title": "Output Volume"
+    }
+  },
+  "required": [
+    "@type",
+    "volume1",
+    "volume2",
+    "transform",
+    "outvolume"
+  ]
+}

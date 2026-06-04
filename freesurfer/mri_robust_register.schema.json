@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_robust_register",
+  "description": "Inverse consistent registration of two volumes using robust and standard cost functions.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_robust_register"
+    },
+    "movable_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input movable volume to be aligned to target.",
+      "title": "Movable Volume"
+    },
+    "target_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input target volume.",
+      "title": "Target Volume"
+    },
+    "output_registration": {
+      "type": "string",
+      "description": "Output registration (transform from mov to dst).",
+      "title": "Output Registration"
+    },
+    "outlier_sensitivity": {
+      "type": "number",
+      "description": "Set outlier sensitivity manually for robust cost functions. Higher values mean less sensitivity.",
+      "title": "Outlier Sensitivity"
+    },
+    "satit": {
+      "type": "boolean",
+      "description": "Auto-detect good sensitivity for robust cost functions.",
+      "title": "Automatic Sensitivity Detection",
+      "default": false
+    },
+    "mapped_movable": {
+      "type": "string",
+      "description": "Output image: movable mapped and resampled at destination.",
+      "title": "Mapped Movable"
+    },
+    "mapped_movable_hdr": {
+      "type": "string",
+      "description": "Output image: movable aligned to destination (no resampling, only adjusting header vox2ras).",
+      "title": "Mapped Movable Header"
+    },
+    "weights": {
+      "type": "string",
+      "description": "Output weights (outlier probabilities) in destination space (0=regular,1=outlier).",
+      "title": "Weights Output"
+    },
+    "oneminus_w": {
+      "type": "boolean",
+      "description": "Weights (outlier) map will be inverted (0=outlier), as in earlier versions.",
+      "title": "Invert Weights Map",
+      "default": false
+    },
+    "iscale": {
+      "type": "boolean",
+      "description": "Estimate intensity scale factor.",
+      "title": "Intensity Scale",
+      "default": false
+    },
+    "iscale_only": {
+      "type": "boolean",
+      "description": "Only perform intensity scaling (no transformation).",
+      "title": "Intensity Scale Only",
+      "default": false
+    },
+    "iscale_out": {
+      "type": "string",
+      "description": "Output text file for iscale value.",
+      "title": "Intensity Scale Output File"
+    },
+    "iscale_in": {
+      "type": "string",
+      "description": "Initial input text file for iscale value.",
+      "title": "Intensity Scale Input File"
+    },
+    "trans_only": {
+      "type": "boolean",
+      "description": "Find 3 parameter translation only.",
+      "title": "Translation Only",
+      "default": false
+    },
+    "affine": {
+      "type": "boolean",
+      "description": "Find 12 parameter affine transform.",
+      "title": "Affine Transform",
+      "default": false
+    },
+    "ixform": {
+      "type": "string",
+      "description": "Use initial transform LTA on source.",
+      "title": "Initial Transform File"
+    },
+    "init_orient": {
+      "type": "boolean",
+      "description": "Use moments for orientation initialization.",
+      "title": "Initialize Orientation",
+      "default": false
+    },
+    "no_init": {
+      "type": "boolean",
+      "description": "Skip automatic transform initialization.",
+      "title": "No Initial Transform",
+      "default": false
+    },
+    "vox2vox": {
+      "type": "boolean",
+      "description": "Output VOX2VOX LTA file.",
+      "title": "Vox2Vox Output",
+      "default": false
+    },
+    "cost": {
+      "type": "string",
+      "description": "Set cost function for registration.",
+      "title": "Cost Function"
+    },
+    "ent_radius": {
+      "type": "number",
+      "description": "With ROBENT: specify box radius for entropy computation.",
+      "title": "Entropy Radius"
+    },
+    "ent_correction": {
+      "type": "boolean",
+      "description": "With ROBENT: use better entropy computation that works on smaller boxes.",
+      "title": "Entropy Correction",
+      "default": false
+    },
+    "ent_ball": {
+      "type": "boolean",
+      "description": "With ROBENT: use ball around voxel instead of box.",
+      "title": "Entropy Ball",
+      "default": false
+    },
+    "ent_mov": {
+      "type": "string",
+      "description": "With ROBENT: write movable entropy image.",
+      "title": "Entropy Movable File"
+    },
+    "powell_tolerance": {
+      "type": "number",
+      "description": "With MI, NMI etc: set Powell tolerance.",
+      "title": "Powell Tolerance"
+    },
+    "sobel": {
+      "type": "boolean",
+      "description": "Register Sobel magnitude images.",
+      "title": "Sobel Image Registration",
+      "default": false
+    },
+    "no_sym": {
+      "type": "boolean",
+      "description": "Do not map to half way space.",
+      "title": "No Symmetry Mapping",
+      "default": false
+    },
+    "maximum_iterations": {
+      "type": "number",
+      "description": "Maximum number of iterations on each resolution.",
+      "title": "Maximum Iterations"
+    },
+    "ent_dst": {
+      "type": "string",
+      "description": "With ROBENT: write target entropy image.",
+      "title": "Entropy Destination File"
+    },
+    "high_iter": {
+      "type": "number",
+      "description": "Maximum number of iterations on highest resolution.",
+      "title": "High Iterations Max"
+    },
+    "eps_iteration": {
+      "type": "number",
+      "description": "Stop iterations when transform update falls below specified RMS distance.",
+      "title": "EPS Iterations"
+    },
+    "no_multiscale": {
+      "type": "boolean",
+      "description": "Process highest resolution only (no multiscale).",
+      "title": "No Multiscale",
+      "default": false
+    },
+    "max_size": {
+      "type": "number",
+      "description": "Specify largest voxel dimension for gaussian pyramid.",
+      "title": "Max Size"
+    },
+    "min_size": {
+      "type": "number",
+      "description": "Specify smallest voxel dimension for gaussian pyramid.",
+      "title": "Min Size"
+    },
+    "w_limit": {
+      "type": "number",
+      "description": "(Expert) sets maximal outlier limit for --satit.",
+      "title": "Weight Limit"
+    },
+    "sub_sample": {
+      "type": "number",
+      "description": "Subsample if dimension is greater than the specified value on all axes.",
+      "title": "Subsample Dimension Limit"
+    },
+    "float_type": {
+      "type": "boolean",
+      "description": "Convert images to float internally.",
+      "title": "Convert to Float",
+      "default": false
+    },
+    "white_bg_mov": {
+      "type": "boolean",
+      "description": "Assume white background in MOV for padding.",
+      "title": "White Background Movable",
+      "default": false
+    },
+    "white_bg_dst": {
+      "type": "boolean",
+      "description": "Assume white background in DST for padding.",
+      "title": "White Background Destination",
+      "default": false
+    },
+    "uchar": {
+      "type": "boolean",
+      "description": "Convert inputs to UCHAR with rescale and histogram cropping.",
+      "title": "Convert to UCHAR",
+      "default": false
+    },
+    "mask_mov": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask movable image with mask file.",
+      "title": "Mask Movable"
+    },
+    "mask_dst": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask destination image with mask file.",
+      "title": "Mask Destination"
+    },
+    "half_mov": {
+      "type": "string",
+      "description": "Outputs half-way movable (resampled in halfway space).",
+      "title": "Half Movable"
+    },
+    "half_dst": {
+      "type": "string",
+      "description": "Outputs half-way destination (resampled in halfway space).",
+      "title": "Half Destination"
+    },
+    "half_weights": {
+      "type": "string",
+      "description": "Outputs half-way weights (resampled in halfway space).",
+      "title": "Half Weights"
+    },
+    "half_mov_lta": {
+      "type": "string",
+      "description": "Outputs transform from movable to half-way space.",
+      "title": "Half Movable LTA"
+    },
+    "half_dst_lta": {
+      "type": "string",
+      "description": "Outputs transform from destination to half-way space.",
+      "title": "Half Destination LTA"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Show debug output.",
+      "title": "Debug Mode",
+      "default": false
+    },
+    "verbose": {
+      "type": "number",
+      "description": "Verbosity level: 0 (quiet), 1 (normal), 2 (detail).",
+      "title": "Verbosity Level"
+    }
+  },
+  "required": [
+    "@type",
+    "movable_volume",
+    "target_volume",
+    "output_registration"
+  ]
+}

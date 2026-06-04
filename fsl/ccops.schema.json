@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ccops",
+  "description": "ccops - Clustering of Connectomes Using Probabilistic Tractography",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/ccops"
+    },
+    "basename": {
+      "type": "string",
+      "description": "Output basename",
+      "title": "Basename"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input matrix",
+      "title": "Input file"
+    },
+    "tract_dir": {
+      "type": "string",
+      "description": "Tractography Results Directory",
+      "title": "Tractography Results Directory"
+    },
+    "exclusion_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Exclusion mask (in tract space)",
+      "title": "Exclusion Mask"
+    },
+    "reorder_seedspace": {
+      "type": "boolean",
+      "description": "Do seedspace reordering (default no)",
+      "title": "Reorder Seedspace",
+      "default": false
+    },
+    "reorder_tractspace": {
+      "type": "boolean",
+      "description": "Do tractspace reordering (default no)",
+      "title": "Reorder Tractspace",
+      "default": false
+    },
+    "tract_reord": {
+      "type": "boolean",
+      "description": "Propagate seed reordering onto tract space",
+      "title": "Tract Reordering",
+      "default": false
+    },
+    "connexity_constraint": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Add connexity constraint - value between 0 and 1 (0 is no constraint). Default is 0",
+      "title": "Connexity Constraint"
+    },
+    "binarise_val": {
+      "type": "number",
+      "description": "Binarise at (default 0 - no binarisation)",
+      "title": "Binarisation"
+    },
+    "matrix_power": {
+      "type": "number",
+      "description": "Power to raise the correlation matrix to (default 1)",
+      "title": "Matrix Power"
+    },
+    "brain_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Brain mask used to output the clustered ROI mask (not necessary if --dir set)",
+      "title": "Brain Mask"
+    },
+    "scheme": {
+      "type": "string",
+      "description": "Reordering algorithm. Can be either spectral (default), kmeans or fuzzy",
+      "title": "Reordering Algorithm"
+    },
+    "nclusters": {
+      "type": "number",
+      "description": "Number of clusters to be used in kmeans or fuzzy",
+      "title": "Number of Clusters"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display this help message",
+      "title": "Help",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "basename"
+  ]
+}

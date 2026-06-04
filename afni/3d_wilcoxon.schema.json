@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dWilcoxon",
+  "description": "Nonparametric Wilcoxon signed-rank test for paired comparisons of two samples",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dWilcoxon"
+    },
+    "workmem": {
+      "type": "number",
+      "description": "Number of megabytes of RAM to use for statistical workspace",
+      "title": "Workspace memory in megabytes"
+    },
+    "voxel": {
+      "type": "number",
+      "description": "Screen output for voxel # num",
+      "title": "Output voxel number"
+    },
+    "dset1_x": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Data set for X observations. The user must specify 1 and only 1 sub-brick with each -dset command.",
+      "title": "Dataset 1 for X observations"
+    },
+    "dset2_y": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Data set for Y observations. The user must specify 1 and only 1 sub-brick with each -dset command.",
+      "title": "Dataset 2 for Y observations"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Estimated population delta and Wilcoxon signed-rank statistics are written to file",
+      "title": "Output file prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "dset1_x",
+    "dset2_y",
+    "output_prefix"
+  ]
+}

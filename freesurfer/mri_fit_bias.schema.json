@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_fit_bias",
+  "description": "A tool for intensity normalization and bias correction in MRI images.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_fit_bias"
+    },
+    "inputvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume for intensity normalization",
+      "title": "Input Volume"
+    },
+    "lpf_cutoff": {
+      "type": "number",
+      "description": "Low-pass filter cutoff in mm (default is 23.000000)",
+      "title": "Low-pass Filter Cutoff"
+    },
+    "segvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Segmentation volume to define WM and Cortex (e.g., aseg.presurf.mgz)",
+      "title": "Segmentation Volume"
+    },
+    "maskvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask volume; zero everything outside of the mask (e.g., brainmask.mgz)",
+      "title": "Mask Volume"
+    },
+    "outvol": {
+      "type": "string",
+      "description": "Bias corrected output volume",
+      "title": "Output Volume"
+    },
+    "biasfield": {
+      "type": "string",
+      "description": "Output bias field",
+      "title": "Bias Field"
+    },
+    "dctvol": {
+      "type": "string",
+      "description": "DCT fields file for debugging",
+      "title": "DCT Volume"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Mask out anything <= threshold value",
+      "title": "Threshold Value"
+    },
+    "nerode": {
+      "type": "number",
+      "description": "3D erode segmentation by n steps (default is 1)",
+      "title": "Erode Steps"
+    },
+    "nthreads": {
+      "type": "number",
+      "description": "Number of threads to use",
+      "title": "Threads"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging mode",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "checkopts": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit",
+      "title": "Check Options Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "inputvol",
+    "segvol",
+    "maskvol",
+    "outvol",
+    "biasfield"
+  ]
+}

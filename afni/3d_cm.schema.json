@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dCM",
+  "description": "Tool for computing the center of mass of a dataset",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dCM"
+    },
+    "dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset.",
+      "title": "Input file"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use the specified dataset as a mask. Only voxels with nonzero values in 'mset' will be averaged from 'dataset'. Both datasets must have the same number of voxels.",
+      "title": "Mask file"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Generate the mask automatically.",
+      "title": "Automask flag",
+      "default": false
+    },
+    "set_origin": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "After computing the CM of the dataset, set the origin fields in the header so that the CM will be at (x,y,z) in DICOM coordinates.",
+      "title": "Set origin"
+    },
+    "local_ijk": {
+      "type": "boolean",
+      "description": "Output values as (i,j,k) in local orientation.",
+      "title": "Local IJK flag",
+      "default": false
+    },
+    "roi_vals": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Compute center of mass for each blob with specified voxel values.",
+      "title": "ROI values"
+    },
+    "all_rois": {
+      "type": "boolean",
+      "description": "Automatically find all ROI values and compute their centers of mass.",
+      "title": "All ROIs flag",
+      "default": false
+    },
+    "icent": {
+      "type": "boolean",
+      "description": "Compute Internal Center, which finds the center voxel closest to the center of mass.",
+      "title": "Internal Center flag",
+      "default": false
+    },
+    "dcent": {
+      "type": "boolean",
+      "description": "Compute Distance Center, the center voxel with the shortest average distance to all other voxels. This is computationally expensive.",
+      "title": "Distance Center flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "dset"
+  ]
+}

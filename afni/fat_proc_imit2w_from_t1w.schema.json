@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_proc_imit2w_from_t1w",
+  "description": "Process T1w anatomical images to generate an imitation T2w-contrast image",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_proc_imit2w_from_t1w"
+    },
+    "t1_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Full name of the input T1w volume",
+      "title": "Input T1w File"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output prefix for files and snapshots",
+      "title": "Output Prefix"
+    },
+    "workdir": {
+      "type": "string",
+      "description": "Specify a working directory, which can be removed (default: __WORKING_imit2w_from_t1w)",
+      "title": "Working Directory"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional input of a pre-skullstripped T1_FILE (either mask or skull-stripped volume)",
+      "title": "Pre-skullstripped Mask"
+    },
+    "ss_blur_fwhm": {
+      "type": "number",
+      "description": "Optional, add in blurring during the 3dSkullStrip part (in mm, default: 2 FWHM)",
+      "title": "Skull Strip Blur FWHM"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Optional switch to NOT remove working directory '__WORKING_imit2w_from_t1w' (default: remove working dir)",
+      "title": "No Clean",
+      "default": false
+    },
+    "no_qc_view": {
+      "type": "boolean",
+      "description": "Turn off the automatic creation of QC montages (default: on)",
+      "title": "No QC View",
+      "default": false
+    },
+    "qc_prefix": {
+      "type": "string",
+      "description": "Change the prefix of the QC images (default: use prefix of volumes)",
+      "title": "QC Image Prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "t1_file",
+    "prefix"
+  ]
+}

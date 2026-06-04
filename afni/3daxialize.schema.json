@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3daxialize",
+  "description": "Read and write dataset as new dataset with data brick oriented as axial slices.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3daxialize"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset to be axially oriented",
+      "title": "Input dataset file"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use specified prefix for the new dataset. Default is 'axialize'.",
+      "title": "Output prefix"
+    },
+    "verb": {
+      "type": "boolean",
+      "description": "Print out a progress report.",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "sagittal": {
+      "type": "boolean",
+      "description": "Write dataset in sagittal slice order.",
+      "title": "Sagittal slice order flag",
+      "default": false
+    },
+    "coronal": {
+      "type": "boolean",
+      "description": "Write dataset in coronal slice order.",
+      "title": "Coronal slice order flag",
+      "default": false
+    },
+    "axial": {
+      "type": "boolean",
+      "description": "Write dataset in axial slice order, the default orientation.",
+      "title": "Axial slice order flag",
+      "default": false
+    },
+    "orient_code": {
+      "type": "string",
+      "description": "Orientation code for output. 3 letters: one from {R,L}, {A,P}, {I,S}.",
+      "title": "Orientation code"
+    },
+    "frugal": {
+      "type": "boolean",
+      "description": "Write data as it is rotated, saving memory. Not available with NIFTI datasets.",
+      "title": "Frugal flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "infile"
+  ]
+}

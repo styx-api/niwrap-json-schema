@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dANOVA2",
+  "description": "This program performs a two-factor Analysis of Variance (ANOVA) on 3D datasets.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dANOVA2"
+    },
+    "type": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3,
+      "description": "Type of ANOVA model to be used: 1=fixed, 2=random, 3=mixed",
+      "title": "ANOVA Model Type"
+    },
+    "alevels": {
+      "type": "integer",
+      "description": "Number of levels of factor A",
+      "title": "A Levels"
+    },
+    "blevels": {
+      "type": "integer",
+      "description": "Number of levels of factor B",
+      "title": "B Levels"
+    },
+    "dataset": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Data set for levels of factor A and factor B",
+      "title": "Dataset"
+    },
+    "voxel": {
+      "type": "integer",
+      "description": "Screen output for voxel number",
+      "title": "Voxel Number"
+    },
+    "diskspace": {
+      "type": "boolean",
+      "description": "Print out disk space required for program execution",
+      "title": "Disk Space Flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use sub-brick #0 of dataset 'mset' to define which voxels to process",
+      "title": "Mask Dataset"
+    },
+    "ftr": {
+      "type": "string",
+      "description": "F-statistic for treatment effect",
+      "title": "F-statistic Treatment Prefix"
+    },
+    "fa": {
+      "type": "string",
+      "description": "F-statistic for factor A effect",
+      "title": "F-statistic A Prefix"
+    },
+    "fb": {
+      "type": "string",
+      "description": "F-statistic for factor B effect",
+      "title": "F-statistic B Prefix"
+    },
+    "fab": {
+      "type": "string",
+      "description": "F-statistic for interaction",
+      "title": "F-statistic Interaction Prefix"
+    },
+    "amean": {
+      "type": "string",
+      "description": "Estimate mean of factor A level",
+      "title": "Estimate Mean A Prefix"
+    },
+    "bmean": {
+      "type": "string",
+      "description": "Estimate mean of factor B level",
+      "title": "Estimate Mean B Prefix"
+    },
+    "xmean": {
+      "type": "string",
+      "description": "Estimate mean of cell at level i of factor A and level j of factor B",
+      "title": "Estimate Mean Cell Prefix"
+    },
+    "adiff": {
+      "type": "string",
+      "description": "Difference between levels i and j of factor A",
+      "title": "Difference A Prefix"
+    },
+    "bdiff": {
+      "type": "string",
+      "description": "Difference between levels i and j of factor B",
+      "title": "Difference B Prefix"
+    },
+    "xdiff": {
+      "type": "string",
+      "description": "Difference between cell mean at A=i, B=j and cell mean at A=k, B=l",
+      "title": "Difference Cell Mean Prefix"
+    },
+    "acontr": {
+      "type": "string",
+      "description": "Contrast in factor A levels",
+      "title": "Contrast A Prefix"
+    },
+    "bcontr": {
+      "type": "string",
+      "description": "Contrast in factor B levels",
+      "title": "Contrast B Prefix"
+    },
+    "xcontr": {
+      "type": "string",
+      "description": "Contrast in cell means",
+      "title": "Contrast Cell Means Prefix"
+    },
+    "bucket": {
+      "type": "string",
+      "description": "Create one AFNI 'bucket' dataset whose sub-bricks are obtained by concatenating the above output files",
+      "title": "Bucket Prefix"
+    },
+    "old_method": {
+      "type": "boolean",
+      "description": "Request to perform ANOVA using the previous functionality (requires -OK, also)",
+      "title": "Old Method Flag",
+      "default": false
+    },
+    "ok": {
+      "type": "boolean",
+      "description": "Confirm understanding that contrasts that do not sum to zero have inflated t-stats, and contrasts that do sum to zero assume sphericity (to be used with -old_method)",
+      "title": "OK Flag",
+      "default": false
+    },
+    "assume_sph": {
+      "type": "boolean",
+      "description": "Assume sphericity (zero-sum contrasts, only). This allows use of the old_method for computing contrasts which sum to zero",
+      "title": "Assume Sphericity Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "type",
+    "alevels",
+    "blevels"
+  ]
+}

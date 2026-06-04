@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfExtrema",
+  "description": "A program finding the local extrema in a dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SurfExtrema"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset in which Extrema are to be identified.",
+      "title": "Input File"
+    },
+    "hood": {
+      "type": "number",
+      "description": "Neighborhood radius (R) in mm. Default is 8 mm.",
+      "title": "Neighborhood Radius"
+    },
+    "thresh": {
+      "type": "number",
+      "description": "Do not consider nodes with value less than this threshold. Default is 0.",
+      "title": "Threshold"
+    },
+    "gthresh": {
+      "type": "number",
+      "description": "Do not consider nodes with gradient less than this threshold. Default is 0.01.",
+      "title": "Gradient Threshold"
+    },
+    "gscale": {
+      "enum": [
+        "NONE",
+        "LMEAN",
+        "GMEAN"
+      ],
+      "description": "Scaling to apply to gradient computation.",
+      "title": "Gradient Scale"
+    },
+    "extype": {
+      "enum": [
+        "MAX",
+        "MIN",
+        "ABS"
+      ],
+      "description": "Find maxima, minima, or extrema. Options are MAX (default), MIN, ABS.",
+      "title": "Extrema Type"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output datasets.",
+      "title": "Output Prefix"
+    },
+    "table": {
+      "type": "string",
+      "description": "Name of file in which to store a record of the extrema found.",
+      "title": "Table File"
+    }
+  },
+  "required": [
+    "@type",
+    "prefix"
+  ]
+}

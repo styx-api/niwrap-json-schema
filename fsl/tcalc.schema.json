@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tcalc",
+  "description": "Resample a 4D phantom for theoretical calculations",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/tcalc"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image (4D phantom for theoretical calculations)",
+      "title": "Input Image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Output image",
+      "title": "Output Image"
+    },
+    "echo_time": {
+      "type": "number",
+      "description": "Echo Time (TE) in seconds [e.g., T1-weighted images for 3T TE=0.01 s]",
+      "title": "Echo Time"
+    },
+    "repetition_time": {
+      "type": "number",
+      "description": "Repetition Time (TR) in seconds [e.g., T1-weighted images for 3T TR=0.7 s]",
+      "title": "Repetition Time"
+    },
+    "mrpar_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "MRpar File",
+      "title": "MRpar File"
+    },
+    "num_voxel_x": {
+      "type": "number",
+      "description": "Number of Voxels along X (default: phantom)",
+      "title": "Number of Voxels along X"
+    },
+    "num_voxel_y": {
+      "type": "number",
+      "description": "Number of Voxels along Y (default: phantom)",
+      "title": "Number of Voxels along Y"
+    },
+    "num_voxel_z": {
+      "type": "number",
+      "description": "Number of Voxels along Z (default: phantom)",
+      "title": "Number of Voxels along Z"
+    },
+    "voxel_size_x": {
+      "type": "number",
+      "description": "Size of voxels along X (default: phantom)",
+      "title": "Size of voxels along X"
+    },
+    "voxel_size_y": {
+      "type": "number",
+      "description": "Size of voxels along Y (default: phantom)",
+      "title": "Size of voxels along Y"
+    },
+    "voxel_size_z": {
+      "type": "number",
+      "description": "Size of voxels along Z i.e., number of slices (default: phantom)",
+      "title": "Size of voxels along Z"
+    },
+    "start_position": {
+      "type": "number",
+      "description": "Starting position of the volume in mm (default = 0mm)",
+      "title": "Start Position"
+    },
+    "noise_sigma": {
+      "type": "number",
+      "description": "Add noise with given sigma (default: 0 i.e., no noise)",
+      "title": "Noise Sigma"
+    },
+    "save_flag": {
+      "type": "boolean",
+      "description": "Save original non-resample output image",
+      "title": "Save Flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_image",
+    "output_image"
+  ]
+}

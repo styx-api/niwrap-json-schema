@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "oxford_asl",
+  "description": "Calculate perfusion maps from ASL data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/oxford_asl"
+    },
+    "asl_data": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input ASL data",
+      "title": "ASL data"
+    },
+    "output_dir_name": {
+      "type": "string",
+      "description": "Output directory name",
+      "title": "Output Directory"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask in native space of ASL data",
+      "title": "Mask"
+    },
+    "spatial_smoothing": {
+      "type": "boolean",
+      "description": "Use adaptive spatial smoothing on perfusion",
+      "title": "Spatial Smoothing",
+      "default": false
+    },
+    "white_paper_analysis": {
+      "type": "boolean",
+      "description": "Analysis that conforms to the 'white paper' (Alsop et al. 2014)",
+      "title": "White Paper Analysis",
+      "default": false
+    },
+    "motion_correction": {
+      "type": "boolean",
+      "description": "Apply motion correction using mcflirt",
+      "title": "Motion Correction",
+      "default": false
+    },
+    "input_asl_format": {
+      "type": "string",
+      "description": "Input ASL format: diff, tc, ct",
+      "title": "Input ASL Format"
+    },
+    "input_block_format": {
+      "type": "string",
+      "description": "Input block format (for multi-TI): rpt, tis",
+      "title": "Input Block Format"
+    },
+    "inversion_times": {
+      "type": "string",
+      "description": "Comma separated list of inversion times",
+      "title": "Inversion Times"
+    },
+    "ti_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "4D image containing voxelwise TI values",
+      "title": "TI Image"
+    },
+    "casl": {
+      "type": "boolean",
+      "description": "ASL acquisition is pseudo cASL (pcASL) rather than pASL",
+      "title": "CASL Acquisition",
+      "default": false
+    },
+    "arterial_suppression": {
+      "type": "boolean",
+      "description": "Arterial suppression (vascular crushing) was used",
+      "title": "Arterial Suppression",
+      "default": false
+    },
+    "bolus_duration": {
+      "type": "number",
+      "description": "Bolus duration",
+      "title": "Bolus Duration"
+    },
+    "bat": {
+      "type": "number",
+      "description": "Bolus arrival time",
+      "title": "Bolus Arrival Time"
+    },
+    "tissue_t1": {
+      "type": "number",
+      "description": "Tissue T1 value",
+      "title": "Tissue T1 Value"
+    },
+    "blood_t1": {
+      "type": "number",
+      "description": "Blood T1 value",
+      "title": "Blood T1 Value"
+    },
+    "slice_timing_difference": {
+      "type": "number",
+      "description": "Timing difference between slices",
+      "title": "Slice Timing Difference"
+    },
+    "slice_band": {
+      "type": "number",
+      "description": "Number of slices per band in a multi-band setup",
+      "title": "Slice Band"
+    },
+    "flip_angle": {
+      "type": "number",
+      "description": "Flip angle for Look-Locker readout correction",
+      "title": "Flip Angle"
+    },
+    "fsl_anat_dir": {
+      "type": "string",
+      "description": "An fsl_anat directory from structural image",
+      "title": "FSL ANAT Directory"
+    },
+    "structural_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Structural image (whole head)",
+      "title": "Structural Image"
+    },
+    "bet_structural_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Structural image (already BETed)",
+      "title": "BET Structural Image"
+    },
+    "fast_segmentation_images": {
+      "type": "string",
+      "description": "Images from a FAST segmentation",
+      "title": "FAST Segmentation Images"
+    },
+    "sensitivity_correction": {
+      "type": "boolean",
+      "description": "Use bias field (from segmentation) for sensitivity correction",
+      "title": "Sensitivity Correction",
+      "default": false
+    },
+    "precomputed_m0_value": {
+      "type": "number",
+      "description": "Single precomputed M0 value",
+      "title": "Precomputed M0 Value"
+    },
+    "inversion_efficiency": {
+      "type": "number",
+      "description": "Inversion efficiency",
+      "title": "Inversion Efficiency"
+    },
+    "tr_calibration_data": {
+      "type": "number",
+      "description": "TR of calibration data",
+      "title": "TR Calibration Data"
+    },
+    "calibration_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "M0 calibration image (proton density or mean control image)",
+      "title": "Calibration Image"
+    },
+    "calibration_method": {
+      "type": "string",
+      "description": "Calibration method: single or voxel",
+      "title": "Calibration Method"
+    }
+  },
+  "required": [
+    "@type",
+    "asl_data",
+    "output_dir_name"
+  ]
+}

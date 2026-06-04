@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RESAMPLE AN ANNOTATION FILE TO DIFFERENT MESHES",
+  "description": "Resample an annotation file from the source mesh to the target mesh.\n\nOnly annotations in surface space are modified, no changes are made to annotations in other spaces.  The -surface-pair option may be repeated for additional structures used by surface space annotations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/annotation_resample"
+    },
+    "annotation_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the annotation file to resample"
+    },
+    "annotation_out": {
+      "type": "string",
+      "description": "name of resampled annotation file"
+    },
+    "surface_pair": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_surface": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "the midthickness surface of the current mesh the annotations use"
+          },
+          "target_surface": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "the midthickness surface of the mesh the annotations should be transferred to"
+          }
+        },
+        "required": [
+          "source_surface",
+          "target_surface"
+        ]
+      },
+      "description": "pair of surfaces for resampling surface annotations for one structure"
+    }
+  },
+  "required": [
+    "@type",
+    "annotation_in",
+    "annotation_out",
+    "surface_pair"
+  ]
+}

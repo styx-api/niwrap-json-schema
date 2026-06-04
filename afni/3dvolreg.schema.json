@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dvolreg",
+  "description": "Register input volumes to a base volume using AFNI 3dvolreg command",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dvolreg"
+    },
+    "copyorigin": {
+      "type": "boolean",
+      "description": "Copy base file origin coords to output.",
+      "title": "Copyorigin",
+      "default": false
+    },
+    "twopass": {
+      "type": "boolean",
+      "description": "Do two passes of the registration algorithm",
+      "title": "twopass",
+      "default": false
+    },
+    "Fourier": {
+      "type": "boolean",
+      "description": "Perform the alignments using Fourier interpolation.",
+      "title": "Fourier",
+      "default": false
+    },
+    "in_weight_volume": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "(file or string, an integer) or file or string. Weights for each voxel specified by a file with an optional volume number (defaults to 0).",
+      "title": "In weight volume"
+    },
+    "in_weight_volume_2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "(file or string, an integer) or file or string. Weights for each voxel specified by a file with an optional volume number (defaults to 0).",
+      "title": "In weight volume"
+    },
+    "interp": {
+      "enum": [
+        "fourier",
+        "cubic",
+        "heptic",
+        "quintic",
+        "linear"
+      ],
+      "description": "'fourier' or 'cubic' or 'heptic' or 'quintic' or 'linear'. Spatial interpolation methods [default = heptic].",
+      "title": "Interp"
+    },
+    "num_threads": {
+      "type": "integer",
+      "description": "Set number of threads.",
+      "title": "Num threads"
+    },
+    "outputtype": {
+      "enum": [
+        "NIFTI",
+        "AFNI",
+        "NIFTI_GZ"
+      ],
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype.",
+      "title": "Outputtype"
+    },
+    "timeshift": {
+      "type": "boolean",
+      "description": "Time shift to mean slice time offset.",
+      "title": "Timeshift",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "More detailed description of the process.",
+      "title": "Verbose",
+      "default": false
+    },
+    "basefile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Base file for registration.",
+      "title": "Basefile"
+    },
+    "zpad": {
+      "type": "integer",
+      "description": "Zeropad around the edges by 'n' voxels during rotations.",
+      "title": "Zpad"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix",
+      "title": "prefix"
+    },
+    "Maxdisp1d": {
+      "type": "string",
+      "description": "Do '-maxdisp' and also write the max displacement for each sub-brick into file 'mm' in 1D (columnar) format.",
+      "title": "Maxdisp1d"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file to 3dvolreg.",
+      "title": "In file"
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "in_file"
+  ]
+}

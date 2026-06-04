@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dSurfMask",
+  "description": "Creates volumetric datasets marking voxels based on their location relative to a surface",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dSurfMask"
+    },
+    "surface_type": {
+      "type": "string",
+      "description": "Specify input surface.",
+      "title": "Surface Type"
+    },
+    "surface_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify input surface filename.",
+      "title": "Surface File"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix of output dataset.",
+      "title": "Prefix"
+    },
+    "grid_parent": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specifies the grid for the output volume.",
+      "title": "Grid Parent"
+    },
+    "fill_method": {
+      "type": "string",
+      "description": "Fill method: SLOW or FAST (default: FAST).",
+      "title": "Fill Method"
+    },
+    "surface_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the surface volume.",
+      "title": "Surface Volume"
+    },
+    "mask_only": {
+      "type": "boolean",
+      "description": "Produce an output dataset where voxels are 1 inside the surface and 0 outside.",
+      "title": "Mask Only",
+      "default": false
+    },
+    "flip_orientation": {
+      "type": "boolean",
+      "description": "Flip triangle winding of surface mesh.",
+      "title": "Flip Orientation",
+      "default": false
+    },
+    "no_distance": {
+      "type": "boolean",
+      "description": "Do not compute the distances, just the mask from the first step.",
+      "title": "No Distance",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "surface_type",
+    "surface_file",
+    "prefix",
+    "grid_parent"
+  ]
+}

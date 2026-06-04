@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dcm2niix_afni",
+  "description": "DICOM to NIfTI converter optimized for AFNI",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/dcm2niix_afni"
+    },
+    "input_folder": {
+      "type": "string",
+      "description": "Folder containing DICOM files",
+      "title": "Input Folder"
+    },
+    "compression_level": {
+      "type": "integer",
+      "description": "GZ compression level (1=fastest..9=smallest, default 6)",
+      "title": "GZ Compression Level"
+    },
+    "adjacent_dicoms": {
+      "type": "string",
+      "description": "Adjacent DICOMs (images from same series always in same folder) for faster conversion (n/y, default n)",
+      "title": "Adjacent DICOMs"
+    },
+    "bids_sidecar": {
+      "type": "string",
+      "description": "BIDS sidecar (y/n/o [o=only: no NIfTI], default y)",
+      "title": "BIDS Sidecar"
+    },
+    "anonymize_bids": {
+      "type": "string",
+      "description": "Anonymize BIDS (y/n, default y)",
+      "title": "Anonymize BIDS"
+    },
+    "comment": {
+      "type": "string",
+      "description": "Comment stored in NIfTI aux_file (provide up to 24 characters e.g. '-c first_visit')",
+      "title": "Comment"
+    },
+    "directory_search_depth": {
+      "type": "integer",
+      "description": "Directory search depth. Convert DICOMs in sub-folders of in_folder? (0..9, default 5)",
+      "title": "Directory Search Depth"
+    },
+    "export_format": {
+      "type": "string",
+      "description": "Export as NRRD (y) or MGH (o) instead of NIfTI (y/n/o, default n)",
+      "title": "Export Format"
+    },
+    "filename_template": {
+      "type": "string",
+      "description": "Filename template for output (default '%f_%p_%t_%s')",
+      "title": "Filename Template"
+    },
+    "generate_defaults": {
+      "type": "string",
+      "description": "Generate defaults file (y/n/o/i [o=only: reset and write defaults; i=ignore: reset defaults], default n)",
+      "title": "Generate Defaults"
+    },
+    "ignore_images": {
+      "type": "string",
+      "description": "Ignore derived, localizer and 2D images (y/n, default n)",
+      "title": "Ignore Images"
+    },
+    "lossless_scale": {
+      "type": "string",
+      "description": "Losslessly scale 16-bit integers to use dynamic range (y/n/o, default o)",
+      "title": "Lossless Scale"
+    },
+    "merge_slices": {
+      "type": "string",
+      "description": "Merge 2D slices from same series regardless of echo, exposure, etc. (n/y or 0/1/2, default 2)",
+      "title": "Merge Slices"
+    },
+    "series_crc_number": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Only convert this series CRC number - can be used up to 16 times (default convert all)",
+      "title": "Series CRC Number"
+    },
+    "output_directory": {
+      "type": "string",
+      "description": "Output directory (omit to save to input folder)",
+      "title": "Output Directory"
+    },
+    "phillips_scaling": {
+      "type": "string",
+      "description": "Philips precise float (not display) scaling (y/n, default y)",
+      "title": "Phillips Scaling"
+    },
+    "rename_dicoms": {
+      "type": "string",
+      "description": "Rename instead of convert DICOMs (y/n, default n)",
+      "title": "Rename DICOMs"
+    },
+    "single_file_mode": {
+      "type": "string",
+      "description": "Single file mode, do not convert other images in folder (y/n, default n)",
+      "title": "Single File Mode"
+    },
+    "up_to_date": {
+      "type": "boolean",
+      "description": "Up-to-date check",
+      "title": "Up-to-Date Check",
+      "default": false
+    },
+    "verbose": {
+      "type": "string",
+      "description": "Verbose (n/y or 0/1/2, default 0)",
+      "title": "Verbose"
+    },
+    "write_behavior": {
+      "type": "integer",
+      "description": "Write behavior for name conflicts (0=skip duplicates, 1=overwrite, 2=add suffix)",
+      "title": "Write Behavior"
+    },
+    "crop_3d": {
+      "type": "string",
+      "description": "Crop 3D acquisitions (y/n/i, default n, use 'i'gnore to neither crop nor rotate 3D acquisitions)",
+      "title": "Crop 3D"
+    },
+    "gz_compress": {
+      "type": "string",
+      "description": "GZ compress images (y/o/i/n/3, default n) [y=pigz, o=optimal pigz, i=internal:miniz, n=no, 3=no,3D]",
+      "title": "GZ Compress"
+    },
+    "big_endian": {
+      "type": "string",
+      "description": "Byte order (y/n/o, default o) [y=big-endian, n=little-endian, o=optimal/native]",
+      "title": "Big Endian"
+    },
+    "progress": {
+      "type": "string",
+      "description": "Slicer format progress information (y/n, default n)",
+      "title": "Progress"
+    },
+    "ignore_trigger_times": {
+      "type": "boolean",
+      "description": "Disregard values in 0018, 1060 and 0020, 9153",
+      "title": "Ignore Trigger Times",
+      "default": false
+    },
+    "terse": {
+      "type": "boolean",
+      "description": "Omit filename post-fixes (can cause overwrites)",
+      "title": "Terse",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Report version",
+      "title": "Version",
+      "default": false
+    },
+    "xml": {
+      "type": "boolean",
+      "description": "Slicer format features",
+      "title": "XML",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_folder"
+  ]
+}

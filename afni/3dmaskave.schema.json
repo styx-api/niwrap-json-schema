@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dmaskave",
+  "description": "Computes average of all voxels in the input dataset which satisfy the criterion in the options list",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dmaskave"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file to 3dmaskave.",
+      "title": "In file"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Matrix to align input file.",
+      "title": "Mask"
+    },
+    "num_threads": {
+      "type": "integer",
+      "description": "Set number of threads.",
+      "title": "Num threads"
+    },
+    "outputtype": {
+      "enum": [
+        "NIFTI",
+        "AFNI",
+        "NIFTI_GZ"
+      ],
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype.",
+      "title": "Outputtype"
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Matrix to align input file.",
+      "title": "Quiet",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

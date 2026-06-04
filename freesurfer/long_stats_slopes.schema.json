@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "long_stats_slopes",
+  "description": "Computes slopes of statistics in a longitudinal study for each subject from processed results, outputting to designated directories for further analysis.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/long_stats_slopes"
+    },
+    "qdec_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "QDEC table file specifying the subjects and time points.",
+      "title": "QDEC Table File"
+    },
+    "stats_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The stats file, e.g. aseg.stats or lh.aparc.stats.",
+      "title": "Stats File"
+    },
+    "measure": {
+      "type": "string",
+      "description": "The stats measure (e.g. volume, thickness, mean, std).",
+      "title": "Measure"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Full path to FreeSurfer subjects directory.",
+      "title": "Subjects Directory"
+    },
+    "do_avg": {
+      "type": "boolean",
+      "description": "Compute and output the temporal average.",
+      "title": "Compute Temporal Average",
+      "default": false
+    },
+    "do_rate": {
+      "type": "boolean",
+      "description": "Compute and output the rate.",
+      "title": "Compute Rate",
+      "default": false
+    },
+    "do_pc1fit": {
+      "type": "boolean",
+      "description": "Compute and output the percent change with respect to tp1 from linear fit.",
+      "title": "Compute Percent Change (Fit)",
+      "default": false
+    },
+    "do_pc1": {
+      "type": "boolean",
+      "description": "Compute and output the percent change with respect to tp1.",
+      "title": "Compute Percent Change",
+      "default": false
+    },
+    "do_spc": {
+      "type": "boolean",
+      "description": "Compute and output the symmetric percent change with respect to temporal average.",
+      "title": "Compute Symmetric Percent Change",
+      "default": false
+    },
+    "do_stack": {
+      "type": "boolean",
+      "description": "Compute and output tables showing the time series (row per time point).",
+      "title": "Compute Time Series",
+      "default": false
+    },
+    "resid": {
+      "type": "number",
+      "description": "Residual timepoint to export (pass 1 for tp1, etc., pass 0 for average).",
+      "title": "Residual Timepoint"
+    },
+    "time_var": {
+      "type": "string",
+      "description": "Variable name for time column variable (e.g., age) in QDEC table.",
+      "title": "Time Variable"
+    },
+    "generic_time": {
+      "type": "boolean",
+      "description": "Time points are ordered in QDEC file; assume time=1,2,3...",
+      "title": "Generic Time",
+      "default": false
+    },
+    "cross_sectional": {
+      "type": "boolean",
+      "description": "Use cross-sectional results (for testing only).",
+      "title": "Cross-Sectional Results",
+      "default": false
+    },
+    "out_avg": {
+      "type": "string",
+      "description": "Filename to store temporal average in <template>/stats/<OUT_AVG>.",
+      "title": "Output Temporal Average"
+    },
+    "out_rate": {
+      "type": "string",
+      "description": "Filename to store rate in <template>/stats/<OUT_RATE>.",
+      "title": "Output Rate"
+    },
+    "out_pc1fit": {
+      "type": "string",
+      "description": "Filename to store percent change to tp1fit in <template>/stats/<OUT_PC1FIT>.",
+      "title": "Output Percent Change (Fit)"
+    },
+    "out_pc1": {
+      "type": "string",
+      "description": "Filename to store percent change to tp1 in <template>/stats/<OUT_PC1>.",
+      "title": "Output Percent Change"
+    },
+    "out_spc": {
+      "type": "string",
+      "description": "Filename to store symmetric percent change in <template>/stats/<OUT_SPC>.",
+      "title": "Output Symmetric Percent Change"
+    },
+    "out_resid": {
+      "type": "string",
+      "description": "Filename to store residual in <template>/stats/<OUT_RESID>.",
+      "title": "Output Residual"
+    },
+    "out_stack": {
+      "type": "string",
+      "description": "Filename to store stacked measure file in <template>/stats/<OUT_STACK>.",
+      "title": "Output Stacked Measures"
+    },
+    "stack_avg": {
+      "type": "string",
+      "description": "Full filename to stack temporal average tables.",
+      "title": "Stacked Temporal Average"
+    },
+    "stack_rate": {
+      "type": "string",
+      "description": "Full filename to stack rate tables.",
+      "title": "Stacked Rate Tables"
+    },
+    "stack_pc1fit": {
+      "type": "string",
+      "description": "Full filename to stack percent change to tp1fit tables.",
+      "title": "Stacked Percent Change (Fit)"
+    },
+    "stack_pc1": {
+      "type": "string",
+      "description": "Full filename to stack percent change to tp1 tables.",
+      "title": "Stacked Percent Change"
+    },
+    "stack_spc": {
+      "type": "string",
+      "description": "Full filename to stack symmetric percent change tables.",
+      "title": "Stacked Symmetric Percent Change"
+    },
+    "stack_resid": {
+      "type": "string",
+      "description": "Full filename to stack residual tables.",
+      "title": "Stacked Residual Tables"
+    }
+  },
+  "required": [
+    "@type",
+    "qdec_table",
+    "stats_file",
+    "measure",
+    "subjects_dir"
+  ]
+}

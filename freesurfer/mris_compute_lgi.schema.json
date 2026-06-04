@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_compute_lgi",
+  "description": "Computes local measurements of gyrification at thousands of points over the entire cortical surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_compute_lgi"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface file, typically lh.pial or rh.pial",
+      "title": "Input surface file"
+    },
+    "close_sphere_size": {
+      "type": "number",
+      "description": "Use sphere of specified size in mm for morph closing operation (default: 15mm)",
+      "title": "Close sphere size"
+    },
+    "smooth_iters": {
+      "type": "number",
+      "description": "Smooth outer-surface specified number of iterations (default: 30)",
+      "title": "Smooth iterations"
+    },
+    "step_size": {
+      "type": "number",
+      "description": "Skip every specified number of vertices when computing lGI (default: 100)",
+      "title": "Step size"
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Enable command echo, for debug",
+      "title": "Echo flag",
+      "default": false
+    },
+    "dontrun": {
+      "type": "boolean",
+      "description": "Just show commands (don't run them)",
+      "title": "Don't run flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface"
+  ]
+}

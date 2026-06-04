@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ss3t_csd_beta1",
+  "description": "SS3T-CSD: beta 1 implementation\n\n* Dhollander, T. & Connelly, A. A novel iterative approach to reap the benefits of multi-tissue CSD from just single-shell (+b=0) diffusion MRI data. Proc Intl Soc Mag Reson Med, 2016, 3010",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix3tissue/ss3t_csd_beta1"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "only perform computation within the specified binary brain mask image.",
+      "title": "mask"
+    },
+    "bzero_pct": {
+      "type": "number",
+      "description": "the threshold below which the amplitude of the FOD is assumed to be zero, expressed as an absolute amplitude (default = 0).",
+      "title": "bzero percent"
+    },
+    "niter": {
+      "type": "integer",
+      "description": "the maximum number of iterations to perform for each voxel (default = 50). Use '-niter 0' for a linear unconstrained spherical deconvolution.",
+      "title": "niter"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "dwi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input diffusion-weighted image",
+      "title": "dwi"
+    },
+    "response_odf": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "input tissue response",
+            "title": "response"
+          },
+          "odf": {
+            "type": "string",
+            "description": "output ODF image",
+            "title": "odf"
+          }
+        },
+        "required": [
+          "response",
+          "odf"
+        ]
+      },
+      "description": "pairs of input tissue response and output ODF images",
+      "title": "response_odf"
+    }
+  },
+  "required": [
+    "@type",
+    "dwi",
+    "response_odf"
+  ]
+}

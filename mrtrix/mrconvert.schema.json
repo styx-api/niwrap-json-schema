@@ -1,0 +1,404 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mrconvert",
+  "description": "Perform conversion between different file types and optionally extract a subset of the input image.\n\nIf used correctly, this program can be a very useful workhorse. In addition to converting images between different formats, it can be used to extract specific studies from a data set, extract a specific region of interest, or flip the images. Some of the possible operations are described in more detail below.\n\nNote that for both the -coord and -axes options, indexing starts from 0 rather than 1. E.g. -coord 3 <#> selects volumes (the fourth dimension) from the series; -axes 0,1,2 includes only the three spatial axes in the output image.\n\nAdditionally, for the second input to the -coord option and the -axes option, you can use any valid number sequence in the selection, as well as the 'end' keyword (see the main documentation for details); this can be particularly useful to select multiple coordinates.\n\nThe -vox option is used to change the size of the voxels in the output image as reported in the image header; note however that this does not re-sample the image based on a new voxel size (that is done using the mrgrid command).\n\nBy default, the intensity scaling parameters in the input image header are passed through to the output image header when writing to an integer image, and reset to 0,1 (i.e. no scaling) for floating-point and binary images. Note that the -scaling option will therefore have no effect for floating-point or binary output images.\n\nThe -axes option specifies which axes from the input image will be used to form the output image. This allows the permutation, omission, or addition of axes into the output image. The axes should be supplied as a comma-separated list of axis indices. If an axis from the input image is to be omitted from the output image, it must either already have a size of 1, or a single coordinate along that axis must be selected by the user by using the -coord option. Examples are provided further below.\n\nThe -bvalue_scaling option controls an aspect of the import of diffusion gradient tables. When the input diffusion-weighting direction vectors have norms that differ substantially from unity, the b-values will be scaled by the square of their corresponding vector norm (this is how multi-shell acquisitions are frequently achieved on scanner platforms). However in some rare instances, the b-values may be correct, despite the vectors not being of unit norm (or conversely, the b-values may need to be rescaled even though the vectors are close to unit norm). This option allows the user to control this operation and override MRrtix3's automatic detection.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/mrconvert"
+    },
+    "coord": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "axis": {
+            "type": "integer",
+            "description": "retain data from the input image only at the coordinates specified in the selection along the specified axis. The selection argument expects a number sequence, which can also include the 'end' keyword.",
+            "title": "axis"
+          },
+          "selection": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "retain data from the input image only at the coordinates specified in the selection along the specified axis. The selection argument expects a number sequence, which can also include the 'end' keyword.",
+            "title": "selection"
+          }
+        },
+        "required": [
+          "axis",
+          "selection"
+        ]
+      },
+      "description": "retain data from the input image only at the coordinates specified in the selection along the specified axis. The selection argument expects a number sequence, which can also include the 'end' keyword.",
+      "title": "coord"
+    },
+    "vox": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "change the voxel dimensions reported in the output image header",
+      "title": "vox"
+    },
+    "axes": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "specify the axes from the input image that will be used to form the output image",
+      "title": "axes"
+    },
+    "scaling": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "specify the data scaling parameters used to rescale the intensity values",
+      "title": "scaling"
+    },
+    "json_import": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "import data from a JSON file into header key-value pairs",
+      "title": "json_import"
+    },
+    "json_export": {
+      "type": "string",
+      "description": "export data from an image header key-value pairs into a JSON file",
+      "title": "json_export"
+    },
+    "clear_property": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "remove the specified key from the image header altogether.",
+      "title": "clear_property"
+    },
+    "set_property": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "set the value of the specified key in the image header.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "set the value of the specified key in the image header.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "set the value of the specified key in the image header.",
+      "title": "set_property"
+    },
+    "append_property": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "append the given value to the specified key in the image header (this adds the value specified as a new line in the header value).",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "append the given value to the specified key in the image header (this adds the value specified as a new line in the header value).",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "append the given value to the specified key in the image header (this adds the value specified as a new line in the header value).",
+      "title": "append_property"
+    },
+    "copy_properties": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousString"
+            },
+            "obj": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "@type",
+            "obj"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousFile"
+            },
+            "obj": {
+              "type": "string",
+              "x-styx-type": "path"
+            }
+          },
+          "required": [
+            "@type",
+            "obj"
+          ]
+        }
+      ],
+      "description": "clear all generic properties and replace with the properties from the image / file specified.",
+      "title": "copy_properties"
+    },
+    "strides": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousString"
+            },
+            "obj": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "@type",
+            "obj"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousFile"
+            },
+            "obj": {
+              "type": "string",
+              "x-styx-type": "path"
+            }
+          },
+          "required": [
+            "@type",
+            "obj"
+          ]
+        }
+      ],
+      "description": "specify the strides of the output data in memory; either as a comma-separated list of (signed) integers, or as a template image from which the strides shall be extracted and used. The actual strides produced will depend on whether the output image format can support it.",
+      "title": "strides"
+    },
+    "datatype": {
+      "type": "string",
+      "description": "specify output image data type. Valid choices are: float32, float32le, float32be, float64, float64le, float64be, int64, uint64, int64le, uint64le, int64be, uint64be, int32, uint32, int32le, uint32le, int32be, uint32be, int16, uint16, int16le, uint16le, int16be, uint16be, cfloat32, cfloat32le, cfloat32be, cfloat64, cfloat64le, cfloat64be, int8, uint8, bit.",
+      "title": "datatype"
+    },
+    "grad": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in a text file. This should be supplied as a 4xN text file with each line is in the format [ X Y Z b ], where [ X Y Z ] describe the direction of the applied gradient, and b gives the b-value in units of s/mm^2. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+      "title": "grad"
+    },
+    "fslgrad": {
+      "type": "object",
+      "properties": {
+        "bvecs": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "title": "bvecs"
+        },
+        "bvals": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "title": "bvals"
+        }
+      },
+      "required": [
+        "bvecs",
+        "bvals"
+      ],
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+      "title": "fslgrad"
+    },
+    "bvalue_scaling": {
+      "type": "string",
+      "description": "enable or disable scaling of diffusion b-values by the square of the corresponding DW gradient norm (see Desciption). Valid choices are yes/no, true/false, 0/1 (default: automatic).",
+      "title": "bvalue_scaling"
+    },
+    "export_grad_mrtrix": {
+      "type": "string",
+      "description": "export the diffusion-weighted gradient table to file in MRtrix format",
+      "title": "export_grad_mrtrix"
+    },
+    "export_grad_fsl": {
+      "type": "object",
+      "properties": {
+        "bvecs_path": {
+          "type": "string",
+          "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format",
+          "title": "bvecs_path"
+        },
+        "bvals_path": {
+          "type": "string",
+          "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format",
+          "title": "bvals_path"
+        }
+      },
+      "required": [
+        "bvecs_path",
+        "bvals_path"
+      ],
+      "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format",
+      "title": "export_grad_fsl"
+    },
+    "import_pe_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "import a phase-encoding table from file",
+      "title": "import_pe_table"
+    },
+    "import_pe_eddy": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "import phase-encoding information from an EDDY-style config / index file pair",
+          "title": "config"
+        },
+        "indices": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "import phase-encoding information from an EDDY-style config / index file pair",
+          "title": "indices"
+        }
+      },
+      "required": [
+        "config",
+        "indices"
+      ],
+      "description": "import phase-encoding information from an EDDY-style config / index file pair",
+      "title": "import_pe_eddy"
+    },
+    "export_pe_table": {
+      "type": "string",
+      "description": "export phase-encoding table to file",
+      "title": "export_pe_table"
+    },
+    "export_pe_eddy": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "type": "string",
+          "description": "export phase-encoding information to an EDDY-style config / index file pair",
+          "title": "config"
+        },
+        "indices": {
+          "type": "string",
+          "description": "export phase-encoding information to an EDDY-style config / index file pair",
+          "title": "indices"
+        }
+      },
+      "required": [
+        "config",
+        "indices"
+      ],
+      "description": "export phase-encoding information to an EDDY-style config / index file pair",
+      "title": "export_pe_eddy"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input image.",
+      "title": "input"
+    },
+    "output": {
+      "type": "string",
+      "description": "the output image.",
+      "title": "output"
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "output"
+  ]
+}

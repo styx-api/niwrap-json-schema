@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3drotate",
+  "description": "Rotates and/or translates all bricks from an AFNI dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3drotate"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input AFNI dataset, may contain a sub-brick selector list",
+      "title": "Dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Sets the output dataset prefix name",
+      "title": "Prefix"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Prints out progress reports (to stderr)",
+      "title": "Verbose",
+      "default": false
+    },
+    "ashift": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Shifts the dataset by specified distances (dx, dy, dz) in mm in x, y, z directions respectively, AFTER rotation",
+      "title": "After Shift"
+    },
+    "bshift": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Shifts the dataset by specified distances (dx, dy, dz) in mm in x, y, z directions respectively, BEFORE rotation",
+      "title": "Before Shift"
+    },
+    "rotate": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specifies the 3D rotation angles (th1, th2, th3) about certain axes",
+      "title": "Rotation"
+    },
+    "rotparent": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Rotation and translation should be taken from the first 3dvolreg transformation found in the header of dataset 'rset'.",
+      "title": "Rotation Parent Dataset"
+    },
+    "gridparent": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output dataset should be shifted to match the grid of dataset 'gset'. Can only be used with -rotparent.",
+      "title": "Grid Parent Dataset"
+    },
+    "matvec_dicom": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Rotation and translation should be read from DICOM file 'mfile'.",
+      "title": "DICOM Matrix/Vector File"
+    },
+    "matvec_order": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Rotation and translation should be read from file 'mfile' with dataset coordinate order.",
+      "title": "Order Matrix/Vector File"
+    },
+    "matvec_dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Rotation and translation should be read from the .HEAD file of dataset 'mset' created by 3dTagalign.",
+      "title": "Dataset Matrix/Vector"
+    },
+    "dfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reads movement parameters for each sub-brick from an ASCII file 'dname'.",
+      "title": "Data File"
+    },
+    "1Dfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reads movement parameters for each sub-brick from a 1D ASCII file 'dname'.",
+      "title": "1D Data File"
+    },
+    "points": {
+      "type": "boolean",
+      "description": "Specifies that (x,y,z) points are to be rotated instead of a dataset.",
+      "title": "Points",
+      "default": false
+    },
+    "origin": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specifies the rotation origin point (xo, yo, zo)",
+      "title": "Rotation Origin"
+    },
+    "Fourier": {
+      "type": "boolean",
+      "description": "Use Fourier interpolation method during transformation.",
+      "title": "Fourier",
+      "default": false
+    },
+    "NN": {
+      "type": "boolean",
+      "description": "Use nearest neighbor interpolation method during transformation.",
+      "title": "Nearest Neighbor",
+      "default": false
+    },
+    "linear": {
+      "type": "boolean",
+      "description": "Use linear interpolation (1st order polynomial) during transformation.",
+      "title": "Linear Interpolation",
+      "default": false
+    },
+    "cubic": {
+      "type": "boolean",
+      "description": "Use cubic interpolation (3rd order polynomial) during transformation.",
+      "title": "Cubic Interpolation",
+      "default": false
+    },
+    "quintic": {
+      "type": "boolean",
+      "description": "Use quintic interpolation (5th order Lagrange polynomial) during transformation.",
+      "title": "Quintic Interpolation",
+      "default": false
+    },
+    "heptic": {
+      "type": "boolean",
+      "description": "Use heptic interpolation (7th order Lagrange polynomial) during transformation.",
+      "title": "Heptic Interpolation",
+      "default": false
+    },
+    "Fourier_nopad": {
+      "type": "boolean",
+      "description": "Use the Fourier method WITHOUT padding.",
+      "title": "Fourier without Padding",
+      "default": false
+    },
+    "clipit": {
+      "type": "boolean",
+      "description": "Clip results to input brick range [default option].",
+      "title": "Clip Results",
+      "default": false
+    },
+    "noclip": {
+      "type": "boolean",
+      "description": "Do not clip results to input brick range.",
+      "title": "No Clipping",
+      "default": false
+    },
+    "zpad": {
+      "type": "number",
+      "description": "Zero pad around the edges by 'n' voxels during rotations.",
+      "title": "Zero Padding"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset"
+  ]
+}

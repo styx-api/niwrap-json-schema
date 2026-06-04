@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsLandmarkBasedTransformInitializer",
+  "description": "This tool initializes a transform between two images based on corresponding landmarks.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsLandmarkBasedTransformInitializer"
+    },
+    "dimension": {
+      "type": "integer",
+      "description": "The dimensionality of the registration problem (e.g., 2 for 2D, 3 for 3D).",
+      "title": "Dimension"
+    },
+    "fixed_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The fixed image in the registration process.",
+      "title": "Fixed Image"
+    },
+    "moving_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The moving image in the registration process.",
+      "title": "Moving Image"
+    },
+    "transform_type": {
+      "enum": [
+        "rigid",
+        "affine",
+        "bspline"
+      ],
+      "description": "The type of transform to initialize. Options are 'rigid', 'affine', or 'bspline'.",
+      "title": "Transform Type"
+    },
+    "output_transform": {
+      "type": "string",
+      "description": "The output transform file that will be created.",
+      "title": "Output Transform"
+    },
+    "mesh_size": {
+      "type": "string",
+      "description": "The mesh size for the B-spline transform, specified as 'meshSize[0]xmeshSize[1]x...'. Default is '1x1x1'.",
+      "title": "Mesh Size"
+    },
+    "number_of_levels": {
+      "type": "integer",
+      "description": "Number of levels for multi-resolution fitting. Default is 4.",
+      "title": "Number of Levels"
+    },
+    "order": {
+      "type": "integer",
+      "description": "The polynomial order of the B-spline transform. Default is 3.",
+      "title": "Order"
+    },
+    "enforce_stationary_boundaries": {
+      "type": "boolean",
+      "description": "Enforces stationary boundaries for the B-spline transform. Default is 1 (true).",
+      "title": "Enforce Stationary Boundaries"
+    },
+    "landmark_weights": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing landmark weights. Each row is either 'label,labelWeight' or 'labelWeight'.",
+      "title": "Landmark Weights"
+    }
+  },
+  "required": [
+    "@type",
+    "dimension",
+    "fixed_image",
+    "moving_image",
+    "transform_type",
+    "output_transform"
+  ]
+}

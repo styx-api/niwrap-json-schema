@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "compute_label_volumes.csh",
+  "description": "Computes the number of voxels and the volumes of either all or a particular label in the input label volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/compute_label_volumes.csh"
+    },
+    "label_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Label volume to be analyzed",
+      "title": "Label Volume"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Text file where the results are written",
+      "title": "Output File"
+    },
+    "label_L": {
+      "type": "object",
+      "properties": {
+        "upper_L": {
+          "type": "string",
+          "description": "The particular label to be analyzed (case-sensitive option)",
+          "title": "Particular Label (L)"
+        },
+        "lower_L": {
+          "type": "string",
+          "description": "The particular label to be analyzed (case-insensitive option)",
+          "title": "Particular Label (l)"
+        }
+      },
+      "description": "The particular label to be analyzed",
+      "title": "Particular Label (L)"
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version and exit",
+      "title": "Version Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print help and exit",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "label_vol",
+    "output_file"
+  ]
+}

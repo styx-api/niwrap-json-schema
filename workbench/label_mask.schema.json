@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MASK A LABEL FILE",
+  "description": "By default, the output label is a copy of the input label, but with the 'unused' label wherever the mask metric is zero or negative.  if -column is specified, the output contains only one column, the masked version of the specified input column.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/label_mask"
+    },
+    "label": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the label file to mask"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the mask metric"
+    },
+    "label_out": {
+      "type": "string",
+      "description": "the output label file"
+    },
+    "column": {
+      "type": "string",
+      "description": "select a single column"
+    }
+  },
+  "required": [
+    "@type",
+    "label",
+    "mask",
+    "label_out"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dFFT",
+  "description": "Performs the FFT of the input dataset in 3 directions (x, y, z) and produces the output dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dFFT"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset (e.g., dataset.nii)",
+      "title": "Input dataset"
+    },
+    "abs": {
+      "type": "boolean",
+      "description": "Outputs the magnitude of the FFT (default)",
+      "title": "Magnitude of FFT flag",
+      "default": false
+    },
+    "phase": {
+      "type": "boolean",
+      "description": "Outputs the phase of the FFT (-PI..PI)",
+      "title": "Phase of FFT flag",
+      "default": false
+    },
+    "complex": {
+      "type": "boolean",
+      "description": "Outputs the complex-valued FFT",
+      "title": "Complex FFT flag",
+      "default": false
+    },
+    "inverse": {
+      "type": "boolean",
+      "description": "Does the inverse FFT instead of the forward FFT",
+      "title": "Inverse FFT flag",
+      "default": false
+    },
+    "Lx": {
+      "type": "number",
+      "description": "Use FFT of length 'xx' in the x-direction",
+      "title": "FFT length in x-direction"
+    },
+    "Ly": {
+      "type": "number",
+      "description": "Use FFT of length 'yy' in the y-direction",
+      "title": "FFT length in y-direction"
+    },
+    "Lz": {
+      "type": "number",
+      "description": "Use FFT of length 'zz' in the z-direction",
+      "title": "FFT length in z-direction"
+    },
+    "altIN": {
+      "type": "boolean",
+      "description": "Alternate signs of input data before FFT to bring zero frequency from edge of FFT-space to center of grid for cosmetic purposes.",
+      "title": "Alternate input signs flag",
+      "default": false
+    },
+    "altOUT": {
+      "type": "boolean",
+      "description": "Alternate signs of output data after FFT. Use '-altOUT' with '-altIN' on the forward transform to get the signs of the recovered image correct.",
+      "title": "Alternate output signs flag",
+      "default": false
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read the input dataset from specified file instead of from the last argument on the command line.",
+      "title": "Input file"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use specified prefix for the output dataset.",
+      "title": "Output prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslmerge",
+  "description": "FSL tool to concatenate images in various dimensions",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fslmerge"
+    },
+    "merge_time": {
+      "type": "boolean",
+      "description": "Concatenate images in time (4th dimension)",
+      "title": "Merge in Time",
+      "default": false
+    },
+    "merge_x": {
+      "type": "boolean",
+      "description": "Concatenate images in the x direction",
+      "title": "Merge in X Direction",
+      "default": false
+    },
+    "merge_y": {
+      "type": "boolean",
+      "description": "Concatenate images in the y direction",
+      "title": "Merge in Y Direction",
+      "default": false
+    },
+    "merge_z": {
+      "type": "boolean",
+      "description": "Concatenate images in the z direction",
+      "title": "Merge in Z Direction",
+      "default": false
+    },
+    "auto_choose": {
+      "type": "boolean",
+      "description": "Auto-choose: single slices -> volume, volumes -> 4D (time series)",
+      "title": "Auto-choose Merge",
+      "default": false
+    },
+    "merge_set_tr": {
+      "type": "boolean",
+      "description": "Concatenate images in time and set the output image tr to the provided value",
+      "title": "Merge in Time with TR",
+      "default": false
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output concatenated image file",
+      "title": "Output File"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input image files to concatenate",
+      "title": "Input Files"
+    },
+    "volume_number": {
+      "type": "number",
+      "description": "Only use volume <N> from each input file (first volume is 0 not 1)",
+      "title": "Volume Number"
+    },
+    "tr_value": {
+      "type": "number",
+      "description": "TR value in seconds, used with the -tr flag",
+      "title": "TR Value"
+    }
+  },
+  "required": [
+    "@type",
+    "output_file",
+    "input_files"
+  ]
+}

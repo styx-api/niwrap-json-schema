@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bbmask",
+  "description": "Tool to create a volume with a smaller field of view by creating a bounding box that encompasses a mask.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/bbmask"
+    },
+    "mask": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Input and output for the mask volume.",
+      "title": "Mask Input and Output Files"
+    },
+    "src_volumes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input and output volumes to be reduced to the bounding box.",
+      "title": "Source Input and Output Volumes"
+    },
+    "npad": {
+      "type": "number",
+      "description": "Number of voxels to expand the bounding box.",
+      "title": "NPad"
+    },
+    "registration": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input and output registration files.",
+      "title": "Registration Files"
+    },
+    "regheader": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output registration file from header.",
+      "title": "Regheader File"
+    },
+    "sub2src": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output file for sub-source registration.",
+      "title": "Sub2Src File"
+    }
+  },
+  "required": [
+    "@type",
+    "mask"
+  ]
+}

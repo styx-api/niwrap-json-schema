@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dZipperZapper",
+  "description": "A basic program to highlight problematic volumes in data sets, especially EPI/DWI data sets with interleaved acquisition.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dZipperZapper"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input 3D+time file of DWIs or EPIs.",
+      "title": "Input file"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix for output file name.",
+      "title": "Output prefix"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional input of a single volume mask file, which gets applied to each volume in the input file.",
+      "title": "Mask file"
+    },
+    "min_slice_nvox": {
+      "type": "number",
+      "description": "Set the minimum number of voxels to be in the mask for a given slice to be included in the calculations.",
+      "title": "Minimum slice voxels"
+    },
+    "min_streak_len": {
+      "type": "number",
+      "description": "Minimum number of slices in a row to look for fluctuations within.",
+      "title": "Minimum streak length"
+    },
+    "do_out_slice_param": {
+      "type": "boolean",
+      "description": "Output the map of slice parameters.",
+      "title": "Output slice parameters flag",
+      "default": false
+    },
+    "no_out_bad_mask": {
+      "type": "boolean",
+      "description": "Do not output the mask of 'bad' slices.",
+      "title": "No output bad mask flag",
+      "default": false
+    },
+    "no_out_text_vals": {
+      "type": "boolean",
+      "description": "Do not output the 1D files of the slice parameter values.",
+      "title": "No output text values flag",
+      "default": false
+    },
+    "dont_use_streak": {
+      "type": "boolean",
+      "description": "Turn off the 'streak' criterion for identifying bad slices.",
+      "title": "Don't use streak flag",
+      "default": false
+    },
+    "dont_use_drop": {
+      "type": "boolean",
+      "description": "Turn off the 'drop' criterion for identifying bad slices.",
+      "title": "Don't use drop flag",
+      "default": false
+    },
+    "dont_use_corr": {
+      "type": "boolean",
+      "description": "Turn off the 'corr' criterion for identifying bad slices.",
+      "title": "Don't use correlation flag",
+      "default": false
+    },
+    "min_streak_val": {
+      "type": "number",
+      "description": "Minimum magnitude of voxelwise relative differences to perhaps be problematic.",
+      "title": "Minimum streak value"
+    },
+    "min_drop_frac": {
+      "type": "number",
+      "description": "Minimum fraction for judging if the change in 'slice parameter' differences between neighboring slices might be a sign of badness.",
+      "title": "Minimum drop fraction"
+    },
+    "min_drop_diff": {
+      "type": "number",
+      "description": "Minimum 'slice parameter' value within a single slice that might be considered a bad sign.",
+      "title": "Minimum drop difference"
+    },
+    "min_corr_len": {
+      "type": "number",
+      "description": "Minimum number of slices in a row to look for consecutive anticorrelations in brightness differences.",
+      "title": "Minimum correlation length"
+    },
+    "min_corr_corr": {
+      "type": "number",
+      "description": "Threshold for the magnitude of anticorrelations to be considered potentially bad.",
+      "title": "Minimum correlation value"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_prefix"
+  ]
+}

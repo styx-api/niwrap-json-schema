@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri-sph2surf",
+  "description": "Converts spherical functional data to surface data in the FreeSurfer processing pipeline.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri-sph2surf"
+    },
+    "instem": {
+      "type": "string",
+      "description": "Input stem of a bfloat file. The full input file name must take the form instem-lh_000.bfloat (or rh).",
+      "title": "Input stem"
+    },
+    "outstem": {
+      "type": "string",
+      "description": "Output stem for the resulting file. The output file will have the name outstem-lh.w (or rh).",
+      "title": "Output stem"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Specifies the hemisphere for processing. Acceptable values are 'lh' or 'rh'.",
+      "title": "Hemisphere"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Specifies the subject identifier for the FreeSurfer processing pipeline.",
+      "title": "Subject"
+    },
+    "offset": {
+      "type": "number",
+      "description": "Zero-based plane/frame number. Default is 0.",
+      "title": "Offset"
+    },
+    "svitdir": {
+      "type": "string",
+      "description": "Directory for svit. Default is '/usr/local/freesurfer/subjects/subject/svit'.",
+      "title": "SVIT directory"
+    },
+    "umask": {
+      "type": "string",
+      "description": "Specifies a new user mask.",
+      "title": "User mask"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Enable verbose output.",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Show version information.",
+      "title": "Version flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "instem",
+    "outstem",
+    "hemi",
+    "subject"
+  ]
+}

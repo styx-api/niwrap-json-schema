@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dcat",
+  "description": "Concatenates columns of multiple 1D or TSV/CSV files",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dcat"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input 1D or TSV/CSV files to concatenate",
+      "title": "Input files"
+    },
+    "tsv_output": {
+      "type": "boolean",
+      "description": "Output in TSV format with tabs as separators and a header line",
+      "title": "TSV format output",
+      "default": false
+    },
+    "csv_output": {
+      "type": "boolean",
+      "description": "Output in CSV format with commas as separators and a header line",
+      "title": "CSV format output",
+      "default": false
+    },
+    "nonconst_output": {
+      "type": "boolean",
+      "description": "Omit columns that are identically constant from the output",
+      "title": "Non-constant columns output",
+      "default": false
+    },
+    "nonfixed_output": {
+      "type": "boolean",
+      "description": "Keep only columns marked as 'free' in the 3dAllineate header",
+      "title": "Non-fixed columns output",
+      "default": false
+    },
+    "number_format": {
+      "type": "string",
+      "description": "Specify the format of the numbers to be output",
+      "title": "Number format"
+    },
+    "stack_output": {
+      "type": "boolean",
+      "description": "Stack the columns of the resulting matrix in the output",
+      "title": "Stack columns output",
+      "default": false
+    },
+    "column_row_selection": {
+      "type": "string",
+      "description": "Apply the same column/row selection string to all filenames on the command line",
+      "title": "Column/Row selection"
+    },
+    "ok_empty": {
+      "type": "boolean",
+      "description": "Exit quietly when encountering an empty file on disk",
+      "title": "OK empty files",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

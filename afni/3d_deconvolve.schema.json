@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dDeconvolve",
+  "description": "Program to calculate the deconvolution of a measurement 3D+time dataset with a specified input stimulus time series.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dDeconvolve"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of 3D+time input dataset.",
+      "title": "Input Dataset"
+    },
+    "mask_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of 3D mask dataset.",
+      "title": "Mask Dataset"
+    },
+    "num_stimts": {
+      "type": "integer",
+      "description": "Number of input stimulus time series.",
+      "title": "Number of Stimulus Time Series"
+    },
+    "stim_file": {
+      "type": "string",
+      "description": "Filename of kth time series input stimulus.",
+      "title": "Stimulus File"
+    },
+    "stim_label": {
+      "type": "string",
+      "description": "Label for kth input stimulus.",
+      "title": "Stimulus Label"
+    },
+    "stim_base": {
+      "type": "boolean",
+      "description": "Kth input stimulus is part of the baseline model.",
+      "title": "Stimulus Baseline",
+      "default": false
+    },
+    "stim_times": {
+      "type": "string",
+      "description": "Deconvolution response model for kth stimulus.",
+      "title": "Stimulus Times"
+    },
+    "iresp": {
+      "type": "string",
+      "description": "Prefix for 3D+time output dataset which will contain the kth estimated impulse response.",
+      "title": "Estimated Impulse Response"
+    },
+    "fitts": {
+      "type": "string",
+      "description": "Prefix for 3D+time output dataset which will contain the (full model) time series fit to the input data.",
+      "title": "Fitted Time Series"
+    },
+    "fout": {
+      "type": "boolean",
+      "description": "Flag to output the F-statistics for each stimulus.",
+      "title": "Output F-Statistics",
+      "default": false
+    },
+    "tout": {
+      "type": "boolean",
+      "description": "Flag to output the t-statistics.",
+      "title": "Output T-Statistics",
+      "default": false
+    },
+    "bucket": {
+      "type": "string",
+      "description": "Create one AFNI 'bucket' dataset containing various parameters of interest.",
+      "title": "Bucket Dataset"
+    },
+    "cbucket": {
+      "type": "string",
+      "description": "Save the regression coefficients (no statistics) into a dataset.",
+      "title": "Coefficient Bucket"
+    },
+    "x1D": {
+      "type": "string",
+      "description": "Save X matrix to a .xmat.1D (ASCII) file.",
+      "title": "X-Matrix Output"
+    },
+    "jobs": {
+      "type": "integer",
+      "description": "Run the program with multiple jobs (sub-processes).",
+      "title": "Number of Jobs"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

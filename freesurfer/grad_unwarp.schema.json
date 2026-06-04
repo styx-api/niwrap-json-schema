@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "grad_unwarp",
+  "description": "Convert, dewarp, and resample DICOM files to MGH files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/grad_unwarp"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file or directory (dcmfile, dcmdir, or mghfile)",
+      "title": "Input file"
+    },
+    "seriesno": {
+      "type": "string",
+      "description": "DICOM series number, required if input is a directory",
+      "title": "Series number"
+    },
+    "unwarp_type": {
+      "type": "string",
+      "description": "Gradient unwarping displacement type or map file (required for MGH file)",
+      "title": "Unwarp type"
+    },
+    "nojac": {
+      "type": "boolean",
+      "description": "Do not perform jacobian correction when unwarping",
+      "title": "Nojac flag",
+      "default": false
+    },
+    "corfov": {
+      "type": "boolean",
+      "description": "Resample to Coronal FOV",
+      "title": "Corfov flag",
+      "default": false
+    },
+    "cor": {
+      "type": "boolean",
+      "description": "Output in COR format instead of MGH",
+      "title": "Cor format flag",
+      "default": false
+    },
+    "interp": {
+      "type": "string",
+      "description": "Interpolation method (cubic, linear, nearest, spline)",
+      "title": "Interpolation method"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Output file in MGH format",
+      "title": "Output file"
+    },
+    "matlab_binary": {
+      "type": "string",
+      "description": "Path to the Matlab binary, version 6.5 or higher required",
+      "title": "Matlab binary path"
+    }
+  },
+  "required": [
+    "@type",
+    "infile",
+    "outfile"
+  ]
+}

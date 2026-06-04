@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dedge3",
+  "description": "Does 3D Edge detection using the library 3DEdge",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dedge3"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Input file"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print out some information along the way",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Sets the prefix of the output dataset",
+      "title": "Prefix of output"
+    },
+    "datum": {
+      "type": "string",
+      "description": "Sets the datum of the output dataset",
+      "title": "Output datum"
+    },
+    "fscale": {
+      "type": "boolean",
+      "description": "Force scaling of the output to the maximum integer range",
+      "title": "Force scaling flag",
+      "default": false
+    },
+    "gscale": {
+      "type": "boolean",
+      "description": "Same as '-fscale', but also forces each output sub-brick to get the same scaling factor",
+      "title": "Global scaling flag",
+      "default": false
+    },
+    "nscale": {
+      "type": "boolean",
+      "description": "Don't do any scaling on output to byte or short datasets",
+      "title": "No scaling flag",
+      "default": false
+    },
+    "scale_floats": {
+      "type": "number",
+      "description": "Multiply input by VAL, but only if the input datum is float.",
+      "title": "Scale floats"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "For automatic internal calculation of a mask in the usual AFNI way",
+      "title": "Automask flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file"
+  ]
+}

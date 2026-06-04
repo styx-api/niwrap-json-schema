@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "seg2filled",
+  "description": "Creates a filled.mgz from an aseg-style segmentation using SAMSEG segmentation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/seg2filled"
+    },
+    "seg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input aseg-style segmentation file (e.g., seg.mgz)",
+      "title": "Segmentation File"
+    },
+    "norm_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Normalization file (e.g., norm.mgz)",
+      "title": "Normalization File"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Filled output file (e.g., filled.mgz)",
+      "title": "Output File"
+    },
+    "ndil": {
+      "type": "integer",
+      "description": "Number of iterations for dilation used to speed cavity detection.",
+      "title": "Dilation Value"
+    },
+    "cavity_flag": {
+      "type": "boolean",
+      "description": "Simulate a cavity to test the filling operation.",
+      "title": "Cavity Simulation Flag",
+      "default": false
+    },
+    "surf_name": {
+      "type": "string",
+      "description": "Name for the surface output (creates ?h.surfname).",
+      "title": "Surface Name"
+    },
+    "surf_dir": {
+      "type": "string",
+      "description": "Directory to put the surface (default is same as filled).",
+      "title": "Surface Directory"
+    }
+  },
+  "required": [
+    "@type",
+    "seg_file",
+    "norm_file",
+    "output_file"
+  ]
+}

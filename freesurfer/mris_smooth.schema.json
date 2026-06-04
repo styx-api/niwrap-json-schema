@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_smooth",
+  "description": "This program smooths the tessellation of a cortical surface and writes out the mean curvature and area files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_smooth"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface file for smoothing.",
+      "title": "Input Surface"
+    },
+    "output_surface": {
+      "type": "string",
+      "description": "Output surface file after smoothing.",
+      "title": "Output Surface"
+    },
+    "average_iters": {
+      "type": "number",
+      "description": "Specify number of curvature averaging iterations (default is 10).",
+      "title": "Averaging Iterations"
+    },
+    "smoothing_iters": {
+      "type": "number",
+      "description": "Specify number of smoothing iterations (default is 10).",
+      "title": "Smoothing Iterations"
+    },
+    "no_write": {
+      "type": "boolean",
+      "description": "Disable writing of curvature and area estimates.",
+      "title": "No Write Flag",
+      "default": false
+    },
+    "curvature_name": {
+      "type": "string",
+      "description": "Write curvature to a specified file name (default 'curv').",
+      "title": "Curvature File Name"
+    },
+    "area_name": {
+      "type": "string",
+      "description": "Write area to a specified file name (default 'area').",
+      "title": "Area File Name"
+    },
+    "gaussian_params": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Use Gaussian curvature smoothing with specified norm and steps.",
+      "title": "Gaussian Parameters"
+    },
+    "normalize_area": {
+      "type": "boolean",
+      "description": "Normalize area after smoothing.",
+      "title": "Normalize Area Flag",
+      "default": false
+    },
+    "momentum": {
+      "type": "number",
+      "description": "Set momentum value.",
+      "title": "Momentum"
+    },
+    "snapshot_interval": {
+      "type": "number",
+      "description": "Write snapshot every specified number of iterations.",
+      "title": "Snapshot Interval"
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface",
+    "output_surface"
+  ]
+}

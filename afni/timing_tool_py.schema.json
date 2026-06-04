@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "timing_tool.py",
+  "description": "Tool for manipulating and evaluating stimulus timing files",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/timing_tool.py"
+    },
+    "timing_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify a stimulus timing file to load",
+      "title": "Timing File"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Specify the output timing file",
+      "title": "Output Timing File"
+    },
+    "run_length": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify the run duration(s), in seconds",
+      "title": "Run Duration"
+    },
+    "tr": {
+      "type": "number",
+      "description": "Specify the time resolution in 1D output (in seconds)",
+      "title": "Time Resolution"
+    },
+    "offset": {
+      "type": "number",
+      "description": "Add OFFSET to every time in the main element",
+      "title": "Add Offset"
+    },
+    "extend_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Extend timing rows with those in NEW_FILE",
+      "title": "Extend File"
+    },
+    "sort": {
+      "type": "boolean",
+      "description": "Sort the times, per row (run)",
+      "title": "Sort Times",
+      "default": false
+    },
+    "scale_data": {
+      "type": "number",
+      "description": "Multiply every stim time by SCALAR",
+      "title": "Scale Data"
+    },
+    "shift_to_run_offset": {
+      "type": "number",
+      "description": "Shift times so first event is at start of run",
+      "title": "Shift to Run Offset"
+    },
+    "timing_to_1D_file": {
+      "type": "string",
+      "description": "Convert stim_times format to stim_file",
+      "title": "Convert to 1D File"
+    },
+    "stim_duration": {
+      "type": "number",
+      "description": "Specify the stimulus duration, in seconds",
+      "title": "Stimulus Duration"
+    },
+    "multi_timing_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify multiple timing files to load",
+      "title": "Multiple Timing Files"
+    },
+    "multi_show_isi_stats": {
+      "type": "boolean",
+      "description": "Display timing and ISI statistics for the multiple timing files",
+      "title": "Show ISI Statistics",
+      "default": false
+    },
+    "multi_show_timing": {
+      "type": "boolean",
+      "description": "Display info on multiple timing elements",
+      "title": "Show Timing for Multiple Elements",
+      "default": false
+    },
+    "show_timing": {
+      "type": "boolean",
+      "description": "Display info on the main timing element",
+      "title": "Show Timing for Single Element",
+      "default": false
+    },
+    "multi_stim_duration": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify stimulus duration(s), in seconds, for multiple timing elements",
+      "title": "Multiple Stimulus Durations"
+    },
+    "round_times_frac": {
+      "type": "number",
+      "description": "Round times to multiples of the TR (0.0 <= FRAC <= 1.0)",
+      "title": "Round Times Fraction"
+    },
+    "truncate_times": {
+      "type": "boolean",
+      "description": "Truncate times to multiples of the TR",
+      "title": "Truncate Times",
+      "default": false
+    },
+    "multi_timing_event_list": {
+      "type": "string",
+      "description": "Create an event list file from multiple timing files",
+      "title": "Multiple Timing Event List"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

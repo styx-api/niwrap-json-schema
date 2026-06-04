@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_z2p",
+  "description": "Converts Z-statistic volumes to P-value volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_z2p"
+    },
+    "z_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Z volume file",
+      "title": "Z Volume"
+    },
+    "p_volume": {
+      "type": "string",
+      "description": "P volume file",
+      "title": "P Volume"
+    },
+    "sig_volume": {
+      "type": "string",
+      "description": "Significance volume file",
+      "title": "Significance Volume"
+    },
+    "mask_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask volume file",
+      "title": "Mask Volume"
+    },
+    "two_sided": {
+      "type": "boolean",
+      "description": "Assume a two-sided, unsigned test (keeps sign of input).",
+      "title": "Two-sided Flag",
+      "default": false
+    },
+    "one_sided": {
+      "type": "boolean",
+      "description": "Assume a one-sided, signed test.",
+      "title": "One-sided Flag",
+      "default": false
+    },
+    "signed": {
+      "type": "boolean",
+      "description": "Two-sided/signed p-value (p = 2*(1-p)).",
+      "title": "Signed Flag",
+      "default": false
+    },
+    "feat": {
+      "type": "string",
+      "description": "Convert all z-stats and zf-stats to sigs in the specified directory.",
+      "title": "Feat Directory"
+    },
+    "feat_format": {
+      "type": "string",
+      "description": "Use specified format for output (e.g., nii, nii.gz, mgh).",
+      "title": "Feat Format"
+    },
+    "nii_format": {
+      "type": "boolean",
+      "description": "Use NIfTI output format.",
+      "title": "NIfTI Format Flag",
+      "default": false
+    },
+    "niigz_format": {
+      "type": "boolean",
+      "description": "Use compressed NIfTI output format.",
+      "title": "NIfTI GZ Format Flag",
+      "default": false
+    },
+    "mgh_format": {
+      "type": "boolean",
+      "description": "Use MGH output format.",
+      "title": "MGH Format Flag",
+      "default": false
+    },
+    "mgz_format": {
+      "type": "boolean",
+      "description": "Use MGZ output format.",
+      "title": "MGZ Format Flag",
+      "default": false
+    },
+    "img_format": {
+      "type": "boolean",
+      "description": "Use Analyze output format.",
+      "title": "IMG Format Flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging.",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "check_opts": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit.",
+      "title": "Check Options Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "z_volume",
+    "p_volume",
+    "sig_volume"
+  ]
+}

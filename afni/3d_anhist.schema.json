@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dAnhist",
+  "description": "Tool to analyze histogram peaks in a T1-weighted high-res brain image dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dAnhist"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset, should be T1-weighted high-res brain image (shorts only).",
+      "title": "Input Dataset"
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Suppress progress reports.",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "dump_histogram": {
+      "type": "boolean",
+      "description": "Dump histogram data to Anhist.1D and plot to Anhist.ps.",
+      "title": "Dump Histogram Flag",
+      "default": false
+    },
+    "no_scurve": {
+      "type": "boolean",
+      "description": "Do not fit histogram with curves.",
+      "title": "No Scurve Flag",
+      "default": false
+    },
+    "winsorize": {
+      "type": "string",
+      "description": "Apply Winsorizing filter prior to histogram scan. Can specify number of times (e.g., -w7).",
+      "title": "Winsorize"
+    },
+    "top_2peaks": {
+      "type": "boolean",
+      "description": "Analyze top 2 peaks only, for overlap, etc.",
+      "title": "Analyze Top 2 Peaks Flag",
+      "default": false
+    },
+    "label": {
+      "type": "string",
+      "description": "Use specified label for Anhist.ps plot file instead of the input dataset filename.",
+      "title": "Label"
+    },
+    "filename": {
+      "type": "string",
+      "description": "Use specified filename instead of 'Anhist'.",
+      "title": "Filename"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset"
+  ]
+}

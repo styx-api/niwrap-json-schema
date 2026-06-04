@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "asl_file",
+  "description": "ASL data manipulation tool for FSL",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/asl_file"
+    },
+    "datafile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "ASL data file",
+      "title": "Data file"
+    },
+    "ntis": {
+      "type": "number",
+      "description": "Number of TIs in the file",
+      "title": "Number of TIs"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file",
+      "title": "Mask"
+    },
+    "inblockform": {
+      "enum": [
+        "rpt",
+        "tis"
+      ],
+      "description": "Input block format",
+      "title": "Input block format"
+    },
+    "inaslform": {
+      "enum": [
+        "diff",
+        "tc",
+        "ct",
+        "tcb",
+        "ctb"
+      ],
+      "description": "ASL data form",
+      "title": "Input ASL form"
+    },
+    "rpts": {
+      "type": "string",
+      "description": "Number of repeats at each TI as comma separated list, not required if the number of repeats is same for all TIs  (only for use with --ibf=tis)",
+      "title": "Repeats"
+    },
+    "pairs": {
+      "type": "boolean",
+      "description": "Data contains adjacent pairs of measurements (e.g. Tag, Control) DEPRECATED use --iaf instead",
+      "title": "Pairs",
+      "default": false
+    },
+    "spairs": {
+      "type": "boolean",
+      "description": "Split the pairs within the data, e.g. to separate tag and control images in output",
+      "title": "Split pairs",
+      "default": false
+    },
+    "diff": {
+      "type": "boolean",
+      "description": "Take the difference between the pairs, i.e., Tag-control difference",
+      "title": "Difference",
+      "default": false
+    },
+    "surrdiff": {
+      "type": "boolean",
+      "description": "Do surround subtraction on the pairs",
+      "title": "Surround subtraction",
+      "default": false
+    },
+    "extrapolate": {
+      "type": "boolean",
+      "description": "Option to extrapolate the edge of the brain to fix the artefact on the edge of the brain",
+      "title": "Extrapolate",
+      "default": false
+    },
+    "neighbour": {
+      "type": "number",
+      "minimum": 3,
+      "maximum": 9,
+      "description": "Neighbour size for extrapolation, must be an odd number between 3 and 9. Default: 5",
+      "title": "Neighbour size"
+    },
+    "pvgm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "GM partial volume map",
+      "title": "GM partial volume map"
+    },
+    "pvwm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "WM partial volume map",
+      "title": "WM partial volume map"
+    },
+    "kernel": {
+      "type": "number",
+      "minimum": 3,
+      "maximum": 9,
+      "description": "Kernel size (in voxels) of partial volume correction, must be an odd number between 3 and 9. Default: 5",
+      "title": "Kernel size"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Output data file",
+      "title": "Output file"
+    },
+    "outblockform": {
+      "enum": [
+        "rpt",
+        "tis"
+      ],
+      "description": "Output block format",
+      "title": "Output block format"
+    },
+    "mean": {
+      "type": "boolean",
+      "description": "Output ASL data having taken mean at each TI to file",
+      "title": "Mean output",
+      "default": false
+    },
+    "split": {
+      "type": "string",
+      "description": "Split data into separate files for each TI, specify filename root",
+      "title": "Split output"
+    },
+    "epoch": {
+      "type": "boolean",
+      "description": "Output epochs of ASL data (takes mean at each TI within the epoch)",
+      "title": "Epoch output",
+      "default": false
+    },
+    "epoch_length": {
+      "type": "number",
+      "description": "Length of epochs in number of repeats",
+      "title": "Epoch length"
+    },
+    "epoch_overlap": {
+      "type": "number",
+      "description": "Amount of overlap between epochs in number of repeats",
+      "title": "Epoch overlap"
+    },
+    "epoch_unit": {
+      "enum": [
+        "rpt",
+        "tis"
+      ],
+      "description": "Epochs to be determined over",
+      "title": "Epoch unit"
+    },
+    "deconv": {
+      "type": "boolean",
+      "description": "Deconvolution of data with arterial input functions",
+      "title": "Deconvolution",
+      "default": false
+    },
+    "aif": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Arterial input functions for deconvolution (4D volume, one aif for each voxel within mask)",
+      "title": "Arterial input functions"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display the help message",
+      "title": "Help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Display version identification",
+      "title": "Version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "datafile",
+    "ntis",
+    "outfile"
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "amp2response",
+  "description": "Estimate response function coefficients based on the DWI signal in single-fibre voxels.\n\nThis command uses the image data from all selected single-fibre voxels concurrently, rather than simply averaging their individual spherical harmonic coefficients. It also ensures that the response function is non-negative, and monotonic (i.e. its amplitude must increase from the fibre direction out to the orthogonal plane).\n\nIf multi-shell data are provided, and one or more b-value shells are not explicitly requested, the command will generate a response function for every b-value shell (including b=0 if present).\n\nReferences:\n\nSmith, R. E.; Dhollander, T. & Connelly, A. Constrained linear least squares estimation of anisotropic response function for spherical deconvolution. ISMRM Workshop on Breaking the Barriers of Diffusion MRI, 23.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/amp2response"
+    },
+    "isotropic": {
+      "type": "boolean",
+      "description": "estimate an isotropic response function (lmax=0 for all shells)",
+      "title": "isotropic",
+      "default": false
+    },
+    "noconstraint": {
+      "type": "boolean",
+      "description": "disable the non-negativity and monotonicity constraints",
+      "title": "noconstraint",
+      "default": false
+    },
+    "shells": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "specify one or more b-values to use during processing, as a comma-separated list of the desired approximate b-values (b-values are clustered to allow for small deviations). Note that some commands are incompatible with multiple b-values, and will report an error if more than one b-value is provided. \nWARNING: note that, even though the b=0 volumes are never referred to as shells in the literature, they still have to be explicitly included in the list of b-values as provided to the -shell option! Several algorithms which include the b=0 volumes in their computations may otherwise return an undesired result.",
+      "title": "shells"
+    },
+    "lmax": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "specify the maximum harmonic degree of the response function to estimate (can be a comma-separated list for multi-shell data)",
+      "title": "lmax"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "amps": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the amplitudes image",
+      "title": "amps"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the mask containing the voxels from which to estimate the response function",
+      "title": "mask"
+    },
+    "directions": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "a 4D image containing the estimated fibre directions",
+      "title": "directions"
+    },
+    "response": {
+      "type": "string",
+      "description": "the output zonal spherical harmonic coefficients",
+      "title": "response"
+    }
+  },
+  "required": [
+    "@type",
+    "amps",
+    "mask",
+    "directions",
+    "response"
+  ]
+}

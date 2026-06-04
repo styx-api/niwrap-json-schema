@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "djpeg",
+  "description": "Decompress a JPEG file to an image file",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/djpeg"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input JPEG file (e.g. image.jpg)",
+      "title": "Input file"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output image file (e.g. image.ppm)",
+      "title": "Output file"
+    },
+    "gray": {
+      "type": "boolean",
+      "description": "Force grayscale output",
+      "title": "Grayscale flag",
+      "default": false
+    },
+    "fast_dct": {
+      "type": "boolean",
+      "description": "Prevent dithering of output",
+      "title": "Fast flag",
+      "default": false
+    },
+    "one_pixel_height": {
+      "type": "boolean",
+      "description": "Force one-pixel modulation flag",
+      "title": "One-pixel height flag",
+      "default": false
+    },
+    "pseudo_pixel_ratio": {
+      "type": "boolean",
+      "description": "Force pseudo-pixel ratio flag",
+      "title": "Pseudo-pixel ratio flag",
+      "default": false
+    },
+    "crop_region": {
+      "type": "string",
+      "description": "Crop region (syntax: WxH+X+Y, e.g., 100x100+10+10)",
+      "title": "Crop region"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file"
+  ]
+}

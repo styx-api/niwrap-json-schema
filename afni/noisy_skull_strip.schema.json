@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@NoisySkullStrip",
+  "description": "Strips the skull of anatomical datasets with low SNR.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@NoisySkullStrip"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The anatomical dataset",
+      "title": "Input File"
+    },
+    "keep_tmp": {
+      "type": "boolean",
+      "description": "Do not erase temporary files at the end.",
+      "title": "Keep Temporary Files",
+      "default": false
+    },
+    "3dskullstrip_opts": {
+      "type": "string",
+      "description": "Anything following this option is passed to 3dSkullStrip",
+      "title": "3dSkullStrip Options"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file"
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "2dcat",
+  "description": "Puts a set of images into an image matrix montage of NX by NY images.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/2dcat"
+    },
+    "filenames": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of input image files.",
+      "title": "Input Files"
+    },
+    "scale_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Multiply each image in the output image matrix by the color or intensity of the pixel in the scale image.",
+      "title": "Scale Image"
+    },
+    "scale_pixels": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Multiply each pixel in the output image by the color or intensity of the pixel in the scale image. The scale image is resized to the output image's resolution.",
+      "title": "Scale Pixels"
+    },
+    "scale_intensity": {
+      "type": "boolean",
+      "description": "Use the intensity (average color) of the pixel instead of its color.",
+      "title": "Scale Intensity",
+      "default": false
+    },
+    "gscale": {
+      "type": "number",
+      "description": "Apply additional scaling factor.",
+      "title": "Global Scale Factor"
+    },
+    "rgb_out": {
+      "type": "boolean",
+      "description": "Force output to be in RGB, even if input is bytes.",
+      "title": "RGB Out",
+      "default": false
+    },
+    "res_in": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set resolution of all input images.",
+      "title": "Input Resolution"
+    },
+    "respad_in": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Resample to max while respecting the aspect ratio, then pad to desired pixel count.",
+      "title": "Resample and Pad Input"
+    },
+    "pad_val": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 255,
+      "description": "Set the padding value when using -respad_in. Should be in the range [0, 255], default is 0.",
+      "title": "Padding Value"
+    },
+    "crop": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Crop images by specified number of pixels from the left, right, top, and bottom.",
+      "title": "Crop Pixels"
+    },
+    "autocrop_ctol": {
+      "type": "number",
+      "description": "Automatically crop lines where RGB values differ by less than the specified percentage from the corner pixel values.",
+      "title": "Auto Crop Corner Tolerance"
+    },
+    "autocrop_atol": {
+      "type": "number",
+      "description": "Automatically crop lines where RGB values differ by less than the specified percentage from the line average.",
+      "title": "Auto Crop Average Tolerance"
+    },
+    "autocrop": {
+      "type": "boolean",
+      "description": "Automatically crop lines with default tolerances using both autocrop_atol and autocrop_ctol set to 20.",
+      "title": "Auto Crop",
+      "default": false
+    },
+    "zero_wrap": {
+      "type": "boolean",
+      "description": "Use solid black images if not enough images are provided to fill the matrix.",
+      "title": "Zero Wrap",
+      "default": false
+    },
+    "white_wrap": {
+      "type": "boolean",
+      "description": "Use solid white images if not enough images are provided to fill the matrix.",
+      "title": "White Wrap",
+      "default": false
+    },
+    "gray_wrap": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Use solid gray images if not enough images are provided to fill the matrix. The gray value must be between 0 and 1.0.",
+      "title": "Gray Wrap"
+    },
+    "image_wrap": {
+      "type": "boolean",
+      "description": "Reuse images to fill the matrix. This is the default behavior.",
+      "title": "Image Wrap",
+      "default": false
+    },
+    "rand_wrap": {
+      "type": "boolean",
+      "description": "Randomize the order of images when reusing to fill the matrix.",
+      "title": "Random Wrap",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix the output file names with the specified string.",
+      "title": "Output Prefix"
+    },
+    "matrix": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify the number of images in each row (NX) and column (NY) of the image matrix.",
+      "title": "Matrix Dimensions"
+    },
+    "nx": {
+      "type": "number",
+      "description": "Specify the number of images in each row.",
+      "title": "Number of Images in Each Row"
+    },
+    "ny": {
+      "type": "number",
+      "description": "Specify the number of images in each column.",
+      "title": "Number of Images in Each Column"
+    },
+    "matrix_from_scale": {
+      "type": "boolean",
+      "description": "Set matrix dimensions NX and NY to be the same as the SCALE_IMG's dimensions. Requires the -scale_image option.",
+      "title": "Matrix from Scale",
+      "default": false
+    },
+    "gap": {
+      "type": "number",
+      "description": "Put a gap of specified pixels between images.",
+      "title": "Gap Size"
+    },
+    "gap_col": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set color of the gap line to specified R, G, B values. Values range from 0 to 255.",
+      "title": "Gap Color"
+    }
+  },
+  "required": [
+    "@type",
+    "filenames"
+  ]
+}

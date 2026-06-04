@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DO A VECTOR OPERATION ON VOLUME FILES",
+  "description": "Does a vector operation on two volume files (that must have a multiple of 3 subvolumes).  Either of the inputs may have multiple vectors (more than 3 subvolumes), but not both (at least one must have exactly 3 subvolumes).  The -magnitude and -normalize-output options may not be specified together, or with the DOT operation.  The <operation> parameter must be one of the following:\n\nDOT\nCROSS\nADD\nSUBTRACT",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume_vector_operation"
+    },
+    "vectors_a": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "first vector input file"
+    },
+    "vectors_b": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "second vector input file"
+    },
+    "operation": {
+      "type": "string",
+      "description": "what vector operation to do"
+    },
+    "volume_out": {
+      "type": "string",
+      "description": "the output file"
+    },
+    "normalize_a": {
+      "type": "boolean",
+      "description": "normalize vectors of first input",
+      "default": false
+    },
+    "normalize_b": {
+      "type": "boolean",
+      "description": "normalize vectors of second input",
+      "default": false
+    },
+    "normalize_output": {
+      "type": "boolean",
+      "description": "normalize output vectors (not valid for dot product)",
+      "default": false
+    },
+    "magnitude": {
+      "type": "boolean",
+      "description": "output the magnitude of the result (not valid for dot product)",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "vectors_a",
+    "vectors_b",
+    "operation",
+    "volume_out"
+  ]
+}

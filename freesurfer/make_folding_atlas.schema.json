@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "make_folding_atlas",
+  "description": "Script to iteratively create a cortical folding atlas.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/make_folding_atlas"
+    },
+    "subjlistfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Subject list file.",
+      "title": "Subject list file"
+    },
+    "fsgdfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "FS Gradient Design file.",
+      "title": "FSGD file"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Subjects to be included.",
+      "title": "Subjects"
+    },
+    "output_base": {
+      "type": "string",
+      "description": "Output base; the subject will be named based on this.",
+      "title": "Output base"
+    },
+    "max_iterations": {
+      "type": "number",
+      "description": "Maximum number of iterations.",
+      "title": "Maximum iterations"
+    },
+    "xhemi": {
+      "type": "boolean",
+      "description": "Do xhemi (sets hemilist to lh only, use --lhrh after if both are wanted).",
+      "title": "Xhemi flag",
+      "default": false
+    },
+    "init_surf_reg": {
+      "type": "string",
+      "description": "Registration used to make template on first iteration (default sphere.reg).",
+      "title": "Initial surface registration"
+    },
+    "init_subject": {
+      "type": "string",
+      "description": "Create first atlas from subject instead of all subjects.",
+      "title": "Initial subject"
+    },
+    "no_annot_template": {
+      "type": "boolean",
+      "description": "Disable annotation template (good for monkeys).",
+      "title": "No annotation template flag",
+      "default": false
+    },
+    "left_hemisphere": {
+      "type": "boolean",
+      "description": "Process left hemisphere.",
+      "title": "Left hemisphere flag",
+      "default": false
+    },
+    "right_hemisphere": {
+      "type": "boolean",
+      "description": "Process right hemisphere.",
+      "title": "Right hemisphere flag",
+      "default": false
+    },
+    "lhrh": {
+      "type": "boolean",
+      "description": "Process both left and right hemispheres (default).",
+      "title": "Both hemispheres flag",
+      "default": false
+    },
+    "ico_order": {
+      "type": "number",
+      "description": "Icosahedron order; default is 7.",
+      "title": "Icosahedron order"
+    },
+    "no_vol_on_last": {
+      "type": "boolean",
+      "description": "Do not run make_average_volume on the last iteration.",
+      "title": "No volume on last iteration flag",
+      "default": false
+    },
+    "vol": {
+      "type": "boolean",
+      "description": "Run make_average_volume on each iteration.",
+      "title": "Volume each iteration flag",
+      "default": false
+    },
+    "init": {
+      "type": "boolean",
+      "description": "Use previous iteration registration to initialize mris_register/surfreg.",
+      "title": "Initialize from previous registration flag",
+      "default": false
+    },
+    "short_sleep": {
+      "type": "boolean",
+      "description": "Sleep for a shorter time before polling.",
+      "title": "Short sleep flag",
+      "default": false
+    },
+    "no_template_only": {
+      "type": "boolean",
+      "description": "Make average surface files even with a single hemi or --no-vol.",
+      "title": "No template only flag",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads to use.",
+      "title": "Number of threads"
+    },
+    "slurm_account": {
+      "type": "string",
+      "description": "SLURM account or set FS_BATCH_ACCOUNT environment variable.",
+      "title": "SLURM account"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

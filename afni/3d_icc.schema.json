@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dICC",
+  "description": "AFNI Program for IntraClass Correlatin (ICC) Analysis",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dICC"
+    },
+    "model": {
+      "type": "string",
+      "description": "Model structure for all the variables. The expression FORMULA with more than one variable has to be surrounded within quotes. Variable names should be consistent with the ones used in the header of -dataTable.",
+      "title": "Model structure"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Name of output file. For AFNI format, provide prefix only, with no view+suffix needed. Filename for NIfTI format should have .nii attached, while file name for surface data is expected to end with .niml.dset.",
+      "title": "Output file name"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to mask file. Only process voxels inside this mask.",
+      "title": "Mask file"
+    },
+    "data_table": {
+      "type": "string",
+      "description": "List the data structure with a header as the first line. The first column is reserved with label 'Subj', and the last is reserved for 'InputFile'.",
+      "title": "Data table"
+    },
+    "bounds": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Bounds for outlier removal. Provide two numbers: the lower bound (lb) and the upper bound (ub). Input data will be confined within [lb, ub]. Any values beyond the bounds will be treated as missing.",
+      "title": "Outlier bounds"
+    },
+    "jobs": {
+      "type": "number",
+      "description": "Number of jobs for parallel computing. Choose 1 for a single-processor computer.",
+      "title": "Number of jobs"
+    },
+    "qVars": {
+      "type": "string",
+      "description": "Identify quantitative variables with this option. List should be separated with comma and surrounded within quotes.",
+      "title": "Quantitative variables"
+    },
+    "qVarCenters": {
+      "type": "string",
+      "description": "Specify centering values for quantitative variables identified under -qVars. Multiple centers are separated by commas and should be surrounded within quotes.",
+      "title": "Quantitative variable centers"
+    },
+    "subj": {
+      "type": "string",
+      "description": "Specify the column name that is designated as the measuring entity variable (usually subject).",
+      "title": "Subject column name"
+    },
+    "input_file_column": {
+      "type": "string",
+      "description": "Specify the last column name that is designated for input files of effect estimate.",
+      "title": "Input file column name"
+    },
+    "tStat": {
+      "type": "string",
+      "description": "Specify the column name that is designated as the t-statistic.",
+      "title": "t-Statistic column name"
+    },
+    "dbgArgs": {
+      "type": "boolean",
+      "description": "Enable R to save the parameters in a file called .3dICC.dbg.AFNI.args in the current directory for debugging.",
+      "title": "Debug Args Flag",
+      "default": false
+    },
+    "cio": {
+      "type": "boolean",
+      "description": "Use AFNI's C io functions. Default is -cio.",
+      "title": "C IO Flag",
+      "default": false
+    },
+    "rio": {
+      "type": "boolean",
+      "description": "Use R's io functions.",
+      "title": "R IO Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "model",
+    "prefix",
+    "data_table"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_morph_stats",
+  "description": "This program generates statistics which characterize a surface-based deformation field.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_morph_stats"
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "Name of the subject.",
+      "title": "Subject Name"
+    },
+    "hemisphere": {
+      "enum": [
+        "lh",
+        "rh"
+      ],
+      "description": "Hemisphere, either 'lh' for left hemisphere or 'rh' for right hemisphere.",
+      "title": "Hemisphere"
+    },
+    "morphed_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Morphed surface file.",
+      "title": "Morphed Surface"
+    },
+    "output_name": {
+      "type": "string",
+      "description": "Name of the output to be generated.",
+      "title": "Output Name"
+    }
+  },
+  "required": [
+    "@type",
+    "subject_name",
+    "hemisphere",
+    "morphed_surface",
+    "output_name"
+  ]
+}

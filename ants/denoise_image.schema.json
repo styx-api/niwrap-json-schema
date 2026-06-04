@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DenoiseImage",
+  "description": "Denoise an image using a spatially adaptive filter originally described in J. V. Manjon, P. Coupe, Luis Marti-Bonmati, D. L. Collins, and M. Robles. Adaptive Non-Local Means Denoising of MR Images With Spatially Varying Noise Levels, Journal of Magnetic Resonance Imaging, 31:192-203, June 2010.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/DenoiseImage"
+    },
+    "image_dimensionality": {
+      "enum": [
+        2,
+        3,
+        4
+      ],
+      "description": "-d, --image-dimensionality 2/3/4. This option forces the image to be treated as a specified-dimensional image. If not specified, the program tries to infer the dimensionality from the input image.",
+      "title": "Image dimensionality"
+    },
+    "noise_model": {
+      "enum": [
+        "Gaussian",
+        "Rician"
+      ],
+      "description": "-n, --noise-model Rician/(Gaussian). Employ a Rician or Gaussian noise model.",
+      "title": "Noise model"
+    },
+    "shrink_factor": {
+      "type": "integer",
+      "description": "-s, --shrink-factor (1)/2/3/... Running noise correction on large images can be time consuming. To lessen computation time, the input image can be resampled. The shrink factor, specified as a single integer, describes this resampling. Shrink factor = 1 is the default.",
+      "title": "Shrink factor"
+    },
+    "mask_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "-x, --mask-image maskImageFilename. If a mask image is specified, denoising is only performed in the mask region.",
+      "title": "Mask image"
+    },
+    "patch_radius": {
+      "type": "string",
+      "description": "-p, --patch-radius 1x1x1. Patch radius. Default is 1x1x1.",
+      "title": "Patch radius"
+    },
+    "search_radius": {
+      "type": "string",
+      "description": "-r, --search-radius 2x2x2. Search radius. Default is 2x2x2.",
+      "title": "Search radius"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose output.",
+      "title": "Verbose"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "-i, --input-image inputImageFilename. A scalar image is expected as input for noise correction.",
+      "title": "Input image"
+    },
+    "output": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "correctedOutput"
+            },
+            "correctedOutputFileName": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "@type",
+            "correctedOutputFileName"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "correctedOutputNoise"
+            },
+            "correctedOutputFileName": {
+              "type": "string"
+            },
+            "noiseFile": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "@type",
+            "correctedOutputFileName"
+          ]
+        }
+      ],
+      "description": "The denoised version of the input image, with optional noise map image.",
+      "title": "output"
+    }
+  },
+  "required": [
+    "@type",
+    "input_image",
+    "output"
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dRegAna",
+  "description": "Multiple linear regression analysis for AFNI datasets",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dRegAna"
+    },
+    "rows": {
+      "type": "number",
+      "description": "Number of input datasets",
+      "title": "Number of rows"
+    },
+    "cols": {
+      "type": "number",
+      "description": "Number of X variables",
+      "title": "Number of columns"
+    },
+    "xydata": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "X variables and Y observations",
+      "title": "X variables and Y observations"
+    },
+    "model": {
+      "type": "string",
+      "description": "Definition of linear regression model: reduced model (Y = f(Xj1,...,Xjr)) and full model (Y = f(Xj1,...,Xjr,Xi1,...,Xiq))",
+      "title": "Regression model"
+    },
+    "diskspace": {
+      "type": "boolean",
+      "description": "Print out disk space required for program execution",
+      "title": "Diskspace flag",
+      "default": false
+    },
+    "workmem": {
+      "type": "number",
+      "description": "Number of megabytes of RAM to use for statistical workspace  (default = 750)",
+      "title": "Workspace memory"
+    },
+    "rmsmin": {
+      "type": "number",
+      "description": "Minimum rms error to reject constant model",
+      "title": "Minimum RMS error"
+    },
+    "fdisp": {
+      "type": "number",
+      "description": "Display results for voxels whose F-statistic is > fval",
+      "title": "Display F-statistic threshold"
+    },
+    "flof": {
+      "type": "number",
+      "description": "Minimum p value for F due to lack of fit",
+      "title": "Minimum p value for F"
+    },
+    "fcoef": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Estimate of kth regression coefficient along with F-test for the regression is written to AFNI `fift` dataset",
+      "title": "Regression coefficient (F-test)"
+    },
+    "rcoef": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Estimate of kth regression coefficient along with coef. of mult. deter. R^2 is written to AFNI `fith` dataset",
+      "title": "Regression coefficient (R^2)"
+    },
+    "tcoef": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Estimate of kth regression coefficient along with t-test for the coefficient is written to AFNI `fitt` dataset",
+      "title": "Regression coefficient (t-test)"
+    },
+    "bucket": {
+      "type": "string",
+      "description": "Create one AFNI 'bucket' dataset having n sub-bricks; n=0 creates default output",
+      "title": "Bucket dataset"
+    },
+    "brick": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify the contents of the mth sub-brick in the bucket dataset",
+      "title": "Bucket sub-brick contents"
+    },
+    "datum": {
+      "type": "string",
+      "description": "Write the output in DATUM format. Choose from short (default) or float",
+      "title": "Output data type"
+    }
+  },
+  "required": [
+    "@type",
+    "rows",
+    "cols",
+    "xydata",
+    "model"
+  ]
+}

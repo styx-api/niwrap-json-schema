@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "merge_stats_tables",
+  "description": "Merges a set of stats table files into a single stats table where each line is a subject and each column is a segmentation or parcellation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/merge_stats_tables"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify the subjects names",
+      "title": "Subjects"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Specify a single subject name",
+      "title": "Subject"
+    },
+    "subjectsfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the file which has the list of subjects (one subject per line)",
+      "title": "Subjects File"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify all the input stat files",
+      "title": "Input Files"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify a single input stat file",
+      "title": "Input File"
+    },
+    "outputfile": {
+      "type": "string",
+      "description": "The output table file",
+      "title": "Output Table File"
+    },
+    "meas": {
+      "type": "string",
+      "description": "Measure to write in output table",
+      "title": "Measure"
+    },
+    "common_segs": {
+      "type": "boolean",
+      "description": "Output only the common segmentations of all the statsfiles given",
+      "title": "Common Segments",
+      "default": false
+    },
+    "all_segs": {
+      "type": "boolean",
+      "description": "Output all the segmentations of the statsfiles given",
+      "title": "All Segments",
+      "default": false
+    },
+    "intable": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use `fname` as input (REQUIRED when passing subject ids)",
+      "title": "Input Table"
+    },
+    "subdir": {
+      "type": "string",
+      "description": "Use `subdir` instead of default \"stats/\" when passing subject ids",
+      "title": "Subdirectory"
+    },
+    "delimiter": {
+      "type": "string",
+      "description": "Delimiter between measures in the table. Options are 'tab', 'space', 'comma', and 'semicolon'. Default is 'space'.",
+      "title": "Delimiter"
+    },
+    "transpose": {
+      "type": "boolean",
+      "description": "Transpose the table (default is subjects in rows and segmentations in cols)",
+      "title": "Transpose Table",
+      "default": false
+    },
+    "skip": {
+      "type": "boolean",
+      "description": "If a subject does not have a stats file, skip it instead of exiting.",
+      "title": "Skip Missing Files",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Increase verbosity for debugging purposes.",
+      "title": "Debug Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "outputfile",
+    "meas"
+  ]
+}

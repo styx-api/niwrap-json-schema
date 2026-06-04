@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTwotoComplex",
+  "description": "Converts 2 sub-bricks of input to a complex-valued dataset",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTwotoComplex"
+    },
+    "dataset1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset (either as 1 dataset with 2 sub-bricks or 2 separate datasets)",
+      "title": "Input dataset 1"
+    },
+    "dataset2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second input dataset (optional if 2 sub-bricks in the first dataset)",
+      "title": "Input dataset 2"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output dataset [default='cmplx']",
+      "title": "Output Prefix"
+    },
+    "ri": {
+      "type": "boolean",
+      "description": "Specify that the 2 inputs are real and imaginary parts [this is the default]",
+      "title": "Real and Imaginary parts flag",
+      "default": false
+    },
+    "mp": {
+      "type": "boolean",
+      "description": "Specify that the 2 inputs are magnitude and phase [phase is in radians]",
+      "title": "Magnitude and Phase flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Only output nonzero values where the mask dataset is nonzero",
+      "title": "Mask Dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset1"
+  ]
+}

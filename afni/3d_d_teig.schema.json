@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dDTeig",
+  "description": "Computes eigenvalues and eigenvectors for an input dataset of tensors",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dDTeig"
+    },
+    "input_dataset": {
+      "type": "string",
+      "description": "Input dataset of Dxx, Dxy, Dyy, Dxz, Dyz, Dzz sub-bricks",
+      "title": "Input Dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use the given prefix for the output dataset",
+      "title": "Output Prefix"
+    },
+    "datum": {
+      "enum": [
+        "byte",
+        "short",
+        "float"
+      ],
+      "description": "Coerce the output data to be stored as the given type (byte, short, or float).",
+      "title": "Output Data Type"
+    },
+    "sep_dsets": {
+      "type": "boolean",
+      "description": "Save eigenvalues, vectors, FA, and MD in separate datasets",
+      "title": "Separate Datasets Flag",
+      "default": false
+    },
+    "uddata": {
+      "type": "boolean",
+      "description": "Tensor data is stored as upper diagonal instead of lower diagonal",
+      "title": "Upper Diagonal Data Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

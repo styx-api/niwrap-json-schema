@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RSFgen",
+  "description": "Program to generate random stimulus functions.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/RSFgen"
+    },
+    "length": {
+      "type": "integer",
+      "description": "Length of time series.",
+      "title": "Length of Time Series"
+    },
+    "num_experimental_conditions": {
+      "type": "integer",
+      "description": "Number of input stimuli (experimental conditions).",
+      "title": "Number of Experimental Conditions"
+    },
+    "block_length": {
+      "type": "string",
+      "description": "Block length for stimulus. Must specify stimulus index and length. Example: -nblock 1 5",
+      "title": "Block Length"
+    },
+    "random_seed": {
+      "type": "number",
+      "description": "Random number seed.",
+      "title": "Random Seed"
+    },
+    "suppress_output_flag": {
+      "type": "boolean",
+      "description": "Flag to suppress screen output.",
+      "title": "Suppress Output Flag",
+      "default": false
+    },
+    "single_file_flag": {
+      "type": "boolean",
+      "description": "Place stimulus functions into a single .1D file.",
+      "title": "Single File Flag",
+      "default": false
+    },
+    "single_column_flag": {
+      "type": "boolean",
+      "description": "Write stimulus functions as a single column of decimal integers.",
+      "title": "Single Column Flag",
+      "default": false
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix for output .1D stimulus functions.",
+      "title": "Output Prefix"
+    },
+    "num_reps": {
+      "type": "string",
+      "description": "Number of repetitions for stimulus.",
+      "title": "Number of Repetitions"
+    },
+    "permutation_seed": {
+      "type": "number",
+      "description": "Stim label permutation random number seed.",
+      "title": "Permutation Seed"
+    },
+    "markov_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing the transition probability matrix.",
+      "title": "Markov File"
+    },
+    "prob_zero": {
+      "type": "number",
+      "description": "Probability of a zero (i.e., null) state (default: 0).",
+      "title": "Probability of Zero"
+    },
+    "input_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of column or table of numbers. All other input options (except -seed and -prefix) are ignored with this option.",
+      "title": "Input Table"
+    }
+  },
+  "required": [
+    "@type",
+    "length",
+    "num_experimental_conditions"
+  ]
+}

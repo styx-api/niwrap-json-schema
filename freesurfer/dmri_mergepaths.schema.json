@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dmri_mergepaths",
+  "description": "A tool for merging diffusion MRI path data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dmri_mergepaths"
+    },
+    "input_volumes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input volume(s)",
+      "title": "Input Volumes"
+    },
+    "input_directory": {
+      "type": "string",
+      "description": "Input directory (optional). If specified, names of input files are relative to this",
+      "title": "Input Directory"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume",
+      "title": "Output Volume"
+    },
+    "color_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Color table file",
+      "title": "Color Table"
+    },
+    "threshold": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Lower threshold for display (0<=num<=1, as fraction of max)",
+      "title": "Threshold"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "check_opts": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit",
+      "title": "Check Options Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_volumes",
+    "output_volume",
+    "color_table",
+    "threshold"
+  ]
+}

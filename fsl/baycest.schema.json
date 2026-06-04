@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "baycest",
+  "description": "Bayesian analysis for chemical exchange saturation transfer z-spectra",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/baycest"
+    },
+    "data_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify data file (nifti image)",
+      "title": "Data file"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify mask file (nifti image)",
+      "title": "Mask file"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Specify output directory name",
+      "title": "Output directory"
+    },
+    "pools_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify pools to be included in model (ascii matrix)",
+      "title": "Pools file"
+    },
+    "spec_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Data specification (ascii matrix)",
+      "title": "Specification file"
+    },
+    "ptrain_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify pulse shape (ascii matrix)",
+      "title": "Pulse shape file"
+    },
+    "spatial_flag": {
+      "type": "boolean",
+      "description": "Use spatial prior (appropriate for in vivo data)",
+      "title": "Spatial prior flag",
+      "default": false
+    },
+    "t12prior_flag": {
+      "type": "boolean",
+      "description": "Include uncertainty in T1 and T2 values",
+      "title": "T1 and T2 uncertainty flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "data_file",
+    "mask_file",
+    "output_dir",
+    "pools_file",
+    "spec_file",
+    "ptrain_file"
+  ]
+}

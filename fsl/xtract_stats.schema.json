@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "xtract_stats",
+  "description": "Quantitative evaluation tool of XTRACT results in neuroimaging",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/xtract_stats"
+    },
+    "folder_basename": {
+      "type": "string",
+      "description": "Path to microstructure folder and basename of data (e.g. /home/DTI/dti_)",
+      "title": "Folder Basename"
+    },
+    "XTRACT_dir": {
+      "type": "string",
+      "description": "Path to XTRACT output folder",
+      "title": "XTRACT Output Directory"
+    },
+    "xtract2diff": {
+      "type": "string",
+      "description": "EITHER XTRACT results to diffusion space transform OR 'native' if tracts are already in diffusion space",
+      "title": "Xtract to Diffusion Transform"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "If not 'native', provide reference image in diffusion space (e.g. /home/DTI/dti_FA)",
+      "title": "Reference Image"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output filepath (Default <XTRACT_dir>/stats.csv)",
+      "title": "Output File"
+    },
+    "structures_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Structures file (as in XTRACT) (Default is all tracts under <XTRACT_dir>)",
+      "title": "Structures File"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold applied to tract probability map (default = 0.001 = 0.1%)",
+      "title": "Threshold"
+    },
+    "measurements": {
+      "type": "string",
+      "description": "Comma separated list of features to extract (Default = vol,prob,length,FA,MD - assumes DTI folder has been provided). vol = tract volume, prob = tract probability, length = tract length. Additional metrics must follow file naming conventions. e.g. for dti_L1 use 'L1'",
+      "title": "Measurements"
+    },
+    "keep_temp_files": {
+      "type": "boolean",
+      "description": "Keep temporary files",
+      "title": "Keep Temporary Files",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "folder_basename",
+    "XTRACT_dir",
+    "xtract2diff"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "defect2seg",
+  "description": "Converts surface defect labels into a segmentation volume and pointsets",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/defect2seg"
+    },
+    "output_seg": {
+      "type": "string",
+      "description": "Output segmentation volume",
+      "title": "Output Segmentation"
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Template for segmentation",
+      "title": "Template"
+    },
+    "left_hemisphere": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Left hemisphere inputs: surface, defect labels, pointset, and offset",
+      "title": "Left Hemisphere Inputs"
+    },
+    "right_hemisphere": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Right hemisphere inputs: surface, defect labels, pointset, and offset",
+      "title": "Right Hemisphere Inputs"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject identifier, sets default values for other parameters",
+      "title": "Subject"
+    },
+    "lh_only": {
+      "type": "boolean",
+      "description": "Consider only left hemisphere defects",
+      "title": "Left Hemisphere Only",
+      "default": false
+    },
+    "rh_only": {
+      "type": "boolean",
+      "description": "Consider only right hemisphere defects",
+      "title": "Right Hemisphere Only",
+      "default": false
+    },
+    "cortex": {
+      "type": "boolean",
+      "description": "Constrain defects to within cortex",
+      "title": "Cortex Constraint",
+      "default": false
+    },
+    "no_cortex": {
+      "type": "boolean",
+      "description": "Allow defects outside of cortex",
+      "title": "No Cortex Constraint",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "output_seg",
+    "template"
+  ]
+}

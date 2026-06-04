@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fabber",
+  "description": "Fabber is a tool for model-based Bayesian analysis of time-series data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fabber"
+    },
+    "output": {
+      "type": "string",
+      "description": "Directory for output files (including logfile)",
+      "title": "Output Directory"
+    },
+    "method": {
+      "type": "string",
+      "description": "Use this inference method",
+      "title": "Inference Method"
+    },
+    "model": {
+      "type": "string",
+      "description": "Use this forward model",
+      "title": "Forward Model"
+    },
+    "data_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify a single input data file",
+      "title": "Data File"
+    },
+    "data_files": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify multiple data files for n=1, 2, 3...",
+      "title": "Multiple Data Files"
+    },
+    "data_order": {
+      "type": "string",
+      "description": "If multiple data files are specified, how they will be handled",
+      "title": "Data Order"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file. Inference will only be performed where mask value > 0",
+      "title": "Mask File"
+    },
+    "mt_n": {
+      "type": "number",
+      "description": "List of masked time points, indexed from 1. These will be ignored in the parameter updates",
+      "title": "Masked Time Points"
+    },
+    "supp_data": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "'Supplemental' timeseries data, required for some models",
+      "title": "Supplemental Data"
+    },
+    "evaluate_output": {
+      "type": "string",
+      "description": "Evaluate model. Set to name of output required or blank for default output. Requires model configuration options, --evaluate-params and --evaluate-nt",
+      "title": "Model Evaluation"
+    },
+    "evaluate_params": {
+      "type": "string",
+      "description": "List of parameter values for evaluation",
+      "title": "Evaluation Parameters"
+    },
+    "evaluate_nt": {
+      "type": "number",
+      "description": "Number of time points for evaluation",
+      "title": "Number of Time Points"
+    },
+    "simple_output": {
+      "type": "boolean",
+      "description": "Instead of usual standard output, simply output series of lines each giving progress as percentage",
+      "title": "Simple Output",
+      "default": false
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "If set will overwrite existing output. If not set, new output directories will be created by appending '+' to the directory name",
+      "title": "Overwrite Flag",
+      "default": false
+    },
+    "link_to_latest": {
+      "type": "boolean",
+      "description": "Try to create a link to the most recent output directory with the prefix _latest",
+      "title": "Link to Latest Flag",
+      "default": false
+    },
+    "load_models": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Load models dynamically from the specified filename, which should be a DLL/shared library",
+      "title": "Load Models"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Output large amounts of debug information. ONLY USE WITH VERY SMALL NUMBERS OF VOXELS",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "optfile": {
+      "type": "object",
+      "properties": {
+        "optfile_short": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Read options in option=value form from the specified file",
+          "title": "Options File"
+        },
+        "optfile_long": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "File containing additional options, one per line, in the same form as specified on the command line",
+          "title": "Options File"
+        }
+      },
+      "description": "File containing additional options, one per line, in the same form as specified on the command line",
+      "title": "Options File"
+    },
+    "save_model_fit": {
+      "type": "boolean",
+      "description": "Output the model prediction as a 4d volume",
+      "title": "Save Model Fit Flag",
+      "default": false
+    },
+    "save_residuals": {
+      "type": "boolean",
+      "description": "Output the residuals (difference between the data and the model prediction)",
+      "title": "Save Residuals Flag",
+      "default": false
+    },
+    "save_model_extras": {
+      "type": "boolean",
+      "description": "Output any additional model-specific timeseries data",
+      "title": "Save Model Extras Flag",
+      "default": false
+    },
+    "save_mvn": {
+      "type": "boolean",
+      "description": "Output the final MVN distributions",
+      "title": "Save MVN Flag",
+      "default": false
+    },
+    "save_mean": {
+      "type": "boolean",
+      "description": "Output the parameter means",
+      "title": "Save Mean Flag",
+      "default": false
+    },
+    "save_std": {
+      "type": "boolean",
+      "description": "Output the parameter standard deviations",
+      "title": "Save Standard Deviations Flag",
+      "default": false
+    },
+    "save_var": {
+      "type": "boolean",
+      "description": "Output the parameter variances",
+      "title": "Save Variances Flag",
+      "default": false
+    },
+    "save_zstat": {
+      "type": "boolean",
+      "description": "Output the parameter Z-stats",
+      "title": "Save Z-Stats Flag",
+      "default": false
+    },
+    "save_noise_mean": {
+      "type": "boolean",
+      "description": "Output the noise means. The noise distribution inferred is the precision of a Gaussian noise source",
+      "title": "Save Noise Means Flag",
+      "default": false
+    },
+    "save_noise_std": {
+      "type": "boolean",
+      "description": "Output the noise standard deviations",
+      "title": "Save Noise Standard Deviations Flag",
+      "default": false
+    },
+    "save_free_energy": {
+      "type": "boolean",
+      "description": "Output the free energy, if calculated",
+      "title": "Save Free Energy Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print this usage method. If given with --method or --model, display relevant method/model usage information",
+      "title": "Help Flag",
+      "default": false
+    },
+    "list_methods": {
+      "type": "boolean",
+      "description": "List all known inference methods",
+      "title": "List Methods Flag",
+      "default": false
+    },
+    "list_models": {
+      "type": "boolean",
+      "description": "List all known forward models",
+      "title": "List Models Flag",
+      "default": false
+    },
+    "list_params": {
+      "type": "boolean",
+      "description": "List model parameters (requires model configuration options to be given)",
+      "title": "List Parameters Flag",
+      "default": false
+    },
+    "desc_params": {
+      "type": "boolean",
+      "description": "Describe model parameters (name, description, units) - requires model configuration options to be given. Note that not all models provide parameter descriptions",
+      "title": "Describe Parameters Flag",
+      "default": false
+    },
+    "list_outputs": {
+      "type": "boolean",
+      "description": "List additional model outputs (requires model configuration options to be given)",
+      "title": "List Outputs Flag",
+      "default": false
+    },
+    "old_optfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read options in command line form from the specified file (DEPRECATED)",
+      "title": "Old Options File"
+    }
+  },
+  "required": [
+    "@type",
+    "output",
+    "method",
+    "model",
+    "data_file"
+  ]
+}

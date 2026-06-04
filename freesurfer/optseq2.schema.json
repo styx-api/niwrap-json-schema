@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "optseq2",
+  "description": "Optseq2 is a tool for automatically scheduling events for rapid-presentation event-related (RPER) fMRI experiments.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/optseq2"
+    },
+    "ntp": {
+      "type": "number",
+      "description": "Number of time points to be acquired during the scan.",
+      "title": "Number of Time Points"
+    },
+    "tr": {
+      "type": "number",
+      "description": "Temporal resolution of acquisition in seconds.",
+      "title": "Temporal Resolution"
+    },
+    "tprescan": {
+      "type": "number",
+      "description": "Start events t seconds before first acquisition.",
+      "title": "Pre-scan Time"
+    },
+    "psdwin": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 3,
+      "description": "Post-stimulus window specifications: minimum PSD, maximum PSD, and optional dPSD.",
+      "title": "PSD Window"
+    },
+    "event": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Event type specification with label, duration, and number of repetitions.",
+      "title": "Event"
+    },
+    "repvar": {
+      "type": "string",
+      "description": "Allow number of repetitions of event types to vary by percentage, optionally per event.",
+      "title": "Repetition Variation"
+    },
+    "polyfit": {
+      "type": "number",
+      "description": "Add polynomial regressors as nuisance variables of specified order.",
+      "title": "Polynomial Fit Order"
+    },
+    "tnullmin": {
+      "type": "number",
+      "description": "Minimum duration of null time between stimuli in seconds.",
+      "title": "Minimum Null Duration"
+    },
+    "tnullmax": {
+      "type": "number",
+      "description": "Maximum duration of null time between stimuli in seconds.",
+      "title": "Maximum Null Duration"
+    },
+    "nsearch": {
+      "type": "number",
+      "description": "Search over a specified number of iterations for schedules.",
+      "title": "Number of Searches"
+    },
+    "tsearch": {
+      "type": "number",
+      "description": "Search for schedules over a specified number of hours.",
+      "title": "Search Time"
+    },
+    "first_order_cb": {
+      "type": "number",
+      "description": "Pre-optimize first order counter-balancing.",
+      "title": "First Order Counter-Balancing"
+    },
+    "ar1": {
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1,
+      "description": "Optimize assuming whitening with AR1 parameter",
+      "title": "AR1 Parameter"
+    },
+    "penalize": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Penalize for presentations being too close with parameters alpha, T, and dtmin.",
+      "title": "Presentation Penalty"
+    },
+    "evc": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Contrast of event types with weights.",
+      "title": "Event Contrast"
+    },
+    "cmtx": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Load contrast from ASCII matrix file.",
+      "title": "Contrast Matrix"
+    },
+    "cost": {
+      "type": "string",
+      "description": "Specify cost function and its parameters.",
+      "title": "Cost Function"
+    },
+    "sumdelays": {
+      "type": "boolean",
+      "description": "Sum delays when forming contrast matrix.",
+      "title": "Sum Delays",
+      "default": false
+    },
+    "seed": {
+      "type": "number",
+      "description": "Initialize random number generator with seed value.",
+      "title": "Random Seed"
+    },
+    "nkeep": {
+      "type": "number",
+      "description": "Number of best schedules to keep.",
+      "title": "Number Keep"
+    },
+    "outstem": {
+      "type": "string",
+      "description": "Output stem for saved schedules.",
+      "title": "Output Stem"
+    },
+    "mtxstem": {
+      "type": "string",
+      "description": "Output stem for saved design matrices.",
+      "title": "Matrix Stem"
+    },
+    "cmtxfile": {
+      "type": "string",
+      "description": "File for saving contrast matrix.",
+      "title": "Contrast Matrix File"
+    },
+    "summaryfile": {
+      "type": "string",
+      "description": "File for saving search summary.",
+      "title": "Summary File"
+    },
+    "logfile": {
+      "type": "string",
+      "description": "File for saving log information.",
+      "title": "Log File"
+    },
+    "pctupdate": {
+      "type": "number",
+      "description": "Percentage interval after which progress is logged.",
+      "title": "Percent Update"
+    },
+    "sviterfile": {
+      "type": "string",
+      "description": "File to save information from each iteration.",
+      "title": "Save Iteration Information"
+    },
+    "instem": {
+      "type": "string",
+      "description": "Initialize with input schedules that match instem-RRR.par.",
+      "title": "Input Stem"
+    },
+    "input_schedule": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Input schedule files.",
+      "title": "Input Schedule"
+    },
+    "nosearch": {
+      "type": "boolean",
+      "description": "Do not perform search for optimal schedules.",
+      "title": "No Search Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print help page.",
+      "title": "Help Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version string.",
+      "title": "Version Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "ntp",
+    "tr",
+    "tprescan",
+    "psdwin"
+  ]
+}

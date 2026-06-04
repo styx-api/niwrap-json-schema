@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "make_stim_times.py",
+  "description": "Convert a set of 0/1 stim files into a set of stim_times files, or convert real-valued files into those for use with -stim_times_AM2.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/make_stim_times.py"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify stim files",
+      "title": "Stimulus files"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output prefix for files",
+      "title": "Output file prefix"
+    },
+    "tr": {
+      "type": "number",
+      "description": "TR time, in seconds",
+      "title": "TR time"
+    },
+    "nruns": {
+      "type": "number",
+      "description": "Number of runs",
+      "title": "Number of runs"
+    },
+    "nt": {
+      "type": "number",
+      "description": "Number of TRs per run",
+      "title": "Number of TRs per run"
+    },
+    "run_trs": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify TRs per run, if they differ",
+      "title": "TRs per run"
+    },
+    "offset": {
+      "type": "number",
+      "description": "Add OFFSET to all output times",
+      "title": "Time offset"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Provide labels for filenames",
+      "title": "Labels for filenames"
+    },
+    "no_consec_events": {
+      "type": "boolean",
+      "description": "Do not allow consecutive events",
+      "title": "No Consecutive Events",
+      "default": false
+    },
+    "amplitudes": {
+      "type": "boolean",
+      "description": "Marry times with amplitudes",
+      "title": "Amplitude Modulation",
+      "default": false
+    },
+    "show_valid_opts": {
+      "type": "boolean",
+      "description": "Output all options",
+      "title": "Show Valid Options",
+      "default": false
+    },
+    "verbose": {
+      "type": "number",
+      "description": "Provide verbose output",
+      "title": "Verbose Level"
+    }
+  },
+  "required": [
+    "@type",
+    "files",
+    "prefix",
+    "tr",
+    "nruns",
+    "nt"
+  ]
+}

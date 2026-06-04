@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "samseg-long",
+  "description": "Longitudinal analysis tool using SAMSEG in FreeSurfer",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/samseg-long"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Output directory.",
+      "title": "Output directory"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input image files. All inputs must be a single modality.",
+      "title": "Input files"
+    },
+    "align_mc": {
+      "type": "boolean",
+      "description": "Align all inputs using robust register.",
+      "title": "Align using robust register (MC)",
+      "default": false
+    },
+    "align_no_mc": {
+      "type": "boolean",
+      "description": "Do not align inputs using robust register.",
+      "title": "Do not align",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads to use.",
+      "title": "Threads"
+    },
+    "save_posteriors": {
+      "type": "boolean",
+      "description": "Save posterior probabilities.",
+      "title": "Save posteriors flag",
+      "default": false
+    },
+    "force_update": {
+      "type": "boolean",
+      "description": "Force update of outputs.",
+      "title": "Force update flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "output_dir",
+    "input_files"
+  ]
+}

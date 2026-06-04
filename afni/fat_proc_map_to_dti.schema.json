@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_proc_map_to_dti",
+  "description": "A program for mapping data sets into DWI space, suitable for aligning anatomical ROI maps or EPI data to a DWI reference volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_proc_map_to_dti"
+    },
+    "source": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T1w volume file (source volume)",
+      "title": "Source file"
+    },
+    "base": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "DWI reference volume file",
+      "title": "Base file"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output prefix for files and snapshots",
+      "title": "Output prefix"
+    },
+    "followers_nn": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Follower data sets with NN interpolation",
+      "title": "Followers NN"
+    },
+    "followers_wsinc5": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Follower data sets with wsinc5 interpolation",
+      "title": "Followers wsinc5"
+    },
+    "followers_surf": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Surface follower data sets",
+      "title": "Followers surf"
+    },
+    "followers_ndset": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "NIML follower data sets",
+      "title": "Followers NIML dset"
+    },
+    "followers_spec": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Spec follower data sets",
+      "title": "Followers spec"
+    },
+    "matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Pre-made matrix file for transformation",
+      "title": "Matrix file"
+    },
+    "workdir": {
+      "type": "string",
+      "description": "Specify a working directory",
+      "title": "Working directory"
+    },
+    "no_cmd_out": {
+      "type": "boolean",
+      "description": "Don't save the command line call of this program",
+      "title": "No command output flag",
+      "default": false
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Do not delete temporary working directory",
+      "title": "No clean flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "source",
+    "base",
+    "prefix"
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "reg_f3d",
+  "description": "Fast Free-Form Deformation algorithm for non-rigid registration based on Rueckert's 99 TMI work.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "niftyreg/reg_f3d"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the reference image",
+      "title": "Reference Image"
+    },
+    "floating_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the floating image",
+      "title": "Floating Image"
+    },
+    "affine_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename which contains an affine transformation",
+      "title": "Affine Transformation"
+    },
+    "flirt_affine_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename which contains a flirt affine transformation",
+      "title": "Flirt Affine Transformation"
+    },
+    "control_point_grid_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of control point grid input",
+      "title": "Control Point Grid Input"
+    },
+    "output_cpp": {
+      "type": "string",
+      "description": "Filename of control point grid",
+      "title": "Output Control Point Grid"
+    },
+    "output_resampled_image": {
+      "type": "string",
+      "description": "Filename of the resampled image",
+      "title": "Output Resampled Image"
+    },
+    "reference_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of a mask image in the reference space",
+      "title": "Reference Mask Image"
+    },
+    "smooth_reference": {
+      "type": "number",
+      "description": "Smooth the reference image using the specified sigma (mm)",
+      "title": "Smooth Reference Image"
+    },
+    "smooth_floating": {
+      "type": "number",
+      "description": "Smooth the floating image using the specified sigma (mm)",
+      "title": "Smooth Floating Image"
+    },
+    "num_bins_joint_histogram": {
+      "type": "number",
+      "description": "Number of bins to use for the joint histogram (reference)",
+      "title": "Number of Bins for Joint Histogram"
+    },
+    "num_bins_floating_joint_histogram": {
+      "type": "number",
+      "description": "Number of bins to use for the joint histogram (floating)",
+      "title": "Number of Bins for Floating Joint Histogram"
+    },
+    "lower_threshold_reference": {
+      "type": "number",
+      "description": "Lower threshold to apply to the reference image intensities",
+      "title": "Lower Threshold for Reference Image"
+    },
+    "upper_threshold_reference": {
+      "type": "number",
+      "description": "Upper threshold to apply to the reference image intensities",
+      "title": "Upper Threshold for Reference Image"
+    },
+    "lower_threshold_floating": {
+      "type": "number",
+      "description": "Lower threshold to apply to the floating image intensities",
+      "title": "Lower Threshold for Floating Image"
+    },
+    "upper_threshold_floating": {
+      "type": "number",
+      "description": "Upper threshold to apply to the floating image intensities",
+      "title": "Upper Threshold for Floating Image"
+    },
+    "spacing_x": {
+      "type": "number",
+      "description": "Final grid spacing along the x axis in mm (or in voxel if negative value)",
+      "title": "Grid Spacing X"
+    },
+    "spacing_y": {
+      "type": "number",
+      "description": "Final grid spacing along the y axis in mm (or in voxel if negative value)",
+      "title": "Grid Spacing Y"
+    },
+    "spacing_z": {
+      "type": "number",
+      "description": "Final grid spacing along the z axis in mm (or in voxel if negative value)",
+      "title": "Grid Spacing Z"
+    },
+    "bending_energy": {
+      "type": "number",
+      "description": "Weight of the bending energy penalty term",
+      "title": "Bending Energy Penalty Term Weight"
+    },
+    "linear_elasticity": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Weights of linear elasticity penalty term",
+      "title": "Linear Elasticity Penalty Term Weights"
+    },
+    "l2_norm_displacement": {
+      "type": "number",
+      "description": "Weight of L2 norm displacement penalty term",
+      "title": "L2 Norm Displacement Penalty Term Weight"
+    },
+    "jacobian_determinant": {
+      "type": "number",
+      "description": "Weight of log of the Jacobian determinant penalty term",
+      "title": "Log of the Jacobian Determinant Penalty Term Weight"
+    },
+    "no_approx_jl": {
+      "type": "boolean",
+      "description": "Do not approximate the JL value only at the control point position",
+      "title": "No Approximate JL",
+      "default": false
+    },
+    "no_conj": {
+      "type": "boolean",
+      "description": "Do not use the conjugate gradient optimization but a simple gradient ascent",
+      "title": "No Conjugate Gradient",
+      "default": false
+    },
+    "ssd": {
+      "type": "boolean",
+      "description": "Use the SSD as the similarity measure instead of NMI",
+      "title": "Use SSD Similarity Measure",
+      "default": false
+    },
+    "kld": {
+      "type": "boolean",
+      "description": "Use the KL divergence as the similarity measure instead of NMI",
+      "title": "Use KL Divergence",
+      "default": false
+    },
+    "amc": {
+      "type": "boolean",
+      "description": "Use the additive NMI for multichannel data",
+      "title": "Use Additive NMI for Multichannel Data",
+      "default": false
+    },
+    "max_iterations": {
+      "type": "number",
+      "description": "Maximal number of iterations per level",
+      "title": "Maximal Number of Iterations Per Level"
+    },
+    "num_levels": {
+      "type": "number",
+      "description": "Number of levels to perform",
+      "title": "Number of Levels"
+    },
+    "first_levels": {
+      "type": "number",
+      "description": "Only perform the first levels",
+      "title": "First Levels"
+    },
+    "no_pyramid": {
+      "type": "boolean",
+      "description": "Do not use a pyramidal approach",
+      "title": "No Pyramidal Approach",
+      "default": false
+    },
+    "symmetric": {
+      "type": "boolean",
+      "description": "Use symmetric approach",
+      "title": "Symmetric Approach",
+      "default": false
+    },
+    "floating_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of a mask image in the floating space",
+      "title": "Floating Mask Image"
+    },
+    "inverse_consistency": {
+      "type": "number",
+      "description": "Weight of the inverse consistency penalty term",
+      "title": "Inverse Consistency Penalty Term Weight"
+    },
+    "velocity_field": {
+      "type": "boolean",
+      "description": "Use velocity field integration to generate the deformation",
+      "title": "Use Velocity Field Integration",
+      "default": false
+    },
+    "composition_steps": {
+      "type": "number",
+      "description": "Number of composition steps",
+      "title": "Number of Composition Steps"
+    },
+    "smooth_gradient": {
+      "type": "number",
+      "description": "Smooth the metric derivative (in mm)",
+      "title": "Smooth Metric Derivative"
+    },
+    "padding_value": {
+      "type": "number",
+      "description": "Padding value",
+      "title": "Padding Value"
+    },
+    "verbose_off": {
+      "type": "boolean",
+      "description": "Turn verbose off",
+      "title": "Verbose Off",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "reference_image",
+    "floating_image"
+  ]
+}

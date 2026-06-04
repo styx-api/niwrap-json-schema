@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTcorrMap",
+  "description": "AFNI program to compute correlation maps of input time series data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTcorrMap"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read 3D+time dataset 'dd'. This provides the time series to be correlated en masse. This is a mandatory option.",
+      "title": "Input dataset"
+    },
+    "seed": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read 3D+time dataset 'bb'. It correlates the -seed voxel time series with every voxel in the -input dataset.",
+      "title": "Seed dataset"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read dataset 'mmm' as a voxel mask.",
+      "title": "Mask dataset"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Create a mask from the input dataset.",
+      "title": "Automask",
+      "default": false
+    },
+    "mean": {
+      "type": "string",
+      "description": "Save average correlations into dataset prefix 'pp'.",
+      "title": "Mean correlations output prefix"
+    },
+    "zmean": {
+      "type": "string",
+      "description": "Save tanh of mean arctanh(correlation) into 'pp'.",
+      "title": "Tanh of mean arctanh output prefix"
+    },
+    "qmean": {
+      "type": "string",
+      "description": "Save RMS(correlation) into 'pp'.",
+      "title": "RMS correlation output prefix"
+    },
+    "pmean": {
+      "type": "string",
+      "description": "Save average of squared positive correlations into 'pp'.",
+      "title": "Positive squared correlation output prefix"
+    },
+    "thresh": {
+      "type": "string",
+      "description": "Save the COUNT of how many voxels survived thresholding at level abs(correlation) >= tt.",
+      "title": "Thresholding level"
+    },
+    "varthresh": {
+      "type": "string",
+      "description": "Save the COUNT of how many voxels survive thresholding at multiple levels abs(correlation) >= tt.",
+      "title": "Variable thresholding levels"
+    },
+    "norm_varthresh": {
+      "type": "string",
+      "description": "Like '-VarThresh', but the output counts are 'Normalized'.",
+      "title": "Normalized variable thresholding levels"
+    },
+    "corrmap": {
+      "type": "string",
+      "description": "Output at each voxel the entire correlation map, into a dataset with prefix 'pp'.",
+      "title": "Correlation map output prefix"
+    },
+    "corrmask": {
+      "type": "boolean",
+      "description": "By default, -CorrMap outputs a sub-brick for EACH input dataset voxel. Eliminates these sub-bricks using this option.",
+      "title": "Correlation mask",
+      "default": false
+    },
+    "aexpr": {
+      "type": "string",
+      "description": "For each correlation 'r', compute the calc-style expression 'expr', and average these values to get the output that goes into dataset 'ppp'.",
+      "title": "Average expression"
+    },
+    "cexpr": {
+      "type": "string",
+      "description": "As in '-Aexpr', but only average together nonzero values computed by 'expr'.",
+      "title": "Conditional average expression"
+    },
+    "sexpr": {
+      "type": "string",
+      "description": "As above, but the sum of the expressions is computed rather than the average.",
+      "title": "Sum expression"
+    },
+    "hist": {
+      "type": "string",
+      "description": "For each voxel, save a histogram of the correlation coefficients into dataset ppp.",
+      "title": "Correlation coefficient histogram"
+    }
+  },
+  "required": [
+    "@type",
+    "input"
+  ]
+}

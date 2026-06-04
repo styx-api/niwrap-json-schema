@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ap_run_simple_rest.tcsh",
+  "description": "Run a quick afni_proc.py analysis for QC",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/ap_run_simple_rest.tcsh"
+    },
+    "anat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Single anatomical dataset",
+      "title": "Anatomical Dataset"
+    },
+    "epi": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "EPI datasets",
+      "title": "EPI Datasets"
+    },
+    "nt_rm": {
+      "type": "number",
+      "description": "Number of time points to remove from starts of runs",
+      "title": "Number of Time Points to Remove"
+    },
+    "run_ap": {
+      "type": "boolean",
+      "description": "Run the afni_proc.py command",
+      "title": "Run afni_proc.py Command",
+      "default": false
+    },
+    "run_proc": {
+      "type": "boolean",
+      "description": "Run the proc script from afni_proc.py command",
+      "title": "Run Proc Script",
+      "default": false
+    },
+    "subjid": {
+      "type": "string",
+      "description": "Specify subject ID for file names",
+      "title": "Subject ID"
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify template for standard space",
+      "title": "Template File"
+    },
+    "compressor": {
+      "type": "string",
+      "description": "Control automatic compression of *.BRIK files",
+      "title": "Compressor"
+    },
+    "verb": {
+      "type": "number",
+      "description": "Specify verbosity level",
+      "title": "Verbosity Level"
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Same as verbosity level 3",
+      "title": "Echo Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "epi"
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_compute_parc_overlap",
+  "description": "Compares two parcellated (annotated or labeled) surfaces and computes an overall Dice coefficient and mean minimum distances (mm).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_compute_parc_overlap"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject to check",
+      "title": "Subject"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere: rh or lh",
+      "title": "Hemisphere"
+    },
+    "annot1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First .annot file",
+      "title": "First Annot File"
+    },
+    "annot2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second .annot file",
+      "title": "Second Annot File"
+    },
+    "label1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First .label file",
+      "title": "First Label File"
+    },
+    "label2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second .label file",
+      "title": "Second Label File"
+    },
+    "subj_dir": {
+      "type": "string",
+      "description": "Set SUBJECTS_DIR",
+      "title": "Subjects Directory"
+    },
+    "log_file": {
+      "type": "string",
+      "description": "Output the overall DICE and minimum distance to filename",
+      "title": "Log Filename"
+    },
+    "label_list": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing labels to check, one per line",
+      "title": "Label List"
+    },
+    "nocheck_label1_xyz": {
+      "type": "boolean",
+      "description": "When loading label1 file, don't check x,y,z coords to surface",
+      "title": "No Check Label1 XYZ",
+      "default": false
+    },
+    "nocheck_label2_xyz": {
+      "type": "boolean",
+      "description": "When loading label2 file, don't check x,y,z coords to surface",
+      "title": "No Check Label2 XYZ",
+      "default": false
+    },
+    "nocheck_label_xyz": {
+      "type": "boolean",
+      "description": "Do not check label1 and label2",
+      "title": "No Check Label XYZ",
+      "default": false
+    },
+    "use_label1_xyz": {
+      "type": "boolean",
+      "description": "Replace surface x,y,z coords with those in label1 file",
+      "title": "Use Label1 XYZ",
+      "default": false
+    },
+    "use_label2_xyz": {
+      "type": "boolean",
+      "description": "Replace surface x,y,z coords with those in label2 file",
+      "title": "Use Label2 XYZ",
+      "default": false
+    },
+    "use_label_xyz": {
+      "type": "boolean",
+      "description": "Use label1 and label2 coords",
+      "title": "Use Label XYZ",
+      "default": false
+    },
+    "debug_overlap": {
+      "type": "boolean",
+      "description": "Generate ?h.overlap.annot",
+      "title": "Debug Overlap",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject",
+    "hemi"
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mideface",
+  "description": "Minimally invasive defacing tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mideface"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Volume to deface",
+      "title": "Input Volume"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Defaced output volume",
+      "title": "Output Volume"
+    },
+    "facemask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Facemask to apply",
+      "title": "Facemask"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Directory for outputs, activates PostHeadSurf",
+      "title": "Output Directory"
+    },
+    "exclusion_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask to exclude certain regions from defacing",
+      "title": "Exclusion Mask"
+    },
+    "samseg_ndilations": {
+      "type": "number",
+      "description": "Number of dilations for Samseg segmentation",
+      "title": "Samseg Dilations"
+    },
+    "samseg_json": {
+      "type": "string",
+      "description": "JSON configuration for Samseg",
+      "title": "Samseg JSON"
+    },
+    "samseg_fast": {
+      "type": "boolean",
+      "description": "Configure Samseg to run quickly",
+      "title": "Samseg Fast",
+      "default": false
+    },
+    "no_samseg_fast": {
+      "type": "boolean",
+      "description": "Do not configure Samseg to run quickly",
+      "title": "Do not run Samseg Fast",
+      "default": false
+    },
+    "init_reg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Initial registration file for Samseg",
+      "title": "Initial Registration"
+    },
+    "synthseg_ndilations": {
+      "type": "number",
+      "description": "Number of dilations for Synthseg segmentation",
+      "title": "Synthseg Dilations"
+    },
+    "fill_const": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Constants for filling regions",
+      "title": "Fill Constants"
+    },
+    "fill_zero": {
+      "type": "boolean",
+      "description": "Fill regions with zero",
+      "title": "Fill Zero",
+      "default": false
+    },
+    "fhi": {
+      "type": "number",
+      "description": "FHI value for MRIchangeType()",
+      "title": "FHI Value"
+    },
+    "no_ears": {
+      "type": "boolean",
+      "description": "Do not include ears in the defacing",
+      "title": "Exclude Ears",
+      "default": false
+    },
+    "back_of_head": {
+      "type": "boolean",
+      "description": "Include back of head in defacing",
+      "title": "Include Back of Head",
+      "default": false
+    },
+    "forehead": {
+      "type": "boolean",
+      "description": "Include forehead in defacing (risks removing brain)",
+      "title": "Include Forehead",
+      "default": false
+    },
+    "pics": {
+      "type": "boolean",
+      "description": "Take pictures of the defaced result",
+      "title": "Take Pictures",
+      "default": false
+    },
+    "code": {
+      "type": "string",
+      "description": "Embed code name in pictures",
+      "title": "Code Name"
+    },
+    "image_convert": {
+      "type": "string",
+      "description": "Path to ImageMagick convert binary for pictures",
+      "title": "ImageMagick Convert Path"
+    },
+    "no_post": {
+      "type": "boolean",
+      "description": "Do not make a head surface after defacing",
+      "title": "No Post-processing",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads to use",
+      "title": "Threads"
+    },
+    "force": {
+      "type": "boolean",
+      "description": "Force reprocessing (only applicable if output directory is used)",
+      "title": "Force Reprocessing",
+      "default": false
+    },
+    "output_format": {
+      "type": "string",
+      "description": "Output file format",
+      "title": "Output Format"
+    },
+    "atlas": {
+      "type": "string",
+      "description": "Directory containing atlas files",
+      "title": "Atlas Directory"
+    },
+    "expert": {
+      "type": "string",
+      "description": "Additional expert options",
+      "title": "Expert Options"
+    },
+    "display_no": {
+      "type": "number",
+      "description": "Xvfb display number for taking pictures",
+      "title": "Display Number"
+    },
+    "apply_volume": {
+      "type": "string",
+      "description": "Apply midface output to a second volume",
+      "title": "Apply to Another Volume"
+    },
+    "check_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Volume to check if defaced",
+      "title": "Check Defaced Volume"
+    },
+    "check_output_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional output file for check result",
+      "title": "Check Output File"
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "output_volume"
+  ]
+}

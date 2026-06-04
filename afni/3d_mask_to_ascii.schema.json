@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dMaskToASCII",
+  "description": "Converts a byte-valued 0/1 dataset into an ASCII string, or vice versa.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dMaskToASCII"
+    },
+    "tobin_flag": {
+      "type": "boolean",
+      "description": "Read ASCII mask, expand it to byte-valued dataset, and write to stdout.",
+      "title": "To binary flag",
+      "default": false
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset (e.g. mask.nii.gz)",
+      "title": "Input dataset"
+    },
+    "outputfile": {
+      "type": "string",
+      "description": "Output file where ASCII string mask or binary mask will be written.",
+      "title": "Output file"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset",
+    "outputfile"
+  ]
+}

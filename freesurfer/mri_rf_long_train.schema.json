@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_rf_long_train",
+  "description": "Trains GCA data with multiple subjects for FreeSurfer",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_rf_long_train"
+    },
+    "seg_dir": {
+      "type": "string",
+      "description": "Path to the segmentation volume directory, relative to $subject/mri.",
+      "title": "Segmentation Directory"
+    },
+    "xform": {
+      "type": "string",
+      "description": "Atlas transform path relative to $subject/mri/transforms.",
+      "title": "Atlas Transform"
+    },
+    "mask": {
+      "type": "string",
+      "description": "Volume name to use as a mask, path relative to $subject/mri.",
+      "title": "Mask Volume"
+    },
+    "node_spacing": {
+      "type": "number",
+      "description": "Spacing of classifiers in canonical space.",
+      "title": "Node Spacing"
+    },
+    "prior_spacing": {
+      "type": "number",
+      "description": "Spacing of class priors in canonical space.",
+      "title": "Prior Spacing"
+    },
+    "input_data": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify training data, path relative to $subject/mri. Can specify multiple inputs. Defaults to 'orig' if not specified.",
+      "title": "Input Data"
+    },
+    "check": {
+      "type": "boolean",
+      "description": "Conduct sanity-check of labels for obvious edit errors.",
+      "title": "Sanity Check Flag",
+      "default": false
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subjects for training.",
+      "title": "Subjects"
+    },
+    "output_rfa": {
+      "type": "string",
+      "description": "Output RFA filename.",
+      "title": "Output RFA Filename"
+    }
+  },
+  "required": [
+    "@type",
+    "seg_dir",
+    "xform",
+    "subjects",
+    "output_rfa"
+  ]
+}

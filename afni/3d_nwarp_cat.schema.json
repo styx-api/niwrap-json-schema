@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dNwarpCat",
+  "description": "Catenates (composes) 3D warps defined on a grid or via a matrix.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dNwarpCat"
+    },
+    "interpolation": {
+      "type": "string",
+      "description": "Interpolation mode: linear, quintic, or wsinc5 (default).",
+      "title": "Interpolation Mode"
+    },
+    "verbosity": {
+      "type": "boolean",
+      "description": "Print various fun messages during execution.",
+      "title": "Verbosity Flag",
+      "default": false
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix name for the output dataset that holds the warp.",
+      "title": "Output Prefix"
+    },
+    "space_marker": {
+      "type": "string",
+      "description": "Attach string 'sss' to the output dataset as its atlas space marker.",
+      "title": "Space Marker"
+    },
+    "warp1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the first warp.",
+      "title": "First Warp"
+    },
+    "warp2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the second warp.",
+      "title": "Second Warp"
+    },
+    "additional_warps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Additional warp files.",
+      "title": "Additional Warp Files"
+    },
+    "invert_final_warp": {
+      "type": "boolean",
+      "description": "Invert the final warp before output.",
+      "title": "Invert Final Warp Flag",
+      "default": false
+    },
+    "extra_padding": {
+      "type": "number",
+      "description": "Pad the nonlinear warps by 'PP' voxels in all directions.",
+      "title": "Extra Padding"
+    }
+  },
+  "required": [
+    "@type",
+    "output_prefix",
+    "warp1",
+    "warp2"
+  ]
+}

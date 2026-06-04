@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "eddy_cuda8.0",
+  "description": "A tool for correcting eddy currents and movements in diffusion data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/eddy_cuda8.0"
+    },
+    "imain": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing all the images to estimate distortions for",
+      "title": "imain"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask to indicate brain",
+      "title": "mask"
+    },
+    "index": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing indices for all volumes in --imain into --acqp and --topup",
+      "title": "index"
+    },
+    "acqp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing acquisition parameters",
+      "title": "acqp"
+    },
+    "bvecs": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing the b-vectors for all volumes in --imain",
+      "title": "bvecs"
+    },
+    "bvals": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing the b-values for all volumes in --imain",
+      "title": "bvals"
+    },
+    "out": {
+      "type": "string",
+      "description": "Basename for output",
+      "title": "out",
+      "default": "eddy_corrected"
+    },
+    "mb": {
+      "type": "number",
+      "description": "Multi-band factor",
+      "title": "mb"
+    },
+    "mb_offs": {
+      "type": "number",
+      "description": "Multi-band offset (-1 if bottom slice removed, 1 if top slice removed)",
+      "title": "mb_offs"
+    },
+    "slspec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of text file completely specifying slice/group acuistion. N.B. --slspec and --json are mutually exclusive.",
+      "title": "slspec"
+    },
+    "json": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of .json text file with information about slice timing. N.B. --json and --slspec are mutually exclusive.",
+      "title": "json"
+    },
+    "mporder": {
+      "type": "number",
+      "description": "Order of slice-to-vol movement model (default 0, i.e. vol-to-vol",
+      "title": "mporder"
+    },
+    "s2v_lambda": {
+      "type": "number",
+      "description": "Regularisation weight for slice-to-vol movement. (default 1, reasonable range 1--10)",
+      "title": "s2v_lambda"
+    },
+    "topup": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Base name for output files from topup",
+      "title": "topup"
+    },
+    "field": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of file with susceptibility field (in Hz)",
+      "title": "field"
+    },
+    "field_mat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of rigid body transform for susceptibility field",
+      "title": "field_mat"
+    },
+    "flm": {
+      "enum": [
+        "movement",
+        "linear",
+        "quadratic",
+        "cubic"
+      ],
+      "description": "First level EC model (movement/linear/quadratic/cubic, default quadratic)",
+      "title": "flm"
+    },
+    "slm": {
+      "enum": [
+        "none",
+        "linear",
+        "quadratic"
+      ],
+      "description": "Second level EC model (none/linear/quadratic, default none)",
+      "title": "slm"
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "FWHM for conditioning filter when estimating the parameters (default 0)",
+      "title": "fwhm"
+    },
+    "niter": {
+      "type": "number",
+      "description": "Number of iterations (default 5)",
+      "title": "niter"
+    },
+    "s2v_niter": {
+      "type": "number",
+      "description": "Number of iterations for slice-to-vol (default 5)",
+      "title": "s2v_niter"
+    },
+    "cnr_maps": {
+      "type": "boolean",
+      "description": "Write shell-wise cnr-maps (default false)",
+      "title": "cnr_maps",
+      "default": false
+    },
+    "residuals": {
+      "type": "boolean",
+      "description": "Write residuals (between GP and observations), (default false)",
+      "title": "residuals",
+      "default": false
+    },
+    "fep": {
+      "type": "boolean",
+      "description": "Fill empty planes in x- or y-directions (default false)",
+      "title": "fep",
+      "default": false
+    },
+    "interp": {
+      "enum": [
+        "spline",
+        "trilinear"
+      ],
+      "description": "Interpolation model for estimation step (spline/trilinear, default spline)",
+      "title": "interp"
+    },
+    "s2v_interp": {
+      "enum": [
+        "spline",
+        "trilinear"
+      ],
+      "description": "Slice-to-vol interpolation model for estimation step (spline/trilinear, default trilinear)",
+      "title": "s2v_interp"
+    },
+    "resamp": {
+      "enum": [
+        "jac",
+        "lsr"
+      ],
+      "description": "Final resampling method (jac/lsr, default jac)",
+      "title": "resamp"
+    },
+    "nvoxhp": {
+      "type": "number",
+      "description": "# of voxels used to estimate the hyperparameters (default 1000)",
+      "title": "nvoxhp"
+    },
+    "initrand": {
+      "type": "number",
+      "description": "Seeds rand for when selecting voxels (default 0=no seeding)",
+      "title": "initrand"
+    },
+    "ff": {
+      "type": "number",
+      "description": "Fudge factor for hyperparameter error variance (default 10.0)",
+      "title": "ff"
+    },
+    "repol": {
+      "type": "boolean",
+      "description": "Detect and replace outlier slices (default false))",
+      "title": "repol",
+      "default": false
+    },
+    "ol_nstd": {
+      "type": "number",
+      "description": "Number of std off to qualify as outlier (default 4)",
+      "title": "ol_nstd"
+    },
+    "ol_nvox": {
+      "type": "number",
+      "description": "Min # of voxels in a slice for inclusion in outlier detection (default 250)",
+      "title": "ol_nvox"
+    },
+    "ol_type": {
+      "enum": [
+        "sw",
+        "gw",
+        "both"
+      ],
+      "description": "Type of outliers, slicewise (sw), groupwise (gw) or both (both). (default sw)",
+      "title": "ol_type"
+    },
+    "ol_pos": {
+      "type": "boolean",
+      "description": "Consider both positive and negative outliers if set (default false)",
+      "title": "ol_pos",
+      "default": false
+    },
+    "ol_sqr": {
+      "type": "boolean",
+      "description": "Consider outliers among sums-of-squared differences if set (default false)",
+      "title": "ol_sqr",
+      "default": false
+    },
+    "estimate_move_by_susceptibility": {
+      "type": "boolean",
+      "description": "Estimate how susceptibility field changes with subject movement (default false)",
+      "title": "estimate_move_by_susceptibility",
+      "default": false
+    },
+    "mbs_niter": {
+      "type": "number",
+      "description": "Number of iterations for MBS estimation (default 10)",
+      "title": "mbs_niter"
+    },
+    "mbs_lambda": {
+      "type": "number",
+      "description": "Weighting of regularisation for MBS estimation (default 10)",
+      "title": "mbs_lambda"
+    },
+    "mbs_ksp": {
+      "type": "number",
+      "description": "Knot-spacing for MBS field estimation (default 10mm)",
+      "title": "mbs_ksp"
+    },
+    "dont_sep_offs_move": {
+      "type": "boolean",
+      "description": "Do NOT attempt to separate field offset from subject movement (default false)",
+      "title": "dont_sep_offs_move",
+      "default": false
+    },
+    "dont_peas": {
+      "type": "boolean",
+      "description": "Do NOT perform a post-eddy alignment of shells (default false)",
+      "title": "dont_peas",
+      "default": false
+    },
+    "data_is_shelled": {
+      "type": "boolean",
+      "description": "Assume, don't check, that data is shelled (default false)",
+      "title": "data_is_shelled",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "switch on diagnostic messages",
+      "title": "verbose",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "imain",
+    "mask",
+    "index",
+    "acqp",
+    "bvecs",
+    "bvals"
+  ]
+}

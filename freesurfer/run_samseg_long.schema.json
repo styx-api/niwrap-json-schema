@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "run_samseg_long",
+  "description": "Longitudinal image segmentation using SAMSEG.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/run_samseg_long"
+    },
+    "timepoint": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Configure a timepoint with multiple inputs.",
+      "title": "Timepoint"
+    },
+    "output": {
+      "type": "string",
+      "description": "Output directory.",
+      "title": "Output Directory"
+    },
+    "lesion": {
+      "type": "boolean",
+      "description": "Enable lesion segmentation (requires tensorflow).",
+      "title": "Lesion Segmentation Flag",
+      "default": false
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Lesion threshold for final segmentation. Requires lesion segmentation.",
+      "title": "Lesion Threshold"
+    },
+    "samples": {
+      "type": "number",
+      "description": "Number of samples for lesion segmentation. Requires lesion segmentation.",
+      "title": "Samples"
+    },
+    "burnin": {
+      "type": "number",
+      "description": "Number of burn-in samples for lesion segmentation. Requires lesion segmentation.",
+      "title": "Burn-in Samples"
+    },
+    "lesion_mask_structure": {
+      "type": "string",
+      "description": "Intensity mask brain structure. Requires lesion segmentation.",
+      "title": "Lesion Mask Structure"
+    },
+    "lesion_mask_pattern": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Lesion mask list: -1 below lesion mask structure mean, +1 above, 0 no mask. Requires lesion segmentation.",
+      "title": "Lesion Mask Pattern"
+    },
+    "mode": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Output basenames for the input image mode.",
+      "title": "Mode"
+    },
+    "atlas": {
+      "type": "string",
+      "description": "Point to an alternative atlas directory.",
+      "title": "Atlas Directory"
+    },
+    "deformation_hyperprior": {
+      "type": "number",
+      "description": "Strength of the latent deformation hyperprior.",
+      "title": "Deformation Hyperprior"
+    },
+    "gmm_hyperprior": {
+      "type": "number",
+      "description": "Strength of the latent GMM hyperprior.",
+      "title": "GMM Hyperprior"
+    },
+    "save_warp": {
+      "type": "boolean",
+      "description": "Save the image->template warp fields.",
+      "title": "Save Warp Flag",
+      "default": false
+    },
+    "save_mesh": {
+      "type": "boolean",
+      "description": "Save the final mesh of each timepoint in template space.",
+      "title": "Save Mesh Flag",
+      "default": false
+    },
+    "save_posteriors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Save posterior volumes to the 'posteriors' subdirectory.",
+      "title": "Save Posteriors"
+    },
+    "pallidum_separate": {
+      "type": "boolean",
+      "description": "Move pallidum outside of global white matter class. Use with T2/flair.",
+      "title": "Pallidum Separate Flag",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads to use. Defaults to OMP_NUM_THREADS or 1.",
+      "title": "Threads"
+    },
+    "tp_to_base_transform": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Transformation file for each time point to base.",
+      "title": "TP to Base Transform"
+    },
+    "force_different_resolutions": {
+      "type": "boolean",
+      "description": "Force run even if time points have different resolutions.",
+      "title": "Force Different Resolutions Flag",
+      "default": false
+    },
+    "history": {
+      "type": "boolean",
+      "description": "Save history.",
+      "title": "History Flag",
+      "default": false
+    },
+    "showfigs": {
+      "type": "boolean",
+      "description": "Show figures during run.",
+      "title": "Show Figures Flag",
+      "default": false
+    },
+    "movie": {
+      "type": "boolean",
+      "description": "Show history as arrow key controlled time sequence.",
+      "title": "Movie Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "timepoint",
+    "output"
+  ]
+}

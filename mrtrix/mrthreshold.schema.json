@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mrthreshold",
+  "description": "Create bitwise image by thresholding image intensity.\n\nThe threshold value to be applied can be determined in one of a number of ways:\n\n- If no relevant command-line option is used, the command will automatically determine an optimal threshold;\n\n- The -abs option provides the threshold value explicitly;\n\n- The -percentile, -top and -bottom options enable more fine-grained control over how the threshold value is determined.\n\nThe -mask option only influences those image values that contribute toward the determination of the threshold value; once the threshold is determined, it is applied to the entire image, irrespective of use of the -mask option. If you wish for the voxels outside of the specified mask to additionally be excluded from the output mask, this can be achieved by providing the -out_masked option.\n\nThe four operators available through the \"-comparison\" option (\"lt\", \"le\", \"ge\" and \"gt\") correspond to \"less-than\" (<), \"less-than-or-equal\" (<=), \"greater-than-or-equal\" (>=) and \"greater-than\" (>). This offers fine-grained control over how the thresholding operation will behave in the presence of values equivalent to the threshold. By default, the command will select voxels with values greater than or equal to the determined threshold (\"ge\"); unless the -bottom option is used, in which case after a threshold is determined from the relevant lowest-valued image voxels, those voxels with values less than or equal to that threshold (\"le\") are selected. This provides more fine-grained control than the -invert option; the latter is provided for backwards compatibility, but is equivalent to selection of the opposite comparison within this selection.\n\nIf no output image path is specified, the command will instead write to standard output the determined threshold value.\n\nReferences:\n\n* If not using any explicit thresholding mechanism: \nRidgway, G. R.; Omar, R.; Ourselin, S.; Hill, D. L.; Warren, J. D. & Fox, N. C. Issues with threshold masking in voxel-based morphometry of atrophied brains. NeuroImage, 2009, 44, 99-111",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/mrthreshold"
+    },
+    "abs": {
+      "type": "number",
+      "description": "specify threshold value as absolute intensity",
+      "title": "abs"
+    },
+    "percentile": {
+      "type": "number",
+      "description": "determine threshold based on some percentile of the image intensity distribution",
+      "title": "percentile"
+    },
+    "top": {
+      "type": "integer",
+      "description": "determine threshold that will result in selection of some number of top-valued voxels",
+      "title": "top"
+    },
+    "bottom": {
+      "type": "integer",
+      "description": "determine & apply threshold resulting in selection of some number of bottom-valued voxels (note: implies threshold application operator of \"le\" unless otherwise specified)",
+      "title": "bottom"
+    },
+    "allvolumes": {
+      "type": "boolean",
+      "description": "compute a single threshold for all image volumes, rather than an individual threshold per volume",
+      "title": "allvolumes",
+      "default": false
+    },
+    "ignorezero": {
+      "type": "boolean",
+      "description": "ignore zero-valued input values during threshold determination",
+      "title": "ignorezero",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "compute the threshold based only on values within an input mask image",
+      "title": "mask"
+    },
+    "comparison": {
+      "type": "string",
+      "description": "comparison operator to use when applying the threshold; options are: lt,le,ge,gt (default = \"le\" for -bottom; \"ge\" otherwise)",
+      "title": "comparison"
+    },
+    "invert": {
+      "type": "boolean",
+      "description": "invert the output binary mask (equivalent to flipping the operator; provided for backwards compatibility)",
+      "title": "invert",
+      "default": false
+    },
+    "out_masked": {
+      "type": "boolean",
+      "description": "mask the output image based on the provided input mask image",
+      "title": "out_masked",
+      "default": false
+    },
+    "nan": {
+      "type": "boolean",
+      "description": "set voxels that fail the threshold to NaN rather than zero (output image will be floating-point rather than binary)",
+      "title": "nan",
+      "default": false
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input image to be thresholded",
+      "title": "input"
+    },
+    "output": {
+      "type": "string",
+      "description": "the (optional) output binary image mask",
+      "title": "output"
+    }
+  },
+  "required": [
+    "@type",
+    "input"
+  ]
+}

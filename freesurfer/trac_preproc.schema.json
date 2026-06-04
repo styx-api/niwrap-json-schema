@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "trac-preproc",
+  "description": "Tractography pre-processing for a single subject.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/trac-preproc"
+    },
+    "dmrirc_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "dmrirc file (see dmrirc.example)",
+      "title": "dmrirc file"
+    },
+    "log_file": {
+      "type": "string",
+      "description": "Log file; default is trac-all.log in the same dir as dmrirc",
+      "title": "Log file"
+    },
+    "nolog": {
+      "type": "boolean",
+      "description": "Do not save a log file",
+      "title": "No log flag",
+      "default": false
+    },
+    "cmd_file": {
+      "type": "string",
+      "description": "Cmd file; default is trac-all.cmd in the same dir as dmrirc",
+      "title": "Cmd file"
+    },
+    "nocmd": {
+      "type": "boolean",
+      "description": "Do not save a cmd file",
+      "title": "No cmd flag",
+      "default": false
+    },
+    "no_isrunning": {
+      "type": "boolean",
+      "description": "Do not check whether this subject is currently being processed",
+      "title": "No isrunning flag",
+      "default": false
+    },
+    "umask": {
+      "type": "string",
+      "description": "Set unix file permission mask (default 002)",
+      "title": "Umask"
+    },
+    "group_id": {
+      "type": "string",
+      "description": "Check that current group is alpha groupid",
+      "title": "Group ID"
+    },
+    "allow_core_dump": {
+      "type": "boolean",
+      "description": "Set coredump limit to unlimited",
+      "title": "Allow coredump flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Generate much more output",
+      "title": "Debug flag",
+      "default": false
+    },
+    "dontrun": {
+      "type": "boolean",
+      "description": "Do everything but execute each command",
+      "title": "Dontrun flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version of this script and exit",
+      "title": "Version flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "dmrirc_file"
+  ]
+}

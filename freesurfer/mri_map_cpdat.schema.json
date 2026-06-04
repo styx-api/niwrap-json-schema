@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_map_cpdat",
+  "description": "Maps a control.dat file to a different space using an LTA",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_map_cpdat"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input control point text file",
+      "title": "Input File"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output control point text file",
+      "title": "Output File"
+    },
+    "lta_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "LTA transform file to be applied",
+      "title": "LTA File"
+    },
+    "to_mni305": {
+      "type": "string",
+      "description": "Get LTA from talairach.xfm for a specific subject",
+      "title": "To MNI305"
+    },
+    "from_mni305": {
+      "type": "string",
+      "description": "Get LTA from talairach.xfm from a specific subject",
+      "title": "From MNI305"
+    },
+    "subject_list_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Maps all control points from all subjects listed in the text/ascii subjectlistfile to MNI305 (talairach) space",
+      "title": "Subject List File"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file"
+  ]
+}

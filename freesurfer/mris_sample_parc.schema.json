@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_sample_parc",
+  "description": "This program samples a volumetric parcellation onto a surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_sample_parc"
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "The subject ID.",
+      "title": "Subject Name"
+    },
+    "hemisphere": {
+      "type": "string",
+      "description": "Hemisphere: rh or lh.",
+      "title": "Hemisphere"
+    },
+    "parc_name": {
+      "type": "string",
+      "description": "Parcellation filename.",
+      "title": "Parcellation Name"
+    },
+    "output_annot": {
+      "type": "string",
+      "description": "Output annotation filename.",
+      "title": "Output Annotation"
+    },
+    "sdir": {
+      "type": "string",
+      "description": "Use as subjects directory (default: $SUBJECTS_DIR).",
+      "title": "Subjects Directory"
+    },
+    "surf": {
+      "type": "string",
+      "description": "Use as surface (default: 'white').",
+      "title": "Surface Filename"
+    },
+    "fix": {
+      "type": "number",
+      "description": "Fix topology of all labels smaller than the specified number of vertices (default=-1, do all).",
+      "title": "Fix Topology"
+    },
+    "replace": {
+      "type": "number",
+      "description": "Replace label with deeper ones.",
+      "title": "Replace Label"
+    },
+    "trans": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Translate one label number to another.",
+      "title": "Translate Labels"
+    },
+    "cortex": {
+      "type": "string",
+      "description": "Mask regions outside of the specified cortex label.",
+      "title": "Cortex Label"
+    },
+    "projmm": {
+      "type": "number",
+      "description": "Project the specified number of millimeters along surface normal (default=0.0).",
+      "title": "Project Millimeters"
+    },
+    "proj": {
+      "type": "number",
+      "description": "Same as -projmm.",
+      "title": "Project"
+    },
+    "projfrac": {
+      "type": "number",
+      "description": "Project the specified percent along surface normal (default=0.5).",
+      "title": "Project Fraction"
+    },
+    "file": {
+      "type": "string",
+      "description": "Use as translation file (default: 'cma_parcellation_colors.txt').",
+      "title": "Translation File"
+    },
+    "ct": {
+      "type": "string",
+      "description": "Embed color table into output annotation file.",
+      "title": "Color Table"
+    },
+    "v_level": {
+      "type": "number",
+      "description": "Diagnostic level (default=0).",
+      "title": "Diagnostic Level"
+    },
+    "filter": {
+      "type": "number",
+      "description": "Apply mode filter a specified number of times to parcellation (default=0).",
+      "title": "Mode Filter"
+    },
+    "smooth": {
+      "type": "number",
+      "description": "Smooth surface a specified number of times (default=0).",
+      "title": "Smooth Surface"
+    },
+    "w_size": {
+      "type": "number",
+      "description": "Use window size for sampling (default=7).",
+      "title": "Window Size"
+    },
+    "thickness": {
+      "type": "string",
+      "description": "Use thickness file (default: 'thickness').",
+      "title": "Thickness File"
+    },
+    "change_unknown": {
+      "type": "number",
+      "description": "Change largest connected unknown region to specified label (default: don't change).",
+      "title": "Change Unknown Region"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print help info.",
+      "title": "Help Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version info.",
+      "title": "Version Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject_name",
+    "hemisphere",
+    "parc_name",
+    "output_annot"
+  ]
+}

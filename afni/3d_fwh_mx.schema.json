@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dFWHMx",
+  "description": "Compute Full Width at Half Maximum (FWHM) for FMRI datasets using AutoCorrelation Function (ACF)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dFWHMx"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use only voxels that are nonzero in dataset 'mmm'",
+      "title": "Mask file"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Compute a mask from THIS dataset",
+      "title": "Automask flag",
+      "default": false
+    },
+    "demed": {
+      "type": "boolean",
+      "description": "if the input dataset has more than one sub-brick then subtract the median of each voxel's time series before processing FWHM",
+      "title": "Demethod flag",
+      "default": false
+    },
+    "unif": {
+      "type": "boolean",
+      "description": "Normalize each voxel's time series to have the same MAD before processing FWHM, implies -demed",
+      "title": "Uniform normalization flag",
+      "default": false
+    },
+    "detrend": {
+      "type": "number",
+      "description": "Detrend to order 'q'. If q is not given, the program picks q=NT/30; -detrend disables -demed, and includes -unif",
+      "title": "Detrending order"
+    },
+    "detprefix": {
+      "type": "string",
+      "description": "Save the detrended file into a dataset with prefix 'd'",
+      "title": "Detrended file prefix"
+    },
+    "geom": {
+      "type": "boolean",
+      "description": "Compute the final estimate as the geometric mean",
+      "title": "Geometric mean flag",
+      "default": false
+    },
+    "arith": {
+      "type": "boolean",
+      "description": "Compute the final estimate as the arithmetic mean",
+      "title": "Arithmetic mean flag",
+      "default": false
+    },
+    "combine": {
+      "type": "boolean",
+      "description": "Combine the final measurements along each axis into one result",
+      "title": "Combine flag",
+      "default": false
+    },
+    "out": {
+      "type": "string",
+      "description": "Write output to file 'ttt' (3 columns of numbers). If not given, the sub-brick outputs are not written. Use '-out -' to write to stdout, if desired",
+      "title": "Output file"
+    },
+    "compat": {
+      "type": "boolean",
+      "description": "Be compatible with the older 3dFWHM",
+      "title": "Compatibility flag",
+      "default": false
+    },
+    "acf": {
+      "type": "string",
+      "description": "Compute the spatial autocorrelation of the data as a function of radius, then fit that to a model and output the model parameters",
+      "title": "ACF parameter"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Input file"
+    }
+  },
+  "required": [
+    "@type",
+    "infile"
+  ]
+}

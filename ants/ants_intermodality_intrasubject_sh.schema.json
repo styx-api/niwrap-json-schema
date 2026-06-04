@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsIntermodalityIntrasubject.sh",
+  "description": "Performs registration between a scalar image and a T1 image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsIntermodalityIntrasubject.sh"
+    },
+    "dimension": {
+      "type": "integer",
+      "description": "Dimensionality of the image, typically 3 for 3D images.",
+      "title": "Image dimension"
+    },
+    "anatomical_t1_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Anatomical T1 image (brain or whole-head) to align to.",
+      "title": "Anatomical T1 image"
+    },
+    "anatomical_reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Anatomical reference image to warp to, often higher resolution than the anatomical T1 image.",
+      "title": "Anatomical reference image"
+    },
+    "scalar_image_to_match": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Scalar image to be matched, such as average BOLD, average DWI, etc.",
+      "title": "Scalar image to match"
+    },
+    "anatomical_t1brainmask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Brain mask for the anatomical T1 image, should mask out regions not appearing in the scalar image.",
+      "title": "Anatomical T1 brainmask"
+    },
+    "transform_type": {
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "description": "Type of transform: 0=rigid, 1=affine, 2=rigid+small_def, 3=affine+small_def",
+      "title": "Transform type"
+    },
+    "t1_to_template_prefix": {
+      "type": "string",
+      "description": "Prefix for T1 to template transform files.",
+      "title": "Prefix of T1 to template transform"
+    },
+    "template_space": {
+      "type": "string",
+      "description": "Template space.",
+      "title": "Template space"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix for output files.",
+      "title": "Output prefix"
+    },
+    "labels_in_template_space": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Labels in the template space.",
+      "title": "Labels in template space"
+    },
+    "auxiliary_scalar_images": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Auxiliary scalar images to warp to the template.",
+      "title": "Auxiliary scalar images"
+    },
+    "auxiliary_dt_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Auxiliary DT image to warp to the template.",
+      "title": "Auxiliary DT image"
+    }
+  },
+  "required": [
+    "@type",
+    "dimension",
+    "anatomical_t1_image",
+    "scalar_image_to_match",
+    "anatomical_t1brainmask",
+    "transform_type",
+    "t1_to_template_prefix",
+    "output_prefix"
+  ]
+}

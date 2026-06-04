@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tsplot",
+  "description": "Time series plotting tool for FSL",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/tsplot"
+    },
+    "input_directory": {
+      "type": "string",
+      "description": "Input FEAT directory (e.g. feat_directory.feat)",
+      "title": "FEAT directory"
+    },
+    "main_filtered_data": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input main filtered data, in case it's not <feat_directory.feat>/filtered_func_data",
+      "title": "Main filtered data"
+    },
+    "coordinates": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Use X, Y, Z instead of max Z stat position",
+      "title": "Coordinates"
+    },
+    "coordinates_output": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Use X,Y,Z to output time series only - no stats or modelling",
+      "title": "Coordinates output"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use mask image instead of thresholded activation images",
+      "title": "Mask"
+    },
+    "output_directory": {
+      "type": "string",
+      "description": "Change output directory from default of input FEAT directory",
+      "title": "Output directory"
+    },
+    "no_weight_flag": {
+      "type": "boolean",
+      "description": "Don't weight cluster averaging with Z stats",
+      "title": "No weight flag",
+      "default": false
+    },
+    "prewhiten_flag": {
+      "type": "boolean",
+      "description": "Prewhiten data and model timeseries before plotting",
+      "title": "Prewhiten flag",
+      "default": false
+    },
+    "no_raw_flag": {
+      "type": "boolean",
+      "description": "Don't keep raw data text files",
+      "title": "No raw flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_directory"
+  ]
+}

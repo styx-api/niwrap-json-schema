@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FIND FREQUENCY OF CIFTI LABELS",
+  "description": "This command outputs a set of soft ROIs, one for each label in the input, where the value is how many of the input maps had that label at that vertex/voxel, divided by the number of input maps.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_label_probability"
+    },
+    "label_maps": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "cifti dlabel file containing individual label maps from many subjects"
+    },
+    "probability_dscalar_out": {
+      "type": "string",
+      "description": "the relative frequencies of each label at each vertex/voxel"
+    },
+    "exclude_unlabeled": {
+      "type": "boolean",
+      "description": "don't make a probability map of the unlabeled key",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "label_maps",
+    "probability_dscalar_out"
+  ]
+}

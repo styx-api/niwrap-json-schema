@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_vol2label",
+  "description": "Converts values in a volume or surface overlay to a label using specified parameters.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_vol2label"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume or surface overlay.",
+      "title": "Input file"
+    },
+    "label_id": {
+      "type": "number",
+      "description": "Value to match in the input.",
+      "title": "Label ID"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold the input to make label (i.e., input > threshold) instead of using Label ID.",
+      "title": "Threshold"
+    },
+    "label_file": {
+      "type": "string",
+      "description": "Name of output label file.",
+      "title": "Label file"
+    },
+    "vol_file": {
+      "type": "string",
+      "description": "Write label volume in this file.",
+      "title": "Volume file"
+    },
+    "surf_subject_hemi": {
+      "type": "string",
+      "description": "Interpret input as surface overlay with the given subject and hemisphere (optionally with surface).",
+      "title": "Surface subject and hemisphere"
+    },
+    "surf_path": {
+      "type": "string",
+      "description": "Specify surface path instead of subject/hemi.",
+      "title": "Surface path"
+    },
+    "opt_params": {
+      "type": "string",
+      "description": "Treats input as a probability map. Format: target delta valmap.",
+      "title": "Optimization parameters"
+    },
+    "remove_holes": {
+      "type": "boolean",
+      "description": "Remove holes in label and islands (with --surf only).",
+      "title": "Remove holes and islands flag",
+      "default": false
+    },
+    "dilations": {
+      "type": "number",
+      "description": "Dilate label (with --surf only).",
+      "title": "Number of dilations"
+    },
+    "erosions": {
+      "type": "number",
+      "description": "Erode label (with --surf only).",
+      "title": "Number of erosions"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print out help information.",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "label_file"
+  ]
+}

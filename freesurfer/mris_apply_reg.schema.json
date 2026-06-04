@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_apply_reg",
+  "description": "Apply surface registration in FreeSurfer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_apply_reg"
+    },
+    "src_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Source values (surface overlay)",
+      "title": "Source Input"
+    },
+    "trg_output": {
+      "type": "string",
+      "description": "Target output file",
+      "title": "Target Output"
+    },
+    "streg_pair": {
+      "type": "string",
+      "description": "Source and target registration file pair",
+      "title": "Source-Target Registration"
+    },
+    "src_label": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Source label file (implies --no-rev)",
+      "title": "Source Label"
+    },
+    "src_annotation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Source annotation file (implies --no-rev)",
+      "title": "Source Annotation"
+    },
+    "src_xyz": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "XYZ coordinates from the given surface file as input",
+      "title": "Source XYZ"
+    },
+    "jacobian": {
+      "type": "boolean",
+      "description": "Use jacobian correction",
+      "title": "Jacobian Correction Flag",
+      "default": false
+    },
+    "no_reverse": {
+      "type": "boolean",
+      "description": "Do not do reverse mapping",
+      "title": "No Reverse Mapping Flag",
+      "default": false
+    },
+    "rand_noise": {
+      "type": "boolean",
+      "description": "Replace input with white Gaussian noise",
+      "title": "Random Noise Flag",
+      "default": false
+    },
+    "replace_ones": {
+      "type": "boolean",
+      "description": "Replace input with ones",
+      "title": "Replace with Ones Flag",
+      "default": false
+    },
+    "center_output": {
+      "type": "boolean",
+      "description": "Place the center of the output surface at (0,0,0)",
+      "title": "Center Output Flag",
+      "default": false
+    },
+    "curv_format": {
+      "type": "boolean",
+      "description": "Save output in curvature file format",
+      "title": "Curvature Format Flag",
+      "default": false
+    },
+    "lta_transform": {
+      "type": "string",
+      "description": "Apply LTA transform to the surface",
+      "title": "LTA Transform"
+    },
+    "lta_patch_transform": {
+      "type": "string",
+      "description": "Apply LTA transform to surface patch",
+      "title": "LTA Patch Transform"
+    },
+    "reverse_surface": {
+      "type": "string",
+      "description": "LR reverse surface with optional patch",
+      "title": "Reverse Surface"
+    },
+    "patch_apply": {
+      "type": "string",
+      "description": "Apply patch for each --streg",
+      "title": "Patch Apply"
+    },
+    "save_vertex_pair": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Save vertex pairs from source and target surfaces",
+      "title": "Save Vertex Pair"
+    },
+    "m3z_transform": {
+      "type": "string",
+      "description": "Apply M3Z transform",
+      "title": "M3Z Transform"
+    },
+    "inv_m3z_transform": {
+      "type": "string",
+      "description": "Apply inverse M3Z transform",
+      "title": "Inverse M3Z Transform"
+    },
+    "src_reg_scale": {
+      "type": "number",
+      "description": "Scale the coordinates of the first surface",
+      "title": "Source Registration Scale"
+    },
+    "trg_reg_scale": {
+      "type": "number",
+      "description": "Scale the coordinates of the last surface",
+      "title": "Target Registration Scale"
+    },
+    "debug_mode": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug Mode Flag",
+      "default": false
+    },
+    "check_options": {
+      "type": "boolean",
+      "description": "Check options without executing anything",
+      "title": "Check Options Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "src_input",
+    "trg_output",
+    "streg_pair"
+  ]
+}

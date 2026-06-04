@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MapIcosahedron",
+  "description": "Creates new versions of original-mesh surfaces using the mesh of an icosahedron.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/MapIcosahedron"
+    },
+    "spec_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Spec file containing original-mesh surfaces.",
+      "title": "Spec File"
+    },
+    "rec_depth": {
+      "type": "number",
+      "description": "Recursive (binary) tessellation depth for icosahedron (default: 3).",
+      "title": "Recursive Depth"
+    },
+    "lin_depth": {
+      "type": "number",
+      "description": "Number of edge divides for linear icosahedron tessellation.",
+      "title": "Linear Depth"
+    },
+    "morph_surf": {
+      "type": "string",
+      "description": "Specifies the morphSurf surface.",
+      "title": "Morph Surface"
+    },
+    "num_it": {
+      "type": "number",
+      "description": "Number of smoothing iterations.",
+      "title": "Number of Iterations"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output files (default: 'std.').",
+      "title": "Output Prefix"
+    },
+    "nn_dset": {
+      "type": "string",
+      "description": "Map DSET onto the new mesh using Nearest Neighbor interpolation.",
+      "title": "NN Dataset"
+    },
+    "dset": {
+      "type": "string",
+      "description": "Map DSET onto the new mesh using barycentric interpolation.",
+      "title": "Dataset"
+    },
+    "fix_cut_surfaces": {
+      "type": "boolean",
+      "description": "Check and fix standard-mesh surfaces with cuts for cross-cut connections.",
+      "title": "Fix Cut Surfaces",
+      "default": false
+    },
+    "verbosity": {
+      "type": "boolean",
+      "description": "Enable verbose output.",
+      "title": "Verbosity",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display the help text.",
+      "title": "Help",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "spec_file"
+  ]
+}

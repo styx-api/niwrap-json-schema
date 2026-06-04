@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_seg_overlap",
+  "description": "Compute the structural overlap between two segmentation volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_seg_overlap"
+    },
+    "vol1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First segmentation volume input",
+      "title": "First volume"
+    },
+    "vol2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second segmentation volume input",
+      "title": "Second volume"
+    },
+    "out_file": {
+      "type": "string",
+      "description": "Save detailed overlap report to a JSON file.",
+      "title": "Output file"
+    },
+    "measures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of measures to compute. Options include: dice, jaccard, voldiff.",
+      "title": "Measures"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Space-separated list of label values to include.",
+      "title": "Labels"
+    },
+    "label_names": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Custom label names corresponding to the values specified with the --labels flag.",
+      "title": "Label names"
+    },
+    "label_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file specifying the label values to include. Must be in the format of a freesurfer lookup-table.",
+      "title": "Label file"
+    },
+    "no_names_flag": {
+      "type": "boolean",
+      "description": "Do not report label names.",
+      "title": "No names flag",
+      "default": false
+    },
+    "seg_flag": {
+      "type": "boolean",
+      "description": "Compute overlap between the major segmentation structures.",
+      "title": "Segmentation flag",
+      "default": false
+    },
+    "quiet_flag": {
+      "type": "boolean",
+      "description": "Quiet mode - do not print results to stdout.",
+      "title": "Quiet flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "vol1",
+    "vol2"
+  ]
+}

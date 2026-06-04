@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_synthsr",
+  "description": "Implementation of SynthSR that generates a synthetic 1mm MP-RAGE from a scan of any contrast and resolution.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_synthsr"
+    },
+    "input": {
+      "type": "string",
+      "description": "Image(s) to super-resolve. Can be a path to an image or to a folder.",
+      "title": "Input"
+    },
+    "output": {
+      "type": "string",
+      "description": "Output(s), i.e., synthetic 1mm MP-RAGE(s). Must be a folder if input is a folder.",
+      "title": "Output"
+    },
+    "ct": {
+      "type": "boolean",
+      "description": "Use this flag for CT scans in Hounsfield scale, it clips intensities to [0,80].",
+      "title": "CT Flag",
+      "default": false
+    },
+    "disable_sharpening": {
+      "type": "boolean",
+      "description": "Use this flag to disable unsharp masking.",
+      "title": "Disable Sharpening Flag",
+      "default": false
+    },
+    "disable_flipping": {
+      "type": "boolean",
+      "description": "Use this flag to disable flipping augmentation at test time.",
+      "title": "Disable Flipping Flag",
+      "default": false
+    },
+    "lowfield": {
+      "type": "boolean",
+      "description": "Use model for low-field scans (e.g., acquired with Hyperfine's Swoop scanner).",
+      "title": "Low Field Flag",
+      "default": false
+    },
+    "v1": {
+      "type": "boolean",
+      "description": "Use version 1 model from July 2021.",
+      "title": "Version 1 Model Flag",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of cores to be used. Default is 1.",
+      "title": "Threads"
+    },
+    "cpu": {
+      "type": "boolean",
+      "description": "Enforce running with CPU rather than GPU.",
+      "title": "CPU Flag",
+      "default": false
+    },
+    "model": {
+      "type": "string",
+      "description": "Use a different model file.",
+      "title": "Model"
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "output"
+  ]
+}

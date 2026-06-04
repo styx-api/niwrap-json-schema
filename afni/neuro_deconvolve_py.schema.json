@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "neuro_deconvolve.py",
+  "description": "Generate a script to apply 3dTfitter to deconvolve an MRI signal (BOLD response curve) into a neuro response curve.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/neuro_deconvolve.py"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set the data to deconvolve",
+      "title": "Input dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Set the prefix for output filenames",
+      "title": "Output prefix"
+    },
+    "script": {
+      "type": "string",
+      "description": "Specify the name of the output script",
+      "title": "Output script name"
+    },
+    "kernel": {
+      "type": "string",
+      "description": "Set the response kernel",
+      "title": "Response kernel"
+    },
+    "kernel_file": {
+      "type": "string",
+      "description": "Set the filename to store the kernel in; should be at the upsampled TR",
+      "title": "Kernel file"
+    },
+    "mask_dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set a mask dataset for 3dTfitter to use",
+      "title": "Mask dataset"
+    },
+    "old_style": {
+      "type": "boolean",
+      "description": "Make old-style script (pre-2015.02.24) for 1D case",
+      "title": "Old style script",
+      "default": false
+    },
+    "tr": {
+      "type": "number",
+      "description": "Set the scanner TR; needed for 1D formatted input files",
+      "title": "Scanner TR"
+    },
+    "tr_nup": {
+      "type": "number",
+      "description": "Upsample factor for TR; number of pieces each original TR is divided into",
+      "title": "TR upsample factor"
+    },
+    "verbosity": {
+      "type": "number",
+      "description": "Set the verbose level",
+      "title": "Verbose level"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "prefix",
+    "script"
+  ]
+}

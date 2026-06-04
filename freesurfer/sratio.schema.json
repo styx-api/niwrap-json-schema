@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "sratio",
+  "description": "Tool to compute ratio A/B if A>B, -B/A if B>A, with options for absolute computation and threshold masking.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/sratio"
+    },
+    "value_a": {
+      "type": "number",
+      "description": "First value for the sratio operation",
+      "title": "Value A"
+    },
+    "value_b": {
+      "type": "number",
+      "description": "Second value for the sratio operation",
+      "title": "Value B"
+    },
+    "abs_flag": {
+      "type": "boolean",
+      "description": "Compute absolute value of both A and B before sratio",
+      "title": "Absolute Flag",
+      "default": false
+    },
+    "mask_threshold": {
+      "type": "number",
+      "description": "Threshold based on max(abs(A),abs(B)) > thresh",
+      "title": "Mask Threshold"
+    }
+  },
+  "required": [
+    "@type",
+    "value_a",
+    "value_b"
+  ]
+}

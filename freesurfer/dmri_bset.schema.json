@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dmri_bset",
+  "description": "This tool extracts a subset of volumes, b-values, and gradient directions from a diffusion MRI data set.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dmri_bset"
+    },
+    "input_dwi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input DWI series",
+      "title": "Input DWI"
+    },
+    "output_dwi": {
+      "type": "string",
+      "description": "Output DWI series",
+      "title": "Output DWI"
+    },
+    "b_values": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Extract one or more b-values",
+      "title": "B-values"
+    },
+    "btol": {
+      "type": "number",
+      "description": "Tolerance around each single b-value (default: 0.05)",
+      "title": "B-value tolerance"
+    },
+    "bsort": {
+      "type": "boolean",
+      "description": "Reorder output data by b-shell (default: maintain original order)",
+      "title": "B-shell sort flag",
+      "default": false
+    },
+    "bmax": {
+      "type": "number",
+      "description": "Extract all b-values less than or equal to a maximum",
+      "title": "B-value maximum"
+    },
+    "input_b_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input b-value table (default: input DWI base, .bvals extension)",
+      "title": "Input b-value table"
+    },
+    "input_g_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input gradient table (default: input DWI base, .bvecs extension)",
+      "title": "Input gradient table"
+    },
+    "output_b_table": {
+      "type": "string",
+      "description": "Output b-value table (default: output DWI base, .bvals extension)",
+      "title": "Output b-value table"
+    },
+    "output_g_table": {
+      "type": "string",
+      "description": "Output gradient table (default: output DWI base, .bvecs extension)",
+      "title": "Output gradient table"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dwi",
+    "output_dwi"
+  ]
+}

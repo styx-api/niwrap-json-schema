@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "imrotate",
+  "description": "Shifts and rotates an image",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/imrotate"
+    },
+    "linear_interpolation": {
+      "type": "boolean",
+      "description": "Use bilinear interpolation (default is bicubic)",
+      "title": "Linear Interpolation",
+      "default": false
+    },
+    "fourier_interpolation": {
+      "type": "boolean",
+      "description": "Use Fourier interpolation",
+      "title": "Fourier Interpolation",
+      "default": false
+    },
+    "dx": {
+      "type": "number",
+      "description": "Pixels to shift rightwards (can be non-integer)",
+      "title": "Dx"
+    },
+    "dy": {
+      "type": "number",
+      "description": "Pixels to shift downwards (can be non-integer)",
+      "title": "Dy"
+    },
+    "phi": {
+      "type": "number",
+      "description": "Degrees to rotate clockwise",
+      "title": "Phi"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image file",
+      "title": "Input Image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Output image file",
+      "title": "Output Image"
+    }
+  },
+  "required": [
+    "@type",
+    "dx",
+    "dy",
+    "phi",
+    "input_image",
+    "output_image"
+  ]
+}

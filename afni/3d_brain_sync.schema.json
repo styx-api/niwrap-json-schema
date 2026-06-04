@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dBrainSync",
+  "description": "'Synchronizes' the -inset2 dataset to match the -inset1 dataset, using orthogonal or permutation transformation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dBrainSync"
+    },
+    "inset1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference dataset",
+      "title": "Reference Dataset"
+    },
+    "inset2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset to be matched to the reference dataset",
+      "title": "Dataset to Match"
+    },
+    "qprefix": {
+      "type": "string",
+      "description": "Specifies the output dataset to be used for the orthogonal matrix transformation",
+      "title": "Orthogonal Matrix Output Prefix"
+    },
+    "pprefix": {
+      "type": "string",
+      "description": "Specifies the output dataset to be used for the permutation transformation",
+      "title": "Permutation Output Prefix"
+    },
+    "normalize": {
+      "type": "boolean",
+      "description": "Normalize the output dataset(s) so that each time series has sum-of-squares = 1",
+      "title": "Normalize Output",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Only operate on nonzero voxels in the mask dataset",
+      "title": "Mask Dataset"
+    },
+    "verb": {
+      "type": "boolean",
+      "description": "Print some progress reports and auxiliary information",
+      "title": "Verbose",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "inset1",
+    "inset2"
+  ]
+}

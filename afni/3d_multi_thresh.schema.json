@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dMultiThresh",
+  "description": "Program to apply a multi-threshold (mthresh) dataset to an input dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dMultiThresh"
+    },
+    "mthresh_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Multi-threshold dataset from 3dXClustSim, usually via running '3dttest++ -ETAC'.",
+      "title": "Multi-threshold File"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset to threshold.",
+      "title": "Input File"
+    },
+    "index": {
+      "type": "number",
+      "description": "Index (sub-brick) on which to threshold.",
+      "title": "Sub-brick Index"
+    },
+    "signed_flag": {
+      "type": "string",
+      "description": "Indicates if the .mthresh.nii file from 3dXClustSim was created using 1-sided thresholding. Choose sign + or -.",
+      "title": "Signed Flag"
+    },
+    "positive_sign_flag": {
+      "type": "boolean",
+      "description": "Same as '-signed +'.",
+      "title": "Positive Sign Flag",
+      "default": false
+    },
+    "negative_sign_flag": {
+      "type": "boolean",
+      "description": "Same as '-signed -'.",
+      "title": "Negative Sign Flag",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output dataset. Can be 'NULL' to get no output dataset.",
+      "title": "Output Prefix"
+    },
+    "mask_only_flag": {
+      "type": "boolean",
+      "description": "Instead of outputting a thresholded version of the input dataset, just output a 0/1 mask dataset of voxels that survive the process.",
+      "title": "Mask Only Flag",
+      "default": false
+    },
+    "all_mask": {
+      "type": "string",
+      "description": "Write out a multi-volume dataset with prefix 'qqq' where each volume is the binary mask of voxels that pass ONE of the tests.",
+      "title": "All Mask Prefix"
+    },
+    "no_zero_flag": {
+      "type": "boolean",
+      "description": "Prevents the output of a dataset if it would be all zero.",
+      "title": "No Zero Flag",
+      "default": false
+    },
+    "quiet_flag": {
+      "type": "boolean",
+      "description": "Turn off progress report messages.",
+      "title": "Quiet Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "mthresh_file",
+    "input_file"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_make_template",
+  "description": "This program will add a template into an average surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_make_template"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere (e.g., 'lh' or 'rh')",
+      "title": "Hemisphere"
+    },
+    "surface_name": {
+      "type": "string",
+      "description": "Surface name (e.g., 'white', 'pial')",
+      "title": "Surface Name"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subjects to be averaged",
+      "title": "Subjects"
+    },
+    "output_name": {
+      "type": "string",
+      "description": "Output name for the template",
+      "title": "Output Name"
+    },
+    "addframe_parameters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Add a frame with specific field and location in atlas",
+      "title": "Add Frame"
+    },
+    "vector": {
+      "type": "boolean",
+      "description": "Print additional information for addframe",
+      "title": "Vector Flag",
+      "default": false
+    },
+    "norot": {
+      "type": "boolean",
+      "description": "Not aligning hemispheres before averaging (default)",
+      "title": "No Rotation Flag",
+      "default": false
+    },
+    "rot": {
+      "type": "boolean",
+      "description": "Rough rigid alignment of hemispheres before averaging",
+      "title": "Rotation Flag",
+      "default": false
+    },
+    "annot": {
+      "type": "boolean",
+      "description": "Zero medial wall",
+      "title": "Annotate Flag",
+      "default": false
+    },
+    "overlay_parameters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Read overlay from file, specify number of averages",
+      "title": "Overlay"
+    },
+    "overlay_dir": {
+      "type": "string",
+      "description": "Use directory for overlay hemi",
+      "title": "Overlay Directory"
+    },
+    "scale": {
+      "type": "number",
+      "description": "Scale value for transformation",
+      "title": "Scale"
+    },
+    "surf_dir": {
+      "type": "string",
+      "description": "Use custom subdirectory instead of 'surf'",
+      "title": "Surface Directory"
+    },
+    "smooth_iterations": {
+      "type": "number",
+      "description": "Number of iterations to smooth curvature",
+      "title": "Smooth Iterations"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Specify SUBJECTS_DIR",
+      "title": "Subjects Directory"
+    }
+  },
+  "required": [
+    "@type",
+    "hemi",
+    "surface_name",
+    "subjects",
+    "output_name"
+  ]
+}

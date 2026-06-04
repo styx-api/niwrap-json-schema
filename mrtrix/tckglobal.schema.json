@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tckglobal",
+  "description": "Multi-Shell Multi-Tissue Global Tractography.\n\nThis command will reconstruct the global white matter fibre tractogram that best explains the input DWI data, using a multi-tissue spherical convolution model.\n\nExample use: \n\n $ tckglobal dwi.mif wmr.txt -riso csfr.txt -riso gmr.txt -mask mask.mif \n   -niter 1e9 -fod fod.mif -fiso fiso.mif tracks.tck \n\nin which dwi.mif is the input image, wmr.txt is an anisotropic, multi-shell response function for WM, and csfr.txt and gmr.txt are isotropic response functions for CSF and GM. The output tractogram is saved to tracks.tck. Optional output images fod.mif and fiso.mif contain the predicted WM fODF and isotropic tissue fractions of CSF and GM respectively, estimated as part of the global optimization and thus affected by spatial regularization.\n\nReferences:\n\nChristiaens, D.; Reisert, M.; Dhollander, T.; Sunaert, S.; Suetens, P. & Maes, F. Global tractography of multi-shell diffusion-weighted imaging data using a multi-tissue model. NeuroImage, 2015, 123, 89-101",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/tckglobal"
+    },
+    "grad": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify the diffusion encoding scheme (required if not supplied in the header).",
+      "title": "grad"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "only reconstruct the tractogram within the specified brain mask image.",
+      "title": "mask"
+    },
+    "riso": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "set one or more isotropic response functions. (multiple allowed)",
+      "title": "riso"
+    },
+    "lmax": {
+      "type": "integer",
+      "description": "set the maximum harmonic order for the output series. (default = 8)",
+      "title": "lmax"
+    },
+    "length": {
+      "type": "number",
+      "description": "set the length of the particles (fibre segments). (default = 1mm)",
+      "title": "length"
+    },
+    "weight": {
+      "type": "number",
+      "description": "set the weight by which particles contribute to the model. (default = 0.1)",
+      "title": "weight"
+    },
+    "ppot": {
+      "type": "number",
+      "description": "set the particle potential, i.e., the cost of adding one segment, relative to the particle weight. (default = 0.05)",
+      "title": "ppot"
+    },
+    "cpot": {
+      "type": "number",
+      "description": "set the connection potential, i.e., the energy term that drives two segments together. (default = 0.5)",
+      "title": "cpot"
+    },
+    "t0": {
+      "type": "number",
+      "description": "set the initial temperature of the metropolis hastings optimizer. (default = 0.1)",
+      "title": "t0"
+    },
+    "t1": {
+      "type": "number",
+      "description": "set the final temperature of the metropolis hastings optimizer. (default = 0.001)",
+      "title": "t1"
+    },
+    "niter": {
+      "type": "integer",
+      "description": "set the number of iterations of the metropolis hastings optimizer. (default = 10M)",
+      "title": "niter"
+    },
+    "fod": {
+      "type": "string",
+      "description": "Predicted fibre orientation distribution function (fODF).\nThis fODF is estimated as part of the global track optimization, and therefore incorporates the spatial regularization that it imposes. Internally, the fODF is represented as a discrete sum of apodized point spread functions (aPSF) oriented along the directions of all particles in the voxel, used to predict the DWI signal from the particle configuration.",
+      "title": "fod"
+    },
+    "noapo": {
+      "type": "boolean",
+      "description": "disable spherical convolution of fODF with apodized PSF, to output a sum of delta functions rather than a sum of aPSFs.",
+      "title": "noapo",
+      "default": false
+    },
+    "fiso": {
+      "type": "string",
+      "description": "Predicted isotropic fractions of the tissues for which response functions were provided with -riso. Typically, these are CSF and GM.",
+      "title": "fiso"
+    },
+    "eext": {
+      "type": "string",
+      "description": "Residual external energy in every voxel.",
+      "title": "eext"
+    },
+    "etrend": {
+      "type": "string",
+      "description": "internal and external energy trend and cooling statistics.",
+      "title": "etrend"
+    },
+    "balance": {
+      "type": "number",
+      "description": "balance internal and external energy. (default = 0)\nNegative values give more weight to the internal energy, positive to the external energy.",
+      "title": "balance"
+    },
+    "density": {
+      "type": "number",
+      "description": "set the desired density of the free Poisson process. (default = 1)",
+      "title": "density"
+    },
+    "prob": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "set the probabilities of generating birth, death, randshift, optshift and connect proposals respectively. (default = 0.25,0.05,0.25,0.1,0.35)",
+      "title": "prob"
+    },
+    "beta": {
+      "type": "number",
+      "description": "set the width of the Hanning interpolation window. (in [0, 1], default = 0)\nIf used, a mask is required, and this mask must keep at least one voxel distance to the image bounding box.",
+      "title": "beta"
+    },
+    "lambda": {
+      "type": "number",
+      "description": "set the weight of the internal energy directly. (default = 1)\nIf provided, any value of -balance will be ignored.",
+      "title": "lambda"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "source": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the image containing the raw DWI data.",
+      "title": "source"
+    },
+    "response": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the response of a track segment on the DWI signal.",
+      "title": "response"
+    },
+    "tracks": {
+      "type": "string",
+      "description": "the output file containing the tracks generated.",
+      "title": "tracks"
+    }
+  },
+  "required": [
+    "@type",
+    "source",
+    "response",
+    "tracks"
+  ]
+}

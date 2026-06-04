@@ -1,0 +1,457 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_glmfit",
+  "description": "Performs general linear model (GLM) analysis in the volume or the surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_glmfit"
+    },
+    "glmdir": {
+      "type": "string",
+      "description": "Directory where output will be saved.",
+      "title": "GLM output directory"
+    },
+    "y_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to input file where each frame is a separate input. Accepts volume or surface-based formats.",
+      "title": "Input file"
+    },
+    "table_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use text table as input instead of --y. Table should be of form produced by asegstats2table or aparcstats2table.",
+      "title": "Stats table"
+    },
+    "fsgd": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the global design matrix with a FreeSurfer Group Descriptor File (FSGDF).",
+      "title": "FSGD descriptor file"
+    },
+    "design_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Explicitly specify the design matrix. Can be in simple text or in matlab4 format.",
+      "title": "Design matrix file"
+    },
+    "contrast_matrix": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify one or more contrasts to test. File should be ASCII text with the contrast matrix.",
+      "title": "Contrast matrix file"
+    },
+    "osgm_flag": {
+      "type": "boolean",
+      "description": "Construct X and C as a one-sample group mean.",
+      "title": "One-sample group mean",
+      "default": false
+    },
+    "no_contrasts_ok_flag": {
+      "type": "boolean",
+      "description": "Do not fail if no contrasts are specified.",
+      "title": "No contrasts OK flag",
+      "default": false
+    },
+    "dti_params": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Do DTI analysis using bvals and bvecs.",
+      "title": "DTI parameters"
+    },
+    "dti_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Do DTI analysis using provided matrix.",
+      "title": "DTI design matrix"
+    },
+    "pvr": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Per-voxel (or vertex) regressors.",
+      "title": "Per-voxel regressors"
+    },
+    "selfreg": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Create a 'self-regressor' from the input data based on the waveform at index col row slice.",
+      "title": "Self-regressor coordinates"
+    },
+    "wls": {
+      "type": "string",
+      "description": "Perform weighted least squares (WLS) random effects analysis instead of ordinary least squares (OLS) using yffxvar.",
+      "title": "Weighted least squares"
+    },
+    "yffxvar": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "For fixed effects analysis.",
+      "title": "YFFX variance file"
+    },
+    "ffxdof": {
+      "type": "number",
+      "description": "Degrees of Freedom (DOF) for fixed effects analysis.",
+      "title": "Fixed effects DOF"
+    },
+    "ffxdofdat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file with DOF for fixed effects analysis.",
+      "title": "Fixed effects DOF data"
+    },
+    "weight": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Perform weighted LMS using per-voxel weights from the weightfile.",
+      "title": "Weight file"
+    },
+    "weight_inv_flag": {
+      "type": "boolean",
+      "description": "Invert weights.",
+      "title": "Invert weights flag",
+      "default": false
+    },
+    "weight_sqrt_flag": {
+      "type": "boolean",
+      "description": "Square root of (inverted) weights.",
+      "title": "Square root weights flag",
+      "default": false
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "Smooth input with a Gaussian kernel, specified in mm.",
+      "title": "Smoothing kernel FWHM"
+    },
+    "var_fwhm": {
+      "type": "number",
+      "description": "Smooth residual variance map with a Gaussian kernel, specified in mm.",
+      "title": "Variance smoothing FWHM"
+    },
+    "no_mask_smooth_flag": {
+      "type": "boolean",
+      "description": "Do not mask when smoothing.",
+      "title": "Skip mask during smoothing",
+      "default": false
+    },
+    "no_est_fwhm_flag": {
+      "type": "boolean",
+      "description": "Turn off FWHM output estimation.",
+      "title": "No FWHM estimation",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Binary mask file for analysis.",
+      "title": "Mask file"
+    },
+    "label": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use label as mask for surface data.",
+      "title": "Label file"
+    },
+    "no_mask_flag": {
+      "type": "boolean",
+      "description": "Do NOT use a mask, same as --no-cortex.",
+      "title": "No mask flag",
+      "default": false
+    },
+    "no_cortex_flag": {
+      "type": "boolean",
+      "description": "Do NOT use subjects ?h.cortex.label as --label.",
+      "title": "No cortex label flag",
+      "default": false
+    },
+    "mask_inv_flag": {
+      "type": "boolean",
+      "description": "Invert mask for analysis.",
+      "title": "Invert mask flag",
+      "default": false
+    },
+    "prune_flag": {
+      "type": "boolean",
+      "description": "Remove voxels that do not have a non-zero value at each frame.",
+      "title": "Prune zero-value voxels",
+      "default": false
+    },
+    "no_prune_flag": {
+      "type": "boolean",
+      "description": "Do not prune zero-value voxels.",
+      "title": "Do not prune voxels",
+      "default": false
+    },
+    "logy_flag": {
+      "type": "boolean",
+      "description": "Compute natural log of y prior to analysis.",
+      "title": "Log transform y",
+      "default": false
+    },
+    "no_logy_flag": {
+      "type": "boolean",
+      "description": "Do not compute natural log of y prior to analysis.",
+      "title": "No log transform of y",
+      "default": false
+    },
+    "rm_spatial_mean_flag": {
+      "type": "boolean",
+      "description": "Subtract the (masked) mean from each frame.",
+      "title": "Remove spatial mean",
+      "default": false
+    },
+    "yhat_save_flag": {
+      "type": "boolean",
+      "description": "Save signal estimate (yhat).",
+      "title": "Save signal estimate",
+      "default": false
+    },
+    "eres_save_flag": {
+      "type": "boolean",
+      "description": "Save residual error (eres).",
+      "title": "Save residual error",
+      "default": false
+    },
+    "eres_scm_flag": {
+      "type": "boolean",
+      "description": "Save residual error spatial correlation matrix (eres.scm).",
+      "title": "Save residual SCM",
+      "default": false
+    },
+    "save_fwhm_map_flag": {
+      "type": "boolean",
+      "description": "Save voxel-wise map of FWHM estimates.",
+      "title": "Save FWHM map",
+      "default": false
+    },
+    "y_out": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Save input after any pre-processing.",
+      "title": "Output pre-processed data file"
+    },
+    "surface": {
+      "type": "string",
+      "description": "Specify that the input has a surface geometry from the hemisphere of the given FreeSurfer subject. Required for surface data operations.",
+      "title": "Surface specification"
+    },
+    "skew_flag": {
+      "type": "boolean",
+      "description": "Compute skew and p-value for skew.",
+      "title": "Compute skewness",
+      "default": false
+    },
+    "kurtosis_flag": {
+      "type": "boolean",
+      "description": "Compute kurtosis and p-value for kurtosis.",
+      "title": "Compute kurtosis",
+      "default": false
+    },
+    "sim_params": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Simulate data for statistical testing. Specify nulltype, number of simulations, threshold and csd basename.",
+      "title": "Simulation parameters"
+    },
+    "sim_sign": {
+      "type": "string",
+      "description": "Specify sign for simulation: abs, pos, or neg.",
+      "title": "Simulation sign"
+    },
+    "uniform_params": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Use uniform distribution for mc-full, specify min and max.",
+      "title": "Uniform distribution parameters"
+    },
+    "permute_input_flag": {
+      "type": "boolean",
+      "description": "Permute input for testing purposes (not related to simulation).",
+      "title": "Permute input flag",
+      "default": false
+    },
+    "pca_flag": {
+      "type": "boolean",
+      "description": "Perform PCA/SVD analysis on the residual.",
+      "title": "Perform PCA",
+      "default": false
+    },
+    "tar1_flag": {
+      "type": "boolean",
+      "description": "Compute and save temporal AR1 of residual.",
+      "title": "Compute temporal AR1",
+      "default": false
+    },
+    "save_yhat_flag": {
+      "type": "boolean",
+      "description": "Flag to save the signal estimate.",
+      "title": "Save signal estimate flag",
+      "default": false
+    },
+    "save_cond_flag": {
+      "type": "boolean",
+      "description": "Flag to save design matrix condition at each voxel.",
+      "title": "Save condition number",
+      "default": false
+    },
+    "voxdump": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Save GLM data for a single voxel at the specified col, row, slice.",
+      "title": "Voxel dump coordinates"
+    },
+    "seed": {
+      "type": "number",
+      "description": "Use seed for random number generation.",
+      "title": "Random seed"
+    },
+    "synth_flag": {
+      "type": "boolean",
+      "description": "Replace input data with Gaussian noise for testing.",
+      "title": "Synthesize Gaussian noise",
+      "default": false
+    },
+    "resynthtest_it": {
+      "type": "number",
+      "description": "Test GLM by resynthsis with the number of iterations specified.",
+      "title": "Resynthesis test iterations"
+    },
+    "profile_it": {
+      "type": "number",
+      "description": "Test speed with specified number of iterations.",
+      "title": "Profile iterations"
+    },
+    "mrtm1_params": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Perform MRTM1 kinetic modeling with specified reference tissue activity and time in seconds.",
+      "title": "MRTM1 parameters"
+    },
+    "mrtm2_params": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Perform MRTM2 kinetic modeling with specified parameters.",
+      "title": "MRTM2 parameters"
+    },
+    "logan_params": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Perform Logan kinetic modeling with specified parameters.",
+      "title": "Logan model parameters"
+    },
+    "bp_clip_neg_flag": {
+      "type": "boolean",
+      "description": "Set negative BP voxels to 0.",
+      "title": "Clip negative BP",
+      "default": false
+    },
+    "bp_clip_max": {
+      "type": "number",
+      "description": "Set BP voxels above max to max.",
+      "title": "Max value for BP clipping"
+    },
+    "perm_force_flag": {
+      "type": "boolean",
+      "description": "Force permutation test, even when design matrix is not orthogonal.",
+      "title": "Force permutation test",
+      "default": false
+    },
+    "diag_level": {
+      "type": "number",
+      "description": "Set diagnostic level.",
+      "title": "Diagnostic level"
+    },
+    "diag_cluster_flag": {
+      "type": "boolean",
+      "description": "Save significant volume and exit from first simulation loop.",
+      "title": "Cluster diagnostic",
+      "default": false
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Turn on debugging mode.",
+      "title": "Debug mode",
+      "default": false
+    },
+    "checkopts_flag": {
+      "type": "boolean",
+      "description": "Check options and exit without executing.",
+      "title": "Check options only",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help information.",
+      "title": "Help",
+      "default": false
+    },
+    "version_flag": {
+      "type": "boolean",
+      "description": "Print out version and exit.",
+      "title": "Version",
+      "default": false
+    },
+    "no_fix_vertex_area_flag": {
+      "type": "boolean",
+      "description": "Turn off fixing of vertex area (backward compatibility).",
+      "title": "No fix vertex area",
+      "default": false
+    },
+    "allowsubjrep_flag": {
+      "type": "boolean",
+      "description": "Allow subject names to repeat in the fsgd file.",
+      "title": "Allow subject repetition",
+      "default": false
+    },
+    "allow_zero_dof_flag": {
+      "type": "boolean",
+      "description": "Allow analyses with zero degrees of freedom.",
+      "title": "Allow zero DOF",
+      "default": false
+    },
+    "illcond_flag": {
+      "type": "boolean",
+      "description": "Allow ill-conditioned design matrices.",
+      "title": "Allow ill-condition",
+      "default": false
+    },
+    "sim_done_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Create done file when simulation finishes.",
+      "title": "Simulation done file"
+    },
+    "no_sig_double_flag": {
+      "type": "boolean",
+      "description": "Compute sig = -log10(p) from float p value, not double.",
+      "title": "No double precision",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "y_input"
+  ]
+}

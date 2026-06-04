@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gen_ss_review_table.py",
+  "description": "Generate a table from ss_review_basic output files",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/gen_ss_review_table.py"
+    },
+    "infiles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input ss_review_basic output text files to process",
+      "title": "Input files"
+    },
+    "write_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Write final table to the given file",
+      "title": "Write table file"
+    },
+    "write_outliers": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Write outlier table to the given file",
+      "title": "Write outliers file"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Overwrite the output -write_table, if it exists",
+      "title": "Overwrite flag",
+      "default": false
+    },
+    "empty_is_outlier": {
+      "type": "boolean",
+      "description": "Treat empty tests as outliers",
+      "title": "Empty is outlier flag",
+      "default": false
+    },
+    "outlier_sep": {
+      "type": "string",
+      "description": "Use SEP for the outlier table separator",
+      "title": "Outlier separator"
+    },
+    "separator": {
+      "type": "string",
+      "description": "Use SEP for the label/vals separator (default = ':')",
+      "title": "Separator"
+    },
+    "showlabs": {
+      "type": "boolean",
+      "description": "Display counts of all labels found, with parents",
+      "title": "Show labels flag",
+      "default": false
+    },
+    "show_infiles": {
+      "type": "boolean",
+      "description": "Include input files in reviewtable result",
+      "title": "Show input files flag",
+      "default": false
+    },
+    "show_keepers": {
+      "type": "boolean",
+      "description": "Show a table of subjects kept rather than dropped",
+      "title": "Show keepers flag",
+      "default": false
+    },
+    "report_outliers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Report outliers where the comparison holds",
+      "title": "Report outliers"
+    },
+    "report_outliers_fill_style": {
+      "type": "string",
+      "description": "How to fill non-outliers in the table",
+      "title": "Report outliers fill style"
+    },
+    "show_missing": {
+      "type": "boolean",
+      "description": "Display all missing keys",
+      "title": "Show missing keys flag",
+      "default": false
+    },
+    "verbosity": {
+      "type": "integer",
+      "description": "Verbosity level",
+      "title": "Verbosity level"
+    }
+  },
+  "required": [
+    "@type",
+    "infiles"
+  ]
+}

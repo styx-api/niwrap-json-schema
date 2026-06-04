@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dDWUncert",
+  "description": "Use jackknifing to estimate uncertainty of DTI parameters, important for probabilistic tractography.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dDWUncert"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file with b0 and DWI subbricks.",
+      "title": "Input file"
+    },
+    "input_prefix": {
+      "type": "string",
+      "description": "Basename of DTI volumes.",
+      "title": "Input prefix"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Output file name prefix.",
+      "title": "Output prefix"
+    },
+    "grad_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with 3 columns for x-, y-, and z-comps of DW-gradients.",
+      "title": "Gradient file"
+    },
+    "bmatrix_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with gradient info in b-matrix format.",
+      "title": "B-matrix file (full)"
+    },
+    "num_iters": {
+      "type": "number",
+      "description": "Number of jackknife resample iterations.",
+      "title": "Number of iterations"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file within which to calculate uncertainty.",
+      "title": "Mask file"
+    },
+    "calc_thr_fa": {
+      "type": "number",
+      "description": "Threshold for the minimum FA value above which to calculate uncertainty.",
+      "title": "Calculate threshold FA"
+    },
+    "csf_fa": {
+      "type": "number",
+      "description": "Number marking FA value of 'bad' voxels.",
+      "title": "CSF FA value"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "input_prefix",
+    "output_prefix"
+  ]
+}

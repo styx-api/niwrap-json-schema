@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_smooth_intracortical",
+  "description": "Smooths data overlaid onto cortical surface meshes using specified tangential and radial extents.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_smooth_intracortical"
+    },
+    "surf_dir": {
+      "type": "string",
+      "description": "Directory with surface meshes.",
+      "title": "Surface Directory"
+    },
+    "surf_name": {
+      "type": "string",
+      "description": "Name of a surface file(s). Use * and ? to pass multiple names (max 20).",
+      "title": "Surface Name"
+    },
+    "overlay_dir": {
+      "type": "string",
+      "description": "Directory with surface mesh overlays.",
+      "title": "Overlay Directory"
+    },
+    "overlay_name": {
+      "type": "string",
+      "description": "Name of an overlay file(s). Use * and ? to pass multiple names (max 20).",
+      "title": "Overlay Name"
+    },
+    "output_dir": {
+      "type": "object",
+      "properties": {
+        "output_dir": {
+          "type": "string",
+          "description": "Path to the output directory. Default is same as overlay directory.",
+          "title": "Output Directory"
+        }
+      }
+    },
+    "output_name": {
+      "type": "object",
+      "properties": {
+        "output_name": {
+          "type": "string",
+          "description": "Name of the output overlay file.",
+          "title": "Output Name"
+        }
+      }
+    },
+    "tan_size": {
+      "type": "object",
+      "properties": {
+        "tan_size": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6,
+          "description": "Tangential extent of the smoothing kernel. Default = 0, Max = 6.",
+          "title": "Tangential Size"
+        }
+      }
+    },
+    "rad_size": {
+      "type": "object",
+      "properties": {
+        "rad_size": {
+          "type": "number",
+          "description": "Radial extent of the intracortical smoothing kernel.",
+          "title": "Radial Size"
+        }
+      }
+    },
+    "rad_start": {
+      "type": "object",
+      "properties": {
+        "rad_start": {
+          "type": "number",
+          "description": "Starting surface mesh of the intracortical smoothing kernel in the radial direction.",
+          "title": "Radial Start"
+        }
+      }
+    },
+    "tan_weights": {
+      "type": "object",
+      "properties": {
+        "tan_weights": {
+          "type": "string",
+          "description": "Weighting function for tangential smoothing. 'gauss' or 'distance'.",
+          "title": "Tangential Weights"
+        }
+      }
+    }
+  },
+  "required": [
+    "@type",
+    "surf_dir",
+    "surf_name",
+    "overlay_dir",
+    "overlay_name",
+    "output_dir",
+    "output_name",
+    "tan_size",
+    "rad_size",
+    "rad_start",
+    "tan_weights"
+  ]
+}

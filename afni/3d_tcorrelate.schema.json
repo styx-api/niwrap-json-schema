@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTcorrelate",
+  "description": "3dTcorrelate. Computes the correlation coefficient between corresponding voxel time series in two input 3D+time datasets 'xset' and 'yset'.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTcorrelate"
+    },
+    "xset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input xset.",
+      "title": "Xset"
+    },
+    "yset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input yset.",
+      "title": "Yset"
+    },
+    "pearson": {
+      "type": "boolean",
+      "description": "Correlation is the normal pearson correlation coefficient.",
+      "title": "Pearson",
+      "default": false
+    },
+    "spearman": {
+      "type": "boolean",
+      "description": "Correlation is the Spearman (rank) correlation coefficient.",
+      "title": "Spearman",
+      "default": false
+    },
+    "quadrant": {
+      "type": "boolean",
+      "description": "Correlation is the quadrant coefficient.",
+      "title": "Quadrant",
+      "default": false
+    },
+    "ktaub": {
+      "type": "boolean",
+      "description": "Correlation is Kendall's tau_b coefficient. For continuous or finely discretized data, tau_b and rank correlation are nearly equivalent.",
+      "title": "KendallTau",
+      "default": false
+    },
+    "covariance": {
+      "type": "boolean",
+      "description": "Covariance instead of correlation. That would be Pearson correlation without scaling by the product of the standard deviations.",
+      "title": "Covariance",
+      "default": false
+    },
+    "partial": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Partial Pearson's correlation of X & Y, adjusting for Z (the dataset provided here).",
+      "title": "Partial"
+    },
+    "ycoef": {
+      "type": "boolean",
+      "description": "Least squares coefficient that best fits y(t) to x(t), after detrending. That is, if yd(t) is the detrended y(t) and xd(t) is the detrended x(t), then the ycoef value is from the OLSQ fit to xd(t) = ycoef & y(t) + error.",
+      "title": "Ycoef",
+      "default": false
+    },
+    "fisher": {
+      "type": "boolean",
+      "description": "Apply the Fisher (inverse hyperbolic tangent) transformation to correlation results. Does not make sense with ktaub, covariance, or ycoef.",
+      "title": "Fisher",
+      "default": false
+    },
+    "polort": {
+      "type": "integer",
+      "minimum": -1,
+      "maximum": 9,
+      "description": "Remove polynomial trend of order m. Using m=-1 mean no detrending; this is only useful fro data that has been preprocessed.",
+      "title": "Polort"
+    },
+    "ort": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A 1D file. Also detrend using the columbs of the 1D file provided here. Only one -ort option can be given, so if you would like to use more than one, create a temporary file using 1dcat.",
+      "title": "Ort"
+    },
+    "autoclip": {
+      "type": "boolean",
+      "description": "Clip off low-intensity regions in the two datasets, so that the correlation is only computed between high-intensity (presumably brain) voxels. The intensity level is determined the same way that 3dClipLevel works.",
+      "title": "Autoclip",
+      "default": false
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Clip off low-intensity regions in the two datasets, so that the correlation is only computed between high-intensity (presumably brain) voxels. The intensity level is determined the same way that 3dClipLevel works.",
+      "title": "Automask",
+      "default": false
+    },
+    "zcensor": {
+      "type": "boolean",
+      "description": "Omit (censor out) any time points where the xset volume is all zero OR where the yset volume is all zero (in mask). Please note that using -zcensor with any detrending is unlikely to be useful.",
+      "title": "Zcensor",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Save output into a dataset with this prefix.",
+      "title": "Prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "xset",
+    "yset"
+  ]
+}

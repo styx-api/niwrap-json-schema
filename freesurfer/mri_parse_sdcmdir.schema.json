@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_parse_sdcmdir",
+  "description": "This program parses the Siemens DICOM files in a given directory and prints out information about each file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_parse_sdcmdir"
+    },
+    "sdicomdir": {
+      "type": "string",
+      "description": "Path to Siemens DICOM directory",
+      "title": "Siemens DICOM directory"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Name of a file to which the results will be printed. If unspecified, the results will be printed to stdout.",
+      "title": "Output file"
+    },
+    "sortbyrun": {
+      "type": "boolean",
+      "description": "Assign run numbers",
+      "title": "Sort by run flag",
+      "default": false
+    },
+    "summarize": {
+      "type": "boolean",
+      "description": "Only print out info for run leaders",
+      "title": "Summarize flag",
+      "default": false
+    },
+    "dwi": {
+      "type": "boolean",
+      "description": "Try to read DWI params. Generally no need to.",
+      "title": "DWI flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "sdicomdir"
+  ]
+}

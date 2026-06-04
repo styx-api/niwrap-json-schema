@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_fill",
+  "description": "A tool that floodfills the interior of a surface and writes the results into a volume of specified resolution.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_fill"
+    },
+    "resolution": {
+      "type": "number",
+      "description": "Set the resolution of the output volume (default = 0.250 mm/voxel)",
+      "title": "Resolution"
+    },
+    "conform": {
+      "type": "boolean",
+      "description": "Conform the volume before writing",
+      "title": "Conform Flag",
+      "default": false
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface file",
+      "title": "Input Surface"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume file",
+      "title": "Output Volume"
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface",
+    "output_volume"
+  ]
+}

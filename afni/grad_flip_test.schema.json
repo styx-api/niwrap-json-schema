@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@GradFlipTest",
+  "description": "Script to test the correct flip for a data set when using 1dDW_Grad_o_Mat++.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@GradFlipTest"
+    },
+    "dwi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set of DWIs (N total volumes)",
+      "title": "DWI"
+    },
+    "grad_row_vec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set of row-wise gradient vectors",
+      "title": "Row-Wise Gradient Vectors"
+    },
+    "grad_col_vec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set of column-wise gradient vectors",
+      "title": "Column-Wise Gradient Vectors"
+    },
+    "grad_col_matA": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set of column-wise g- or b-matrix elements (\"AFNI\"-style format, \"diagonal-first\")",
+      "title": "Column-Wise Matrix A"
+    },
+    "grad_col_matT": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set of column-wise g- or b-matrix elements (\"TORTOISE\"-style format, \"row-first\")",
+      "title": "Column-Wise Matrix T"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional mask (probably whole brain); otherwise, automasking is performed",
+      "title": "Mask"
+    },
+    "bvals": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Can input bvals, if necessary (but shouldn't be necessary?)",
+      "title": "Bvals"
+    },
+    "thresh_fa": {
+      "type": "number",
+      "description": "Set minimum FA value for tracking (default X=0.2)",
+      "title": "FA Threshold"
+    },
+    "thresh_len": {
+      "type": "number",
+      "description": "Set minimum tract length to keep a tract when propagating (default L=30mm)",
+      "title": "Tract Length Threshold"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output name of text file that stores recommended flip option",
+      "title": "Prefix"
+    },
+    "check_abs_min": {
+      "type": "number",
+      "description": "Handle tiny negative values in gradient vectors",
+      "title": "Check Absolute Minimum"
+    },
+    "scale_out_1000": {
+      "type": "boolean",
+      "description": "Scale output to 1000, as in 3dDWItoDT (probably not necessary)",
+      "title": "Scale Output to 1000 Flag",
+      "default": false
+    },
+    "wdir": {
+      "type": "string",
+      "description": "Rename working directory output; useful if running multiple iterations",
+      "title": "Working Directory"
+    },
+    "do_clean": {
+      "type": "boolean",
+      "description": "Remove temporary directory",
+      "title": "Clean temporary directory",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "dwi"
+  ]
+}

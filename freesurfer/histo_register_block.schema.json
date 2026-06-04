@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "histo_register_block",
+  "description": "A tool to align a histological slice with a block face image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/histo_register_block"
+    },
+    "seg_time1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Segmented image at time point 1",
+      "title": "Segmented Time 1"
+    },
+    "seg_time2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Segmented image at time point 2",
+      "title": "Segmented Time 2"
+    },
+    "transform1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Transformation file for time point 1",
+      "title": "Transform 1"
+    },
+    "transform2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Transformation file for time point 2",
+      "title": "Transform 2"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output file name for the aligned image",
+      "title": "Output File"
+    },
+    "out_like": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set output volume parameters like the reference volume",
+      "title": "Reference Volume"
+    },
+    "invert_transform": {
+      "type": "boolean",
+      "description": "Invert transform coordinates",
+      "title": "Invert Transform Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "seg_time1",
+    "seg_time2",
+    "transform1",
+    "transform2",
+    "output_file"
+  ]
+}

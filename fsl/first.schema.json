@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "first",
+  "description": "A command-line tool for segmenting subcortical structures in MRI images using models and transformations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/first"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input image to be segmented.",
+      "title": "Input image file"
+    },
+    "output_name": {
+      "type": "string",
+      "description": "Output name",
+      "title": "Output name"
+    },
+    "input_model": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input model (the structure to be segmented).",
+      "title": "Input model file"
+    },
+    "flirt_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of flirt matrix that transform input image to MNI space (output of first_flirt).",
+      "title": "Flirt matrix file"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help flag",
+      "default": false
+    },
+    "input_model2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of second input model (the structure to be segmented).",
+      "title": "Second input model file"
+    },
+    "nmodes": {
+      "type": "number",
+      "description": "Specifies number of modes used.",
+      "title": "Number of modes"
+    },
+    "intref": {
+      "type": "boolean",
+      "description": "Use structure specified by modelname2 as intensity reference",
+      "title": "Intensity reference flag",
+      "default": false
+    },
+    "multi_image_input": {
+      "type": "boolean",
+      "description": "Use structure specified by modelname2 as intensity reference",
+      "title": "Multi-image input flag",
+      "default": false
+    },
+    "binary_surface_output": {
+      "type": "boolean",
+      "description": "Use structure specified by modelname2 as intensity reference",
+      "title": "Binary surface output flag",
+      "default": false
+    },
+    "bmap_name": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of conditional mapping matrix",
+      "title": "Conditional mapping matrix file"
+    },
+    "bvars": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Initialize using bvars from a previous segmentation. When using with --shcond specifies the shape of the structure we are conditioning on.",
+      "title": "Bvars file"
+    },
+    "shcond": {
+      "type": "boolean",
+      "description": "Use conditional shape probability",
+      "title": "Shape conditioning flag",
+      "default": false
+    },
+    "loadbvars": {
+      "type": "boolean",
+      "description": "Load initial parameter estimates from a previous segmentation.",
+      "title": "Load bvars flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_name",
+    "input_model",
+    "flirt_matrix"
+  ]
+}

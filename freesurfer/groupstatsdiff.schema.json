@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "groupstatsdiff",
+  "description": "Evaluate the differences between two groupstats outputs from recon-all analyses in Freesurfer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/groupstatsdiff"
+    },
+    "group1_dir": {
+      "type": "string",
+      "description": "Output folder from groupstats for group 1",
+      "title": "Group1 Directory"
+    },
+    "group2_dir": {
+      "type": "string",
+      "description": "Output folder from groupstats for group 2",
+      "title": "Group2 Directory"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Output folder for the difference analysis",
+      "title": "Output Directory"
+    },
+    "no_maps": {
+      "type": "boolean",
+      "description": "Only analyze ROI data, no maps",
+      "title": "No Maps Flag",
+      "default": false
+    },
+    "osgm": {
+      "type": "boolean",
+      "description": "Use OSGM instead of native FSGD",
+      "title": "OSGM Flag",
+      "default": false
+    },
+    "no_common": {
+      "type": "boolean",
+      "description": "Do not select common segments when running stattablediff",
+      "title": "No Common Flag",
+      "default": false
+    },
+    "allow_subj_diff": {
+      "type": "boolean",
+      "description": "Allow list of subjects to be different between the two analyses",
+      "title": "Allow Subject Difference Flag",
+      "default": false
+    },
+    "no_area": {
+      "type": "boolean",
+      "description": "Do not compute area differences",
+      "title": "No Area Flag",
+      "default": false
+    },
+    "no_volume": {
+      "type": "boolean",
+      "description": "Do not compute volume differences",
+      "title": "No Volume Flag",
+      "default": false
+    },
+    "no_ba": {
+      "type": "boolean",
+      "description": "Do not compute differences for BA labels",
+      "title": "No BA Flag",
+      "default": false
+    },
+    "no_aparcstats": {
+      "type": "boolean",
+      "description": "Do not do aparcstats",
+      "title": "No Aparcstats Flag",
+      "default": false
+    },
+    "no_asegstats": {
+      "type": "boolean",
+      "description": "Do not do asegstats",
+      "title": "No Asegstats Flag",
+      "default": false
+    },
+    "no_wparcstats": {
+      "type": "boolean",
+      "description": "Do not do wmparcstats",
+      "title": "No Wmparcstats Flag",
+      "default": false
+    },
+    "no_stats": {
+      "type": "boolean",
+      "description": "Do not do any ROI stats",
+      "title": "No Stats Flag",
+      "default": false
+    },
+    "no_prune": {
+      "type": "boolean",
+      "description": "Do not prune when running mri_glmfit",
+      "title": "No Prune Flag",
+      "default": false
+    },
+    "fwhm_value": {
+      "type": "number",
+      "description": "Override the FWHM from group analysis",
+      "title": "FWHM Value"
+    },
+    "subjects_dir1": {
+      "type": "string",
+      "description": "Subjects directory 1 for computing dice (default is parent dir of groupdir)",
+      "title": "Subjects Directory 1"
+    },
+    "subjects_dir2": {
+      "type": "string",
+      "description": "Subjects directory 2 for computing dice (default is parent dir of groupdir)",
+      "title": "Subjects Directory 2"
+    },
+    "no_dice": {
+      "type": "boolean",
+      "description": "Do not compute dice",
+      "title": "No Dice Flag",
+      "default": false
+    },
+    "dice_ctab": {
+      "type": "string",
+      "description": "CTAB to use for dice computation (default is /usr/local/freesurfer/ASegStatsLUT.txt)",
+      "title": "Dice CTAB"
+    }
+  },
+  "required": [
+    "@type",
+    "group1_dir",
+    "group2_dir",
+    "output_dir"
+  ]
+}

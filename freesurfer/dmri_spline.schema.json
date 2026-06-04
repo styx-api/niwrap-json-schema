@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dmri_spline",
+  "description": "Tool for interpolating and analyzing splines within a defined mask",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dmri_spline"
+    },
+    "control_points_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input text file containing control points",
+      "title": "Control Points File"
+    },
+    "mask_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input mask volume (spline is not allowed to stray off mask)",
+      "title": "Mask Volume"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume of the interpolated spline",
+      "title": "Output Volume"
+    },
+    "show_points": {
+      "type": "boolean",
+      "description": "Highlight control points in output volume (default: no)",
+      "title": "Show Control Points Flag",
+      "default": false
+    },
+    "output_points": {
+      "type": "string",
+      "description": "Output text file containing all interpolated spline points",
+      "title": "Output Points File"
+    },
+    "output_vectors_base": {
+      "type": "string",
+      "description": "Base name of output text files containing tangent vectors, normal vectors, and curvatures at every point along the spline",
+      "title": "Output Vectors Base Name"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "check_options": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit",
+      "title": "Check Options Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "control_points_file",
+    "mask_volume"
+  ]
+}

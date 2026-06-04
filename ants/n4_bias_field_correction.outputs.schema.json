@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "N4BiasFieldCorrection",
+  "description": "N4 is a variant of the popular N3 (nonparameteric nonuniform normalization) retrospective bias correction algorithm. Based on the assumption that the corruption of the low frequency bias field can be modeled as a convolution of the intensity histogram by a Gaussian, the basic algorithmic protocol is to iterate between deconvolving the intensity histogram by a Gaussian, remapping the intensities, and then spatially smoothing this result by a B-spline modeling of the bias field itself.",
+  "properties": {
+    "root": {
+      "type": "string",
+      "x-styx-type": "path"
+    },
+    "output_image_outfile": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-styx-type": "path",
+      "description": "Bias corrected image."
+    },
+    "output_bias_image": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-styx-type": "path",
+      "description": "Bias field image."
+    }
+  },
+  "required": [
+    "root",
+    "output_image_outfile",
+    "output_bias_image"
+  ]
+}

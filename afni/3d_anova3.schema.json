@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dANOVA3",
+  "description": "Performs three-factor ANOVA on 3D data sets.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dANOVA3"
+    },
+    "type": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Type of ANOVA model to be used. k = 1: A,B,C fixed; AxBxC, k = 2: A,B,C random; AxBxC, k = 3: A fixed; B,C random; AxBxC, k = 4: A,B fixed; C random; AxBxC, k = 5: A,B fixed; C random; AxB,BxC,C(A)",
+      "title": "ANOVA Model Type"
+    },
+    "alevels": {
+      "type": "integer",
+      "description": "Number of levels for factor A.",
+      "title": "Factor A Levels"
+    },
+    "blevels": {
+      "type": "integer",
+      "description": "Number of levels for factor B.",
+      "title": "Factor B Levels"
+    },
+    "clevels": {
+      "type": "integer",
+      "description": "Number of levels for factor C.",
+      "title": "Factor C Levels"
+    },
+    "dsets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Input data sets for specific levels of factors A, B, and C.",
+      "title": "Datasets"
+    },
+    "voxel_num": {
+      "type": "integer",
+      "description": "Screen output for specified voxel number.",
+      "title": "Voxel Number"
+    },
+    "diskspace": {
+      "type": "boolean",
+      "description": "Print out disk space required for program execution.",
+      "title": "Disk Space",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use sub-brick #0 of dataset to define which voxels to process.",
+      "title": "Mask Dataset"
+    },
+    "outfile_fa": {
+      "type": "string",
+      "description": "Specify the output file for the main ANOVA result.",
+      "title": "Output File A"
+    },
+    "outfile_fb": {
+      "type": "string",
+      "description": "Specify the output file for the main B ANOVA result.",
+      "title": "Output File B"
+    },
+    "outfile_fc": {
+      "type": "string",
+      "description": "Specify the output file for the main C ANOVA result.",
+      "title": "Output File C"
+    },
+    "outfile_fab": {
+      "type": "string",
+      "description": "Specify the output file for the interaction between A and B.",
+      "title": "Output File AB"
+    },
+    "outfile_fac": {
+      "type": "string",
+      "description": "Specify the output file for the interaction between A and C.",
+      "title": "Output File AC"
+    },
+    "outfile_fbc": {
+      "type": "string",
+      "description": "Specify the output file for the interaction between B and C.",
+      "title": "Output File BC"
+    },
+    "outfile_fabc": {
+      "type": "string",
+      "description": "Specify the output file for the interaction between A, B, and C.",
+      "title": "Output File ABC"
+    },
+    "outfile_amean": {
+      "type": "string",
+      "description": "Specify the output file for the A mean results.",
+      "title": "Output File A Mean"
+    },
+    "outfile_bmean": {
+      "type": "string",
+      "description": "Specify the output file for the B mean results.",
+      "title": "Output File B Mean"
+    },
+    "outfile_cmean": {
+      "type": "string",
+      "description": "Specify the output file for the C mean results.",
+      "title": "Output File C Mean"
+    },
+    "outfile_xmean": {
+      "type": "string",
+      "description": "Specify the output file for the overall mean results.",
+      "title": "Output File Overall Mean"
+    },
+    "outfile_adiff": {
+      "type": "string",
+      "description": "Specify the output file for the A difference results.",
+      "title": "Output File A Difference"
+    },
+    "outfile_bdiff": {
+      "type": "string",
+      "description": "Specify the output file for the B difference results.",
+      "title": "Output File B Difference"
+    },
+    "outfile_cdiff": {
+      "type": "string",
+      "description": "Specify the output file for the C difference results.",
+      "title": "Output File C Difference"
+    },
+    "outfile_xdiff": {
+      "type": "string",
+      "description": "Specify the output file for the overall difference results.",
+      "title": "Output File Overall Difference"
+    },
+    "outfile_acontr": {
+      "type": "string",
+      "description": "Specify the output file for the A contrast results.",
+      "title": "Output File A Contrast"
+    },
+    "outfile_bcontr": {
+      "type": "string",
+      "description": "Specify the output file for the B contrast results.",
+      "title": "Output File B Contrast"
+    },
+    "outfile_ccontr": {
+      "type": "string",
+      "description": "Specify the output file for the C contrast results.",
+      "title": "Output File C Contrast"
+    },
+    "outfile_abcontr": {
+      "type": "object",
+      "properties": {
+        "outfile_abcontr": {
+          "type": "string",
+          "description": "Specify the output file for the interaction contrast results between A and B.",
+          "title": "Output File A and B Contrast"
+        },
+        "outfile_Abcontr": {
+          "type": "string",
+          "description": "Specify the output file for the interaction contrast results between A and B (case-sensitive).",
+          "title": "Output File A and b Contrast"
+        }
+      },
+      "description": "Specify the output file for the interaction contrast results between A and B.",
+      "title": "Output file A and B Contrast"
+    },
+    "outfile_abdiff": {
+      "type": "object",
+      "properties": {
+        "outfile_abdiff": {
+          "type": "string",
+          "description": "Specify the output file for the interaction difference results between A and B.",
+          "title": "Output File A and B Difference"
+        },
+        "outfile_Abdiff": {
+          "type": "string",
+          "description": "Specify the output file for the interaction difference results between A and B (case-sensitive).",
+          "title": "Output File A and b Difference"
+        }
+      },
+      "description": "Specify the output file for the interaction contrast results between A and B.",
+      "title": "Output file A and B Contrast"
+    },
+    "outfile_abmean": {
+      "type": "string",
+      "description": "Specify the output file for the mean results of the interaction between A and B.",
+      "title": "Output File AB Mean"
+    },
+    "outfile_bucket": {
+      "type": "string",
+      "description": "Specify the output file for the bucket (combined) results.",
+      "title": "Output File Bucket"
+    },
+    "anova_options": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Modified ANOVA computation options. See: https://afni.nimh.nih.gov/sscc/gangc/ANOVA_Mod.html",
+      "title": "ANOVA Computation Options"
+    }
+  },
+  "required": [
+    "@type",
+    "type",
+    "alevels",
+    "blevels",
+    "clevels",
+    "dsets"
+  ]
+}

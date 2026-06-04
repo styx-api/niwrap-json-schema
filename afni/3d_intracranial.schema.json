@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dIntracranial",
+  "description": "Performs automatic segmentation of intracranial region.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dIntracranial"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of anat dataset to be segmented",
+      "title": "Anat file"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix name for file to contain segmented image",
+      "title": "Prefix for output file"
+    },
+    "min_val": {
+      "type": "number",
+      "description": "Minimum voxel intensity limit. Default is internal PDF estimate for lower bound",
+      "title": "Minimum voxel intensity"
+    },
+    "max_val": {
+      "type": "number",
+      "description": "Maximum voxel intensity limit. Default is internal PDF estimate for upper bound",
+      "title": "Maximum voxel intensity"
+    },
+    "min_conn": {
+      "type": "number",
+      "description": "Minimum voxel connectivity to enter. Default is 4",
+      "title": "Minimum voxel connectivity"
+    },
+    "max_conn": {
+      "type": "number",
+      "description": "Maximum voxel connectivity to leave. Default is 2",
+      "title": "Maximum voxel connectivity"
+    },
+    "no_smooth": {
+      "type": "boolean",
+      "description": "Suppress spatial smoothing of segmentation mask",
+      "title": "No smoothing flag",
+      "default": false
+    },
+    "mask": {
+      "type": "boolean",
+      "description": "Generate functional image mask (complement). Default is to generate anatomical image",
+      "title": "Generate functional image mask",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Suppress output to screen",
+      "title": "Quiet flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "infile",
+    "prefix"
+  ]
+}

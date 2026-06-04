@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@diff.files",
+  "description": "Show file differences (between specified files and those in another directory)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@diff.files"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of files to compare",
+      "title": "Files"
+    },
+    "old_dir": {
+      "type": "string",
+      "description": "Directory containing the files to compare against",
+      "title": "Old Directory"
+    },
+    "diff_opts": {
+      "type": "string",
+      "description": "Add options to diff command (e.g., -w)",
+      "title": "Diff Options"
+    },
+    "diff_prog": {
+      "type": "string",
+      "description": "Display diffs using a specified program (e.g., meld, xxdiff)",
+      "title": "Diff Program"
+    },
+    "ignore_missing": {
+      "type": "boolean",
+      "description": "Continue even if files are missing",
+      "title": "Ignore Missing Files Flag",
+      "default": false
+    },
+    "longlist": {
+      "type": "boolean",
+      "description": "Run 'ls -l' on both directories instead of listing files",
+      "title": "Longlist Flag",
+      "default": false
+    },
+    "save": {
+      "type": "boolean",
+      "description": "Create PDFs of diffs",
+      "title": "Save Diffs Flag",
+      "default": false
+    },
+    "show": {
+      "type": "boolean",
+      "description": "Show diffs using 'diff'",
+      "title": "Show Diffs Flag",
+      "default": false
+    },
+    "xxdiff": {
+      "type": "boolean",
+      "description": "Show diffs using 'xxdiff'",
+      "title": "XXDiff Flag",
+      "default": false
+    },
+    "X_flag": {
+      "type": "boolean",
+      "description": "Implies -xxdiff and -ignore_missing",
+      "title": "X Flag",
+      "default": false
+    },
+    "verbosity": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 3,
+      "description": "Set verbosity level (2 or 3)",
+      "title": "Verbosity Level"
+    }
+  },
+  "required": [
+    "@type",
+    "files",
+    "old_dir"
+  ]
+}

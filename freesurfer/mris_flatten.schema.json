@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_flatten",
+  "description": "This program will flatten a surface patch",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_flatten"
+    },
+    "input_patch": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface patch",
+      "title": "Input Patch"
+    },
+    "output_patch": {
+      "type": "string",
+      "description": "Output flattened surface patch",
+      "title": "Output Patch"
+    },
+    "iterations": {
+      "type": "number",
+      "description": "Write out the surface every # of iterations.",
+      "title": "Iterations"
+    },
+    "distances": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify size of neighborhood and number of vertices at each distance to be used in the optimization.",
+      "title": "Distances"
+    },
+    "dilations": {
+      "type": "number",
+      "description": "Specify the number of times to dilate the ripped edges to ensure a clean cut",
+      "title": "Dilations"
+    },
+    "random_seed": {
+      "type": "number",
+      "description": "Set the random seed to a specific value so that flattening is repeatable",
+      "title": "Random Seed"
+    },
+    "copy_coords": {
+      "type": "string",
+      "description": "Copy xyz coords from surface before flattening.",
+      "title": "Copy Coords Surface"
+    },
+    "norand": {
+      "type": "boolean",
+      "description": "Set the random seed to 0 so that flattening is repeatable",
+      "title": "No Random Seed Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_patch",
+    "output_patch"
+  ]
+}

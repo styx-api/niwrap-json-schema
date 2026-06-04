@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "swi_preprocess",
+  "description": "Pre-process the Susceptibility-weighted images and write out nifti files for feeding into PRELUDE (Phase Unwrapping Library of FSL).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/swi_preprocess"
+    },
+    "scanner": {
+      "enum": [
+        "ge",
+        "siemens",
+        "philips"
+      ],
+      "description": "Name of the scanner (one of ge, siemens or philips)",
+      "title": "Scanner name"
+    },
+    "ge_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the input GE file (only compatible with --scanner ge option)",
+      "title": "GE input file"
+    },
+    "philips_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the input Philips file (only compatible with --scanner philips option)",
+      "title": "Philips input file"
+    },
+    "siemens_magnitude": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the input Siemens magnitude file (only compatible with --scanner siemens option)",
+      "title": "Siemens magnitude file"
+    },
+    "siemens_phase": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the input Siemens phase file (only compatible with --scanner siemens option)",
+      "title": "Siemens phase file"
+    },
+    "out_magnitude": {
+      "type": "string",
+      "description": "Name of the output magnitude file after preprocessing. Ensure it has a .nii suffix",
+      "title": "Output magnitude file"
+    },
+    "out_phase": {
+      "type": "string",
+      "description": "Name of the output phase file after preprocessing. Ensure it has a .nii suffix",
+      "title": "Output phase file"
+    }
+  },
+  "required": [
+    "@type",
+    "scanner",
+    "out_magnitude",
+    "out_phase"
+  ]
+}

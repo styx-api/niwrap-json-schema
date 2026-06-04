@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@SUMA_Make_Spec_FS",
+  "description": "Prepare for surface viewing in SUMA",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@SUMA_Make_Spec_FS"
+    },
+    "subject_id": {
+      "type": "string",
+      "description": "Required subject ID for file naming",
+      "title": "Subject ID"
+    },
+    "debug": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "Print debug information along the way; default level is 0, max is 2",
+      "title": "Debug level"
+    },
+    "fs_setup": {
+      "type": "boolean",
+      "description": "Source $FREESURFER_HOME/SetUpFreeSurfer.csh",
+      "title": "FreeSurfer setup flag",
+      "default": false
+    },
+    "filesystem_path": {
+      "type": "string",
+      "description": "Path to 'surf' and 'orig' directories; defaults to './', the current directory",
+      "title": "Filesystem path"
+    },
+    "extra_annot_labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Convert extra annot files into ROI datasets",
+      "title": "Extra annotation labels"
+    },
+    "extra_fs_dsets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List other datasets to include; defaults are thickness, curv, sulc",
+      "title": "Extra FreeSurfer datasets"
+    },
+    "make_rank_dsets": {
+      "type": "boolean",
+      "description": "Create *rank* datasets; for backward compatibility",
+      "title": "Make rank datasets flag",
+      "default": false
+    },
+    "use_mgz": {
+      "type": "boolean",
+      "description": "Use MGZ volumes even if COR volumes are there",
+      "title": "Use MGZ flag",
+      "default": false
+    },
+    "neuro": {
+      "type": "boolean",
+      "description": "Use neurological orientation",
+      "title": "Neurological orientation flag",
+      "default": false
+    },
+    "gnifti": {
+      "type": "boolean",
+      "description": "Produce files in exchangeable formats; same as -NIFTI",
+      "title": "GNIFTI flag",
+      "default": false
+    },
+    "nifti": {
+      "type": "boolean",
+      "description": "Produce files in exchangeable formats; output files in NIFTI format and surfaces in GIFTI format",
+      "title": "NIFTI flag",
+      "default": false
+    },
+    "inflate": {
+      "type": "number",
+      "description": "Create moderately inflated surfaces using SurfSmooth; control the amount of smoothness with INF",
+      "title": "Inflation factor"
+    },
+    "set_space": {
+      "type": "string",
+      "description": "Set the space flag of all volumes; defaults to 'orig' space",
+      "title": "Set space"
+    },
+    "ld": {
+      "type": "number",
+      "description": "Create standard mesh surfaces with mesh density linear depth set to LD",
+      "title": "Linear depth"
+    },
+    "ldpref": {
+      "type": "string",
+      "description": "Supply the prefix option for MapIcosahedron; defaults to std.LD",
+      "title": "Linear depth prefix"
+    },
+    "no_ld": {
+      "type": "boolean",
+      "description": "Do not run MapIcosahedron",
+      "title": "No MapIcosahedron flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject_id"
+  ]
+}

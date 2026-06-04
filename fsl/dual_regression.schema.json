@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dual_regression",
+  "description": "Dual regression algorithm to investigate group-ICA results",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/dual_regression"
+    },
+    "group_ic_maps": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "4D image containing spatial IC maps (melodic_IC) from the whole-group ICA analysis",
+      "title": "Group IC Maps 4D"
+    },
+    "des_norm": {
+      "type": "number",
+      "description": "0 or 1 (1 is recommended). Whether to variance-normalise the timecourses used as the stage-2 regressors",
+      "title": "Des Norm"
+    },
+    "design_mat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Design matrix for final cross-subject modelling with randomise",
+      "title": "Design Matrix"
+    },
+    "design_con": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Design contrasts for final cross-subject modelling with randomise",
+      "title": "Design Contrasts"
+    },
+    "n_perm": {
+      "type": "number",
+      "description": "Number of permutations for randomise; set to 1 for just raw tstat output, set to 0 to not run randomise at all.",
+      "title": "Number of Permutations"
+    },
+    "thr_flag": {
+      "type": "boolean",
+      "description": "Perform thresholded dual regression to obtain unbiased timeseries for connectomics analyses (e.g., with FSLnets)",
+      "title": "Thresholded Dual Regression",
+      "default": false
+    },
+    "output_directory": {
+      "type": "string",
+      "description": "This directory will be created to hold all output and logfiles",
+      "title": "Output Directory"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of all subjects' preprocessed, standard-space 4D datasets",
+      "title": "Input Files"
+    }
+  },
+  "required": [
+    "@type",
+    "group_ic_maps",
+    "des_norm",
+    "design_mat",
+    "design_con",
+    "n_perm",
+    "output_directory",
+    "input_files"
+  ]
+}

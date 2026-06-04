@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_volsmooth",
+  "description": "Performs surface-based smoothing inside a volume by sampling a volume to a surface, smoothing on the surface, then replacing the surface voxels in the volume with values that were smoothed.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_volsmooth"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Source volume with values that will be smoothed on the surface.",
+      "title": "Input Volume"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume.",
+      "title": "Output Volume"
+    },
+    "registration": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "TKRegister-style registration matrix that maps between the input/output volumes and the FreeSurfer surface anatomical.",
+      "title": "Registration"
+    },
+    "projfrac": {
+      "type": "number",
+      "description": "Fraction of thickness to project along surface normal.",
+      "title": "Projection Fraction"
+    },
+    "projfrac_avg": {
+      "type": "string",
+      "description": "Average sampling along normal, specified by min, max, and delta.",
+      "title": "Projection Fraction Average"
+    },
+    "fill_ribbon": {
+      "type": "boolean",
+      "description": "Fill ribbon.",
+      "title": "Fill Ribbon Flag",
+      "default": false
+    },
+    "surf_out": {
+      "type": "string",
+      "description": "Save smoothed surfaces as basename.?h.mgh",
+      "title": "Surface Output Basename"
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "Surface smoothing by full-width/half-max in mm.",
+      "title": "FWHM"
+    },
+    "niters": {
+      "type": "number",
+      "description": "Specify surface smoothing by number of nearest neighbor smoothing iterations.",
+      "title": "Iterations"
+    },
+    "vol_fwhm": {
+      "type": "number",
+      "description": "Volume smoothing outside of the surface. Surface voxels and non-surface voxels are smoothed separately.",
+      "title": "Volume FWHM"
+    },
+    "log": {
+      "type": "string",
+      "description": "Explicitly set log file.",
+      "title": "Log File"
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "description": "Do not delete temporary files.",
+      "title": "No Cleanup Flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging.",
+      "title": "Debug Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "output_volume",
+    "registration"
+  ]
+}

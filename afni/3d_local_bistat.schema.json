@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLocalBistat",
+  "description": "Compute statistics between 2 datasets at each voxel based on a local neighborhood.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLocalBistat"
+    },
+    "nbhd": {
+      "type": "string",
+      "description": "Specifies the neighborhood around each voxel for statistics calculation. Types include: SPHERE(r), RECT(a,b,c), RHDD(r), TOHD(r)",
+      "title": "Neighborhood"
+    },
+    "stats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Statistic to compute in the region around each voxel. Multiple options allowed. Includes: pearson, spearman, quadrant, mutinfo, normuti, jointent, hellinger, crU, crM, crA, L2slope, L1slope, num, ALL.",
+      "title": "Statistics"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read in a dataset to use as a mask. Non-zero voxels define the mask region.",
+      "title": "Mask"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Compute the mask as in program 3dAutomask. Mutually exclusive with -mask.",
+      "title": "Automatic mask",
+      "default": false
+    },
+    "weight": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use dataset as a weight (applies to pearson).",
+      "title": "Weight"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix of the output dataset.",
+      "title": "Output Prefix"
+    },
+    "histpow": {
+      "type": "number",
+      "description": "Sets the exponent for the number of bins in the histogram used for Hellinger, Mutual Information, and Correlation Ratio statistics.",
+      "title": "Histogram Power"
+    },
+    "histbin": {
+      "type": "number",
+      "description": "Sets the number of bins directly in the histogram used for Hellinger, Mutual Information, and Correlation Ratio statistics.",
+      "title": "Histogram Bins"
+    },
+    "hclip1": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Clip dataset1 to lie between specified values.",
+      "title": "Clip Dataset 1"
+    },
+    "hclip2": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Clip dataset2 to lie between specified values.",
+      "title": "Clip Dataset 2"
+    },
+    "dataset1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The first input dataset (e.g. data1.nii)",
+      "title": "Dataset 1"
+    },
+    "dataset2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The second input dataset (e.g. data2.nii)",
+      "title": "Dataset 2"
+    }
+  },
+  "required": [
+    "@type",
+    "nbhd",
+    "stats",
+    "prefix",
+    "dataset1",
+    "dataset2"
+  ]
+}

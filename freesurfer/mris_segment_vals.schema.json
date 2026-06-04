@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_segment_vals",
+  "description": "This program segments an input val file into connected components",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_segment_vals"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface file",
+      "title": "Input Surface"
+    },
+    "input_curv_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input w/curv file",
+      "title": "Input Curv File"
+    },
+    "output_curv_file": {
+      "type": "string",
+      "description": "Output w/curv file",
+      "title": "Output Curv File"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold for segmentation (default is 0)",
+      "title": "Threshold"
+    },
+    "area_thresh": {
+      "type": "number",
+      "description": "Ignore segments smaller than <area thresh> mm (default 0)",
+      "title": "Area Threshold"
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface",
+    "input_curv_file",
+    "output_curv_file"
+  ]
+}

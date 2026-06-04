@@ -1,0 +1,262 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dcmdjpeg.fs",
+  "description": "A tool to decode JPEG-compressed DICOM files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dcmdjpeg.fs"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "DICOM input filename to be converted",
+      "title": "Input File"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "DICOM output filename",
+      "title": "Output File"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print this help text and exit",
+      "title": "Help Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version information and exit",
+      "title": "Version Flag",
+      "default": false
+    },
+    "arguments": {
+      "type": "boolean",
+      "description": "Print expanded command line arguments",
+      "title": "Arguments Flag",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Quiet mode, print no warnings and errors",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose mode, print processing details",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Debug mode, print debug information",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "log_level": {
+      "type": "string",
+      "description": "Use level l for the logger (fatal, error, warn, info, debug, trace)",
+      "title": "Log Level"
+    },
+    "log_config": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use config file f for the logger",
+      "title": "Log Config"
+    },
+    "read_file": {
+      "type": "boolean",
+      "description": "Read file format or data set (default)",
+      "title": "Read File Flag",
+      "default": false
+    },
+    "read_file_only": {
+      "type": "boolean",
+      "description": "Read file format only",
+      "title": "Read File Only Flag",
+      "default": false
+    },
+    "read_dataset": {
+      "type": "boolean",
+      "description": "Read data set without file meta information",
+      "title": "Read Dataset Flag",
+      "default": false
+    },
+    "conv_photometric": {
+      "type": "boolean",
+      "description": "Convert if YCbCr photometric interpretation (default)",
+      "title": "Conv Photometric Flag",
+      "default": false
+    },
+    "conv_lossy": {
+      "type": "boolean",
+      "description": "Convert YCbCr to RGB if lossy JPEG",
+      "title": "Conv Lossy Flag",
+      "default": false
+    },
+    "conv_guess": {
+      "type": "boolean",
+      "description": "Convert to RGB if YCbCr is guessed by library",
+      "title": "Conv Guess Flag",
+      "default": false
+    },
+    "conv_guess_lossy": {
+      "type": "boolean",
+      "description": "Convert to RGB if lossy JPEG and YCbCr is guessed",
+      "title": "Conv Guess Lossy Flag",
+      "default": false
+    },
+    "conv_always": {
+      "type": "boolean",
+      "description": "Always convert YCbCr to RGB",
+      "title": "Conv Always Flag",
+      "default": false
+    },
+    "conv_never": {
+      "type": "boolean",
+      "description": "Never convert color space",
+      "title": "Conv Never Flag",
+      "default": false
+    },
+    "planar_auto": {
+      "type": "boolean",
+      "description": "Automatically determine planar configuration from SOP class and color space (default)",
+      "title": "Planar Auto Flag",
+      "default": false
+    },
+    "color_by_pixel": {
+      "type": "boolean",
+      "description": "Always store color-by-pixel",
+      "title": "Color by Pixel Flag",
+      "default": false
+    },
+    "color_by_plane": {
+      "type": "boolean",
+      "description": "Always store color-by-plane",
+      "title": "Color by Plane Flag",
+      "default": false
+    },
+    "uid_default": {
+      "type": "boolean",
+      "description": "Keep same SOP Instance UID (default)",
+      "title": "UID Default Flag",
+      "default": false
+    },
+    "uid_always": {
+      "type": "boolean",
+      "description": "Always assign new UID",
+      "title": "UID Always Flag",
+      "default": false
+    },
+    "workaround_pred6": {
+      "type": "boolean",
+      "description": "Enable workaround for JPEG lossless images with overflow in predictor 6",
+      "title": "Workaround Pred6 Flag",
+      "default": false
+    },
+    "workaround_incpl": {
+      "type": "boolean",
+      "description": "Enable workaround for incomplete JPEG data",
+      "title": "Workaround Incomplete JPEG Data Flag",
+      "default": false
+    },
+    "write_file": {
+      "type": "boolean",
+      "description": "Write file format (default)",
+      "title": "Write File Flag",
+      "default": false
+    },
+    "write_dataset": {
+      "type": "boolean",
+      "description": "Write data set without file meta information",
+      "title": "Write Dataset Flag",
+      "default": false
+    },
+    "write_xfer_little": {
+      "type": "boolean",
+      "description": "Write with explicit VR little endian (default)",
+      "title": "Write Xfer Little Flag",
+      "default": false
+    },
+    "write_xfer_big": {
+      "type": "boolean",
+      "description": "Write with explicit VR big endian TS",
+      "title": "Write Xfer Big Flag",
+      "default": false
+    },
+    "write_xfer_implicit": {
+      "type": "boolean",
+      "description": "Write with implicit VR little endian TS",
+      "title": "Write Xfer Implicit Flag",
+      "default": false
+    },
+    "enable_new_vr": {
+      "type": "boolean",
+      "description": "Enable support for new VRs (UN/UT) (default)",
+      "title": "Enable New VR Flag",
+      "default": false
+    },
+    "disable_new_vr": {
+      "type": "boolean",
+      "description": "Disable support for new VRs, convert to OB",
+      "title": "Disable New VR Flag",
+      "default": false
+    },
+    "group_length_recalc": {
+      "type": "boolean",
+      "description": "Recalculate group lengths if present (default)",
+      "title": "Group Length Recalc Flag",
+      "default": false
+    },
+    "group_length_create": {
+      "type": "boolean",
+      "description": "Always write with group length elements",
+      "title": "Group Length Create Flag",
+      "default": false
+    },
+    "group_length_remove": {
+      "type": "boolean",
+      "description": "Always write without group length elements",
+      "title": "Group Length Remove Flag",
+      "default": false
+    },
+    "length_explicit": {
+      "type": "boolean",
+      "description": "Write with explicit lengths (default)",
+      "title": "Length Explicit Flag",
+      "default": false
+    },
+    "length_undefined": {
+      "type": "boolean",
+      "description": "Write with undefined lengths",
+      "title": "Length Undefined Flag",
+      "default": false
+    },
+    "padding_retain": {
+      "type": "boolean",
+      "description": "Do not change padding (default if not --write-dataset)",
+      "title": "Padding Retain Flag",
+      "default": false
+    },
+    "padding_off": {
+      "type": "boolean",
+      "description": "No padding (implicit if --write-dataset)",
+      "title": "Padding Off Flag",
+      "default": false
+    },
+    "padding_create": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Align file on multiple of f bytes and items on multiple of i bytes",
+      "title": "Padding Create"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "quickspecSL",
+  "description": "This program makes a *.spec file after a set of intermediate surfaces have been generated with SurfLayers. It can also make a *.spec file that relates inflated surfaces to anatomically-correct surfaces.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/quickspecSL"
+    },
+    "surf_A": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Inner (anatomically-correct) boundary surface dataset (e.g. smoothwm.gii)",
+      "title": "Surface A"
+    },
+    "surf_B": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Outer (anatomically-correct) boundary surface dataset (e.g. pial.gii)",
+      "title": "Surface B"
+    },
+    "surf_intermed_pref": {
+      "type": "string",
+      "description": "Prefix for (anatomically-correct) intermediate surfaces, typically output by SurfLayers (default: isurf)",
+      "title": "Intermediate Surface Prefix"
+    },
+    "infl_surf_A": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Inner (inflated) boundary surface dataset (e.g. infl.smoothwm.gii)",
+      "title": "Inflated Surface A"
+    },
+    "infl_surf_B": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Outer (inflated) boundary surface dataset (e.g. infl.pial.gii)",
+      "title": "Inflated Surface B"
+    },
+    "infl_surf_intermed_pref": {
+      "type": "string",
+      "description": "Prefix for (inflated) intermediate surfaces, typically output by SurfLayers (default: infl.isurf)",
+      "title": "Inflated Intermediate Surface Prefix"
+    },
+    "both_lr_flag": {
+      "type": "boolean",
+      "description": "Specify an output spec for both hemispheres if surfaces for both exist",
+      "title": "Both Hemispheres Flag",
+      "default": false
+    },
+    "out_spec": {
+      "type": "string",
+      "description": "Name for output *.spec file (default: newspec.spec)",
+      "title": "Output Spec File"
+    }
+  },
+  "required": [
+    "@type",
+    "surf_A",
+    "surf_B"
+  ]
+}

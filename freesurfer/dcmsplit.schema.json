@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dcmsplit",
+  "description": "Splits DICOM files into separate folders based on a unique identifier (UID).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dcmsplit"
+    },
+    "dcm_dir": {
+      "type": "string",
+      "description": "Directory containing the DICOM files",
+      "title": "DICOM Directory"
+    },
+    "out_dir": {
+      "type": "string",
+      "description": "Output directory for split DICOM files",
+      "title": "Output Directory"
+    },
+    "copy": {
+      "type": "boolean",
+      "description": "Copy files instead of creating symbolic links",
+      "title": "Copy Flag",
+      "default": false
+    },
+    "link": {
+      "type": "boolean",
+      "description": "Link files instead of copying (default behavior)",
+      "title": "Link Flag",
+      "default": false
+    },
+    "split_name": {
+      "type": "boolean",
+      "description": "Split files by patient name instead of UID",
+      "title": "Split by Name Flag",
+      "default": false
+    },
+    "split_uid": {
+      "type": "boolean",
+      "description": "Split files by Study UID instead of name (default behavior)",
+      "title": "Split by UID Flag",
+      "default": false
+    },
+    "series_no": {
+      "type": "boolean",
+      "description": "Split files by series number",
+      "title": "Split by Series Number Flag",
+      "default": false
+    },
+    "series_plus": {
+      "type": "boolean",
+      "description": "Split files by series number and either name or UID",
+      "title": "Split by Series and Name/UID Flag",
+      "default": false
+    },
+    "dicom_tag": {
+      "type": "string",
+      "description": "Split files by given DICOM tag (group element)",
+      "title": "DICOM Tag"
+    },
+    "study_description": {
+      "type": "boolean",
+      "description": "Split files by Study Description",
+      "title": "Split by Study Description Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "dcm_dir",
+    "out_dir"
+  ]
+}

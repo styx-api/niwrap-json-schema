@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "applywarp",
+  "description": "Apply warps estimated by FNIRT (or some other software) to some image.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/applywarp"
+    },
+    "interp": {
+      "enum": [
+        "nn",
+        "trilinear",
+        "sinc",
+        "spline"
+      ],
+      "description": "'nn' or 'trilinear' or 'sinc' or 'spline'. Interpolation method.",
+      "title": "Interp"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Image to be warped.",
+      "title": "In file"
+    },
+    "ref_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference image.",
+      "title": "Ref file"
+    },
+    "out_file": {
+      "type": "string",
+      "description": "Output filename.",
+      "title": "Out file"
+    },
+    "relwarp": {
+      "type": "boolean",
+      "description": "Treat warp field as relative: x' = x + w(x).",
+      "title": "Relwarp",
+      "default": false
+    },
+    "abswarp": {
+      "type": "boolean",
+      "description": "Treat warp field as absolute: x' = w(x).",
+      "title": "Abswarp",
+      "default": false
+    },
+    "datatype": {
+      "enum": [
+        "char",
+        "short",
+        "int",
+        "float",
+        "double"
+      ],
+      "description": "'char' or 'short' or 'int' or 'float' or 'double'. Force output data type [char short int float double].",
+      "title": "Datatype"
+    },
+    "field_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing warp field.",
+      "title": "Field file"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for mask image (in reference space).",
+      "title": "Mask file"
+    },
+    "output_type": {
+      "enum": [
+        "NIFTI",
+        "NIFTI_PAIR",
+        "NIFTI_GZ",
+        "NIFTI_PAIR_GZ"
+      ],
+      "description": "'nifti' or 'nifti_pair' or 'nifti_gz' or 'nifti_pair_gz'. Fsl output type.",
+      "title": "Output type"
+    },
+    "postmat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for post-transform (affine matrix).",
+      "title": "Postmat"
+    },
+    "premat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for pre-transform (affine matrix).",
+      "title": "Premat"
+    },
+    "superlevel": {
+      "enum": [
+        "a"
+      ],
+      "description": "'a' or an integer. Level of intermediary supersampling, a for 'automatic' or integer level. default = 2.",
+      "title": "Superlevel"
+    },
+    "superlevel_2": {
+      "type": "integer",
+      "description": "'a' or an integer. Level of intermediary supersampling, a for 'automatic' or integer level. default = 2.",
+      "title": "Superlevel"
+    },
+    "supersample": {
+      "type": "boolean",
+      "description": "Intermediary supersampling of output, default is off.",
+      "title": "Supersample",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "in_file",
+    "ref_file"
+  ]
+}

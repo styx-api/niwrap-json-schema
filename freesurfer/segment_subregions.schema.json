@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "segment_subregions",
+  "description": "Cross-sectional and longitudinal segmentation for brain structures like thalamus, brainstem, and hippo-amygdala.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/segment_subregions"
+    },
+    "structure": {
+      "type": "string",
+      "description": "Structure to segment. Options are: thalamus, brainstem, hippo-amygdala.",
+      "title": "Structure"
+    },
+    "cross": {
+      "type": "string",
+      "description": "Subject to segment in cross-sectional analysis.",
+      "title": "Cross-sectional Subject"
+    },
+    "long_base": {
+      "type": "string",
+      "description": "Base subject for longitudinal analysis. Timepoints are extracted from the base-tps file.",
+      "title": "Longitudinal Base Subject"
+    },
+    "sd": {
+      "type": "string",
+      "description": "Specify subjects directory (will override SUBJECTS_DIR env variable).",
+      "title": "Subjects Directory"
+    },
+    "suffix": {
+      "type": "string",
+      "description": "Optional output file suffix.",
+      "title": "Output File Suffix"
+    },
+    "temp_dir": {
+      "type": "string",
+      "description": "Use alternative temporary directory. This will get deleted unless --debug is enabled.",
+      "title": "Temporary Directory"
+    },
+    "out_dir": {
+      "type": "string",
+      "description": "Use alternative output directory (only for cross-sectional). Default is the subject's `mri` directory.",
+      "title": "Output Directory"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Write intermediate debugging outputs.",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads to use. Defaults to 1.",
+      "title": "Number of Threads"
+    }
+  },
+  "required": [
+    "@type",
+    "structure"
+  ]
+}

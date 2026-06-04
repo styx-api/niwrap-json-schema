@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dPFM",
+  "description": "Program for identifying brief BOLD events in fMRI time series using Paradigm Free Mapping",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dPFM"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the dataset to analyze (e.g., epi.nii).",
+      "title": "Input dataset"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Process voxels inside this mask only. Default is no masking.",
+      "title": "Mask dataset"
+    },
+    "algorithm": {
+      "type": "string",
+      "description": "Regularization function used for HRF deconvolution (dantzig or lasso).",
+      "title": "Deconvolution Algorithm"
+    },
+    "criteria": {
+      "type": "string",
+      "description": "Model selection criterion for HRF deconvolution (BIC or AIC).",
+      "title": "Model Selection Criteria"
+    },
+    "nonzeros": {
+      "type": "number",
+      "description": "Choose estimate with a fixed number of nonzero coefficients.",
+      "title": "Non-zero coefficients"
+    },
+    "maxiter": {
+      "type": "number",
+      "description": "Maximum number of iterations in the homotopy procedure (absolute value).",
+      "title": "Maximum Iterations"
+    },
+    "maxiterfactor": {
+      "type": "number",
+      "description": "Maximum number of iterations relative to the number of volumes.",
+      "title": "Maximum Iterations Factor"
+    },
+    "tr": {
+      "type": "number",
+      "description": "Repetition time or sampling period of the input data.",
+      "title": "Repetition Time (TR)"
+    },
+    "hrf": {
+      "type": "string",
+      "description": "Haemodynamic response function used for deconvolution.",
+      "title": "HRF Model"
+    },
+    "hrf_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "3D+time dataset with voxel/nodes/vertex -dependent HRFs.",
+      "title": "Voxel-dependent HRF Dataset"
+    },
+    "idx_hrf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "3D dataset with voxel-dependent indexes for HRF.",
+      "title": "HRF Index Dataset"
+    },
+    "LHS": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Additional regressors to be fitted to the dataset.",
+      "title": "Additional Regressors"
+    },
+    "jobs": {
+      "type": "number",
+      "description": "Number of parallel jobs to use in processing.",
+      "title": "Parallel Jobs"
+    },
+    "nSeg": {
+      "type": "number",
+      "description": "Divide into segments to report progress.",
+      "title": "Segmentation for Progress Reporting"
+    },
+    "verb": {
+      "type": "number",
+      "description": "Verbosity level (0 for quiet, 1 for talkative).",
+      "title": "Verbosity Level"
+    }
+  },
+  "required": [
+    "@type",
+    "input"
+  ]
+}

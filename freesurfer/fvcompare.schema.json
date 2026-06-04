@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fvcompare",
+  "description": "Simultaneously loads volume, segmentation, and surface data from two subjects in freeview, for comparing across time or different analysis methods.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/fvcompare"
+    },
+    "subject1": {
+      "type": "string",
+      "description": "Subject 1 identifier",
+      "title": "Subject 1"
+    },
+    "subject2": {
+      "type": "string",
+      "description": "Subject 2 identifier",
+      "title": "Subject 2"
+    },
+    "subject_dir1": {
+      "type": "string",
+      "description": "Directory path for Subject 1",
+      "title": "Subject Directory 1"
+    },
+    "subject_dir2": {
+      "type": "string",
+      "description": "Directory path for Subject 2",
+      "title": "Subject Directory 2"
+    },
+    "name1": {
+      "type": "string",
+      "description": "Name associated with Subject 1 (default: s1)",
+      "title": "Name 1"
+    },
+    "name2": {
+      "type": "string",
+      "description": "Name associated with Subject 2 (default: s2)",
+      "title": "Name 2"
+    },
+    "color1": {
+      "type": "string",
+      "description": "Set surface colors for Subject 1",
+      "title": "Surface Colors 1"
+    },
+    "volume": {
+      "type": "string",
+      "description": "Volume name found in subject/mri (default: brainmask.mgz, can have multiple)",
+      "title": "Volume Name"
+    },
+    "segmentation": {
+      "type": "string",
+      "description": "Segmentation name found in subject/mri (default: aparc+aseg.mgz, can have multiple)",
+      "title": "Segmentation Name"
+    },
+    "aseg": {
+      "type": "boolean",
+      "description": "Add aseg.mgz to segmentation list",
+      "title": "Aseg Flag",
+      "default": false
+    },
+    "no_seg": {
+      "type": "boolean",
+      "description": "Do not display segmentations",
+      "title": "No Segmentation Flag",
+      "default": false
+    },
+    "left_hemi": {
+      "type": "boolean",
+      "description": "Only display left hemisphere",
+      "title": "Left Hemisphere Flag",
+      "default": false
+    },
+    "right_hemi": {
+      "type": "boolean",
+      "description": "Only display right hemisphere",
+      "title": "Right Hemisphere Flag",
+      "default": false
+    },
+    "no_surf": {
+      "type": "boolean",
+      "description": "Do not display surfaces",
+      "title": "No Surface Flag",
+      "default": false
+    },
+    "gray_levels": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set gray scale levels",
+      "title": "Gray Scale Levels"
+    },
+    "cursor_position": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Place cursor at given location and center Field of View",
+      "title": "Cursor Position"
+    },
+    "zoom_level": {
+      "type": "number",
+      "description": "Set zoom level",
+      "title": "Zoom Level"
+    },
+    "annotation": {
+      "type": "string",
+      "description": "Load annotation onto surfaces",
+      "title": "Annotation"
+    },
+    "aparc": {
+      "type": "boolean",
+      "description": "Load aparc.annot onto surfaces",
+      "title": "Aparc Flag",
+      "default": false
+    },
+    "inflated": {
+      "type": "boolean",
+      "description": "Load inflated surfaces in addition to white and pial",
+      "title": "Inflated Surfaces Flag",
+      "default": false
+    },
+    "white": {
+      "type": "boolean",
+      "description": "Only show white surfaces",
+      "title": "White Surfaces Flag",
+      "default": false
+    },
+    "orig": {
+      "type": "boolean",
+      "description": "Only show orig.nofix and orig surfaces",
+      "title": "Original Surfaces Flag",
+      "default": false
+    },
+    "surf_name": {
+      "type": "string",
+      "description": "Only show specified surface name",
+      "title": "Surf Name"
+    },
+    "pointset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Load point set file",
+      "title": "Point Set"
+    },
+    "wot2": {
+      "type": "boolean",
+      "description": "Include the ?h.woT2.pial surfs",
+      "title": "WOT2 Surfaces Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject1",
+    "subject2"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "flip_4dfp",
+  "description": "A tool to flip 4dfp images along specified axes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/flip_4dfp"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input 4dfp image file",
+      "title": "Input image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Output 4dfp image file. Default is input image root with '_flip' suffix.",
+      "title": "Output image"
+    },
+    "flip_x": {
+      "type": "boolean",
+      "description": "Flip along x-axis",
+      "title": "Flip X",
+      "default": false
+    },
+    "flip_y": {
+      "type": "boolean",
+      "description": "Flip along y-axis",
+      "title": "Flip Y",
+      "default": false
+    },
+    "flip_z": {
+      "type": "boolean",
+      "description": "Flip along z-axis",
+      "title": "Flip Z",
+      "default": false
+    },
+    "endianness": {
+      "enum": [
+        "b",
+        "l"
+      ],
+      "description": "Specify output endianness: 'b' for big endian, 'l' for little endian. Default is input endianness.",
+      "title": "Endianness"
+    }
+  },
+  "required": [
+    "@type",
+    "input_image"
+  ]
+}

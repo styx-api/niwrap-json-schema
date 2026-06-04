@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_ms_fitparms",
+  "description": "Tool for estimating T1 and PD values from FLASH images and applying transformations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_ms_fitparms"
+    },
+    "volumes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of 3D FLASH images with different flip angles.",
+      "title": "Input Volumes"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Output directory",
+      "title": "Output Directory"
+    },
+    "afi_flag": {
+      "type": "boolean",
+      "description": "Designate flip angle map to use with nominal value 60 degrees",
+      "title": "AFI Flag",
+      "default": false
+    },
+    "ait_flag": {
+      "type": "boolean",
+      "description": "Apply inverse of transform",
+      "title": "Inverse Transform Flag",
+      "default": false
+    },
+    "at": {
+      "type": "string",
+      "description": "Set acquisition time",
+      "title": "Acquisition Time"
+    },
+    "conform_flag": {
+      "type": "boolean",
+      "description": "Interpolate volume to be isotropic 1mm^3",
+      "title": "Conform to Isotropic 1mm^3",
+      "default": false
+    },
+    "correct_flag": {
+      "type": "boolean",
+      "description": "Correct proton density map (PD) by T2* estimates",
+      "title": "Correct PD by T2*",
+      "default": false
+    },
+    "cubic_flag": {
+      "type": "boolean",
+      "description": "Use cubic interpolation (NOT WORKING!)",
+      "title": "Cubic Interpolation Flag",
+      "default": false
+    },
+    "debug_slice_flag": {
+      "type": "boolean",
+      "description": "Debug slice processing ???",
+      "title": "Debug Slice Flag",
+      "default": false
+    },
+    "debug_voxel_flag": {
+      "type": "boolean",
+      "description": "Debug voxel processing ???",
+      "title": "Debug Voxel Flag",
+      "default": false
+    },
+    "dt": {
+      "type": "string",
+      "description": "Set time step dt ???",
+      "title": "Time Step"
+    },
+    "fa": {
+      "type": "string",
+      "description": "Set flip angle",
+      "title": "Flip Angle"
+    },
+    "fa_scale": {
+      "type": "number",
+      "description": "Set value to scale all flip angles by",
+      "title": "Flip Angle Scale"
+    },
+    "faf": {
+      "type": "string",
+      "description": "Designate flip angle map to use with specified control points",
+      "title": "Flip Angle Map"
+    },
+    "fsmooth": {
+      "type": "number",
+      "description": "Smooth flip angle map for X iterations of soap bubble smoothing",
+      "title": "Flip Angle Smoothing"
+    },
+    "invert_flag": {
+      "type": "boolean",
+      "description": "Invert volumes",
+      "title": "Invert Flag",
+      "default": false
+    },
+    "momentum": {
+      "type": "string",
+      "description": "Set momentum",
+      "title": "Momentum"
+    },
+    "max_t2": {
+      "type": "string",
+      "description": "Set max T2*",
+      "title": "Max T2*"
+    },
+    "n_iter": {
+      "type": "number",
+      "description": "Perform estimation/motion correction X times",
+      "title": "Iterations"
+    },
+    "nearest_flag": {
+      "type": "boolean",
+      "description": "Use nearest-neighbor interpolation",
+      "title": "Nearest Neighbor Interpolation",
+      "default": false
+    },
+    "nocompress_flag": {
+      "type": "boolean",
+      "description": "Do not compress output volumes (save as .mgh)",
+      "title": "No Compress Flag",
+      "default": false
+    },
+    "nosynth_flag": {
+      "type": "boolean",
+      "description": "Disable volume synthesis",
+      "title": "No Synthesis Flag",
+      "default": false
+    },
+    "residuals": {
+      "type": "string",
+      "description": "Write out residuals to designated location",
+      "title": "Residuals"
+    },
+    "smooth_sigma": {
+      "type": "number",
+      "description": "Smooth faf field with sigma=X",
+      "title": "Faf Smoothing Sigma"
+    },
+    "scale_factor": {
+      "type": "number",
+      "description": "Scale volumes by X after reading",
+      "title": "Scale Factor"
+    },
+    "sinc_flag": {
+      "type": "boolean",
+      "description": "Use sinc interpolation (default window width is 6)",
+      "title": "Sinc Interpolation Flag",
+      "default": false
+    },
+    "transform_flag": {
+      "type": "boolean",
+      "description": "Apply transform to output volumes",
+      "title": "Transform Flag",
+      "default": false
+    },
+    "echo_time": {
+      "type": "number",
+      "description": "Set echo time (TE) in ms",
+      "title": "Echo Time"
+    },
+    "repetition_time": {
+      "type": "number",
+      "description": "Set repetition time (TR) in ms",
+      "title": "Repetition Time"
+    },
+    "trilinear_flag": {
+      "type": "boolean",
+      "description": "Use trilinear interpolation",
+      "title": "Trilinear Interpolation Flag",
+      "default": false
+    },
+    "tukey_flag": {
+      "type": "boolean",
+      "description": "Use Tukey bi-weight of residuals",
+      "title": "Tukey Bi-weight Flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help text",
+      "title": "Help Flag",
+      "default": false
+    },
+    "use_brain_mask_flag": {
+      "type": "boolean",
+      "description": "Compute a brain mask from the PD map and use it for registration",
+      "title": "Use Brain Mask Flag",
+      "default": false
+    },
+    "write_intermediate": {
+      "type": "number",
+      "description": "Write out intermediate results every X iterations",
+      "title": "Write Intermediate Frequency"
+    },
+    "extract_subimage": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Extract a subimage for each input image, specified by x0 y0 z0 dx dy dz",
+      "title": "Subimage Extraction Coordinates"
+    },
+    "window_flag": {
+      "type": "boolean",
+      "description": "Not implemented",
+      "title": "Window Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "volumes",
+    "output_dir"
+  ]
+}

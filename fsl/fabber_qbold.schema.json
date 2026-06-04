@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fabber_qbold",
+  "description": "Fabber - a flexible BaYesian modeling framework for FMRI and MRI analysis.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fabber_qbold"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Directory for output files (including logfile)",
+      "title": "Output Directory"
+    },
+    "method": {
+      "type": "string",
+      "description": "Use this inference method",
+      "title": "Inference Method"
+    },
+    "model": {
+      "type": "string",
+      "description": "Use this forward model",
+      "title": "Forward Model"
+    },
+    "data": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify a single input data file",
+      "title": "Input Data File"
+    },
+    "data_n": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify multiple data files for n=1, 2, 3...",
+      "title": "Additional Data Files"
+    },
+    "data_order": {
+      "type": "string",
+      "description": "If multiple data files are specified, how they will be handled: concatenate = one after the other,  interleave = first record from each file, then  second, etc.",
+      "title": "Data Order Handling"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file. Inference will only be performed where mask value > 0",
+      "title": "Mask File"
+    },
+    "mt_n": {
+      "type": "number",
+      "description": "List of masked time points, indexed from 1. These will be ignored in the parameter updates",
+      "title": "Masked Time Points"
+    },
+    "suppdata": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "'Supplemental' timeseries data, required for some models",
+      "title": "Supplemental Timeseries Data"
+    },
+    "listmethods": {
+      "type": "boolean",
+      "description": "List all known inference methods",
+      "title": "List Methods",
+      "default": false
+    },
+    "listmodels": {
+      "type": "boolean",
+      "description": "List all known forward models",
+      "title": "List Models",
+      "default": false
+    },
+    "listparams": {
+      "type": "boolean",
+      "description": "List model parameters (requires model configuration options to be given)",
+      "title": "List Parameters",
+      "default": false
+    },
+    "descparams": {
+      "type": "boolean",
+      "description": "Descript model parameters (name, description, units) - requires model configuration options to be given. Note that not all models provide parameter descriptions",
+      "title": "Describe Parameters",
+      "default": false
+    },
+    "listoutputs": {
+      "type": "boolean",
+      "description": "List additional model outputs (requires model configuration options to be given)",
+      "title": "List Outputs",
+      "default": false
+    },
+    "evaluate": {
+      "type": "string",
+      "description": "Evaluate model. Set to name of output required or blank for default output. Requires model configuration options, --evaluate-params and --evaluate-nt",
+      "title": "Evaluate Model"
+    },
+    "evaluate_params": {
+      "type": "string",
+      "description": "List of parameter values for evaluation",
+      "title": "Evaluation Parameters"
+    },
+    "evaluate_nt": {
+      "type": "number",
+      "description": "Number of time points for evaluation - must be consistent with model options where appropriate",
+      "title": "Number of Time Points for Evaluation"
+    },
+    "simple_output": {
+      "type": "boolean",
+      "description": "Instead of usual standard output, simply output series of lines each giving progress as percentage",
+      "title": "Simple Output",
+      "default": false
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "If set will overwrite existing output. If not set, new output directories will be created by appending '+' to the directory name",
+      "title": "Overwrite Output",
+      "default": false
+    },
+    "link_latest": {
+      "type": "boolean",
+      "description": "Try to create a link to the most recent output directory with the prefix _latest",
+      "title": "Link to Latest",
+      "default": false
+    },
+    "loadmodels": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Load models dynamically from the specified filename, which should be a DLL/shared library",
+      "title": "Load Models File"
+    },
+    "dump_param_names": {
+      "type": "boolean",
+      "description": "Write the file paramnames.txt containing the names of the model parameters",
+      "title": "Dump Parameter Names",
+      "default": false
+    },
+    "save_model_fit": {
+      "type": "boolean",
+      "description": "Output the model prediction as a 4d volume",
+      "title": "Save Model Fit",
+      "default": false
+    },
+    "save_residuals": {
+      "type": "boolean",
+      "description": "Output the residuals (difference between the data and the model prediction)",
+      "title": "Save Residuals",
+      "default": false
+    },
+    "save_model_extras": {
+      "type": "boolean",
+      "description": "Output any additional model-specific timeseries data",
+      "title": "Save Model Extras",
+      "default": false
+    },
+    "save_mvn": {
+      "type": "boolean",
+      "description": "Output the final MVN distributions.",
+      "title": "Save MVN",
+      "default": false
+    },
+    "save_mean": {
+      "type": "boolean",
+      "description": "Output the parameter means.",
+      "title": "Save Mean",
+      "default": false
+    },
+    "save_std": {
+      "type": "boolean",
+      "description": "Output the parameter standard deviations.",
+      "title": "Save Standard Deviation",
+      "default": false
+    },
+    "save_var": {
+      "type": "boolean",
+      "description": "Output the parameter variances.",
+      "title": "Save Variance",
+      "default": false
+    },
+    "save_zstat": {
+      "type": "boolean",
+      "description": "Output the parameter Zstats.",
+      "title": "Save Zstats",
+      "default": false
+    },
+    "save_noise_mean": {
+      "type": "boolean",
+      "description": "Output the noise means. The noise distribution inferred is the precision of a Gaussian noise source",
+      "title": "Save Noise Mean",
+      "default": false
+    },
+    "save_noise_std": {
+      "type": "boolean",
+      "description": "Output the noise standard deviations.",
+      "title": "Save Noise Standard Deviation",
+      "default": false
+    },
+    "save_free_energy": {
+      "type": "boolean",
+      "description": "Output the free energy, if calculated.",
+      "title": "Save Free Energy",
+      "default": false
+    },
+    "optfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing additional options, one per line, in the same form as specified on the command line",
+      "title": "Options File"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Output large amounts of debug information. ONLY USE WITH VERY SMALL NUMBERS OF VOXELS",
+      "title": "Debug Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "output_dir",
+    "method",
+    "model",
+    "data"
+  ]
+}

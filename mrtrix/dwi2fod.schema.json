@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dwi2fod",
+  "description": "Estimate fibre orientation distributions from diffusion data using spherical deconvolution.\n\nThe spherical harmonic coefficients are stored according the conventions described the main documentation, which can be found at the following link: \nhttps://mrtrix.readthedocs.io/en/3.0.4/concepts/spherical_harmonics.html\n\nReferences:\n\n* If using csd algorithm:\nTournier, J.-D.; Calamante, F. & Connelly, A. Robust determination of the fibre orientation distribution in diffusion MRI: Non-negativity constrained super-resolved spherical deconvolution. NeuroImage, 2007, 35, 1459-1472\n\n* If using msmt_csd algorithm:\nJeurissen, B; Tournier, J-D; Dhollander, T; Connelly, A & Sijbers, J. Multi-tissue constrained spherical deconvolution for improved analysis of multi-shell diffusion MRI data. NeuroImage, 2014, 103, 411-426\n\nTournier, J.-D.; Calamante, F., Gadian, D.G. & Connelly, A. Direct estimation of the fiber orientation density function from diffusion-weighted MRI data using spherical deconvolution. NeuroImage, 2004, 23, 1176-1185",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/dwi2fod"
+    },
+    "grad": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in a text file. This should be supplied as a 4xN text file with each line is in the format [ X Y Z b ], where [ X Y Z ] describe the direction of the applied gradient, and b gives the b-value in units of s/mm^2. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+      "title": "grad"
+    },
+    "fslgrad": {
+      "type": "object",
+      "properties": {
+        "bvecs": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "title": "bvecs"
+        },
+        "bvals": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "title": "bvals"
+        }
+      },
+      "required": [
+        "bvecs",
+        "bvals"
+      ],
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+      "title": "fslgrad"
+    },
+    "shells": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "specify one or more b-values to use during processing, as a comma-separated list of the desired approximate b-values (b-values are clustered to allow for small deviations). Note that some commands are incompatible with multiple b-values, and will report an error if more than one b-value is provided. \nWARNING: note that, even though the b=0 volumes are never referred to as shells in the literature, they still have to be explicitly included in the list of b-values as provided to the -shell option! Several algorithms which include the b=0 volumes in their computations may otherwise return an undesired result.",
+      "title": "shells"
+    },
+    "directions": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "specify the directions over which to apply the non-negativity constraint (by default, the built-in 300 direction set is used). These should be supplied as a text file containing [ az el ] pairs for the directions.",
+      "title": "directions"
+    },
+    "lmax": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "the maximum spherical harmonic order for the output FOD(s).For algorithms with multiple outputs, this should be provided as a comma-separated list of integers, one for each output image; for single-output algorithms, only a single integer should be provided. If omitted, the command will use the lmax of the corresponding response function (i.e based on its number of coefficients), up to a maximum of 8.",
+      "title": "lmax"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "only perform computation within the specified binary brain mask image.",
+      "title": "mask"
+    },
+    "filter": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the linear frequency filtering parameters used for the initial linear spherical deconvolution step (default = [ 1 1 1 0 0 ]). These should be  supplied as a text file containing the filtering coefficients for each even harmonic order.",
+      "title": "filter"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "the threshold below which the amplitude of the FOD is assumed to be zero, expressed as an absolute amplitude (default = 0).",
+      "title": "threshold"
+    },
+    "niter": {
+      "type": "integer",
+      "description": "the maximum number of iterations to perform for each voxel (default = 50). Use '-niter 0' for a linear unconstrained spherical deconvolution.",
+      "title": "niter"
+    },
+    "norm_lambda": {
+      "type": "number",
+      "description": "the regularisation parameter lambda that controls the strength of the constraint on the norm of the solution (default = 1e-10).",
+      "title": "norm_lambda"
+    },
+    "neg_lambda": {
+      "type": "number",
+      "description": "the regularisation parameter lambda that controls the strength of the non-negativity constraint (default = 1e-10).",
+      "title": "neg_lambda"
+    },
+    "predicted_signal": {
+      "type": "string",
+      "description": "output the predicted dwi image.",
+      "title": "predicted_signal"
+    },
+    "strides": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousString"
+            },
+            "obj": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "@type",
+            "obj"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "VariousFile"
+            },
+            "obj": {
+              "type": "string",
+              "x-styx-type": "path"
+            }
+          },
+          "required": [
+            "@type",
+            "obj"
+          ]
+        }
+      ],
+      "description": "specify the strides of the output data in memory; either as a comma-separated list of (signed) integers, or as a template image from which the strides shall be extracted and used. The actual strides produced will depend on whether the output image format can support it.",
+      "title": "strides"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "algorithm": {
+      "type": "string",
+      "description": "the algorithm to use for FOD estimation. (options are: csd,msmt_csd)",
+      "title": "algorithm"
+    },
+    "dwi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input diffusion-weighted image",
+      "title": "dwi"
+    },
+    "response_odf": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "input tissue response",
+            "title": "response"
+          },
+          "odf": {
+            "type": "string",
+            "description": "output ODF image",
+            "title": "odf"
+          }
+        },
+        "required": [
+          "response",
+          "odf"
+        ]
+      },
+      "description": "pairs of input tissue response and output ODF images",
+      "title": "response_odf"
+    }
+  },
+  "required": [
+    "@type",
+    "algorithm",
+    "dwi",
+    "response_odf"
+  ]
+}

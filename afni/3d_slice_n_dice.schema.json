@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dSliceNDice",
+  "description": "Calculates the Dice coefficient between two volumes on a slice-by-slice basis.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dSliceNDice"
+    },
+    "infile_a": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset A (e.g. mask_1.nii.gz)",
+      "title": "Input file A"
+    },
+    "infile_b": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset B (e.g. mask_2.nii.gz)",
+      "title": "Input file B"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix for output files (e.g. result_prefix)",
+      "title": "Output prefix"
+    },
+    "out_domain": {
+      "enum": [
+        "all",
+        "AorB",
+        "AandB",
+        "Amask",
+        "Bmask"
+      ],
+      "description": "Specify which slices to include in the Dice coefficient report. Options are: all (default), AorB, AandB, Amask, Bmask.",
+      "title": "Output domain flag"
+    },
+    "no_cmd_echo": {
+      "type": "boolean",
+      "description": "Turn OFF recording the command line call in the output *.1D files. Default is to do the recording.",
+      "title": "No command echo flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "infile_a",
+    "infile_b",
+    "output_prefix"
+  ]
+}

@@ -1,0 +1,301 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_preproc",
+  "description": "Script to prepare surface-based data for high-level analysis by resampling surface or volume source data to a common subject and concatenating them into one file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_preproc"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Save output here.",
+      "title": "Output File"
+    },
+    "target_subject": {
+      "type": "string",
+      "description": "Subject to use as the common-space. All input data will be resampled to the surface of this subject.",
+      "title": "Target Subject"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Use hemisphere for source and target surfaces. Can be lh or rh.",
+      "title": "Hemisphere"
+    },
+    "meas": {
+      "type": "string",
+      "description": "Use subject/surf/hemi.surfmeasure as input. Implies --srcfmt curv.",
+      "title": "Surface Measure"
+    },
+    "label": {
+      "type": "string",
+      "description": "Look in label/hemi.annotname.(annot,mgz) and use mapmethod nnf.",
+      "title": "Label"
+    },
+    "measdir": {
+      "type": "string",
+      "description": "Look in subdir instead of surf.",
+      "title": "Measure Directory"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify an input subject on the command-line. All subjects must be specified in this way.",
+      "title": "Subjects"
+    },
+    "fsgd": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the list of input subjects from the fsgd file.",
+      "title": "FSGD File"
+    },
+    "subjectlist": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "List all subjects separated by white space in subjlistfile.",
+      "title": "Subject List File"
+    },
+    "qdec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify list of subjects via qdec table file. Assumes the first column is the \"fsid\".",
+      "title": "QDEC Table"
+    },
+    "qdec_long": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify list of subjects via longitudinal qdec table file.",
+      "title": "QDEC Longitudinal Table"
+    },
+    "surfmeasfile": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify full path to input surface measure file.",
+      "title": "Surface Measure File"
+    },
+    "volmeasfile_reg": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify full path to a volume file and its registration matrix file.",
+      "title": "Volume Measure and Registration Files"
+    },
+    "projfrac": {
+      "type": "number",
+      "description": "When sampling a volume onto the surface, sample a fraction of the thickness along the surface normal.",
+      "title": "Projection Fraction"
+    },
+    "projfrac_max": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "When sampling a volume onto the surface, find max along projection for vol2surf.",
+      "title": "Projection Fraction Max"
+    },
+    "projfrac_avg": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Compute average along projection for vol2surf.",
+      "title": "Projection Fraction Average"
+    },
+    "no_mask_non_cortex": {
+      "type": "boolean",
+      "description": "Do not mask out non-cortex in vol2surf.",
+      "title": "No Mask Non-Cortex Flag",
+      "default": false
+    },
+    "session_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "FS-FAST session file.",
+      "title": "Session File"
+    },
+    "dir_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "FS-FAST session directory file.",
+      "title": "Directory File"
+    },
+    "analysis": {
+      "type": "string",
+      "description": "FS-FAST analysis.",
+      "title": "Analysis"
+    },
+    "contrast": {
+      "type": "string",
+      "description": "FS-FAST contrast.",
+      "title": "Contrast"
+    },
+    "cvar_flag": {
+      "type": "boolean",
+      "description": "Use fsfast contrast variance (cesvar).",
+      "title": "CVar Flag",
+      "default": false
+    },
+    "offset_flag": {
+      "type": "boolean",
+      "description": "Use fsfast mean offset (h-offset).",
+      "title": "Offset Flag",
+      "default": false
+    },
+    "map": {
+      "type": "string",
+      "description": "Use fsfast contrast/map.",
+      "title": "Map"
+    },
+    "etiv_flag": {
+      "type": "boolean",
+      "description": "Divide each subject's value by the Estimated Total Intra Cranial Volume as found in aseg.stats.",
+      "title": "ETIV Flag",
+      "default": false
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "Smooth by fwhm mm on the target surface.",
+      "title": "FWHM Smoothing"
+    },
+    "fwhm_src": {
+      "type": "number",
+      "description": "Smooth by fwhm mm on the source surface.",
+      "title": "FWHM Source Smoothing"
+    },
+    "niters": {
+      "type": "number",
+      "description": "Smooth by niters on the target surface.",
+      "title": "Number of Iterations Smoothing"
+    },
+    "niters_src": {
+      "type": "number",
+      "description": "Smooth by niters on the source surface.",
+      "title": "Source Smoothing Iterations"
+    },
+    "cortex_only": {
+      "type": "boolean",
+      "description": "Exclude medial wall.",
+      "title": "Cortex Only Flag",
+      "default": false
+    },
+    "mgz_flag": {
+      "type": "boolean",
+      "description": "Use mgz format internally.",
+      "title": "MGZ Format Flag",
+      "default": false
+    },
+    "no_jac_flag": {
+      "type": "boolean",
+      "description": "Turn off jacobian correction.",
+      "title": "No Jacobian Flag",
+      "default": false
+    },
+    "paired_diff_flag": {
+      "type": "boolean",
+      "description": "Compute paired differences after concatenating all inputs together.",
+      "title": "Paired Difference Flag",
+      "default": false
+    },
+    "cache_out": {
+      "type": "string",
+      "description": "Cache the output in the specified cache file.",
+      "title": "Cache Output"
+    },
+    "cache_in": {
+      "type": "string",
+      "description": "Use the pre-computed cached data from the specified cache file.",
+      "title": "Cache Input"
+    },
+    "cache_out_only": {
+      "type": "string",
+      "description": "Cache data without actually creating an output.",
+      "title": "Cache Output Only"
+    },
+    "no_prune_flag": {
+      "type": "boolean",
+      "description": "Do not prune the inputs.",
+      "title": "No Prune Flag",
+      "default": false
+    },
+    "mean_flag": {
+      "type": "boolean",
+      "description": "Compute the mean of all inputs.",
+      "title": "Mean Flag",
+      "default": false
+    },
+    "std_flag": {
+      "type": "boolean",
+      "description": "Compute the standard deviation of all inputs.",
+      "title": "Standard Deviation Flag",
+      "default": false
+    },
+    "reshape_flag": {
+      "type": "boolean",
+      "description": "Reshape spatial dimensions.",
+      "title": "Reshape Flag",
+      "default": false
+    },
+    "surfreg": {
+      "type": "string",
+      "description": "Use specified surface registration to the common space.",
+      "title": "Surface Registration"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Set SUBJECTS_DIR environment variable.",
+      "title": "Subjects Directory"
+    },
+    "synth_flag": {
+      "type": "boolean",
+      "description": "Synthesize the input data with white gaussian noise.",
+      "title": "Synthesize Flag",
+      "default": false
+    },
+    "tmpdir": {
+      "type": "string",
+      "description": "Use specified temporary directory.",
+      "title": "Temporary Directory"
+    },
+    "nocleanup_flag": {
+      "type": "boolean",
+      "description": "Do not delete temporary files.",
+      "title": "No Cleanup Flag",
+      "default": false
+    },
+    "cleanup_flag": {
+      "type": "boolean",
+      "description": "Delete temporary files (default).",
+      "title": "Cleanup Flag",
+      "default": false
+    },
+    "log": {
+      "type": "string",
+      "description": "Specify log file.",
+      "title": "Log File"
+    },
+    "nolog_flag": {
+      "type": "boolean",
+      "description": "Do not create a log file.",
+      "title": "No Log Flag",
+      "default": false
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Enable debug mode.",
+      "title": "Debug Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "outfile",
+    "target_subject",
+    "hemi"
+  ]
+}

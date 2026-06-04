@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SpharmDeco",
+  "description": "Spherical Harmonics Decomposition of a surface's coordinates or data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SpharmDeco"
+    },
+    "i_type_s": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Unit sphere, isotopic to the surface domain over which the data to be decomposed is defined.",
+      "title": "Input type S"
+    },
+    "unit_sph_label": {
+      "type": "string",
+      "description": "Label of the unit sphere.",
+      "title": "Unit sphere label"
+    },
+    "order_l": {
+      "type": "number",
+      "description": "Decomposition order.",
+      "title": "Decomposition order L"
+    },
+    "i_type_sd": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "A surface whose node coordinates provide data vectors (X, Y, Z) to be decomposed or a dataset whose columns are to be individually decomposed. You can specify multiple surfaces to be processed.",
+      "title": "Input type SD"
+    },
+    "data_d": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Data vectors to be decomposed.",
+      "title": "Input data D"
+    },
+    "bases_prefix": {
+      "type": "string",
+      "description": "Save the basis functions under the prefix BASES_PREFIX.",
+      "title": "Bases prefix"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Write out the reconstructed data into dataset PREFIX and write the beta coefficients for each processed data column.",
+      "title": "Output prefix"
+    },
+    "o_type_sdr": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Write out a new surface with reconstructed coordinates.",
+      "title": "Output type SDR"
+    },
+    "debug": {
+      "type": "number",
+      "description": "Debug levels (1-3)",
+      "title": "Debug level"
+    },
+    "sigma": {
+      "type": "number",
+      "description": "Smoothing parameter (0 .. 0.001) which weighs down the contribution of higher order harmonics.",
+      "title": "Smoothing sigma"
+    }
+  },
+  "required": [
+    "@type",
+    "i_type_s",
+    "unit_sph_label",
+    "order_l"
+  ]
+}

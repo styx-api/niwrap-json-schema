@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_ca_train",
+  "description": "Trains GCA data with multiple subjects using provided segmentation volumes and other configuration.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_ca_train"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "List of subject directories under the SUBJECTS_DIR. Each is a path relative to the subject's MRI directory.",
+      "title": "Subjects"
+    },
+    "output_gca": {
+      "type": "string",
+      "description": "Output GCA file name.",
+      "title": "Output GCA filename"
+    },
+    "segmentation": {
+      "type": "string",
+      "description": "Segmentation volume directory relative to each subject's MRI path.",
+      "title": "Segmentation Volume Directory"
+    },
+    "transform": {
+      "type": "string",
+      "description": "Atlas transform path relative to each subject's MRI transforms directory.",
+      "title": "Atlas Transform Path"
+    },
+    "mask_volume": {
+      "type": "string",
+      "description": "Volume name used as a mask, path relative to each subject's MRI directory.",
+      "title": "Mask Volume Name"
+    },
+    "node_spacing": {
+      "type": "string",
+      "description": "Spacing of classifiers in canonical space",
+      "title": "Node Spacing"
+    },
+    "prior_spacing": {
+      "type": "string",
+      "description": "Spacing of class priors in canonical space",
+      "title": "Prior Spacing"
+    },
+    "input_training": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specifying training data, path relative to each subject's MRI directory. Can specify multiple inputs.",
+      "title": "Input Training Data"
+    },
+    "symmetrize": {
+      "type": "boolean",
+      "description": "Symmetrize the atlas after creation",
+      "title": "Symmetrize Flag",
+      "default": false
+    },
+    "makesym": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Symmetrize an already existing atlas. Specify input GCA and symmetrized GCA.",
+      "title": "Make Symmetrized GCA"
+    },
+    "check_symmetry": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Check the symmetry of an already existing atlas. Specify input GCA and symmetrized GCA.",
+      "title": "Check Symmetry"
+    },
+    "sanity_check": {
+      "type": "boolean",
+      "description": "Conduct sanity-check of labels for obvious edit errors",
+      "title": "Sanity Check Flag",
+      "default": false
+    },
+    "threads": {
+      "type": "integer",
+      "description": "Specify number of threads to use (also known as -nthreads)",
+      "title": "Number of Threads"
+    },
+    "done_file": {
+      "type": "string",
+      "description": "Create DoneFile when done (contents: 0=ok, 1=error)",
+      "title": "Done File"
+    }
+  },
+  "required": [
+    "@type",
+    "subjects",
+    "output_gca",
+    "segmentation"
+  ]
+}

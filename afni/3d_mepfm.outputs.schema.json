@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "3dMEPFM",
+  "description": "Voxelwise deconvolution of Multiecho fMRI data to yield time-varying estimates of changes in transverse relaxation (DR2*) and optionally, net magnetization (DS0)",
+  "properties": {
+    "root": {
+      "type": "string",
+      "x-styx-type": "path"
+    },
+    "dr2_output": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Changes in R2* parameter, assumed to represent neuronal-related signal changes"
+    },
+    "dr2fit_output": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Convolution of DR2 with HRF, one volume per echo"
+    },
+    "ds0_output": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Changes in net magnetization (S0) (if estimated)"
+    },
+    "lambda_output": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Regularization parameter"
+    },
+    "sigmas_mad_output": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Estimate of the noise standard deviation after wavelet decomposition for each input dataset"
+    },
+    "costs_output": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Cost function to select the regularization parameter (lambda) according to selection criterion"
+    }
+  },
+  "required": [
+    "root",
+    "dr2_output",
+    "dr2fit_output",
+    "ds0_output",
+    "lambda_output",
+    "sigmas_mad_output",
+    "costs_output"
+  ]
+}

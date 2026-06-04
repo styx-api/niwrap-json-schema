@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fs_lib_check",
+  "description": "Checks if the operating system has the necessary system libraries required to run FreeSurfer.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/fs_lib_check"
+    },
+    "use_ldconfig": {
+      "type": "boolean",
+      "description": "Force use of 'ldconfig' to check for instances of required system libraries. This is useful on rpm systems if system libraries were installed from source code, and are thus not known to the system rpm database.",
+      "title": "Force use ldconfig",
+      "default": false
+    },
+    "use_rpm": {
+      "type": "boolean",
+      "description": "Force use of 'rpm -qa' to check for installed library packages. If -r and -l are both specified concurrently, then behavior is unspecified.",
+      "title": "Force use rpm",
+      "default": false
+    },
+    "show_help": {
+      "type": "boolean",
+      "description": "Show this synopsis and exit.",
+      "title": "Show help",
+      "default": false
+    },
+    "show_version": {
+      "type": "boolean",
+      "description": "Show a version number and exit.",
+      "title": "Show version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "stat_normalize",
+  "description": "This program will convert and average a sequence of volume-based statistics in Talairach space.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/stat_normalize"
+    },
+    "input_sv_prefix": {
+      "type": "string",
+      "description": "Input subject volume prefix.",
+      "title": "Input SV Prefix"
+    },
+    "output_sv_prefix": {
+      "type": "string",
+      "description": "Output subject volume prefix.",
+      "title": "Output SV Prefix"
+    },
+    "resolution": {
+      "type": "number",
+      "description": "Set output resolution in mm (default is 8mm).",
+      "title": "Output Resolution"
+    },
+    "field_of_view": {
+      "type": "number",
+      "description": "Set output field of view (default is 256).",
+      "title": "Output Field of View"
+    },
+    "sph_avg": {
+      "type": "string",
+      "description": "Average in spherical coordinates by specifying hemisphere and surface.",
+      "title": "Spherical Coordinates Average"
+    },
+    "xfm_file": {
+      "type": "string",
+      "description": "Use specified transform file (subjid/mri/transforms/xfmfile).",
+      "title": "Transform File"
+    },
+    "fix_xfm_flag": {
+      "type": "boolean",
+      "description": "Fix transform for non-zero center of original volume.",
+      "title": "Fix Transform",
+      "default": false
+    },
+    "float2int_option": {
+      "type": "string",
+      "description": "Specify float to int conversion to tkregister or round.",
+      "title": "Float to Int"
+    }
+  },
+  "required": [
+    "@type",
+    "input_sv_prefix",
+    "output_sv_prefix"
+  ]
+}

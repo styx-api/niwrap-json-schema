@@ -1,0 +1,380 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dwi2response",
+  "description": "Estimate response function(s) for spherical deconvolution.\ndwi2response offers different algorithms for performing various types of response function estimation. The name of the algorithm must appear as the first argument on the command-line after â€˜dwi2responseâ€™. The subsequent arguments and options depend on the particular algorithm being invoked.\nEach algorithm available has its own help page, including necessary references; e.g. to see the help page of the 'fa' algorithm, type 'dwi2response fa'.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/dwi2response"
+    },
+    "algorithm": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "dhollander"
+            },
+            "input": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "out_sfwm": {
+              "type": "string"
+            },
+            "out_gm": {
+              "type": "string"
+            },
+            "out_csf": {
+              "type": "string"
+            },
+            "erode": {
+              "type": "integer"
+            },
+            "fa": {
+              "type": "number"
+            },
+            "sfwm": {
+              "type": "number"
+            },
+            "gm": {
+              "type": "number"
+            },
+            "csf": {
+              "type": "number"
+            },
+            "wm_algo": {
+              "enum": [
+                "fa",
+                "tax",
+                "tournier"
+              ]
+            }
+          },
+          "required": [
+            "@type",
+            "input",
+            "out_sfwm",
+            "out_gm",
+            "out_csf"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "fa"
+            },
+            "input": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "output": {
+              "type": "string"
+            },
+            "erode": {
+              "type": "integer"
+            },
+            "number": {
+              "type": "integer"
+            },
+            "threshold": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "@type",
+            "input",
+            "output"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "manual"
+            },
+            "input": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "in_voxels": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "output": {
+              "type": "string"
+            },
+            "dirs": {
+              "type": "string",
+              "x-styx-type": "path"
+            }
+          },
+          "required": [
+            "@type",
+            "input",
+            "in_voxels",
+            "output"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "msmt_5tt"
+            },
+            "input": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "in_5tt": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "out_wm": {
+              "type": "string"
+            },
+            "out_gm": {
+              "type": "string"
+            },
+            "out_csf": {
+              "type": "string"
+            },
+            "dirs": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "fa": {
+              "type": "number"
+            },
+            "pvf": {
+              "type": "number"
+            },
+            "wm_algo": {
+              "enum": [
+                "fa",
+                "tax",
+                "tournier"
+              ]
+            },
+            "sfwm_fa_threshold": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "@type",
+            "input",
+            "in_5tt",
+            "out_wm",
+            "out_gm",
+            "out_csf"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "tax"
+            },
+            "input": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "output": {
+              "type": "string"
+            },
+            "peak_ratio": {
+              "type": "number"
+            },
+            "max_iters": {
+              "type": "integer"
+            },
+            "convergence": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "@type",
+            "input",
+            "output"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "tournier"
+            },
+            "input": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "output": {
+              "type": "string"
+            },
+            "number": {
+              "type": "integer"
+            },
+            "iter_voxels": {
+              "type": "integer"
+            },
+            "dilate": {
+              "type": "integer"
+            },
+            "max_iters": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "@type",
+            "input",
+            "output"
+          ]
+        }
+      ],
+      "description": "Select the algorithm to be used to complete the script operation; additional details and options become available once an algorithm is nominated. Options are: dhollander, fa, manual, msmt_5tt, tax, tournier.",
+      "title": "algorithm"
+    },
+    "grad": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Provide the diffusion gradient table in MRtrix format",
+      "title": "grad"
+    },
+    "fslgrad": {
+      "type": "object",
+      "properties": {
+        "bvecs": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "title": "bvecs"
+        },
+        "bvals": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "title": "bvals"
+        }
+      },
+      "required": [
+        "bvecs",
+        "bvals"
+      ],
+      "description": "Provide the diffusion gradient table in FSL bvecs/bvals format",
+      "title": "fslgrad"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Only process voxels within the specified binary brain mask image.",
+      "title": "mask"
+    },
+    "voxels": {
+      "type": "string",
+      "description": "Output an image showing the final voxel selection(s)",
+      "title": "voxels"
+    },
+    "shells": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "b-value(s) to use in response function estimation (comma-separated list in case of multiple b-values, b=0 must be included explicitly)",
+      "title": "shells"
+    },
+    "lmax": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "maximum harmonic degree(s) for response function estimation (comma-separated list in case of multiple b-values).",
+      "title": "lmax"
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "description": "do not delete intermediate files during script execution, and do not delete scratch directory at script completion.",
+      "title": "nocleanup",
+      "default": false
+    },
+    "scratch": {
+      "type": "string",
+      "description": "manually specify the path in which to generate the scratch directory.",
+      "title": "scratch"
+    },
+    "continue": {
+      "type": "string",
+      "description": "continue the script from a previous execution; must provide the scratch directory path, and the name of the last successfully-generated file.",
+      "title": "continue"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "algorithm"
+  ]
+}

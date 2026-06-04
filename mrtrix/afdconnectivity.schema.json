@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "afdconnectivity",
+  "description": "Obtain an estimate of fibre connectivity between two regions using AFD and streamlines tractography.\n\nThis estimate is obtained by determining a fibre volume (AFD) occupied by the pathway of interest, and dividing by the streamline length.\n\nIf only the streamlines belonging to the pathway of interest are provided, then ALL of the fibre volume within each fixel selected will contribute to the result. If the -wbft option is used to provide whole-brain fibre-tracking (of which the pathway of interest should contain a subset), only the fraction of the fibre volume in each fixel estimated to belong to the pathway of interest will contribute to the result.\n\nUse -quiet to suppress progress messages and output fibre connectivity value only.\n\nFor valid comparisons of AFD connectivity across scans, images MUST be intensity normalised and bias field corrected, and a common response function for all subjects must be used.\n\nNote that the sum of the AFD is normalised by streamline length to account for subject differences in fibre bundle length. This normalisation results in a measure that is more related to the cross-sectional volume of the tract (and therefore 'connectivity'). Note that SIFT-ed tract count is a superior measure because it is unaffected by tangential yet unrelated fibres. However, AFD connectivity may be used as a substitute when Anatomically Constrained Tractography is not possible due to uncorrectable EPI distortions, and SIFT may therefore not be as effective.\n\nLonger discussion regarding this command can additionally be found at: https://mrtrix.readthedocs.io/en/3.0.4/concepts/afd_connectivity.html (as well as in the relevant reference).\n\nReferences:\n\nSmith, R. E.; Raffelt, D.; Tournier, J.-D.; Connelly, A. Quantitative Streamlines Tractography: Methods and Inter-Subject Normalisation. Open Science Framework, https://doi.org/10.31219/osf.io/c67kn.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/afdconnectivity"
+    },
+    "wbft": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "provide a whole-brain fibre-tracking data set (of which the input track file should be a subset), to improve the estimate of fibre bundle volume in the presence of partial volume",
+      "title": "wbft"
+    },
+    "afd_map": {
+      "type": "string",
+      "description": "output a 3D image containing the AFD estimated for each voxel.",
+      "title": "afd_map"
+    },
+    "all_fixels": {
+      "type": "boolean",
+      "description": "if whole-brain fibre-tracking is NOT provided, then if multiple fixels within a voxel are traversed by the pathway of interest, by default the fixel with the greatest streamlines density is selected to contribute to the AFD in that voxel. If this option is provided, then ALL fixels with non-zero streamlines density will contribute to the result, even if multiple fixels per voxel are selected.",
+      "title": "all_fixels",
+      "default": false
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input FOD image.",
+      "title": "image"
+    },
+    "tracks": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input track file defining the bundle of interest.",
+      "title": "tracks"
+    }
+  },
+  "required": [
+    "@type",
+    "image",
+    "tracks"
+  ]
+}

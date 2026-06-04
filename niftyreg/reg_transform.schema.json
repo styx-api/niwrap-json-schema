@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "reg_transform",
+  "description": "Tool for performing various transformation operations on medical images including control point to deformation conversion, composition of transformations, and converting between deformation and displacement fields.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "niftyreg/reg_transform"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the reference image",
+      "title": "Reference Image"
+    },
+    "cpp2def_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Conversion from control point position to deformation field. Filename of input lattice of control point positions (CPP).",
+      "title": "CPP to DEF Input"
+    },
+    "cpp2def_output": {
+      "type": "string",
+      "description": "Filename of the output deformation field image (DEF).",
+      "title": "CPP to DEF Output"
+    },
+    "comp1_cpp2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Composition of two lattices of control points. CPP2(CPP1(x)). Filename of lattice of control point that contains the second deformation (CPP2).",
+      "title": "Second CPP for Composition 1"
+    },
+    "comp1_cpp1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of lattice of control point that contains the initial deformation (CPP1).",
+      "title": "First CPP for Composition 1"
+    },
+    "comp1_output": {
+      "type": "string",
+      "description": "Filename of the output deformation field.",
+      "title": "Output for Composition 1"
+    },
+    "comp2_cpp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Composition of a deformation field with a lattice of control points. CPP(DEF(x)). Filename of lattice of control point that contains the second deformation (CPP).",
+      "title": "CPP for Composition 2"
+    },
+    "comp2_def": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the deformation field to be used as initial deformation (DEF).",
+      "title": "DEF for Composition 2"
+    },
+    "comp2_output": {
+      "type": "string",
+      "description": "Filename of the output deformation field.",
+      "title": "Output for Composition 2"
+    },
+    "comp3_def2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Composition of two deformation fields. DEF2(DEF1(x)). Filename of the second deformation field (DEF2).",
+      "title": "Second DEF for Composition 3"
+    },
+    "comp3_def1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the first deformation field (DEF1).",
+      "title": "First DEF for Composition 3"
+    },
+    "comp3_output": {
+      "type": "string",
+      "description": "Filename of the output deformation field.",
+      "title": "Output for Composition 3"
+    },
+    "def2disp_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Convert a deformation field into a displacement field. Filename of deformation field x'=T(x).",
+      "title": "DEF to DISP Input"
+    },
+    "def2disp_output": {
+      "type": "string",
+      "description": "Filename of displacement field x'=x+T(x).",
+      "title": "DEF to DISP Output"
+    },
+    "disp2def_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Convert a displacement field into a deformation field. Filename of displacement field x'=x+T(x).",
+      "title": "DISP to DEF Input"
+    },
+    "disp2def_output": {
+      "type": "string",
+      "description": "Filename of deformation field x'=T(x).",
+      "title": "DISP to DEF Output"
+    },
+    "upd_sform_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Update the sform of a floating (source) image using an affine transformation. Filename of image to be updated.",
+      "title": "Update Sform Image"
+    },
+    "upd_sform_affine": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Affine transformation defined as Affine x Reference = Floating. Filename of affine transformation.",
+      "title": "Update Sform Affine"
+    },
+    "upd_sform_output": {
+      "type": "string",
+      "description": "Updated image filename.",
+      "title": "Update Sform Output"
+    },
+    "aff2def_affine": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Compose a non-rigid with an affine. Filename of affine transformation.",
+      "title": "Affine for Aff2Def"
+    },
+    "aff2def_target": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Image used as a target for the non-rigid step.",
+      "title": "Target for Aff2Def"
+    },
+    "aff2def_cpp_or_def": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference image (B). Filename of control point position or deformation field.",
+      "title": "CPP or DEF for Aff2Def"
+    },
+    "aff2def_output": {
+      "type": "string",
+      "description": "Output deformation field filename.",
+      "title": "Output for Aff2Def"
+    },
+    "inv_affine_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Invert an affine transformation matrix. Filename of input affine matrix.",
+      "title": "Input Affine for Inversion"
+    },
+    "inv_affine_output": {
+      "type": "string",
+      "description": "Filename of inverted affine matrix.",
+      "title": "Output Affine for Inversion"
+    },
+    "comp_aff_1st": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Compose two affine transformation matrices. Filename of first affine matrix.",
+      "title": "First Affine for Composition"
+    },
+    "comp_aff_2nd": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of second affine matrix.",
+      "title": "Second Affine for Composition"
+    },
+    "comp_aff_output": {
+      "type": "string",
+      "description": "Filename of composed affine matrix result.",
+      "title": "Output Affine for Composition"
+    }
+  },
+  "required": [
+    "@type",
+    "reference_image"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fdrval",
+  "description": "Computes q-values from FDR curve data stored in dataset headers",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fdrval"
+    },
+    "dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Input dataset"
+    },
+    "sub": {
+      "type": "number",
+      "description": "Sub-brick number",
+      "title": "Sub-brick number"
+    },
+    "val_list": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "List of threshold values",
+      "title": "Threshold values"
+    },
+    "pval": {
+      "type": "boolean",
+      "description": "Output the p-value (on the same line, after q)",
+      "title": "Output p-value flag",
+      "default": false
+    },
+    "ponly": {
+      "type": "boolean",
+      "description": "Don't output q-values, just p-values",
+      "title": "Output only p-values flag",
+      "default": false
+    },
+    "qonly": {
+      "type": "boolean",
+      "description": "Don't output p-values, just q-values",
+      "title": "Output only q-values flag",
+      "default": false
+    },
+    "qinput": {
+      "type": "boolean",
+      "description": "The 'val' inputs are taken to be q-values and then the outputs are the corresponding statistical thresholds.",
+      "title": "Input q-values flag",
+      "default": false
+    },
+    "inverse": {
+      "type": "boolean",
+      "description": "Inverse of the usual operation. 'Val' inputs must be between 0 and 1 (exclusive). Cannot be used with '-ponly' or '-pval'.",
+      "title": "Inverse operation flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "dset",
+    "sub",
+    "val_list"
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_skeletonize",
+  "description": "Computes the skeleton of gyri (ie, the crowns) or sulci (ie, the fundi).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_skeletonize"
+    },
+    "surface": {
+      "type": "string",
+      "description": "Path to the surface file.",
+      "title": "Surface Path"
+    },
+    "surfvals": {
+      "type": "string",
+      "description": "Pass input explicitly rather than computing it.",
+      "title": "Surface Values Path"
+    },
+    "mask": {
+      "type": "string",
+      "description": "Final skeletonized mask file.",
+      "title": "Mask Path"
+    },
+    "k1": {
+      "type": "boolean",
+      "description": "Use k1 from surface (not with --curv-nonmaxsup).",
+      "title": "Use K1 Flag",
+      "default": false
+    },
+    "curv_nonmaxsup": {
+      "type": "boolean",
+      "description": "Use curvature H computed from surface with non-max suppression (not with --k1).",
+      "title": "Curvature Non-Max Suppression Flag",
+      "default": false
+    },
+    "gyrus": {
+      "type": "boolean",
+      "description": "Skeletonize the crowns of the gyri.",
+      "title": "Gyrus Flag",
+      "default": false
+    },
+    "sulcus": {
+      "type": "boolean",
+      "description": "Skeletonize the fundi of the sulci.",
+      "title": "Sulcus Flag",
+      "default": false
+    },
+    "outdir": {
+      "type": "string",
+      "description": "Directory where all outputs will be saved.",
+      "title": "Output Directory"
+    },
+    "sphere": {
+      "type": "string",
+      "description": "Sphere path, only needed for nonmax suppression.",
+      "title": "Sphere Path"
+    },
+    "pointset": {
+      "type": "string",
+      "description": "Point set of the skeleton (PointSet.json).",
+      "title": "Point Set Path"
+    },
+    "label": {
+      "type": "string",
+      "description": "Surface label of the skeleton (label file path).",
+      "title": "Label Path"
+    },
+    "nbrsize": {
+      "type": "number",
+      "description": "Neighborhood size for 2nd FF (default is 2).",
+      "title": "Neighborhood Size"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Used to create initial mask that will be skeletonized (typically about 0.3).",
+      "title": "Threshold Value"
+    },
+    "cluster": {
+      "type": "number",
+      "description": "Cluster the thresholded input and keep the largest nkeep clusters.",
+      "title": "Cluster Size"
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "Smooth surface values by this FWHM.",
+      "title": "FWHM Value"
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "surfvals",
+    "mask"
+  ]
+}

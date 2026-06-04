@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bedpostx",
+  "description": "Bayesian Estimation of Diffusion Parameters Obtained using Sampling Techniques (BEDPOST) for modeling multiple fibers per voxel.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/bedpostx"
+    },
+    "subject_dir": {
+      "type": "string",
+      "description": "Input subject directory which contains bvals, bvecs, data, and nodif_brain_mask files.",
+      "title": "Subject Directory"
+    },
+    "num_fibres": {
+      "type": "number",
+      "description": "Number of fibres per voxel (default 3).",
+      "title": "Number of Fibres"
+    },
+    "ard_weight": {
+      "type": "number",
+      "description": "ARD weight, more weight means less secondary fibres per voxel (default 1).",
+      "title": "ARD Weight"
+    },
+    "burnin": {
+      "type": "number",
+      "description": "Burnin period (default 1000).",
+      "title": "Burnin Period"
+    },
+    "num_jumps": {
+      "type": "number",
+      "description": "Number of jumps (default 1250).",
+      "title": "Number of Jumps"
+    },
+    "sample_every": {
+      "type": "number",
+      "description": "Sample every (default 25).",
+      "title": "Sample Every"
+    },
+    "model_type": {
+      "type": "number",
+      "description": "Deconvolution model. 1: with sticks, 2: with sticks with a range of diffusivities (default), 3: with zeppelins.",
+      "title": "Model Type"
+    },
+    "grad_nonlinear": {
+      "type": "boolean",
+      "description": "Consider gradient nonlinearities, expects grad_dev in the subject directory.",
+      "title": "Gradient Nonlinearities",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject_dir"
+  ]
+}

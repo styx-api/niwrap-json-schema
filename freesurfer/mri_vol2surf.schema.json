@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_vol2surf",
+  "description": "This program resamples a volume onto a surface of a subject or the sphere. The output can be viewed on the surface (using tksurfer) or can be used for surface-based intersubject averaging.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_vol2surf"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to input volume file",
+      "title": "Input Volume"
+    },
+    "registration_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Registration file as computed by tkregister, spmregister, bbregister, etc.",
+      "title": "Registration File"
+    },
+    "output_path": {
+      "type": "string",
+      "description": "Output path for the resampled volume",
+      "title": "Output Path"
+    },
+    "reference_volume": {
+      "type": "string",
+      "description": "Reference volume name, default is orig.mgz",
+      "title": "Reference Volume"
+    },
+    "regheader_subject": {
+      "type": "string",
+      "description": "Compute registration from header information, aligning the current volume with the subject/mri/orig.mgz",
+      "title": "Regheader Subject"
+    },
+    "mni152reg_flag": {
+      "type": "boolean",
+      "description": "Use MNI152 registration: $FREESURFER_HOME/average/mni152.register.dat",
+      "title": "MNI152 Registration",
+      "default": false
+    },
+    "target_subject": {
+      "type": "string",
+      "description": "Target subject for resampling, can be a subject name or 'ico' for icosahedron",
+      "title": "Target Subject"
+    },
+    "hemisphere": {
+      "enum": [
+        "lh",
+        "rh"
+      ],
+      "description": "Hemisphere to process: lh = left hemisphere or rh = right hemisphere",
+      "title": "Hemisphere"
+    },
+    "surface": {
+      "type": "string",
+      "description": "Target surface on which to resample, default is 'white'",
+      "title": "Target Surface"
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "registration_file",
+    "output_path"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "plugout_tt",
+  "description": "This program connects to AFNI and receives notification whenever the user changes Talairach coordinates.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/plugout_tt"
+    },
+    "host": {
+      "type": "string",
+      "description": "Name of the host computer to connect to AFNI on. The default is to connect on the current host using shared memory.",
+      "title": "Host Name"
+    },
+    "ijk_option": {
+      "type": "boolean",
+      "description": "Get voxel indices from AFNI instead of Talairach coordinates.",
+      "title": "IJK Option",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Enable verbose mode (prints lots of diagnostic messages).",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "port": {
+      "type": "number",
+      "description": "TCP/IP port number to use. The default is 8001.",
+      "title": "Port Number"
+    },
+    "name": {
+      "type": "string",
+      "description": "String to use as the name that AFNI assigns to this plugout. The default is something silly.",
+      "title": "Plugin Name"
+    },
+    "port_offset": {
+      "type": "number",
+      "description": "Provide a port offset to allow multiple instances of communicating programs to operate on the same computer. Use an integer in the inclusive range [1025 to 65500].",
+      "title": "Port Offset"
+    },
+    "port_offset_quiet": {
+      "type": "number",
+      "description": "Provide a port offset to allow multiple instances of communicating programs to operate on the same computer with quiet output in case of issues. Use an integer in the inclusive range [1025 to 65500].",
+      "title": "Port Offset Quiet"
+    },
+    "port_bloc": {
+      "type": "number",
+      "description": "Provide a port offset bloc for easier configuration of multiple instances. PORT_OFFSET_BLOC is an integer between 0 and MAX_BLOC (around 4000).",
+      "title": "Port Bloc"
+    },
+    "max_port_bloc": {
+      "type": "boolean",
+      "description": "Print the current value of MAX_BLOC and exit. Stay under 2000 for safety.",
+      "title": "Max Port Bloc",
+      "default": false
+    },
+    "max_port_bloc_quiet": {
+      "type": "boolean",
+      "description": "Print the current value of MAX_BLOC quietly and exit.",
+      "title": "Max Port Bloc Quiet",
+      "default": false
+    },
+    "num_assigned_ports": {
+      "type": "boolean",
+      "description": "Print the number of assigned ports used by AFNI, then quit.",
+      "title": "Number of Assigned Ports",
+      "default": false
+    },
+    "num_assigned_ports_quiet": {
+      "type": "boolean",
+      "description": "Print the number of assigned ports used by AFNI quietly, then quit.",
+      "title": "Number of Assigned Ports Quiet",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

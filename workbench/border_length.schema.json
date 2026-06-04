@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "REPORT LENGTH OF BORDERS",
+  "description": "For each border, print its length along the surface, in mm.  If a border has multiple parts, their lengths are summed before printing, unless -separate-pieces is specified.\n\nThe -corrected-areas option is intended for when the length is not meaningfully measurable on individual surfaces, it is only an approximate correction for the reduction in structure of a group average surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/border_length"
+    },
+    "border": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input border file"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the surface to measure the borders on"
+    },
+    "corrected_areas": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "vertex areas to use instead of computing them from the surface"
+    },
+    "separate_pieces": {
+      "type": "boolean",
+      "description": "report lengths for multi-part borders as separate numbers",
+      "default": false
+    },
+    "hide_border_name": {
+      "type": "boolean",
+      "description": "don't print border name before each output",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "border",
+    "surface"
+  ]
+}

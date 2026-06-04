@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "RESAMPLE A METRIC FILE TO A DIFFERENT MESH",
+  "description": "Resamples a metric file, given two spherical surfaces that are in register.  If ADAP_BARY_AREA is used, exactly one of -area-surfs or -area-metrics must be specified.\n\nThe ADAP_BARY_AREA method is recommended for ordinary metric data, because it should use all data while downsampling, unlike BARYCENTRIC.  The recommended areas option for most data is individual midthicknesses for individual data, and averaged vertex area metrics from individual midthicknesses for group average data.\n\nThe -current-roi option only masks the input, the output may be slightly dilated in comparison, consider using -metric-mask on the output when using -current-roi.\n\nThe -largest option results in nearest vertex behavior when used with BARYCENTRIC.  When resampling a binary metric, consider thresholding at 0.5 after resampling rather than using -largest.\n\nThe <method> argument must be one of the following:\n\nADAP_BARY_AREA\nBARYCENTRIC\n",
+  "properties": {
+    "root": {
+      "type": "string",
+      "x-styx-type": "path"
+    },
+    "metric_out": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the output metric"
+    },
+    "roi_out": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-styx-type": "path",
+      "description": "the output roi as a metric"
+    }
+  },
+  "required": [
+    "root",
+    "metric_out",
+    "roi_out"
+  ]
+}

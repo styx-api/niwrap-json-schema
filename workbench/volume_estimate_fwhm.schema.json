@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ESTIMATE FWHM SMOOTHNESS OF A VOLUME",
+  "description": "Estimates the smoothness of the input volume in X, Y, and Z directions separately, printing the estimates to standard output, in mm as FWHM.  If -subvolume or -whole-file are not specified, each subvolume is estimated and displayed separately.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/volume_estimate_fwhm"
+    },
+    "volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input volume"
+    },
+    "roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "use only data within an ROI"
+    },
+    "subvolume": {
+      "type": "string",
+      "description": "select a single subvolume to estimate smoothness of"
+    },
+    "whole_file": {
+      "type": "object",
+      "properties": {
+        "demean": {
+          "type": "boolean",
+          "description": "subtract the mean image before estimating smoothness",
+          "default": false
+        }
+      },
+      "description": "estimate for the whole file at once, not each subvolume separately"
+    }
+  },
+  "required": [
+    "@type",
+    "volume"
+  ]
+}

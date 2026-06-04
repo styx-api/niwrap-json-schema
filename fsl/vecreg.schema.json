@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "vecreg",
+  "description": "Vector Affine/NonLinear Transformation with Orientation Preservation",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/vecreg"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for input vector or tensor field",
+      "title": "Input File"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Filename for output registered vector or tensor field",
+      "title": "Output File"
+    },
+    "reference_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for reference (target) volume",
+      "title": "Reference Volume"
+    },
+    "transform_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for affine transformation matrix",
+      "title": "Affine Transformation Matrix File"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help Flag",
+      "default": false
+    },
+    "secondary_affine": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for secondary affine matrix; if set, this will be used for the rotation of the vector/tensor field",
+      "title": "Secondary Affine Matrix File"
+    },
+    "secondary_warp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for secondary warp field; if set, this will be used for the rotation of the vector/tensor field",
+      "title": "Secondary Warp Field"
+    },
+    "interp_method": {
+      "type": "string",
+      "description": "Interpolation method (nearestneighbour, trilinear (default), sinc, or spline)",
+      "title": "Interpolation Method"
+    },
+    "brain_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Brain mask in input space",
+      "title": "Brain Mask"
+    },
+    "ref_brain_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Brain mask in output space (useful for speed up of nonlinear registration)",
+      "title": "Reference Brain Mask"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file",
+    "reference_volume"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SpharmReco",
+  "description": "Spherical Harmonics Reconstruction from a set of harmonics and their corresponding coefficients.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SpharmReco"
+    },
+    "input_surface": {
+      "type": "string",
+      "description": "Surface that provides the topology of the mesh (nodes' connections). TYPE specifies the input surface type.",
+      "title": "Input Surface"
+    },
+    "decomposition_order": {
+      "type": "number",
+      "description": "Decomposition order",
+      "title": "Decomposition Order"
+    },
+    "bases_prefix": {
+      "type": "string",
+      "description": "Prefix of files containing the bases functions (spherical harmonics). These files are generated with SpharmDeco.",
+      "title": "Bases Prefix"
+    },
+    "coefficients": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "minItems": 1,
+      "description": "Coefficients files used to recompose data columns. Multiple coefficient files can be specified by repeating the option.",
+      "title": "Coefficient Files"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Write out the reconstructed data into dataset PREFIX. The output contains N columns; one for each COEF file.",
+      "title": "Output Prefix"
+    },
+    "output_surface": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Write out a new surface with reconstructed coordinates. Requires N to be a multiple of 3.",
+      "title": "Output Surface"
+    },
+    "debug": {
+      "type": "number",
+      "description": "Debug levels (1-3)",
+      "title": "Debug Level"
+    },
+    "smoothing": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 0.001,
+      "description": "Smoothing parameter (0 .. 0.001) weighing the contribution of higher order harmonics",
+      "title": "Smoothing Parameter"
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface",
+    "decomposition_order",
+    "bases_prefix",
+    "coefficients"
+  ]
+}

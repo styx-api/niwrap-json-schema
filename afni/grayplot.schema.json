@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@grayplot",
+  "description": "Script to read files from an afni_proc.py results directory and produce a grayplot from the errts dataset(s), combined with a motion magnitude indicator graph.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@grayplot"
+    },
+    "dirname": {
+      "type": "string",
+      "description": "Directory containing afni_proc.py results.",
+      "title": "Results Directory"
+    },
+    "pvorder": {
+      "type": "boolean",
+      "description": "Within each partition, voxels are ordered by a simple similarity measure.",
+      "title": "Partition voxel order by similarity",
+      "default": false
+    },
+    "peelorder": {
+      "type": "boolean",
+      "description": "Within each partition, voxels are ordered by how many 'peel' operations are needed to reach a given voxel.",
+      "title": "Partition voxel order by peel operations",
+      "default": false
+    },
+    "ijkorder": {
+      "type": "boolean",
+      "description": "Within each partition, voxels are ordered by the 3D index in which they appear in the dataset.",
+      "title": "Partition voxel order by 3D index",
+      "default": false
+    },
+    "allorder": {
+      "type": "boolean",
+      "description": "Create grayplots for all ordering methods.",
+      "title": "Generate grayplots for all ordering methods",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "dirname"
+  ]
+}

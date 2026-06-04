@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@djunct_edgy_align_check",
+  "description": "Helper script for various tasks, heavily modeled on RW Cox's '@snapshot_volreg' script",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@djunct_edgy_align_check"
+    },
+    "ULAY": {
+      "type": "string",
+      "description": "ULAY dataset",
+      "title": "ULAY"
+    },
+    "OLAY": {
+      "type": "string",
+      "description": "OLAY dataset",
+      "title": "OLAY"
+    },
+    "PREFIX": {
+      "type": "string",
+      "description": "Prefix for output files",
+      "title": "Output Prefix"
+    },
+    "set_dicom_xyz": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "description": "DICOM coordinates {XX YY ZZ}",
+      "title": "DICOM Coordinates"
+    },
+    "box_focus_slices": {
+      "type": "string",
+      "description": "Dataset to focus slices",
+      "title": "Focus Slices Dataset"
+    },
+    "montgap": {
+      "type": "number",
+      "description": "Gap between slices in montage",
+      "title": "Montage Gap"
+    },
+    "montcolor": {
+      "type": "string",
+      "description": "Color for montage",
+      "title": "Montage Color"
+    },
+    "cbar": {
+      "type": "string",
+      "description": "Color bar for overlay",
+      "title": "Color Bar"
+    },
+    "save_ftype": {
+      "type": "string",
+      "description": "File type to save",
+      "title": "Save File Type"
+    },
+    "umin_fac": {
+      "type": "number",
+      "description": "Scaling factor for underlay minimum",
+      "title": "Underlay Min Factor"
+    },
+    "montx": {
+      "type": "number",
+      "description": "Number of slices in X-direction for montage",
+      "title": "Montage X Slices"
+    },
+    "monty": {
+      "type": "number",
+      "description": "Number of slices in Y-direction for montage",
+      "title": "Montage Y Slices"
+    },
+    "use_olay_grid": {
+      "type": "string",
+      "description": "Grid interpolation method for overlay",
+      "title": "Overlay Grid Interpolation"
+    },
+    "label_mode": {
+      "type": "string",
+      "description": "Mode for labeling",
+      "title": "Label Mode"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help",
+      "default": false
+    },
+    "ver_flag": {
+      "type": "boolean",
+      "description": "Show version",
+      "title": "Version",
+      "default": false
+    },
+    "echo_flag": {
+      "type": "boolean",
+      "description": "Echo commands",
+      "title": "Echo",
+      "default": false
+    },
+    "sharpen_ulay_off_flag": {
+      "type": "boolean",
+      "description": "Disable underlay sharpening",
+      "title": "Sharpen Underlay Off",
+      "default": false
+    },
+    "mask_olay_edges_flag": {
+      "type": "boolean",
+      "description": "Mask overlay edges",
+      "title": "Mask Overlay Edges",
+      "default": false
+    },
+    "no_cor_flag": {
+      "type": "boolean",
+      "description": "Exclude coronal plane",
+      "title": "No Coronal",
+      "default": false
+    },
+    "no_sag_flag": {
+      "type": "boolean",
+      "description": "Exclude sagittal plane",
+      "title": "No Sagittal",
+      "default": false
+    },
+    "no_axi_flag": {
+      "type": "boolean",
+      "description": "Exclude axial plane",
+      "title": "No Axial",
+      "default": false
+    },
+    "no_clean_flag": {
+      "type": "boolean",
+      "description": "Disable cleaning temporary files",
+      "title": "No Clean",
+      "default": false
+    },
+    "ulay_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Range for underlay {umin umax}",
+      "title": "Underlay Range"
+    },
+    "ulay_range_nz": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Range for non-zero underlay {umin umax}",
+      "title": "Non-zero Underlay Range"
+    },
+    "ulay_range_am": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Range for auto-mask underlay {umin umax}",
+      "title": "Auto-mask Underlay Range"
+    }
+  },
+  "required": [
+    "@type",
+    "ULAY",
+    "OLAY",
+    "PREFIX"
+  ]
+}

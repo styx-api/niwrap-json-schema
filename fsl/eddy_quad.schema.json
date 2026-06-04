@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "eddy_quad",
+  "description": "QUality Assessment for DMRI",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/eddy_quad"
+    },
+    "eddyBase": {
+      "type": "string",
+      "description": "Basename (including path) specified when running EDDY",
+      "title": "Eddy base"
+    },
+    "eddyIndex": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing indices for all volumes into acquisition parameters",
+      "title": "Eddy index"
+    },
+    "eddyParams": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing acquisition parameters",
+      "title": "Eddy parameters"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Binary mask file",
+      "title": "Binary mask file"
+    },
+    "bvals": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "b-values file",
+      "title": "b-values file"
+    },
+    "bvecs": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "b-vectors file - only used when <eddyBase>.eddy_residuals file is present",
+      "title": "b-vectors file"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Output directory - default = '<eddyBase>.qc'",
+      "title": "Output directory"
+    },
+    "field": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "TOPUP estimated field (in Hz)",
+      "title": "Estimated field"
+    },
+    "slspec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file specifying slice/group acquisition",
+      "title": "Slice/group acquisition specification"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Display debug messages",
+      "title": "Verbose",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "eddyBase",
+    "eddyIndex",
+    "eddyParams",
+    "mask",
+    "bvals"
+  ]
+}

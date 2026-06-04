@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_gtmseg",
+  "description": "Creates a segmentation that can be used with the geometric transfer matrix (GTM).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_gtmseg"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume (output will be subject/mri/outvol)",
+      "title": "Output Volume"
+    },
+    "source_subject": {
+      "type": "string",
+      "description": "Source subject",
+      "title": "Source Subject"
+    },
+    "internal_usf": {
+      "type": "number",
+      "description": "Upsampling factor (default 2)",
+      "title": "Internal Upsampling Factor"
+    },
+    "apas_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Defines extra-cerebral and subcortical segmentations (apas+head.mgz)",
+      "title": "APAS File"
+    },
+    "context_annotation": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Use annotation to segment cortex (aparc.annot,1000,2000)",
+      "title": "Context Annotation"
+    },
+    "subseg_wm": {
+      "type": "boolean",
+      "description": "Turn on segmenting of WM into smaller parts (off by default)",
+      "title": "Subsegment White Matter Flag",
+      "default": false
+    },
+    "wm_annotation": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Use annotation to subsegment white matter",
+      "title": "White Matter Annotation"
+    },
+    "dmax": {
+      "type": "number",
+      "description": "Distance from cortex for white matter segmentation to be considered 'unsegmented' (default 5.000000)",
+      "title": "Dmax"
+    },
+    "keep_hypo": {
+      "type": "boolean",
+      "description": "Do not convert white matter hypointensities to a white matter label",
+      "title": "Keep Hypointensities Flag",
+      "default": false
+    },
+    "keep_cc": {
+      "type": "boolean",
+      "description": "Do not convert corpus callosum to a white matter label",
+      "title": "Keep Corpus Callosum Flag",
+      "default": false
+    },
+    "ctab": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Copy items in ctab.lut into master ctab merging or overwriting what is there",
+      "title": "CTAB Lookup Table"
+    },
+    "lhminmax": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "For defining left hemisphere ribbon in APAS (default: 1000 1900)",
+      "title": "LH Min Max"
+    },
+    "rhminmax": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "For defining right hemisphere ribbon in APAS (default: 2000 2900)",
+      "title": "RH Min Max"
+    },
+    "output_usf": {
+      "type": "number",
+      "description": "Set actual output resolution. Default is to be the same as the --internal-usf",
+      "title": "Output Upsampling Factor"
+    },
+    "threads": {
+      "type": "number",
+      "description": "Use N threads (with Open MP)",
+      "title": "Threads"
+    },
+    "threads_max": {
+      "type": "boolean",
+      "description": "Use the maximum allowable number of threads for this computer",
+      "title": "Max Threads Flag",
+      "default": false
+    },
+    "threads_max_1": {
+      "type": "boolean",
+      "description": "Use one less than the maximum allowable number of threads for this computer",
+      "title": "Max Threads Minus One Flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "check_opts": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit",
+      "title": "Check Options Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "output_volume",
+    "source_subject"
+  ]
+}

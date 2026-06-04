@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bianca",
+  "description": "BIANCA: Brain Intensity AbNormality Classification Algorithm",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/bianca"
+    },
+    "master_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the master file",
+      "title": "Master file"
+    },
+    "label_feature_num": {
+      "type": "number",
+      "description": "Column number (in the master file) of the manual masks (or any placeholder name for query subjects)",
+      "title": "Label feature number"
+    },
+    "brain_mask_feature_num": {
+      "type": "number",
+      "description": "Column number (in the master file) of images to derive non-zero mask from",
+      "title": "Brain mask feature number"
+    },
+    "query_subject_num": {
+      "type": "number",
+      "description": "Row number of query subject (in masterlistfile)",
+      "title": "Query subject number"
+    },
+    "training_nums": {
+      "type": "string",
+      "description": "Subjects to be used in training. List of row numbers (comma separated, no spaces) or 'all' to use all the subjects in the master file",
+      "title": "Training numbers"
+    },
+    "feature_subset": {
+      "type": "string",
+      "description": "Set of column numbers (comma separated and no spaces) for features/images to use (default: use all available modalities as intensity features). The image used to derive non-zero mask from must be part of the features subset",
+      "title": "Feature subset"
+    },
+    "mat_feature_num": {
+      "type": "number",
+      "description": "Column number of matrix files (in masterlistfile). Needed to extract spatial features (MNI coordinates)",
+      "title": "Matrix feature number"
+    },
+    "spatial_weight": {
+      "type": "number",
+      "description": "Weighting for spatial coordinates (default = 1, i.e., variance-normalized MNI coordinates). Requires --matfeaturenum to be specified",
+      "title": "Spatial weight"
+    },
+    "patch_sizes": {
+      "type": "string",
+      "description": "List of patch sizes for local averaging",
+      "title": "Patch sizes"
+    },
+    "patch_3d": {
+      "type": "boolean",
+      "description": "Use 3D patches (default is 2D)",
+      "title": "3D patches",
+      "default": false
+    },
+    "select_pts": {
+      "type": "string",
+      "description": "\"any\" (default) or \"surround\" or \"noborder\"",
+      "title": "Select points"
+    },
+    "training_pts": {
+      "type": "string",
+      "description": "Number (max) of (lesion) points to use (per training subject) or \"equalpoints\" to select all lesion points and equal number of non-lesion points",
+      "title": "Training points"
+    },
+    "non_les_pts": {
+      "type": "string",
+      "description": "Number (max) of non-lesion points to use. If not specified will be set to the same amount of lesion points",
+      "title": "Non-lesion points"
+    },
+    "load_classifier_data": {
+      "type": "string",
+      "description": "Load training data from file",
+      "title": "Load classifier data"
+    },
+    "save_classifier_data": {
+      "type": "string",
+      "description": "Save training data to file",
+      "title": "Save classifier data"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Use verbose mode",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "out_name": {
+      "type": "string",
+      "description": "Specify (base) output name of files",
+      "title": "Output name"
+    }
+  },
+  "required": [
+    "@type",
+    "master_file",
+    "label_feature_num",
+    "brain_mask_feature_num",
+    "query_subject_num"
+  ]
+}

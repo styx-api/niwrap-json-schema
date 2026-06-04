@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_cor2label",
+  "description": "Converts values in a volume or surface overlay to a label. Designed to convert parcellation volumes stored in mri format.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_cor2label"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume or surface overlay file.",
+      "title": "Input File"
+    },
+    "label_id": {
+      "type": "number",
+      "description": "Value to match in the input data.",
+      "title": "Label Identifier"
+    },
+    "label_file": {
+      "type": "string",
+      "description": "Name of the output label file.",
+      "title": "Output Label File"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold the input to make label, e.g., input values must be greater than the threshold.",
+      "title": "Threshold Value"
+    },
+    "volume_file": {
+      "type": "string",
+      "description": "Write the label volume to a file.",
+      "title": "Volume File"
+    },
+    "surface_overlay": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Interpret input as a surface overlay, specifying subject, hemisphere, and surface.",
+      "title": "Surface Overlay"
+    },
+    "surface_path": {
+      "type": "string",
+      "description": "Specify surface path rather than subject/hemisphere.",
+      "title": "Surface Path"
+    },
+    "optimize": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Treat input as a probability map and optimize thresholding.",
+      "title": "Optimize"
+    },
+    "remove_holes_islands": {
+      "type": "boolean",
+      "description": "Remove holes in label and islands (only valid with --surf).",
+      "title": "Remove Holes and Islands",
+      "default": false
+    },
+    "dilate": {
+      "type": "number",
+      "description": "Dilate label with specified number of dilations (only valid with --surf).",
+      "title": "Dilate"
+    },
+    "erode": {
+      "type": "number",
+      "description": "Erode label with specified number of erosions (only valid with --surf).",
+      "title": "Erode"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help information.",
+      "title": "Help",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "label_id",
+    "label_file"
+  ]
+}

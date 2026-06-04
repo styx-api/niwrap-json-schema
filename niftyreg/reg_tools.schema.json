@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "reg_tools",
+  "description": "A versatile tool for manipulating and processing medical images.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "niftyreg/reg_tools"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the input image",
+      "title": "Input Image"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Filename of the output image",
+      "title": "Output Image"
+    },
+    "add_value_or_image": {
+      "type": "string",
+      "description": "This image (or value) is added to the input",
+      "title": "Add Image or Value"
+    },
+    "sub_value_or_image": {
+      "type": "string",
+      "description": "This image (or value) is subtracted from the input",
+      "title": "Subtract Image or Value"
+    },
+    "mul_value_or_image": {
+      "type": "string",
+      "description": "This image (or value) is multiplied with the input",
+      "title": "Multiply Image or Value"
+    },
+    "div_value_or_image": {
+      "type": "string",
+      "description": "This image (or value) is divided by the input",
+      "title": "Divide Image or Value"
+    },
+    "smooth_value": {
+      "type": "number",
+      "description": "The input image is smoothed using a B-spline curve",
+      "title": "Smooth with B-Spline Curve"
+    },
+    "smooth_gaussian": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "The input image is smoothed using a Gaussian kernel",
+      "title": "Smooth with Gaussian Kernel"
+    },
+    "rms_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Compute the mean RMS between the input image and this image",
+      "title": "Compute RMS"
+    },
+    "binarize": {
+      "type": "boolean",
+      "description": "Binarize the input image (val!=0?val=1:val=0)",
+      "title": "Binarize Image",
+      "default": false
+    },
+    "threshold_value": {
+      "type": "number",
+      "description": "Threshold the input image (val<thr?val=0:val=1)",
+      "title": "Threshold Image"
+    },
+    "nan_mask_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "This image is used to mask the input image. Voxels outside of the mask are set to NaN",
+      "title": "NaN Mask Image"
+    }
+  },
+  "required": [
+    "@type",
+    "input_image"
+  ]
+}

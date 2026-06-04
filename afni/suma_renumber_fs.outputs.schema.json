@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "@SUMA_renumber_FS",
+  "description": "This script processes FreeSurfer-generated parcellation files and produces various derived datasets and segmentation maps.",
+  "properties": {
+    "root": {
+      "type": "string",
+      "x-styx-type": "path"
+    },
+    "ren_all": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Whole parcellation/segmentation file with renumbered ROIs."
+    },
+    "ren_gm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Gray matter tissue segmentation map."
+    },
+    "ren_wmat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "White matter tissue segmentation map."
+    },
+    "ren_csf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Cerebrospinal fluid tissue segmentation map."
+    },
+    "ren_vent": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Ventricles and choroid plexus tissue segmentation map."
+    },
+    "ren_othr": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Other tissue segmentation map (optic chiasm, non-WM-hypointens, etc.)."
+    },
+    "ren_unkn": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Unknown tissue segmentation map (FS-defined 'unknown', with voxel value >0)."
+    },
+    "ren_gmrois": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Gray matter ROIs without '*-Cerebral-Cortex' dots."
+    },
+    "fs_ap_wm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "White matter mask (excluding the dotted part from FS)."
+    },
+    "fs_ap_latvent": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Lateral ventricles mask ('*-Lateral-Ventricle')."
+    },
+    "ren_lbl_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Labeltable of the new ROI values."
+    }
+  },
+  "required": [
+    "root",
+    "ren_all",
+    "ren_gm",
+    "ren_wmat",
+    "ren_csf",
+    "ren_vent",
+    "ren_othr",
+    "ren_unkn",
+    "ren_gmrois",
+    "fs_ap_wm",
+    "fs_ap_latvent",
+    "ren_lbl_table"
+  ]
+}

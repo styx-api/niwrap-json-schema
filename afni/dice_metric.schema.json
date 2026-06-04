@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@DiceMetric",
+  "description": "Computes Dice Metric between BASE and each of the DSET volumes",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@DiceMetric"
+    },
+    "base": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of base (reference) segmentation",
+      "title": "Base Segmentation"
+    },
+    "dsets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Data sets for which the Dice Metric with BASE is computed. This should be the last option on the command line.",
+      "title": "Dataset Segmentation"
+    },
+    "max_roi": {
+      "type": "number",
+      "description": "The maximum possible ROI index. Default is 12 or based on LTFILE if specified.",
+      "title": "Maximum ROI Index"
+    },
+    "labeltable": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "If given, the labeltable is used to set the default MAX_ROI parameter. Also, this option forces an output for each key in the LTFILE.",
+      "title": "Label Table File"
+    },
+    "forceoutput": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "If given, force output for each class in LTFILE.",
+      "title": "Force Output File"
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Set echo.",
+      "title": "Echo Flag",
+      "default": false
+    },
+    "save_match": {
+      "type": "boolean",
+      "description": "Save volume showing BASE*equals(BASE,DSET).",
+      "title": "Save Match Volume",
+      "default": false
+    },
+    "save_diff": {
+      "type": "boolean",
+      "description": "Save volume showing BASE*(1-equals(BASE,DSET)).",
+      "title": "Save Diff Volume",
+      "default": false
+    },
+    "do_not_mask_by_base": {
+      "type": "boolean",
+      "description": "Do not mask dset by step(base) before computing Dice coefficient.",
+      "title": "Do Not Mask by Base",
+      "default": false
+    },
+    "mask_by_base": {
+      "type": "boolean",
+      "description": "Mask dset by the step(base) before computing Dice coefficient.",
+      "title": "Mask by Base",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use PREFIX for the output table. Default is separate results for each dset to stdout.",
+      "title": "Output Prefix"
+    },
+    "ignore_bad": {
+      "type": "boolean",
+      "description": "Warn if encountering bad scenarios, but do not create a zero entry.",
+      "title": "Ignore Bad Scenarios",
+      "default": false
+    },
+    "keep_tmp": {
+      "type": "boolean",
+      "description": "Keep temporary files for debugging. Note that you should delete temporary files before rerunning the script.",
+      "title": "Keep Temporary Files",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "base",
+    "dsets"
+  ]
+}

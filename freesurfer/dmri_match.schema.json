@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dmri_match",
+  "description": "Tool for matching diffusion MRI parcellations",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dmri_match"
+    },
+    "parcellation1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First parcellation input file",
+      "title": "Parcellation 1"
+    },
+    "parcellation2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second parcellation input file",
+      "title": "Parcellation 2"
+    },
+    "num_clusters": {
+      "type": "number",
+      "description": "Number of clusters",
+      "title": "Number of Clusters"
+    },
+    "clustering_path1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First clustering path",
+      "title": "Clustering Path 1"
+    },
+    "clustering_path2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second clustering path",
+      "title": "Clustering Path 2"
+    },
+    "labels": {
+      "type": "boolean",
+      "description": "Use labels (no additional input expected)",
+      "title": "Labels",
+      "default": false
+    },
+    "euclidean": {
+      "type": "boolean",
+      "description": "Use Euclidean distance for matching",
+      "title": "Euclidean flag",
+      "default": false
+    },
+    "bounding_box": {
+      "type": "boolean",
+      "description": "Use bounding box constraint (no additional input expected)",
+      "title": "Bounding Box flag",
+      "default": false
+    },
+    "symmetry": {
+      "type": "boolean",
+      "description": "Use symmetry constraint (no additional input expected)",
+      "title": "Symmetry flag",
+      "default": false
+    },
+    "inter_hemi_ratio_removal": {
+      "type": "string",
+      "description": "Inter-hemispheric ratio cluster removal constraint",
+      "title": "InterHemi Ratio Removal"
+    },
+    "output": {
+      "type": "string",
+      "description": "Output file",
+      "title": "Output File"
+    }
+  },
+  "required": [
+    "@type",
+    "parcellation1",
+    "parcellation2",
+    "num_clusters",
+    "clustering_path1",
+    "clustering_path2",
+    "output"
+  ]
+}

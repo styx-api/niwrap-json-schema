@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_place_surface",
+  "description": "This program positions the triangular mesh representing a cortical surface, either the 'white' surface (ie, white/gray boundary) or the 'pial' surface (ie, the gray/csf boundary).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_place_surface"
+    },
+    "output_surface": {
+      "type": "string",
+      "description": "Output surface",
+      "title": "Output Surface"
+    },
+    "input_surface": {
+      "type": "string",
+      "description": "Input surface",
+      "title": "Input Surface"
+    },
+    "autodetect_gray_white_stats": {
+      "type": "string",
+      "description": "Intensity stats created by mris_autodet_gwstats",
+      "title": "AutoDetect Gray White Stats"
+    },
+    "input_volume": {
+      "type": "string",
+      "description": "T1-weighed intensity volume used to find white/gray/csf gradients (usually brain.finalsurf.mgz)",
+      "title": "Input Volume"
+    },
+    "surface_type_group": {
+      "enum": [
+        "--white",
+        "--pial"
+      ],
+      "description": "Place the white surface or the pial surface. Must choose one.",
+      "title": "Surface Type"
+    },
+    "hemi_group": {
+      "enum": [
+        "--lh",
+        "--rh"
+      ],
+      "description": "Left or right hemisphere. Must choose one.",
+      "title": "Hemisphere"
+    },
+    "wm_segment": {
+      "type": "string",
+      "description": "White matter segmentation",
+      "title": "White Matter Segmentation"
+    },
+    "out_volume": {
+      "type": "string",
+      "description": "Save input volume after preprocessing",
+      "title": "Output Volume"
+    },
+    "out_volume_only": {
+      "type": "string",
+      "description": "Save input volume after preprocessing and then exit",
+      "title": "Output Volume Only"
+    },
+    "restore_255": {
+      "type": "boolean",
+      "description": "Set voxels in the input volume that start off as 255 to 110 (white surf only).",
+      "title": "Restore 255 Flag",
+      "default": false
+    },
+    "segmentation": {
+      "type": "string",
+      "description": "Whole-brain segmentation (usually aseg.presurf.mgz)",
+      "title": "Segmentation"
+    },
+    "cortical_parcellation": {
+      "type": "string",
+      "description": "Set cortical parcellation used to rip vertices (usually ?h.aparc.annot)",
+      "title": "Cortical Parcellation"
+    },
+    "nsmooth": {
+      "type": "number",
+      "description": "Smooth input surface by number of iterations",
+      "title": "Number of Smooth Iterations"
+    },
+    "smooth_after_rip": {
+      "type": "boolean",
+      "description": "Smooth after ripping",
+      "title": "Smooth After Rip Flag",
+      "default": false
+    },
+    "max_cbv_dist": {
+      "type": "number",
+      "description": "Limit distance MRIScomputeBorderValues() can search from the input",
+      "title": "Max CBV Distance"
+    },
+    "rip_label": {
+      "type": "string",
+      "description": "Do not move vertices that are NOT in the cortex label",
+      "title": "Rip Label"
+    },
+    "rip_midline": {
+      "type": "boolean",
+      "description": "Do not move vertices that are in the midline as indicated by the seg",
+      "title": "Rip Midline Flag",
+      "default": false
+    },
+    "rip_bg": {
+      "type": "boolean",
+      "description": "Do not move vertices near basal ganglia (as defined by seg)",
+      "title": "Rip Basal Ganglia Flag",
+      "default": false
+    },
+    "rip_bg_no_annot": {
+      "type": "boolean",
+      "description": "Do not require surface have an annotation when ripping BG",
+      "title": "Rip BG No Annotation Flag",
+      "default": false
+    },
+    "no_rip_freeze": {
+      "type": "boolean",
+      "description": "Do NOT move vertices in/near freeze voxels (247 as defined in seg)",
+      "title": "No Rip Freeze Flag",
+      "default": false
+    },
+    "rip_wmsa": {
+      "type": "boolean",
+      "description": "Do not move vertices in/near white-matter signal abnormalities (77,78,79 as defined in seg)",
+      "title": "Rip WMSA Flag",
+      "default": false
+    },
+    "rip_lesion": {
+      "type": "boolean",
+      "description": "Do not move vertices in/near lesions (25 and 57 as defined in seg)",
+      "title": "Rip Lesion Flag",
+      "default": false
+    },
+    "no_rip": {
+      "type": "boolean",
+      "description": "Turn off all ripping",
+      "title": "No Rip Flag",
+      "default": false
+    },
+    "rip_overlay": {
+      "type": "string",
+      "description": "Rip vertices > 0.5 in the surface overlay file",
+      "title": "Rip Overlay"
+    },
+    "rip_surface": {
+      "type": "string",
+      "description": "Use this surface with ripping midline, BG, Freezes, Lesions, and WMSA.",
+      "title": "Rip Surface"
+    },
+    "rip_projection": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Control projection depth along normal to ripsurface when sampling seg",
+      "title": "Rip Projection"
+    },
+    "repulse_surface": {
+      "type": "string",
+      "description": "Force input surface away from this surface (usually the white surface when placing the pial).",
+      "title": "Repulse Surface"
+    },
+    "white_surface": {
+      "type": "string",
+      "description": "Set the white{xyz} coordinates of the input surface using this surface.",
+      "title": "White Surface"
+    },
+    "blend_surface": {
+      "type": "string",
+      "description": "Recompute the xyz coordinates of the input surface by computing a weighted average with the blend surface.",
+      "title": "Blend Surface"
+    },
+    "multimodal_input": {
+      "type": "string",
+      "description": "Specify a T2 or FLAIR input volume used for placing the pial surface. Must be in registration with the input volume.",
+      "title": "MultiModal Input Volume"
+    },
+    "mm_refine": {
+      "type": "boolean",
+      "description": "Use Siless' MultimodalRefinement. Sets tspring=nspring=0.3",
+      "title": "Multimodal Refinement Flag",
+      "default": false
+    },
+    "pin_medial_wall": {
+      "type": "string",
+      "description": "Set coordinates in vertices NOT in cortexlabel to be that of the white{xyz} coordinates.",
+      "title": "Pin Medial Wall"
+    },
+    "no_intensity_proc": {
+      "type": "boolean",
+      "description": "Do not process the input intensity volume (eg, to remove parts of eye socket).",
+      "title": "No Intensity Processing Flag",
+      "default": false
+    },
+    "debug_vertex": {
+      "type": "number",
+      "description": "Debug vertex number",
+      "title": "Debug Vertex"
+    },
+    "ripflag_out": {
+      "type": "string",
+      "description": "Save ripflag as overlay",
+      "title": "Ripflag Out"
+    },
+    "local_max": {
+      "type": "string",
+      "description": "Save LocalMaxFoundFlag as overlay",
+      "title": "Local Max"
+    },
+    "target_surf": {
+      "type": "string",
+      "description": "Save CBV target surface",
+      "title": "Target Surface"
+    },
+    "stop_mask": {
+      "type": "boolean",
+      "description": "Stop mask to stop search along normal for max gradient",
+      "title": "Stop Mask Flag",
+      "default": false
+    },
+    "mm_intensity_limits": {
+      "type": "string",
+      "description": "Intensity limits for placing pial on multimodal input.",
+      "title": "Multimodal Intensity Limits"
+    },
+    "cover_seg": {
+      "type": "string",
+      "description": "Force surface to cover the segmentation",
+      "title": "Cover Segmentation"
+    },
+    "first_peak_d1": {
+      "type": "boolean",
+      "description": "Use find-first-peak option with 1st derivative in ComputeBorderValues",
+      "title": "First Peak D1 Flag",
+      "default": false
+    },
+    "first_peak_d2": {
+      "type": "boolean",
+      "description": "Use find-first-peak option with 2nd derivative in ComputeBorderValues",
+      "title": "First Peak D2 Flag",
+      "default": false
+    },
+    "white_border_low_factor": {
+      "type": "number",
+      "description": "white_border_low = f*adgws.gray_mean + (1-f)*adgws.white_mean;",
+      "title": "White Border Low Factor"
+    },
+    "fill_lateral_ventricles": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Fill lateral ventricles with 110.",
+      "title": "Fill Lateral Ventricles"
+    }
+  },
+  "required": [
+    "@type",
+    "output_surface",
+    "input_surface",
+    "autodetect_gray_white_stats",
+    "input_volume",
+    "surface_type_group",
+    "hemi_group"
+  ]
+}

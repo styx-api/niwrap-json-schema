@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "afni_proc.py",
+  "description": "Generate a tcsh script for an AFNI single subject processing stream",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/afni_proc.py"
+    },
+    "dsets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify the EPI dataset files. (e.g. epi_run1+orig, epi_run2+orig)",
+      "title": "EPI Datasets"
+    },
+    "subj_id": {
+      "type": "string",
+      "description": "Specify the subject ID for the script.",
+      "title": "Subject ID"
+    },
+    "out_dir": {
+      "type": "string",
+      "description": "Specify the output directory for the script.",
+      "title": "Output Directory"
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify the processing blocks to apply (e.g. tshift volreg blur mask scale regress).",
+      "title": "Processing Blocks"
+    },
+    "anat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the anatomical dataset.",
+      "title": "Anatomical Dataset"
+    },
+    "echo_times": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify echo times for multi-echo data processing.",
+      "title": "Echo Times"
+    },
+    "stim_times": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify files used for stimulus timing in -stim_times.",
+      "title": "Stimulus Timing Files"
+    },
+    "stim_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify TR-locked stim files for 3dDeconvolve -stim_file instead of -stim_times.",
+      "title": "TR-locked Stimulus Files"
+    },
+    "copy_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify additional files to be copied to the results directory.",
+      "title": "Additional Files to Copy"
+    },
+    "copy_anat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Copy the anatomical dataset(s) to the results directory.",
+      "title": "Copy Anatomical Dataset"
+    },
+    "regress_params": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify extra options for 3dDeconvolve.",
+      "title": "Extra Regression Parameters"
+    }
+  },
+  "required": [
+    "@type",
+    "dsets",
+    "subj_id",
+    "anat"
+  ]
+}

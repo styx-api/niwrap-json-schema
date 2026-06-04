@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FILTER CLUSTERS BY SURFACE AREA",
+  "description": "Outputs a metric with nonzero integers for all vertices within a large enough cluster, and zeros elsewhere.  The integers denote cluster membership (by default, first cluster found will use value 1, second cluster 2, etc).  Cluster values are not reused across maps of the output, but instead keep counting up.  By default, values greater than <value-threshold> are considered to be in a cluster, use -less-than to test for values less than the threshold.  To apply this as a mask to the data, or to do more complicated thresholding, see -metric-math.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric_find_clusters"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the surface to compute on"
+    },
+    "metric_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input metric"
+    },
+    "value_threshold": {
+      "type": "number",
+      "description": "threshold for data values"
+    },
+    "minimum_area": {
+      "type": "number",
+      "description": "threshold for cluster area, in mm^2"
+    },
+    "metric_out": {
+      "type": "string",
+      "description": "the output metric"
+    },
+    "less_than": {
+      "type": "boolean",
+      "description": "find values less than <value-threshold>, rather than greater",
+      "default": false
+    },
+    "roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "select a region of interest"
+    },
+    "corrected_areas": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "vertex areas to use instead of computing them from the surface"
+    },
+    "column": {
+      "type": "string",
+      "description": "select a single column"
+    },
+    "size_ratio": {
+      "type": "number",
+      "description": "ignore clusters smaller than a given fraction of the largest cluster in map"
+    },
+    "distance": {
+      "type": "number",
+      "description": "ignore clusters further than a given distance from the largest cluster"
+    },
+    "start": {
+      "type": "integer",
+      "description": "start labeling clusters from a value other than 1"
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "metric_in",
+    "value_threshold",
+    "minimum_area",
+    "metric_out"
+  ]
+}

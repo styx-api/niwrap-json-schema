@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_nl_align",
+  "description": "mri_nl_align aligns two images using nonlinear registration.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_nl_align"
+    },
+    "source": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input source image file",
+      "title": "Source Image"
+    },
+    "target": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input target image file",
+      "title": "Target Image"
+    },
+    "warp": {
+      "type": "string",
+      "description": "Output warp file",
+      "title": "Warp Output"
+    },
+    "debug_voxel": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Debug voxel coordinates (Gx, Gy, Gz)",
+      "title": "Debug Voxel"
+    },
+    "debug_node": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Debug node coordinates (Gx, Gy, Gz)",
+      "title": "Debug Node"
+    },
+    "no_neg": {
+      "type": "number",
+      "description": "Control allowing temporary folds during numerical minimization",
+      "title": "No Negative"
+    },
+    "renormalize": {
+      "type": "number",
+      "description": "Control for renormalizing intensities",
+      "title": "Renormalize"
+    },
+    "aseg_flag": {
+      "type": "boolean",
+      "description": "Treat inputs as segmentations",
+      "title": "Segmentations Flag",
+      "default": false
+    },
+    "diag_volume": {
+      "type": "string",
+      "description": "Write d2 diagnostics for input volume",
+      "title": "Diagnostic Volume"
+    },
+    "optimal_flag": {
+      "type": "boolean",
+      "description": "Use line search optimization",
+      "title": "Optimal Search Optimization Flag",
+      "default": false
+    },
+    "momentum_flag": {
+      "type": "boolean",
+      "description": "Use fixed time-step integration",
+      "title": "Momentum Integration Flag",
+      "default": false
+    },
+    "fixed_flag": {
+      "type": "boolean",
+      "description": "Use fixed time-step integration",
+      "title": "Fixed Time-Step Integration Flag",
+      "default": false
+    },
+    "distance": {
+      "type": "number",
+      "description": "Expand border by specified mm every outer cycle",
+      "title": "Expand Border"
+    },
+    "dtrans": {
+      "type": "number",
+      "description": "Set distance transform coefficient",
+      "title": "Distance Transform Coefficient"
+    },
+    "match_peak_flag": {
+      "type": "boolean",
+      "description": "Match peak of intensity ratio histogram",
+      "title": "Match Peak Flag",
+      "default": false
+    },
+    "erode": {
+      "type": "number",
+      "description": "Erode source and target image specified times before morphing",
+      "title": "Erode"
+    },
+    "match_mean": {
+      "type": "number",
+      "description": "Control for matching peak of intensity ratio histogram",
+      "title": "Match Mean"
+    },
+    "intensity": {
+      "type": "number",
+      "description": "Set l_log_likelihood to specified value",
+      "title": "Log Likelihood Intensity"
+    },
+    "ll": {
+      "type": "number",
+      "description": "Set l_log_likelihood to specified value",
+      "title": "Log Likelihood"
+    },
+    "noregrid_flag": {
+      "type": "boolean",
+      "description": "Disable regridding",
+      "title": "Disable Regridding Flag",
+      "default": false
+    },
+    "regrid_flag": {
+      "type": "boolean",
+      "description": "Enable regridding",
+      "title": "Enable Regridding Flag",
+      "default": false
+    },
+    "view": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "View voxel coordinates (Gx, Gy, Gz)",
+      "title": "View Voxel"
+    },
+    "levels": {
+      "type": "number",
+      "description": "Set levels to specified value",
+      "title": "Levels"
+    },
+    "area_smoothness": {
+      "type": "number",
+      "description": "Set l_area_smoothness to specified value",
+      "title": "Area Smoothness"
+    },
+    "asmooth": {
+      "type": "number",
+      "description": "Set l_area_smoothness to specified value",
+      "title": "Area Smoothness (asmooth)"
+    },
+    "area": {
+      "type": "number",
+      "description": "Set l_area to specified value",
+      "title": "Area"
+    },
+    "tolerance": {
+      "type": "number",
+      "description": "Set tolerance to specified value",
+      "title": "Tolerance"
+    },
+    "sigma": {
+      "type": "number",
+      "description": "Set sigma to specified value",
+      "title": "Sigma"
+    },
+    "min_sigma": {
+      "type": "number",
+      "description": "Set minimum sigma value",
+      "title": "Minimum Sigma"
+    },
+    "ribbon": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read ribbon from specified file and insert into aseg",
+      "title": "Ribbon"
+    },
+    "rthresh": {
+      "type": "number",
+      "description": "Set compression ratio threshold to specified value",
+      "title": "Compression Ratio Threshold"
+    },
+    "scale": {
+      "type": "number",
+      "description": "Scale input values by specified factor",
+      "title": "Scale"
+    },
+    "dt": {
+      "type": "number",
+      "description": "Set dt to specified value",
+      "title": "Delta Time"
+    },
+    "passes": {
+      "type": "number",
+      "description": "Integrate in specified number of passes",
+      "title": "Passes"
+    },
+    "skip": {
+      "type": "number",
+      "description": "Skip specified number of voxels in source data",
+      "title": "Skip Voxels"
+    },
+    "apply": {
+      "type": "number",
+      "description": "Control for applying transform after registration",
+      "title": "Apply Transform"
+    },
+    "distance_log": {
+      "type": "number",
+      "description": "Set l_distance to specified value",
+      "title": "Distance Log"
+    },
+    "momentum": {
+      "type": "number",
+      "description": "Set momentum to specified value",
+      "title": "Momentum"
+    },
+    "iterations": {
+      "type": "number",
+      "description": "Set number of iterations to specified value",
+      "title": "Number of Iterations"
+    },
+    "smoothness": {
+      "type": "number",
+      "description": "Set l_smoothness to specified value",
+      "title": "Smoothness"
+    },
+    "transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read the forward transform from specified file",
+      "title": "Forward Transform"
+    },
+    "inverse_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read the inverse transform from specified file",
+      "title": "Inverse Transform"
+    },
+    "binary": {
+      "type": "number",
+      "description": "Set l_binary to specified value",
+      "title": "Binary"
+    },
+    "jacobian": {
+      "type": "number",
+      "description": "Set l_jacobian to specified value",
+      "title": "Jacobian"
+    },
+    "disable_zero_locations": {
+      "type": "number",
+      "description": "Control for disabling zero image locations",
+      "title": "Disable Zero Image Locations"
+    },
+    "smooth_averages": {
+      "type": "number",
+      "description": "Smooth gradient with specified number of averages",
+      "title": "Gradient Smoothing Averages"
+    },
+    "exp_k": {
+      "type": "number",
+      "description": "Set exp_k to specified value",
+      "title": "Exp K"
+    },
+    "diagnostics": {
+      "type": "number",
+      "description": "Write diagnostics at each specified iteration",
+      "title": "Diagnostics Iteration"
+    }
+  },
+  "required": [
+    "@type",
+    "source",
+    "target",
+    "warp"
+  ]
+}

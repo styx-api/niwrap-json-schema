@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@DeblankFileNames",
+  "description": "A script to remove blanks and other annoying characters ([], ()) from filenames.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@DeblankFileNames"
+    },
+    "move": {
+      "type": "boolean",
+      "description": "Actually rename the files (opposite of -dry_run).",
+      "title": "Move Flag",
+      "default": false
+    },
+    "nobrac": {
+      "type": "boolean",
+      "description": "Do not replace () and [] in filenames, just spaces.",
+      "title": "No Brackets Flag",
+      "default": false
+    },
+    "demo_set": {
+      "type": "boolean",
+      "description": "Create a toy directory with bad names for testing.",
+      "title": "Demo Set Flag",
+      "default": false
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Turn on script echo.",
+      "title": "Echo Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message.",
+      "title": "Help Flag",
+      "default": false
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify files to fix as opposed to letting it fix all the names in the current directory.",
+      "title": "Files to Fix"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

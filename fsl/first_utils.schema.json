@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "first_utils",
+  "description": "Utilities for handling FIRST's input and output files",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/first_utils"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input image/mesh/bvars",
+      "title": "Input file"
+    },
+    "output_name": {
+      "type": "string",
+      "description": "Output name",
+      "title": "Output name"
+    },
+    "norm_factors": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of normalization factors",
+      "title": "Normalization factors"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of reference image",
+      "title": "Reference image"
+    },
+    "extra_path": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specifies extra path to image in .bvars file",
+      "title": "Extra path to image"
+    },
+    "flirt_matrices": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file containing filenames of flirt matrices",
+      "title": "Flirt matrices"
+    },
+    "use_scale": {
+      "type": "boolean",
+      "description": "Do stats",
+      "title": "Use Scale",
+      "default": false
+    },
+    "dice_overlap": {
+      "type": "boolean",
+      "description": "Calculates Dice overlap",
+      "title": "Dice overlap",
+      "default": false
+    },
+    "input_mesh": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input mesh",
+      "title": "Input mesh"
+    },
+    "use_norm": {
+      "type": "boolean",
+      "description": "Normalize volumes measurements",
+      "title": "Normalize volumes measurements",
+      "default": false
+    },
+    "surface_out": {
+      "type": "boolean",
+      "description": "Output vertex analysis on the surface",
+      "title": "Surface output",
+      "default": false
+    },
+    "threshold": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Threshold for clean up",
+      "title": "Threshold"
+    },
+    "mesh_label": {
+      "type": "string",
+      "description": "Specifies the label used to fill the mesh",
+      "title": "Mesh label"
+    },
+    "use_bvars": {
+      "type": "boolean",
+      "description": "Operate using the mode parameters output from FIRST",
+      "title": "Use bvars",
+      "default": false
+    },
+    "use_recon_mni": {
+      "type": "boolean",
+      "description": "Reconstruct meshes in MNI space",
+      "title": "Reconstruct in MNI space",
+      "default": false
+    },
+    "vertex_analysis": {
+      "type": "boolean",
+      "description": "Perform vertex-wise stats from bvars",
+      "title": "Vertex analysis",
+      "default": false
+    },
+    "use_recon_native": {
+      "type": "boolean",
+      "description": "Reconstruct meshes in native space",
+      "title": "Reconstruct in native space",
+      "default": false
+    },
+    "use_rigid_align": {
+      "type": "boolean",
+      "description": "Register meshes using 6 degree of freedom (7 if useScale is used)",
+      "title": "Rigid alignment",
+      "default": false
+    },
+    "design_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of fsl design matrix",
+      "title": "Design matrix"
+    },
+    "recon_mesh_from_bvars": {
+      "type": "boolean",
+      "description": "Convert bvars to mesh",
+      "title": "Reconstruct mesh from bvars",
+      "default": false
+    },
+    "read_bvars": {
+      "type": "boolean",
+      "description": "Read bvars from binary format",
+      "title": "Read bvars",
+      "default": false
+    },
+    "mesh_to_vol": {
+      "type": "boolean",
+      "description": "Convert mesh to an image",
+      "title": "Mesh to volume",
+      "default": false
+    },
+    "centre_origin": {
+      "type": "boolean",
+      "description": "Places origin of mesh at the centre of the image",
+      "title": "Centre origin",
+      "default": false
+    },
+    "save_vertices": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for saving matrix of vertex coords: (all x, then all y, then all z) by Nsubjects",
+      "title": "Save vertices"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Output F-stats to standard out",
+      "title": "Verbose",
+      "default": false
+    },
+    "use_pca_filter": {
+      "type": "boolean",
+      "description": "Smooths the surface by truncating the mode parameters",
+      "title": "Use PCA filter",
+      "default": false
+    },
+    "num_modes": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Number of modes to retain per structure",
+      "title": "Number of modes"
+    },
+    "single_boundary_corr": {
+      "type": "boolean",
+      "description": "Correct boundary voxels of a single structure",
+      "title": "Single boundary correction",
+      "default": false
+    },
+    "do_mvglm": {
+      "type": "boolean",
+      "description": "Perform multivariate general linear model analysis",
+      "title": "Do MVGLM",
+      "default": false
+    },
+    "concat_bvars": {
+      "type": "boolean",
+      "description": "Concat bvars from binary format",
+      "title": "Concat bvars",
+      "default": false
+    },
+    "debug_mode": {
+      "type": "boolean",
+      "description": "Turn on debugging mode",
+      "title": "Debug mode",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_name"
+  ]
+}

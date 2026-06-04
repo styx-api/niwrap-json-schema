@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_congeal",
+  "description": "Program that registers a set of input surfaces together and generates an atlas.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_congeal"
+    },
+    "input_surface_name": {
+      "type": "string",
+      "description": "Input surface name",
+      "title": "Input Surface Name"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere (hemi)",
+      "title": "Hemisphere"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subjects",
+      "title": "Subjects"
+    },
+    "output_surface_name": {
+      "type": "string",
+      "description": "Output surface name",
+      "title": "Output Surface Name"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Subjects directory",
+      "title": "Subjects Directory"
+    },
+    "disable_rigid_alignment": {
+      "type": "boolean",
+      "description": "Disable initial rigid alignment",
+      "title": "Disable Rigid Alignment Flag",
+      "default": false
+    },
+    "disable_sulc_alignment": {
+      "type": "boolean",
+      "description": "Disable initial sulc alignment",
+      "title": "Disable Sulc Alignment Flag",
+      "default": false
+    },
+    "smoothwm_curv": {
+      "type": "boolean",
+      "description": "Use smoothwm curvature for final alignment",
+      "title": "Smoothwm Curvature Flag",
+      "default": false
+    },
+    "jacobian_output": {
+      "type": "string",
+      "description": "Write-out jacobian overlay data to file",
+      "title": "Jacobian Output File"
+    },
+    "distance_term": {
+      "type": "number",
+      "description": "Specify distance term",
+      "title": "Distance Term"
+    },
+    "manual_label": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify a manual label to align with atlas label",
+      "title": "Manual Label"
+    },
+    "addframe": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Add frame with specified parameters",
+      "title": "Add Frame"
+    },
+    "overlay": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify overlay surface values and number of averages",
+      "title": "Overlay"
+    },
+    "overlay_dir": {
+      "type": "string",
+      "description": "Specify overlay directory",
+      "title": "Overlay Directory"
+    },
+    "target_subject": {
+      "type": "boolean",
+      "description": "Target specifies a subject's surface, not a template file",
+      "title": "Target Subject Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface_name",
+    "hemi",
+    "subjects",
+    "output_surface_name"
+  ]
+}

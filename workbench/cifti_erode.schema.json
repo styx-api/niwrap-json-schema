@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ERODE A CIFTI FILE",
+  "description": "For all data values that are empty (for label data, unlabeled, for other data, zero), set the surrounding values to empty.  The surrounding values are defined as the immediate neighbors and all values in the same structure within the specified distance (-merged-volume treats all voxels as one structure).\n\nThe -*-corrected-areas options are intended for eroding on group average surfaces, but it is only an approximate correction.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_erode"
+    },
+    "cifti_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input cifti file"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which dimension to dilate along, ROW or COLUMN"
+    },
+    "surface_distance": {
+      "type": "number",
+      "description": "the distance to dilate on surfaces, in mm"
+    },
+    "volume_distance": {
+      "type": "number",
+      "description": "the distance to dilate in the volume, in mm"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "the output cifti file"
+    },
+    "left_surface": {
+      "type": "object",
+      "properties": {
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the left surface file"
+        },
+        "left_corrected_areas": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "vertex areas to use instead of computing them from the left surface"
+        }
+      },
+      "required": [
+        "surface"
+      ],
+      "description": "specify the left surface to use"
+    },
+    "right_surface": {
+      "type": "object",
+      "properties": {
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the right surface file"
+        },
+        "right_corrected_areas": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "vertex areas to use instead of computing them from the right surface"
+        }
+      },
+      "required": [
+        "surface"
+      ],
+      "description": "specify the right surface to use"
+    },
+    "cerebellum_surface": {
+      "type": "object",
+      "properties": {
+        "surface": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the cerebellum surface file"
+        },
+        "cerebellum_corrected_areas": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "vertex areas to use instead of computing them from the cerebellum surface"
+        }
+      },
+      "required": [
+        "surface"
+      ],
+      "description": "specify the cerebellum surface to use"
+    },
+    "merged_volume": {
+      "type": "boolean",
+      "description": "treat volume components as if they were a single component",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "cifti_in",
+    "direction",
+    "surface_distance",
+    "volume_distance",
+    "cifti_out"
+  ]
+}

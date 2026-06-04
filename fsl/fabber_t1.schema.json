@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fabber_t1",
+  "description": "Fabber is a tool for performing model-based analysis of fMRI data, using advanced Bayesian inference techniques.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fabber_t1"
+    },
+    "output": {
+      "type": "string",
+      "description": "Directory for output files (including logfile)",
+      "title": "Output Directory"
+    },
+    "method": {
+      "type": "string",
+      "description": "Inference method to use",
+      "title": "Inference Method"
+    },
+    "model": {
+      "type": "string",
+      "description": "Forward model to use",
+      "title": "Forward Model"
+    },
+    "data": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify a single input data file",
+      "title": "Input Data"
+    },
+    "data_mult": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Specify multiple data files for n=1, 2, 3...",
+      "title": "Multiple Data Files"
+    },
+    "data_order": {
+      "type": "string",
+      "description": "How multiple data files are handled: concatenate or interleave",
+      "title": "Data Order"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file. Inference will only be performed where mask value > 0",
+      "title": "Mask File"
+    },
+    "masked_time_points": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "List of masked time points, indexed from 1. These will be ignored in the parameter updates",
+      "title": "Masked Time Points"
+    },
+    "supp_data": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Supplemental timeseries data, required for some models",
+      "title": "Supplemental Data"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Overwrite existing output. If not set, new output directories will be created by appending '+' to the directory name",
+      "title": "Overwrite",
+      "default": false
+    },
+    "link_to_latest": {
+      "type": "boolean",
+      "description": "Try to create a link to the most recent output directory with the prefix _latest",
+      "title": "Link to Latest",
+      "default": false
+    },
+    "simple_output": {
+      "type": "boolean",
+      "description": "Simple output format: progress as percentage",
+      "title": "Simple Output",
+      "default": false
+    },
+    "load_models": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Load models dynamically from the specified filename, which should be a DLL/shared library",
+      "title": "Load Models"
+    },
+    "evaluate": {
+      "type": "string",
+      "description": "Evaluate model. Set to name of output required or blank for default output",
+      "title": "Evaluate Model"
+    },
+    "evaluate_params": {
+      "type": "string",
+      "description": "List of parameter values for evaluation",
+      "title": "Evaluate Parameters"
+    },
+    "evaluate_nt": {
+      "type": "number",
+      "description": "Number of time points for evaluation - must be consistent with model options where appropriate",
+      "title": "Evaluate NT"
+    },
+    "dump_param_names": {
+      "type": "boolean",
+      "description": "Write the file paramnames.txt containing the names of the model parameters",
+      "title": "Dump Parameter Names",
+      "default": false
+    },
+    "save_model_fit": {
+      "type": "boolean",
+      "description": "Output the model prediction as a 4d volume",
+      "title": "Save Model Fit",
+      "default": false
+    },
+    "save_residuals": {
+      "type": "boolean",
+      "description": "Output the residuals (difference between the data and the model prediction)",
+      "title": "Save Residuals",
+      "default": false
+    },
+    "save_model_extras": {
+      "type": "boolean",
+      "description": "Output any additional model-specific timeseries data",
+      "title": "Save Model Extras",
+      "default": false
+    },
+    "save_mvn": {
+      "type": "boolean",
+      "description": "Output the final MVN distributions",
+      "title": "Save MVN",
+      "default": false
+    },
+    "save_mean": {
+      "type": "boolean",
+      "description": "Output the parameter means",
+      "title": "Save Means",
+      "default": false
+    },
+    "save_std": {
+      "type": "boolean",
+      "description": "Output the parameter standard deviations",
+      "title": "Save Standard Deviations",
+      "default": false
+    },
+    "save_var": {
+      "type": "boolean",
+      "description": "Output the parameter variances",
+      "title": "Save Variances",
+      "default": false
+    },
+    "save_zstat": {
+      "type": "boolean",
+      "description": "Output the parameter Zstats",
+      "title": "Save ZStats",
+      "default": false
+    },
+    "save_noise_mean": {
+      "type": "boolean",
+      "description": "Output the noise means. The noise distribution inferred is the precision of a Gaussian noise source",
+      "title": "Save Noise Means",
+      "default": false
+    },
+    "save_noise_std": {
+      "type": "boolean",
+      "description": "Output the noise standard deviations",
+      "title": "Save Noise Std",
+      "default": false
+    },
+    "save_free_energy": {
+      "type": "boolean",
+      "description": "Output the free energy, if calculated",
+      "title": "Save Free Energy",
+      "default": false
+    },
+    "optfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing additional options, one per line, in the same form as specified on the command line",
+      "title": "Options File"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Output large amounts of debug information",
+      "title": "Debug",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "output",
+    "method",
+    "model",
+    "data"
+  ]
+}

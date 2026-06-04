@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_mvlm",
+  "description": "Multivariate Linear Model regression on time courses and/or 3D/4D images using SVD (PCA), PLS, normalised PLS, CVA, SVD-CVA or MLM",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fsl_mvlm"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file (text matrix or 3D/4D image file)",
+      "title": "Input file"
+    },
+    "basename_output_files": {
+      "type": "string",
+      "description": "Basename for output files",
+      "title": "Output basename"
+    },
+    "algorithm": {
+      "type": "string",
+      "description": "Algorithm for decomposition: PCA (or SVD; default), PLS, orthoPLS, CVA, SVD-CVA, MLM, NMF",
+      "title": "Algorithm"
+    },
+    "design_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File name of the GLM design matrix (time courses or spatial maps)",
+      "title": "Design matrix file"
+    },
+    "mask_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask image file name if input is an image",
+      "title": "Mask image file"
+    },
+    "design_normalization": {
+      "type": "boolean",
+      "description": "Switch on normalisation of the design matrix columns to unit standard deviation",
+      "title": "Design normalization flag",
+      "default": false
+    },
+    "variance_normalisation": {
+      "type": "boolean",
+      "description": "Perform MELODIC variance-normalisation on data",
+      "title": "Variance normalisation flag",
+      "default": false
+    },
+    "demean": {
+      "type": "boolean",
+      "description": "Switch on de-meaning of design and data",
+      "title": "Demean flag",
+      "default": false
+    },
+    "nmf_dim": {
+      "type": "number",
+      "description": "Number of underlying factors for NMF",
+      "title": "NMF dimension"
+    },
+    "nmf_iterations": {
+      "type": "number",
+      "description": "Number of NMF iterations (default 100)",
+      "title": "NMF iterations"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Switch on verbose output",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "out_data": {
+      "type": "string",
+      "description": "Output file name for pre-processed data",
+      "title": "Output data file"
+    },
+    "out_vnscales": {
+      "type": "string",
+      "description": "Output file name for scaling factors for variance normalisation",
+      "title": "Variance normalisation scales file"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "basename_output_files"
+  ]
+}

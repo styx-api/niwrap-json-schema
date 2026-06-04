@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "rca-long-tp-init",
+  "description": "Initialize long timepoint subject for recon-all processing.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/rca-long-tp-init"
+    },
+    "timepoint": {
+      "type": "string",
+      "description": "Timepoint identifier",
+      "title": "Timepoint"
+    },
+    "base": {
+      "type": "string",
+      "description": "Base identifier",
+      "title": "Base"
+    },
+    "use_long_base_ctrl_vol": {
+      "type": "boolean",
+      "description": "Use long base control volume",
+      "title": "Use Long Base Ctrl Vol Flag",
+      "default": false
+    },
+    "hemisphere": {
+      "enum": [
+        "lh",
+        "rh"
+      ],
+      "description": "Specify the hemisphere (left or right)",
+      "title": "Hemisphere"
+    },
+    "expert_opts": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Expert options file",
+      "title": "Expert Options File"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject identifier for testing; put after -long",
+      "title": "Subject"
+    }
+  },
+  "required": [
+    "@type",
+    "timepoint",
+    "base"
+  ]
+}

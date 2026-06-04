@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mergeseg",
+  "description": "Merges one segmentation into another, replacing the source voxels with those from the merge segmentation where non-zero.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mergeseg"
+    },
+    "src_seg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Source segmentation image file",
+      "title": "Source Segmentation"
+    },
+    "merge_seg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Merge segmentation volume file",
+      "title": "Merge Segmentation"
+    },
+    "out_seg": {
+      "type": "string",
+      "description": "Output merged segmentation",
+      "title": "Output Segmentation"
+    },
+    "segid": {
+      "type": "number",
+      "description": "Segmentation index (optional). If specified, all the voxels in the merge seg will be set to segindex.",
+      "title": "Segmentation Index"
+    },
+    "segid_only": {
+      "type": "number",
+      "description": "Only take segindex from merge and use it for merging.",
+      "title": "Segmentation Index Only"
+    },
+    "segid_erode": {
+      "type": "number",
+      "description": "Erode seg-only segindex before merge. Specify the number of erosion iterations.",
+      "title": "Erode Segmentation Index"
+    },
+    "ctab": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Color table to embed in the output segmentation.",
+      "title": "Color Table"
+    }
+  },
+  "required": [
+    "@type",
+    "src_seg",
+    "merge_seg",
+    "out_seg"
+  ]
+}

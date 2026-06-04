@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "wm-anat-snr",
+  "description": "Measures the anatomical SNR in white matter (WM) for quality assurance (QA). This is an experimental metric.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/wm-anat-snr"
+    },
+    "subject": {
+      "type": "string",
+      "description": "FreeSurfer subject name",
+      "title": "Subject"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output file",
+      "title": "Output file"
+    },
+    "force": {
+      "type": "boolean",
+      "description": "Force analysis even if output is up-to-date",
+      "title": "Force Flag",
+      "default": false
+    },
+    "nerode": {
+      "type": "integer",
+      "description": "Number of erosions for the WM mask",
+      "title": "Number of Erodes"
+    },
+    "tmp_dir": {
+      "type": "string",
+      "description": "Temporary directory",
+      "title": "Temporary Directory"
+    },
+    "cleanup": {
+      "type": "boolean",
+      "description": "Delete temporary directory after execution",
+      "title": "Cleanup Flag",
+      "default": false
+    },
+    "no_cleanup": {
+      "type": "boolean",
+      "description": "Do not delete temporary directory after execution",
+      "title": "No Cleanup Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject",
+    "output_file"
+  ]
+}

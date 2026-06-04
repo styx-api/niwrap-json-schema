@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_calc",
+  "description": "Simple calculator that operates on FreeSurfer curvatures and volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_calc"
+    },
+    "input_file1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The name of a FreeSurfer curvature overlay (e.g., rh.curv) or volume file (e.g., orig.mgz).",
+      "title": "Input File 1"
+    },
+    "action": {
+      "type": "string",
+      "description": "Mathematical action to perform on the input file(s), written as a text string.",
+      "title": "Action"
+    },
+    "input_file2_or_float": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The second input for the calculation. Can be a file (e.g., rh.thickness) or a float number if the file does not exist.",
+      "title": "Input File 2 or Float"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Specify the output file name for the result of the calculation.",
+      "title": "Output File"
+    },
+    "label_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Constrain the calculation to vertices defined in the FreeSurfer label file.",
+      "title": "Label File"
+    },
+    "verbosity": {
+      "type": "string",
+      "description": "Set the verbosity of the program.",
+      "title": "Verbosity"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file1",
+    "action"
+  ]
+}

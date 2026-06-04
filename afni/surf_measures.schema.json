@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfMeasures",
+  "description": "Compute measures from surface dataset(s)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SurfMeasures"
+    },
+    "spec_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "SUMA spec file containing a list of related surfaces",
+      "title": "Spec file"
+    },
+    "surf_A": {
+      "type": "string",
+      "description": "Surface name (in spec file) for the first surface",
+      "title": "Surface A"
+    },
+    "surf_B": {
+      "type": "string",
+      "description": "Surface name (in spec file) for the second surface",
+      "title": "Surface B"
+    },
+    "out_1D": {
+      "type": "string",
+      "description": "Output filename in 1D format",
+      "title": "Output 1D file"
+    },
+    "out_dset": {
+      "type": "string",
+      "description": "Output filename with dataset format",
+      "title": "Output dataset file"
+    },
+    "func": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Measure function to be applied",
+      "title": "Function"
+    },
+    "surf_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "AFNI volume dataset associated with the surface",
+      "title": "Surface Volume"
+    },
+    "cmask": {
+      "type": "string",
+      "description": "Restrict nodes with a mask",
+      "title": "Constraint Mask"
+    },
+    "debug": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5,
+      "description": "Display extra run-time information with specified debug level (0-5)",
+      "title": "Debug Level"
+    },
+    "dnode": {
+      "type": "number",
+      "description": "Display extra information for specified node",
+      "title": "Debug Node"
+    },
+    "nodes_1D": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Restrict output to specific nodes listed in a file",
+      "title": "Node List"
+    },
+    "info_all": {
+      "type": "boolean",
+      "description": "Display all final info",
+      "title": "Info All",
+      "default": false
+    },
+    "info_area": {
+      "type": "boolean",
+      "description": "Display total area of each triangulated surface",
+      "title": "Info Area",
+      "default": false
+    },
+    "info_norms": {
+      "type": "boolean",
+      "description": "Display info about the normals",
+      "title": "Info Norms",
+      "default": false
+    },
+    "info_thick": {
+      "type": "boolean",
+      "description": "Display minimum and maximum thickness between surfaces",
+      "title": "Info Thickness",
+      "default": false
+    },
+    "info_vol": {
+      "type": "boolean",
+      "description": "Display total computed volume between surfaces",
+      "title": "Info Volume",
+      "default": false
+    },
+    "info_volg": {
+      "type": "boolean",
+      "description": "Display total computed volume estimated via Gauss' theorem",
+      "title": "Info Volume Gauss",
+      "default": false
+    },
+    "ver": {
+      "type": "boolean",
+      "description": "Show program version and compile date",
+      "title": "Version Information",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "spec_file",
+    "surf_A",
+    "out_dset"
+  ]
+}

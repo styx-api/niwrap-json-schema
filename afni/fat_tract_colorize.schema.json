@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@fat_tract_colorize",
+  "description": "Visualize tractographic output from 3dTrackID, particularly in probabilistic mode.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@fat_tract_colorize"
+    },
+    "in_fa": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "FA values of the DT fitting, used to modulate the brightness of the RGB coloration.",
+      "title": "Input FA file"
+    },
+    "in_v1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First eigenvector of the DT fitting. A unit vector volume with 3 components (0-1 range).",
+      "title": "Input V1 file"
+    },
+    "in_tracts": {
+      "type": "string",
+      "description": "The INDIMAP or PAIRMAP file output by 3dTrackID, specifying the subbrick if >1 (e.g., NAME_INDIMAP+orig'[0]').",
+      "title": "Input tracts file"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for all output files.",
+      "title": "Output prefix"
+    },
+    "in_ulay": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional underlay dataset for AFNI/SUMA viewing. Default is to use the FA dataset.",
+      "title": "Input underlay file"
+    },
+    "no_view": {
+      "type": "boolean",
+      "description": "Turn off auto-running of AFNI_SUMA commands to view the output immediately.",
+      "title": "No view flag",
+      "default": false
+    },
+    "only_view": {
+      "type": "boolean",
+      "description": "Only view the data with AFNI+SUMA, assuming the command has been run before.",
+      "title": "Only view flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "in_fa",
+    "in_v1",
+    "in_tracts",
+    "prefix"
+  ]
+}

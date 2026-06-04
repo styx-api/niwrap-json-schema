@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_compute_acorr",
+  "description": "Compute the autocorrelation function of a curvature file on a spherical surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_compute_acorr"
+    },
+    "output_subject": {
+      "type": "string",
+      "description": "The output subject file.",
+      "title": "Output Subject"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Specify the hemisphere for processing.",
+      "title": "Hemisphere"
+    },
+    "surf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The surface file which must be a spherical surface suitable for computing geodesics.",
+      "title": "Surface File"
+    },
+    "curv": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The input curvature file.",
+      "title": "Curvature File"
+    },
+    "c1_subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subjects from one class.",
+      "title": "Class 1 Subjects"
+    },
+    "c2_subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subjects from another class.",
+      "title": "Class 2 Subjects"
+    }
+  },
+  "required": [
+    "@type",
+    "output_subject",
+    "hemi",
+    "surf",
+    "curv",
+    "c1_subjects",
+    "c2_subjects"
+  ]
+}

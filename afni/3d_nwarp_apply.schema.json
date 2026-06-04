@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dNwarpApply",
+  "description": "Program to apply a nonlinear 3D warp saved from 3dQwarp (or 3dNwarpCat, etc.) to a 3D dataset, to produce a warped version of the source dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dNwarpApply"
+    },
+    "nwarp": {
+      "type": "string",
+      "description": "The name of the 3D warp dataset. Multiple warps can be catenated.",
+      "title": "Nonlinear Warp"
+    },
+    "iwarp": {
+      "type": "boolean",
+      "description": "Invert the warp specified in '-nwarp'.",
+      "title": "Invert Warp Flag",
+      "default": false
+    },
+    "source": {
+      "type": "string",
+      "description": "The name of the source dataset to be warped. Multiple datasets can be supplied.",
+      "title": "Source Dataset"
+    },
+    "master": {
+      "type": "string",
+      "description": "The name of the master dataset which defines the output grid.",
+      "title": "Master Dataset"
+    },
+    "newgrid": {
+      "type": "string",
+      "description": "The new grid spacing (cubical voxels, in mm).",
+      "title": "New Grid Spacing"
+    },
+    "dxyz": {
+      "type": "string",
+      "description": "Specify a different grid spacing (cubical voxels, in mm).",
+      "title": "Grid Spacing"
+    },
+    "interp": {
+      "type": "string",
+      "description": "The interpolation mode ('NN', 'linear', 'cubic', 'quintic', 'wsinc5').",
+      "title": "Interpolation Mode"
+    },
+    "ainterp": {
+      "type": "string",
+      "description": "Specify a different interpolation mode for the data than the warp.",
+      "title": "Alternative Interpolation Mode"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "The name of the new output dataset. Multiple names can be supplied if more than one source dataset is input.",
+      "title": "Output Prefix"
+    },
+    "suffix": {
+      "type": "string",
+      "description": "Change the default suffix '_Nwarp' to a user-defined suffix.",
+      "title": "Output Suffix"
+    },
+    "short": {
+      "type": "boolean",
+      "description": "Write output dataset using 16-bit short integers rather than the usual 32-bit floats.",
+      "title": "Short Output Flag",
+      "default": false
+    },
+    "wprefix": {
+      "type": "string",
+      "description": "Save every warp generated in the process to a separate dataset.",
+      "title": "Warp Prefix"
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Don't be verbose.",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "verb": {
+      "type": "boolean",
+      "description": "Be extra verbose.",
+      "title": "Verbose Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "nwarp",
+    "source"
+  ]
+}

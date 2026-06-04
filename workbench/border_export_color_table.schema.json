@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WRITE BORDER NAMES AND COLORS AS TEXT",
+  "description": "Takes the names and colors of each border, and writes it to the same format as -metric-label-import expects.  By default, the borders are colored by border name, specify -class-colors to color them by class instead.  The key values start at 1 and follow the order of the borders in the file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/border_export_color_table"
+    },
+    "border_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input border file"
+    },
+    "table_out": {
+      "type": "string",
+      "description": "output - the output text file"
+    },
+    "class_colors": {
+      "type": "boolean",
+      "description": "use class colors instead of the name colors",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "border_file",
+    "table_out"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AVERAGE SURFACE FILES TOGETHER",
+  "description": "The 3D sample standard deviation is computed as 'sqrt(sum(squaredlength(xyz - mean(xyz)))/(n - 1))'.\n\nUncertainty is a legacy measure used in caret5, and is computed as 'sum(length(xyz - mean(xyz)))/n'.\n\nWhen weights are used, the 3D sample standard deviation treats them as reliability weights.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/surface_average"
+    },
+    "surface_out": {
+      "type": "string",
+      "description": "the output averaged surface"
+    },
+    "stddev": {
+      "type": "object",
+      "properties": {
+        "stddev_metric_out": {
+          "type": "string",
+          "description": "the output metric for 3D sample standard deviation"
+        }
+      },
+      "required": [
+        "stddev_metric_out"
+      ],
+      "description": "compute 3D sample standard deviation"
+    },
+    "uncertainty": {
+      "type": "object",
+      "properties": {
+        "uncert_metric_out": {
+          "type": "string",
+          "description": "the output metric for uncertainty"
+        }
+      },
+      "required": [
+        "uncert_metric_out"
+      ],
+      "description": "compute caret5 'uncertainty'"
+    },
+    "surf": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "surface": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "a surface file to average"
+          },
+          "weight": {
+            "type": "number",
+            "description": "specify a weighted average"
+          }
+        },
+        "required": [
+          "surface"
+        ]
+      },
+      "description": "specify a surface to include in the average"
+    }
+  },
+  "required": [
+    "@type",
+    "surface_out",
+    "surf"
+  ]
+}

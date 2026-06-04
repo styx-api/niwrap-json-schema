@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "vol2symsurf",
+  "description": "A tool that samples a volume onto the surface of the left-right symmetric subject (fsaverage_sym).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/vol2symsurf"
+    },
+    "registration_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Registration file",
+      "title": "Registration File"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume in NIfTI format",
+      "title": "Input Volume"
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "Full width at half maximum for surface smoothing",
+      "title": "Surface Smoothing FWHM"
+    },
+    "output_stem": {
+      "type": "string",
+      "description": "Output stem",
+      "title": "Output Stem"
+    },
+    "regheader": {
+      "type": "string",
+      "description": "Subject for regheader",
+      "title": "Regheader Subject"
+    },
+    "projection_fraction": {
+      "type": "number",
+      "description": "Projection fraction",
+      "title": "Projection Fraction"
+    },
+    "no_diff": {
+      "type": "boolean",
+      "description": "Do not compute left-right hemisphere difference",
+      "title": "No LH-RH Difference Flag",
+      "default": false
+    },
+    "laterality_index": {
+      "type": "boolean",
+      "description": "Compute laterality index instead of simple difference",
+      "title": "Laterality Index Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "registration_file",
+    "input_volume",
+    "fwhm"
+  ]
+}

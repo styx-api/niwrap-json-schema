@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "slices_summary",
+  "description": "Generate summary PNG images for 4D neuroimaging data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/slices_summary"
+    },
+    "4d_input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "4D input image (e.g., melodic_IC)",
+      "title": "4D Input File"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold value for the slices",
+      "title": "Threshold"
+    },
+    "background_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Background image file (e.g., standard/MNI152_T1_2mm)",
+      "title": "Background Image"
+    },
+    "pictures_sum": {
+      "type": "string",
+      "description": "Output directory for summary images",
+      "title": "Pictures Summar"
+    },
+    "single_slice_flag": {
+      "type": "boolean",
+      "description": "Generate single-slice summary images instead of 3-slice",
+      "title": "Single Slice Flag",
+      "default": false
+    },
+    "darker_background_flag": {
+      "type": "boolean",
+      "description": "Make background darker and colour brighter, for greater colour visibility",
+      "title": "Darker Background Flag",
+      "default": false
+    },
+    "dumb_rule_flag": {
+      "type": "boolean",
+      "description": "Use dumber rule for choosing optimal slice",
+      "title": "Dumb Rule Flag",
+      "default": false
+    },
+    "pictures_sum_second": {
+      "type": "string",
+      "description": "Path to summary images directory",
+      "title": "Pictures Summary Second"
+    },
+    "output_png": {
+      "type": "string",
+      "description": "Output PNG file",
+      "title": "Output PNG"
+    },
+    "timepoints": {
+      "type": "string",
+      "description": "Space-separated list of timepoints to use; first timepoint is 0",
+      "title": "Timepoints"
+    }
+  },
+  "required": [
+    "@type",
+    "4d_input_file",
+    "threshold",
+    "background_image",
+    "pictures_sum",
+    "pictures_sum_second",
+    "output_png",
+    "timepoints"
+  ]
+}

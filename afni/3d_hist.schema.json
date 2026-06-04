@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dHist",
+  "description": "Computes histograms using functions for generating priors",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dHist"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset providing values for histogram.",
+      "title": "Input dataset"
+    },
+    "dind_subbrick": {
+      "type": "number",
+      "description": "Use sub-brick SB from the input rather than 0",
+      "title": "Sub-brick number"
+    },
+    "mask_dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Provide mask dataset to select subset of input.",
+      "title": "Mask dataset"
+    },
+    "mask_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify the range of values to consider from MSET. Default is anything non-zero",
+      "title": "Mask range"
+    },
+    "cmask": {
+      "type": "string",
+      "description": "Provide cmask expression. Voxels where expression is 0 are excluded from computations.",
+      "title": "Cmask expression"
+    },
+    "hist_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read this previously created histogram instead of forming one from DSET.",
+      "title": "Histogram file"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Write histogram to niml file called PREF.niml.hist",
+      "title": "Output prefix"
+    },
+    "equalized": {
+      "type": "string",
+      "description": "Write a histogram equalized version of the input dataset.",
+      "title": "Equalized output"
+    },
+    "nbin": {
+      "type": "number",
+      "description": "Use K bins.",
+      "title": "Number of bins"
+    },
+    "min": {
+      "type": "number",
+      "description": "Minimum intensity.",
+      "title": "Minimum intensity"
+    },
+    "max": {
+      "type": "number",
+      "description": "Maximum intensity.",
+      "title": "Maximum intensity"
+    },
+    "binwidth": {
+      "type": "number",
+      "description": "Bin width.",
+      "title": "Bin width"
+    },
+    "ignore_out": {
+      "type": "boolean",
+      "description": "Do not count samples outside the user specified range.",
+      "title": "Ignore out of range samples",
+      "default": false
+    },
+    "range_hist": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use previously created histogram to set range and binwidth parameters.",
+      "title": "Range histogram file"
+    },
+    "showhist": {
+      "type": "boolean",
+      "description": "Display histogram to stdout.",
+      "title": "Show histogram",
+      "default": false
+    },
+    "at_val": {
+      "type": "number",
+      "description": "Set the value at which you want histogram values.",
+      "title": "Histogram value at"
+    },
+    "get_params": {
+      "type": "string",
+      "description": "Return the desired properties at a given value. You can select multiple properties.",
+      "title": "Histogram parameters to get"
+    },
+    "voxvol": {
+      "type": "number",
+      "description": "Specify voxel volume in mm^3. To be used with upvol.",
+      "title": "Voxel volume"
+    },
+    "val_at": {
+      "type": "string",
+      "description": "Return the value where histogram property PAR is equal to PARVAL. PAR can be: cdf, rcdf, ncdf, nrcdf, upvol.",
+      "title": "Value at histogram property"
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Return a concise output to simplify parsing.",
+      "title": "Quiet output",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input"
+  ]
+}

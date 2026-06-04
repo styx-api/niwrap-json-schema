@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_normalize_tp2",
+  "description": "Normalize the input volume using control points of tp1 to help normalize tp2.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_normalize_tp2"
+    },
+    "input_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume to be normalized",
+      "title": "Input Volume"
+    },
+    "normalized_vol": {
+      "type": "string",
+      "description": "Output normalized volume",
+      "title": "Normalized Volume"
+    },
+    "t1_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T1 volume for tp1 where normalization is applied",
+      "title": "T1 Volume for tp1"
+    },
+    "mask1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Brain mask for tp1, mapped to tp2 via the xform",
+      "title": "Mask for tp1"
+    },
+    "mask2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Brain mask for tp2, mapped to tp1 via the inverse xform",
+      "title": "Mask for tp2"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold for background (default = 1.0)",
+      "title": "Background Threshold"
+    },
+    "ctrl": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Control point volume for tp1",
+      "title": "Control Points Volume"
+    },
+    "xform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "LTA transform that aligns tp1 to tp2",
+      "title": "Xform"
+    },
+    "invert_flag": {
+      "type": "boolean",
+      "description": "Reversely apply -xform",
+      "title": "Invert Flag",
+      "default": false
+    },
+    "lta_src": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Source volume for -xform if not available from the xform file",
+      "title": "LTA Source"
+    },
+    "lta_dst": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Target volume for -xform if not available from the xform file",
+      "title": "LTA Destination"
+    }
+  },
+  "required": [
+    "@type",
+    "input_vol",
+    "normalized_vol"
+  ]
+}

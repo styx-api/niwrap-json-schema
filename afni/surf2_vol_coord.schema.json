@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Surf2VolCoord",
+  "description": "Relates node indices to coordinates given x y z coordinates and returns the nodes closest to them.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/Surf2VolCoord"
+    },
+    "surface": {
+      "type": "string",
+      "description": "Specify input surface.",
+      "title": "Surface"
+    },
+    "grid_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specifies the grid for the output volume.",
+      "title": "Grid Volume"
+    },
+    "grid_subbrick": {
+      "type": "number",
+      "description": "Sub-brick from which data are taken.",
+      "title": "Grid Subbrick"
+    },
+    "sv": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface Volume file aligning with the surface.",
+      "title": "Surface Volume"
+    },
+    "one_node": {
+      "type": "string",
+      "description": "Specify a single node's coordinates.",
+      "title": "One Node"
+    },
+    "closest_nodes": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "A coordinate file specifying coordinates for which the closest nodes will be found.",
+      "title": "Closest Nodes"
+    },
+    "qual": {
+      "type": "string",
+      "description": "A string of characters that qualify the surface in which the closest node was found.",
+      "title": "Qual string"
+    },
+    "lpi": {
+      "type": "boolean",
+      "description": "Coordinate axis direction for values in XYZ.1D are in LPI.",
+      "title": "LPI Flag",
+      "default": false
+    },
+    "rai": {
+      "type": "boolean",
+      "description": "Coordinate axis direction for values in XYZ.1D are in RAI (default).",
+      "title": "RAI Flag",
+      "default": false
+    },
+    "verb_level": {
+      "type": "number",
+      "description": "Verbosity level, default is 0.",
+      "title": "Verbosity Level"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output results to file PREFIX (will overwrite). Default is stdout.",
+      "title": "Prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "grid_vol",
+    "closest_nodes",
+    "prefix"
+  ]
+}

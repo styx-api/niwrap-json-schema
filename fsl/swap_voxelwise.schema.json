@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "swap_voxelwise",
+  "description": "Reordering of vectors with direction preservation",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/swap_voxelwise"
+    },
+    "vectors_file_list": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file containing list of vectors",
+      "title": "Vectors file list"
+    },
+    "scalars_file_list": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file containing list of scalars",
+      "title": "Scalars file list"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of brain mask or skeleton",
+      "title": "Mask"
+    },
+    "output_base_name": {
+      "type": "string",
+      "description": "Output base name",
+      "title": "Output base name"
+    },
+    "reorder_mode": {
+      "type": "string",
+      "description": "Reordering mode - choose between 'voxels' (default) or 'volumes'",
+      "title": "Reordering mode"
+    },
+    "init_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of initialization mask",
+      "title": "Initialization mask"
+    },
+    "crossing_thresh": {
+      "type": "number",
+      "description": "Threshold for considering a crossing fibre region - default=0.1",
+      "title": "Crossing threshold"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "vectors_file_list",
+    "mask"
+  ]
+}

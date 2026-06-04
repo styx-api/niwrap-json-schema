@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "unWarpEPI.py",
+  "description": "Routine to unwarp EPI data set using another data set with opposite polarity",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/unWarpEPI.py"
+    },
+    "forward": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Calibration matching data to be corrected",
+      "title": "Forward"
+    },
+    "reverse": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Calibration with opposing polarity to data to be corrected",
+      "title": "Reverse"
+    },
+    "anat4warp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference anatomical dataset",
+      "title": "Anat4warp"
+    },
+    "data": {
+      "type": "string",
+      "description": "Data to be corrected (same polarity as forward calibration data). Separate with commas if specifying multiple datasets.",
+      "title": "Data"
+    },
+    "subjID": {
+      "type": "string",
+      "description": "ID of subject to be corrected",
+      "title": "SubjID"
+    },
+    "giant_move": {
+      "type": "boolean",
+      "description": "Set giant_move option for align_epi_anat if final align of anatomy to corrected EPI fails if datasets are far apart in space.",
+      "title": "Giant Move",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "forward",
+    "reverse",
+    "anat4warp",
+    "data",
+    "subjID"
+  ]
+}

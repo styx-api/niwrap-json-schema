@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "annot2std",
+  "description": "Creates an average annotation in a standard space based on transforming the annotations of the individual subjects to the standard space through the surface registration.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/annot2std"
+    },
+    "output_annot_path": {
+      "type": "string",
+      "description": "Full output annotation path (also creates outannotpath.p.mgh)",
+      "title": "Output annotation path"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Input subject(s), specify each subject with --s subj",
+      "title": "Subjects"
+    },
+    "fsgd_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "FSGD file for group descriptor",
+      "title": "FSGD file"
+    },
+    "subject_list_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Subject list file",
+      "title": "Subject list file"
+    },
+    "target": {
+      "type": "string",
+      "description": "Target subject (e.g., fsaverage)",
+      "title": "Target subject"
+    },
+    "left_hemisphere": {
+      "type": "boolean",
+      "description": "Use left hemisphere",
+      "title": "Left hemisphere flag",
+      "default": false
+    },
+    "right_hemisphere": {
+      "type": "boolean",
+      "description": "Use right hemisphere",
+      "title": "Right hemisphere flag",
+      "default": false
+    },
+    "xhemi": {
+      "type": "boolean",
+      "description": "For interhemispheric analysis",
+      "title": "Interhemispheric analysis flag",
+      "default": false
+    },
+    "surfreg": {
+      "type": "string",
+      "description": "Surface registration type (default is sphere.reg)",
+      "title": "Surface registration"
+    },
+    "srcsurfreg": {
+      "type": "string",
+      "description": "Source surface registration type (default is sphere.reg)",
+      "title": "Source surface registration"
+    },
+    "trgsurfreg": {
+      "type": "string",
+      "description": "Target surface registration type (default is sphere.reg)",
+      "title": "Target surface registration"
+    },
+    "annotname": {
+      "type": "string",
+      "description": "Input annotation name (?h.annotname.annot)",
+      "title": "Annotation name"
+    },
+    "aparc": {
+      "type": "boolean",
+      "description": "Annotation name set to aparc",
+      "title": "Aparc annotation name",
+      "default": false
+    },
+    "a2009s": {
+      "type": "boolean",
+      "description": "Annotation name set to aparc.a2009s",
+      "title": "Aparc a2009s annotation name",
+      "default": false
+    },
+    "segmentation": {
+      "type": "string",
+      "description": "Save output as a surface segmentation (2 frames, second = p)",
+      "title": "Output segmentation"
+    },
+    "stack": {
+      "type": "string",
+      "description": "Stack of individual annotations as segmentation",
+      "title": "Segmentation stack"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help",
+      "title": "Help flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Display version",
+      "title": "Version flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "output_annot_path",
+    "subjects"
+  ]
+}

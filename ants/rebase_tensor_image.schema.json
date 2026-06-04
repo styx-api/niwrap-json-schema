@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RebaseTensorImage",
+  "description": "Rebase Tensor Image using specified dimensionality and method.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/RebaseTensorImage"
+    },
+    "dimension": {
+      "type": "integer",
+      "description": "The dimensionality of the input image.",
+      "title": "Dimension"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The input image file.",
+      "title": "Input File"
+    },
+    "outfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The output image file.",
+      "title": "Output File"
+    },
+    "method": {
+      "enum": [
+        "PHYSICAL",
+        "LOCAL"
+      ],
+      "description": "Method of rebasing the tensor image.",
+      "title": "Method"
+    },
+    "reference": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference image file (required if PHYSICAL or LOCAL method is chosen).",
+      "title": "Reference Image"
+    }
+  },
+  "required": [
+    "@type",
+    "dimension",
+    "infile",
+    "outfile",
+    "method"
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@SUMA_AlignToExperiment",
+  "description": "Creates a version of Surface Anatomy that is registered to Experiment Anatomy.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@SUMA_AlignToExperiment"
+    },
+    "exp_anat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of high resolution anatomical data set in register with experimental data.",
+      "title": "Experiment Anatomy"
+    },
+    "surf_anat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path and name of high resolution antomical data set used to create the surface.",
+      "title": "Surface Anatomy"
+    },
+    "dxyz": {
+      "type": "number",
+      "description": "Optional parameter to downsample anatomical volumes to dxyz mm voxel resolution before registration.",
+      "title": "Resolution for Downsampling"
+    },
+    "out_dxyz": {
+      "type": "number",
+      "description": "Output the final aligned volume at a cubic voxelsize of DXYZmm.",
+      "title": "Output Voxel Size"
+    },
+    "wd": {
+      "type": "boolean",
+      "description": "Use 3dWarpDrive's general affine transform (12 param) instead of 3dvolreg's 6 parameters.",
+      "title": "Use 3dWarpDrive",
+      "default": false
+    },
+    "al": {
+      "type": "boolean",
+      "description": "Use 3dAllineate to do the 12 parameter alignment. Cost function is 'lpa'.",
+      "title": "Use 3dAllineate",
+      "default": false
+    },
+    "al_opt": {
+      "type": "string",
+      "description": "Specify set of options to pass to 3dAllineate.",
+      "title": "Options for 3dAllineate"
+    },
+    "ok_change_view": {
+      "type": "boolean",
+      "description": "Be quiet when view of registered volume is changed to match that of the Experiment_Anatomy.",
+      "title": "OK Change View",
+      "default": false
+    },
+    "strip_skull": {
+      "type": "string",
+      "description": "Use 3dSkullStrip to remove non-brain tissue.",
+      "title": "Strip Skull"
+    },
+    "skull_strip_opt": {
+      "type": "string",
+      "description": "Pass the options to 3dSkullStrip.",
+      "title": "Options for 3dSkullStrip"
+    },
+    "align_centers": {
+      "type": "boolean",
+      "description": "Add an additional transformation to align the volume centers.",
+      "title": "Align Centers",
+      "default": false
+    },
+    "init_xform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Apply affine transform file to Surface_Anatomy before beginning registration.",
+      "title": "Initial Transform"
+    },
+    "EA_clip_below": {
+      "type": "number",
+      "description": "Set slices below CLPmm in 'Experiment Anatomy' to zero.",
+      "title": "Clip Below"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output volume.",
+      "title": "Prefix for Output"
+    },
+    "surf_anat_followers": {
+      "type": "string",
+      "description": "Apply the same alignment transform to additional datasets.",
+      "title": "Surface Anatomy Followers"
+    },
+    "followers_interp": {
+      "type": "string",
+      "description": "Set the interpolation mode for the follower datasets.",
+      "title": "Interpolation Mode"
+    },
+    "atlas_followers": {
+      "type": "boolean",
+      "description": "Automatically set the followers to be atlases in the directory of -surf_anat.",
+      "title": "Atlas Followers",
+      "default": false
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Echo all commands to terminal for debugging.",
+      "title": "Echo Commands",
+      "default": false
+    },
+    "keep_tmp": {
+      "type": "boolean",
+      "description": "Keep temporary files for debugging.",
+      "title": "Keep Temporary Files",
+      "default": false
+    },
+    "overwrite_resp": {
+      "type": "string",
+      "description": "Answer 'overwrite' questions automatically.",
+      "title": "Overwrite Response"
+    }
+  },
+  "required": [
+    "@type",
+    "exp_anat",
+    "surf_anat"
+  ]
+}

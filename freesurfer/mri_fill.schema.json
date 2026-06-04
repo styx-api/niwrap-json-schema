@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_fill",
+  "description": "Tool for creating hemispheric cutting planes and filling white matter for surface tessellation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_fill"
+    },
+    "input_mr_dir": {
+      "type": "string",
+      "description": "Input MR directory",
+      "title": "Input MR Directory"
+    },
+    "output_mr_dir": {
+      "type": "string",
+      "description": "Output MR directory",
+      "title": "Output MR Directory"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Specify fill_holes threshold (default=1)",
+      "title": "Fill Holes Threshold"
+    },
+    "xform_name": {
+      "type": "string",
+      "description": "Use xform dst offset to get an accurate Talairach volume",
+      "title": "Xform Name"
+    },
+    "segmentation_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "ASEG volume used to perform fill",
+      "title": "Segmentation File"
+    },
+    "atlas_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify atlas to use for auto-filling",
+      "title": "Atlas File"
+    },
+    "fill_ven": {
+      "type": "boolean",
+      "description": "Fill ventricles",
+      "title": "Fill Ventricles Flag",
+      "default": false
+    },
+    "seed_cc_tal": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Talairach coords of the seed for the corpus callosum (three numerical values required)",
+      "title": "Corpus Callosum Seed Talairach"
+    },
+    "seed_pons_tal": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Talairach coords of the seed for the pons (three numerical values required)",
+      "title": "Pons Seed Talairach"
+    },
+    "seed_lh_tal": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Talairach coords of the white matter seed for the left hemisphere (three numerical values required)",
+      "title": "Left Hemisphere Seed Talairach"
+    },
+    "seed_rh_tal": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Talairach coords of the white matter seed for the right hemisphere (three numerical values required)",
+      "title": "Right Hemisphere Seed Talairach"
+    },
+    "seed_cc_vox": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Voxel coords of the seed for the corpus callosum (three numerical values required)",
+      "title": "Corpus Callosum Seed Voxel"
+    },
+    "seed_pons_vox": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Voxel coords of the seed for the pons (three numerical values required)",
+      "title": "Pons Seed Voxel"
+    },
+    "auto_man_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Get edits based on the difference between auto and man and apply to the output",
+      "title": "Auto Man Files"
+    },
+    "no_auto_man": {
+      "type": "boolean",
+      "description": "Turns off the -auto-man option",
+      "title": "No Auto Man Flag",
+      "default": false
+    },
+    "pointset_args": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Stand-alone option: takes one or more pointsets and fills in all the voxels that intersect lines connecting any two points within a given point set",
+      "title": "Pointset Arguments"
+    },
+    "ctab_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Embed color table in the output",
+      "title": "Color Table File"
+    }
+  },
+  "required": [
+    "@type",
+    "input_mr_dir",
+    "output_mr_dir"
+  ]
+}

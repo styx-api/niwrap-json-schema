@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "map_central_sulcus",
+  "description": "Performs all, or any part of, the FreeSurfer cortical reconstruction process.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/map_central_sulcus"
+    },
+    "subjid": {
+      "type": "string",
+      "description": "FreeSurfer subject identification string which doubles as the name of the reconstruction root directory for the subject.",
+      "title": "Subject ID"
+    },
+    "process_directive": {
+      "type": "string",
+      "description": "Process directive for recon-all (e.g. -all, -autorecon-all, -autorecon1)",
+      "title": "Process Directive"
+    },
+    "hemi_flag": {
+      "type": "string",
+      "description": "Specify hemisphere processing (e.g., lh for left hemisphere or rh for right hemisphere)",
+      "title": "Hemisphere Process Flag"
+    },
+    "expert_prefs_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read-in expert options file for processing. Overrides default options.",
+      "title": "Expert Preferences File"
+    },
+    "xopts_use": {
+      "type": "boolean",
+      "description": "Use pre-existing expert options file.",
+      "title": "Use Expert Options Flag",
+      "default": false
+    },
+    "xopts_clean": {
+      "type": "boolean",
+      "description": "Delete pre-existing expert options file.",
+      "title": "Clean Expert Options Flag",
+      "default": false
+    },
+    "xopts_overwrite": {
+      "type": "boolean",
+      "description": "Overwrite pre-existing expert options file.",
+      "title": "Overwrite Expert Options Flag",
+      "default": false
+    },
+    "watershed_cmd": {
+      "type": "string",
+      "description": "Controls how the skull stripping will be performed.",
+      "title": "Watershed Command"
+    },
+    "xmask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Custom external brain mask to replace automated skullstripping.",
+      "title": "External Brain Mask"
+    },
+    "wsless": {
+      "type": "boolean",
+      "description": "Decrease watershed threshold (leaves less skull, but can strip more brain).",
+      "title": "WSLess Flag",
+      "default": false
+    },
+    "wsmore": {
+      "type": "boolean",
+      "description": "Increase watershed threshold (leaves more skull, but can strip less brain).",
+      "title": "WSMore Flag",
+      "default": false
+    },
+    "wsatlas": {
+      "type": "boolean",
+      "description": "Use atlas when skull stripping.",
+      "title": "WSAtlas Flag",
+      "default": false
+    },
+    "no_wsatlas": {
+      "type": "boolean",
+      "description": "Do not use atlas when skull stripping.",
+      "title": "No WSAtlas Flag",
+      "default": false
+    },
+    "no_wsgcaatlas": {
+      "type": "boolean",
+      "description": "Do not use GCA atlas when skull stripping.",
+      "title": "No WSGCAAtlas Flag",
+      "default": false
+    },
+    "wsthresh": {
+      "type": "number",
+      "description": "Explicitly set watershed threshold.",
+      "title": "WS Threshold"
+    },
+    "wsseed": {
+      "type": "string",
+      "description": "Specify an index (C, R, S) point in the skull.",
+      "title": "WS Seed Point"
+    },
+    "norm3diters": {
+      "type": "number",
+      "description": "Number of 3d iterations for mri_normalize.",
+      "title": "Norm 3D Iterations"
+    },
+    "normmaxgrad": {
+      "type": "number",
+      "description": "Max grad (-g) for mri_normalize. Default is 1.",
+      "title": "Norm Max Grad"
+    },
+    "norm1_b": {
+      "type": "number",
+      "description": "In the first usage of mri_normalize, use control point with intensity N below target (default=10.0).",
+      "title": "Norm1 B"
+    },
+    "norm2_b": {
+      "type": "number",
+      "description": "In the second usage of mri_normalize, use control point with intensity N below target (default=10.0).",
+      "title": "Norm2 B"
+    },
+    "norm1_n": {
+      "type": "number",
+      "description": "In the first usage of mri_normalize, do N number of iterations.",
+      "title": "Norm1 N"
+    },
+    "norm2_n": {
+      "type": "number",
+      "description": "In the second usage of mri_normalize, do N number of iterations.",
+      "title": "Norm2 N"
+    },
+    "cm_flag": {
+      "type": "boolean",
+      "description": "Conform volumes to the min voxel size.",
+      "title": "Conform Volumes Flag",
+      "default": false
+    },
+    "no_fix_with_ga": {
+      "type": "boolean",
+      "description": "Do not use genetic algorithm when fixing topology.",
+      "title": "No Fix with GA Flag",
+      "default": false
+    },
+    "fix_diag_only": {
+      "type": "boolean",
+      "description": "Topology fixer runs until ?h.defect_labels files are created, then stops.",
+      "title": "Fix Diag Only Flag",
+      "default": false
+    },
+    "seg_wlo": {
+      "type": "number",
+      "description": "Set wlo value for mri_segment and mris_make_surfaces.",
+      "title": "Segment WLO"
+    },
+    "seg_ghi": {
+      "type": "number",
+      "description": "Set ghi value for mri_segment and mris_make_surfaces.",
+      "title": "Segment GHI"
+    },
+    "nothicken": {
+      "type": "boolean",
+      "description": "Pass '-thicken 0' to mri_segment.",
+      "title": "No Thicken Flag",
+      "default": false
+    },
+    "no_ca_align_after": {
+      "type": "boolean",
+      "description": "Turn off -align-after with mri_ca_register.",
+      "title": "No CA Align After Flag",
+      "default": false
+    },
+    "no_ca_align": {
+      "type": "boolean",
+      "description": "Turn off -align with mri_ca_label.",
+      "title": "No CA Align Flag",
+      "default": false
+    },
+    "deface": {
+      "type": "boolean",
+      "description": "Deface subject, written to orig_defaced.mgz.",
+      "title": "Deface Flag",
+      "default": false
+    },
+    "mprage": {
+      "type": "boolean",
+      "description": "Assume scan parameters are MGH MP-RAGE protocol.",
+      "title": "MPRAGE Protocol Flag",
+      "default": false
+    },
+    "washu_mprage": {
+      "type": "boolean",
+      "description": "Assume scan parameters are Wash.U. MP-RAGE protocol.",
+      "title": "WashU MPRAGE Flag",
+      "default": false
+    },
+    "schwartzya3t_atlas": {
+      "type": "boolean",
+      "description": "For tal reg, use special young adult 3T atlas.",
+      "title": "Schwartzya 3T Atlas Flag",
+      "default": false
+    },
+    "mail_username": {
+      "type": "string",
+      "description": "Mail user when done.",
+      "title": "Mail Username"
+    },
+    "threads": {
+      "type": "number",
+      "description": "Set number of threads to use.",
+      "title": "Number of Threads"
+    }
+  },
+  "required": [
+    "@type",
+    "subjid",
+    "process_directive"
+  ]
+}

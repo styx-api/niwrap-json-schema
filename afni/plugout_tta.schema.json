@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "plugout_tta",
+  "description": "Connects to AFNI and receives notification whenever the user changes Talairach coordinates, then drives Netscape to display the closest figures from the Talairach-Tournoux atlas.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/plugout_tta"
+    },
+    "host": {
+      "type": "string",
+      "description": "Connect to AFNI running on the specified computer using TCP/IP. Use '-host localhost' to connect on current host with TCP/IP.",
+      "title": "Host"
+    },
+    "port": {
+      "type": "integer",
+      "description": "Use TCP/IP port number 'pp'. Default is 8005.",
+      "title": "Port Number"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose mode: prints out progress reports.",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "port_offset": {
+      "type": "integer",
+      "description": "Provide a port offset to allow multiple instances of programs to communicate on the same machine. All ports are assigned numbers relative to PORT_OFFSET. Range: [1025, 65500].",
+      "title": "Port Offset"
+    },
+    "port_offset_quiet": {
+      "type": "integer",
+      "description": "Like -np, but more quiet in the face of adversity.",
+      "title": "Port Offset Quiet"
+    },
+    "port_offset_bloc": {
+      "type": "integer",
+      "description": "Provide a port offset block. Easier to use than -np. Range: [0, MAX_BLOC]. Using this reduces chances of port conflicts.",
+      "title": "Port Offset Block"
+    },
+    "max_port_bloc": {
+      "type": "boolean",
+      "description": "Print the current value of MAX_BLOC and exit.",
+      "title": "Max Port Block",
+      "default": false
+    },
+    "max_port_bloc_quiet": {
+      "type": "boolean",
+      "description": "Print MAX_BLOC value and exit quietly.",
+      "title": "Max Port Block Quiet",
+      "default": false
+    },
+    "num_assigned_ports": {
+      "type": "boolean",
+      "description": "Print the number of assigned ports used by AFNI then quit.",
+      "title": "Number of Assigned Ports",
+      "default": false
+    },
+    "num_assigned_ports_quiet": {
+      "type": "boolean",
+      "description": "Print the number of assigned ports used by AFNI then quit quietly.",
+      "title": "Number of Assigned Ports Quiet",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

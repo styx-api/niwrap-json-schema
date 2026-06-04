@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "vol2subfield",
+  "description": "A tool for integrating arbitrary volumes with volumes that share a RAS space with the orig volume in the FreeSurfer mri folder.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/vol2subfield"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume",
+      "title": "Input Volume"
+    },
+    "subfield_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Subfield volume (full path or relative to subject/mri)",
+      "title": "Subfield Volume"
+    },
+    "registration_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Registration that maps input volume to conformed space",
+      "title": "Registration File"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume",
+      "title": "Output Volume"
+    },
+    "output_registration": {
+      "type": "string",
+      "description": "Registration between input volume and subfield",
+      "title": "Output Registration File"
+    },
+    "stats_output": {
+      "type": "string",
+      "description": "Run mri_segstats with --sum output to this file",
+      "title": "Statistics Output"
+    },
+    "avgwf_output": {
+      "type": "string",
+      "description": "Run mri_segstats with --avgwf output to this file",
+      "title": "Average Waveform Output"
+    },
+    "avgwfvol_output": {
+      "type": "string",
+      "description": "Run mri_segstats with --avgwfvol output to this file",
+      "title": "Average Waveform Volume Output"
+    },
+    "color_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Color table to use with mri_segstats",
+      "title": "Color Table File"
+    },
+    "interpolation_nearest": {
+      "type": "boolean",
+      "description": "Use nearest neighbor interpolation",
+      "title": "Nearest Neighbor Interpolation Flag",
+      "default": false
+    },
+    "interpolation_trilin": {
+      "type": "boolean",
+      "description": "Use triliear interpolation",
+      "title": "Trilinear Interpolation Flag",
+      "default": false
+    },
+    "interpolation_cubic": {
+      "type": "boolean",
+      "description": "Use cubic interpolation",
+      "title": "Cubic Interpolation Flag",
+      "default": false
+    },
+    "tmp_directory": {
+      "type": "string",
+      "description": "Temporary directory for debugging",
+      "title": "Temporary Debug Directory"
+    },
+    "preset_subfield_lh_hippoamyg": {
+      "type": "boolean",
+      "description": "Set subfield to lh.hippoAmygLabels-T1.v21.mgz",
+      "title": "LH HippoAmyg Subfield Flag",
+      "default": false
+    },
+    "preset_subfield_rh_hippoamyg": {
+      "type": "boolean",
+      "description": "Set subfield to rh.hippoAmygLabels-T1.v21.mgz",
+      "title": "RH HippoAmyg Subfield Flag",
+      "default": false
+    },
+    "preset_subfield_lh_hbt": {
+      "type": "boolean",
+      "description": "Set subfield to lh.hippoAmygLabels-T1.v21.HBT.mgz",
+      "title": "LH HBT Subfield Flag",
+      "default": false
+    },
+    "preset_subfield_rh_hbt": {
+      "type": "boolean",
+      "description": "Set subfield to rh.hippoAmygLabels-T1.v21.HBT.mgz",
+      "title": "RH HBT Subfield Flag",
+      "default": false
+    },
+    "preset_subfield_thalamus": {
+      "type": "boolean",
+      "description": "Set subfield to ThalamicNuclei.v10.T1.mgz",
+      "title": "Thalamus Subfield Flag",
+      "default": false
+    },
+    "preset_subfield_brainstem": {
+      "type": "boolean",
+      "description": "Set subfield to brainstemSsLabels.v12.mgz",
+      "title": "Brainstem Subfield Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "subfield_volume",
+    "registration_file"
+  ]
+}

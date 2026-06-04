@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dkmeans",
+  "description": "3d+t Clustering segmentation based on The C clustering library.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dkmeans"
+    },
+    "version": {
+      "type": "boolean",
+      "title": "Version information",
+      "default": false
+    },
+    "input": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input data to be clustered. You can specify multiple filenames in sequence and they will be concatenated internally.",
+      "title": "Input data files"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset to be used as a mask; only voxels with nonzero values in 'mset' will be used.",
+      "title": "Mask dataset"
+    },
+    "mask_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Restrict the voxels from 'mset' to only those mask values between 'a' and 'b' (inclusive).",
+      "title": "Mask range"
+    },
+    "cmask": {
+      "type": "string",
+      "description": "Execute the options enclosed in single quotes as a 3dcalc-like program to produce a mask from the resulting 3D brick.",
+      "title": "Custom mask options"
+    },
+    "jobname": {
+      "type": "string",
+      "description": "Specify a different name for the output files. Default is derived from the input file name.",
+      "title": "Output job name"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Specify a prefix for the output volumes. Default is the same as jobname.",
+      "title": "Output prefix"
+    },
+    "distance_measure": {
+      "type": "number",
+      "description": "Specifies distance measure for clustering. Supported values: 0 (No clustering), 1 (Uncentered correlation distance), 2 (Pearson distance), 3 (Uncentered correlation distance, absolute value), 4 (Pearson distance, absolute value), 5 (Spearman's rank distance), 6 (Kendall's distance), 7 (Euclidean distance), 8 (City-block distance).",
+      "title": "Distance measure for clustering"
+    },
+    "num_clusters": {
+      "type": "number",
+      "description": "Specify number of clusters.",
+      "title": "Number of clusters"
+    },
+    "remap_method": {
+      "type": "string",
+      "description": "Reassign clusters numbers based on METHOD: NONE (default), COUNT, iCOUNT, MAG, iMAG.",
+      "title": "Remap method"
+    },
+    "labeltable": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Attach labeltable to clustering output.",
+      "title": "Label table file"
+    },
+    "clabels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Provide a label for each cluster. Labels cannot start with '-'.",
+      "title": "Cluster labels"
+    },
+    "clust_init": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify a dataset to initialize clustering. If provided, sets -r 0.",
+      "title": "Cluster initialization dataset"
+    },
+    "num_repeats": {
+      "type": "number",
+      "description": "Number of times the k-means clustering algorithm is run.",
+      "title": "Number of k-means runs"
+    },
+    "rsigs": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Calculate distances from each voxel's signature to the signatures in this multi-column file. No clustering done.",
+      "title": "Signatures file"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Enable verbose mode.",
+      "title": "Verbose",
+      "default": false
+    },
+    "write_dists": {
+      "type": "boolean",
+      "description": "Output text files containing various distance measures.",
+      "title": "Write distances",
+      "default": false
+    },
+    "voxdbg": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Output debugging info for specified voxel (I J K).",
+      "title": "Voxel debugging"
+    },
+    "seed": {
+      "type": "number",
+      "description": "Seed for the random number generator. Default is 1234567.",
+      "title": "Random seed"
+    }
+  },
+  "required": [
+    "@type",
+    "input"
+  ]
+}

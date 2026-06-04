@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FILL HOLES IN AN ROI METRIC",
+  "description": "Finds all connected areas that are not included in the ROI, and writes ones into all but the largest one, in terms of surface area.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric_fill_holes"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the surface to use for neighbor information"
+    },
+    "metric_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input ROI metric"
+    },
+    "metric_out": {
+      "type": "string",
+      "description": "the output ROI metric"
+    },
+    "corrected_areas": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "vertex areas to use instead of computing them from the surface"
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "metric_in",
+    "metric_out"
+  ]
+}

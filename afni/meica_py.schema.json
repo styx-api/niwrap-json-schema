@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "meica.py",
+  "description": "Multi-Echo Independent Component Analysis for fMRI denoising",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/meica.py"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image dataset (e.g. dataset.nii.gz)",
+      "title": "Input file"
+    },
+    "echo_times": {
+      "type": "string",
+      "description": "Echo times (e.g. 15.0,30.0,45.0)",
+      "title": "Echo times"
+    },
+    "affine": {
+      "type": "string",
+      "description": "Affine registration matrix",
+      "title": "Affine registration matrix"
+    },
+    "output_directory": {
+      "type": "string",
+      "description": "Output directory",
+      "title": "Output directory"
+    },
+    "components": {
+      "type": "number",
+      "description": "Number of components for ICA",
+      "title": "Number of components"
+    },
+    "talairach": {
+      "type": "boolean",
+      "description": "Apply standard Talairach transformation",
+      "title": "Talairach Flag",
+      "default": false
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold value for masking",
+      "title": "Threshold value"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Enable debug mode",
+      "title": "Debug Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "infile",
+    "echo_times",
+    "affine",
+    "output_directory"
+  ]
+}

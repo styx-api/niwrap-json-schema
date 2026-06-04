@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_mat_sel.py",
+  "description": "Perform simple matrix plotting operations from outputs of FATCAT programs 3dNetCorr and 3dTrackID.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_mat_sel.py"
+    },
+    "parameters": {
+      "type": "string",
+      "description": "Supply names of parameters, separated by whitespace, for selecting from a matrix file",
+      "title": "Parameters"
+    },
+    "matr_in": {
+      "type": "string",
+      "description": "Provide the set of matrix (*.grid or *.netcc) files by searchable path. This can be a globbable entry in quotes containing wildcard characters.",
+      "title": "Matrix Input"
+    },
+    "list_match": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Provide the matrix (*.grid or *.netcc) files by explicit path, matched per file with a CSV subject ID.",
+      "title": "List Match"
+    },
+    "out_ind_matr": {
+      "type": "boolean",
+      "description": "Output individual matrix files of properties.",
+      "title": "Output Individual Matrix",
+      "default": false
+    },
+    "out_ind_1ddset": {
+      "type": "boolean",
+      "description": "Output as a 1D dset, more easily readable by other programs.",
+      "title": "Output Individual 1D Dset",
+      "default": false
+    },
+    "hold_image": {
+      "type": "boolean",
+      "description": "Switch to hold the Python-produced image on the output screen until a key has been hit.",
+      "title": "Hold Image",
+      "default": false
+    },
+    "extern_labs_no": {
+      "type": "boolean",
+      "description": "Switch to turn off the usage of user-defined labels in the *.grid/*.netcc files.",
+      "title": "External Labels No",
+      "default": false
+    },
+    "type_file": {
+      "type": "string",
+      "description": "Select image format type (e.g., jpg, png, pdf).",
+      "title": "File Type"
+    },
+    "dpi_file": {
+      "type": "number",
+      "description": "Set resolution (dots per inch) of output image.",
+      "title": "DPI"
+    },
+    "xlen_file": {
+      "type": "number",
+      "description": "Horizontal dimension of output saved image, in units of inches.",
+      "title": "X-Length"
+    },
+    "ylen_file": {
+      "type": "number",
+      "description": "Vertical dimension of output saved image, in units of inches.",
+      "title": "Y-Length"
+    },
+    "tight_layout_on": {
+      "type": "boolean",
+      "description": "Use matplotlib's tight_layout() option to ensure no overlap of features in the image.",
+      "title": "Tight Layout On",
+      "default": false
+    },
+    "fig_off": {
+      "type": "boolean",
+      "description": "Switch if you don't want matrix figure output.",
+      "title": "Figure Off",
+      "default": false
+    },
+    "size_font": {
+      "type": "number",
+      "description": "Set font size for colorbar and title.",
+      "title": "Font Size"
+    },
+    "lab_size_font": {
+      "type": "number",
+      "description": "Set font size for x- and y-axis labels.",
+      "title": "Label Font Size"
+    },
+    "a_plotmin": {
+      "type": "number",
+      "description": "Minimum colorbar value.",
+      "title": "Plot Min"
+    },
+    "b_plotmax": {
+      "type": "number",
+      "description": "Maximum colorbar value.",
+      "title": "Plot Max"
+    },
+    "cbar_off": {
+      "type": "boolean",
+      "description": "Switch to not include a colorbar at the right side of the plot.",
+      "title": "Colorbar Off",
+      "default": false
+    },
+    "map_of_colors": {
+      "type": "string",
+      "description": "Change the colormap style used in the plot.",
+      "title": "Map of Colors"
+    },
+    "cbar_int_num": {
+      "type": "number",
+      "description": "Set the number of intervals on the colorbar.",
+      "title": "Colorbar Interval Number"
+    },
+    "width_cbar_perc": {
+      "type": "number",
+      "description": "Width of colorbar as percentage of width of the correlation matrix.",
+      "title": "Width of Colorbar Percentage"
+    },
+    "specifier": {
+      "type": "string",
+      "description": "Specify number formatting for the colorbar numbers (e.g., '%.4f' for four decimal places).",
+      "title": "Specifier"
+    },
+    "xtick_lab_off": {
+      "type": "boolean",
+      "description": "Switch to turn off labels along the x- (horizontal) axis but leave those along the y- (vertical) axis.",
+      "title": "X-axis Label Off",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "parameters"
+  ]
+}

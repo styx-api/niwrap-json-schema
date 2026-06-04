@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_rotate",
+  "description": "Rotate a surface given three angles.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_rotate"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface file to be rotated.",
+      "title": "Input Surface"
+    },
+    "alpha_deg": {
+      "type": "number",
+      "description": "Rotation angle in degrees around the X-axis.",
+      "title": "Alpha (Degrees)"
+    },
+    "beta_deg": {
+      "type": "number",
+      "description": "Rotation angle in degrees around the Y-axis.",
+      "title": "Beta (Degrees)"
+    },
+    "gamma_deg": {
+      "type": "number",
+      "description": "Rotation angle in degrees around the Z-axis.",
+      "title": "Gamma (Degrees)"
+    },
+    "output_surface": {
+      "type": "string",
+      "description": "Output surface file after rotation.",
+      "title": "Output Surface"
+    },
+    "regfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Extract angles from registration file, ignores alpha, beta, gamma.",
+      "title": "Registration File"
+    },
+    "invalidate_geometry": {
+      "type": "boolean",
+      "description": "Invalidate volume geometry in output.",
+      "title": "Invalidate Geometry Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface",
+    "alpha_deg",
+    "beta_deg",
+    "gamma_deg",
+    "output_surface"
+  ]
+}

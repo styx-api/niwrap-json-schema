@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "APPLY AFFINE TRANSFORM TO SURFACE FILE",
+  "description": "For flirt matrices, you must use the -flirt option, because flirt matrices are not a complete description of the coordinate transform they represent.  If the -flirt option is not present, the affine must be a nifti 'world' affine, which can be obtained with the -convert-affine command, or aff_conv from the 4dfp suite.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/surface_apply_affine"
+    },
+    "in_surf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the surface to transform"
+    },
+    "affine": {
+      "type": "string",
+      "description": "the affine file"
+    },
+    "out_surf": {
+      "type": "string",
+      "description": "the output transformed surface"
+    },
+    "flirt": {
+      "type": "object",
+      "properties": {
+        "source_volume": {
+          "type": "string",
+          "description": "the source volume used when generating the affine"
+        },
+        "target_volume": {
+          "type": "string",
+          "description": "the target volume used when generating the affine"
+        }
+      },
+      "required": [
+        "source_volume",
+        "target_volume"
+      ],
+      "description": "MUST be used if affine is a flirt affine"
+    }
+  },
+  "required": [
+    "@type",
+    "in_surf",
+    "affine",
+    "out_surf"
+  ]
+}

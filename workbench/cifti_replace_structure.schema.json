@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "REPLACE DATA IN A STRUCTURE IN A CIFTI FILE",
+  "description": "This is a fairly low-level command, you probably want to use -cifti-create-dense-from-template instead.\n\nYou must specify at least one of -metric, -label, -volume, or -volume-all for this command to do anything.  Input volumes must line up with the output of -cifti-separate.  For dtseries/dscalar, use COLUMN, and if your dconn matrix will be fully symmetric, COLUMN is more efficient.  The -volume-all option must not be specified when using a -volume option.  A -metric option must not be specified when using a -label option, and is not recommended on a label-type cifti file.  For each <structure> argument, use one of the following strings:\n\nCORTEX_LEFT\nCORTEX_RIGHT\nCEREBELLUM\nACCUMBENS_LEFT\nACCUMBENS_RIGHT\nALL_GREY_MATTER\nALL_WHITE_MATTER\nAMYGDALA_LEFT\nAMYGDALA_RIGHT\nBRAIN_STEM\nCAUDATE_LEFT\nCAUDATE_RIGHT\nCEREBELLAR_WHITE_MATTER_LEFT\nCEREBELLAR_WHITE_MATTER_RIGHT\nCEREBELLUM_LEFT\nCEREBELLUM_RIGHT\nCEREBRAL_WHITE_MATTER_LEFT\nCEREBRAL_WHITE_MATTER_RIGHT\nCORTEX\nDIENCEPHALON_VENTRAL_LEFT\nDIENCEPHALON_VENTRAL_RIGHT\nHIPPOCAMPUS_LEFT\nHIPPOCAMPUS_RIGHT\nHIPPOCAMPUS_DENTATE_LEFT\nHIPPOCAMPUS_DENTATE_RIGHT\nINVALID\nOTHER\nOTHER_GREY_MATTER\nOTHER_WHITE_MATTER\nPALLIDUM_LEFT\nPALLIDUM_RIGHT\nPUTAMEN_LEFT\nPUTAMEN_RIGHT\nTHALAMUS_LEFT\nTHALAMUS_RIGHT",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_replace_structure"
+    },
+    "cifti": {
+      "type": "string",
+      "description": "the cifti to modify"
+    },
+    "direction": {
+      "type": "string",
+      "description": "which dimension to interpret as a single map, ROW or COLUMN"
+    },
+    "volume_all": {
+      "type": "object",
+      "properties": {
+        "volume": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the input volume"
+        },
+        "from_cropped": {
+          "type": "boolean",
+          "description": "the input is cropped to the size of the data",
+          "default": false
+        }
+      },
+      "required": [
+        "volume"
+      ],
+      "description": "replace the data in all volume components"
+    },
+    "discard_unused_labels": {
+      "type": "boolean",
+      "description": "when operating on a dlabel file, drop any unused label keys from the label table",
+      "default": false
+    },
+    "label_collision": {
+      "type": "string",
+      "description": "how to handle conflicts between label keys"
+    },
+    "label": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "structure": {
+            "type": "string",
+            "description": "the structure to replace the data of"
+          },
+          "label": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "the input label file"
+          }
+        },
+        "required": [
+          "structure",
+          "label"
+        ]
+      },
+      "description": "replace the data in a surface label component"
+    },
+    "metric": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "structure": {
+            "type": "string",
+            "description": "the structure to replace the data of"
+          },
+          "metric": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "the input metric"
+          }
+        },
+        "required": [
+          "structure",
+          "metric"
+        ]
+      },
+      "description": "replace the data in a surface component"
+    },
+    "volume": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "structure": {
+            "type": "string",
+            "description": "the structure to replace the data of"
+          },
+          "volume": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "the input volume"
+          },
+          "from_cropped": {
+            "type": "boolean",
+            "description": "the input is cropped to the size of the component",
+            "default": false
+          }
+        },
+        "required": [
+          "structure",
+          "volume"
+        ]
+      },
+      "description": "replace the data in a volume component"
+    }
+  },
+  "required": [
+    "@type",
+    "cifti",
+    "direction",
+    "label",
+    "metric",
+    "volume"
+  ]
+}

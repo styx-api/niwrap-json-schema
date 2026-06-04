@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLocalstat",
+  "description": "This program computes statistics at each voxel, based on a local neighborhood of that voxel",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLocalstat"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Input dataset"
+    },
+    "nbhd": {
+      "type": "string",
+      "description": "The region around each voxel that will be extracted for the statistics calculation",
+      "title": "Neighborhood definition"
+    },
+    "stat": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Compute the specified statistic on the values extracted from the neighborhood",
+      "title": "Statistic"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read in dataset 'mset' and use the nonzero voxels therein as a mask",
+      "title": "Mask dataset"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Compute the mask as in program 3dAutomask (mutually exclusive with -mask)",
+      "title": "Automask",
+      "default": false
+    },
+    "use_nonmask": {
+      "type": "boolean",
+      "description": "Compute local statistics from all voxels in the neighborhood that are in the mask, even if the central voxel is not in the mask",
+      "title": "Use nonmask",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use the given string as the prefix for the output dataset",
+      "title": "Prefix"
+    },
+    "datum": {
+      "type": "string",
+      "description": "Coerce the output data to be stored as the given type (byte, short, float)",
+      "title": "Datum type"
+    },
+    "label_ext": {
+      "type": "string",
+      "description": "Append given label to each sub-brick label",
+      "title": "Label extension"
+    },
+    "reduce_grid": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Compute output on a grid that is reduced by the given factor in X, Y, and Z directions of the input dataset",
+      "title": "Reduce grid"
+    },
+    "reduce_restore_grid": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Resample the output back to input grid after reducing the grid",
+      "title": "Reduce restore grid"
+    },
+    "reduce_max_vox": {
+      "type": "number",
+      "description": "Automatically set Rx Ry Rz so that the computation grid is at a resolution of nbhd/MAX_VOX voxels",
+      "title": "Reduce max voxels"
+    },
+    "grid_rmode": {
+      "type": "string",
+      "description": "Interpolant to use when resampling the output with reduce_restore_grid option",
+      "title": "Grid resample mode"
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Stop the highly informative progress reports",
+      "title": "Quiet mode",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "A little more verbose output",
+      "title": "Verbose mode",
+      "default": false
+    },
+    "proceed_small_N": {
+      "type": "boolean",
+      "description": "Do not crash if neighborhood is too small for certain estimates",
+      "title": "Proceed with small neighborhood",
+      "default": false
+    },
+    "fillvalue": {
+      "type": "number",
+      "description": "Value used for filled statistic, default=1",
+      "title": "Fill value"
+    },
+    "unfillvalue": {
+      "type": "number",
+      "description": "Value used for unfilled statistic, default=1",
+      "title": "Unfill value"
+    },
+    "maskvalue": {
+      "type": "number",
+      "description": "Value searched for with has_mask option",
+      "title": "Mask value"
+    },
+    "maskvalue2": {
+      "type": "number",
+      "description": "Alternate value for has_mask2 option",
+      "title": "Mask value 2"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset",
+    "nbhd"
+  ]
+}

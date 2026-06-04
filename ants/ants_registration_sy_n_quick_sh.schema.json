@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsRegistrationSyNQuick.sh",
+  "description": "A script to quickly compute a SyN-based registration between two images using ANTS.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsRegistrationSyNQuick.sh"
+    },
+    "dimensionality": {
+      "enum": [
+        2,
+        3
+      ],
+      "description": "Dimensionality of the images (2 or 3).",
+      "title": "Dimensionality"
+    },
+    "fixed_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Fixed image to which the moving image is registered.",
+      "title": "Fixed Image"
+    },
+    "moving_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Moving image that is registered to the fixed image.",
+      "title": "Moving Image"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix for the output files.",
+      "title": "Output Prefix"
+    },
+    "transform_type": {
+      "enum": [
+        "s",
+        "b"
+      ],
+      "description": "Type of transform: 's' for SyN, 'b' for B-spline SyN. Default is 's'.",
+      "title": "Transform Type"
+    }
+  },
+  "required": [
+    "@type",
+    "dimensionality",
+    "fixed_image",
+    "moving_image",
+    "output_prefix"
+  ]
+}

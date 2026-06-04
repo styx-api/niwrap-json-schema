@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dsvd",
+  "description": "Computes SVD of the matrix formed by the 1D file(s) and outputs the result on stdout.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dsvd"
+    },
+    "one": {
+      "type": "boolean",
+      "description": "Make 1st vector be all 1's",
+      "title": "One flag",
+      "default": false
+    },
+    "vmean": {
+      "type": "boolean",
+      "description": "Remove mean from each vector (cannot be used with -one)",
+      "title": "Vmean flag",
+      "default": false
+    },
+    "vnorm": {
+      "type": "boolean",
+      "description": "Make L2-norm of each vector = 1 before SVD",
+      "title": "Vnorm flag",
+      "default": false
+    },
+    "cond": {
+      "type": "boolean",
+      "description": "Only print condition number (ratio of extremes)",
+      "title": "Cond flag",
+      "default": false
+    },
+    "sing": {
+      "type": "boolean",
+      "description": "Only print singular values",
+      "title": "Sing flag",
+      "default": false
+    },
+    "sort": {
+      "type": "boolean",
+      "description": "Sort singular values in descending order (default)",
+      "title": "Sort flag",
+      "default": false
+    },
+    "nosort": {
+      "type": "boolean",
+      "description": "Don't sort singular values",
+      "title": "Nosort flag",
+      "default": false
+    },
+    "asort": {
+      "type": "boolean",
+      "description": "Sort singular values in ascending order",
+      "title": "Asort flag",
+      "default": false
+    },
+    "left_eigenvectors": {
+      "type": "boolean",
+      "description": "Only output left eigenvectors in .1D format",
+      "title": "Left eigenvectors flag",
+      "default": false
+    },
+    "num_eigenvectors": {
+      "type": "string",
+      "description": "Specify number of left eigenvectors to output",
+      "title": "Number of Eigenvectors"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input 1D file(s) for SVD computation",
+      "title": "Input 1D files"
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

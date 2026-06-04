@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@surf_to_vol_spackle",
+  "description": "Project data from a surface dataset into a volume primarily using 3dSurf2Vol but then filling any holes with an iterative smoothing procedure.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@surf_to_vol_spackle"
+    },
+    "maskset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask dataset in which to project surface measures.",
+      "title": "Mask Set"
+    },
+    "spec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface specification file with list of surfaces.",
+      "title": "Surface Spec"
+    },
+    "surfA": {
+      "type": "string",
+      "description": "Name of the first surface, e.g., smoothwm, pial, etc.",
+      "title": "Surface A"
+    },
+    "surfB": {
+      "type": "string",
+      "description": "Name of the second surface. If not included, computes using normal vector.",
+      "title": "Surface B"
+    },
+    "surfset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset of surface measures.",
+      "title": "Surface Data Set"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Basename of output. Final name used is prefix.nii.gz.",
+      "title": "Prefix"
+    },
+    "normal_vector_length": {
+      "type": "number",
+      "description": "Normal vector length if only using a single surface (default 2 mm).",
+      "title": "Normal Vector Length"
+    },
+    "search_radius": {
+      "type": "number",
+      "description": "Radius for search for mean to fill holes (default 2 mm).",
+      "title": "Search Radius"
+    },
+    "num_steps": {
+      "type": "number",
+      "description": "Number of steps on line segments (default 10).",
+      "title": "Number of Steps"
+    },
+    "keep_temp_files": {
+      "type": "boolean",
+      "description": "Do not remove any of the temporary files (default is to remove them).",
+      "title": "Keep Temporary Files Flag",
+      "default": false
+    },
+    "max_iters": {
+      "type": "number",
+      "description": "Maximum number of smoothing and filling iterations (default is 4).",
+      "title": "Max Iterations"
+    },
+    "use_mode": {
+      "type": "boolean",
+      "description": "Use mode instead of non-zero median (appropriate for ROIs).",
+      "title": "Use Mode Flag",
+      "default": false
+    },
+    "datum_type": {
+      "type": "string",
+      "description": "Set datum type to byte, short, or float instead of maskset type. Mode triggers -datum short.",
+      "title": "Datum Type"
+    },
+    "ignore_unknown_options": {
+      "type": "boolean",
+      "description": "Ignore additional options that are not needed.",
+      "title": "Ignore Unknown Options Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "maskset",
+    "spec",
+    "surfA",
+    "surfset",
+    "prefix"
+  ]
+}

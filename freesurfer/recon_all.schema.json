@@ -1,0 +1,420 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "recon-all",
+  "description": "Performs all, or any part of, the FreeSurfer cortical reconstruction process",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/recon-all"
+    },
+    "subjid": {
+      "type": "string",
+      "description": "Subject ID for the FreeSurfer analysis",
+      "title": "Subject ID"
+    },
+    "all_flag": {
+      "type": "boolean",
+      "description": "Performs all stages of cortical reconstruction",
+      "title": "All flag",
+      "default": false
+    },
+    "autorecon_all_flag": {
+      "type": "boolean",
+      "description": "Same as -all",
+      "title": "Autorecon all flag",
+      "default": false
+    },
+    "autorecon1_flag": {
+      "type": "boolean",
+      "description": "Process stages 1-5",
+      "title": "Autorecon 1 flag",
+      "default": false
+    },
+    "autorecon2_flag": {
+      "type": "boolean",
+      "description": "Process stages 6-23",
+      "title": "Autorecon 2 flag",
+      "default": false
+    },
+    "autorecon2_cp_flag": {
+      "type": "boolean",
+      "description": "Process stages 12-23",
+      "title": "Autorecon 2 CP flag",
+      "default": false
+    },
+    "autorecon2_wm_flag": {
+      "type": "boolean",
+      "description": "Process stages 15-23",
+      "title": "Autorecon 2 WM flag",
+      "default": false
+    },
+    "autorecon2_inflate1_flag": {
+      "type": "boolean",
+      "description": "Process stages 6-18",
+      "title": "Autorecon 2 Inflate 1 flag",
+      "default": false
+    },
+    "autorecon2_perhemi_flag": {
+      "type": "boolean",
+      "description": "Tessellation, Smooth1, Inflate1, Qsphere, Fix, Smooth2, Inflate2, Finalsurf, Ribbon",
+      "title": "Autorecon 2 per hemisphere flag",
+      "default": false
+    },
+    "autorecon3_flag": {
+      "type": "boolean",
+      "description": "Process stages 24-34",
+      "title": "Autorecon 3 flag",
+      "default": false
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Specify hemisphere ('lh' or 'rh')",
+      "title": "Hemisphere"
+    },
+    "pons_crs": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify CRS for pons during fill operation",
+      "title": "Pons CRS"
+    },
+    "cc_crs": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify CRS for corpus callosum during fill operation",
+      "title": "Corpus Callosum CRS"
+    },
+    "lh_crs": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify CRS for left hemisphere during fill operation",
+      "title": "Left Hemisphere CRS"
+    },
+    "rh_crs": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Specify CRS for right hemisphere during fill operation",
+      "title": "Right Hemisphere CRS"
+    },
+    "nofill": {
+      "type": "boolean",
+      "description": "Do not use automatic subcortical seg to fill",
+      "title": "No Fill Flag",
+      "default": false
+    },
+    "watershed": {
+      "type": "string",
+      "description": "Control skull stripping/watershed program",
+      "title": "Watershed Command"
+    },
+    "external_brain_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Custom external brain mask file",
+      "title": "External Brain Mask"
+    },
+    "wsless": {
+      "type": "boolean",
+      "description": "Decrease watershed threshold",
+      "title": "WS Less Flag",
+      "default": false
+    },
+    "wsmore": {
+      "type": "boolean",
+      "description": "Increase watershed threshold",
+      "title": "WS More Flag",
+      "default": false
+    },
+    "wsatlas": {
+      "type": "boolean",
+      "description": "Use atlas when skull stripping",
+      "title": "WS Atlas Flag",
+      "default": false
+    },
+    "no_wsatlas": {
+      "type": "boolean",
+      "description": "Do not use atlas when skull stripping",
+      "title": "No WS Atlas Flag",
+      "default": false
+    },
+    "no_wsgcaatlas": {
+      "type": "boolean",
+      "description": "Do not use GCA atlas when skull stripping",
+      "title": "No WS GCA Atlas Flag",
+      "default": false
+    },
+    "wsthresh": {
+      "type": "number",
+      "description": "Explicitly set watershed threshold",
+      "title": "WS Thresh"
+    },
+    "wsseed": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Identify an index (C, R, S) point in the skull",
+      "title": "WS Seed"
+    },
+    "norm_3d_iters": {
+      "type": "number",
+      "description": "Number of 3D iterations for mri_normalize",
+      "title": "Norm 3D Iters"
+    },
+    "norm_max_grad": {
+      "type": "number",
+      "description": "Max grad for mri_normalize",
+      "title": "Norm Max Grad"
+    },
+    "norm1_b": {
+      "type": "number",
+      "description": "First usage of mri_normalize with control point intensity N below target",
+      "title": "Norm 1-B"
+    },
+    "norm2_b": {
+      "type": "number",
+      "description": "Second usage of mri_normalize with control point intensity N below target",
+      "title": "Norm 2-B"
+    },
+    "norm1_n": {
+      "type": "number",
+      "description": "First usage of mri_normalize, number of iterations",
+      "title": "Norm 1-N"
+    },
+    "norm2_n": {
+      "type": "number",
+      "description": "Second usage of mri_normalize, number of iterations",
+      "title": "Norm 2-N"
+    },
+    "cm": {
+      "type": "boolean",
+      "description": "Conform volumes to the min voxel size",
+      "title": "Conform volumes flag",
+      "default": false
+    },
+    "no_fix_with_ga": {
+      "type": "boolean",
+      "description": "Do not use genetic algorithm when fixing topology",
+      "title": "No Fix with GA flag",
+      "default": false
+    },
+    "fix_diag_only": {
+      "type": "boolean",
+      "description": "Topology fixer runs until ?h.defect_labels files are created",
+      "title": "Fix Diag Only flag",
+      "default": false
+    },
+    "seg_wlo": {
+      "type": "number",
+      "description": "Set WLO value for mri_segment and mris_make_surfaces",
+      "title": "Seg WLO"
+    },
+    "seg_ghi": {
+      "type": "number",
+      "description": "Set GHI value for mri_segment and mris_make_surfaces",
+      "title": "Seg GHI"
+    },
+    "nothicken": {
+      "type": "boolean",
+      "description": "Pass '-thicken 0' to mri_segment",
+      "title": "No Thicken flag",
+      "default": false
+    },
+    "no_ca_align_after": {
+      "type": "boolean",
+      "description": "Turn off '-align-after' with mri_ca_register",
+      "title": "No CA Align After flag",
+      "default": false
+    },
+    "no_ca_align": {
+      "type": "boolean",
+      "description": "Turn off '-align' with mri_ca_label",
+      "title": "No CA Align flag",
+      "default": false
+    },
+    "deface": {
+      "type": "boolean",
+      "description": "Deface subject, written to orig_defaced.mgz",
+      "title": "Deface flag",
+      "default": false
+    },
+    "expert_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read-in expert options file",
+      "title": "Expert File"
+    },
+    "xopts_use": {
+      "type": "boolean",
+      "description": "Use pre-existing expert options file",
+      "title": "XOPTS Use flag",
+      "default": false
+    },
+    "xopts_clean": {
+      "type": "boolean",
+      "description": "Delete pre-existing expert options file",
+      "title": "XOPTS Clean flag",
+      "default": false
+    },
+    "xopts_overwrite": {
+      "type": "boolean",
+      "description": "Overwrite pre-existing expert options file",
+      "title": "XOPTS Overwrite flag",
+      "default": false
+    },
+    "termscript_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Run script before exiting",
+      "title": "Term Script File"
+    },
+    "mprage": {
+      "type": "boolean",
+      "description": "Assume scan parameters are MGH MP-RAGE protocol",
+      "title": "MPRAGE flag",
+      "default": false
+    },
+    "washu_mprage": {
+      "type": "boolean",
+      "description": "Assume scan parameters are Wash.U. MP-RAGE protocol",
+      "title": "WashU MPRAGE flag",
+      "default": false
+    },
+    "schwartzya3t_atlas": {
+      "type": "boolean",
+      "description": "Use special young adult 3T atlas for tal reg",
+      "title": "Schwartzya 3T Atlas flag",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Set number of threads to use",
+      "title": "Threads"
+    },
+    "waitfor_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Wait for file to appear before beginning",
+      "title": "Wait for File"
+    },
+    "notify_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Create this file after finishing",
+      "title": "Notify File"
+    },
+    "log_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify log file",
+      "title": "Log File"
+    },
+    "status_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify status file",
+      "title": "Status File"
+    },
+    "noappend": {
+      "type": "boolean",
+      "description": "Start new log and status files instead of appending",
+      "title": "No Append flag",
+      "default": false
+    },
+    "no_isrunning": {
+      "type": "boolean",
+      "description": "Do not check whether this subject is currently being processed",
+      "title": "No Is Running flag",
+      "default": false
+    },
+    "hippocampal_subfields_t1": {
+      "type": "boolean",
+      "description": "Segmentation of hippocampal subfields using input T1 scan",
+      "title": "Hippocampal Subfields T1 flag",
+      "default": false
+    },
+    "hippocampal_subfields_t2": {
+      "type": "string",
+      "description": "Segmentation using an additional scan and input T2 scan",
+      "title": "Hippocampal Subfields T2"
+    },
+    "hippocampal_subfields_t1t2": {
+      "type": "string",
+      "description": "Segmentation using additional scan and input T1",
+      "title": "Hippocampal Subfields T1T2"
+    },
+    "brainstem_structures": {
+      "type": "boolean",
+      "description": "Segmentation of brainstem structures",
+      "title": "Brainstem Structures flag",
+      "default": false
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Specify subjects directory",
+      "title": "Subjects Directory"
+    },
+    "mail_user": {
+      "type": "string",
+      "description": "Mail user when done",
+      "title": "Mail User"
+    },
+    "umask": {
+      "type": "string",
+      "description": "Set unix file permission mask",
+      "title": "UMASK"
+    },
+    "group_id": {
+      "type": "string",
+      "description": "Check that current group is alpha group",
+      "title": "Group ID"
+    },
+    "only_versions": {
+      "type": "boolean",
+      "description": "Print version of each binary and exit",
+      "title": "Only Versions flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Print out lots of info",
+      "title": "Debug flag",
+      "default": false
+    },
+    "allow_coredump": {
+      "type": "boolean",
+      "description": "Set coredump limit to unlimited",
+      "title": "Allow Core Dump flag",
+      "default": false
+    },
+    "dontrun": {
+      "type": "boolean",
+      "description": "Do everything but execute each command",
+      "title": "Don’t Run flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version of this script and exit",
+      "title": "Version flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message and exit",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subjid"
+  ]
+}

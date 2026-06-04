@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsladd",
+  "description": "Tool for adding or averaging multiple input volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fsladd"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output volume file",
+      "title": "Output file"
+    },
+    "mean_flag": {
+      "type": "boolean",
+      "description": "Calculate mean instead of sum",
+      "title": "Mean flag",
+      "default": false
+    },
+    "scale_flag": {
+      "type": "boolean",
+      "description": "Scale each input image mean to 1000 before processing",
+      "title": "Scale flag",
+      "default": false
+    },
+    "volume_list": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of input volumes",
+      "title": "Input volumes"
+    }
+  },
+  "required": [
+    "@type",
+    "output_file",
+    "volume_list"
+  ]
+}

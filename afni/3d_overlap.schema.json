@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dOverlap",
+  "description": "Counts the number of voxels that are nonzero in all input datasets",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dOverlap"
+    },
+    "dataset1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First input dataset (e.g. dset1+orig)",
+      "title": "Input Dataset 1"
+    },
+    "dataset2": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Second input dataset (e.g. dset2+orig)",
+      "title": "Input Dataset 2"
+    },
+    "save_prefix": {
+      "type": "string",
+      "description": "Save the count of overlaps at each voxel into a dataset with the given prefix",
+      "title": "Save Prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset1",
+    "dataset2"
+  ]
+}

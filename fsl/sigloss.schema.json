@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "sigloss",
+  "description": "Estimates signal loss from a field map (in rad/s)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/sigloss"
+    },
+    "input_b0map": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input b0 map image filename (in rad/s)",
+      "title": "Input B0 map image"
+    },
+    "output_sigloss": {
+      "type": "string",
+      "description": "Output signal loss image filename",
+      "title": "Output signal loss image"
+    },
+    "input_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input mask filename",
+      "title": "Input mask image"
+    },
+    "echo_time": {
+      "type": "number",
+      "description": "Echo time (in seconds)",
+      "title": "Echo time"
+    },
+    "slice_direction": {
+      "enum": [
+        "x",
+        "y",
+        "z"
+      ],
+      "description": "Slice direction (either x, y or z)",
+      "title": "Slice direction"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display this help message",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_b0map",
+    "output_sigloss"
+  ]
+}

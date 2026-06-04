@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dmri_trk2trk",
+  "description": "A tool for transforming and analyzing tractography data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dmri_trk2trk"
+    },
+    "in_trk": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input .trk file(s)",
+      "title": "Input TRK files"
+    },
+    "in_asc": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input ASCII plain text file(s), as an alternative to .trk",
+      "title": "Input ASCII files"
+    },
+    "in_dir": {
+      "type": "string",
+      "description": "Input directory (optional)",
+      "title": "Input directory"
+    },
+    "out_trk": {
+      "type": "string",
+      "description": "Output .trk file(s), as many as inputs (or 1 to merge inputs)",
+      "title": "Output TRK files"
+    },
+    "out_asc": {
+      "type": "string",
+      "description": "Output ASCII plain text file(s), as many as inputs (or 1 to merge inputs)",
+      "title": "Output ASCII files"
+    },
+    "out_vol": {
+      "type": "string",
+      "description": "Output volume(s), as many as inputs (or 1 to merge inputs)",
+      "title": "Output volumes"
+    },
+    "out_dir": {
+      "type": "string",
+      "description": "Output directory (optional)",
+      "title": "Output directory"
+    },
+    "in_ref": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input reference volume (needed for --reg/--regnl)",
+      "title": "Input reference volume"
+    },
+    "out_ref": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output reference volume (needed for --reg/--regnl/--outvol)",
+      "title": "Output reference volume"
+    },
+    "reg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Affine registration file (.lta or .mat), applied first",
+      "title": "Affine registration file"
+    },
+    "regnl_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Nonlinear registration file (.m3z), applied second",
+      "title": "Nonlinear registration file"
+    },
+    "inv_flag": {
+      "type": "boolean",
+      "description": "Apply inverse of registration (default: no)",
+      "title": "Inverse registration flag",
+      "default": false
+    },
+    "fill_flag": {
+      "type": "boolean",
+      "description": "Fill gaps b/w mapped points by linear interpolation",
+      "title": "Fill gaps flag",
+      "default": false
+    },
+    "overlay": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Scalar overlay 1D volume(s), applied to all input .trk files",
+      "title": "Scalar overlay volumes"
+    },
+    "inclusion_mask": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Inclusion mask(s), applied to all input .trk files",
+      "title": "Inclusion masks"
+    },
+    "exclusion_mask": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Exclusion mask(s), applied to all input .trk files",
+      "title": "Exclusion masks"
+    },
+    "terminal_inclusion_mask": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Terminal inclusion mask(s), applied to all input .trk files",
+      "title": "Terminal inclusion masks"
+    },
+    "terminal_exclusion_mask": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Terminal exclusion mask(s), applied to all input .trk files",
+      "title": "Terminal exclusion masks"
+    },
+    "length_min": {
+      "type": "number",
+      "description": "Only save streamlines with length greater than this number",
+      "title": "Minimum streamline length"
+    },
+    "length_max": {
+      "type": "number",
+      "description": "Only save streamlines with length smaller than this number",
+      "title": "Maximum streamline length"
+    },
+    "mean_flag": {
+      "type": "boolean",
+      "description": "Only save the mean of the streamlines (Default: save all)",
+      "title": "Save mean streamline flag",
+      "default": false
+    },
+    "nearmean_flag": {
+      "type": "boolean",
+      "description": "Only save the streamline nearest to the mean (Default: save all)",
+      "title": "Save nearest to mean streamline flag",
+      "default": false
+    },
+    "nth_streamline": {
+      "type": "number",
+      "description": "Only save the n-th (0-based) streamline (Default: save all)",
+      "title": "Save nth streamline"
+    },
+    "every_nth_streamline": {
+      "type": "number",
+      "description": "Only save every n-th streamline (Default: save all)",
+      "title": "Save every nth streamline"
+    },
+    "smooth_flag": {
+      "type": "boolean",
+      "description": "Smooth streamlines (default: no)",
+      "title": "Smooth streamlines flag",
+      "default": false
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug flag",
+      "default": false
+    },
+    "check_opts": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit",
+      "title": "Check options flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "in_trk"
+  ]
+}

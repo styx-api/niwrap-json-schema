@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mni152reg",
+  "description": "Registers the FreeSurfer subject to the FSL MNI 152 brain to create a tkregister-style registration matrix.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mni152reg"
+    },
+    "subject": {
+      "type": "string",
+      "description": "FreeSurfer subject ID",
+      "title": "Subject"
+    },
+    "register_1mm": {
+      "type": "boolean",
+      "description": "Register to 1mm target (instead of 2mm)",
+      "title": "Register 1mm flag",
+      "default": false
+    },
+    "output": {
+      "type": "string",
+      "description": "Explicitly set output registration file",
+      "title": "Output registration file"
+    },
+    "symmetric": {
+      "type": "boolean",
+      "description": "Register to FSL symmetric target",
+      "title": "Symmetric target flag",
+      "default": false
+    },
+    "save_volume": {
+      "type": "boolean",
+      "description": "Sample original to output space",
+      "title": "Save volume flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject"
+  ]
+}

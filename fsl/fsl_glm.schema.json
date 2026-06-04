@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_glm",
+  "description": "Simple GLM allowing temporal or spatial regression on either text data or images",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fsl_glm"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file name (text matrix or 3D/4D image file)",
+      "title": "Input file"
+    },
+    "design_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File name of the GLM design matrix (text time courses for temporal regression or an image file for spatial regression)",
+      "title": "Design matrix"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output file name for GLM parameter estimates (GLM betas)",
+      "title": "Output file"
+    },
+    "contrasts": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Matrix of t-statistics contrasts",
+      "title": "Contrasts"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask image file name if input is image",
+      "title": "Mask file"
+    },
+    "dof": {
+      "type": "number",
+      "description": "Set degrees-of-freedom explicitly",
+      "title": "Degrees-of-freedom"
+    },
+    "design_norm_flag": {
+      "type": "boolean",
+      "description": "Switch on normalisation of the design matrix columns to unit std. deviation",
+      "title": "Design normalisation flag",
+      "default": false
+    },
+    "data_norm_flag": {
+      "type": "boolean",
+      "description": "Switch on normalisation of the data time series to unit std. deviation",
+      "title": "Data normalisation flag",
+      "default": false
+    },
+    "vn_flag": {
+      "type": "boolean",
+      "description": "Perform MELODIC variance-normalisation on data",
+      "title": "Variance normalisation flag",
+      "default": false
+    },
+    "demean_flag": {
+      "type": "boolean",
+      "description": "Switch on de-meaning of design and data",
+      "title": "De-mean flag",
+      "default": false
+    },
+    "output_copes": {
+      "type": "string",
+      "description": "Output file name for COPEs (either as text file or image)",
+      "title": "Output COPEs file"
+    },
+    "output_zstats": {
+      "type": "string",
+      "description": "Output file name for Z-stats (either as text file or image)",
+      "title": "Output Z-stats file"
+    },
+    "output_tstats": {
+      "type": "string",
+      "description": "Output file name for t-stats (either as text file or image)",
+      "title": "Output t-stats file"
+    },
+    "output_pvals": {
+      "type": "string",
+      "description": "Output file name for p-values of Z-stats (either as text file or image)",
+      "title": "Output p-values file"
+    },
+    "output_fvals": {
+      "type": "string",
+      "description": "Output file name for F-value of full model fit",
+      "title": "Output F-value file"
+    },
+    "output_pfvals": {
+      "type": "string",
+      "description": "Output file name for p-value for full model fit",
+      "title": "Output p-value file"
+    },
+    "output_residuals": {
+      "type": "string",
+      "description": "Output file name for residuals",
+      "title": "Output residuals file"
+    },
+    "output_varcb": {
+      "type": "string",
+      "description": "Output file name for variance of COPEs",
+      "title": "Output variance of COPEs file"
+    },
+    "output_sigsq": {
+      "type": "string",
+      "description": "Output file name for residual noise variance sigma-square",
+      "title": "Output sigma-square variance file"
+    },
+    "output_data": {
+      "type": "string",
+      "description": "Output file name for pre-processed data",
+      "title": "Output pre-processed data"
+    },
+    "output_vnscales": {
+      "type": "string",
+      "description": "Output file name for scaling factors for variance normalisation",
+      "title": "Output variance normalisation scales file"
+    },
+    "vx_text": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of text files containing text matrix confounds. Caution, BETA option.",
+      "title": "VXT confounds"
+    },
+    "vx_images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of 4D images containing voxelwise confounds. Caution, BETA option.",
+      "title": "VXF confounds"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display this help text",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "design_matrix"
+  ]
+}

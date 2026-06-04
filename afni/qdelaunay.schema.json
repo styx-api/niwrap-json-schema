@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "qdelaunay",
+  "description": "Compute the Delaunay triangulation using Qhull.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/qdelaunay"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file containing point coordinates.",
+      "title": "Input file"
+    },
+    "furthest_site": {
+      "type": "boolean",
+      "description": "Compute furthest-site Delaunay triangulation",
+      "title": "Furthest-site Delaunay flag",
+      "default": false
+    },
+    "triangulated_output": {
+      "type": "boolean",
+      "description": "Triangulated output",
+      "title": "Triangulated output flag",
+      "default": false
+    },
+    "joggled_input": {
+      "type": "boolean",
+      "description": "Joggled input instead of merged facets",
+      "title": "Joggled input flag",
+      "default": false
+    },
+    "joggle_range": {
+      "type": "number",
+      "description": "Randomly joggle input in range [-n,n]",
+      "title": "Joggle range"
+    },
+    "search_simplex": {
+      "type": "boolean",
+      "description": "Search all points for the initial simplex",
+      "title": "Search simplex flag",
+      "default": false
+    },
+    "point_infinity": {
+      "type": "boolean",
+      "description": "Add point-at-infinity to Delaunay triangulation",
+      "title": "Point-at-infinity flag",
+      "default": false
+    },
+    "delaunay_visible": {
+      "type": "string",
+      "description": "Print Delaunay region if visible from point n, -n if not",
+      "title": "Delaunay region visibility"
+    },
+    "delaunay_regions": {
+      "type": "string",
+      "description": "Print Delaunay regions that include point n, -n if not",
+      "title": "Delaunay regions inclusion"
+    },
+    "trace_level": {
+      "type": "number",
+      "description": "Trace at level n, 4=all, 5=mem/gauss, -1= events",
+      "title": "Trace level"
+    },
+    "check": {
+      "type": "boolean",
+      "description": "Check frequently during execution",
+      "title": "Check frequently flag",
+      "default": false
+    },
+    "statistics": {
+      "type": "boolean",
+      "description": "Print statistics",
+      "title": "Print statistics flag",
+      "default": false
+    },
+    "verify": {
+      "type": "boolean",
+      "description": "Verify result: structure, convexity, and in-circle test",
+      "title": "Verify result flag",
+      "default": false
+    },
+    "output_stdout": {
+      "type": "boolean",
+      "description": "Send all output to stdout",
+      "title": "Output to stdout flag",
+      "default": false
+    },
+    "facets_summary": {
+      "type": "number",
+      "description": "Report summary when n or more facets created",
+      "title": "Facets summary"
+    },
+    "input_file_option": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input data from file, no spaces or single quotes",
+      "title": "Input option file"
+    },
+    "output_file_option": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output results to file, may be enclosed in single quotes",
+      "title": "Output option file"
+    },
+    "trace_point": {
+      "type": "number",
+      "description": "Turn on tracing when point n added to hull",
+      "title": "Trace point flag"
+    },
+    "trace_merge": {
+      "type": "number",
+      "description": "Turn on tracing at merge n",
+      "title": "Trace merge flag"
+    },
+    "trace_merge_width": {
+      "type": "number",
+      "description": "Trace merge facets when width > n",
+      "title": "Trace merge width flag"
+    },
+    "stop_point": {
+      "type": "number",
+      "description": "Stop Qhull after adding point n, -n for before",
+      "title": "Stop at point flag"
+    },
+    "stop_cone_point": {
+      "type": "number",
+      "description": "Stop Qhull after building cone for point n",
+      "title": "Stop at cone point flag"
+    },
+    "centrum_radius": {
+      "type": "number",
+      "description": "Radius of centrum (roundoff added). Merge facets if non-convex",
+      "title": "Centrum radius"
+    },
+    "max_angle_cosine": {
+      "type": "number",
+      "description": "Cosine of maximum angle. Merge facets if cosine > n or non-convex",
+      "title": "Maximum angle cosine"
+    },
+    "perturb_factor": {
+      "type": "number",
+      "description": "Randomly perturb computations by a factor of [1-n,1+n]",
+      "title": "Perturb factor"
+    },
+    "min_facet_width": {
+      "type": "number",
+      "description": "Min facet width for outside point (before roundoff)",
+      "title": "Min facet width"
+    },
+    "facet_dump": {
+      "type": "boolean",
+      "description": "Facet dump",
+      "title": "Facet dump flag",
+      "default": false
+    },
+    "geomview": {
+      "type": "boolean",
+      "description": "Geomview output",
+      "title": "Geomview flag",
+      "default": false
+    },
+    "vertices_incident": {
+      "type": "boolean",
+      "description": "Vertices incident to each Delaunay region",
+      "title": "Vertices incident flag",
+      "default": false
+    },
+    "mathematica": {
+      "type": "boolean",
+      "description": "Mathematica output (2-d only, lifted to a paraboloid)",
+      "title": "Mathematica flag",
+      "default": false
+    },
+    "off_format": {
+      "type": "boolean",
+      "description": "OFF format (dim, points, and facets as a paraboloid)",
+      "title": "OFF format flag",
+      "default": false
+    },
+    "point_coordinates": {
+      "type": "boolean",
+      "description": "Point coordinates (lifted to a paraboloid)",
+      "title": "Point coordinates flag",
+      "default": false
+    },
+    "summary": {
+      "type": "boolean",
+      "description": "Summary (stderr)",
+      "title": "Summary flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file"
+  ]
+}

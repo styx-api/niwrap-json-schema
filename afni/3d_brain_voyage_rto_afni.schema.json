@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dBRAIN_VOYAGERtoAFNI",
+  "description": "Converts a BrainVoyager vmr dataset to AFNI's BRIK format based on information from BrainVoyager's website.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dBRAIN_VOYAGERtoAFNI"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input BrainVoyager VMR file",
+      "title": "Input File"
+    },
+    "force_byte_swap": {
+      "type": "boolean",
+      "description": "Force byte swapping",
+      "title": "Force Byte Swap",
+      "default": false
+    },
+    "brainvoyager_qx": {
+      "type": "boolean",
+      "description": ".vmr file is from BrainVoyager QX",
+      "title": "BrainVoyager QX",
+      "default": false
+    },
+    "tlrc_space": {
+      "type": "boolean",
+      "description": "Dset in tlrc space",
+      "title": "TLRC Space",
+      "default": false
+    },
+    "acpc_space": {
+      "type": "boolean",
+      "description": "Dset in acpc-aligned space",
+      "title": "ACPC Space",
+      "default": false
+    },
+    "orig_space": {
+      "type": "boolean",
+      "description": "Dset in orig space",
+      "title": "Orig Space",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output files",
+      "title": "Prefix"
+    },
+    "novolreg": {
+      "type": "boolean",
+      "description": "Ignore any Rotate, Volreg, Tagalign, or WarpDrive transformations present in the Surface Volume.",
+      "title": "Ignore Volreg Transformations",
+      "default": false
+    },
+    "noxform": {
+      "type": "boolean",
+      "description": "Same as -novolreg",
+      "title": "Ignore Transformations",
+      "default": false
+    },
+    "set_environment": {
+      "type": "string",
+      "description": "Set environment variable ENVname to be ENVvalue. Quotes are necessary.",
+      "title": "Set Environment Variable"
+    },
+    "trace_debugging": {
+      "type": "boolean",
+      "description": "Turns on In/Out debug and Memory tracing.",
+      "title": "Trace Debugging",
+      "default": false
+    },
+    "trace_extreme_debugging": {
+      "type": "boolean",
+      "description": "Turns on extreme tracing.",
+      "title": "Extreme Trace Debugging",
+      "default": false
+    },
+    "turn_off_memory_tracing": {
+      "type": "boolean",
+      "description": "Turn off memory tracing.",
+      "title": "Turn Off Memory Tracing",
+      "default": false
+    },
+    "turn_on_memory_tracing": {
+      "type": "boolean",
+      "description": "Turn on memory tracing (default).",
+      "title": "Turn On Memory Tracing",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "xhemireg",
+  "description": "Tool for hemisphere registration in neuroimaging.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/xhemireg"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject ID for the hemisphere registration process",
+      "title": "Subject ID"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Output directory for the hemisphere registration",
+      "title": "Output Directory"
+    },
+    "map_lh": {
+      "type": "boolean",
+      "description": "Map from left hemisphere to right hemisphere",
+      "title": "Map LH to RH",
+      "default": false
+    },
+    "map_rh": {
+      "type": "boolean",
+      "description": "Map from right hemisphere to left hemisphere",
+      "title": "Map RH to LH",
+      "default": false
+    },
+    "perform_reg": {
+      "type": "boolean",
+      "description": "Perform registration to create sphere.reg",
+      "title": "Perform Registration",
+      "default": false
+    },
+    "tal_compute": {
+      "type": "boolean",
+      "description": "Recompute Talairach registration",
+      "title": "Talairach Compute",
+      "default": false
+    },
+    "no_tal_compute": {
+      "type": "boolean",
+      "description": "Do not perform Talairach registration",
+      "title": "No Talairach Compute",
+      "default": false
+    },
+    "tal_estimate": {
+      "type": "boolean",
+      "description": "Compute estimate of Talairach registration from unflipped registration",
+      "title": "Talairach Estimate",
+      "default": false
+    },
+    "no_tal_estimate": {
+      "type": "boolean",
+      "description": "Do not perform estimation of Talairach registration",
+      "title": "No Talairach Estimate",
+      "default": false
+    },
+    "gcaprep": {
+      "type": "string",
+      "description": "Prepare GCA for training symmetrical GCA atlases",
+      "title": "GCA Preparation"
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads used, applicable with --gcaprep option",
+      "title": "Threads"
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version and exit",
+      "title": "Version Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print help and exit",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject"
+  ]
+}

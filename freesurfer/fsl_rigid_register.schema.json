@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_rigid_register",
+  "description": "A front-end tool for FSL's FLIRT that computes a rigid registration matrix and resamples the input volume to the reference volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/fsl_rigid_register"
+    },
+    "refvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference/Target volume.",
+      "title": "Reference Volume"
+    },
+    "inputvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input/Moveable volume.",
+      "title": "Input Volume"
+    },
+    "outputvol": {
+      "type": "string",
+      "description": "Input resampled to reference.",
+      "title": "Output Volume"
+    },
+    "fslmat": {
+      "type": "string",
+      "description": "Specifies explicitly where to store the FSL registration matrix.",
+      "title": "FSL Matrix File"
+    },
+    "regmat": {
+      "type": "string",
+      "description": "Get registration matrix in register.dat file format.",
+      "title": "Register Matrix File"
+    },
+    "xfmmat": {
+      "type": "string",
+      "description": "Get registration matrix as MNI xfm file.",
+      "title": "MNI XFM File"
+    },
+    "ltamat": {
+      "type": "string",
+      "description": "Get registration matrix as MGH lta file.",
+      "title": "MGH LTA File"
+    },
+    "noinitgeom": {
+      "type": "boolean",
+      "description": "Do not initialize matrix based on geometry.",
+      "title": "No Initial Geometry Flag",
+      "default": false
+    },
+    "applyxfm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Apply a transformation file to the input without registration.",
+      "title": "Apply Transformation File"
+    },
+    "applyinitxfm": {
+      "type": "boolean",
+      "description": "Apply initial transformation to the input without registration.",
+      "title": "Apply Initial Transformation Flag",
+      "default": false
+    },
+    "initxfm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use this as an initial matrix for registration.",
+      "title": "Initial Transformation File"
+    },
+    "maxangle": {
+      "type": "number",
+      "description": "Only search over +/- max angle degrees.",
+      "title": "Max Angle"
+    },
+    "interp": {
+      "type": "string",
+      "description": "Interpolation method: trilinear, nearestneighbour, sinc.",
+      "title": "Interpolation Method"
+    },
+    "dof": {
+      "type": "number",
+      "description": "Use degrees of freedom instead of 6.",
+      "title": "Degrees of Freedom"
+    },
+    "bins": {
+      "type": "number",
+      "description": "Number of bins to use (default 256).",
+      "title": "Bins"
+    },
+    "cost": {
+      "type": "string",
+      "description": "Objective function: mutualinfo, corratio (default), normcorr, normmi, leastsq.",
+      "title": "Objective Function"
+    },
+    "tmpdir": {
+      "type": "string",
+      "description": "Specify temporary directory.",
+      "title": "Temporary Directory"
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "description": "Do not delete temporary files.",
+      "title": "No Cleanup Flag",
+      "default": false
+    },
+    "cleanup": {
+      "type": "boolean",
+      "description": "Delete temporary files (default).",
+      "title": "Cleanup Flag",
+      "default": false
+    },
+    "subject": {
+      "type": "string",
+      "description": "Only puts it in the register.dat file.",
+      "title": "Subject"
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version and exit.",
+      "title": "Version Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print help and exit.",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "refvol",
+    "inputvol",
+    "outputvol"
+  ]
+}

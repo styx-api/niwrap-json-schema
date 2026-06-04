@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_mc",
+  "description": "Extract a surface from a label volume using Marching Cubes algorithm.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_mc"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The input volume from which to extract the surface.",
+      "title": "Input Volume"
+    },
+    "label_value": {
+      "type": "number",
+      "description": "The label value of the structure to extract.",
+      "title": "Label Value"
+    },
+    "output_surface": {
+      "type": "object",
+      "properties": {
+        "output_surface": {
+          "type": "string",
+          "description": "The file where the extracted surface mesh will be saved.",
+          "title": "Output Surface"
+        },
+        "connectivity": {
+          "type": "number",
+          "description": "The connectivity used for Marching Cubes. Options are: 1=6+, 2=18, 3=6, 4=26.",
+          "title": "Connectivity"
+        }
+      },
+      "required": [
+        "output_surface"
+      ]
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "label_value",
+    "output_surface"
+  ]
+}

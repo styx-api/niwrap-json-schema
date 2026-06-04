@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_easyreg",
+  "description": "EasyReg: deep learning registration simple and easy",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_easyreg"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference image",
+      "title": "Reference Image"
+    },
+    "reference_segmentation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference SynthSeg segmentation (will be created if it does not exist)",
+      "title": "Reference Segmentation"
+    },
+    "floating_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Floating image",
+      "title": "Floating Image"
+    },
+    "floating_segmentation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Floating SynthSeg segmentation (will be created if it does not exist)",
+      "title": "Floating Segmentation"
+    },
+    "registered_reference": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "(optional) Registered reference",
+      "title": "Registered Reference"
+    },
+    "registered_floating": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "(optional) Registered floating images (in space of reference)",
+      "title": "Registered Floating"
+    },
+    "forward_field": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "(optional) Forward field",
+      "title": "Forward Field"
+    },
+    "inverse_field": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "(optional) Inverse field",
+      "title": "Inverse Field"
+    },
+    "affine_only": {
+      "type": "boolean",
+      "description": "(optional) Skips nonlinear part",
+      "title": "Affine Only Flag",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "(optional) Number of cores to be used. Default is 1. You can use -1 to use all available cores",
+      "title": "Number of Threads"
+    }
+  },
+  "required": [
+    "@type",
+    "reference_image",
+    "floating_image"
+  ]
+}

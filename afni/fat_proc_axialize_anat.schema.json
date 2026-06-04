@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_proc_axialize_anat",
+  "description": "Helps align the major axes of an anatomical volume to those of the volumetric field of view.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_proc_axialize_anat"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input anatomical volume full name",
+      "title": "Input file"
+    },
+    "ref_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference volume full name, such as TT or MNI",
+      "title": "Reference file"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output prefix for files and snapshots",
+      "title": "Output prefix"
+    },
+    "mode_t2w": {
+      "type": "boolean",
+      "description": "Switch for T2-weighted image processing",
+      "title": "Mode T2w flag",
+      "default": false
+    },
+    "mode_t1w": {
+      "type": "boolean",
+      "description": "Switch for T1-weighted image processing",
+      "title": "Mode T1w flag",
+      "default": false
+    },
+    "workdir": {
+      "type": "string",
+      "description": "Name of the working subdirectory in the output directory",
+      "title": "Working directory"
+    },
+    "out_match_ref": {
+      "type": "boolean",
+      "description": "Match the final output volume space FOV and spatial resolution to the reference file",
+      "title": "Output match reference space flag",
+      "default": false
+    },
+    "do_ceil_out": {
+      "type": "boolean",
+      "description": "Apply a ceiling based on the 98%ile value within an automasked volume",
+      "title": "Ceiling output flag",
+      "default": false
+    },
+    "extra_al_wtmask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Extra weight mask to emphasize specific parts for alignment",
+      "title": "Extra weight mask file"
+    },
+    "extra_al_cost": {
+      "type": "string",
+      "description": "Specify a cost function for 3dAllineate to use (default 'lpa')",
+      "title": "Extra alignment cost function"
+    },
+    "extra_al_opts": {
+      "type": "string",
+      "description": "Extra options for 3dAllineate when applying the warp",
+      "title": "Extra alignment options"
+    },
+    "focus_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input mask to focus processing and alignment",
+      "title": "Focus mask file"
+    },
+    "focus_by_ss": {
+      "type": "boolean",
+      "description": "Make a mask by simply skullstripping input data set",
+      "title": "Focus by skullstrip flag",
+      "default": false
+    },
+    "remove_inf_sli": {
+      "type": "number",
+      "description": "Remove a number of slices from the inferior part of the FOV",
+      "title": "Remove inferior slices"
+    },
+    "pre_align_center_mass": {
+      "type": "boolean",
+      "description": "Pre-align the centers of mass of the volumes",
+      "title": "Pre-align center of mass flag",
+      "default": false
+    },
+    "pre_center_mass": {
+      "type": "boolean",
+      "description": "Pre-recenter input center of mass to (0, 0, 0)",
+      "title": "Pre-center mass flag",
+      "default": false
+    },
+    "post_lr_symm": {
+      "type": "boolean",
+      "description": "Apply post-alignment left-right symmetrization",
+      "title": "Post-alignment left-right symmetrization flag",
+      "default": false
+    },
+    "no_pre_lr_symm": {
+      "type": "boolean",
+      "description": "Turn off pre-alignment left-right symmetrization",
+      "title": "No pre-alignment left-right symmetrization flag",
+      "default": false
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Do not remove working directory '__WORKING_axialize_anat'",
+      "title": "No clean flag",
+      "default": false
+    },
+    "qc_ulay_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Provide a min (UMIN) and max (UMAX) range for underlay grayscale bar",
+      "title": "QC underlay range"
+    },
+    "no_qc_view": {
+      "type": "boolean",
+      "description": "Turn off default QC image saving/viewing",
+      "title": "No QC view flag",
+      "default": false
+    },
+    "qc_prefix": {
+      "type": "string",
+      "description": "Provide a prefix for QC outputs separate from the main prefix",
+      "title": "QC prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file",
+    "ref_file",
+    "prefix"
+  ]
+}

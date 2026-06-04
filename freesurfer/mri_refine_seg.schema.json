@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_refine_seg",
+  "description": "Refines a messy segmentation by recoding stray voxels.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_refine_seg"
+    },
+    "input_segmentation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input segmentation file.",
+      "title": "Input Segmentation"
+    },
+    "output_segmentation": {
+      "type": "string",
+      "description": "Refined segmentation output name.",
+      "title": "Output Segmentation"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Save the original segmentation, a mask of the refined voxels, and a pointset of the refined clusters to the output directory.",
+      "title": "Debug Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_segmentation",
+    "output_segmentation"
+  ]
+}

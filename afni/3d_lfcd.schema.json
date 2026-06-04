@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLFCD",
+  "description": "Performs degree centrality on a dataset using a given maskfile via the 3dLFCD command",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLFCD"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file to 3dlfcd.",
+      "title": "In file"
+    },
+    "autoclip": {
+      "type": "boolean",
+      "description": "Clip off low-intensity regions in the dataset.",
+      "title": "Autoclip",
+      "default": false
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Mask the dataset to target brain-only voxels.",
+      "title": "Automask",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file to mask input data.",
+      "title": "Mask"
+    },
+    "num_threads": {
+      "type": "integer",
+      "description": "Set number of threads.",
+      "title": "Num threads"
+    },
+    "out_file": {
+      "type": "string",
+      "description": "Output image file name.",
+      "title": "Out file"
+    },
+    "outputtype": {
+      "enum": [
+        "NIFTI",
+        "AFNI",
+        "NIFTI_GZ"
+      ],
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype.",
+      "title": "Outputtype"
+    },
+    "polort": {
+      "type": "integer",
+      "description": "No description provided.",
+      "title": "Polort"
+    },
+    "thresh": {
+      "type": "number",
+      "description": "Threshold to exclude connections where corr <= thresh.",
+      "title": "Thresh"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_diff",
+  "description": "Determines whether two volumes differ based on dimensions, resolutions, acquisition parameters, geometry, precision, and pixel data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_diff"
+    },
+    "vol1file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First volume to compare (e.g., vol1.mgz)",
+      "title": "Volume 1 File"
+    },
+    "vol2file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second volume to compare (e.g., vol2.mgz)",
+      "title": "Volume 2 File"
+    },
+    "resolution_check": {
+      "type": "boolean",
+      "description": "Do not check for resolution differences.",
+      "title": "Check Resolution",
+      "default": false
+    },
+    "acquisition_param_check": {
+      "type": "boolean",
+      "description": "Do not check for acquisition parameter differences.",
+      "title": "Check Acquisition Parameters",
+      "default": false
+    },
+    "geometry_check": {
+      "type": "boolean",
+      "description": "Do not check for geometry differences.",
+      "title": "Check Geometry",
+      "default": false
+    },
+    "precision_check": {
+      "type": "boolean",
+      "description": "Do not check for precision differences.",
+      "title": "Check Precision",
+      "default": false
+    },
+    "pixel_check": {
+      "type": "boolean",
+      "description": "Do not check for pixel differences.",
+      "title": "Check Pixel",
+      "default": false
+    },
+    "orientation_check": {
+      "type": "boolean",
+      "description": "Do not check for orientation differences.",
+      "title": "Check Orientation",
+      "default": false
+    },
+    "file_type_diff_check": {
+      "type": "boolean",
+      "description": "Do not check for file type differences.",
+      "title": "Check File Type",
+      "default": false
+    },
+    "no_exit_on_diff": {
+      "type": "boolean",
+      "description": "Do not exit on difference; run through everything.",
+      "title": "No Exit on Difference",
+      "default": false
+    },
+    "quality_assurance": {
+      "type": "boolean",
+      "description": "Check resolution, acquisition, precision, and orientation only.",
+      "title": "Quality Assurance",
+      "default": false
+    },
+    "pixel_only": {
+      "type": "boolean",
+      "description": "Only check pixel data.",
+      "title": "Pixel Only",
+      "default": false
+    },
+    "abs_difference": {
+      "type": "boolean",
+      "description": "Take absolute value of difference (default).",
+      "title": "Absolute Difference",
+      "default": false
+    },
+    "no_abs_difference": {
+      "type": "boolean",
+      "description": "Do not take absolute value of difference.",
+      "title": "No Absolute Difference",
+      "default": false
+    },
+    "difference_abs": {
+      "type": "boolean",
+      "description": "Take absolute value before computing difference.",
+      "title": "Difference Absolute Value",
+      "default": false
+    },
+    "percentage_difference": {
+      "type": "boolean",
+      "description": "Compute percentage difference: 100*(v1-v2)/((v1+v2)/2).",
+      "title": "Percentage Difference",
+      "default": false
+    },
+    "rss_save": {
+      "type": "boolean",
+      "description": "Save square root sum squares with --diff.",
+      "title": "RSS Save",
+      "default": false
+    },
+    "ssd_print": {
+      "type": "boolean",
+      "description": "Print sum squared differences over all voxels.",
+      "title": "SSD Print",
+      "default": false
+    },
+    "rms_print": {
+      "type": "boolean",
+      "description": "Print root mean squared difference over all non-zero voxels.",
+      "title": "RMS Print",
+      "default": false
+    },
+    "count_diff_voxels": {
+      "type": "boolean",
+      "description": "Print number of differing voxels.",
+      "title": "Count Differing Voxels",
+      "default": false
+    },
+    "pixel_threshold": {
+      "type": "number",
+      "description": "Pixel differences must be greater than this value to be considered different.",
+      "title": "Pixel Threshold"
+    },
+    "count_thresh_voxels": {
+      "type": "number",
+      "description": "There must be at least this many voxels that are different.",
+      "title": "Count Threshold Voxels"
+    },
+    "log_file": {
+      "type": "string",
+      "description": "Store difference information in this log file.",
+      "title": "Log File"
+    },
+    "difference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Save difference image to specified volume.",
+      "title": "Difference Image"
+    },
+    "suspicious_diff_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Differing voxels replaced with label SUSPICIOUS in the specified volume.",
+      "title": "Suspicious Difference Volume"
+    },
+    "segmentation_diff": {
+      "type": "string",
+      "description": "Perform diff on voxels with specific label index.",
+      "title": "Segmentation Difference"
+    },
+    "merge_edits": {
+      "type": "string",
+      "description": "Merge edits from newauto, oldauto, and manedit volumes into merged volume.",
+      "title": "Merge Edits"
+    },
+    "average_difference": {
+      "type": "string",
+      "description": "Save average difference to specified file.",
+      "title": "Average Difference"
+    },
+    "debug_mode": {
+      "type": "boolean",
+      "description": "Enable debugging mode.",
+      "title": "Debug Mode",
+      "default": false
+    },
+    "verbose_mode": {
+      "type": "boolean",
+      "description": "Print information on all differences found.",
+      "title": "Verbose Mode",
+      "default": false
+    },
+    "check_options": {
+      "type": "boolean",
+      "description": "Check options and exit without running anything.",
+      "title": "Check Options",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "vol1file",
+    "vol2file"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MBA",
+  "description": "Matrix-Based Analysis Program through Bayesian Multilevel Modeling",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/MBA"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output file names",
+      "title": "Prefix"
+    },
+    "chains": {
+      "type": "integer",
+      "description": "Specify the number of Markov chains",
+      "title": "Chains"
+    },
+    "iterations": {
+      "type": "integer",
+      "description": "Specify the number of iterations per Markov chain",
+      "title": "Iterations"
+    },
+    "model": {
+      "type": "string",
+      "description": "Specify the effects associated with explanatory variables",
+      "title": "Model"
+    },
+    "eoi": {
+      "type": "string",
+      "description": "Identify effects of interest in the output",
+      "title": "Effects of Interest"
+    },
+    "data_table": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the data structure in a table of long format",
+      "title": "Data table"
+    },
+    "cvars": {
+      "type": "string",
+      "description": "Identify categorical (qualitative) variables",
+      "title": "Categorical Variables"
+    },
+    "qvars": {
+      "type": "string",
+      "description": "Identify quantitative variables (or covariates)",
+      "title": "Quantitative Variables"
+    },
+    "qcvar": {
+      "type": "string",
+      "description": "Identify comparisons of interest between quantitative variables",
+      "title": "Quantitative Comparisons"
+    },
+    "stdz": {
+      "type": "string",
+      "description": "Identify quantitative variables (or covariates) to be standardized",
+      "title": "Standardize Variables"
+    },
+    "wcp": {
+      "type": "integer",
+      "description": "Invoke within-chain parallelization to speed up runtime",
+      "title": "Within-Chain Parallelization"
+    },
+    "disty": {
+      "type": "string",
+      "description": "Specify the distribution for the response variable",
+      "title": "Distribution for Response Variable"
+    },
+    "se": {
+      "type": "string",
+      "description": "Specify the column name that designates the standard error for the response variable",
+      "title": "Standard Error"
+    },
+    "dbgArgs": {
+      "type": "boolean",
+      "description": "Enable R to save the parameters in a file called .MBA.dbg.AFNI.args for debugging purposes",
+      "title": "Debug Arguments",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show help message",
+      "title": "Help",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "data_table"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "invwarp",
+  "description": "\nUse FSL Invwarp to invert a FNIRT warp",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/invwarp"
+    },
+    "warp": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for warp/shiftmap transform (volume).",
+      "title": "Warp"
+    },
+    "out_img": {
+      "type": "string",
+      "description": "Filename for output (inverse warped) image.",
+      "title": "Output image"
+    },
+    "ref_img": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename for new reference image.",
+      "title": "Reference image"
+    },
+    "absolute": {
+      "type": "boolean",
+      "description": "Use absolute warp convention (default): x' = w(x).",
+      "title": "Absolute warp convention",
+      "default": false
+    },
+    "relative": {
+      "type": "boolean",
+      "description": "Use relative warp convention (default): x' = x + w(x).",
+      "title": "Absolute warp convention",
+      "default": false
+    },
+    "noconstraint": {
+      "type": "boolean",
+      "description": "Do not apply jacobian constraint.",
+      "title": "No constraint",
+      "default": false
+    },
+    "jacobian_min": {
+      "type": "number",
+      "description": "Minimum acceptable jacobian value for constraint (default 0.01).",
+      "title": "Jacobian min"
+    },
+    "jacobian_max": {
+      "type": "number",
+      "description": "Maximum acceptable jacobian value for constraint (default 100.0).",
+      "title": "Jacobian max"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging output.",
+      "title": "Debug",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "warp",
+    "out_img",
+    "ref_img"
+  ]
+}

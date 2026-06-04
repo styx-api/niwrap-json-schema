@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_pmake",
+  "description": "Calculates paths and related costs on FreeSurfer surfaces based on an edge cost and Dijkstra's algorithm.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_pmake"
+    },
+    "options_file": {
+      "type": "string",
+      "description": "The main configuration file specifying the startup run-time behaviour.",
+      "title": "Options File"
+    },
+    "working_dir": {
+      "type": "string",
+      "description": "The working directory.",
+      "title": "Working Directory"
+    },
+    "listen_mode": {
+      "type": "boolean",
+      "description": "Start in LISTEN mode without calculating a path.",
+      "title": "Listen Mode",
+      "default": false
+    },
+    "listen_on_port": {
+      "type": "number",
+      "description": "Create the server port on specified port and do nothing else.",
+      "title": "Listen on Port"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Set the subject to <subj>.",
+      "title": "Subject"
+    },
+    "hemisphere": {
+      "type": "string",
+      "description": "The hemisphere to process.",
+      "title": "Hemisphere"
+    },
+    "surface0": {
+      "type": "string",
+      "description": "The main mesh surface to read.",
+      "title": "Surface0 File"
+    },
+    "surface1": {
+      "type": "string",
+      "description": "The aux mesh surface to read.",
+      "title": "Surface1 File"
+    },
+    "curve0": {
+      "type": "string",
+      "description": "The main curvature function maps.",
+      "title": "Curve0 File"
+    },
+    "curve1": {
+      "type": "string",
+      "description": "The aux curvature function maps.",
+      "title": "Curve1 File"
+    },
+    "use_abs_curvs": {
+      "type": "boolean",
+      "description": "Use absolute values on each curvature map.",
+      "title": "Use Absolute Curvatures",
+      "default": false
+    },
+    "mpm_prog": {
+      "type": "string",
+      "description": "The mpmProg to run.",
+      "title": "MPM Prog"
+    },
+    "mpm_args": {
+      "type": "string",
+      "description": "Arguments for the specified mpmProg.",
+      "title": "MPM Arguments"
+    }
+  },
+  "required": [
+    "@type",
+    "subject",
+    "hemisphere"
+  ]
+}

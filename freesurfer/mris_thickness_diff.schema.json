@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_thickness_diff",
+  "description": "Computes the difference of two surface data sets defined on two surface meshes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_thickness_diff"
+    },
+    "src_type": {
+      "type": "string",
+      "description": "Input surface data format (curv, paint or w)",
+      "title": "Source type"
+    },
+    "trg_type": {
+      "type": "string",
+      "description": "Output format (paint or w)",
+      "title": "Target type"
+    },
+    "out_file": {
+      "type": "string",
+      "description": "Output file name",
+      "title": "Output file"
+    },
+    "out_resampled": {
+      "type": "string",
+      "description": "Output resampled thickness",
+      "title": "Output resampled thickness file"
+    },
+    "nsmooth": {
+      "type": "number",
+      "description": "Number of smoothing steps",
+      "title": "Number of smoothing steps"
+    },
+    "register": {
+      "type": "boolean",
+      "description": "Perform ICP rigid registration",
+      "title": "Register surfaces",
+      "default": false
+    },
+    "xform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Apply LTA transform to align input surface1 to surface2",
+      "title": "Transform file"
+    },
+    "invert": {
+      "type": "boolean",
+      "description": "Reversely apply -xform",
+      "title": "Invert transform",
+      "default": false
+    },
+    "src_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Source volume for -xform",
+      "title": "Source volume"
+    },
+    "dst_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Target volume for -xform",
+      "title": "Destination volume"
+    },
+    "abs": {
+      "type": "boolean",
+      "description": "Compute the std of abs-thickness-diff",
+      "title": "Absolute difference",
+      "default": false
+    },
+    "log_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Log file name",
+      "title": "Log file"
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "Subject name (to be recorded in logfile)",
+      "title": "Subject name"
+    }
+  },
+  "required": [
+    "@type",
+    "out_file"
+  ]
+}

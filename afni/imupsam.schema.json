@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "imupsam",
+  "description": "Upsamples a 2D image by a specified factor",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/imupsam"
+    },
+    "ascii_flag": {
+      "type": "boolean",
+      "description": "Write the result in ASCII format: all numbers for the file are output, with no header info",
+      "title": "ASCII output flag",
+      "default": false
+    },
+    "factor": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 30,
+      "description": "Upsampling factor; must be an integer in the range 2 to 30",
+      "title": "Upsampling factor"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path of the input 2D image file",
+      "title": "Input image file"
+    },
+    "output_image": {
+      "type": "string",
+      "description": "Path of the output upsampled image file. Use '-' to write to stdout.",
+      "title": "Output image file"
+    }
+  },
+  "required": [
+    "@type",
+    "factor",
+    "input_image",
+    "output_image"
+  ]
+}

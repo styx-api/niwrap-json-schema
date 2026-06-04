@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_xvolavg",
+  "description": "Tool to average multiple volumes together (including 4D volumes).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_xvolavg"
+    },
+    "input_volumes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Path(s) to input volume(s). This option can be repeated for each input volume.",
+      "title": "Input volumes"
+    },
+    "vol_type": {
+      "type": "string",
+      "description": "Format type of all input volumes.",
+      "title": "Volume type"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Path to output volume.",
+      "title": "Output volume"
+    },
+    "output_type": {
+      "type": "string",
+      "description": "Format type of the output volume (default is that of input volumes).",
+      "title": "Output type"
+    }
+  },
+  "required": [
+    "@type",
+    "input_volumes",
+    "vol_type",
+    "output_volume"
+  ]
+}

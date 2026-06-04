@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "topup",
+  "description": "topup is part of FSL and is used to estimate and correct for susceptibility-induced distortions in echo planar imaging (EPI) data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/topup"
+    },
+    "imain": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of 4D file with images",
+      "title": "Input main file"
+    },
+    "datain": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of text file with PE directions/times",
+      "title": "Data file"
+    },
+    "out": {
+      "type": "string",
+      "description": "Base-name of output files (spline coefficients (Hz) and movement parameters)",
+      "title": "Output basename"
+    },
+    "fout": {
+      "type": "string",
+      "description": "Name of image file with field (Hz)",
+      "title": "Field output file"
+    },
+    "iout": {
+      "type": "string",
+      "description": "Name of 4D image file with unwarped images",
+      "title": "Unwarped images file"
+    },
+    "logout": {
+      "type": "string",
+      "description": "Name of log-file",
+      "title": "Log file"
+    },
+    "warpres": {
+      "type": "number",
+      "description": "(Approximate) resolution (in mm) of warp basis for the different sub-sampling levels, default 10",
+      "title": "Warp resolution"
+    },
+    "subsamp": {
+      "type": "number",
+      "description": "Sub-sampling scheme, default 1",
+      "title": "Sub-sampling scheme"
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "FWHM (in mm) of gaussian smoothing kernel, default 8",
+      "title": "Gaussian smoothing kernel"
+    },
+    "config": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of config file specifying command line arguments",
+      "title": "Config file"
+    },
+    "miter": {
+      "type": "number",
+      "description": "Max # of non-linear iterations, default 5",
+      "title": "Max non-linear iterations"
+    },
+    "lambda": {
+      "type": "number",
+      "description": "Weight of regularisation, default depending on --ssqlambda and --regmod switches. See user documentation.",
+      "title": "Regularisation weight"
+    },
+    "ssqlambda": {
+      "type": "boolean",
+      "description": "If set (=1), lambda is weighted by current ssq, default 1",
+      "title": "Weighted lambda flag",
+      "default": false
+    },
+    "regmod": {
+      "enum": [
+        "membrane_energy",
+        "bending_energy"
+      ],
+      "description": "Model for regularisation of warp-field [membrane_energy bending_energy], default bending_energy",
+      "title": "Regularisation model"
+    },
+    "estmov": {
+      "type": "boolean",
+      "description": "Estimate movements if set, default 1 (true)",
+      "title": "Estimate movements",
+      "default": false
+    },
+    "minmet": {
+      "type": "boolean",
+      "description": "Minimisation method 0=Levenberg-Marquardt, 1=Scaled Conjugate Gradient, default 0 (LM)",
+      "title": "Minimisation method"
+    },
+    "splineorder": {
+      "enum": [
+        2,
+        3
+      ],
+      "description": "Order of spline, 2=Quadratic spline, 3=Cubic spline. Default=3",
+      "title": "Spline order"
+    },
+    "numprec": {
+      "enum": [
+        "double",
+        "float"
+      ],
+      "description": "Precision for representing Hessian, double or float. Default double",
+      "title": "Numerical precision"
+    },
+    "interp": {
+      "enum": [
+        "linear",
+        "spline"
+      ],
+      "description": "Image interpolation model, linear or spline. Default spline",
+      "title": "Interpolation model"
+    },
+    "scale": {
+      "type": "boolean",
+      "description": "If set (=1), the images are individually scaled to a common mean, default 0 (false)",
+      "title": "Scale images",
+      "default": false
+    },
+    "regrid": {
+      "type": "boolean",
+      "description": "If set (=1), the calculations are done in a different grid, default 1 (true)",
+      "title": "Regrid calculations",
+      "default": false
+    },
+    "nthr": {
+      "type": "number",
+      "description": "Number of threads to use (cannot be greater than numbers of hardware cores), default 1",
+      "title": "Number of threads"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print diagnostic information while running",
+      "title": "Verbose flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "imain",
+    "datain"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "convert_cdiflist_to_grads.py",
+  "description": "This program reads in a GE cdiflist and outputs gradient file and file of bvalues for subsequent processing.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/convert_cdiflist_to_grads.py"
+    },
+    "cdiflist": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name(s) of cdiflist text file output by GE scanners when acquiring DWIs.",
+      "title": "Cdiflist file"
+    },
+    "bval_max": {
+      "type": "number",
+      "description": "Max bvalue used, which provides a reference value for scaling everything else.",
+      "title": "Maximum bvalue"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output basename for the subsequent grad and bvalue files (suffix and extensions will be added).",
+      "title": "Output prefix"
+    },
+    "ver": {
+      "type": "boolean",
+      "description": "Display current version.",
+      "title": "Version flag",
+      "default": false
+    },
+    "date": {
+      "type": "boolean",
+      "description": "Display release/editing date of current version.",
+      "title": "Date flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help in terminal.",
+      "title": "Help flag",
+      "default": false
+    },
+    "hview": {
+      "type": "boolean",
+      "description": "Display help in terminal.",
+      "title": "Help in text editor flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "cdiflist",
+    "bval_max",
+    "prefix"
+  ]
+}

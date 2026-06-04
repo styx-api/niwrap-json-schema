@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dNwarpAdjust",
+  "description": "Program to adjust 3D warp datasets by composing them with the inverse of their average, optionally warping input datasets and generating an output mean dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dNwarpAdjust"
+    },
+    "input_warps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of input 3D warp datasets (at least 5).",
+      "title": "Input Warps"
+    },
+    "source_datasets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of input 3D datasets to be warped by the adjusted warp datasets. There must be exactly as many of these datasets as there are input warps.",
+      "title": "Source Datasets"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix for the output mean dataset (only needed if the '-source' option is also given).",
+      "title": "Output Prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "input_warps"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_proc_convert_dcm_anat",
+  "description": "Converts an anatomical dataset from DICOM files into a volume, specifically designed to fit in line with other processing such as DTI analysis.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_proc_convert_dcm_anat"
+    },
+    "dicom_directory": {
+      "type": "string",
+      "description": "Input as DICOM directory; DIR_IN should contain only DICOM files; all will be selected.",
+      "title": "DICOM Directory"
+    },
+    "nifti_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input as NIFTI file (zipped or unzipped fine). Alternative to '-indir ..'.",
+      "title": "NIFTI Input"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Set prefix (and path) for output data.",
+      "title": "Prefix"
+    },
+    "workdir": {
+      "type": "string",
+      "description": "Specify a working directory, which can be removed (default name = '__WORKING_convert_dcm_anat').",
+      "title": "Working Directory"
+    },
+    "orient": {
+      "type": "string",
+      "description": "Optional chance to reset orientation of the volume files (default is currently 'RAI').",
+      "title": "Orientation"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Prevents removal of working directory.",
+      "title": "No Clean Flag",
+      "default": false
+    },
+    "reorig_reorient_off": {
+      "type": "boolean",
+      "description": "Turns off the nicety of putting (0, 0, 0) at brain's center of mass (-> 'reorigin' calc) and reorienting data (-> 'reorient' calc).",
+      "title": "Reorient/Reorigin Off Flag",
+      "default": false
+    },
+    "qc_prefix": {
+      "type": "string",
+      "description": "Set the prefix of the QC image files separately (default is '').",
+      "title": "QC Prefix"
+    },
+    "no_cmd_out": {
+      "type": "boolean",
+      "description": "Don't save the command line call and the location where it was run.",
+      "title": "No Command Output Flag",
+      "default": false
+    },
+    "no_qc_view": {
+      "type": "boolean",
+      "description": "Turn off generating QC image files.",
+      "title": "No QC View Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "prefix"
+  ]
+}

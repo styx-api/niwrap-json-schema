@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dMEMA",
+  "description": "3dMEMA is a program for performing Mixed Effects Meta Analysis at group level that models both within- and across-subjects variability.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dMEMA"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output prefix (just prefix, no view+suffix needed)",
+      "title": "Output prefix"
+    },
+    "jobs": {
+      "type": "number",
+      "description": "Number of jobs for parallel computing",
+      "title": "Number of jobs"
+    },
+    "set": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Set data for one of the test variables",
+      "title": "Set data"
+    },
+    "covariates": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the name of a text file containing a table for the covariate(s).",
+      "title": "Covariates file"
+    },
+    "covariates_center": {
+      "type": "string",
+      "description": "Specify the center values for covariates.",
+      "title": "Covariates center"
+    },
+    "covariates_model": {
+      "type": "string",
+      "description": "Specify how covariates should be modeled.",
+      "title": "Covariates model"
+    },
+    "covariates_name": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify the name of each covariate.",
+      "title": "Covariates name"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Label of groups, used for output naming.",
+      "title": "Groups"
+    },
+    "cio": {
+      "type": "boolean",
+      "description": "Use AFNI's C io functions.",
+      "title": "C IO functions flag",
+      "default": false
+    },
+    "HKtest": {
+      "type": "boolean",
+      "description": "Perform Hartung-Knapp adjustment for the output t-statistic.",
+      "title": "H-K test flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Only process voxels inside the specified mask.",
+      "title": "Mask file"
+    },
+    "max_zeros": {
+      "type": "number",
+      "description": "Specify how many beta/t-statistics can be zero.",
+      "title": "Maximum zeros allowed"
+    },
+    "missing_data": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify missing data handling.",
+      "title": "Missing data"
+    },
+    "model_outliers": {
+      "type": "boolean",
+      "description": "Model outliers with a Laplace distribution.",
+      "title": "Model outliers flag",
+      "default": false
+    },
+    "n_nonzero": {
+      "type": "number",
+      "description": "Number of non-zero beta values required.",
+      "title": "Minimum non-zero betas"
+    },
+    "no_HKtest": {
+      "type": "boolean",
+      "description": "Specify not to use Hartung-Knapp adjustment.",
+      "title": "No H-K test flag",
+      "default": false
+    },
+    "no_model_outliers": {
+      "type": "boolean",
+      "description": "Specify not to model outliers.",
+      "title": "No model outliers flag",
+      "default": false
+    },
+    "no_residual_Z": {
+      "type": "boolean",
+      "description": "Do not output residuals and their Z values.",
+      "title": "No residual Z flag",
+      "default": false
+    },
+    "residual_Z": {
+      "type": "boolean",
+      "description": "Output residuals and their Z values.",
+      "title": "Residual Z flag",
+      "default": false
+    },
+    "Rio": {
+      "type": "boolean",
+      "description": "Use R's io functions.",
+      "title": "R IO functions flag",
+      "default": false
+    },
+    "equal_variance": {
+      "type": "boolean",
+      "description": "Assume same cross-subjects variability between groups.",
+      "title": "Equal variance flag",
+      "default": false
+    },
+    "unequal_variance": {
+      "type": "boolean",
+      "description": "Model cross-subject variability difference between groups.",
+      "title": "Unequal variance flag",
+      "default": false
+    },
+    "verb": {
+      "type": "number",
+      "description": "Specify verbosity level",
+      "title": "Verbosity level"
+    },
+    "dbgArgs": {
+      "type": "boolean",
+      "description": "Output missing data debug file.",
+      "title": "Debug arguments flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show help message",
+      "title": "Help flag",
+      "default": false
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Name of 1 or 2 conditions, tasks, or GLTs",
+      "title": "Conditions"
+    },
+    "no_tstat": {
+      "type": "boolean",
+      "description": "Do not compute t-statistics",
+      "title": "No t-stat flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "set"
+  ]
+}

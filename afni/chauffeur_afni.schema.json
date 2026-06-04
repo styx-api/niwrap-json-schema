@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@chauffeur_afni",
+  "description": "Automated QC snapshots generator in AFNI",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@chauffeur_afni"
+    },
+    "ulay": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of underlay dataset (required); can be 3D or 4D set",
+      "title": "Underlay dataset"
+    },
+    "olay": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of overlay dataset (optional)",
+      "title": "Overlay dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output files (required)",
+      "title": "Output prefix"
+    },
+    "mode_4D": {
+      "type": "boolean",
+      "description": "For each viewing plane, one slice is selected across all volumes in a 4D dataset",
+      "title": "4D mode",
+      "default": false
+    },
+    "func_range": {
+      "type": "number",
+      "description": "Specify upper value of the overlay dataset to be matched to top of colorbar (default: 98%ile non-zero value of dataset)",
+      "title": "Functional range"
+    },
+    "opacity": {
+      "type": "number",
+      "description": "Enter an opacity factor for the overlay (0-9, with 9 being opaque)",
+      "title": "Overlay opacity"
+    },
+    "set_subbricks": {
+      "type": "string",
+      "description": "Specify subbricks for 3D image viewing",
+      "title": "Set subbricks"
+    },
+    "montx": {
+      "type": "number",
+      "description": "Number of image panels in a row (default: 3)",
+      "title": "Montage X"
+    },
+    "monty": {
+      "type": "number",
+      "description": "Number of image panels in a column (default: 3)",
+      "title": "Montage Y"
+    },
+    "montgap": {
+      "type": "number",
+      "description": "Number of pixels as gap between image panels (default: 0)",
+      "title": "Montage gap"
+    },
+    "label_mode": {
+      "type": "number",
+      "description": "Control labels, ON/OFF and location (default: 1)",
+      "title": "Label mode"
+    },
+    "label_size": {
+      "type": "number",
+      "description": "Control labels, size (default: 3)",
+      "title": "Label size"
+    },
+    "label_color": {
+      "type": "string",
+      "description": "Control labels, color (default: white)",
+      "title": "Label color"
+    },
+    "label_setback": {
+      "type": "number",
+      "description": "Control labels, offset from edge (default: 0.01)",
+      "title": "Label setback"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Do not remove the temporary directory of copied/intermediate files",
+      "title": "No clean",
+      "default": false
+    },
+    "do_clean": {
+      "type": "boolean",
+      "description": "Remove the temporary directory of copied/intermediate files",
+      "title": "Do clean",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help information",
+      "title": "Help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Display version number",
+      "title": "Version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "ulay",
+    "prefix"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "balloon",
+  "description": "Simulation of haemodynamic response using the balloon model. Based on the theoretical model proposed by Buxton et al. (1998).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/balloon"
+    },
+    "tr": {
+      "type": "number",
+      "description": "Scan repetition time in seconds (TR), the interval at which the output curve will be sampled.",
+      "title": "Repetition Time"
+    },
+    "num_scans": {
+      "type": "integer",
+      "description": "Number of scans (N), the output curve will comprise this number of samples.",
+      "title": "Number of Scans"
+    },
+    "event_times": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The name of a file containing the event timings, in seconds, as ASCII strings separated by white space, with time 0 being the time at which the initial scan occurred.",
+      "title": "Event Times File"
+    },
+    "t_rise": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "maxItems": 1,
+      "description": "Haemodynamic rise time in seconds (typically between 4s and 6s).",
+      "title": "Haemodynamic Rise Time"
+    },
+    "t_fall": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "maxItems": 1,
+      "description": "Haemodynamic fall time in seconds (typically between 4s and 6s).",
+      "title": "Haemodynamic Fall Time"
+    },
+    "t_sustain": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "maxItems": 1,
+      "description": "Haemodynamic sustain time in seconds (typically between 0s and 4s).",
+      "title": "Haemodynamic Sustain Time"
+    }
+  },
+  "required": [
+    "@type",
+    "tr",
+    "num_scans",
+    "event_times"
+  ]
+}

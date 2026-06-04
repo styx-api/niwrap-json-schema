@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsMotionCorrStats",
+  "description": "Create summary measures of the parameters that are output by antsMotionCorr. Currently only works for linear transforms. Outputs the mean and max displacements for the voxels within a provided mask, at each time point. By default the displacements are relative to the reference space, but the framewise option may be used to provide displacements between consecutive time points.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsMotionCorrStats"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask image - compute displacements within mask.",
+      "title": "Mask image"
+    },
+    "moco_params": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Motion correction parameters from antsMotionCorr.",
+      "title": "Motion correction parameters"
+    },
+    "output": {
+      "type": "string",
+      "description": "Specify the output file.",
+      "title": "Output file"
+    },
+    "transform_index": {
+      "type": "integer",
+      "description": "Specify the index for a 3D transform to output.",
+      "title": "Transform index"
+    },
+    "framewise": {
+      "type": "boolean",
+      "description": "Do framewise summary stats.",
+      "title": "Framewise stats"
+    },
+    "spatial_map": {
+      "type": "boolean",
+      "description": "Output image of displacement magnitude.",
+      "title": "Spatial map",
+      "default": false
+    },
+    "timeseries_displacement": {
+      "type": "boolean",
+      "description": "Output 4d time-series image of displacement magnitude.",
+      "title": "Timeseries displacement",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print the help menu. Short version with -h.",
+      "title": "Help"
+    }
+  },
+  "required": [
+    "@type",
+    "mask",
+    "moco_params",
+    "output"
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "waver",
+  "description": "Creates an ideal waveform timeseries file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/waver"
+    },
+    "wav": {
+      "type": "boolean",
+      "description": "Sets waveform to Cox special [default]",
+      "title": "Cox special waveform",
+      "default": false
+    },
+    "gam": {
+      "type": "boolean",
+      "description": "Sets waveform to form t^b * exp(-t/c) (cf. Mark Cohen)",
+      "title": "Gamma waveform",
+      "default": false
+    },
+    "expr": {
+      "type": "string",
+      "description": "Sets waveform to the expression given, which should depend on the variable 't'.",
+      "title": "Expression for custom waveform"
+    },
+    "file_opt": {
+      "type": "string",
+      "description": "Sets waveform to the values read from the file wname, which should be a single column .1D file. The dt value is the time step (in seconds) between lines in wname.",
+      "title": "File for waveform values"
+    },
+    "delay_time": {
+      "type": "number",
+      "description": "Sets delay time to # seconds [2]",
+      "title": "Delay time"
+    },
+    "rise_time": {
+      "type": "number",
+      "description": "Sets rise time to # seconds [4]",
+      "title": "Rise time"
+    },
+    "fall_time": {
+      "type": "number",
+      "description": "Sets fall time to # seconds [6]",
+      "title": "Fall time"
+    },
+    "undershoot": {
+      "type": "number",
+      "description": "Sets undershoot to # times the peak [0.2]",
+      "title": "Undershoot"
+    },
+    "restore_time": {
+      "type": "number",
+      "description": "Sets time to restore from undershoot [2]",
+      "title": "Restore time"
+    },
+    "gamb": {
+      "type": "number",
+      "description": "Sets the parameter 'b' to # [8.6]",
+      "title": "Gamma parameter b"
+    },
+    "gamc": {
+      "type": "number",
+      "description": "Sets the parameter 'c' to # [0.547]",
+      "title": "Gamma parameter c"
+    },
+    "gamd": {
+      "type": "number",
+      "description": "Sets the delay time to # seconds [0.0]",
+      "title": "Gamma delay time"
+    },
+    "peak": {
+      "type": "number",
+      "description": "Sets peak value to # [100]",
+      "title": "Peak value"
+    },
+    "dt": {
+      "type": "number",
+      "description": "Sets time step of output AND input [0.1]",
+      "title": "Time step"
+    },
+    "tr": {
+      "type": "number",
+      "description": "'-TR' is equivalent to '-dt'",
+      "title": "TR time step"
+    },
+    "xyout": {
+      "type": "boolean",
+      "description": "Output data in 2 columns: 1=time 2=waveform (useful for graphing) [default is 1 column=waveform]",
+      "title": "XY output flag",
+      "default": false
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read timeseries from *.1D formatted 'infile'; convolve with waveform to produce output",
+      "title": "Input file"
+    },
+    "inline_data": {
+      "type": "string",
+      "description": "Read timeseries from command line DATA; convolve with waveform to produce output",
+      "title": "Inline input data"
+    },
+    "tstim_data": {
+      "type": "string",
+      "description": "Read discrete stimulation times from the command line and convolve the waveform with delta-functions at those times.",
+      "title": "Tstim input data"
+    },
+    "when_data": {
+      "type": "string",
+      "description": "Read time blocks when stimulus is 'on' (=1) from the command line and convolve the waveform with with a zero-one input.",
+      "title": "When input data"
+    },
+    "numout": {
+      "type": "integer",
+      "description": "Output a timeseries with NN points; if this option is not given, then enough points are output to let the result tail back down to zero.",
+      "title": "Number of output points"
+    },
+    "ver_flag": {
+      "type": "boolean",
+      "description": "Output version information and exit.",
+      "title": "Version flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

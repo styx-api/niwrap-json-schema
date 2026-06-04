@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@fix_FSsphere",
+  "description": "Tool for fixing errors in FreeSurfer spherical surfaces",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@fix_FSsphere"
+    },
+    "spec_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Spec file",
+      "title": "Spec File"
+    },
+    "sphere_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "SPHERE.asc is the sphere to be used",
+      "title": "Sphere File"
+    },
+    "num_iterations": {
+      "type": "integer",
+      "description": "Number of local smoothing operations. Default is 3000",
+      "title": "Number of Iterations"
+    },
+    "extent_lim": {
+      "type": "number",
+      "description": "Extent, in mm, by which troubled sections are fattened. Default is 6",
+      "title": "Extent Limit"
+    },
+    "project_first": {
+      "type": "boolean",
+      "description": "Project to a sphere, before smoothing. Default is 0",
+      "title": "Project First Flag",
+      "default": false
+    },
+    "keep_temp": {
+      "type": "boolean",
+      "description": "Keep temporary files",
+      "title": "Keep Temporary Files Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "spec_file",
+    "sphere_file"
+  ]
+}

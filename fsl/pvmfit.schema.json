@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "pvmfit",
+  "description": "Fits diffusion models to multishell DWI data",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/pvmfit"
+    },
+    "data_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Data file",
+      "title": "Data file"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file",
+      "title": "Mask file"
+    },
+    "bvec_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "B vectors file",
+      "title": "B vectors file"
+    },
+    "bval_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "B values file",
+      "title": "B values file"
+    },
+    "output_basename": {
+      "type": "string",
+      "description": "Output basename - default='pvm'",
+      "title": "Output basename"
+    },
+    "number_of_fibres": {
+      "type": "number",
+      "description": "Number of fibres to fit - default=1",
+      "title": "Number of fibres"
+    },
+    "model_type": {
+      "type": "integer",
+      "description": "Model type: 1 for Ball-Sticks (single-shell), 2 for Ball-Sticks (multi-shells), 4 for Ball-Binghams",
+      "title": "Model type"
+    },
+    "fit_all_models": {
+      "type": "boolean",
+      "description": "Fit all models from 1 up to N fibres and choose the best using BIC",
+      "title": "Fit all models using BIC",
+      "default": false
+    },
+    "constrained_nonlinear": {
+      "type": "boolean",
+      "description": "Model1: Apply constrained nonlinear optimization on the diffusivity, volume fractions and their sum",
+      "title": "Constrained nonlinear optimization",
+      "default": false
+    },
+    "constrained_nonlinear_f": {
+      "type": "boolean",
+      "description": "Model1: Apply constrained nonlinear optimization on the diffusivity, volume fractions and their sum. Return n fanning angle estimates, using the Hessian of the cost function",
+      "title": "Constrained nonlinear optimization with fanning",
+      "default": false
+    },
+    "grid_search": {
+      "type": "boolean",
+      "description": "Use grid search (on the fanning eigenvalues). Default=off",
+      "title": "Grid search",
+      "default": false
+    },
+    "include_noise_floor": {
+      "type": "boolean",
+      "description": "Include noise floor parameter in the model",
+      "title": "Include noise floor",
+      "default": false
+    },
+    "save_bic": {
+      "type": "boolean",
+      "description": "Save BIC for certain models",
+      "title": "Save BIC",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "data_file",
+    "mask_file",
+    "bvec_file",
+    "bval_file"
+  ]
+}

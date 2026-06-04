@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "xcerebralseg",
+  "description": "Tool for labeling extracerebral structures including sulcal CSF, skull/bone, head soft tissue, and air inside the head, merged with aparc+aseg.mgz segmentation for a whole head segmentation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/xcerebralseg"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject identifier (required)",
+      "title": "Subject ID"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume file (default: apas+head.mgz)",
+      "title": "Output Volume"
+    },
+    "atlas": {
+      "type": "string",
+      "description": "Atlas file path (default: /usr/local/freesurfer/average/aseg+spmhead+vermis+pons.ixi.gca)",
+      "title": "Atlas"
+    },
+    "mergevol": {
+      "type": "string",
+      "description": "Merge with mergevol (default: aparc+aseg.mgz)",
+      "title": "Merge Volume"
+    },
+    "source_volume": {
+      "type": "string",
+      "description": "Source intensity volume (default: nu.mgz)",
+      "title": "Source Volume"
+    },
+    "no_stats": {
+      "type": "boolean",
+      "description": "Do not run mri_segstats",
+      "title": "No Stats Flag",
+      "default": false
+    },
+    "seg1_name": {
+      "type": "string",
+      "description": "Full-head segmentation name (usually computed with mri_ca_label)",
+      "title": "Segmentation 1 Name"
+    },
+    "no_pons": {
+      "type": "boolean",
+      "description": "Exclude pons segmentation",
+      "title": "No Pons Flag",
+      "default": false
+    },
+    "no_vermis": {
+      "type": "boolean",
+      "description": "Exclude vermis segmentation",
+      "title": "No Vermis Flag",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Set number of OPENMP threads",
+      "title": "Threads"
+    }
+  },
+  "required": [
+    "@type",
+    "subject"
+  ]
+}

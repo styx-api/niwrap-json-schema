@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mm",
+  "description": "FSL's MM: mixture modelling",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/mm"
+    },
+    "spatial_data_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Spatial map data file.",
+      "title": "Spatial data file"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file.",
+      "title": "Mask file"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages.",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "debug_level": {
+      "type": "string",
+      "description": "Set debug level.",
+      "title": "Debug level"
+    },
+    "timing_flag": {
+      "type": "boolean",
+      "description": "Turn timing on.",
+      "title": "Timing flag",
+      "default": false
+    },
+    "example_epi_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Example EPI data file.",
+      "title": "Example EPI file"
+    },
+    "log_directory": {
+      "type": "string",
+      "description": "Log directory.",
+      "title": "Log directory"
+    },
+    "nonspatial_flag": {
+      "type": "boolean",
+      "description": "Nonspatial mixture model.",
+      "title": "Nonspatial flag",
+      "default": false
+    },
+    "fix_mrf_precision_flag": {
+      "type": "boolean",
+      "description": "Fix MRF precision to mrfprecstart throughout.",
+      "title": "Fix MRF precision flag",
+      "default": false
+    },
+    "mrf_prec_start": {
+      "type": "number",
+      "description": "MRF precision initial value (default is 10).",
+      "title": "MRF precision start"
+    },
+    "mrf_prec_multiplier": {
+      "type": "number",
+      "description": "Update multiplier for MRF precision (default is -1, do not multiply).",
+      "title": "MRF precision multiplier"
+    },
+    "init_multiplier": {
+      "type": "number",
+      "description": "Init multiplier (default is 0.3).",
+      "title": "Init multiplier"
+    },
+    "no_update_theta_flag": {
+      "type": "boolean",
+      "description": "Turn off updating of distribution parameters after non-spatial fit.",
+      "title": "No update theta flag",
+      "default": false
+    },
+    "zfstat_flag": {
+      "type": "boolean",
+      "description": "Turn on zfstat mode - this enforces no deactivation class.",
+      "title": "ZFSTAT flag",
+      "default": false
+    },
+    "phi": {
+      "type": "number",
+      "description": "Phi (default is 0.05).",
+      "title": "Phi"
+    },
+    "niters": {
+      "type": "number",
+      "description": "Number of iterations (default is -1: auto stop).",
+      "title": "Number of iterations"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold for use when displaying classification maps in MM.html report (default is 0.5, -1 indicates no thresholding).",
+      "title": "Threshold"
+    }
+  },
+  "required": [
+    "@type",
+    "spatial_data_file",
+    "mask_file"
+  ]
+}

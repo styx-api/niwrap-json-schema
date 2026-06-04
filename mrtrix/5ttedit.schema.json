@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "5ttedit",
+  "description": "Manually set the partial volume fractions in an ACT five-tissue-type (5TT) image using mask images.\n\n\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/5ttedit"
+    },
+    "cgm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "provide a mask of voxels that should be set to cortical grey matter",
+      "title": "cgm"
+    },
+    "sgm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "provide a mask of voxels that should be set to sub-cortical grey matter",
+      "title": "sgm"
+    },
+    "wm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "provide a mask of voxels that should be set to white matter",
+      "title": "wm"
+    },
+    "csf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "provide a mask of voxels that should be set to CSF",
+      "title": "csf"
+    },
+    "path": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "provide a mask of voxels that should be set to pathological tissue",
+      "title": "path"
+    },
+    "none": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "provide a mask of voxels that should be cleared (i.e. are non-brain); note that this will supersede all other provided masks",
+      "title": "none"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the 5TT image to be modified",
+      "title": "input"
+    },
+    "output": {
+      "type": "string",
+      "description": "the output modified 5TT image",
+      "title": "output"
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "output"
+  ]
+}

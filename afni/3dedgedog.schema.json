@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dedgedog",
+  "description": "Calculate edges in an image using the Difference of Gaussians (DOG) method with extensions/tweaks of the Marr-Hildreth algorithm.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dedgedog"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Input dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output prefix name",
+      "title": "Output prefix"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask dataset applied after Euclidean Distance Transform calculation",
+      "title": "Mask dataset"
+    },
+    "automask": {
+      "type": "string",
+      "description": "Calculate mask automatically. Optionally, you can provide an integer X to dilate the initial automask X times (e.g., -automask+X)",
+      "title": "Automask"
+    },
+    "sigma_rad": {
+      "type": "number",
+      "description": "Radius for 'inner' Gaussian, in mm; must be greater than 0 (default: 1.40)",
+      "title": "Sigma radius"
+    },
+    "sigma_nvox": {
+      "type": "number",
+      "description": "Define radius for 'inner' Gaussian by providing a multiplicative factor for voxel edge length greater than 0 (default: use sigma_rad)",
+      "title": "Sigma number of voxels"
+    },
+    "ratio_sigma": {
+      "type": "number",
+      "description": "Ratio of inner and outer Gaussian sigma values (default: 1.40)",
+      "title": "Ratio sigma"
+    },
+    "output_intermed": {
+      "type": "boolean",
+      "description": "Output intermediate datasets: DOG, EDT2, BLURS (default: not output)",
+      "title": "Output intermediates flag",
+      "default": false
+    },
+    "edge_bnd_nn": {
+      "type": "number",
+      "description": "Nearest neighbor (NN) value for connectedness of boundaries; must be 1 (face only), 2 (face+edge), or 3 (face+edge+node) (default: 1)",
+      "title": "Edge boundary NN"
+    },
+    "edge_bnd_side": {
+      "type": "string",
+      "description": "Specify boundary layer to use: NEG, POS, BOTH, BOTH_SIGN (default: NEG)",
+      "title": "Edge boundary side"
+    },
+    "edge_bnd_scale": {
+      "type": "boolean",
+      "description": "Scale edge values to have relative magnitude between 0 and 100 (default: edge locations have value=1)",
+      "title": "Edge boundary scale flag",
+      "default": false
+    },
+    "only2d": {
+      "type": "string",
+      "description": "Calculate edges in 2D per plane specified by SLI: 'axi', 'cor', 'sag'",
+      "title": "Only 2D slice"
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "prefix"
+  ]
+}

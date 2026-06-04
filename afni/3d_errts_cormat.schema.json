@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dErrtsCormat",
+  "description": "Computes the correlation matrix corresponding to the residual (or error) time series in 'dset'.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dErrtsCormat"
+    },
+    "dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset to read, usually the '-errts' output from 3dDeconvolve.",
+      "title": "Input dataset"
+    },
+    "concat": {
+      "type": "string",
+      "description": "As used in 3dDeconvolve.",
+      "title": "Concatenation re-run name"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alternate way of specifying the dataset to read.",
+      "title": "Alternate input dataset"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask dataset to apply.",
+      "title": "Mask dataset"
+    },
+    "maxlag": {
+      "type": "number",
+      "description": "Set maximum lag.",
+      "title": "Maximum lag"
+    },
+    "polort": {
+      "type": "number",
+      "description": "Set polort level. Default is 0.",
+      "title": "Polort level"
+    }
+  },
+  "required": [
+    "@type",
+    "dset"
+  ]
+}

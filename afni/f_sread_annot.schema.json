@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FSread_annot",
+  "description": "Reads a FreeSurfer annotation file and outputs an equivalent ROI file and/or a colormap file for use with SUMA.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/FSread_annot"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Binary formatted FreeSurfer annotation file.",
+      "title": "Input file"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Specify hemisphere. HEMI is one of lh or rh. Program guesses by default.",
+      "title": "Hemisphere"
+    },
+    "fscmap": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Get the colormap from the Freesurfer colormap file CMAPFILE. Colormaps inside the ANNOTFILE would be ignored.",
+      "title": "Freesurfer Colormap File"
+    },
+    "fscmap_range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "CMAPFILE contains multiple types of labels. The annotation values in ANNOTFILE can map to multiple labels if you do not restrict the range with iMin and iMax.",
+      "title": "Freesurfer Colormap Range"
+    },
+    "fsversion": {
+      "type": "string",
+      "description": "VER is the annotation file vintage. Choose from 2009 or 2005.",
+      "title": "Freesurfer Version"
+    },
+    "col_1d": {
+      "type": "string",
+      "description": "Write a 4-column 1D color file.",
+      "title": "1D Color File"
+    },
+    "roi_1d": {
+      "type": "string",
+      "description": "Write a 5-column 1D roi file.",
+      "title": "1D ROI File"
+    },
+    "cmap_1d": {
+      "type": "string",
+      "description": "Write a 4-column 1D color map file.",
+      "title": "1D Color Map File"
+    },
+    "show_fscmap": {
+      "type": "boolean",
+      "description": "Show the info of the colormap in the ANNOT file.",
+      "title": "Show Freesurfer Colormap Flag",
+      "default": false
+    },
+    "dset": {
+      "type": "string",
+      "description": "Write the annotation and colormap as a niml formatted Label Dset.",
+      "title": "NIML Dataset"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message.",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "infile"
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "possum",
+  "description": "Positron emission tomography (PET) simulation tool as part of FSL suite",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/possum"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input 4D volume filename",
+      "title": "Input Object"
+    },
+    "mr_parameters": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input matrix filename containing MR parameters",
+      "title": "MR Parameters"
+    },
+    "motion_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input motion matrix filename (time(s) Tx(m) Ty(m) Tz(m) Rx(rad) Ry(rad) Rz(rad))",
+      "title": "Motion Matrix"
+    },
+    "pulse_sequence": {
+      "type": "string",
+      "description": "Input matrix basename for pulse sequence files (.posx, .posy, etc.)",
+      "title": "Pulse Sequence"
+    },
+    "rf_slice_profile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input matrix filename containing RF slice profile",
+      "title": "RF Slice Profile"
+    },
+    "output_signal": {
+      "type": "string",
+      "description": "Output matrix filename for the signal",
+      "title": "Output Signal"
+    },
+    "event_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Main event matrix file [(t(s), rf_ang(rad), rf_freq_band(Hz), rf_cent_freq(Hz), ...)]",
+      "title": "Main Event Matrix"
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help",
+      "default": false
+    },
+    "kcoord": {
+      "type": "boolean",
+      "description": "Save the k-space coordinates",
+      "title": "K-space Coordinates",
+      "default": false
+    },
+    "b0_inhomogeneities": {
+      "type": "string",
+      "description": "B0 inhomogeneities due to susceptibility differences (basename)",
+      "title": "B0 Inhomogeneities"
+    },
+    "extra_b0_inhomogeneities": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "B0 inhomogeneities due to an extra field",
+      "title": "Extra B0 Inhomogeneities"
+    },
+    "b0_inhomogeneities_timecourse": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "B0 inhomogeneities timecourse file",
+      "title": "B0 Inhomogeneities Time Course"
+    },
+    "rf_inhomogeneity_receive": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "RF inhomogeneity - receive",
+      "title": "RF Inhomogeneity Receive"
+    },
+    "rf_inhomogeneity_transmit": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "RF inhomogeneity - transmit",
+      "title": "RF Inhomogeneity Transmit"
+    },
+    "activation_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Activation volume file",
+      "title": "Activation Volume"
+    },
+    "activation_timecourse": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Activation time course file",
+      "title": "Activation Time Course"
+    },
+    "activation_4d_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Activation 4D volume file",
+      "title": "Activation 4D Volume"
+    },
+    "activation_4d_timecourse": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Activation 4D time course file",
+      "title": "Activation 4D Time Course"
+    },
+    "level": {
+      "type": "string",
+      "description": "Level of processing: 1.no motion//basic B0, 2.motion//basic B0, 3.motion//full B0, 4.no motion//time changing B0",
+      "title": "Levels"
+    },
+    "num_procs": {
+      "type": "number",
+      "description": "Number of processors available for parallelisation",
+      "title": "Number of Processors"
+    },
+    "proc_id": {
+      "type": "number",
+      "description": "ID of the processor",
+      "title": "Processor ID"
+    },
+    "no_speedup": {
+      "type": "boolean",
+      "description": "If ON, will not do the speedup but perform signal calculation for all slices for each voxel",
+      "title": "No Speedup",
+      "default": false
+    },
+    "rf_average": {
+      "type": "boolean",
+      "description": "If ON, it will use RF angle averaging",
+      "title": "RF Angle Averaging",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "mr_parameters",
+    "motion_matrix",
+    "pulse_sequence",
+    "rf_slice_profile",
+    "output_signal",
+    "event_matrix"
+  ]
+}

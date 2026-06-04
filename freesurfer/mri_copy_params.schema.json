@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_copy_params",
+  "description": "A tool to replace the volume parameters of an input volume with those of a template volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_copy_params"
+    },
+    "in_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume file whose parameters will be replaced.",
+      "title": "Input Volume"
+    },
+    "template_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Template volume file whose parameters will be copied.",
+      "title": "Template Volume"
+    },
+    "out_vol": {
+      "type": "string",
+      "description": "Output volume file with replaced parameters.",
+      "title": "Output Volume"
+    },
+    "size_flag": {
+      "type": "boolean",
+      "description": "Force copying of voxel sizes when resolutions vary.",
+      "title": "Copy Voxel Size Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "in_vol",
+    "template_vol",
+    "out_vol"
+  ]
+}

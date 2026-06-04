@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dtoXdataset",
+  "description": "Convert input datasets to the format needed for 3dClustSimX",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dtoXdataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output file.",
+      "title": "Prefix"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask dataset file.",
+      "title": "Mask file"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input datasets to be converted.",
+      "title": "Input files"
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "mask",
+    "input_files"
+  ]
+}

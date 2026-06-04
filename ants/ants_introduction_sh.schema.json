@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsIntroduction.sh",
+  "description": "Script for registration using ANTS with compulsory and optional arguments.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsIntroduction.sh"
+    },
+    "image_dimension": {
+      "enum": [
+        2,
+        3
+      ],
+      "description": "Image dimension for registration: 2 or 3.",
+      "title": "Image Dimension"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference image for registration.",
+      "title": "Reference Image"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image to be registered.",
+      "title": "Input Image"
+    },
+    "force": {
+      "type": "boolean",
+      "description": "Force script to proceed even if headers may be incompatible.",
+      "title": "Force"
+    },
+    "labels_in_fixed_image_space": {
+      "type": "string",
+      "description": "Labels in fixed image space to deform to moving image.",
+      "title": "Labels In Fixed Image Space"
+    },
+    "max_iterations": {
+      "type": "integer",
+      "description": "Maximum number of iterations.",
+      "title": "Max Iterations"
+    },
+    "n4_bias_field_correction": {
+      "type": "boolean",
+      "description": "N4 Bias Field Correction of moving image: 0 for off, 1 for on.",
+      "title": "N4 Bias Field Correction"
+    },
+    "outprefix": {
+      "type": "string",
+      "description": "A prefix that is prepended to all output files.",
+      "title": "Output Prefix"
+    },
+    "quality_check": {
+      "type": "boolean",
+      "description": "Perform a Quality Check (QC) of the result: 0 for off, 1 for on.",
+      "title": "Quality Check"
+    },
+    "similarity_metric": {
+      "type": "string",
+      "description": "Type of similarity metric used for registration.",
+      "title": "Similarity Metric"
+    },
+    "transformation_model": {
+      "type": "string",
+      "description": "Type of transformation model used for registration.",
+      "title": "Transformation Model"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "reference_image",
+    "input_image"
+  ]
+}

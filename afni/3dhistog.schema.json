@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dhistog",
+  "description": "Compute histogram of a 3D dataset",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dhistog"
+    },
+    "dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Dataset"
+    },
+    "nbin": {
+      "type": "number",
+      "description": "Use specified number of bins",
+      "title": "Number of Bins"
+    },
+    "dind": {
+      "type": "number",
+      "description": "Use data from specified sub-brick index",
+      "title": "Sub-brick Index"
+    },
+    "omit": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Omit specified value from the count",
+      "title": "Omit Value"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use mask dataset to determine which voxels to use",
+      "title": "Mask Dataset"
+    },
+    "roi_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Create histogram for each non-zero value in 'r' dataset",
+      "title": "ROI Mask"
+    },
+    "doall": {
+      "type": "boolean",
+      "description": "Include all sub-bricks in the calculation",
+      "title": "Do All",
+      "default": false
+    },
+    "noempty": {
+      "type": "boolean",
+      "description": "Only output bins that are not empty",
+      "title": "No Empty Bins",
+      "default": false
+    },
+    "notitle": {
+      "type": "boolean",
+      "description": "Leave the title line off the output",
+      "title": "No Title",
+      "default": false
+    },
+    "log10": {
+      "type": "boolean",
+      "description": "Output log10() of the counts",
+      "title": "Log10 Output",
+      "default": false
+    },
+    "pdf": {
+      "type": "boolean",
+      "description": "Output the counts divided by the number of samples",
+      "title": "PDF Output",
+      "default": false
+    },
+    "min": {
+      "type": "number",
+      "description": "Specify minimum (inclusive) of histogram",
+      "title": "Minimum Value"
+    },
+    "max": {
+      "type": "number",
+      "description": "Specify maximum (inclusive) of histogram",
+      "title": "Maximum Value"
+    },
+    "igfac": {
+      "type": "boolean",
+      "description": "Ignore sub-brick scale factors and histogram-ize the 'raw' data",
+      "title": "Ignore Scale Factors",
+      "default": false
+    },
+    "int": {
+      "type": "boolean",
+      "description": "Treat data and output as integers",
+      "title": "Integer Data",
+      "default": false
+    },
+    "float": {
+      "type": "boolean",
+      "description": "Treat data and output as floats",
+      "title": "Float Data",
+      "default": false
+    },
+    "unq": {
+      "type": "string",
+      "description": "Writes out the sorted unique values to file",
+      "title": "Unique Values File"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Write a copy of the histogram into specified file",
+      "title": "Prefix"
+    }
+  },
+  "required": [
+    "@type",
+    "dataset"
+  ]
+}

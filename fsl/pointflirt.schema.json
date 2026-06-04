@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "pointflirt",
+  "description": "A tool to align point coordinates between volumes and compute affine transformation matrices.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/pointflirt"
+    },
+    "invol_coords": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input volume coordinates",
+      "title": "Input volume coordinates"
+    },
+    "refvol_coords": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of reference volume coordinates",
+      "title": "Reference volume coordinates"
+    },
+    "out_matrix": {
+      "type": "string",
+      "description": "Filename of affine matrix output",
+      "title": "Output matrix"
+    },
+    "use_vox": {
+      "type": "boolean",
+      "description": "Use voxel coordinates, not mm, for input",
+      "title": "Use Voxel Coordinates",
+      "default": false
+    },
+    "vol_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of input volume (needed for --vox option)",
+      "title": "Input volume"
+    },
+    "vol_ref": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of reference volume (needed for --vox option)",
+      "title": "Reference volume"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "invol_coords",
+    "refvol_coords"
+  ]
+}

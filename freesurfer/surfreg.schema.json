@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surfreg",
+  "description": "Performs surface registration (mris_register) between a subject and a target average subject based on the hemi.reg.template.tif atlas in the average subject.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/surfreg"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject to register",
+      "title": "Subject"
+    },
+    "target": {
+      "type": "string",
+      "description": "Target average subject to use as a registration target",
+      "title": "Target"
+    },
+    "cross_hemi": {
+      "type": "boolean",
+      "description": "Perform cross-hemi registration",
+      "title": "Cross-hemi registration flag",
+      "default": false
+    },
+    "reg_lh": {
+      "type": "boolean",
+      "description": "Register left hemisphere only",
+      "title": "Left hemisphere registration flag",
+      "default": false
+    },
+    "reg_rh": {
+      "type": "boolean",
+      "description": "Register right hemisphere only",
+      "title": "Right hemisphere registration flag",
+      "default": false
+    },
+    "reg_both": {
+      "type": "boolean",
+      "description": "Register both left and right hemispheres",
+      "title": "Both hemispheres registration flag",
+      "default": false
+    },
+    "no_annot": {
+      "type": "boolean",
+      "description": "Do not use annot to rip",
+      "title": "No annotations flag",
+      "default": false
+    },
+    "annot": {
+      "type": "string",
+      "description": "Use specified annotation name",
+      "title": "Annotation name"
+    },
+    "aparc": {
+      "type": "boolean",
+      "description": "Set annotation name to aparc.annot",
+      "title": "Aparc annotation flag",
+      "default": false
+    },
+    "noneg": {
+      "type": "boolean",
+      "description": "Option flag with unspecified behavior in the provided help text",
+      "title": "No negative flag",
+      "default": false
+    },
+    "init_reg": {
+      "type": "string",
+      "description": "Initial registration name, default is sphere",
+      "title": "Initial registration name"
+    },
+    "lta": {
+      "type": "string",
+      "description": "Apply rotational components of affine registration",
+      "title": "Affine registration"
+    },
+    "init_from_tal": {
+      "type": "boolean",
+      "description": "Use talaiach.xfm.lta for initial spherical registration",
+      "title": "Initialize from Talairach",
+      "default": false
+    },
+    "outsurf": {
+      "type": "string",
+      "description": "Output surface name, default depends on the target",
+      "title": "Output surface name"
+    },
+    "no_set_vol_geom": {
+      "type": "boolean",
+      "description": "Do not set volume geometry and center the sphere",
+      "title": "No set volume geometry flag",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads to run in parallel",
+      "title": "Threads"
+    }
+  },
+  "required": [
+    "@type",
+    "subject",
+    "target"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "run_first",
+  "description": "A tool to run FSL's FIRST for subcortical segmentation",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/run_first"
+    },
+    "input_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image file (e.g. img.nii.gz)",
+      "title": "Input Image"
+    },
+    "transformation_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input transformation matrix file (e.g. input_to_mni.mat)",
+      "title": "Transformation Matrix"
+    },
+    "n_modes": {
+      "type": "number",
+      "description": "Number of modes",
+      "title": "Number of Modes"
+    },
+    "output_basename": {
+      "type": "string",
+      "description": "Output basename",
+      "title": "Output Basename"
+    },
+    "model_name": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Model name",
+      "title": "Model Name"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Verbose mode",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "intref_model_name": {
+      "type": "string",
+      "description": "Reference structure for the local intensity normalization",
+      "title": "Intensity Reference Model Name"
+    },
+    "load_bvars": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Initializes FIRST with a previous estimate of the structure",
+      "title": "Load Bvars"
+    },
+    "multiple_images_flag": {
+      "type": "boolean",
+      "description": "Run FIRST on multiple images; provide a list of images, transformation matrices, and output names",
+      "title": "Multiple Images Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_image",
+    "transformation_matrix",
+    "n_modes",
+    "output_basename",
+    "model_name"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslcc",
+  "description": "Cross-correlate two time-series, timepoint by timepoint",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fslcc"
+    },
+    "first_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First input time-series",
+      "title": "First Input File"
+    },
+    "second_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second input time-series",
+      "title": "Second Input File"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file name",
+      "title": "Mask File"
+    },
+    "noabs_flag": {
+      "type": "boolean",
+      "description": "Don't return absolute values (keep sign)",
+      "title": "No absolute values flag",
+      "default": false
+    },
+    "nodemean_flag": {
+      "type": "boolean",
+      "description": "Don't demean the input files",
+      "title": "No demean flag",
+      "default": false
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold (default 0.1)",
+      "title": "Threshold"
+    },
+    "decimal_places": {
+      "type": "number",
+      "description": "Number of decimal places to display in output (default 2)",
+      "title": "Decimal Places"
+    }
+  },
+  "required": [
+    "@type",
+    "first_input",
+    "second_input"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "wmsaseg",
+  "description": "White Matter Hyperintensity Segmentation Tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/wmsaseg"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject identifier",
+      "title": "Subject"
+    },
+    "source_orig": {
+      "type": "string",
+      "description": "Use T2 and PD images from original subject",
+      "title": "Source original"
+    },
+    "source_long": {
+      "type": "boolean",
+      "description": "Use T2 and PD images from longitudinal subject",
+      "title": "Source long",
+      "default": false
+    },
+    "output_subdir": {
+      "type": "string",
+      "description": "Output subdirectory name (default is wmsa)",
+      "title": "Output subdirectory"
+    },
+    "gca_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "GCA file path",
+      "title": "GCA file"
+    },
+    "no_reg": {
+      "type": "boolean",
+      "description": "Do not register mode to anatomical image",
+      "title": "No registration",
+      "default": false
+    },
+    "no_canorm": {
+      "type": "boolean",
+      "description": "Do not run mri_ca_normalize",
+      "title": "No CA normalization",
+      "default": false
+    },
+    "init_spm": {
+      "type": "boolean",
+      "description": "Initialize SPM (default is FSL)",
+      "title": "Initialize SPM",
+      "default": false
+    },
+    "reg_only": {
+      "type": "boolean",
+      "description": "Only perform registration",
+      "title": "Register only",
+      "default": false
+    },
+    "halo1": {
+      "type": "boolean",
+      "description": "Halo 1 option",
+      "title": "Halo 1",
+      "default": false
+    },
+    "halo2": {
+      "type": "boolean",
+      "description": "Halo 2 option",
+      "title": "Halo 2",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject"
+  ]
+}

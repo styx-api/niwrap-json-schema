@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tcksift",
+  "description": "Filter a whole-brain fibre-tracking data set such that the streamline densities match the FOD lobe integrals.\n\n\n\nReferences:\n\nSmith, R. E.; Tournier, J.-D.; Calamante, F. & Connelly, A. SIFT: Spherical-deconvolution informed filtering of tractograms. NeuroImage, 2013, 67, 298-312",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/tcksift"
+    },
+    "nofilter": {
+      "type": "boolean",
+      "description": "do NOT perform track filtering - just construct the model in order to provide output debugging images",
+      "title": "nofilter",
+      "default": false
+    },
+    "output_at_counts": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "output filtered track files (and optionally debugging images if -output_debug is specified) at specific numbers of remaining streamlines; provide as comma-separated list of integers",
+      "title": "output_at_counts"
+    },
+    "proc_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "provide an image containing the processing mask weights for the model; image spatial dimensions must match the fixel image",
+      "title": "proc_mask"
+    },
+    "act": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "use an ACT five-tissue-type segmented anatomical image to derive the processing mask",
+      "title": "act"
+    },
+    "fd_scale_gm": {
+      "type": "boolean",
+      "description": "provide this option (in conjunction with -act) to heuristically downsize the fibre density estimates based on the presence of GM in the voxel. This can assist in reducing tissue interface effects when using a single-tissue deconvolution algorithm",
+      "title": "fd_scale_gm",
+      "default": false
+    },
+    "no_dilate_lut": {
+      "type": "boolean",
+      "description": "do NOT dilate FOD lobe lookup tables; only map streamlines to FOD lobes if the precise tangent lies within the angular spread of that lobe",
+      "title": "no_dilate_lut",
+      "default": false
+    },
+    "make_null_lobes": {
+      "type": "boolean",
+      "description": "add an additional FOD lobe to each voxel, with zero integral, that covers all directions with zero / negative FOD amplitudes",
+      "title": "make_null_lobes",
+      "default": false
+    },
+    "remove_untracked": {
+      "type": "boolean",
+      "description": "remove FOD lobes that do not have any streamline density attributed to them; this improves filtering slightly, at the expense of longer computation time (and you can no longer do quantitative comparisons between reconstructions if this is enabled)",
+      "title": "remove_untracked",
+      "default": false
+    },
+    "fd_thresh": {
+      "type": "number",
+      "description": "fibre density threshold; exclude an FOD lobe from filtering processing if its integral is less than this amount (streamlines will still be mapped to it, but it will not contribute to the cost function or the filtering)",
+      "title": "fd_thresh"
+    },
+    "csv": {
+      "type": "string",
+      "description": "output statistics of execution per iteration to a .csv file",
+      "title": "csv"
+    },
+    "out_mu": {
+      "type": "string",
+      "description": "output the final value of SIFT proportionality coefficient mu to a text file",
+      "title": "out_mu"
+    },
+    "output_debug": {
+      "type": "boolean",
+      "description": "provide various output images for assessing & debugging performance etc.",
+      "title": "output_debug",
+      "default": false
+    },
+    "out_selection": {
+      "type": "string",
+      "description": "output a text file containing the binary selection of streamlines",
+      "title": "out_selection"
+    },
+    "term_number": {
+      "type": "integer",
+      "description": "number of streamlines - continue filtering until this number of streamlines remain",
+      "title": "term_number"
+    },
+    "term_ratio": {
+      "type": "number",
+      "description": "termination ratio - defined as the ratio between reduction in cost function, and reduction in density of streamlines.\nSmaller values result in more streamlines being filtered out.",
+      "title": "term_ratio"
+    },
+    "term_mu": {
+      "type": "number",
+      "description": "terminate filtering once the SIFT proportionality coefficient reaches a given value",
+      "title": "term_mu"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "in_tracks": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input track file",
+      "title": "in_tracks"
+    },
+    "in_fod": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "input image containing the spherical harmonics of the fibre orientation distributions",
+      "title": "in_fod"
+    },
+    "out_tracks": {
+      "type": "string",
+      "description": "the output filtered tracks file",
+      "title": "out_tracks"
+    }
+  },
+  "required": [
+    "@type",
+    "in_tracks",
+    "in_fod",
+    "out_tracks"
+  ]
+}

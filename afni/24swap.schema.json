@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "24swap",
+  "description": "Swaps bytes pairs and/or quadruples on the files listed.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/24swap"
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Operate quietly",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "pattern": {
+      "type": "string",
+      "description": "Pattern that determines the pattern of 2 and 4 byte swaps.",
+      "title": "Byte Swap Pattern"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input file(s) to swap bytes",
+      "title": "Input Files"
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mrisp_paint",
+  "description": "A tool for extracting arrays from a surface-registration template file and sampling them onto a surface mesh.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mrisp_paint"
+    },
+    "template_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Full path to the template file. Template may contain multiple parameters. Example: 'somepath/mytemplate.tif#1'.",
+      "title": "Template file"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Full path to the input surface file, which provides the grid onto which the template data is sampled.",
+      "title": "Input surface file"
+    },
+    "output_name": {
+      "type": "string",
+      "description": "Output file name. Saves the surface-worth of per-vertex values.",
+      "title": "Output file name"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Set the SUBJECTS_DIR. Default: use environment variable.",
+      "title": "Subjects directory"
+    },
+    "vertex_coords": {
+      "type": "string",
+      "description": "Treat overlay as a surface and write it into a 3 frame parameterization.",
+      "title": "Vertex coordinates"
+    },
+    "average_flag": {
+      "type": "number",
+      "description": "Average curvature patterns a given number of times.",
+      "title": "Average flag"
+    },
+    "normalize_flag": {
+      "type": "boolean",
+      "description": "Normalize curvature by variance.",
+      "title": "Normalize flag",
+      "default": false
+    },
+    "frame_number": {
+      "type": "number",
+      "description": "Paint the specified frame number to the output file. Default: 0.",
+      "title": "Frame number"
+    },
+    "square_root_flag": {
+      "type": "boolean",
+      "description": "Take the square-root of the output variable.",
+      "title": "Square root flag",
+      "default": false
+    },
+    "variance_params": {
+      "type": "string",
+      "description": "Generate variance map. Requires subject name, hemisphere, and field number.",
+      "title": "Variance parameters"
+    },
+    "usage_flag": {
+      "type": "boolean",
+      "description": "Print usage.",
+      "title": "Usage flag",
+      "default": false
+    },
+    "birn_info_flag": {
+      "type": "boolean",
+      "description": "Print BIRN-standard program information.",
+      "title": "BIRN info flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Print help message.",
+      "title": "Help flag",
+      "default": false
+    },
+    "diag_vertex": {
+      "type": "number",
+      "description": "Invoke diagnostics for a specific vertex number.",
+      "title": "Diagnostic vertex"
+    },
+    "version_flag": {
+      "type": "boolean",
+      "description": "Print version information.",
+      "title": "Version flag",
+      "default": false
+    },
+    "diag_write_flag": {
+      "type": "boolean",
+      "description": "Write some diagnostics (DIAG_WRITE).",
+      "title": "Diagnostic write flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "template_file",
+    "input_surface",
+    "output_name"
+  ]
+}

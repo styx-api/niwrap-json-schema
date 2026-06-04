@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "pctsurfcon",
+  "description": "Compute surface-wise gray/white matter contrast.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/pctsurfcon"
+    },
+    "subject": {
+      "type": "string",
+      "description": "FreeSurfer subject name",
+      "title": "Subject"
+    },
+    "fsvol": {
+      "type": "string",
+      "description": "Use fsvol instead of rawavg",
+      "title": "FSVol"
+    },
+    "outbase": {
+      "type": "string",
+      "description": "Use outbase instead of w-g.pct (?h.w-g.pct.mgh)",
+      "title": "Output Base"
+    },
+    "lh_only": {
+      "type": "boolean",
+      "description": "Compute left hemisphere only",
+      "title": "Left Hemisphere Only",
+      "default": false
+    },
+    "rh_only": {
+      "type": "boolean",
+      "description": "Compute right hemisphere only",
+      "title": "Right Hemisphere Only",
+      "default": false
+    },
+    "gm_proj_frac": {
+      "type": "number",
+      "description": "GM projection fraction (default 0.3)",
+      "title": "GM Projection Fraction"
+    },
+    "gm_proj_abs": {
+      "type": "number",
+      "description": "GM projection distance (default is to use frac)",
+      "title": "GM Projection Distance"
+    },
+    "wm_proj_abs": {
+      "type": "number",
+      "description": "WM projection distance (default is 1 mm)",
+      "title": "WM Projection Distance"
+    },
+    "neg": {
+      "type": "boolean",
+      "description": "Compute G-W instead of W-G",
+      "title": "Negate Contrast",
+      "default": false
+    },
+    "no_mask": {
+      "type": "boolean",
+      "description": "Do not mask out non-cortical regions",
+      "title": "No Mask",
+      "default": false
+    },
+    "pial": {
+      "type": "boolean",
+      "description": "Use pial surface as base to compute gray/CSF contrast",
+      "title": "Use Pial Surface",
+      "default": false
+    },
+    "tmp": {
+      "type": "string",
+      "description": "Temporary directory (implies --nocleanup)",
+      "title": "Temporary Directory"
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "description": "Do not delete temporary files",
+      "title": "No Cleanup",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject"
+  ]
+}

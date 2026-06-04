@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dDTtoDWI",
+  "description": "Tool to compute multiple gradient images from tensors and gradient vector coordinates applied to the I0-dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dDTtoDWI"
+    },
+    "gradient_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "1D file containing the gradient vectors (ASCII floats) for non-zero gradients.",
+      "title": "Gradient File"
+    },
+    "i0_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Volume without any gradient applied.",
+      "title": "I0 Dataset"
+    },
+    "dt_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "6-sub-brick dataset containing the diffusion tensor data (Dxx, Dxy, Dyy, Dxz, Dyz, Dzz).",
+      "title": "DT Dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output dataset name.",
+      "title": "Output Prefix"
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Compute gradient images only for high-intensity (brain) voxels.",
+      "title": "Automask",
+      "default": false
+    },
+    "datum_type": {
+      "type": "string",
+      "description": "Type of the output dataset (float, short, or byte).",
+      "title": "Output Data Type"
+    },
+    "scale_out_1000": {
+      "type": "boolean",
+      "description": "Match with 3dDWItoDT's '-scale_out_1000' functionality.",
+      "title": "Scale Out 1000",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show help message.",
+      "title": "Help",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "gradient_file",
+    "i0_dataset",
+    "dt_dataset"
+  ]
+}

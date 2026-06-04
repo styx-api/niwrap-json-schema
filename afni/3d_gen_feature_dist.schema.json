@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dGenFeatureDist",
+  "description": "3dGenFeatureDist produces histogram volume (hives) from input data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dGenFeatureDist"
+    },
+    "features_string": {
+      "type": "string",
+      "description": "FEATURES_STRING is a semicolon delimited string of features.",
+      "title": "Features String"
+    },
+    "class_string": {
+      "type": "string",
+      "description": "CLASS_STRING is a semicolon delimited string of class labels.",
+      "title": "Class String"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "PREF is the prefix for all output volumes that are not debugging related.",
+      "title": "Output Prefix"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Automatically overwrite existing output.",
+      "title": "Overwrite Flag",
+      "default": false
+    },
+    "debug_level": {
+      "type": "number",
+      "description": "Debugging level.",
+      "title": "Debug Level"
+    },
+    "other": {
+      "type": "boolean",
+      "description": "Add histograms for an 'OTHER' class that has a uniform pdf.",
+      "title": "Other Flag",
+      "default": false
+    },
+    "no_other": {
+      "type": "boolean",
+      "description": "Opposite of -OTHER.",
+      "title": "No Other Flag",
+      "default": false
+    },
+    "samp": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify which voxels belong to each class of interest.",
+      "title": "Sample Voxels"
+    },
+    "sig": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify volumes that define the features.",
+      "title": "Signal Volumes"
+    },
+    "hspec": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Set histogram parameters for a specific feature.",
+      "title": "Histogram Specifications"
+    },
+    "labeltable": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the label table.",
+      "title": "Label Table"
+    },
+    "show_histograms": {
+      "type": "string",
+      "description": "Show specified histograms and quit.",
+      "title": "Show Histograms"
+    }
+  },
+  "required": [
+    "@type",
+    "features_string",
+    "class_string"
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gca-apply",
+  "description": "Applies a GCA, performing the steps of mri_em_register, mri_ca_normalize, mri_ca_register, and mri_ca_label. This script replicates the stages in recon-all without overwriting files.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/gca-apply"
+    },
+    "gcafile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "GCA file",
+      "title": "GCA file"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject",
+      "title": "Subject"
+    },
+    "nthreads": {
+      "type": "number",
+      "description": "Number of OMP threads",
+      "title": "Number of threads"
+    },
+    "base": {
+      "type": "string",
+      "description": "Use gcabase for naming output files (default is basename gcafile)",
+      "title": "Output file base"
+    },
+    "no_segstats": {
+      "type": "boolean",
+      "description": "Do not compute segstats",
+      "title": "No segstats flag",
+      "default": false
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Subjects directory",
+      "title": "Subjects Directory"
+    },
+    "dice_seg": {
+      "type": "string",
+      "description": "Specify dice coefficient computation parameters",
+      "title": "Dice Segmentation"
+    },
+    "dice_file": {
+      "type": "string",
+      "description": "Specify dice coefficient computation file",
+      "title": "Dice File"
+    },
+    "lta": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use SrcLTA instead of running mri_em_register",
+      "title": "LTA File"
+    },
+    "norm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use SrcNorm instead of running mri_ca_normalize",
+      "title": "Normalization File"
+    },
+    "input_mgz": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file, default is nu.mgz",
+      "title": "Input File"
+    },
+    "brainmask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Brainmask file, default is brainmask.mgz",
+      "title": "Brainmask File"
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Output directory (default: SUBJECTS_DIR/subject)",
+      "title": "Output Directory"
+    },
+    "no_v6labopts": {
+      "type": "boolean",
+      "description": "Do not include v6 command line options",
+      "title": "No v6labopts flag",
+      "default": false
+    },
+    "m3z_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "M3Z file",
+      "title": "M3Z File"
+    },
+    "gca_rb_2016": {
+      "type": "boolean",
+      "description": "Use RB_all_2016-05-10.vc700.gca",
+      "title": "GCA RB 2016 Flag",
+      "default": false
+    },
+    "force_update": {
+      "type": "boolean",
+      "description": "Force recreation of a file even if it is younger than its parents",
+      "title": "Force Update Flag",
+      "default": false
+    },
+    "gcareg_iters": {
+      "type": "number",
+      "description": "Set to 1, only for testing",
+      "title": "GCA Register Iterations"
+    }
+  },
+  "required": [
+    "@type",
+    "gcafile",
+    "subject"
+  ]
+}

@@ -1,0 +1,309 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_ca_label",
+  "description": "MRI cortical annotation labeler using atlas prior (GCA).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_ca_label"
+    },
+    "input_volumes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input MRI volumes.",
+      "title": "Input Volumes"
+    },
+    "transform_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Transform file for the registration.",
+      "title": "Transform File"
+    },
+    "gca_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "GCA file for the atlas.",
+      "title": "GCA File"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output labeled volume.",
+      "title": "Output Volume"
+    },
+    "cross_sequence": {
+      "type": "boolean",
+      "description": "Label a volume acquired with sequence different than atlas",
+      "title": "Cross Sequence",
+      "default": false
+    },
+    "no_gibbs": {
+      "type": "boolean",
+      "description": "Disable gibbs priors",
+      "title": "No Gibbs",
+      "default": false
+    },
+    "wm_segmentation": {
+      "type": "string",
+      "description": "Use wm segmentation",
+      "title": "White Matter Segmentation"
+    },
+    "conform": {
+      "type": "boolean",
+      "description": "Interpolate volume to be isotropic 1mm^3",
+      "title": "Conform",
+      "default": false
+    },
+    "topo_dist_thresh": {
+      "type": "number",
+      "description": "Ventricle segments distance threshold",
+      "title": "Topo Distance Threshold"
+    },
+    "topo_volume_thresh1": {
+      "type": "number",
+      "description": "First ventricle segments volume threshold",
+      "title": "Topo Volume Threshold 1"
+    },
+    "topo_volume_thresh2": {
+      "type": "number",
+      "description": "Second ventricle segments volume threshold",
+      "title": "Topo Volume Threshold 2"
+    },
+    "norm_pd": {
+      "type": "boolean",
+      "description": "Normalize PD image to GCA means",
+      "title": "Normalize PD",
+      "default": false
+    },
+    "thin_temporal_lobe": {
+      "type": "string",
+      "description": "Use file to label thin temporal lobe",
+      "title": "Thin Temporal Lobe Labeling"
+    },
+    "debug_voxel": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Debug voxel coordinates",
+      "title": "Debug Voxel"
+    },
+    "debug_node": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Debug node coordinates",
+      "title": "Debug Node"
+    },
+    "debug_label": {
+      "type": "number",
+      "description": "Debug label",
+      "title": "Debug Label"
+    },
+    "tr": {
+      "type": "number",
+      "description": "Set TR in msec",
+      "title": "TR"
+    },
+    "te": {
+      "type": "number",
+      "description": "Set TE in msec",
+      "title": "TE"
+    },
+    "alpha": {
+      "type": "number",
+      "description": "Set alpha in radians",
+      "title": "Alpha"
+    },
+    "example": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Use T1 and segmentation as example",
+      "title": "Example Volume"
+    },
+    "pthresh": {
+      "type": "number",
+      "description": "P threshold for adaptive renormalization",
+      "title": "P Threshold"
+    },
+    "niter": {
+      "type": "number",
+      "description": "Number of iterations for max likelihood",
+      "title": "Number of Iterations"
+    },
+    "write_probs": {
+      "type": "string",
+      "description": "Write label probabilities to filename",
+      "title": "Write Probabilities"
+    },
+    "novar": {
+      "type": "boolean",
+      "description": "Do not use variance in classification",
+      "title": "No Variance",
+      "default": false
+    },
+    "regularize": {
+      "type": "number",
+      "description": "Regularize variance to be sigma+nC(noise)",
+      "title": "Regularize"
+    },
+    "nohippo": {
+      "type": "boolean",
+      "description": "Do not auto-edit hippocampus",
+      "title": "No Hippocampus",
+      "default": false
+    },
+    "fixed_white_matter": {
+      "type": "string",
+      "description": "Use fixed white matter segmentation",
+      "title": "Fixed White Matter"
+    },
+    "mri": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Write most likely MR volume to file",
+      "title": "Output MR Volume"
+    },
+    "histogram_equalization": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use histogram equalization from volume",
+      "title": "Histogram Equalization"
+    },
+    "renorm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Renormalize using predicted intensity values",
+      "title": "Renormalize"
+    },
+    "flash": {
+      "type": "boolean",
+      "description": "Use FLASH forward model to predict intensity values",
+      "title": "FLASH Model",
+      "default": false
+    },
+    "flash_params": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use FLASH forward model and tissue params to predict",
+      "title": "FLASH Parameters"
+    },
+    "renormalize": {
+      "type": "string",
+      "description": "Renormalize class means iter times after initial label with window of wsize",
+      "title": "Renormalize Class"
+    },
+    "set_input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Set input volume",
+      "title": "Set Input Volume"
+    },
+    "histogram_normalize": {
+      "type": "boolean",
+      "description": "Use GCA to histogram normalize input image",
+      "title": "Histogram Normalize",
+      "default": false
+    },
+    "mean_filter": {
+      "type": "number",
+      "description": "Mean filter n time to conditional densities",
+      "title": "Mean Filter"
+    },
+    "write_snapshots": {
+      "type": "string",
+      "description": "Write snapshots of gibbs process every n times to filename",
+      "title": "Write Snapshots"
+    },
+    "mask_final_labeling": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use mri_vol to mask final labeling",
+      "title": "Mask Final Labeling"
+    },
+    "expand": {
+      "type": "number",
+      "description": "Expand",
+      "title": "Expand"
+    },
+    "max_iterations": {
+      "type": "number",
+      "description": "Set max iterations",
+      "title": "Max Iterations"
+    },
+    "filter_labeled_volume": {
+      "type": "string",
+      "description": "Filter labeled volume with threshold t",
+      "title": "Filter Labeled Volume"
+    },
+    "longitudinal_processing": {
+      "type": "string",
+      "description": "Longitudinal processing with registrations",
+      "title": "Longitudinal Processing"
+    },
+    "relabel_unlikely": {
+      "type": "string",
+      "description": "Reclassify unlikely voxels",
+      "title": "Relabel Unlikely"
+    },
+    "disables_wmsa": {
+      "type": "boolean",
+      "description": "Disables WMSA labels",
+      "title": "Disables WMSA",
+      "default": false
+    },
+    "fix_ventricle": {
+      "type": "string",
+      "description": "Fix underlabeled ventricle",
+      "title": "Fix Ventricle"
+    },
+    "insert_wm_bet_putctx": {
+      "type": "string",
+      "description": "Insert WM between putamen and cortex",
+      "title": "Insert WM between Putamen and Cortex"
+    },
+    "sa_insert_wm_bet_putctx": {
+      "type": "string",
+      "description": "Stand-alone operation to insert WM between putamen and cortex",
+      "title": "Stand-alone Insert WM between Putamen and Cortex"
+    },
+    "insert_from_seg": {
+      "type": "string",
+      "description": "Insert given indices from segmentation volume",
+      "title": "Insert from Segmentation"
+    },
+    "sa_insert_from_seg": {
+      "type": "string",
+      "description": "Stand-alone insert given indices from segmentation volume",
+      "title": "Stand-alone Insert from Segmentation"
+    },
+    "cblum_from_seg": {
+      "type": "string",
+      "description": "Insert indices into segmentation volume with default label set",
+      "title": "Insert Indices into Segmentation with Default Label Set"
+    },
+    "sa_cblum_from_seg": {
+      "type": "string",
+      "description": "Stand-alone operation to insert indices into segmentation with default label set",
+      "title": "Stand-alone Insert Indices into Segmentation with Default Label Set"
+    },
+    "threads": {
+      "type": "integer",
+      "description": "Set the number of open mp threads",
+      "title": "Number of Threads"
+    }
+  },
+  "required": [
+    "@type",
+    "input_volumes",
+    "transform_file",
+    "gca_file",
+    "output_volume"
+  ]
+}

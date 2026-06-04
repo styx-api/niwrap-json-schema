@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "swe",
+  "description": "SwE (summary statistics and voxelwise statistical analyses tool for FSL)",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/swe"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "4D input image",
+      "title": "Input file"
+    },
+    "output_root": {
+      "type": "string",
+      "description": "Output file root name",
+      "title": "Output root"
+    },
+    "design_mat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Design matrix file",
+      "title": "Design matrix"
+    },
+    "design_con": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T contrasts file",
+      "title": "Design contrasts"
+    },
+    "design_sub": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Subjects file",
+      "title": "Design subjects"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask image",
+      "title": "Mask"
+    },
+    "fcon": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "F contrasts file",
+      "title": "F contrasts"
+    },
+    "modified": {
+      "type": "boolean",
+      "description": "Use the modified 'Homogeneous' SwE instead of the classic 'Heterogeneous' SwE",
+      "title": "Modified SwE",
+      "default": false
+    },
+    "wild_bootstrap": {
+      "type": "boolean",
+      "description": "Inference using a non-parametric Wild Bootstrap procedure",
+      "title": "Wild Bootstrap",
+      "default": false
+    },
+    "logp": {
+      "type": "boolean",
+      "description": "Return -log_10(p) images instead of 1-p images",
+      "title": "-log_10(p)",
+      "default": false
+    },
+    "nboot": {
+      "type": "number",
+      "description": "Number of bootstraps (default 999)",
+      "title": "Number of bootstraps"
+    },
+    "corrp": {
+      "type": "boolean",
+      "description": "Output voxelwise corrected p-value images",
+      "title": "Corrected p-values",
+      "default": false
+    },
+    "fonly": {
+      "type": "boolean",
+      "description": "Calculate f-statistics only",
+      "title": "F-statistics only",
+      "default": false
+    },
+    "tfce": {
+      "type": "boolean",
+      "description": "Threshold-Free Cluster Enhancement",
+      "title": "TFCE",
+      "default": false
+    },
+    "tfce_2d": {
+      "type": "boolean",
+      "description": "Threshold-Free Cluster Enhancement with 2D optimisation, e.g. for TBSS data (H=2, E=1, C=26)",
+      "title": "TFCE 2D",
+      "default": false
+    },
+    "cluster_t": {
+      "type": "number",
+      "description": "Cluster-extent-based inference for t-contrasts with specified cluster-forming threshold (z-score if >= 1, uncorrected p-value if < 1)",
+      "title": "Cluster extent t-contrasts"
+    },
+    "cluster_t_mass": {
+      "type": "number",
+      "description": "Cluster-mass-based inference for t-contrasts with specified cluster-forming threshold (z-score if >= 1, uncorrected p-value if < 1)",
+      "title": "Cluster mass t-contrasts"
+    },
+    "cluster_f": {
+      "type": "number",
+      "description": "Cluster-extent-based inference for f-contrasts with specified cluster-forming threshold (chi-squared-score if >= 1, uncorrected p-value if < 1)",
+      "title": "Cluster extent f-contrasts"
+    },
+    "cluster_f_mass": {
+      "type": "number",
+      "description": "Cluster-mass-based inference for f-contrasts with specified cluster-forming threshold (chi-squared-score if >= 1, uncorrected p-value if < 1)",
+      "title": "Cluster mass f-contrasts"
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Switch off diagnostic messages",
+      "title": "Quiet",
+      "default": false
+    },
+    "raw": {
+      "type": "boolean",
+      "description": "Output raw voxelwise statistic images",
+      "title": "Raw voxelwise stats",
+      "default": false
+    },
+    "equiv": {
+      "type": "boolean",
+      "description": "Output equivalent z or chi-squared statistic images",
+      "title": "Equivalent statistics",
+      "default": false
+    },
+    "dof": {
+      "type": "boolean",
+      "description": "Output effective number of degrees of freedom images",
+      "title": "Degrees of freedom",
+      "default": false
+    },
+    "uncorr_p": {
+      "type": "boolean",
+      "description": "Output uncorrected p-value images",
+      "title": "Uncorrected p-values",
+      "default": false
+    },
+    "null_dist": {
+      "type": "boolean",
+      "description": "Output null distribution text files",
+      "title": "Null distribution",
+      "default": false
+    },
+    "no_rc_mask": {
+      "type": "boolean",
+      "description": "Don't remove constant voxels from mask",
+      "title": "No RC mask",
+      "default": false
+    },
+    "seed": {
+      "type": "number",
+      "description": "Specific integer seed for random number generator",
+      "title": "Seed"
+    },
+    "tfce_h": {
+      "type": "number",
+      "description": "TFCE height parameter (default=2)",
+      "title": "TFCE height"
+    },
+    "tfce_d": {
+      "type": "number",
+      "description": "TFCE delta parameter override",
+      "title": "TFCE delta"
+    },
+    "tfce_e": {
+      "type": "number",
+      "description": "TFCE extent parameter (default=0.5)",
+      "title": "TFCE extent"
+    },
+    "tfce_c": {
+      "type": "number",
+      "description": "TFCE connectivity (6 or 26; default=6)",
+      "title": "TFCE connectivity"
+    },
+    "voxelwise_ev": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "List of numbers indicating voxelwise EVs position in the design matrix",
+      "title": "Voxelwise EVs"
+    },
+    "voxelwise_evs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of 4D images containing voxelwise EVs",
+      "title": "Voxelwise EVs images"
+    },
+    "glm_output": {
+      "type": "boolean",
+      "description": "Output GLM information (pe, cope, & varcope)",
+      "title": "GLM output",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_root",
+    "design_mat",
+    "design_con",
+    "design_sub"
+  ]
+}

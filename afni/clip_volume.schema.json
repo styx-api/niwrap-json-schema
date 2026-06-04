@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@clip_volume",
+  "description": "A tool to clip regions of a volume in various ways, such as above/below certain coordinates or within a specified box.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@clip_volume"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Volume to clip",
+      "title": "Input Volume"
+    },
+    "below_zmm": {
+      "type": "number",
+      "description": "Set to 0 slices below Zmm",
+      "title": "Below Zmm"
+    },
+    "above_zmm": {
+      "type": "number",
+      "description": "Set to 0 slices above Zmm",
+      "title": "Above Zmm"
+    },
+    "left_xmm": {
+      "type": "number",
+      "description": "Set to 0 slices left of Xmm",
+      "title": "Left Xmm"
+    },
+    "right_xmm": {
+      "type": "number",
+      "description": "Set to 0 slices right of Xmm",
+      "title": "Right Xmm"
+    },
+    "anterior_ymm": {
+      "type": "number",
+      "description": "Set to 0 slices anterior to Ymm",
+      "title": "Anterior Ymm"
+    },
+    "posterior_ymm": {
+      "type": "number",
+      "description": "Set to 0 slices posterior to Ymm",
+      "title": "Posterior Ymm"
+    },
+    "box": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Clip the volume to a box centered at Cx, Cy, Cz (RAI mm), and of dimensions Dx Dy Dz (RAI mm).",
+      "title": "Box Clipping"
+    },
+    "mask_box": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set all values inside the box to 1. Box centered at Cx, Cy, Cz (RAI mm), and of dimensions Dx Dy Dz (RAI mm).",
+      "title": "Mask Box Clipping"
+    },
+    "and_logic": {
+      "type": "boolean",
+      "description": "Combine with next clipping planes using 'and'.",
+      "title": "And Logic",
+      "default": false
+    },
+    "or_logic": {
+      "type": "boolean",
+      "description": "Combine with next clipping planes using 'or'.",
+      "title": "Or Logic",
+      "default": false
+    },
+    "verbosity": {
+      "type": "boolean",
+      "description": "Show command details (verbose output).",
+      "title": "Verbosity Flag",
+      "default": false
+    },
+    "crop_allzero": {
+      "type": "boolean",
+      "description": "Crop the output volume with 3dAutobox -noclust.",
+      "title": "Crop Allzero",
+      "default": false
+    },
+    "crop_greedy": {
+      "type": "boolean",
+      "description": "Crop the output volume with 3dAutobox.",
+      "title": "Crop Greedy",
+      "default": false
+    },
+    "crop": {
+      "type": "boolean",
+      "description": "Same as -crop_greedy, kept for backward compatibility.",
+      "title": "Crop",
+      "default": false
+    },
+    "crop_npad": {
+      "type": "number",
+      "description": "Set 3dAutobox's -npad option to NPAD. NPAD fattens the volume a little after cropping.",
+      "title": "Crop Npad"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Output prefix for the resultant volume. Default is the input prefix with _clp suffixed to it.",
+      "title": "Output Prefix"
+    },
+    "followers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Apply the same clipping or cropping treatment to the follower datasets.",
+      "title": "Followers"
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume"
+  ]
+}

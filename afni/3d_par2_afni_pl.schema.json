@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dPAR2AFNI.pl",
+  "description": "Convert Philips PAR/REC files to AFNI's BRIK/HEAD, NIfTI, or ANALYZE format",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dPAR2AFNI.pl"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input PAR file (e.g., subject1.PAR)",
+      "title": "Input File"
+    },
+    "skip_outliers_test": {
+      "type": "boolean",
+      "description": "Skip the outliers test when converting 4D files. The default is to perform the outliers test.",
+      "title": "Skip Outliers Test Flag",
+      "default": false
+    },
+    "output_nifti": {
+      "type": "boolean",
+      "description": "Output NIfTI files instead of HEAD/BRIK. The default is to create HEAD/BRIK files.",
+      "title": "Output NIfTI Flag",
+      "default": false
+    },
+    "output_analyze": {
+      "type": "boolean",
+      "description": "Output ANALYZE files instead of HEAD/BRIK.",
+      "title": "Output ANALYZE Flag",
+      "default": false
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "The name of the directory where the created files should be placed. If this directory does not exist, the program exits without performing any conversion.",
+      "title": "Output Directory"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Be verbose in operation.",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "gzip_files": {
+      "type": "boolean",
+      "description": "Gzip the files created. The default is not to gzip the files.",
+      "title": "Gzip Files Flag",
+      "default": false
+    },
+    "byte_swap_2": {
+      "type": "boolean",
+      "description": "2-Byte-swap the files created. The default is not to 2 byte-swap.",
+      "title": "2 Byte Swap Flag",
+      "default": false
+    },
+    "byte_swap_4": {
+      "type": "boolean",
+      "description": "4-Byte-swap the files created. The default is not to 4 byte-swap.",
+      "title": "4 Byte Swap Flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help message.",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file"
+  ]
+}

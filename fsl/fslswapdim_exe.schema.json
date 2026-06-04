@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslswapdim_exe",
+  "description": "Tool to swap the x, y, z axes dimensions of an image",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fslswapdim_exe"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image file (e.g., input.nii.gz)",
+      "title": "Input File"
+    },
+    "axis_a": {
+      "type": "string",
+      "description": "New x-axis in terms of old axes (-x, x, y, -y, z, -z)",
+      "title": "Axis A"
+    },
+    "axis_b": {
+      "type": "string",
+      "description": "New y-axis in terms of old axes (-x, x, y, -y, z, -z)",
+      "title": "Axis B"
+    },
+    "axis_c": {
+      "type": "string",
+      "description": "New z-axis in terms of old axes (-x, x, y, -y, z, -z)",
+      "title": "Axis C"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output image file (optional, cannot be used with --checkLR flag)",
+      "title": "Output File"
+    },
+    "checkLR_flag": {
+      "type": "boolean",
+      "description": "Option to check if the specified arguments lead to a Left-Right swap or not, cannot be used with an output name",
+      "title": "Check Left-Right Swap Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "axis_a",
+    "axis_b",
+    "axis_c"
+  ]
+}

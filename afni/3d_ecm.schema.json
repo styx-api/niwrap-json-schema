@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dECM",
+  "description": "Performs degree centrality on a dataset using a given maskfile via the 3dECM command",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dECM"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file to 3decm.",
+      "title": "In file"
+    },
+    "autoclip": {
+      "type": "boolean",
+      "description": "Clip off low-intensity regions in the dataset.",
+      "title": "Autoclip",
+      "default": false
+    },
+    "automask": {
+      "type": "boolean",
+      "description": "Mask the dataset to target brain-only voxels.",
+      "title": "Automask",
+      "default": false
+    },
+    "eps": {
+      "type": "number",
+      "description": "Sets the stopping criterion for the power iteration; :math:`l2\\|v_\\text{old} - v_\\text{new}\\| < eps\\|v_\\text{old}\\|`; default = 0.001.",
+      "title": "Eps"
+    },
+    "fecm": {
+      "type": "boolean",
+      "description": "Fast centrality method; substantial speed increase but cannot accommodate thresholding; automatically selected if -thresh or -sparsity are not set.",
+      "title": "Fecm",
+      "default": false
+    },
+    "full": {
+      "type": "boolean",
+      "description": "Full power method; enables thresholding; automatically selected if -thresh or -sparsity are set.",
+      "title": "Full",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file to mask input data.",
+      "title": "Mask"
+    },
+    "max_iter": {
+      "type": "integer",
+      "description": "Sets the maximum number of iterations to use in the power iteration; default = 1000.",
+      "title": "Max iter"
+    },
+    "memory": {
+      "type": "number",
+      "description": "Limit memory consumption on system by setting the amount of gb to limit the algorithm to; default = 2gb.",
+      "title": "Memory"
+    },
+    "num_threads": {
+      "type": "integer",
+      "description": "Set number of threads.",
+      "title": "Num threads"
+    },
+    "outputtype": {
+      "enum": [
+        "NIFTI",
+        "AFNI",
+        "NIFTI_GZ"
+      ],
+      "description": "'nifti' or 'afni' or 'nifti_gz'. Afni output filetype.",
+      "title": "Outputtype"
+    },
+    "out_file": {
+      "type": "string",
+      "description": "Output image file name.",
+      "title": "Out file"
+    },
+    "polort": {
+      "type": "integer",
+      "description": "No description provided.",
+      "title": "Polort"
+    },
+    "scale": {
+      "type": "number",
+      "description": "Scale correlation coefficients in similarity matrix to after shifting, x >= 0.0; default = 1.0 for -full, 0.5 for -fecm.",
+      "title": "Scale"
+    },
+    "shift": {
+      "type": "number",
+      "description": "Shift correlation coefficients in similarity matrix to enforce non-negativity, s >= 0.0; default = 0.0 for -full, 1.0 for -fecm.",
+      "title": "Shift"
+    },
+    "sparsity": {
+      "type": "number",
+      "description": "Only take the top percent of connections.",
+      "title": "Sparsity"
+    },
+    "thresh": {
+      "type": "number",
+      "description": "Threshold to exclude connections where corr <= thresh.",
+      "title": "Thresh"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

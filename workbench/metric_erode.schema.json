@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ERODE A METRIC FILE",
+  "description": "Around each vertex with a value of zero, set surrounding vertices to zero.  The surrounding vertices are all immediate neighbors and all vertices within the specified distance.\n\nNote that the -corrected-areas option uses an approximate correction for distance along the surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric_erode"
+    },
+    "metric": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the metric file to erode"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the surface to compute on"
+    },
+    "distance": {
+      "type": "number",
+      "description": "distance in mm to erode"
+    },
+    "metric_out": {
+      "type": "string",
+      "description": "the output metric"
+    },
+    "roi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "assume values outside this roi are nonzero"
+    },
+    "column": {
+      "type": "string",
+      "description": "select a single column to erode"
+    },
+    "corrected_areas": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "vertex areas to use instead of computing them from the surface"
+    }
+  },
+  "required": [
+    "@type",
+    "metric",
+    "surface",
+    "distance",
+    "metric_out"
+  ]
+}

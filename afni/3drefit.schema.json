@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3drefit",
+  "description": "Changes some of the information inside a 3D dataset's header",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3drefit"
+    },
+    "atrcopy": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "(file, string). Copy afni header attribute from the given file into the header of the dataset(s) being modified. for more information on afni header attributes, see documentation file readme.attributes. more than one '-atrcopy' option can be used. for afni advanced users only. do not use -atrcopy or -atrstring with other modification options. see also -copyaux.",
+      "title": "Atrcopy"
+    },
+    "atrfloat": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "(a string, a string). Create or modify floating point attributes. the input values may be specified as a single string in quotes or as a 1d filename or string, example '1 0.2 0 0 -0.2 1 0 0 0 0 1 0' or flipz.1d or '1d:1,0.2,2@0,-0.2,1,2@0,2@0,1,0'.",
+      "title": "Atrfloat"
+    },
+    "atrint": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "(a string, a string). Create or modify integer attributes. the input values may be specified as a single string in quotes or as a 1d filename or string, example '1 0 0 0 0 1 0 0 0 0 1 0' or flipz.1d or '1d:1,0,2@0,-0,1,2@0,2@0,1,0'.",
+      "title": "Atrint"
+    },
+    "atrstring": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "(a string, a string). Copy the last given string into the dataset(s) being modified, giving it the attribute name given by the last string.to be safe, the last string should be in quotes.",
+      "title": "Atrstring"
+    },
+    "deoblique": {
+      "type": "boolean",
+      "description": "Replace current transformation matrix with cardinal matrix.",
+      "title": "Deoblique",
+      "default": false
+    },
+    "duporigin_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Copies the xorigin, yorigin, and zorigin values from the header of the given dataset.",
+      "title": "Duporigin file"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file to 3drefit.",
+      "title": "In file"
+    },
+    "nosaveatr": {
+      "type": "boolean",
+      "description": "Opposite of -saveatr.",
+      "title": "Nosaveatr",
+      "default": false
+    },
+    "saveatr": {
+      "type": "boolean",
+      "description": "(default) copy the attributes that are known to afni into the dset->dblk structure thereby forcing changes to known attributes to be present in the output. this option only makes sense with -atrcopy.",
+      "title": "Saveatr",
+      "default": false
+    },
+    "space": {
+      "enum": [
+        "TLRC",
+        "MNI",
+        "ORIG"
+      ],
+      "description": "'tlrc' or 'mni' or 'orig'. Associates the dataset with a specific template type, e.g. tlrc, mni, orig.",
+      "title": "Space"
+    },
+    "xdel": {
+      "type": "number",
+      "description": "New x voxel dimension in mm.",
+      "title": "Xdel"
+    },
+    "xorigin": {
+      "type": "string",
+      "description": "X distance for edge voxel offset.",
+      "title": "Xorigin"
+    },
+    "xyzscale": {
+      "type": "number",
+      "description": "Scale the size of the dataset voxels by the given factor.",
+      "title": "Xyzscale"
+    },
+    "ydel": {
+      "type": "number",
+      "description": "New y voxel dimension in mm.",
+      "title": "Ydel"
+    },
+    "yorigin": {
+      "type": "string",
+      "description": "Y distance for edge voxel offset.",
+      "title": "Yorigin"
+    },
+    "zdel": {
+      "type": "number",
+      "description": "New z voxel dimension in mm.",
+      "title": "Zdel"
+    },
+    "zorigin": {
+      "type": "string",
+      "description": "Z distance for edge voxel offset.",
+      "title": "Zorigin"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

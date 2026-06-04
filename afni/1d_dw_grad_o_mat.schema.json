@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dDW_Grad_o_Mat++",
+  "description": "Manipulation of diffusion-weighted (DW) gradient vector files, b-value files, and b- or g-matrices with various input and output configurations.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dDW_Grad_o_Mat++"
+    },
+    "in_row_vec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file of 3 rows of gradients (e.g., dcm2nii-format output)",
+      "title": "Input Row Vectors"
+    },
+    "in_col_vec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file of 3 columns of gradients",
+      "title": "Input Column Vectors"
+    },
+    "in_col_matA": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file of 6 columns of b- or g-matrix in 'A(FNI)' diagonal first format",
+      "title": "Input Columns Matrix A"
+    },
+    "in_col_matT": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file of 6 columns of b- or g-matrix in 'T(ORTOISE)' row first format",
+      "title": "Input Columns Matrix T"
+    },
+    "flip_x": {
+      "type": "boolean",
+      "description": "Change sign of first column of gradients (or of the x-component parts of the matrix)",
+      "title": "Flip X",
+      "default": false
+    },
+    "flip_y": {
+      "type": "boolean",
+      "description": "Change sign of second column of gradients (or of the y-component parts of the matrix)",
+      "title": "Flip Y",
+      "default": false
+    },
+    "flip_z": {
+      "type": "boolean",
+      "description": "Change sign of third column of gradients (or of the z-component parts of the matrix)",
+      "title": "Flip Z",
+      "default": false
+    },
+    "no_flip": {
+      "type": "boolean",
+      "description": "Don't change any gradient/matrix signs (default behavior)",
+      "title": "No Flip",
+      "default": false
+    },
+    "out_row_vec": {
+      "type": "string",
+      "description": "Output file of 3 rows of gradients",
+      "title": "Output Row Vectors"
+    },
+    "out_col_vec": {
+      "type": "string",
+      "description": "Output file of 3 columns of gradients",
+      "title": "Output Column Vectors"
+    },
+    "out_col_matA": {
+      "type": "string",
+      "description": "Output file of 6 columns of b- or g-matrix in 'A(FNI)' diagonal first format",
+      "title": "Output Columns Matrix A"
+    },
+    "out_col_matT": {
+      "type": "string",
+      "description": "Output file of 6 columns of b- or g-matrix in 'T(ORTOISE)' row first format",
+      "title": "Output Columns Matrix T"
+    },
+    "in_bvals": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "BVAL_FILE is a file of b-values either in a single row or a single column",
+      "title": "Input B-Values"
+    },
+    "out_col_bval": {
+      "type": "boolean",
+      "description": "Switch to put a column of the bvalues as the first column in the output data",
+      "title": "Output Column B-Values",
+      "default": false
+    },
+    "out_row_bval_sep": {
+      "type": "string",
+      "description": "Output a file of bvalues in a single row",
+      "title": "Output Row B-Values File"
+    },
+    "out_col_bval_sep": {
+      "type": "string",
+      "description": "Output a file of bvalues in a single column",
+      "title": "Output Column B-Values File"
+    },
+    "unit_mag_out": {
+      "type": "boolean",
+      "description": "Switch to scale each vector/matrix from the INFILE to either unit or zero magnitude",
+      "title": "Unit Magnitude Output",
+      "default": false
+    },
+    "check_abs_min": {
+      "type": "number",
+      "description": "Specify the threshold to replace small negative diagonal elements with zero in the input matrix",
+      "title": "Check Absolute Minimum"
+    },
+    "bref_mean_top": {
+      "type": "boolean",
+      "description": "When averaging the reference 'b0' values, represent the mean of X values in the top row",
+      "title": "Reference Mean Top",
+      "default": false
+    },
+    "put_zeros_top": {
+      "type": "boolean",
+      "description": "Add a row at the top with all zeros in the output format",
+      "title": "Put Zeros at Top",
+      "default": false
+    },
+    "bmax_ref": {
+      "type": "number",
+      "description": "THRESH is a scalar number below which b-values are considered zero or reference",
+      "title": "Maximum Reference B-Value Threshold"
+    }
+  },
+  "required": [
+    "@type",
+    "in_row_vec",
+    "in_col_vec",
+    "in_col_matA",
+    "in_col_matT",
+    "out_row_vec",
+    "out_col_vec",
+    "out_col_matA",
+    "out_col_matT"
+  ]
+}

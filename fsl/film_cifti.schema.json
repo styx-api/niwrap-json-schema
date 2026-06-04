@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "film_cifti",
+  "description": "A tool for statistical analysis of CIFTI files using FILM.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/film_cifti"
+    },
+    "input_filename": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input CIFTI file",
+      "title": "Input file"
+    },
+    "basename": {
+      "type": "string",
+      "description": "Output basename",
+      "title": "Output basename"
+    },
+    "left_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Geometry for left cortex",
+      "title": "Left cortex surface geometry"
+    },
+    "right_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Geometry for right cortex",
+      "title": "Right cortex surface geometry"
+    },
+    "susan_threshold": {
+      "type": "number",
+      "description": "Susan brightness threshold for volumetric analysis (default: 0)",
+      "title": "Susan brightness threshold"
+    },
+    "susan_extent": {
+      "type": "number",
+      "description": "Susan mask size for volumetric analysis (default: 4)",
+      "title": "Susan mask size"
+    },
+    "surface_sigma": {
+      "type": "number",
+      "description": "Smoothing sigma for surface analysis (default: 0)",
+      "title": "Smoothing sigma"
+    },
+    "surface_extent": {
+      "type": "number",
+      "description": "Smoothing extent for surface analysis (default: 4)",
+      "title": "Smoothing extent"
+    },
+    "film_options": {
+      "type": "string",
+      "description": "Film options to be used with all modes, list must be wrapped by quotes",
+      "title": "Film options"
+    }
+  },
+  "required": [
+    "@type",
+    "input_filename",
+    "basename",
+    "left_surface",
+    "right_surface"
+  ]
+}

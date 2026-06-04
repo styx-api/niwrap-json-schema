@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "img2imgcoord",
+  "description": "Tool for transforming coordinates between images",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/img2imgcoord"
+    },
+    "coordinates_file": {
+      "type": "string",
+      "description": "Filename containing coordinates",
+      "title": "Coordinates File"
+    },
+    "source_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of source image",
+      "title": "Source Image"
+    },
+    "dest_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of destination image",
+      "title": "Destination Image"
+    },
+    "affine_transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of affine transform (e.g. source2dest.mat)",
+      "title": "Affine Transform"
+    },
+    "warp_field": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of warpfield (e.g. intermediate2dest_warp.nii.gz)",
+      "title": "Warp Field"
+    },
+    "pre_warp_affine": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of pre-warp affine transform (default=identity)",
+      "title": "Pre-warp Affine Transform"
+    },
+    "coords_in_voxels": {
+      "type": "boolean",
+      "description": "All coordinates in voxels (default)",
+      "title": "Coordinates in Voxels",
+      "default": false
+    },
+    "coords_in_mm": {
+      "type": "boolean",
+      "description": "All coordinates in mm",
+      "title": "Coordinates in MM",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose mode",
+      "title": "Verbose",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "coordinates_file",
+    "source_image",
+    "dest_image",
+    "affine_transform"
+  ]
+}

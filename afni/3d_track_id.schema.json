@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTrackID",
+  "description": "FACTID-based tractography code for AFNI, part of FATCAT",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTrackID"
+    },
+    "mode": {
+      "enum": [
+        "DET",
+        "MINIP",
+        "PROB"
+      ],
+      "description": "The mode of tracking: DET, MINIP, or PROB",
+      "title": "Tracking mode"
+    },
+    "netrois": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Network ROI mask(s)",
+      "title": "Network ROI mask"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output files",
+      "title": "Output file prefix"
+    },
+    "dti_in": {
+      "type": "string",
+      "description": "Input DTI volumes basename",
+      "title": "DTI input prefix"
+    },
+    "dti_list": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Alternative way to specify DTI input files, a NIML-formatted text file",
+      "title": "DTI list file"
+    },
+    "dti_extra": {
+      "type": "string",
+      "description": "Option for extra scalar for WM skeleton thresholding",
+      "title": "Extra DTI input prefix"
+    },
+    "dti_search_no": {
+      "type": "boolean",
+      "description": "Turn off automatic search for additional scalar files to include in output",
+      "title": "DTI search no flag",
+      "default": false
+    },
+    "hardi_gfa": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Single brik dataset with generalized FA (GFA) info",
+      "title": "HARDI GFA dataset"
+    },
+    "hardi_dirs": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Directions file for HARDI data containing directions components",
+      "title": "HARDI directions file"
+    },
+    "hardi_pars": {
+      "type": "string",
+      "description": "Prefix to search for scalar files naming format",
+      "title": "HARDI pars prefix"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask within which tracking is done. Optional but highly recommended.",
+      "title": "Brain mask"
+    },
+    "thru_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Extra restrictor mask through which paths are strictly required to pass",
+      "title": "Thru mask"
+    },
+    "targ_surf_stop": {
+      "type": "boolean",
+      "description": "Make tracts stop at outer surfaces of the target ROIs",
+      "title": "Stop at target surfaces flag",
+      "default": false
+    },
+    "targ_surf_twixt": {
+      "type": "boolean",
+      "description": "Make tracts stop just before entering target surfaces",
+      "title": "Stop between target surfaces flag",
+      "default": false
+    },
+    "logic": {
+      "enum": [
+        "OR",
+        "AND"
+      ],
+      "description": "Control logic connections among target ROIs per network",
+      "title": "Logic for connections"
+    },
+    "mini_num": {
+      "type": "number",
+      "description": "Number of whole brain Monte Carlo iterations for mini-probabilistic tracking",
+      "title": "Mini-probabilistic iterations"
+    },
+    "uncert": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Uncertainty values file",
+      "title": "Uncertainty values file"
+    },
+    "unc_min_fa": {
+      "type": "number",
+      "description": "Minimum stdev for perturbing FA",
+      "title": "Min stdev for perturbing FA"
+    },
+    "unc_min_v": {
+      "type": "number",
+      "description": "Minimum stdev for perturbing direction-vectors",
+      "title": "Min stdev for perturbing direction-vectors"
+    },
+    "algopt": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify tracking parameter quantities file in ASCII",
+      "title": "Algorithm options file"
+    },
+    "alg_thresh_fa": {
+      "type": "number",
+      "description": "Set threshold for FA map or other WM proxy",
+      "title": "FA/GFA threshold"
+    },
+    "alg_thresh_ang": {
+      "type": "number",
+      "description": "Set maximum angle for turning during propagation",
+      "title": "Max angle threshold (degrees)"
+    },
+    "alg_thresh_len": {
+      "type": "number",
+      "description": "Set minimum physical length of tracts to keep",
+      "title": "Min length threshold (mm)"
+    },
+    "alg_nseed_x": {
+      "type": "number",
+      "description": "Number of seeds per voxel in x-direction",
+      "title": "Number of x seeds"
+    },
+    "alg_nseed_y": {
+      "type": "number",
+      "description": "Number of seeds per voxel in y-direction",
+      "title": "Number of y seeds"
+    },
+    "alg_nseed_z": {
+      "type": "number",
+      "description": "Number of seeds per voxel in z-direction",
+      "title": "Number of z seeds"
+    },
+    "alg_thresh_frac": {
+      "type": "number",
+      "description": "Value for thresholding the fraction of tracks through a voxel for a given connection",
+      "title": "Threshold fraction"
+    },
+    "alg_nseed_vox": {
+      "type": "number",
+      "description": "Number of seeds per voxel per Monte Carlo iteration",
+      "title": "Seeds per voxel"
+    },
+    "alg_nmonte": {
+      "type": "number",
+      "description": "Number of Monte Carlo iterations",
+      "title": "Monte Carlo iterations"
+    },
+    "extra_tr_par": {
+      "type": "boolean",
+      "description": "Run three extra track parameter scalings for each connection",
+      "title": "Extra parameter scaling flag",
+      "default": false
+    },
+    "uncut_at_rois": {
+      "type": "boolean",
+      "description": "Keep entire track even if overshoots a target",
+      "title": "Keep uncut at targets flag",
+      "default": false
+    },
+    "dump_rois": {
+      "enum": [
+        "DUMP",
+        "AFNI",
+        "BOTH",
+        "AFNI_MAP"
+      ],
+      "description": "Output individual masks of ROI connections",
+      "title": "Dump ROIs mode"
+    },
+    "dump_no_labtab": {
+      "type": "boolean",
+      "description": "Turn off label table use in ROI dump output",
+      "title": "No label table flag",
+      "default": false
+    },
+    "dump_lab_consec": {
+      "type": "boolean",
+      "description": "DON'T apply numerical labels of original ROIs in dump output",
+      "title": "Consecutive labels flag",
+      "default": false
+    },
+    "posteriori": {
+      "type": "boolean",
+      "description": "Output individual files with number of tracks per voxel per pair",
+      "title": "Posteriori flag",
+      "default": false
+    },
+    "rec_orig": {
+      "type": "boolean",
+      "description": "Record dataset origin in header of *.trk file",
+      "title": "Record origin flag",
+      "default": false
+    },
+    "do_trk_out": {
+      "type": "boolean",
+      "description": "Output *.trk files for viewing in TrackVis",
+      "title": "Output TrackVis flag",
+      "default": false
+    },
+    "trk_opp_orient": {
+      "type": "boolean",
+      "description": "Oppositize voxel_order for TRK files",
+      "title": "Oppositize voxel order flag",
+      "default": false
+    },
+    "nifti": {
+      "type": "boolean",
+      "description": "Output files in *.nii.gz format",
+      "title": "Nifti output flag",
+      "default": false
+    },
+    "no_indipair_out": {
+      "type": "boolean",
+      "description": "Do not output INDIMAP and PAIRMAP volumes",
+      "title": "No INDIMAP/PAIRMAP flag",
+      "default": false
+    },
+    "write_rois": {
+      "type": "boolean",
+      "description": "Write out ROI labels",
+      "title": "Write ROIs flag",
+      "default": false
+    },
+    "write_opts": {
+      "type": "boolean",
+      "description": "Write out all option values",
+      "title": "Write options flag",
+      "default": false
+    },
+    "pair_out_power": {
+      "type": "boolean",
+      "description": "Switch to use powers of two labelling for PAIRMAP",
+      "title": "PAIRMAP powers flag",
+      "default": false
+    },
+    "verb": {
+      "type": "number",
+      "description": "Set verbosity level",
+      "title": "Verbosity level"
+    }
+  },
+  "required": [
+    "@type",
+    "mode",
+    "netrois",
+    "prefix",
+    "logic"
+  ]
+}

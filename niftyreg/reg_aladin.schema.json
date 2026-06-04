@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "reg_aladin",
+  "description": "Block Matching algorithm for global registration based on \"Reconstructing a 3D structure from serial histological sections\", Image and Vision Computing, 2001",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "niftyreg/reg_aladin"
+    },
+    "reference_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the reference (target) image",
+      "title": "Reference Image"
+    },
+    "floating_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the floating (source) image",
+      "title": "Floating Image"
+    },
+    "symmetric": {
+      "type": "boolean",
+      "description": "Uses symmetric version of the algorithm",
+      "title": "Symmetric Version",
+      "default": false
+    },
+    "output_affine": {
+      "type": "string",
+      "description": "Filename which contains the output affine transformation",
+      "title": "Output Affine Transformation"
+    },
+    "rigid_only": {
+      "type": "boolean",
+      "description": "To perform a rigid registration only",
+      "title": "Rigid Registration Only",
+      "default": false
+    },
+    "direct_affine": {
+      "type": "boolean",
+      "description": "Directly optimize 12 DoF affine",
+      "title": "Direct Affine Optimization",
+      "default": false
+    },
+    "smooth_ref": {
+      "type": "number",
+      "description": "Smooth the reference image using the specified sigma (mm)",
+      "title": "Smooth Reference Image"
+    },
+    "smooth_float": {
+      "type": "number",
+      "description": "Smooth the floating image using the specified sigma (mm)",
+      "title": "Smooth Floating Image"
+    },
+    "num_levels": {
+      "type": "number",
+      "description": "Number of levels to perform",
+      "title": "Number of Levels"
+    },
+    "first_levels": {
+      "type": "number",
+      "description": "Only perform the first levels",
+      "title": "First Levels"
+    },
+    "use_nifti_origin": {
+      "type": "boolean",
+      "description": "Use the NIFTI header origins to initialize the translation",
+      "title": "Use NIFTI Origins",
+      "default": false
+    },
+    "percent_block": {
+      "type": "number",
+      "description": "Percentage of block to use",
+      "title": "Percentage of Block"
+    },
+    "percent_inlier": {
+      "type": "number",
+      "description": "Percentage of inlier for the LTS",
+      "title": "Percentage of Inlier"
+    }
+  },
+  "required": [
+    "@type",
+    "reference_image",
+    "floating_image"
+  ]
+}

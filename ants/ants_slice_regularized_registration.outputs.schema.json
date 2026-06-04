@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "antsSliceRegularizedRegistration",
+  "description": "This program is a user-level application for slice-by-slice translation registration. Results are regularized in z using polynomial regression. The program is targeted at spinal cord MRI. Only one stage is supported where a stage consists of a transform; an image metric; and iterations, shrink factors, and smoothing sigmas for each level. Specialized for 3D data: fixed image is 3D, moving image is 3D. Registration is performed slice-by-slice then regularized in z. The parameter -p controls the polynomial degree. -p 0 means no regularization.",
+  "properties": {
+    "root": {
+      "type": "string",
+      "x-styx-type": "path"
+    },
+    "polynomial_fit": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output is the polynomial fit to Tx & Ty."
+    },
+    "transformed_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output is the transformed image."
+    }
+  },
+  "required": [
+    "root",
+    "polynomial_fit",
+    "transformed_image"
+  ]
+}

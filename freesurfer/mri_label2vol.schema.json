@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_label2vol",
+  "description": "Converts a label or a set of labels into a volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_label2vol"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Enter the name of the label file. For multiple labels, use multiple --label flags.",
+      "title": "Label files"
+    },
+    "annotation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface annotation file. Use this to input annotations directly.",
+      "title": "Annotation file"
+    },
+    "segmentation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to input segmentation.",
+      "title": "Segmentation file"
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Template volume; the output will have the same size and geometry.",
+      "title": "Template volume"
+    },
+    "registration": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "tkregister-style registration matrix mapping LabelXYZ to VolXYZ.",
+      "title": "Registration matrix"
+    },
+    "identity_flag": {
+      "type": "boolean",
+      "description": "Use the identity matrix as the registration.",
+      "title": "Identity registration flag",
+      "default": false
+    },
+    "fill_threshold": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Threshold for voxel fill; a value between 0 and 1.",
+      "title": "Fill threshold"
+    },
+    "label_vox_vol": {
+      "type": "number",
+      "description": "Volume of each label point; default is 1mm³.",
+      "title": "Label voxel volume"
+    },
+    "projection": {
+      "type": "string",
+      "description": "Project the label along the surface normal. Type can be abs or frac.",
+      "title": "Projection settings"
+    },
+    "subject": {
+      "type": "string",
+      "description": "FREESURFER subject identifier; needed with --proj.",
+      "title": "Subject ID"
+    },
+    "hemisphere": {
+      "type": "string",
+      "description": "Hemisphere to use for --proj or --annot. Legal values are lh and rh.",
+      "title": "Hemisphere"
+    },
+    "output_volume": {
+      "type": "string",
+      "description": "Output volume in which each voxel will have the number of the label to which it is assigned.",
+      "title": "Output volume"
+    },
+    "hits_volume": {
+      "type": "string",
+      "description": "Hit volume, a multi-frame volume with one frame per label showing the number of hits per voxel.",
+      "title": "Hit volume"
+    },
+    "label_stat_volume": {
+      "type": "string",
+      "description": "Map the label stats field into the volume.",
+      "title": "Label stat volume"
+    },
+    "stat_threshold": {
+      "type": "number",
+      "description": "Only use label point where stat > thresh.",
+      "title": "Statistical threshold"
+    },
+    "offset": {
+      "type": "number",
+      "description": "Add offset to the segmentation numbers.",
+      "title": "Segmentation offset"
+    },
+    "defects": {
+      "type": "string",
+      "description": "Creates a segmentation volume of the surface defects.",
+      "title": "Defects settings"
+    },
+    "native_vox2ras_flag": {
+      "type": "boolean",
+      "description": "Use native voxel-to-RAS transform instead of tkregister-style.",
+      "title": "Native voxel-to-RAS flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "template",
+    "output_volume"
+  ]
+}

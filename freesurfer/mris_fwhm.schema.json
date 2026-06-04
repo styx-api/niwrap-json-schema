@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_fwhm",
+  "description": "Smooths surface data and/or estimates FWHM",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_fwhm"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input data file.",
+      "title": "Input File"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject whose surface the input is defined on.",
+      "title": "Subject"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemifield that the input is defined on. Legal values are lh and rh.",
+      "title": "Hemisphere"
+    },
+    "surf": {
+      "type": "string",
+      "description": "Surface name to compute AR1 on. Default is white.",
+      "title": "Surface"
+    },
+    "label_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Label file to be used as a mask.",
+      "title": "Label File"
+    },
+    "cortex_flag": {
+      "type": "boolean",
+      "description": "Use hemi.cortex.label as a mask.",
+      "title": "Cortex Flag",
+      "default": false
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file. Compute AR1 only over voxels in the given mask.",
+      "title": "Mask File"
+    },
+    "x_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Detrend data with the matrix in x.mat.",
+      "title": "Detrending Matrix"
+    },
+    "detrend_order": {
+      "type": "number",
+      "description": "Order of polynomial detrending.",
+      "title": "Detrend Order"
+    },
+    "smooth_only_flag": {
+      "type": "boolean",
+      "description": "Only smooth the data, implies --no-detrend.",
+      "title": "Smooth Only Flag",
+      "default": false
+    },
+    "no_detrend_flag": {
+      "type": "boolean",
+      "description": "Turn off polynomial detrending.",
+      "title": "No Detrend Flag",
+      "default": false
+    },
+    "sqr_flag": {
+      "type": "boolean",
+      "description": "Compute square of input before smoothing.",
+      "title": "Square Input Flag",
+      "default": false
+    },
+    "sum_file": {
+      "type": "string",
+      "description": "Prints ascii summary to sumfile.",
+      "title": "Sum File"
+    },
+    "dat_file": {
+      "type": "string",
+      "description": "File for FWHM data.",
+      "title": "Dat File"
+    },
+    "ar1dat_file": {
+      "type": "string",
+      "description": "File containing ar1mean and ar1std.",
+      "title": "AR1 Data File"
+    },
+    "ar1vol": {
+      "type": "string",
+      "description": "Save spatial AR1 as an overlay.",
+      "title": "AR1 Volume"
+    },
+    "fwhmmap": {
+      "type": "string",
+      "description": "Save vertex-wise spatial FWHM as an overlay.",
+      "title": "FWHM Map"
+    },
+    "prune_flag": {
+      "type": "boolean",
+      "description": "Remove any voxel that is zero in any subject (after any inversion).",
+      "title": "Prune Flag",
+      "default": false
+    },
+    "no_prune_flag": {
+      "type": "boolean",
+      "description": "Do not prune (default).",
+      "title": "No Prune Flag",
+      "default": false
+    },
+    "out_mask": {
+      "type": "string",
+      "description": "File to save the final mask.",
+      "title": "Out Mask"
+    },
+    "varnorm_flag": {
+      "type": "boolean",
+      "description": "Normalize the variance across space within any mask.",
+      "title": "Variance Normalize Flag",
+      "default": false
+    },
+    "fwhm": {
+      "type": "number",
+      "description": "Smooth input by the specified FWHM in mm.",
+      "title": "FWHM Value"
+    },
+    "niters_only": {
+      "type": "string",
+      "description": "File that reports the number of iterations needed to achieve the specified FWHM.",
+      "title": "Niters Only"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output file to save the processed data.",
+      "title": "Output File"
+    },
+    "sd": {
+      "type": "string",
+      "description": "Subjects directory.",
+      "title": "Subjects Directory"
+    },
+    "synth_flag": {
+      "type": "boolean",
+      "description": "Synthesize input with white gaussian noise.",
+      "title": "Synthesize Input Flag",
+      "default": false
+    },
+    "synth_frames": {
+      "type": "number",
+      "description": "Number of frames for synthesized input.",
+      "title": "Number of Synth Frames"
+    },
+    "threads": {
+      "type": "number",
+      "description": "Number of threads to use.",
+      "title": "Number of Threads"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Turn on debugging.",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "checkopts_flag": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit.",
+      "title": "Check Options Flag",
+      "default": false
+    },
+    "version_flag": {
+      "type": "boolean",
+      "description": "Print out version and exit.",
+      "title": "Version Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "subject",
+    "hemi",
+    "output_file"
+  ]
+}

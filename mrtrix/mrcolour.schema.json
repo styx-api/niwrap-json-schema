@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mrcolour",
+  "description": "Apply a colour map to an image.\n\nUnder typical usage, this command will receive as input ad 3D greyscale image, and output a 4D image with 3 volumes corresponding to red-green-blue components; other use cases are possible, and are described in more detail below.\n\nBy default, the command will automatically determine the maximum and minimum intensities of the input image, and use that information to set the upper and lower bounds of the applied colourmap. This behaviour can be overridden by manually specifying these bounds using the -upper and -lower options respectively.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/mrcolour"
+    },
+    "upper": {
+      "type": "number",
+      "description": "manually set the upper intensity of the colour mapping",
+      "title": "upper"
+    },
+    "lower": {
+      "type": "number",
+      "description": "manually set the lower intensity of the colour mapping",
+      "title": "lower"
+    },
+    "colour": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "set the target colour for use of the 'colour' map (three comma-separated floating-point values)",
+      "title": "colour"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input image",
+      "title": "input"
+    },
+    "map": {
+      "type": "string",
+      "description": "the colourmap to apply; choices are: gray,hot,cool,jet,inferno,viridis,pet,colour,rgb",
+      "title": "map"
+    },
+    "output": {
+      "type": "string",
+      "description": "the output image",
+      "title": "output"
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "map",
+    "output"
+  ]
+}

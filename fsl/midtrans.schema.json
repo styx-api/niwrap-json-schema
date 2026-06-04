@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "midtrans",
+  "description": "Calculate the midpoint transform from a series of input transforms.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/midtrans"
+    },
+    "transforms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "List of input transform files (e.g. transform1.mat transform2.mat ... transformN.mat)",
+      "title": "Input transform files"
+    },
+    "output_matrix": {
+      "type": "string",
+      "description": "Output filename for the resulting matrix",
+      "title": "Output matrix"
+    },
+    "template_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input filename for template image (needed for fix origin)",
+      "title": "Template image"
+    },
+    "separate_basename": {
+      "type": "string",
+      "description": "Basename for the output of separate matrices (final name includes a number; e.g. img2mid0001.mat)",
+      "title": "Separate matrices basename"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Switch on debugging output",
+      "title": "Debug flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "transforms"
+  ]
+}

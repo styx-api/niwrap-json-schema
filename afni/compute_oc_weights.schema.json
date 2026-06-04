@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@compute_OC_weights",
+  "description": "Compute optimal combined weights dataset for multi-echo EPI data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@compute_OC_weights"
+    },
+    "echo_times": {
+      "type": "string",
+      "description": "Specify echo times as list (e.g., \"15 30.5 41\"). Use either -echo_times or -echo_times_files.",
+      "title": "Echo times"
+    },
+    "echo_times_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify file with echo times. Use either -echo_times or -echo_times_files.",
+      "title": "Echo times file"
+    },
+    "echo_dsets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify one run of multi-echo EPI data.",
+      "title": "Echo datasets"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Specify prefix of resulting OC weights dataset (e.g., OC.weights.SUBJ).",
+      "title": "Output prefix"
+    },
+    "def_to_equal": {
+      "type": "string",
+      "description": "Specify whether to default to equal weights (default = no).",
+      "title": "Default to equal weights"
+    },
+    "oc_method": {
+      "type": "string",
+      "description": "Specify which OC method to employ (default = OC_A).",
+      "title": "OC method"
+    },
+    "sum_weight_tolerance": {
+      "type": "number",
+      "description": "Tolerance for summed weight difference from 1.0 (default = 0.001).",
+      "title": "Sum weight tolerance"
+    },
+    "t2_star_limit": {
+      "type": "number",
+      "description": "Specify limit for T2* values (default = 300).",
+      "title": "T2* limit"
+    },
+    "work_dir": {
+      "type": "string",
+      "description": "Specify directory to compute results in.",
+      "title": "Working directory"
+    },
+    "verbosity": {
+      "type": "boolean",
+      "description": "Increase verbosity of output.",
+      "title": "Verbose flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "echo_dsets"
+  ]
+}

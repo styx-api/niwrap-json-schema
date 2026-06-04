@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dmri_motion",
+  "description": "A tool for calculating motion measures from DWI scans.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/dmri_motion"
+    },
+    "outfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output text file of motion measures",
+      "title": "Output File"
+    },
+    "outf": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output text file of frame-by-frame motion measures",
+      "title": "Output Frame-by-Frame File"
+    },
+    "mat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input text file of volume-to-baseline affine transformations",
+      "title": "Transformation Matrix File"
+    },
+    "dwi": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input DWI scan(s), unprocessed",
+      "title": "DWI Scans"
+    },
+    "bval": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input b-value table(s), one per scan",
+      "title": "B-Value Tables"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Low-b image intensity threshold",
+      "title": "Image Intensity Threshold"
+    },
+    "diffusivity": {
+      "type": "number",
+      "description": "Nominal diffusivity",
+      "title": "Nominal Diffusivity"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug",
+      "default": false
+    },
+    "checkopts": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit",
+      "title": "Check Options",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print out information on how to use this program",
+      "title": "Help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print out version and exit",
+      "title": "Version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "outfile"
+  ]
+}

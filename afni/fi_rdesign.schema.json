@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FIRdesign",
+  "description": "Uses the Remez algorithm to calculate the FIR filter weights for a bandpass filter; results are written to stdout in an unadorned (no header) column of numbers.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/FIRdesign"
+    },
+    "fbot": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Lowest frequency in the pass band.",
+      "title": "Low Passband Frequency"
+    },
+    "ftop": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Highest frequency in the pass band, must be higher than fbot and <= 0.5/TR.",
+      "title": "High Passband Frequency"
+    },
+    "ntap": {
+      "type": "number",
+      "minimum": 8,
+      "maximum": 2000,
+      "description": "Number of filter weights (AKA 'taps') to use, must be in the range 8..2000 (inclusive).",
+      "title": "Number of Taps"
+    },
+    "tr": {
+      "type": "number",
+      "description": "Set time grid spacing to 'dd' [default is 1.0]",
+      "title": "Time Grid Spacing"
+    },
+    "alternative_band": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Alternative way to specify the passband",
+      "title": "Alternative Passband"
+    },
+    "alternative_ntap": {
+      "type": "number",
+      "minimum": 8,
+      "maximum": 2000,
+      "description": "Alternative way to specify the number of taps",
+      "title": "Alternative Number of Taps"
+    }
+  },
+  "required": [
+    "@type",
+    "fbot",
+    "ftop",
+    "ntap"
+  ]
+}

@@ -1,0 +1,339 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dplot",
+  "description": "Graphs the columns of a *.1D time series file to the X11 screen, or to an image file (.jpg or .png).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dplot"
+    },
+    "tsfiles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input time series files (*.1D) to be plotted.",
+      "title": "Time Series Files"
+    },
+    "install": {
+      "type": "boolean",
+      "description": "Install a new X11 colormap.",
+      "title": "Install Colormap",
+      "default": false
+    },
+    "sep": {
+      "type": "boolean",
+      "description": "Plot each column in a separate sub-graph.",
+      "title": "Separate Sub-Graphs",
+      "default": false
+    },
+    "one": {
+      "type": "boolean",
+      "description": "Plot all columns together in one big graph.",
+      "title": "One Big Graph",
+      "default": false
+    },
+    "sepscl": {
+      "type": "boolean",
+      "description": "Plot each column in a separate sub-graph and allow each sub-graph to have a different y-scale. This option is meaningless with -one!",
+      "title": "Separate Sub-Graphs with different y-scale",
+      "default": false
+    },
+    "noline": {
+      "type": "object",
+      "properties": {
+        "noline": {
+          "type": "boolean",
+          "description": "Don't plot the connecting lines.",
+          "title": "No Connecting Lines",
+          "default": false
+        },
+        "NOLINE": {
+          "type": "boolean",
+          "description": "Same as -noline, but will not try to plot values outside the rectangular box that contains the graph axes.",
+          "title": "No Connecting Lines with Axis Containment",
+          "default": false
+        }
+      },
+      "description": "Don't plot the connecting lines.",
+      "title": "No Connecting Lines"
+    },
+    "box": {
+      "type": "boolean",
+      "description": "Plot a small 'box' at each data point.",
+      "title": "Plot Boxes",
+      "default": false
+    },
+    "hist": {
+      "type": "boolean",
+      "description": "Plot graphs in histogram style (i.e., vertical boxes).",
+      "title": "Histogram Style",
+      "default": false
+    },
+    "norm2": {
+      "type": "boolean",
+      "description": "Independently scale each time series plotted to have L_2 norm = 1 (sum of squares).",
+      "title": "L2 Norm Scaling",
+      "default": false
+    },
+    "normx": {
+      "type": "boolean",
+      "description": "Independently scale each time series plotted to have max absolute value = 1 (L_infinity norm).",
+      "title": "Linfinity Norm Scaling",
+      "default": false
+    },
+    "norm1": {
+      "type": "boolean",
+      "description": "Independently scale each time series plotted to have max sum of absolute values = 1 (L_1 norm).",
+      "title": "L1 Norm Scaling",
+      "default": false
+    },
+    "demean": {
+      "type": "boolean",
+      "description": "Remove the mean from each time series before normalizing.",
+      "title": "Demean Time Series",
+      "default": false
+    },
+    "x": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use for X axis the data in a specified .1D file.",
+      "title": "X axis data"
+    },
+    "xl10": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use log10 of the specified .1D file as the X axis.",
+      "title": "Log10 X axis data"
+    },
+    "dx": {
+      "type": "number",
+      "description": "Spacing between points on the x-axis.",
+      "title": "X-axis spacing"
+    },
+    "xzero": {
+      "type": "number",
+      "description": "Initial x coordinate.",
+      "title": "Initial X coordinate"
+    },
+    "nopush": {
+      "type": "boolean",
+      "description": "Don't 'push' axes ranges outwards.",
+      "title": "No Axis Pushing",
+      "default": false
+    },
+    "ignore": {
+      "type": "number",
+      "description": "Skip first 'nn' rows in the input file.",
+      "title": "Ignore Initial Rows"
+    },
+    "use": {
+      "type": "number",
+      "description": "Plot 'mm' points.",
+      "title": "Use Specified Points"
+    },
+    "xlabel": {
+      "type": "string",
+      "description": "Put string 'aa' below the x-axis.",
+      "title": "X-axis Label"
+    },
+    "ylabel": {
+      "type": "string",
+      "description": "Put string 'aa' to the left of the y-axis.",
+      "title": "Y-axis Label"
+    },
+    "plabel": {
+      "type": "string",
+      "description": "Put string 'pp' atop the plot.",
+      "title": "Plot Label"
+    },
+    "title": {
+      "type": "string",
+      "description": "Same as -plabel, but only works with -ps/-png/-jpg/-pnm options.",
+      "title": "Plot Title"
+    },
+    "wintitle": {
+      "type": "string",
+      "description": "Set string 'pp' as the title of the frame containing the plot.",
+      "title": "Window Title"
+    },
+    "naked": {
+      "type": "boolean",
+      "description": "Do NOT plot axes or labels, just the graph(s).",
+      "title": "Naked Graph",
+      "default": false
+    },
+    "aspect": {
+      "type": "number",
+      "description": "Set the width-to-height ratio of the plot region to 'A'.",
+      "title": "Aspect Ratio"
+    },
+    "stdin": {
+      "type": "boolean",
+      "description": "Don't read from tsfile; instead, read from stdin and plot it.",
+      "title": "Read from Stdin",
+      "default": false
+    },
+    "ps": {
+      "type": "boolean",
+      "description": "Don't draw plot in a window; instead, write it to stdout in PostScript format.",
+      "title": "PostScript Output",
+      "default": false
+    },
+    "jpg": {
+      "type": "string",
+      "description": "Render plot to JPEG image and save to a file named 'fname'.",
+      "title": "JPEG Output"
+    },
+    "jpeg": {
+      "type": "string",
+      "description": "Render plot to JPEG image and save to a file named 'fname'.",
+      "title": "JPEG Output"
+    },
+    "png": {
+      "type": "string",
+      "description": "Render plot to PNG image and save to a file named 'fname'.",
+      "title": "PNG Output"
+    },
+    "pnm": {
+      "type": "string",
+      "description": "Render plot to PNM image and save to a file named 'fname'.",
+      "title": "PNM Output"
+    },
+    "pngs": {
+      "type": "string",
+      "description": "Render plot to PNG image of specified size and save to a file named 'fname'.",
+      "title": "PNG Output with Size"
+    },
+    "jpgs": {
+      "type": "string",
+      "description": "Render plot to JPEG image of specified size and save to a file named 'fname'.",
+      "title": "JPEG Output with Size"
+    },
+    "jpegs": {
+      "type": "string",
+      "description": "Render plot to JPEG image of specified size and save to a file named 'fname'.",
+      "title": "JPEG Output with Size"
+    },
+    "pnms": {
+      "type": "string",
+      "description": "Render plot to PNM image of specified size and save to a file named 'fname'.",
+      "title": "PNM Output with Size"
+    },
+    "ytran": {
+      "type": "string",
+      "description": "Transform the data along the y-axis by applying the expression to each input value.",
+      "title": "Y-axis Transformation"
+    },
+    "xtran": {
+      "type": "string",
+      "description": "Transform the data along the x-axis by applying the expression to each input value.",
+      "title": "X-axis Transformation"
+    },
+    "xaxis": {
+      "type": "string",
+      "description": "Set the x-axis to run from value 'b' to value 't', with 'n' major divisions and 'm' minor tic marks per major division.",
+      "title": "X-axis Settings"
+    },
+    "yaxis": {
+      "type": "string",
+      "description": "Set the y-axis to run from value 'b' to value 't', with 'n' major divisions and 'm' minor tic marks per major division.",
+      "title": "Y-axis Settings"
+    },
+    "ynames": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Use the strings as labels to the right of the graphs, corresponding to each input column.",
+      "title": "Y-axis Names"
+    },
+    "volreg": {
+      "type": "boolean",
+      "description": "Makes the 'ynames' be the same as the 6 labels used in plug_volreg for Roll, Pitch, Yaw, I-S, R-L, and A-P movements.",
+      "title": "Volume Registration Names",
+      "default": false
+    },
+    "thick": {
+      "type": "object",
+      "properties": {
+        "thick": {
+          "type": "boolean",
+          "description": "Increase the line thickness used for plotting.",
+          "title": "Increase Line Thickness",
+          "default": false
+        },
+        "THICK": {
+          "type": "boolean",
+          "description": "Twice the power of '-thick' at no extra cost!",
+          "title": "Double Line Thickness",
+          "default": false
+        }
+      },
+      "description": "Increase the line thickness used for plotting.",
+      "title": "Increase Line Thickness"
+    },
+    "dashed": {
+      "type": "string",
+      "description": "Plot dashed lines between data points using specified colon-separated list of dash values (1: solid, 2: longer dashes, 3: shorter dashes).",
+      "title": "Dashed Lines"
+    },
+    "setenv": {
+      "type": "string",
+      "description": "Set environment variable 'name' to 'val' for this run of the program only.",
+      "title": "Set Environment Variable"
+    },
+    "censor_RGB": {
+      "type": "string",
+      "description": "Set the color used for marking to a specified color.",
+      "title": "Censor Marking Color"
+    },
+    "censor": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the filename of the censor .1D time series.",
+      "title": "Censor Time Series"
+    },
+    "CENSORTR": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify time indexes to be marked in the graph(s).",
+      "title": "Censor Time Indexes"
+    },
+    "concat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify the filename for the list of concatenated runs.",
+      "title": "Concatenated Runs"
+    },
+    "rbox": {
+      "type": "object",
+      "properties": {
+        "rbox": {
+          "type": "string",
+          "description": "Draw a rectangular box with specified corners and colors.",
+          "title": "Draw Rectangular Box"
+        },
+        "Rbox": {
+          "type": "string",
+          "description": "Draw a rectangular box with one extra horizontal line.",
+          "title": "Draw Rectangular Box with Line"
+        }
+      },
+      "description": "Draw a rectangular box.",
+      "title": "Draw Rectangular Box"
+    },
+    "line": {
+      "type": "string",
+      "description": "Draw one line segment.",
+      "title": "Draw Line Segment"
+    }
+  },
+  "required": [
+    "@type",
+    "tsfiles"
+  ]
+}

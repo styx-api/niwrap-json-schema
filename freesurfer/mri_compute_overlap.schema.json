@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_compute_overlap",
+  "description": "Computes three different types of overlap measures for labels in input volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_compute_overlap"
+    },
+    "volumes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input volume files for which overlap measures are computed.",
+      "title": "Input volumes"
+    },
+    "label_numbers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of specific label numbers for which to compute overlap measures. If not specified, all labels are considered if -a is provided.",
+      "title": "Label numbers"
+    },
+    "all_labels": {
+      "type": "boolean",
+      "description": "Compute overlap for all labels.",
+      "title": "All labels flag",
+      "default": false
+    },
+    "show_label": {
+      "type": "boolean",
+      "description": "Show label name for segmentation.",
+      "title": "Show label flag",
+      "default": false
+    },
+    "total_overlap": {
+      "type": "boolean",
+      "description": "Compute the total overlap, which is the number of voxels that are the same among all labels.",
+      "title": "Total overlap flag",
+      "default": false
+    },
+    "no_summary": {
+      "type": "boolean",
+      "description": "Do not compute total label summary.",
+      "title": "No summary flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Limit the domain of the calculation to the nonzero voxels in specified volume.",
+      "title": "Mask volume"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Filename to write results to.",
+      "title": "Output filename"
+    },
+    "quiet_mode": {
+      "type": "boolean",
+      "description": "Do not display results on standard display. If -l is specified, this flag is automatically set.",
+      "title": "Quiet mode flag",
+      "default": false
+    },
+    "translate_label": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Translate label l1 to label l2.",
+      "title": "Translate label"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print help.",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "volumes"
+  ]
+}

@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_vol2vol",
+  "description": "Resamples a volume into another field-of-view using various types of matrices (FreeSurfer, FSL, SPM, and MNI).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_vol2vol"
+    },
+    "movvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume (or output template with --inv)",
+      "title": "Moving volume"
+    },
+    "targvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output template (or input with --inv)",
+      "title": "Target volume"
+    },
+    "outvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output volume",
+      "title": "Output volume"
+    },
+    "dispvol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Displacement volume",
+      "title": "Displacement volume"
+    },
+    "downsample": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Downsample factor (e.g., 2) (do not include a targ or registration)",
+      "title": "Downsample factor"
+    },
+    "register_dat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "tkRAS-to-tkRAS matrix (tkregister2 format)",
+      "title": "Registration matrix"
+    },
+    "lta": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Linear Transform Array (usually only 1 transform)",
+      "title": "Linear Transform Array"
+    },
+    "lta_inv": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "LTA, invert (may not be the same as --lta --inv with --fstal)",
+      "title": "Inverted LTA"
+    },
+    "fsl": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "fslRAS-to-fslRAS matrix (FSL format)",
+      "title": "FSL matrix"
+    },
+    "xfm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "ScannerRAS-to-ScannerRAS matrix (MNI format)",
+      "title": "XFM matrix"
+    },
+    "inv": {
+      "type": "boolean",
+      "description": "Sample from targ to mov",
+      "title": "Inverse transform flag",
+      "default": false
+    },
+    "tal": {
+      "type": "boolean",
+      "description": "Map to a sub FOV of MNI305 (with --reg only)",
+      "title": "Talairach mapping flag",
+      "default": false
+    },
+    "talres": {
+      "type": "number",
+      "description": "Set voxel size 1mm or 2mm (default is 1)",
+      "title": "Talairach resolution"
+    },
+    "talxfm": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Path to the talairach transformation file. Default is talairach.xfm (looks in mri/transforms)",
+      "title": "Talairach transformation file"
+    },
+    "m3z": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Non-linear morph encoded in the m3z format",
+      "title": "M3Z morph file"
+    },
+    "inv_morph": {
+      "type": "boolean",
+      "description": "Compute and use the inverse of the m3z morph",
+      "title": "Inverse morph flag",
+      "default": false
+    },
+    "fstarg": {
+      "type": "string",
+      "description": "Optionally use the specified volume from the subject in --reg as target. Default is orig.mgz",
+      "title": "FreeSurfer target volume"
+    },
+    "crop": {
+      "type": "number",
+      "description": "Crop and change voxel size",
+      "title": "Crop factor"
+    },
+    "slice_crop": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Crop output slices to be within specified start and end indices",
+      "title": "Slice crop range"
+    },
+    "slice_reverse": {
+      "type": "boolean",
+      "description": "Reverse order of slices, update vox2ras",
+      "title": "Slice reverse flag",
+      "default": false
+    },
+    "slice_bias": {
+      "type": "number",
+      "description": "Apply half-cosine bias field",
+      "title": "Slice bias factor"
+    },
+    "interp": {
+      "type": "string",
+      "description": "Interpolation method: cubic, trilin, or nearest (default is trilin)",
+      "title": "Interpolation type"
+    },
+    "fill_average": {
+      "type": "boolean",
+      "description": "Compute mean of all source voxels in a given target voxel",
+      "title": "Fill average flag",
+      "default": false
+    },
+    "fill_conserve": {
+      "type": "boolean",
+      "description": "Compute sum of all source voxels in a given target voxel",
+      "title": "Fill conserve flag",
+      "default": false
+    },
+    "fill_up": {
+      "type": "number",
+      "description": "Source upsampling factor for --fill-{avg,cons} (default is 2)",
+      "title": "Fill upsample factor"
+    },
+    "mul": {
+      "type": "number",
+      "description": "Multiply output by the specified value",
+      "title": "Multiplication factor"
+    },
+    "precision": {
+      "type": "string",
+      "description": "Output precision (default is float)",
+      "title": "Output precision level"
+    },
+    "keep_precision": {
+      "type": "boolean",
+      "description": "Set output precision to that of the input",
+      "title": "Keep input precision flag",
+      "default": false
+    },
+    "kernel": {
+      "type": "boolean",
+      "description": "Save the trilinear interpolation kernel at each voxel instead of the interpolated image",
+      "title": "Trilinear interpolation kernel flag",
+      "default": false
+    },
+    "copy_ctab": {
+      "type": "boolean",
+      "description": "Setenv FS_COPY_HEADER_CTAB to copy any ctab in the mov header",
+      "title": "Copy ctab flag",
+      "default": false
+    },
+    "gcam": {
+      "type": "string",
+      "description": "GCAM warp procedure",
+      "title": "GCAM parameters"
+    },
+    "spm_warp": {
+      "type": "string",
+      "description": "SPM warp procedure",
+      "title": "SPM Warp parameters"
+    },
+    "map_point": {
+      "type": "string",
+      "description": "Standalone option to map a point to another space",
+      "title": "Map point parameters"
+    },
+    "map_point_inv_lta": {
+      "type": "string",
+      "description": "Same as --map-point but inverts the LTA",
+      "title": "Inverted LTA map point parameters"
+    },
+    "no_resample": {
+      "type": "boolean",
+      "description": "Do not resample, just change vox2ras matrix",
+      "title": "No resampling flag",
+      "default": false
+    },
+    "rot": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Rotation angles (degrees) to apply to registration matrix",
+      "title": "Rotation angles"
+    },
+    "trans": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Translation (mm) to apply to registration matrix",
+      "title": "Translation distances"
+    },
+    "shear": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Shearing factors. Sxy Sxz Syz with xz as in-plane",
+      "title": "Shearing factors"
+    },
+    "reg_final": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Final registration matrix after rotation and translation (but not inversion)",
+      "title": "Final registration matrix"
+    },
+    "synth": {
+      "type": "boolean",
+      "description": "Replace input with white Gaussian noise",
+      "title": "Synthesize noise flag",
+      "default": false
+    },
+    "seed": {
+      "type": "number",
+      "description": "Seed for synth (default is to set from time of day)",
+      "title": "Random seed"
+    },
+    "save_reg": {
+      "type": "boolean",
+      "description": "Write out output volume registration matrix",
+      "title": "Save registration flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging output",
+      "title": "Debug flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print out version string and exit",
+      "title": "Version flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "movvol",
+    "targvol",
+    "outvol"
+  ]
+}

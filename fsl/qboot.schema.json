@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "qboot",
+  "description": "Tool for computing q-ball ODFs using bootstrap samples",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/qboot"
+    },
+    "data_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Data file",
+      "title": "Data file"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file",
+      "title": "Mask file"
+    },
+    "bvecs_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "b vectors file",
+      "title": "b vectors file"
+    },
+    "bvals_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "b values file",
+      "title": "b values file"
+    },
+    "log_dir": {
+      "type": "string",
+      "description": "Output directory (default is logdir)",
+      "title": "Output log directory"
+    },
+    "forcedir_flag": {
+      "type": "boolean",
+      "description": "Use the actual directory name given - i.e. don't add + to make a new directory",
+      "title": "Force directory flag",
+      "default": false
+    },
+    "q_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File provided with multi-shell data. Indicates the number of directions for each shell",
+      "title": "Multi-shell data file"
+    },
+    "model_type": {
+      "type": "integer",
+      "description": "Which model to use. 1=Tuch's ODFs, 2=CSA ODFs (default), 3=multi-shell CSA ODFs",
+      "title": "Model type"
+    },
+    "lmax_order": {
+      "type": "integer",
+      "description": "Maximum spherical harmonic order employed (must be even, default=4)",
+      "title": "Lmax order"
+    },
+    "npeaks": {
+      "type": "integer",
+      "description": "Maximum number of ODF peaks to be detected (default 2)",
+      "title": "Number of peaks"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Minimum threshold for a local maxima to be considered an ODF peak. Expressed as a fraction of the maximum ODF value (default 0.4)",
+      "title": "Threshold value"
+    },
+    "num_samples": {
+      "type": "integer",
+      "description": "Number of bootstrap samples (default is 50)",
+      "title": "Number of samples"
+    },
+    "lambda_param": {
+      "type": "number",
+      "description": "Laplace-Beltrami regularization parameter (default is 0)",
+      "title": "Laplace-Beltrami regularization parameter"
+    },
+    "delta_param": {
+      "type": "number",
+      "description": "Signal attenuation regularization parameter for models=2,3 (default is 0.01)",
+      "title": "Signal attenuation parameter"
+    },
+    "alpha_param": {
+      "type": "number",
+      "description": "Laplacian sharpening parameter for model=1 (default is 0, should be smaller than 1)",
+      "title": "Laplacian sharpening parameter"
+    },
+    "seed_param": {
+      "type": "integer",
+      "description": "Seed for pseudo-random number generator",
+      "title": "Seed value"
+    },
+    "gfa_flag": {
+      "type": "boolean",
+      "description": "Compute a generalised FA, using the mean ODF in each voxel",
+      "title": "Generalized FA flag",
+      "default": false
+    },
+    "savecoeff_flag": {
+      "type": "boolean",
+      "description": "Save the ODF coefficients instead of the peaks. WARNING: These can be huge files, please use a few bootstrap samples and a low lmax!",
+      "title": "Save coefficients flag",
+      "default": false
+    },
+    "savemeancoeff_flag": {
+      "type": "boolean",
+      "description": "Save the mean ODF coefficients across all samples",
+      "title": "Save mean coefficients flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display this help message",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "data_file",
+    "mask_file",
+    "bvecs_file",
+    "bvals_file"
+  ]
+}

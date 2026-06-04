@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dGroupInCorr",
+  "description": "Functional connectivity analysis in group of subjects",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dGroupInCorr"
+    },
+    "set_a": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Setup file describing the first dataset collection.",
+      "title": "Dataset collection A"
+    },
+    "set_b": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Setup file describing the second dataset collection for two-sample t-test analysis.",
+      "title": "Dataset collection B"
+    },
+    "apair": {
+      "type": "boolean",
+      "description": "Use -setA collection again but with different seed locations; produce paired t-test.",
+      "title": "Paired-test option",
+      "default": false
+    },
+    "label_a": {
+      "type": "string",
+      "description": "Label for sub-bricks corresponding to setA.",
+      "title": "Label A"
+    },
+    "label_b": {
+      "type": "string",
+      "description": "Label for sub-bricks corresponding to setB.",
+      "title": "Label B"
+    },
+    "pooled": {
+      "type": "boolean",
+      "description": "Use pooled variance estimator for two-sample un-paired t-test.",
+      "title": "Pooled estimator option",
+      "default": false
+    },
+    "unpooled": {
+      "type": "boolean",
+      "description": "Use unpooled variance estimator for two-sample un-paired t-test.",
+      "title": "Unpooled estimator option",
+      "default": false
+    },
+    "paired": {
+      "type": "boolean",
+      "description": "Use a two-sample paired t-test.",
+      "title": "Paired test option",
+      "default": false
+    },
+    "nosix": {
+      "type": "boolean",
+      "description": "Suppress the individual 1-sample t-tests and only return the difference 2-sample t-test.",
+      "title": "Suppress 1-sample t-tests",
+      "default": false
+    },
+    "covariates_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing covariate values for each dataset.",
+      "title": "Covariates file"
+    },
+    "center": {
+      "type": "string",
+      "description": "Option for centering covariates.",
+      "title": "Centering option"
+    },
+    "seed_radius": {
+      "type": "number",
+      "description": "Radius for seed voxel time series averaging (mm).",
+      "title": "Seed radius"
+    },
+    "sendall": {
+      "type": "boolean",
+      "description": "Send all individual subject results to AFNI along with group statistics.",
+      "title": "Send all results",
+      "default": false
+    },
+    "donocov": {
+      "type": "boolean",
+      "description": "Compute results both with and without covariates.",
+      "title": "Donocov results",
+      "default": false
+    },
+    "dospcov": {
+      "type": "boolean",
+      "description": "Compute Spearman (rank) correlation coefficient of subject correlation results vs each covariate.",
+      "title": "Spearman correlation",
+      "default": false
+    },
+    "cluster": {
+      "type": "string",
+      "description": "Input results from a 3dClustSim run to interface with AFNI.",
+      "title": "Clustering option"
+    },
+    "read": {
+      "type": "boolean",
+      "description": "Force program to read data into memory instead of memory mapping.",
+      "title": "Read into memory",
+      "default": false
+    },
+    "ztest": {
+      "type": "boolean",
+      "description": "Debugging option to test if input data is all zero.",
+      "title": "Zero data test",
+      "default": false
+    },
+    "ah": {
+      "type": "string",
+      "description": "Connect to AFNI/SUMA on a remote host.",
+      "title": "Remote host"
+    },
+    "port_offset": {
+      "type": "number",
+      "description": "Provide a port offset.",
+      "title": "Port offset"
+    },
+    "port_offset_quiet": {
+      "type": "number",
+      "description": "Provide a port offset, with less verbose output.",
+      "title": "Port offset quiet"
+    },
+    "port_bloc": {
+      "type": "number",
+      "description": "Provide a port offset bloc.",
+      "title": "Port offset bloc"
+    },
+    "suma": {
+      "type": "boolean",
+      "description": "Talk to SUMA instead of AFNI.",
+      "title": "Use SUMA",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Suppress informational messages.",
+      "title": "Quiet mode",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Print extra informational messages.",
+      "title": "Verbose mode",
+      "default": false
+    },
+    "very_verbose": {
+      "type": "boolean",
+      "description": "Print even more detailed informational messages.",
+      "title": "Very verbose mode",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Enable internal testing.",
+      "title": "Debug mode",
+      "default": false
+    },
+    "batch": {
+      "type": "string",
+      "description": "Run program in batch mode with specified METHOD and command file.",
+      "title": "Batch mode"
+    }
+  },
+  "required": [
+    "@type",
+    "set_a"
+  ]
+}

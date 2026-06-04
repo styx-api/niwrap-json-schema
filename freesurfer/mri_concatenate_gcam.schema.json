@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_concatenate_gcam",
+  "description": "Concatenate a combination of input LTAs (linear transform array) and GCAMs (Gaussian classifier atlas, M3Z).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_concatenate_gcam"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Combination of input LTAs and M3Zs.",
+      "title": "Input Transforms"
+    },
+    "output": {
+      "type": "string",
+      "description": "Concatenated output transform, saved as an LTA or M3Z depending on the input transforms.",
+      "title": "Output Transform"
+    },
+    "source_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Change source image geometry of output M3Z, useful for GCAM inversion if the path of the original source volume changed.",
+      "title": "Change Source Image"
+    },
+    "target_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Change destination image geometry of output M3Z.",
+      "title": "Change Target Image"
+    },
+    "reduce": {
+      "type": "boolean",
+      "description": "Reduce output LTA to single LT.",
+      "title": "Reduce LTA",
+      "default": false
+    },
+    "invert": {
+      "type": "boolean",
+      "description": "Invert the output transform.",
+      "title": "Invert Transform",
+      "default": false
+    },
+    "downsample": {
+      "type": "boolean",
+      "description": "Downsample output M3Z to spacing of 2; by default, the output spacing is that of the rightmost input M3Z.",
+      "title": "Downsample M3Z",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "inputs",
+    "output"
+  ]
+}

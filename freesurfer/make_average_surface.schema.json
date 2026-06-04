@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "make_average_surface",
+  "description": "Creates average surfaces and curvatures from a set of subjects.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/make_average_surface"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subject names",
+      "title": "Subjects"
+    },
+    "fsgd_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File from which to get the subject list",
+      "title": "FSGD file"
+    },
+    "average_subject_name": {
+      "type": "string",
+      "description": "Average subject name",
+      "title": "Output name"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Directory for SUBJECTS_DIR (if different from the environment variable)",
+      "title": "Subjects directory"
+    },
+    "sd_out_dir": {
+      "type": "string",
+      "description": "Directory to put output data",
+      "title": "SD_out directory"
+    },
+    "transform_file": {
+      "type": "string",
+      "description": "Filename of the transform file",
+      "title": "Transform file"
+    },
+    "icosahedron_number": {
+      "type": "number",
+      "description": "Specify icosahedron number",
+      "title": "Icosahedron number"
+    },
+    "surf_reg": {
+      "type": "string",
+      "description": "Alternative registration surface name",
+      "title": "Surface registration"
+    },
+    "left_hemi": {
+      "type": "boolean",
+      "description": "Only process the left hemisphere",
+      "title": "Left hemisphere flag",
+      "default": false
+    },
+    "right_hemi": {
+      "type": "boolean",
+      "description": "Only process the right hemisphere",
+      "title": "Right hemisphere flag",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "Overwrite existing average subject data",
+      "title": "Force overwrite flag",
+      "default": false
+    },
+    "annot_template": {
+      "type": "boolean",
+      "description": "Use annotation when making tif",
+      "title": "Annotation template flag",
+      "default": false
+    },
+    "template_only": {
+      "type": "boolean",
+      "description": "Useful when creating iterative atlases",
+      "title": "Template only flag",
+      "default": false
+    },
+    "no_template_only": {
+      "type": "boolean",
+      "description": "Turns off --template-only",
+      "title": "No template only flag",
+      "default": false
+    },
+    "no_annot": {
+      "type": "boolean",
+      "description": "Do not create average annotations",
+      "title": "No annot flag",
+      "default": false
+    },
+    "no_cortex_label": {
+      "type": "boolean",
+      "description": "Do not create ?h.cortex.label",
+      "title": "No cortex label flag",
+      "default": false
+    },
+    "annot_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of annotations to use",
+      "title": "Annotations list"
+    },
+    "meas_list": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of measurements to use",
+      "title": "Measurements list"
+    },
+    "no_surf2surf": {
+      "type": "boolean",
+      "description": "Use old parametric surface method",
+      "title": "No surf2surf flag",
+      "default": false
+    },
+    "no_symlink": {
+      "type": "boolean",
+      "description": "Do not use symbolic links, just copy files",
+      "title": "No symlink flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Script version information",
+      "title": "Version flag",
+      "default": false
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Enable command echo for debugging",
+      "title": "Echo flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subjects"
+  ]
+}

@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "5ttgen",
+  "description": "Generate a 5TT image suitable for ACT.\n\n5ttgen acts as a 'master' script for generating a five-tissue-type (5TT) segmented tissue image suitable for use in Anatomically-Constrained Tractography (ACT). A range of different algorithms are available for completing this task. When using this script, the name of the algorithm to be used must appear as the first argument on the command-line after '5ttgen'. The subsequent compulsory arguments and options available depend on the particular algorithm being invoked.\nEach algorithm available also has its own help page, including necessary references; e.g. to see the help page of the 'fsl' algorithm, type '5ttgen fsl'.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/5ttgen"
+    },
+    "algorithm": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "freesurfer"
+            },
+            "input": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "output": {
+              "type": "string"
+            },
+            "lut": {
+              "type": "string",
+              "x-styx-type": "path"
+            }
+          },
+          "required": [
+            "@type",
+            "input",
+            "output"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "fsl"
+            },
+            "input": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "output": {
+              "type": "string"
+            },
+            "t2": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "mask": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "premasked": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "@type",
+            "input",
+            "output",
+            "premasked"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "gif"
+            },
+            "input": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "output": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "@type",
+            "input",
+            "output"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "hsvs"
+            },
+            "input": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "output": {
+              "type": "string"
+            },
+            "template": {
+              "type": "string",
+              "x-styx-type": "path"
+            },
+            "hippocampi": {
+              "enum": [
+                "subfields",
+                "first",
+                "aseg"
+              ]
+            },
+            "thalami": {
+              "enum": [
+                "nuclei",
+                "first",
+                "aseg"
+              ]
+            },
+            "white_stem": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "@type",
+            "input",
+            "output",
+            "white_stem"
+          ]
+        }
+      ],
+      "description": "Select the algorithm to be used to complete the script operation; additional details and options become available once an algorithm is nominated. Options are: freesurfer, fsl, gif, hsvs",
+      "title": "algorithm"
+    },
+    "nocrop": {
+      "type": "boolean",
+      "description": "Do NOT crop the resulting 5TT image to reduce its size (keep the same dimensions as the input image)",
+      "title": "nocrop",
+      "default": false
+    },
+    "sgm_amyg_hipp": {
+      "type": "boolean",
+      "description": "Represent the amygdalae and hippocampi as sub-cortical grey matter in the 5TT image",
+      "title": "sgm_amyg_hipp",
+      "default": false
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "description": "do not delete intermediate files during script execution, and do not delete scratch directory at script completion.",
+      "title": "nocleanup",
+      "default": false
+    },
+    "scratch": {
+      "type": "string",
+      "description": "manually specify the path in which to generate the scratch directory.",
+      "title": "scratch"
+    },
+    "continue": {
+      "type": "string",
+      "description": "continue the script from a previous execution; must provide the scratch directory path, and the name of the last successfully-generated file.",
+      "title": "continue"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "algorithm"
+  ]
+}

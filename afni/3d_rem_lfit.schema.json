@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dREMLfit",
+  "description": "Generalized least squares time series fit, with REML estimation of the temporal auto-correlation structure",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dREMLfit"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read time series dataset",
+      "title": "Input file"
+    },
+    "regression_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read the regression matrix, which should have been output from 3dDeconvolve via the '-x1D' option",
+      "title": "Regression matrix"
+    },
+    "baseline_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Add baseline model columns to the matrix. Each column in the specified .1D file will be appended to the matrix.",
+      "title": "Baseline files"
+    },
+    "sort_nods": {
+      "type": "boolean",
+      "description": "If '-dsort' is used, the output datasets reflect the impact of the voxel-wise regressor(s). If you want to compare those results to the case where you did NOT give the '-dsort' option, then also use '-dsort_nods'.",
+      "title": "Sort NoDS flag",
+      "default": false
+    },
+    "temp_storage": {
+      "type": "boolean",
+      "description": "Write intermediate output to disk, to economize on RAM.",
+      "title": "Temporary storage flag",
+      "default": false
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read dataset as a mask for the input; voxels outside the mask will not be fit by the regression model.",
+      "title": "Mask file"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Dataset prefix for saving REML variance parameters.",
+      "title": "Output prefix"
+    },
+    "no_fdr_curve": {
+      "type": "boolean",
+      "description": "Do not add FDR curve data to bucket datasets.",
+      "title": "No FDR curve",
+      "default": false
+    },
+    "go_for_it": {
+      "type": "boolean",
+      "description": "Force the program to continue past a failed collinearity check.",
+      "title": "Go For It",
+      "default": false
+    },
+    "max_a_param": {
+      "type": "number",
+      "description": "Set max allowed AR a parameter.",
+      "title": "Maximum a parameter"
+    },
+    "max_b_param": {
+      "type": "number",
+      "description": "Set max allowed MA b parameter.",
+      "title": "Maximum b parameter"
+    },
+    "grid_param": {
+      "type": "number",
+      "description": "Set the number of grid divisions in the (a,b) grid.",
+      "title": "Grid parameter"
+    },
+    "negative_corr": {
+      "type": "boolean",
+      "description": "Allows negative correlations to be used.",
+      "title": "Negative correlation",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Turn off most progress messages",
+      "title": "Quiet flag",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Turn on more progress messages",
+      "title": "Verbose flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "regression_matrix"
+  ]
+}

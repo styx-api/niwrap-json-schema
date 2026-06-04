@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "rmz",
+  "description": "Zeros out files before removing them",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/rmz"
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Quiet mode",
+      "title": "Quiet mode flag",
+      "default": false
+    },
+    "hash_flag": {
+      "type": "number",
+      "description": "Number of times to zero out the files",
+      "title": "Hash flag"
+    },
+    "keep_flag": {
+      "type": "boolean",
+      "description": "Keep the files instead of removing them",
+      "title": "Keep files flag",
+      "default": false
+    },
+    "filenames": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Files to zero out and remove",
+      "title": "Input filenames"
+    }
+  },
+  "required": [
+    "@type",
+    "filenames"
+  ]
+}

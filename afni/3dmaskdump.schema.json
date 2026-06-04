@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dmaskdump",
+  "description": "Outputs voxel values from AFNI datasets satisfying mask criteria to an ASCII file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dmaskdump"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input datasets to dump voxel values",
+      "title": "Input datasets"
+    },
+    "mask_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use the dataset as a mask. Only voxels with nonzero values in the mask will be printed from the input dataset.",
+      "title": "Mask dataset"
+    },
+    "mask_range": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Further restrict the voxels from mask dataset to those mask values between 'a' and 'b' (inclusive).",
+      "title": "Mask range"
+    },
+    "output_index": {
+      "type": "boolean",
+      "description": "Write out the dataset index values.",
+      "title": "Output index values",
+      "default": false
+    },
+    "output_noijk": {
+      "type": "boolean",
+      "description": "Do not write out the i,j,k values.",
+      "title": "Exclude i,j,k values",
+      "default": false
+    },
+    "output_xyz": {
+      "type": "boolean",
+      "description": "Write the x,y,z coordinates from the first input dataset at the start of each output line.",
+      "title": "Output x,y,z coordinates",
+      "default": false
+    },
+    "output_filename": {
+      "type": "string",
+      "description": "Write output to specified file.",
+      "title": "Output filename"
+    },
+    "calc_mask_opts": {
+      "type": "string",
+      "description": "Execute options enclosed as a 3dcalc-like program to produce a mask from the resulting 3D brick.",
+      "title": "3dcalc-like mask options"
+    },
+    "xbox_coords": {
+      "type": "string",
+      "description": "Put a 'mask' at dataset coordinates 'x y z' mm.",
+      "title": "Dataset coordinates for mask"
+    },
+    "dbox_coords": {
+      "type": "string",
+      "description": "Put a 'mask' at RAI/DICOM coordinates of 'x y z' mm.",
+      "title": "RAI/DICOM coordinates for mask"
+    },
+    "nbox_coords": {
+      "type": "string",
+      "description": "Put a 'mask' at LPI/SPM coordinates of 'x y z' mm.",
+      "title": "LPI/SPM coordinates for mask"
+    },
+    "ibox_coords": {
+      "type": "string",
+      "description": "Put a 'mask' at voxel indexes 'i j k'.",
+      "title": "Voxel indexes for mask"
+    },
+    "xball_coords": {
+      "type": "string",
+      "description": "Put a ball (sphere) mask at dataset coordinates (x,y,z) with radius r.",
+      "title": "Coordinates and radius for ball mask"
+    },
+    "dball_coords": {
+      "type": "string",
+      "description": "Put a ball (sphere) mask at RAI/DICOM coordinates (x,y,z) with radius r.",
+      "title": "RAI/DICOM Coordinates and radius for ball mask"
+    },
+    "nball_coords": {
+      "type": "string",
+      "description": "Put a ball (sphere) mask at LPI/SPM coordinates (x,y,z) with radius r.",
+      "title": "LPI/SPM Coordinates and radius for ball mask"
+    },
+    "nozero_output": {
+      "type": "boolean",
+      "description": "Skip output of any voxel where all the data values are zero.",
+      "title": "Exclude zero values",
+      "default": false
+    },
+    "random_voxels": {
+      "type": "number",
+      "description": "Keep only N_RAND randomly selected voxels from what would have been the output.",
+      "title": "Number of random voxels"
+    },
+    "random_seed": {
+      "type": "number",
+      "description": "Seed the random number generator with SEED.",
+      "title": "Random seed"
+    },
+    "output_niml": {
+      "type": "string",
+      "description": "Output data in the XML/NIML format compatible with input back to AFNI via the READ_NIML_FILE command.",
+      "title": "NIML format output"
+    },
+    "quiet_mode": {
+      "type": "boolean",
+      "description": "Do not print progress messages to stderr.",
+      "title": "Quiet mode",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

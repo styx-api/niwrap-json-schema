@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_compute_seg_overlap",
+  "description": "Compute coefficients of overlap between segmentation volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_compute_seg_overlap"
+    },
+    "segvol1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First segmentation volume.",
+      "title": "Segmentation Volume 1"
+    },
+    "segvol2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second segmentation volume.",
+      "title": "Segmentation Volume 2"
+    },
+    "log_file": {
+      "type": "string",
+      "description": "Log file for individual Dice coefficients for 12 structure pairs, plus mean, std, and 'overall'.",
+      "title": "Log File"
+    },
+    "mean_log_file": {
+      "type": "string",
+      "description": "Log file for mean Dice.",
+      "title": "Mean Log File"
+    },
+    "std_log_file": {
+      "type": "string",
+      "description": "Log file for std Dice.",
+      "title": "Std Log File"
+    },
+    "overall_log_flag": {
+      "type": "boolean",
+      "description": "Log file for 'overall' Dice (mean excluding wm, gm, and accumbens).",
+      "title": "Overall Log Flag",
+      "default": false
+    },
+    "exclude_cortex_flag": {
+      "type": "boolean",
+      "description": "Exclude cerebral cortex labels from all calculation. (0/1 flag, if nonzero)",
+      "title": "Exclude Cortex Flag",
+      "default": false
+    },
+    "exclude_wm_flag": {
+      "type": "boolean",
+      "description": "Exclude cerebral white matter labels from all calculation. (0/1 flag, if nonzero)",
+      "title": "Exclude White Matter Flag",
+      "default": false
+    },
+    "all_labels_flag": {
+      "type": "boolean",
+      "description": "Check all labels, not just the predefined main structures.",
+      "title": "All Labels Flag",
+      "default": false
+    },
+    "dice_params": {
+      "type": "string",
+      "description": "Standalone way to compute Dice coefficients, using seg1, seg2, ctab, ReportEmpty01, ExcludeId, datfile, and tablefile as additional parameters.",
+      "title": "Dice Params"
+    }
+  },
+  "required": [
+    "@type",
+    "segvol1",
+    "segvol2"
+  ]
+}

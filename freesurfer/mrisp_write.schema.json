@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mrisp_write",
+  "description": "This tool converts a surface overlay on a sphere into spherical coordinates.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mrisp_write"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Full path to input surface.",
+      "title": "Input Surface"
+    },
+    "overlay_filename": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Full path to the overlay to map.",
+      "title": "Overlay Filename"
+    },
+    "output_name": {
+      "type": "string",
+      "description": "Output file name. Can be full path to a .tif or .mgz file.",
+      "title": "Output Name"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Set SUBJECTS_DIR. Default: uses environment variable.",
+      "title": "Subjects Directory"
+    },
+    "coords": {
+      "type": "string",
+      "description": "Treat overlay as a surface and write it into a 3 frame parameterization.",
+      "title": "Overlay as Surface"
+    },
+    "average_curvature": {
+      "type": "number",
+      "description": "Average curvature patterns navgs times.",
+      "title": "Average Curvature"
+    },
+    "correlation_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use the overlay to compute the correlation matrix within the specified label.",
+      "title": "Correlation Matrix Label"
+    },
+    "scale_factor": {
+      "type": "number",
+      "description": "Scale factor to adjust resolution of the spherical map.",
+      "title": "Scale Factor"
+    },
+    "normalize_curvature": {
+      "type": "boolean",
+      "description": "Normalize curvature by variance.",
+      "title": "Normalize Curvature Flag",
+      "default": false
+    },
+    "verbose_vertex": {
+      "type": "number",
+      "description": "Invoke diagnostics for specified vertex number.",
+      "title": "Verbose Vertex Number"
+    },
+    "write_diagnostics": {
+      "type": "boolean",
+      "description": "Write some diagnostics.",
+      "title": "Write Diagnostics Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface",
+    "overlay_filename",
+    "output_name"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "strblast",
+  "description": "Finds exact copies of the target string in each of the input files, and replaces all characters with some junk string.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/strblast"
+    },
+    "targetstring": {
+      "type": "string",
+      "description": "Target string to search for in the input files.",
+      "title": "Target String"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input files to search for the target string.",
+      "title": "Input Files"
+    },
+    "new_char": {
+      "type": "string",
+      "description": "Replace TARGETSTRING with CHAR (repeated)",
+      "title": "New Character"
+    },
+    "new_string": {
+      "type": "string",
+      "description": "Replace TARGETSTRING with STRING",
+      "title": "New String"
+    },
+    "unescape": {
+      "type": "boolean",
+      "description": "Parse TARGETSTRING for escaped characters (includes '\\t', '\\n', '\\r')",
+      "title": "Unescape Flag",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Do not report files with no strings found. Use -quiet -quiet to avoid any reporting.",
+      "title": "Quiet Flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Show help message and exit.",
+      "title": "Help Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "targetstring",
+    "input_files"
+  ]
+}

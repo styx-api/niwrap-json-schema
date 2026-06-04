@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fslorient",
+  "description": "FSL tool to manipulate NIfTI header orientation information",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fslorient"
+    },
+    "get_orient": {
+      "type": "boolean",
+      "description": "Prints FSL left-right orientation",
+      "title": "Get Orientation",
+      "default": false
+    },
+    "get_sform": {
+      "type": "boolean",
+      "description": "Prints the 16 elements of the sform matrix",
+      "title": "Get Sform",
+      "default": false
+    },
+    "get_qform": {
+      "type": "boolean",
+      "description": "Prints the 16 elements of the qform matrix",
+      "title": "Get Qform",
+      "default": false
+    },
+    "set_sform": {
+      "type": "string",
+      "description": "Sets the 16 elements of the sform matrix",
+      "title": "Set Sform"
+    },
+    "set_qform": {
+      "type": "string",
+      "description": "Sets the 16 elements of the qform matrix",
+      "title": "Set Qform"
+    },
+    "set_sform_code": {
+      "type": "string",
+      "description": "Sets sform integer code",
+      "title": "Set Sform Code"
+    },
+    "set_qform_code": {
+      "type": "string",
+      "description": "Sets qform integer code",
+      "title": "Set Qform Code"
+    },
+    "get_qform_code": {
+      "type": "boolean",
+      "description": "Prints the qform integer code",
+      "title": "Get Qform Code",
+      "default": false
+    },
+    "get_sform_code": {
+      "type": "boolean",
+      "description": "Prints the sform integer code",
+      "title": "Get Sform Code",
+      "default": false
+    },
+    "copy_qform_to_sform": {
+      "type": "object",
+      "properties": {
+        "copy_qform_to_sform": {
+          "type": "boolean",
+          "description": "Sets the sform equal to the qform - code and matrix",
+          "title": "Copy Qform to Sform",
+          "default": false
+        },
+        "copy_sform_to_qform": {
+          "type": "boolean",
+          "description": "Sets the qform equal to the sform - code and matrix",
+          "title": "Copy Sform to Qform",
+          "default": false
+        }
+      }
+    },
+    "delete_orient": {
+      "type": "boolean",
+      "description": "Removes orient info from header",
+      "title": "Delete Orientation",
+      "default": false
+    },
+    "force_neurological": {
+      "type": "boolean",
+      "description": "Makes FSL neurological header - not Analyze",
+      "title": "Force Neurological",
+      "default": false
+    },
+    "force_radiological": {
+      "type": "boolean",
+      "description": "Makes FSL radiological header",
+      "title": "Force Radiological",
+      "default": false
+    },
+    "swap_orient": {
+      "type": "boolean",
+      "description": "Swaps FSL radiological and FSL neurological",
+      "title": "Swap Orientation",
+      "default": false
+    },
+    "filename": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Filename of the image to operate on (e.g. img.nii.gz)",
+      "title": "Filename"
+    }
+  },
+  "required": [
+    "@type",
+    "copy_qform_to_sform",
+    "filename"
+  ]
+}

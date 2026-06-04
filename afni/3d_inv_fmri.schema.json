@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dInvFMRI",
+  "description": "Program to compute stimulus time series, given a 3D+time dataset and an activation map (the inverse of the usual FMRI analysis problem).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dInvFMRI"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input 3D+time dataset.",
+      "title": "Input file"
+    },
+    "activation_map": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Defines activation map; should be a bucket dataset where each sub-brick defines the beta weight map for an unknown stimulus time series.",
+      "title": "Activation map"
+    },
+    "map_weight": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Defines a weighting factor for the map. Dataset can have either 1 sub-brick or the same number as in the -map dataset.",
+      "title": "Map weight"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Defines a mask dataset to restrict input voxels from -data and -map.",
+      "title": "Mask dataset"
+    },
+    "baseline_file": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Baseline time series file. Each column of the file defines a baseline time series.",
+      "title": "Baseline file"
+    },
+    "polynom_order": {
+      "type": "number",
+      "description": "Adds polynomials of specified order to the baseline collection.",
+      "title": "Polynomial order"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Name of the 1D output file.",
+      "title": "Output file"
+    },
+    "method": {
+      "type": "string",
+      "description": "Determines the method to use: C for least squares fit to data matrix (default) or K for least squares fit to activation matrix.",
+      "title": "Method"
+    },
+    "alpha": {
+      "type": "number",
+      "description": "Set the alpha factor to penalize large values of the output vectors.",
+      "title": "Alpha factor"
+    },
+    "smooth_fir": {
+      "type": "boolean",
+      "description": "Smooth the results with a 5 point lowpass FIR filter.",
+      "title": "5 point FIR filter",
+      "default": false
+    },
+    "smooth_median": {
+      "type": "boolean",
+      "description": "Smooth the results with a 5 point median filter.",
+      "title": "5 point median filter",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "activation_map"
+  ]
+}

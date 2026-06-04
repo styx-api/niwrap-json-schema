@@ -1,0 +1,292 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_make_surfaces",
+  "description": "Positions the tessellation of the cortical surface at the white matter surface, then the gray matter surface, generating surface files along with a curvature file and a surface file for cortical thickness.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_make_surfaces"
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "Name of the subject",
+      "title": "Subject Name"
+    },
+    "hemisphere": {
+      "type": "string",
+      "description": "Brain hemisphere (r or l)",
+      "title": "Hemisphere"
+    },
+    "white": {
+      "type": "string",
+      "description": "Output name for white surface (default is 'white'). Set to NOWHITE to generate but not save white surface.",
+      "title": "White Surface Name"
+    },
+    "pial": {
+      "type": "string",
+      "description": "Output name for pial surface (default is 'pial').",
+      "title": "Pial Surface Name"
+    },
+    "whiteonly": {
+      "type": "boolean",
+      "description": "Only generate white matter surface.",
+      "title": "White-only Flag",
+      "default": false
+    },
+    "nowhite": {
+      "type": "boolean",
+      "description": "Only generate pial surface.",
+      "title": "No-White Flag",
+      "default": false
+    },
+    "orig_white": {
+      "type": "string",
+      "description": "Specify a white surface to start with.",
+      "title": "Original White Surface"
+    },
+    "orig_pial": {
+      "type": "string",
+      "description": "Specify a pial surface to start with.",
+      "title": "Original Pial Surface"
+    },
+    "q": {
+      "type": "boolean",
+      "description": "Omit self-intersection and only generate gray/white surface.",
+      "title": "Q Flag",
+      "default": false
+    },
+    "max_gray_scale": {
+      "type": "number",
+      "description": "Set maximum gray scale value.",
+      "title": "Maximum Gray Scale"
+    },
+    "c": {
+      "type": "boolean",
+      "description": "Do not create curvature and area files from white matter surface.",
+      "title": "C Flag",
+      "default": false
+    },
+    "cortex": {
+      "type": "number",
+      "description": "Set to 0 to turn off creation of cortex label file.",
+      "title": "Cortex Flag"
+    },
+    "w": {
+      "type": "number",
+      "description": "Unused argument",
+      "title": "W Argument"
+    },
+    "first_wm_peak": {
+      "type": "boolean",
+      "description": "Settle WM surface at first peak in intensity profile instead of highest.",
+      "title": "First WM Peak Flag",
+      "default": false
+    },
+    "a_avgs": {
+      "type": "number",
+      "description": "Average curvature values a number of times (default=10).",
+      "title": "Average Curvature"
+    },
+    "pa_avgs": {
+      "type": "number",
+      "description": "Average pial curvature values a max of a number of times (default=16).",
+      "title": "Average Pial Curvature"
+    },
+    "wa_avgs": {
+      "type": "number",
+      "description": "Average white curvature values a max of a number of times (default=4).",
+      "title": "Average White Curvature"
+    },
+    "t1_vol": {
+      "type": "string",
+      "description": "Specify T1 volume (default is brain).",
+      "title": "T1 Volume"
+    },
+    "w_vol": {
+      "type": "string",
+      "description": "Specify white volume and <hires> option.",
+      "title": "White Volume"
+    },
+    "long": {
+      "type": "boolean",
+      "description": "Run longitudinal analysis.",
+      "title": "Longitudinal Flag",
+      "default": false
+    },
+    "dura_thresh": {
+      "type": "number",
+      "description": "Set a threshold for the multi-echo mprage dura avoidance.",
+      "title": "Dura Threshold"
+    },
+    "sdir": {
+      "type": "string",
+      "description": "Specify SUBJECTS_DIR.",
+      "title": "Subjects Directory"
+    },
+    "erase_cerebellum": {
+      "type": "boolean",
+      "description": "Erase cerebellar labeled voxels if aseg is loaded.",
+      "title": "Erase Cerebellum Flag",
+      "default": false
+    },
+    "wm_weight": {
+      "type": "number",
+      "description": "Weighting of WM mean in calculating T2 threshold of disallowed GM values, default=3.",
+      "title": "WM Weight"
+    },
+    "nsigma_above": {
+      "type": "number",
+      "description": "# of sigmas above the mean to allow gray matter T2 intensities.",
+      "title": "Sigma Above"
+    },
+    "nsigma_below": {
+      "type": "number",
+      "description": "# of sigmas below the mean to allow gray matter T2 intensities.",
+      "title": "Sigma Below"
+    },
+    "t2_min_inside": {
+      "type": "number",
+      "description": "Specify threshold for min T2 value allowed to be interior to the cortical ribbon.",
+      "title": "Min T2 Inside"
+    },
+    "t2_max_inside": {
+      "type": "number",
+      "description": "Specify threshold for max T2 value allowed to be interior to the cortical ribbon.",
+      "title": "Max T2 Inside"
+    },
+    "t2_outside_min": {
+      "type": "number",
+      "description": "Specify threshold for min T2 value outside of pial surface that will cause surface to deform outwards.",
+      "title": "Min T2 Outside"
+    },
+    "t2_outside_max": {
+      "type": "number",
+      "description": "Specify threshold for max T2 value outside of pial surface that will cause surface to deform outwards.",
+      "title": "Max T2 Outside"
+    },
+    "min_peak_pct": {
+      "type": "number",
+      "description": "Specify the pct of the histo peak in the local gm histogram to use as threshold for finding the local inside and outside gm thresholds.",
+      "title": "Min Peak %"
+    },
+    "border_vals_hires": {
+      "type": "boolean",
+      "description": "Turn on hires options in MRIScomputeBorderValues_new(). May not be helpful.",
+      "title": "Border Vals Hires",
+      "default": false
+    },
+    "no_unitize": {
+      "type": "boolean",
+      "description": "Turn off face normal unitization.",
+      "title": "No Unitize",
+      "default": false
+    },
+    "intensity": {
+      "type": "number",
+      "description": "Set weight of intensity cost.",
+      "title": "Intensity Cost"
+    },
+    "curv": {
+      "type": "number",
+      "description": "Set weight of curvature cost.",
+      "title": "Curvature Cost"
+    },
+    "tspring": {
+      "type": "number",
+      "description": "Set weight of tangential spring cost.",
+      "title": "Tangential Spring Cost"
+    },
+    "nspring": {
+      "type": "number",
+      "description": "Set weight of normal spring cost.",
+      "title": "Normal Spring Cost"
+    },
+    "repulse": {
+      "type": "number",
+      "description": "Set weight of repulsion force.",
+      "title": "Repulsion Cost"
+    },
+    "save_target": {
+      "type": "boolean",
+      "description": "Save target surface for debugging.",
+      "title": "Save Target",
+      "default": false
+    },
+    "save_res": {
+      "type": "boolean",
+      "description": "Save residual for debugging.",
+      "title": "Save Residual",
+      "default": false
+    },
+    "v_vertexno": {
+      "type": "number",
+      "description": "Set Gdiag_no to vertex number.",
+      "title": "Vertex Number"
+    },
+    "diag_vertex": {
+      "type": "number",
+      "description": "Set Gdiag_no to vertex number and turn off writing of cortex label or curvature files.",
+      "title": "Diagnostic Vertex"
+    },
+    "rip": {
+      "type": "string",
+      "description": "Save ripflag as overlay. Specify full path including hemi, suffix, etc.",
+      "title": "Rip File"
+    },
+    "sigma_white": {
+      "type": "string",
+      "description": "Save white surface sigma as overlay. Specify full path including hemi, suffix, etc.",
+      "title": "Sigma White File"
+    },
+    "sigma_pial": {
+      "type": "string",
+      "description": "Save pial surface sigma as overlay. Specify full path including hemi, suffix, etc.",
+      "title": "Sigma Pial File"
+    },
+    "output": {
+      "type": "string",
+      "description": "Append suffix to all outputs to prevent over-writing.",
+      "title": "Output Suffix"
+    },
+    "min_border_white": {
+      "type": "number",
+      "description": "Minimum border white.",
+      "title": "Min Border White"
+    },
+    "max_border_white": {
+      "type": "number",
+      "description": "Maximum border white.",
+      "title": "Max Border White"
+    },
+    "min_gray_white_border": {
+      "type": "number",
+      "description": "Minimum gray at white border.",
+      "title": "Min Gray at White Border"
+    },
+    "max_gray": {
+      "type": "number",
+      "description": "Maximum gray value.",
+      "title": "Max Gray"
+    },
+    "max_gray_csf_border": {
+      "type": "number",
+      "description": "Maximum gray at CSF border.",
+      "title": "Max Gray at CSF Border"
+    },
+    "min_gray_csf_border": {
+      "type": "number",
+      "description": "Minimum gray at CSF border.",
+      "title": "Min Gray at CSF Border"
+    },
+    "max_csf": {
+      "type": "number",
+      "description": "Maximum CSF value.",
+      "title": "Max CSF"
+    }
+  },
+  "required": [
+    "@type",
+    "subject_name",
+    "hemisphere"
+  ]
+}

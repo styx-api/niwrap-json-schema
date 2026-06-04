@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_proc_convert_dcm_dwis",
+  "description": "Convert sets of DWIs in DICOM format into 'nicer' volume+grad format, reorient volumetric data, and glue together multiple sessions/directories of data.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_proc_convert_dcm_dwis"
+    },
+    "dicom_dir": {
+      "type": "string",
+      "description": "Directory of DICOM files of the DWI data with 'AP' phase encoding. Can contain a wildcard expression for several directories.",
+      "title": "Input DICOM Directory"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix (and path) for output data (e.g., *.nii.gz, *.bvec, *.bval files). Required.",
+      "title": "Output Prefix"
+    },
+    "nifti_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "One or more NIFTI files of DWIs.",
+      "title": "NIFTI Files"
+    },
+    "bvec_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "One or more row-wise, gradient (unit-magnitude) files (e.g., *.bvec).",
+      "title": "bvec Files"
+    },
+    "bval_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "One or more bvalue files (e.g., *.bval).",
+      "title": "bval Files"
+    },
+    "work_dir": {
+      "type": "string",
+      "description": "Optional working directory for intermediate files.",
+      "title": "Working Directory"
+    },
+    "orientation": {
+      "type": "string",
+      "description": "Optional chance to reset orientation of the volume files (default is currently 'RAI').",
+      "title": "Orientation"
+    },
+    "origin_xyz": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "description": "Explicit origin coordinates (X, Y, Z).",
+      "title": "Origin XYZ"
+    },
+    "flip_x": {
+      "type": "boolean",
+      "description": "Flip gradients along the X-axis.",
+      "title": "Flip X",
+      "default": false
+    },
+    "flip_y": {
+      "type": "boolean",
+      "description": "Flip gradients along the Y-axis.",
+      "title": "Flip Y",
+      "default": false
+    },
+    "flip_z": {
+      "type": "boolean",
+      "description": "Flip gradients along the Z-axis.",
+      "title": "Flip Z",
+      "default": false
+    },
+    "no_flip": {
+      "type": "boolean",
+      "description": "Prevent flipping of gradients (default).",
+      "title": "No Flip",
+      "default": false
+    },
+    "qc_prefix": {
+      "type": "string",
+      "description": "Set the prefix for QC image files separately (default is '').",
+      "title": "QC Prefix"
+    },
+    "reorient_off": {
+      "type": "boolean",
+      "description": "Turn off reorigin calculation and reorientation.",
+      "title": "Reorient Off",
+      "default": false
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Do not remove the working directory of intermediate files (default is to delete it).",
+      "title": "No Clean",
+      "default": false
+    },
+    "no_cmd_out": {
+      "type": "boolean",
+      "description": "Do not save the command line call and location where it was run.",
+      "title": "No Cmd Out",
+      "default": false
+    },
+    "no_qc_view": {
+      "type": "boolean",
+      "description": "Do not generate QC image files.",
+      "title": "No QC View",
+      "default": false
+    },
+    "do_movie": {
+      "type": "string",
+      "description": "Generate a movie of the newly created dataset (AGIF or MPEG).",
+      "title": "Create Movie"
+    }
+  },
+  "required": [
+    "@type",
+    "dicom_dir",
+    "output_prefix"
+  ]
+}

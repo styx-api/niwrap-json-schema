@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "parc_atlas_jackknife_test",
+  "description": "Tool for conducting a jackknife accuracy test using FreeSurfer atlases.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/parc_atlas_jackknife_test"
+    },
+    "register": {
+      "type": "boolean",
+      "description": "Run mris_register: creates .sphere.reg files",
+      "title": "Register Flag",
+      "default": false
+    },
+    "reg_dist": {
+      "type": "string",
+      "description": "Run mris_register with '-dist <arg>' flag",
+      "title": "Register Distance"
+    },
+    "reg_append": {
+      "type": "string",
+      "description": "Append <string> to end of ?h.sphere.reg",
+      "title": "Register Append"
+    },
+    "reg_copy": {
+      "type": "string",
+      "description": "Copy ?h.sphere.reg<string> ?h.sphere.reg",
+      "title": "Register Copy"
+    },
+    "train": {
+      "type": "boolean",
+      "description": "Run mris_ca_train: creates .gcs files",
+      "title": "Train Flag",
+      "default": false
+    },
+    "classify": {
+      "type": "boolean",
+      "description": "Run mris_ca_label: creates .annot files",
+      "title": "Classify Flag",
+      "default": false
+    },
+    "test": {
+      "type": "boolean",
+      "description": "Run mris_compute_parc_overlap",
+      "title": "Test Flag",
+      "default": false
+    },
+    "all": {
+      "type": "boolean",
+      "description": "Run train, classify, and test",
+      "title": "All Flag",
+      "default": false
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Override default subjects directory",
+      "title": "Subjects Directory"
+    },
+    "freesurfer_home": {
+      "type": "string",
+      "description": "Source a new FREESURFER_HOME",
+      "title": "FreeSurfer Home"
+    },
+    "binaries_path": {
+      "type": "string",
+      "description": "Specify override path to binaries",
+      "title": "Binaries Path"
+    },
+    "dontrun": {
+      "type": "boolean",
+      "description": "Don't execute the commands",
+      "title": "Don’t Run Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

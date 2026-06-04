@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LIST INFORMATION ABOUT A FILE'S CONTENT",
+  "description": "List information about the content of a data file.  Only one -only option may be specified.  The information listed when no -only option is present is dependent upon the type of data file.\n\nLibrary paths:\n   /usr/lib/x86_64-linux-gnu/qt5/plugins\n   /workspace/source/build/CommandLine\n\n\nFile and extensions for reading and writing:\n   Annotation: wb_annot\n   Annotation Text Substitution: wb_annsub.csv\n   Border: border, wb_border\n   CIFTI - Dense: dconn.nii\n   CIFTI - Dense Label: dlabel.nii\n   CIFTI - Dense Parcel: dpconn.nii\n   CIFTI - Dense Scalar: dscalar.nii\n   CIFTI - Dense Data Series: dtseries.nii\n   CIFTI - Fiber Orientations TEMPORARY: fiberTEMP.nii\n   CIFTI - Fiber Trajectory TEMPORARY: trajTEMP.wbsparse\n   CIFTI - Fiber Trajectory Maps: trajMaps.wbsparse\n   CIFTI - Parcel: pconn.nii\n   CIFTI - Parcel Dense: pdconn.nii\n   CIFTI - Parcel Label: plabel.nii\n   CIFTI - Parcel Scalar: pscalar.nii\n   CIFTI - Parcel Series: ptseries.nii\n   CIFTI - Scalar Data Series: sdseries.nii\n   CZI Image: czi\n   Foci: foci, wb_foci\n   Histology Slices: metaczi, meta-image\n   Image Read: bmp, gif, jpeg, jpg, png, ppm\n        Write: bmp, jpeg, jpg, png, ppm\n   Label: label.gii\n   Metric: func.gii, shape.gii\n   OME-ZARR Image File: ome.zarr, ome.zarr.zip\n   Palette: palette, wb_palette\n   RGBA: rgba.gii\n   Samples: wb_samples\n   Scene: scene, wb_scene\n   Specification: spec, wb_spec\n   Surface: surf.gii\n   Volume: nii, nii.gz\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/file_information"
+    },
+    "data_file": {
+      "type": "string",
+      "description": "data file"
+    },
+    "no_map_info": {
+      "type": "boolean",
+      "description": "do not show map information for files that support maps",
+      "default": false
+    },
+    "only_step_interval": {
+      "type": "boolean",
+      "description": "suppress normal output, print the interval between maps",
+      "default": false
+    },
+    "only_number_of_maps": {
+      "type": "boolean",
+      "description": "suppress normal output, print the number of maps",
+      "default": false
+    },
+    "only_map_names": {
+      "type": "boolean",
+      "description": "suppress normal output, print the names of all maps",
+      "default": false
+    },
+    "only_metadata": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "only print the metadata for one key, with no formatting"
+        }
+      },
+      "description": "suppress normal output, print file metadata"
+    },
+    "only_cifti_xml": {
+      "type": "boolean",
+      "description": "suppress normal output, print the cifti xml if the file type has it",
+      "default": false
+    },
+    "czi": {
+      "type": "boolean",
+      "description": "For a CZI file, show information from the libCZI Info Command instead of the Workbench CZI File",
+      "default": false
+    },
+    "czi_all_sub_blocks": {
+      "type": "boolean",
+      "description": "show all sub-blocks in CZI file (may produce long output)",
+      "default": false
+    },
+    "czi_xml": {
+      "type": "boolean",
+      "description": "show XML from CZI file",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "data_file"
+  ]
+}

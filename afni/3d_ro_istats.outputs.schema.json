@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "3dROIstats",
+  "description": "Display statistics over masked regions",
+  "properties": {
+    "root": {
+      "type": "string",
+      "x-styx-type": "path"
+    },
+    "stats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "There will be one line of output for every sub-brick of every input dataset. Across each line will be every statistic for every mask value. For instance, if there 3 mask values (1,2,3), then the columns Mean_1, Mean_2 and Mean_3 will refer to the means across each mask value, respectively. If 4 statistics are requested, then there will be 12 stats displayed on each line (4 for each mask region), besides the file and sub-brick number."
+    }
+  },
+  "required": [
+    "root",
+    "stats"
+  ]
+}

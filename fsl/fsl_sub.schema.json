@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_sub",
+  "description": "FSL cluster submission tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fsl_sub"
+    },
+    "arch": {
+      "type": "string",
+      "description": "Architectures not available.",
+      "title": "Architecture"
+    },
+    "coprocessor": {
+      "type": "string",
+      "description": "No co-processor configured - ignored.",
+      "title": "Co-processor"
+    },
+    "coprocessor_multi": {
+      "type": "number",
+      "description": "No co-processor configured - ignored",
+      "title": "Co-processor Multi"
+    },
+    "coprocessor_class": {
+      "type": "string",
+      "description": "No co-processor classes configured - ignored.",
+      "title": "Co-processor Class"
+    },
+    "coprocessor_class_strict": {
+      "type": "boolean",
+      "description": "No co-processor classes configured - ignored.",
+      "title": "Co-processor Class Strict",
+      "default": false
+    },
+    "coprocessor_toolkit": {
+      "type": "string",
+      "description": "No co-processor toolkits configured - ignored.",
+      "title": "Co-processor Toolkit"
+    },
+    "usescript": {
+      "type": "boolean",
+      "description": "Use flags embedded in scripts to set queuing options - not supported",
+      "title": "Use Script",
+      "default": false
+    },
+    "jobhold": {
+      "type": "string",
+      "description": "Place a hold on this task until specified job id has completed.",
+      "title": "Job Hold"
+    },
+    "not_requeueable": {
+      "type": "boolean",
+      "description": "Job cannot be requeued in the event of a node failure.",
+      "title": "Not Requeueable",
+      "default": false
+    },
+    "array_hold": {
+      "type": "string",
+      "description": "Not supported - will be converted to simple job hold",
+      "title": "Array Hold"
+    },
+    "logdir": {
+      "type": "string",
+      "description": "Where to output logfiles.",
+      "title": "Log Directory"
+    },
+    "mailoptions": {
+      "type": "string",
+      "description": "Email notification options (ignored).",
+      "title": "Mail Options"
+    },
+    "mailto": {
+      "type": "string",
+      "description": "Email notification recipients (ignored).",
+      "title": "Mail To"
+    },
+    "novalidation": {
+      "type": "boolean",
+      "description": "Don't check for presence of script/binary in your searchpath",
+      "title": "No Validation",
+      "default": false
+    },
+    "name": {
+      "type": "string",
+      "description": "Specify job name as it will appear on queue.",
+      "title": "Job Name"
+    },
+    "priority": {
+      "type": "string",
+      "description": "Specify job priority (not supported).",
+      "title": "Priority"
+    },
+    "queue": {
+      "type": "string",
+      "description": "Specify the queue for the job (irrelevant if not running in a cluster environment).",
+      "title": "Queue"
+    },
+    "resource": {
+      "type": "string",
+      "description": "Pass a resource request or constraint string through to the job scheduler.",
+      "title": "Resource"
+    },
+    "delete_job": {
+      "type": "string",
+      "description": "Deletes a queued/running job.",
+      "title": "Delete Job"
+    },
+    "jobram": {
+      "type": "number",
+      "description": "Max total RAM required for job (integer in GB).",
+      "title": "Job RAM"
+    },
+    "parallelenv_threads": {
+      "type": "string",
+      "description": "No parallel environments configured.",
+      "title": "Parallel Environment and Threads"
+    },
+    "array_task": {
+      "type": "string",
+      "description": "Specify a task file of commands to execute in parallel.",
+      "title": "Array Task"
+    },
+    "array_native": {
+      "type": "string",
+      "description": "Binary/Script will handle array task internally (mutually exclusive with --array_task).",
+      "title": "Array Native"
+    },
+    "array_limit": {
+      "type": "number",
+      "description": "Specify the maximum number of parallel job sub-tasks to run concurrently.",
+      "title": "Array Limit"
+    },
+    "keep_jobscript": {
+      "type": "boolean",
+      "description": "Whether to create and save a job submission script.",
+      "title": "Keep Jobscript",
+      "default": false
+    },
+    "project": {
+      "type": "string",
+      "description": "Specify the project (not relevant when not running in a cluster environment).",
+      "title": "Project"
+    },
+    "noramsplit": {
+      "type": "boolean",
+      "description": "Disable RAM splitting (not relevant when not running in a cluster environment).",
+      "title": "No RAM Split",
+      "default": false
+    },
+    "jobtime": {
+      "type": "number",
+      "description": "Estimated job length in minutes, used to automatically choose the queue name.",
+      "title": "Job Time"
+    },
+    "has_coprocessor": {
+      "type": "string",
+      "description": "fsl_sub returns with exit code of 0 if specified coprocessor is configured.",
+      "title": "Has Coprocessor"
+    },
+    "has_queues": {
+      "type": "boolean",
+      "description": "fsl_sub returns with exit code of 0 if there's a compute cluster with queues configured.",
+      "title": "Has Queues",
+      "default": false
+    },
+    "show_config": {
+      "type": "boolean",
+      "description": "Display the configuration currently in force.",
+      "title": "Show Config",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose mode.",
+      "title": "Verbose",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Show program's version number and exit.",
+      "title": "Version",
+      "default": false
+    },
+    "fileisimage": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "If <file> already exists and is an MRI image file, do nothing and exit.",
+      "title": "File is Image"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

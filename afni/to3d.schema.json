@@ -1,0 +1,286 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "to3d",
+  "description": "Creates 3D datasets for use with AFNI from 2D image files",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/to3d"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input 2D image files",
+      "title": "Input Files"
+    },
+    "type": {
+      "enum": [
+        "spgr",
+        "fse",
+        "epan",
+        "anat",
+        "ct",
+        "spct",
+        "pet",
+        "mra",
+        "bmap",
+        "diff",
+        "omri",
+        "abuc",
+        "fim",
+        "fith",
+        "fico",
+        "fitt",
+        "fift",
+        "fizt",
+        "fict",
+        "fibt",
+        "fibn",
+        "figt",
+        "fipt",
+        "fbuc"
+      ],
+      "description": "Declare images to contain data of a given type",
+      "title": "Image Type"
+    },
+    "statpar": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Supply auxiliary statistical parameters",
+      "title": "Statistical Parameters"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix of the output 3D dataset",
+      "title": "Output Prefix"
+    },
+    "session": {
+      "type": "string",
+      "description": "Session directory for output 3D dataset",
+      "title": "Output Session"
+    },
+    "geomparent": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read geometry data from dataset file",
+      "title": "Geometry Parent File"
+    },
+    "anatparent": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Take anatomy parent from dataset file",
+      "title": "Anatomy Parent File"
+    },
+    "nosave_flag": {
+      "type": "boolean",
+      "description": "Suppress autosave of 3D dataset",
+      "title": "No Save Flag",
+      "default": false
+    },
+    "nowritebrik_flag": {
+      "type": "boolean",
+      "description": "Suppress saving of the BRIK file",
+      "title": "No Write BRIK Flag",
+      "default": false
+    },
+    "view": {
+      "enum": [
+        "orig",
+        "acpc",
+        "tlrc"
+      ],
+      "description": "Set the dataset's viewing coordinates",
+      "title": "View Type"
+    },
+    "time_zt": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify time dependent dataset (z-axis first, then t-axis)",
+      "title": "Time Dependent Data (zt)"
+    },
+    "time_tz": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify time dependent dataset (t-axis first, then z-axis)",
+      "title": "Time Dependent Data (tz)"
+    },
+    "tr_units": {
+      "enum": [
+        "ms",
+        "msec",
+        "s",
+        "sec",
+        "Hz",
+        "Hertz"
+      ],
+      "description": "Specify TR units",
+      "title": "TR Units"
+    },
+    "torg": {
+      "type": "number",
+      "description": "Set time origin of dataset",
+      "title": "Time Origin"
+    },
+    "xFOV": {
+      "type": "string",
+      "description": "Specify size and orientation of the x-axis extent",
+      "title": "X-Axis FOV"
+    },
+    "yFOV": {
+      "type": "string",
+      "description": "Specify size and orientation of the y-axis extent",
+      "title": "Y-Axis FOV"
+    },
+    "zFOV": {
+      "type": "string",
+      "description": "Specify size and orientation of the z-axis extent",
+      "title": "Z-Axis FOV"
+    },
+    "xSLAB": {
+      "type": "string",
+      "description": "Specify x-axis slab",
+      "title": "X-Axis Slab"
+    },
+    "ySLAB": {
+      "type": "string",
+      "description": "Specify y-axis slab",
+      "title": "Y-Axis Slab"
+    },
+    "zSLAB": {
+      "type": "string",
+      "description": "Specify z-axis slab",
+      "title": "Z-Axis Slab"
+    },
+    "zorigin": {
+      "type": "number",
+      "description": "Set the center of the first slice offset in z-axis",
+      "title": "Z-Origin"
+    },
+    "data_type": {
+      "enum": [
+        "short",
+        "float",
+        "byte",
+        "complex"
+      ],
+      "description": "Set voxel data to be stored as given data type",
+      "title": "Data Type"
+    },
+    "global_scaling_factor": {
+      "type": "number",
+      "description": "Global scaling factor",
+      "title": "Global Scaling Factor"
+    },
+    "nofloatscan_flag": {
+      "type": "boolean",
+      "description": "Do not scan for illegal floating point values",
+      "title": "No Float Scan Flag",
+      "default": false
+    },
+    "in1_flag": {
+      "type": "boolean",
+      "description": "Read and process images one slice at a time",
+      "title": "In 1 Flag",
+      "default": false
+    },
+    "orient": {
+      "type": "string",
+      "description": "Set the orientation of the 3D volumes",
+      "title": "Orientation Code"
+    },
+    "skip_outliers_flag": {
+      "type": "boolean",
+      "description": "Skip the outlier check for 3D+time datasets",
+      "title": "Skip Outliers Flag",
+      "default": false
+    },
+    "text_outliers_flag": {
+      "type": "boolean",
+      "description": "Only print out the outlier check results in text form",
+      "title": "Text Outliers Flag",
+      "default": false
+    },
+    "save_outliers": {
+      "type": "string",
+      "description": "Save the outliers count into a 1D file",
+      "title": "Save Outliers File"
+    },
+    "assume_dicom_mosaic_flag": {
+      "type": "boolean",
+      "description": "Assume any Siemens DICOM file is a potential MOSAIC image",
+      "title": "Assume DICOM Mosaic Flag",
+      "default": false
+    },
+    "oblique_origin_flag": {
+      "type": "boolean",
+      "description": "Assume origin and orientation from oblique transformation matrix",
+      "title": "Oblique Origin Flag",
+      "default": false
+    },
+    "reverse_list_flag": {
+      "type": "boolean",
+      "description": "Reverse the input file list",
+      "title": "Reverse List Flag",
+      "default": false
+    },
+    "use_last_elem_flag": {
+      "type": "boolean",
+      "description": "Search DICOM images for the last occurrence of each element",
+      "title": "Use Last Element Flag",
+      "default": false
+    },
+    "use_old_mosaic_code_flag": {
+      "type": "boolean",
+      "description": "Do not use the Dec 2010 updates to Siemens mosaic code",
+      "title": "Use Old Mosaic Code Flag",
+      "default": false
+    },
+    "ushort2float_flag": {
+      "type": "boolean",
+      "description": "Convert input shorts to float and add 2^16 to any negatives",
+      "title": "Ushort2Float Flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Show debugging information for reading DICOM files",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "gamma": {
+      "type": "number",
+      "description": "Gamma correction factor for the monitor",
+      "title": "Gamma Correction"
+    },
+    "ncolors": {
+      "type": "number",
+      "description": "Number of gray levels for the image displays",
+      "title": "Number of Colors"
+    },
+    "xtwarns_flag": {
+      "type": "boolean",
+      "description": "Turn on display of Xt warning messages",
+      "title": "XT Warns Flag",
+      "default": false
+    },
+    "quit_on_err_flag": {
+      "type": "boolean",
+      "description": "Do not launch interactive to3d mode if input has error",
+      "title": "Quit on Error Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_files"
+  ]
+}

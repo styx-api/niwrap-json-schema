@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "susan",
+  "description": "Non-linear noise reduction filtering tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/susan"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input image file",
+      "title": "Input file"
+    },
+    "brightness_threshold": {
+      "type": "number",
+      "description": "Brightness threshold; should be greater than noise level and less than contrast of edges to be preserved",
+      "title": "Brightness threshold"
+    },
+    "spatial_size": {
+      "type": "number",
+      "description": "Spatial size (sigma, i.e., half-width) of smoothing, in mm",
+      "title": "Spatial size"
+    },
+    "dimensionality": {
+      "type": "number",
+      "minimum": 2,
+      "maximum": 3,
+      "description": "Dimensionality (2 or 3), for within-plane (2) or fully 3D (3) smoothing",
+      "title": "Dimensionality"
+    },
+    "use_median_filter": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Use median filter for cases where single-point noise is detected (0 or 1)",
+      "title": "Use median filter"
+    },
+    "n_usans": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "Determine if the smoothing area is found from secondary images (0, 1 or 2)",
+      "title": "Number of USANs"
+    },
+    "usan1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "First USAN image file",
+      "title": "USAN1"
+    },
+    "brightness_threshold1": {
+      "type": "number",
+      "description": "Brightness threshold for first USAN image",
+      "title": "Brightness threshold 1"
+    },
+    "usan2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second USAN image file",
+      "title": "USAN2"
+    },
+    "brightness_threshold2": {
+      "type": "number",
+      "description": "Brightness threshold for second USAN image",
+      "title": "Brightness threshold 2"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output image file",
+      "title": "Output file"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "brightness_threshold",
+    "spatial_size",
+    "dimensionality",
+    "use_median_filter",
+    "n_usans",
+    "output_file"
+  ]
+}

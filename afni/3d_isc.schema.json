@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dISC",
+  "description": "Program for Voxelwise Inter-Subject Correlation (ISC) Analysis using linear mixed-effects modeling.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dISC"
+    },
+    "outfile_prefix": {
+      "type": "string",
+      "description": "Output file name. For AFNI format, provide prefix only, with no view+suffix needed.",
+      "title": "Output file prefix"
+    },
+    "num_jobs": {
+      "type": "number",
+      "description": "Specify the number of jobs to run concurrently. Choose 1 for a single-processor computer.",
+      "title": "Number of jobs"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Process voxels inside this mask only. Default is no masking.",
+      "title": "Mask file"
+    },
+    "model_structure": {
+      "type": "string",
+      "description": "Specify the model structure for all the variables. The expression FORMULA with more than one variable has to be surrounded within quotes.",
+      "title": "Model structure formula"
+    },
+    "qvar_centers": {
+      "type": "string",
+      "description": "Specify centering values for quantitative variables identified under -qVars. Multiple centers are separated by commas without spaces and should be within quotes.",
+      "title": "Quantitative variable centers"
+    },
+    "quantitative_vars": {
+      "type": "string",
+      "description": "Identify quantitative variables (or covariates). The list should be comma-separated and within quotes.",
+      "title": "Quantitative variables"
+    },
+    "fisher_transform": {
+      "type": "boolean",
+      "description": "Perform Fisher transformation on the response variable (input files) if it is a correlation value.",
+      "title": "Fisher transformation flag",
+      "default": false
+    },
+    "io_functions": {
+      "enum": [
+        "AFNI",
+        "R"
+      ],
+      "description": "Use AFNI's C io functions (default) or R's io functions.",
+      "title": "IO Functions"
+    },
+    "data_table": {
+      "type": "string",
+      "description": "List the data structure with a header as the first line. Has to occur last in the script.",
+      "title": "Data table"
+    }
+  },
+  "required": [
+    "@type",
+    "outfile_prefix",
+    "model_structure",
+    "data_table"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_ents",
+  "description": "Extract component time series from a MELODIC .ica directory",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fsl_ents"
+    },
+    "icadir": {
+      "type": "string",
+      "description": ".ica directory to extract time series from",
+      "title": ".ica directory"
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Component number or FIX/AROMA file specifying components to extract",
+      "title": "Components"
+    },
+    "outfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File to save time series to",
+      "title": "Output file"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Overwrite output file if it exists",
+      "title": "Overwrite output",
+      "default": false
+    },
+    "conffile": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Extra files to append to output file",
+      "title": "Extra configuration file"
+    }
+  },
+  "required": [
+    "@type",
+    "icadir",
+    "components"
+  ]
+}

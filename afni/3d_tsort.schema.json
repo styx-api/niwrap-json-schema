@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTsort",
+  "description": "Sorts each voxel in a dataset and produces a new dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTsort"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset to be sorted",
+      "title": "Input dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output dataset",
+      "title": "Output prefix"
+    },
+    "inc": {
+      "type": "boolean",
+      "description": "Sort into increasing order (default)",
+      "title": "Sort increasing",
+      "default": false
+    },
+    "dec": {
+      "type": "boolean",
+      "description": "Sort into decreasing order",
+      "title": "Sort decreasing",
+      "default": false
+    },
+    "rank": {
+      "type": "boolean",
+      "description": "Output rank instead of sorted values; ranks range from 1 to Nvals",
+      "title": "Output rank",
+      "default": false
+    },
+    "ind": {
+      "type": "boolean",
+      "description": "Output sorting index (0 to Nvals -1)",
+      "title": "Output sorting index",
+      "default": false
+    },
+    "val": {
+      "type": "boolean",
+      "description": "Output sorted values (default)",
+      "title": "Output sorted values",
+      "default": false
+    },
+    "random": {
+      "type": "boolean",
+      "description": "Randomly shuffle (permute) the time points in each voxel",
+      "title": "Random shuffle",
+      "default": false
+    },
+    "ranfft": {
+      "type": "boolean",
+      "description": "Randomize each time series by scrambling the FFT phase",
+      "title": "Randomize FFT",
+      "default": false
+    },
+    "randft": {
+      "type": "boolean",
+      "description": "Randomize each time series by scrambling the DFT phase",
+      "title": "Randomize DFT",
+      "default": false
+    },
+    "datum": {
+      "type": "string",
+      "description": "Coerce the output data to be stored as the given type (byte, short, or float)",
+      "title": "Datum type"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file"
+  ]
+}

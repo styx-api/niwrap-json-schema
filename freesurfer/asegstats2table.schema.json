@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "asegstats2table",
+  "description": "Converts a subcortical stats file created by recon-all and/or mri_segstats (e.g., aseg.stats) into a table.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/asegstats2table"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of subjects.",
+      "title": "Subjects"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of input stat files.",
+      "title": "Inputs"
+    },
+    "tablefile": {
+      "type": "string",
+      "description": "The output table file.",
+      "title": "Output Table File"
+    },
+    "subjectsfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the file which has the list of subjects (one subject per line).",
+      "title": "Subjects File"
+    },
+    "qdec": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the qdec table which has the column of subjects ids (fsid).",
+      "title": "QDEC Table"
+    },
+    "qdec_long": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the longitudinal qdec table with column of tp ids (fsid) and subject templates (fsid-base).",
+      "title": "Longitudinal QDEC Table"
+    },
+    "fsgd": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the FSGD file to extract subjects from.",
+      "title": "FSGD File"
+    },
+    "maxsegno": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify the maximum segmentation number.",
+      "title": "Max Segmentation Number"
+    },
+    "segids_from_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output only the segmentations present in the specified file.",
+      "title": "Segmentation IDs from File"
+    },
+    "segno_include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Include only the specified segmentation IDs.",
+      "title": "Include Segmentation IDs"
+    },
+    "segno_exclude": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Exclude the specified segmentation IDs.",
+      "title": "Exclude Segmentation IDs"
+    },
+    "measure": {
+      "type": "string",
+      "description": "Measure to report: default is volume (alternative: mean, std).",
+      "title": "Measure"
+    },
+    "delimiter": {
+      "type": "string",
+      "description": "Delimiter between measures in the table. Default is tab (alternative: comma, space, semicolon).",
+      "title": "Delimiter"
+    },
+    "statsfile": {
+      "type": "string",
+      "description": "Use specified stats file instead of 'aseg.stats'.",
+      "title": "Stats File"
+    },
+    "subdir": {
+      "type": "string",
+      "description": "Use specified subdir instead of 'stats/'.",
+      "title": "Subdirectory"
+    },
+    "scale": {
+      "type": "number",
+      "description": "Scale factor for all values written to output file. Default is 1.",
+      "title": "Scale Factor"
+    },
+    "write_etiv": {
+      "type": "boolean",
+      "description": "Report volume as percent estimated total intracranial volume.",
+      "title": "Write eTIV",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Increase verbosity for debugging purposes.",
+      "title": "Debug Mode",
+      "default": false
+    },
+    "transpose_flag": {
+      "type": "boolean",
+      "description": "Transpose the table: subjects in columns and segmentations in rows.",
+      "title": "Transpose Table",
+      "default": false
+    },
+    "common_segs_flag": {
+      "type": "boolean",
+      "description": "Output only the segmentations common to all stats files.",
+      "title": "Common Segmentations Flag",
+      "default": false
+    },
+    "all_segs_flag": {
+      "type": "boolean",
+      "description": "Output all segmentations in the stats files given.",
+      "title": "All Segmentations Flag",
+      "default": false
+    },
+    "no_vol_extras_flag": {
+      "type": "boolean",
+      "description": "Do not include global volume measures like BrainSegVol.",
+      "title": "No Volume Extras Flag",
+      "default": false
+    },
+    "skip_missing_flag": {
+      "type": "boolean",
+      "description": "Skip subjects that do not have a stats file.",
+      "title": "Skip Missing Flag",
+      "default": false
+    },
+    "replace53_flag": {
+      "type": "boolean",
+      "description": "Replace 5.3 structure names with later names.",
+      "title": "Replace 5.3 Names Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "tablefile"
+  ]
+}

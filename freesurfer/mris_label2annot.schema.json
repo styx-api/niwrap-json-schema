@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_label2annot",
+  "description": "Converts a set of surface labels to an annotation file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_label2annot"
+    },
+    "subject": {
+      "type": "string",
+      "description": "FreeSurfer subject",
+      "title": "Subject"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere (lh or rh)",
+      "title": "Hemisphere"
+    },
+    "ctabfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Colortable file (like FreeSurferColorLUT.txt)",
+      "title": "Colortable File"
+    },
+    "annotname": {
+      "type": "string",
+      "description": "Output annotation name",
+      "title": "Annotation Name"
+    },
+    "index_offset": {
+      "type": "number",
+      "description": "Add to label number to get CTAB index",
+      "title": "Index Offset"
+    },
+    "label_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Label file(s)",
+      "title": "Label Files"
+    },
+    "annot_path": {
+      "type": "string",
+      "description": "Full name/path of annotation file",
+      "title": "Annotation File Path"
+    },
+    "labeldir": {
+      "type": "string",
+      "description": "Directory with label files when not using --l",
+      "title": "Label Directory"
+    },
+    "ldir_default": {
+      "type": "boolean",
+      "description": "Use subject/labels as label directory",
+      "title": "Use Default Label Directory",
+      "default": false
+    },
+    "no_unknown": {
+      "type": "boolean",
+      "description": "Do not map unhit labels to index 0",
+      "title": "No Unknown Labels",
+      "default": false
+    },
+    "thresh": {
+      "type": "number",
+      "description": "Threshold label by stats field",
+      "title": "Threshold"
+    },
+    "maxstatwinner": {
+      "type": "boolean",
+      "description": "Keep label with highest 'stat' value",
+      "title": "Maximum Stat Winner",
+      "default": false
+    },
+    "surf": {
+      "type": "string",
+      "description": "Surface name, default is orig",
+      "title": "Surface Name"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Subjects Directory",
+      "title": "Subjects Directory"
+    }
+  },
+  "required": [
+    "@type",
+    "subject",
+    "hemi",
+    "ctabfile",
+    "annotname"
+  ]
+}

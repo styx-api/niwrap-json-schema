@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "imcalc",
+  "description": "Tool for arithmetic operations on 2D images, pixel-by-pixel",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/imcalc"
+    },
+    "datum_type": {
+      "type": "string",
+      "description": "Coerce the output data to be stored as the given type: byte, short, or float. Default is the datum of the first input image on the command line.",
+      "title": "Output Datum Type"
+    },
+    "image_inputs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Read image 'dname' and call the voxel values 'a' in the expression. 'a' may be any letter from 'a' to 'z'. If some letter name is used in the expression but not present in one of the image options here, then that variable is set to 0.",
+      "title": "Input Image Files"
+    },
+    "expression": {
+      "type": "string",
+      "description": "Apply the expression within quotes to the input images, one voxel at a time, to produce the output image. (e.g., \"sqrt(a*b)\" to compute the geometric mean)",
+      "title": "Expression"
+    },
+    "output_name": {
+      "type": "string",
+      "description": "Use 'name' for the output image filename. Default is 'imcalc.out'.",
+      "title": "Output Image Filename"
+    }
+  },
+  "required": [
+    "@type",
+    "expression"
+  ]
+}

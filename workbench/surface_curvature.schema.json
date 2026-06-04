@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CALCULATE CURVATURE OF SURFACE",
+  "description": "Compute the curvature of the surface, using the method from:\nInteractive Texture Mapping by J. Maillot, Yahia, and Verroust, 1993.\nACM-0-98791-601-8/93/008",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/surface_curvature"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the surface to compute the curvature of"
+    },
+    "mean": {
+      "type": "object",
+      "properties": {
+        "mean_out": {
+          "type": "string",
+          "description": "mean curvature metric"
+        }
+      },
+      "required": [
+        "mean_out"
+      ],
+      "description": "output mean curvature"
+    },
+    "gauss": {
+      "type": "object",
+      "properties": {
+        "gauss_out": {
+          "type": "string",
+          "description": "gaussian curvature metric"
+        }
+      },
+      "required": [
+        "gauss_out"
+      ],
+      "description": "output gaussian curvature"
+    }
+  },
+  "required": [
+    "@type",
+    "surface"
+  ]
+}

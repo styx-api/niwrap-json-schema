@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DRAW BORDERS AROUND LABELS",
+  "description": "For each label, finds all edges on the mesh that cross the boundary of the label, and draws borders through them.  By default, this is done on all columns in the input file, using the map name as the class name for the border.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/label_to_border"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the surface to use for neighbor information"
+    },
+    "label_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the input label file"
+    },
+    "border_out": {
+      "type": "string",
+      "description": "the output border file"
+    },
+    "placement": {
+      "type": "number",
+      "description": "set how far along the edge border points are drawn"
+    },
+    "column": {
+      "type": "string",
+      "description": "select a single column"
+    }
+  },
+  "required": [
+    "@type",
+    "surface",
+    "label_in",
+    "border_out"
+  ]
+}

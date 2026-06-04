@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@align_partial_oblique",
+  "description": "A script to align a full coverage T1 weighted non-oblique dataset to match a partial coverage T1 weighted non-oblique dataset. Alignment is done with a rotation and shift (6 parameters) transform only.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@align_partial_oblique"
+    },
+    "base": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference anatomical full coverage volume.",
+      "title": "Base dataset"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Partial coverage T1 weighted non-oblique dataset.",
+      "title": "Input dataset"
+    },
+    "suffix": {
+      "type": "string",
+      "description": "Output dataset name is formed by adding SUF to the prefix of the base dataset. The default suffix is _alnd_PartialCoverageObliqueT1",
+      "title": "Suffix"
+    },
+    "keep_tmp": {
+      "type": "boolean",
+      "description": "Keep temporary files.",
+      "title": "Keep temporary files flag",
+      "default": false
+    },
+    "clean": {
+      "type": "boolean",
+      "description": "Clean all temp files, likely left from -keep_tmp option then exit.",
+      "title": "Clean temporary files flag",
+      "default": false
+    },
+    "dxyz": {
+      "type": "number",
+      "description": "Cubic voxel size of output dataset in TLRC space Default MM is 1.",
+      "title": "Cubic voxel size"
+    },
+    "dx": {
+      "type": "number",
+      "description": "Size of voxel in the x direction (Right-Left). Default is 1mm.",
+      "title": "Voxel size in x direction"
+    },
+    "dy": {
+      "type": "number",
+      "description": "Size of voxel in the y direction (Anterior-Posterior). Default is 1mm.",
+      "title": "Voxel size in y direction"
+    },
+    "dz": {
+      "type": "number",
+      "description": "Size of voxel in the z direction (Inferior-Superior). Default is 1mm.",
+      "title": "Voxel size in z direction"
+    }
+  },
+  "required": [
+    "@type",
+    "base",
+    "input"
+  ]
+}

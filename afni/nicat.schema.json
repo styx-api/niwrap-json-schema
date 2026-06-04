@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "nicat",
+  "description": "Copies stdin to the NIML stream, which will be opened for writing.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/nicat"
+    },
+    "stream_spec": {
+      "type": "string",
+      "description": "Stream specification (e.g., tcp:localhost:4444)",
+      "title": "Stream specifier"
+    },
+    "reopen": {
+      "type": "string",
+      "description": "Reopen the stream after connection to the stream specified by the given value.",
+      "title": "Reopen stream"
+    },
+    "copy_stream": {
+      "type": "boolean",
+      "description": "Copy the stream to stdout instead; the 'streamspec' will be opened for reading.",
+      "title": "Copy stream to stdout",
+      "default": false
+    },
+    "read_only": {
+      "type": "boolean",
+      "description": "Read the stream but don't copy to stdout.",
+      "title": "Read stream only",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "stream_spec"
+  ]
+}

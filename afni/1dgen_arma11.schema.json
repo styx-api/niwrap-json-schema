@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "1dgenARMA11",
+  "description": "Program to generate an ARMA(1,1) time series, for simulation studies. Results are written to stdout.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/1dgenARMA11"
+    },
+    "length": {
+      "type": "number",
+      "description": "Specify the length of the time series vector to generate (equivalent to -len option).",
+      "title": "Length of time series"
+    },
+    "length_alt": {
+      "type": "number",
+      "description": "Specify the length of the time series vector to generate (equivalent to -num option).",
+      "title": "Length of time series (alternative)"
+    },
+    "num_series": {
+      "type": "number",
+      "description": "The number of time series vectors to generate; defaults to 1 if not given.",
+      "title": "Number of time series vectors"
+    },
+    "param_a": {
+      "type": "number",
+      "description": "Specify ARMA(1,1) parameters 'a'.",
+      "title": "ARMA(1,1) parameter a"
+    },
+    "param_b": {
+      "type": "number",
+      "description": "Specify ARMA(1,1) parameter 'b' directly.",
+      "title": "ARMA(1,1) parameter b"
+    },
+    "param_lam": {
+      "type": "number",
+      "description": "Specify ARMA(1,1) parameter 'b' indirectly.",
+      "title": "ARMA(1,1) parameter lam"
+    },
+    "std_dev": {
+      "type": "number",
+      "description": "Set standard deviation of results [default=1].",
+      "title": "Standard Deviation"
+    },
+    "normalize": {
+      "type": "boolean",
+      "description": "Normalize time series so sum of squares is 1.",
+      "title": "Normalize Flag",
+      "default": false
+    },
+    "seed": {
+      "type": "number",
+      "description": "Set random number seed.",
+      "title": "Random Seed"
+    },
+    "corcut": {
+      "type": "number",
+      "description": "Specify a cutoff for the correlation coefficient r(k) of noise samples at k units apart. Default is 0.00010.",
+      "title": "Correlation Cutoff"
+    },
+    "arma31": {
+      "type": "string",
+      "description": "Specify parameters for a restricted ARMA(3,1) model: -arma31 a r theta vrat",
+      "title": "Restricted ARMA(3,1) model parameters"
+    },
+    "arma51": {
+      "type": "string",
+      "description": "Specify parameters for a restricted ARMA(5,1) model: -arma51 a r1 theta1 r2 theta2 vrat",
+      "title": "Restricted ARMA(5,1) model parameters"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

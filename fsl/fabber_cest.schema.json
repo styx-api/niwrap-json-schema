@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fabber_cest",
+  "description": "Fabber Model-based Analysis",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fabber_cest"
+    },
+    "output": {
+      "type": "string",
+      "description": "Directory for output files",
+      "title": "Output directory"
+    },
+    "method": {
+      "type": "string",
+      "description": "Inference method",
+      "title": "Inference method"
+    },
+    "model": {
+      "type": "string",
+      "description": "Forward model",
+      "title": "Forward model"
+    },
+    "data": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input data file",
+      "title": "Input data file"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print usage help",
+      "title": "Help",
+      "default": false
+    },
+    "listmethods": {
+      "type": "boolean",
+      "description": "List all known inference methods",
+      "title": "List Methods",
+      "default": false
+    },
+    "listmodels": {
+      "type": "boolean",
+      "description": "List all known forward models",
+      "title": "List Models",
+      "default": false
+    },
+    "listparams": {
+      "type": "boolean",
+      "description": "List model parameters",
+      "title": "List Parameters",
+      "default": false
+    },
+    "descparams": {
+      "type": "boolean",
+      "description": "Describe model parameters",
+      "title": "Describe Parameters",
+      "default": false
+    },
+    "listoutputs": {
+      "type": "boolean",
+      "description": "List additional model outputs",
+      "title": "List Outputs",
+      "default": false
+    },
+    "evaluate": {
+      "type": "string",
+      "description": "Evaluate model and set to name of output required",
+      "title": "Evaluate Model"
+    },
+    "evaluate_params": {
+      "type": "string",
+      "description": "List of parameter values for evaluation",
+      "title": "Evaluation Parameters"
+    },
+    "evaluate_nt": {
+      "type": "integer",
+      "description": "Number of time points for evaluation",
+      "title": "Evaluation Time Points"
+    },
+    "simple_output": {
+      "type": "boolean",
+      "description": "Simple output series of lines each giving progress as percentage",
+      "title": "Simple Output",
+      "default": false
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Overwrite existing output",
+      "title": "Overwrite Output",
+      "default": false
+    },
+    "link_to_latest": {
+      "type": "boolean",
+      "description": "Create a link to the most recent output directory with the prefix _latest",
+      "title": "Link to Latest",
+      "default": false
+    },
+    "loadmodels": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Load models dynamically from the specified filename",
+      "title": "Load Models"
+    },
+    "data_multi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify multiple data files (data<n>)",
+      "title": "Multiple Data Files"
+    },
+    "data_order": {
+      "type": "string",
+      "description": "Handling of multiple data files (concatenate or interleave)",
+      "title": "Data Order"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask file. Inference performed where mask value > 0",
+      "title": "Mask File"
+    },
+    "masked_timepoints": {
+      "type": "integer",
+      "description": "List of masked time points to ignore (mt<n>)",
+      "title": "Masked Timepoints"
+    },
+    "suppdata": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Supplemental timeseries data required for some models",
+      "title": "Supplemental Data"
+    },
+    "dump_param_names": {
+      "type": "boolean",
+      "description": "Write the file paramnames.txt containing the names of the model parameters",
+      "title": "Dump Parameter Names",
+      "default": false
+    },
+    "save_model_fit": {
+      "type": "boolean",
+      "description": "Output the model prediction as a 4d volume",
+      "title": "Save Model Fit",
+      "default": false
+    },
+    "save_residuals": {
+      "type": "boolean",
+      "description": "Output the residuals (difference between the data and the model prediction)",
+      "title": "Save Residuals",
+      "default": false
+    },
+    "save_model_extras": {
+      "type": "boolean",
+      "description": "Output additional model-specific timeseries data",
+      "title": "Save Model Extras",
+      "default": false
+    },
+    "save_mvn": {
+      "type": "boolean",
+      "description": "Output the final MVN distributions.",
+      "title": "Save MVN",
+      "default": false
+    },
+    "save_mean": {
+      "type": "boolean",
+      "description": "Output the parameter means.",
+      "title": "Save Mean",
+      "default": false
+    },
+    "save_std": {
+      "type": "boolean",
+      "description": "Output the parameter standard deviations.",
+      "title": "Save Std",
+      "default": false
+    },
+    "save_var": {
+      "type": "boolean",
+      "description": "Output the parameter variances.",
+      "title": "Save Var",
+      "default": false
+    },
+    "save_zstat": {
+      "type": "boolean",
+      "description": "Output the parameter Zstats.",
+      "title": "Save Zstat",
+      "default": false
+    },
+    "save_noise_mean": {
+      "type": "boolean",
+      "description": "Output the noise means.",
+      "title": "Save Noise Mean",
+      "default": false
+    },
+    "save_noise_std": {
+      "type": "boolean",
+      "description": "Output the noise standard deviations.",
+      "title": "Save Noise Std",
+      "default": false
+    },
+    "save_free_energy": {
+      "type": "boolean",
+      "description": "Output the free energy, if calculated.",
+      "title": "Save Free Energy",
+      "default": false
+    },
+    "optfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File containing additional options, one per line, in the same form as specified on the command line",
+      "title": "Options File"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Output large amounts of debug information. ONLY USE WITH VERY SMALL NUMBERS OF VOXELS",
+      "title": "Debug",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "output",
+    "method",
+    "model",
+    "data"
+  ]
+}

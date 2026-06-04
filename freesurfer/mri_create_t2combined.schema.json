@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_create_t2combined",
+  "description": "Utility to combine two or three T2* 7T partial-brain volumes into one volume, retaining resolution and registered to the MPRAGE anatomical.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_create_t2combined"
+    },
+    "subjid": {
+      "type": "string",
+      "description": "Subject ID of the FreeSurfer anatomical",
+      "title": "Subject ID"
+    },
+    "t1wb": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T1 7T whole-brain image",
+      "title": "T1 7T Whole Brain"
+    },
+    "t2upper": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T2* 7T partial-brain upper half image",
+      "title": "T2* 7T Partial Brain Upper Half"
+    },
+    "t2middle": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T2* 7T partial-brain middle half image, or enter 'none'",
+      "title": "T2* 7T Partial Brain Middle Half"
+    },
+    "t2lower": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T2* 7T partial-brain lower half image",
+      "title": "T2* 7T Partial Brain Lower Half"
+    },
+    "t2combined": {
+      "type": "string",
+      "description": "Output file for T2* 7T combined partial-brain halves",
+      "title": "T2* 7T Combined Partial Brain Halves"
+    },
+    "show": {
+      "type": "boolean",
+      "description": "If the last argument is 'show', then the commands that will run are shown but not executed.",
+      "title": "Show Command",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subjid",
+    "t1wb",
+    "t2upper",
+    "t2lower",
+    "t2combined"
+  ]
+}

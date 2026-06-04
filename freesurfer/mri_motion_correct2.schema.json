@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_motion_correct2",
+  "description": "Aligns and averages two or more volumes using minctracc for alignment and mincresample and mincaverage for resampling.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_motion_correct2"
+    },
+    "output_spec": {
+      "type": "string",
+      "description": "Output file or directory (for COR format)",
+      "title": "Output Specification"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input volume files, specified multiple times for multiple files",
+      "title": "Input Files"
+    },
+    "target": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use the specified target instead of the first input file",
+      "title": "Target File"
+    },
+    "wild": {
+      "type": "boolean",
+      "description": "Assume unmatched arguments are input files",
+      "title": "Wild Flag",
+      "default": false
+    },
+    "tmp_dir": {
+      "type": "string",
+      "description": "Directory for temporary files",
+      "title": "Temporary Directory"
+    },
+    "nocleanup": {
+      "type": "boolean",
+      "description": "Do not delete temporary files",
+      "title": "No Cleanup Flag",
+      "default": false
+    },
+    "umask": {
+      "type": "string",
+      "description": "Set UNIX file permission mask",
+      "title": "UMask"
+    },
+    "cm": {
+      "type": "boolean",
+      "description": "Make COR volumes conform to minimum voxel size",
+      "title": "Conform to Min Voxel Size Flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version information and exit",
+      "title": "Version Flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Print detailed debug information to screen",
+      "title": "Debug Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "output_spec",
+    "input_files"
+  ]
+}

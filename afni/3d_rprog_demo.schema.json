@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dRprogDemo",
+  "description": "Template program to help users write their own R processing routines on MRI volumes.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dRprogDemo"
+    },
+    "input_dsets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input dataset(s) to be scaled.",
+      "title": "Input Datasets"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Process voxels inside this mask only. Default is no masking.",
+      "title": "Mask"
+    },
+    "scale": {
+      "type": "number",
+      "description": "Multiply each voxel by SS",
+      "title": "Scale Factor"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output prefix (just prefix, no view+suffix needed).",
+      "title": "Output Prefix"
+    },
+    "help_aspx": {
+      "type": "boolean",
+      "description": "Display help message with autolabeling.",
+      "title": "Help aspx flag",
+      "default": false
+    },
+    "help_raw": {
+      "type": "boolean",
+      "description": "Display raw help message as in the code.",
+      "title": "Help raw flag",
+      "default": false
+    },
+    "help_spx": {
+      "type": "boolean",
+      "description": "Display help message in sphinx format.",
+      "title": "Help spx flag",
+      "default": false
+    },
+    "help_txt": {
+      "type": "boolean",
+      "description": "Display help message in simple text.",
+      "title": "Help text flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message in simple text.",
+      "title": "Help flag",
+      "default": false
+    },
+    "show_allowed_options": {
+      "type": "boolean",
+      "description": "List of allowed options.",
+      "title": "Show allowed options flag",
+      "default": false
+    },
+    "verbosity_level": {
+      "type": "number",
+      "description": "Verbosity level. 0 for quiet (Default). 1 or more: talkative.",
+      "title": "Verbosity level"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dsets",
+    "scale",
+    "prefix"
+  ]
+}

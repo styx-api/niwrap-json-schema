@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScaleToMap",
+  "description": "Tool to scale values to a color map",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/ScaleToMap"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file in 1D formatted ascii containing node values",
+      "title": "Input File"
+    },
+    "icol": {
+      "type": "number",
+      "description": "Index of node index column (-1 if node index is implicit)",
+      "title": "Index Column"
+    },
+    "vcol": {
+      "type": "number",
+      "description": "Index of node value column",
+      "title": "Value Column"
+    },
+    "cmap": {
+      "type": "string",
+      "description": "Choose one of the standard colormaps available with SUMA",
+      "title": "Color Map"
+    },
+    "cmapfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read color map from a Mapfile",
+      "title": "Color Map File"
+    },
+    "cmapdb": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Read color maps from an AFNI .pal file",
+      "title": "Color Map Database File"
+    },
+    "frf": {
+      "type": "boolean",
+      "description": "Indicate that the first row in the file is the first color",
+      "title": "First Row First",
+      "default": false
+    },
+    "clp": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Clip values in IntVect to specified range",
+      "title": "Clip Values"
+    },
+    "perc_clp": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Percentile clip values in IntVect to specified range",
+      "title": "Percentile Clip Values"
+    },
+    "apr": {
+      "type": "number",
+      "description": "Clip values in IntVect to [0 range]",
+      "title": "Auto-Positive Range"
+    },
+    "anr": {
+      "type": "number",
+      "description": "Clip values in IntVect to [-range range]",
+      "title": "Auto-Negative Range"
+    },
+    "interp": {
+      "type": "boolean",
+      "description": "Use color interpolation between colors in colormap (default)",
+      "title": "Interpolation",
+      "default": false
+    },
+    "nointerp": {
+      "type": "boolean",
+      "description": "Turn off color interpolation within the colormap",
+      "title": "No Interpolation",
+      "default": false
+    },
+    "direct": {
+      "type": "boolean",
+      "description": "Directly map values to index of color in colormap",
+      "title": "Direct Mapping",
+      "default": false
+    },
+    "msk_zero": {
+      "type": "boolean",
+      "description": "Mask values that are 0",
+      "title": "Mask Zero",
+      "default": false
+    },
+    "msk": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Mask values in vcol between specified range",
+      "title": "Mask Range"
+    },
+    "msk_col": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set color of masked voxels",
+      "title": "Mask Color"
+    },
+    "nomsk_col": {
+      "type": "boolean",
+      "description": "Do not output nodes that got masked",
+      "title": "No Mask Color",
+      "default": false
+    },
+    "br": {
+      "type": "number",
+      "description": "Apply a brightness factor to colormap and mask color",
+      "title": "Brightness Factor"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help message",
+      "title": "Help",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Verbose mode",
+      "title": "Verbose",
+      "default": false
+    },
+    "showmap": {
+      "type": "boolean",
+      "description": "Print colormap to screen and quit",
+      "title": "Show Color Map",
+      "default": false
+    },
+    "showdb": {
+      "type": "boolean",
+      "description": "Print colors and colormaps of AFNI along with any loaded from Palfile",
+      "title": "Show Color Database",
+      "default": false
+    },
+    "novolreg": {
+      "type": "boolean",
+      "description": "Ignore any Rotate, Volreg, Tagalign, or WarpDrive transformations present in the Surface Volume",
+      "title": "No Volume Registration",
+      "default": false
+    },
+    "noxform": {
+      "type": "boolean",
+      "description": "Same as -novolreg",
+      "title": "No Transformations",
+      "default": false
+    },
+    "setenv": {
+      "type": "string",
+      "description": "Set environment variable ENVname to ENVvalue. Quotes are necessary",
+      "title": "Set Environment Variable"
+    },
+    "trace": {
+      "type": "object",
+      "properties": {
+        "trace": {
+          "type": "boolean",
+          "description": "Turns on In/Out debug and Memory tracing. It's recommended to redirect stdout to a file when using this option.",
+          "title": "Trace Debugging",
+          "default": false
+        },
+        "TRACE": {
+          "type": "boolean",
+          "description": "Turns on extreme tracing.",
+          "title": "Extreme Tracing",
+          "default": false
+        }
+      },
+      "description": "Turns on In/Out debug and Memory tracing. It's recommended to redirect stdout to a file when using this option.",
+      "title": "Trace Debugging"
+    },
+    "nomall": {
+      "type": "boolean",
+      "description": "Turn off memory tracing",
+      "title": "No Memory Trace",
+      "default": false
+    },
+    "yesmall": {
+      "type": "boolean",
+      "description": "Turn on memory tracing (default)",
+      "title": "Memory Trace",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "icol",
+    "vcol"
+  ]
+}

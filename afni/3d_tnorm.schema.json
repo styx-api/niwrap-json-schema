@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTnorm",
+  "description": "Normalizes each voxel time series by multiplicative scaling",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTnorm"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output dataset",
+      "title": "Output prefix"
+    },
+    "norm2": {
+      "type": "boolean",
+      "description": "L2 normalize (sum of squares = 1)",
+      "title": "L2 normalization flag",
+      "default": false
+    },
+    "normR": {
+      "type": "boolean",
+      "description": "Normalize so sum of squares = number of time points",
+      "title": "Sum of squares normalization flag",
+      "default": false
+    },
+    "norm1": {
+      "type": "boolean",
+      "description": "L1 normalize (sum of absolute values = 1)",
+      "title": "L1 normalization flag",
+      "default": false
+    },
+    "normx": {
+      "type": "boolean",
+      "description": "Scale so max absolute value = 1 (L_infinity norm)",
+      "title": "Max absolute value normalization flag",
+      "default": false
+    },
+    "polort": {
+      "type": "number",
+      "description": "Detrend with polynomials of order p before normalizing",
+      "title": "Polynomial order for detrending"
+    },
+    "L1fit": {
+      "type": "boolean",
+      "description": "Detrend with L1 regression (L2 is default)",
+      "title": "L1 regression detrending flag",
+      "default": false
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset (e.g. data.nii)",
+      "title": "Input dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

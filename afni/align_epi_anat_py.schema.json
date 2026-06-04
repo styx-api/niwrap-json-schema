@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "align_epi_anat.py",
+  "description": "Align EPI to anatomical datasets or vice versa",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/align_epi_anat.py"
+    },
+    "epi": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "EPI dataset to align or to which to align",
+      "title": "EPI Dataset"
+    },
+    "anat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Anatomical dataset to align or to which to align",
+      "title": "Anatomical Dataset"
+    },
+    "epi_base": {
+      "type": "string",
+      "description": "Base sub-brick to use for alignment (0/mean/median/max/subbrick#)",
+      "title": "EPI Base Sub-brick"
+    },
+    "anat2epi": {
+      "type": "boolean",
+      "description": "Align anatomical to EPI dataset (default)",
+      "title": "Align anatomical to EPI dataset",
+      "default": false
+    },
+    "epi2anat": {
+      "type": "boolean",
+      "description": "Align EPI to anatomical dataset",
+      "title": "Align EPI to anatomical dataset",
+      "default": false
+    },
+    "suffix": {
+      "type": "string",
+      "description": "Append suffix to the original anat/epi dataset to use in the resulting dataset names",
+      "title": "Output Suffix"
+    },
+    "AddEdge": {
+      "type": "boolean",
+      "description": "Run @AddEdge script to create composite edge images",
+      "title": "AddEdge",
+      "default": false
+    },
+    "big_move": {
+      "type": "boolean",
+      "description": "Large displacement is needed to align the two volumes",
+      "title": "Big movement between datasets",
+      "default": false
+    },
+    "giant_move": {
+      "type": "boolean",
+      "description": "Even larger movement required, uses cmass, two passes and very large angles and shifts",
+      "title": "Giant movement between datasets",
+      "default": false
+    },
+    "ginormous_move": {
+      "type": "boolean",
+      "description": "Adds align_centers to giant_move",
+      "title": "Ginormous movement between datasets",
+      "default": false
+    },
+    "keep_rm_files": {
+      "type": "boolean",
+      "description": "Don't delete any of the temporary files created",
+      "title": "Keep temporary files",
+      "default": false
+    },
+    "prep_only": {
+      "type": "boolean",
+      "description": "Do preprocessing steps only without alignment",
+      "title": "Preprocessing only",
+      "default": false
+    },
+    "ana_has_skull": {
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "description": "Do not skullstrip anat dataset",
+      "title": "Anatomical dataset has skull"
+    },
+    "epi_strip": {
+      "enum": [
+        "3dSkullStrip",
+        "3dAutomask",
+        "None"
+      ],
+      "description": "Method to remove skull for EPI data",
+      "title": "Skull stripping method for EPI dataset"
+    },
+    "volreg_method": {
+      "enum": [
+        "3dvolreg",
+        "3dWarpDrive",
+        "3dAllineate"
+      ],
+      "description": "Time series volume registration method",
+      "title": "Volume Registration Method"
+    },
+    "ex_mode": {
+      "enum": [
+        "quiet",
+        "echo",
+        "dry_run",
+        "script"
+      ],
+      "description": "Command execution mode",
+      "title": "Execution Mode"
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Overwrite existing files",
+      "title": "Overwrite existing files",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "epi",
+    "anat",
+    "epi_base"
+  ]
+}

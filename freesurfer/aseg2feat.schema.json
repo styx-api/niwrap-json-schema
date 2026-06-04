@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "aseg2feat",
+  "description": "Resamples the FreeSurfer automatic subcortical segmentation (aseg) to the FEAT functional space.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/aseg2feat"
+    },
+    "feat": {
+      "type": "string",
+      "description": "FEAT output directory. Multiple --feat arguments can be supplied.",
+      "title": "FEAT directory"
+    },
+    "featdirfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with a list of FEAT directories. Can be used in conjunction with --feat.",
+      "title": "FEAT directory file"
+    },
+    "seg": {
+      "type": "string",
+      "description": "Change segmentation volume, default is aseg.",
+      "title": "Segmentation volume"
+    },
+    "aparc_aseg": {
+      "type": "boolean",
+      "description": "Use aparc+aseg.mgz. Same as --seg aparc+aseg.mgz.",
+      "title": "Aparc + aseg flag",
+      "default": false
+    },
+    "svstats": {
+      "type": "boolean",
+      "description": "Save result in featdir/stats instead of featdir/reg/freesurfer",
+      "title": "Save stats flag",
+      "default": false
+    },
+    "standard": {
+      "type": "boolean",
+      "description": "Map results to standard space instead of native functional space. Implies --svstats.",
+      "title": "Standard space flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging.",
+      "title": "Debug flag",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print help and exit.",
+      "title": "Help flag",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print version and exit.",
+      "title": "Version flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "feat"
+  ]
+}

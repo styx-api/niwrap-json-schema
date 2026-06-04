@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bianca_cluster_stats",
+  "description": "Calculate number of clusters and WMH volume in a BIANCA output map",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/bianca_cluster_stats"
+    },
+    "bianca_output_map": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "BIANCA output map file",
+      "title": "BIANCA output map"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold value to apply",
+      "title": "Threshold"
+    },
+    "min_cluster_size": {
+      "type": "number",
+      "description": "Minimum cluster size in voxels",
+      "title": "Minimum Cluster Size"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional mask file (in the same space as the BIANCA output map)",
+      "title": "Mask"
+    }
+  },
+  "required": [
+    "@type",
+    "bianca_output_map",
+    "threshold",
+    "min_cluster_size"
+  ]
+}

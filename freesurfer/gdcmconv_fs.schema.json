@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gdcmconv.fs",
+  "description": "Convert a DICOM file into another DICOM file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/gdcmconv.fs"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input DICOM filename",
+      "title": "Input File"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output DICOM filename",
+      "title": "Output File"
+    },
+    "explicit_flag": {
+      "type": "boolean",
+      "description": "Change Transfer Syntax to explicit.",
+      "title": "Explicit Transfer Syntax Flag",
+      "default": false
+    },
+    "implicit_flag": {
+      "type": "boolean",
+      "description": "Change Transfer Syntax to implicit.",
+      "title": "Implicit Transfer Syntax Flag",
+      "default": false
+    },
+    "use_dict_flag": {
+      "type": "boolean",
+      "description": "Use dict for VR (only public by default).",
+      "title": "Use Dict Flag",
+      "default": false
+    },
+    "with_private_dict_flag": {
+      "type": "boolean",
+      "description": "Use private dict for VR (advanced user only).",
+      "title": "With Private Dict Flag",
+      "default": false
+    },
+    "check_meta_flag": {
+      "type": "boolean",
+      "description": "Check File Meta Information (advanced user only).",
+      "title": "Check Meta Information Flag",
+      "default": false
+    },
+    "root_uid": {
+      "type": "string",
+      "description": "Root UID.",
+      "title": "Root UID"
+    },
+    "remove_gl_flag": {
+      "type": "boolean",
+      "description": "Remove group length (deprecated in DICOM 2008).",
+      "title": "Remove Group Length Flag",
+      "default": false
+    },
+    "remove_private_tags_flag": {
+      "type": "boolean",
+      "description": "Remove private tags.",
+      "title": "Remove Private Tags Flag",
+      "default": false
+    },
+    "remove_retired_flag": {
+      "type": "boolean",
+      "description": "Remove retired tags.",
+      "title": "Remove Retired Tags Flag",
+      "default": false
+    },
+    "apply_lut_flag": {
+      "type": "boolean",
+      "description": "Apply LUT (non-standard, advanced user only).",
+      "title": "Apply LUT Flag",
+      "default": false
+    },
+    "photometric_interpretation": {
+      "type": "string",
+      "description": "Change Photometric Interpretation (when possible).",
+      "title": "Photometric Interpretation"
+    },
+    "raw_flag": {
+      "type": "boolean",
+      "description": "Decompress image.",
+      "title": "Raw Decompression Flag",
+      "default": false
+    },
+    "deflated_flag": {
+      "type": "boolean",
+      "description": "Compress using deflated (gzip).",
+      "title": "Deflated Compression Flag",
+      "default": false
+    },
+    "jpeg_flag": {
+      "type": "boolean",
+      "description": "Compress image in jpeg.",
+      "title": "JPEG Compression Flag",
+      "default": false
+    },
+    "j2k_flag": {
+      "type": "boolean",
+      "description": "Compress image in j2k.",
+      "title": "J2K Compression Flag",
+      "default": false
+    },
+    "jpegls_flag": {
+      "type": "boolean",
+      "description": "Compress image in jpeg-ls.",
+      "title": "JPEG-LS Compression Flag",
+      "default": false
+    },
+    "rle_flag": {
+      "type": "boolean",
+      "description": "Compress image in rle (lossless only).",
+      "title": "RLE Compression Flag",
+      "default": false
+    },
+    "force_flag": {
+      "type": "boolean",
+      "description": "Force decompression/merging before recompression/splitting.",
+      "title": "Force Flag",
+      "default": false
+    },
+    "generate_icon_flag": {
+      "type": "boolean",
+      "description": "Generate icon.",
+      "title": "Generate Icon Flag",
+      "default": false
+    },
+    "icon_minmax": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Min/Max value for icon.",
+      "title": "Icon Min/Max Values"
+    },
+    "icon_auto_minmax_flag": {
+      "type": "boolean",
+      "description": "Automatically compute best Min/Max values for icon.",
+      "title": "Auto Compute Icon Min/Max Flag",
+      "default": false
+    },
+    "compress_icon_flag": {
+      "type": "boolean",
+      "description": "Decide whether icon follows main Transfer Syntax or remains uncompressed.",
+      "title": "Compress Icon Flag",
+      "default": false
+    },
+    "planar_configuration": {
+      "type": "string",
+      "description": "Change planar configuration.",
+      "title": "Planar Configuration"
+    },
+    "lossy_flag": {
+      "type": "boolean",
+      "description": "Use the lossy (if possible) compressor.",
+      "title": "Lossy Compression Flag",
+      "default": false
+    },
+    "split": {
+      "type": "number",
+      "description": "Write 2D image with multiple fragments (using max size).",
+      "title": "Split Fragments"
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "More verbose (warning+error).",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "warning_flag": {
+      "type": "boolean",
+      "description": "Print warning info.",
+      "title": "Warning Info Flag",
+      "default": false
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Print debug info.",
+      "title": "Debug Info Flag",
+      "default": false
+    },
+    "error_flag": {
+      "type": "boolean",
+      "description": "Print error info.",
+      "title": "Error Info Flag",
+      "default": false
+    },
+    "quiet_flag": {
+      "type": "boolean",
+      "description": "Do not print to stdout.",
+      "title": "Quiet Mode Flag",
+      "default": false
+    },
+    "jpeg_quality": {
+      "type": "number",
+      "description": "Set JPEG quality.",
+      "title": "JPEG Quality"
+    },
+    "lossy_error": {
+      "type": "integer",
+      "description": "Set JPEG-LS lossy error.",
+      "title": "JPEG-LS Lossy Error"
+    },
+    "rate": {
+      "type": "number",
+      "description": "Set J2K rate.",
+      "title": "J2K Rate"
+    },
+    "j2k_quality": {
+      "type": "number",
+      "description": "Set J2K quality.",
+      "title": "J2K Quality"
+    },
+    "tile": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Set J2K tile size.",
+      "title": "J2K Tile Size"
+    },
+    "number_resolution": {
+      "type": "number",
+      "description": "Set number of resolution.",
+      "title": "Number of Resolutions"
+    },
+    "irreversible_flag": {
+      "type": "boolean",
+      "description": "Set irreversible.",
+      "title": "Irreversible Flag",
+      "default": false
+    },
+    "ignore_errors_flag": {
+      "type": "boolean",
+      "description": "Convert even if file is corrupted (advanced users only, see disclaimers).",
+      "title": "Ignore Errors Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file"
+  ]
+}

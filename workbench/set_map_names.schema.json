@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SET THE NAME OF ONE OR MORE MAPS IN A FILE",
+  "description": "Sets the name of one or more maps for metric, shape, label, volume, cifti scalar or cifti label files.  You must specify either -name-file, or -from-data-file, or at least one -map option.  The three option types are mutually exclusive.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/set_map_names"
+    },
+    "data_file": {
+      "type": "string",
+      "description": "the file to set the map names of"
+    },
+    "name_file": {
+      "type": "string",
+      "description": "use a text file to replace all map names"
+    },
+    "from_data_file": {
+      "type": "string",
+      "description": "use the map names from another data file"
+    },
+    "map": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "description": "the map index to change the name of"
+          },
+          "new_name": {
+            "type": "string",
+            "description": "the name to set for the map"
+          }
+        },
+        "required": [
+          "index",
+          "new_name"
+        ]
+      },
+      "description": "specify a map to set the name of"
+    }
+  },
+  "required": [
+    "@type",
+    "data_file",
+    "map"
+  ]
+}

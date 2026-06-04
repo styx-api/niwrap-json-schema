@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fat_proc_decmap",
+  "description": "This program makes a directionally encoded color (DEC) map for DTI results.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/fat_proc_decmap"
+    },
+    "in_fa": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input FA (scalar) map.",
+      "title": "Input FA"
+    },
+    "in_v1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input first eigenvector (3-vector) map.",
+      "title": "Input V1"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Set prefix (and path) for output DWI data.",
+      "title": "Prefix"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional mask for picking out a region. Otherwise, only places with FA>0 are given coloration.",
+      "title": "Mask"
+    },
+    "fa_thr": {
+      "type": "number",
+      "description": "For QC1 type of DEC images, use FFF to threshold where DEC values are calculated (default: 0.2).",
+      "title": "FA Threshold"
+    },
+    "fa_sca": {
+      "type": "number",
+      "description": "For QC2 type of DEC images, use SSS to scale the FA weighting of what would otherwise be a 'classical' DEC map (default: 0.7).",
+      "title": "FA Scale"
+    },
+    "workdir": {
+      "type": "string",
+      "description": "Specify a working directory, which can be removed (default: '__WORKING_decmap').",
+      "title": "Working Directory"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Do not delete temporary files when finishing.",
+      "title": "No Clean",
+      "default": false
+    },
+    "qc_prefix": {
+      "type": "string",
+      "description": "Set the prefix of the QC image files (default: 'PREFIX').",
+      "title": "QC Prefix"
+    },
+    "no_cmd_out": {
+      "type": "boolean",
+      "description": "Do not save the command line call of this program and location where it was run.",
+      "title": "No Command Output",
+      "default": false
+    },
+    "no_qc_view": {
+      "type": "boolean",
+      "description": "Turn off generating QC image files.",
+      "title": "No QC View",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "in_fa",
+    "in_v1",
+    "prefix"
+  ]
+}

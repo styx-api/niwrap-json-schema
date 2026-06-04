@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "betsurf",
+  "description": "BET Surface Finder to extract brain surfaces using T1 and T2 images",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/betsurf"
+    },
+    "t1_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T1-weighted MRI image",
+      "title": "T1 Image"
+    },
+    "t2_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T2-weighted MRI image (optional if using --t1only flag)",
+      "title": "T2 Image"
+    },
+    "bet_mesh": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "BET Mesh File (.vtk)",
+      "title": "BET Mesh"
+    },
+    "t1_to_standard_mat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Transformation matrix file from T1 to standard space",
+      "title": "T1 to Standard Matrix"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Output prefix for generated files",
+      "title": "Output Prefix"
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Displays help message and exits",
+      "title": "Help Flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose Flag",
+      "default": false
+    },
+    "t1only_flag": {
+      "type": "boolean",
+      "description": "Extraction with T1 only",
+      "title": "T1-only Extraction Flag",
+      "default": false
+    },
+    "outline_flag": {
+      "type": "boolean",
+      "description": "Generates all surface outlines",
+      "title": "Outline Flag",
+      "default": false
+    },
+    "mask_flag": {
+      "type": "boolean",
+      "description": "Generates binary masks from the meshes",
+      "title": "Mask Generation Flag",
+      "default": false
+    },
+    "skull_mask_flag": {
+      "type": "boolean",
+      "description": "Generates skull binary mask",
+      "title": "Skull Mask Flag",
+      "default": false
+    },
+    "increased_precision": {
+      "type": "integer",
+      "description": "Retessellates the meshes the indicated number of times (int)",
+      "title": "Increased Precision"
+    }
+  },
+  "required": [
+    "@type",
+    "t1_image",
+    "bet_mesh",
+    "t1_to_standard_mat",
+    "output_prefix"
+  ]
+}

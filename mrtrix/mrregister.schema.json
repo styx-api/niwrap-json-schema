@@ -1,0 +1,472 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mrregister",
+  "description": "Register two images together using a symmetric rigid, affine or non-linear transformation model.\n\nBy default this application will perform an affine, followed by non-linear registration.\n\nFOD registration (with apodised point spread reorientation) will be performed by default if the number of volumes in the 4th dimension equals the number of coefficients in an antipodally symmetric spherical harmonic series (e.g. 6, 15, 28 etc). The -no_reorientation option can be used to force reorientation off if required.\n\nNon-linear registration computes warps to map from both image1->image2 and image2->image1. Similar to Avants (2008) Med Image Anal. 12(1): 26â€“41, registration is performed by matching both the image1 and image2 in a 'midway space'. Warps can be saved as two deformation fields that map directly between image1->image2 and image2->image1, or if using -nl_warp_full as a single 5D file that stores all 4 warps image1->mid->image2, and image2->mid->image1. The 5D warp format stores x,y,z deformations in the 4th dimension, and uses the 5th dimension to index the 4 warps. The affine transforms estimated (to midway space) are also stored as comments in the image header. The 5D warp file can be used to reinitialise subsequent registrations, in addition to transforming images to midway space (e.g. for intra-subject alignment in a 2-time-point longitudinal analysis).\n\nReferences:\n\n* If FOD registration is being performed:\nRaffelt, D.; Tournier, J.-D.; Fripp, J; Crozier, S.; Connelly, A. & Salvado, O. Symmetric diffeomorphic registration of fibre orientation distributions. NeuroImage, 2011, 56(3), 1171-1180\n\nRaffelt, D.; Tournier, J.-D.; Crozier, S.; Connelly, A. & Salvado, O. Reorientation of fiber orientation distributions using apodized point spread functions. Magnetic Resonance in Medicine, 2012, 67, 844-855",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/mrregister"
+    },
+    "type": {
+      "type": "string",
+      "description": "the registration type. Valid choices are: rigid, affine, nonlinear, rigid_affine, rigid_nonlinear, affine_nonlinear, rigid_affine_nonlinear (Default: affine_nonlinear)",
+      "title": "type"
+    },
+    "transformed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "image1 after registration transformed and regridded to the space of image2. Note that -transformed needs to be repeated for each contrast if multi-contrast registration is used.",
+      "title": "transformed"
+    },
+    "transformed_midway": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "image1_transformed": {
+            "type": "string",
+            "description": "image1 and image2 after registration transformed and regridded to the midway space. Note that -transformed_midway needs to be repeated for each contrast if multi-contrast registration is used.",
+            "title": "image1_transformed"
+          },
+          "image2_transformed": {
+            "type": "string",
+            "description": "image1 and image2 after registration transformed and regridded to the midway space. Note that -transformed_midway needs to be repeated for each contrast if multi-contrast registration is used.",
+            "title": "image2_transformed"
+          }
+        },
+        "required": [
+          "image1_transformed",
+          "image2_transformed"
+        ]
+      },
+      "description": "image1 and image2 after registration transformed and regridded to the midway space. Note that -transformed_midway needs to be repeated for each contrast if multi-contrast registration is used.",
+      "title": "transformed_midway"
+    },
+    "mask1": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "a mask to define the region of image1 to use for optimisation.",
+      "title": "mask1"
+    },
+    "mask2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "a mask to define the region of image2 to use for optimisation.",
+      "title": "mask2"
+    },
+    "nan": {
+      "type": "boolean",
+      "description": "use NaN as out of bounds value. (Default: 0.0)",
+      "title": "nan",
+      "default": false
+    },
+    "rigid": {
+      "type": "string",
+      "description": "the output text file containing the rigid transformation as a 4x4 matrix",
+      "title": "rigid"
+    },
+    "rigid_1tomidway": {
+      "type": "string",
+      "description": "the output text file containing the rigid transformation that aligns image1 to image2 in their common midway space as a 4x4 matrix",
+      "title": "rigid_1tomidway"
+    },
+    "rigid_2tomidway": {
+      "type": "string",
+      "description": "the output text file containing the rigid transformation that aligns image2 to image1 in their common midway space as a 4x4 matrix",
+      "title": "rigid_2tomidway"
+    },
+    "rigid_init_translation": {
+      "type": "string",
+      "description": "initialise the translation and centre of rotation \nValid choices are: \nmass (aligns the centers of mass of both images, default), \ngeometric (aligns geometric image centres) and none.",
+      "title": "rigid_init_translation"
+    },
+    "rigid_init_rotation": {
+      "type": "string",
+      "description": "initialise the rotation Valid choices are: \nsearch (search for the best rotation using mean squared residuals), \nmoments (rotation based on directions of intensity variance with respect to centre of mass), \nnone (default).",
+      "title": "rigid_init_rotation"
+    },
+    "rigid_init_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "initialise either the rigid, affine, or syn registration with the supplied rigid transformation (as a 4x4 matrix in scanner coordinates). Note that this overrides rigid_init_translation and rigid_init_rotation initialisation ",
+      "title": "rigid_init_matrix"
+    },
+    "rigid_scale": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "use a multi-resolution scheme by defining a scale factor for each level using comma separated values (Default: 0.25,0.5,1.0)",
+      "title": "rigid_scale"
+    },
+    "rigid_niter": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "the maximum number of gradient descent iterations per stage. This can be specified either as a single number for all multi-resolution levels, or a single value for each level. (Default: 1000)",
+      "title": "rigid_niter"
+    },
+    "rigid_metric": {
+      "type": "string",
+      "description": "valid choices are: diff (intensity differences), Default: diff",
+      "title": "rigid_metric"
+    },
+    "rigid_metric_diff_estimator": {
+      "type": "string",
+      "description": "Valid choices are: l1 (least absolute: |x|), l2 (ordinary least squares), lp (least powers: |x|^1.2), Default: l2",
+      "title": "rigid_metric_diff_estimator"
+    },
+    "rigid_lmax": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "explicitly set the lmax to be used per scale factor in rigid FOD registration. By default FOD registration will use lmax 0,2,4 with default scale factors 0.25,0.5,1.0 respectively. Note that no reorientation will be performed with lmax = 0.",
+      "title": "rigid_lmax"
+    },
+    "rigid_log": {
+      "type": "string",
+      "description": "write gradient descent parameter evolution to log file",
+      "title": "rigid_log"
+    },
+    "affine": {
+      "type": "string",
+      "description": "the output text file containing the affine transformation as a 4x4 matrix",
+      "title": "affine"
+    },
+    "affine_1tomidway": {
+      "type": "string",
+      "description": "the output text file containing the affine transformation that aligns image1 to image2 in their common midway space as a 4x4 matrix",
+      "title": "affine_1tomidway"
+    },
+    "affine_2tomidway": {
+      "type": "string",
+      "description": "the output text file containing the affine transformation that aligns image2 to image1 in their common midway space as a 4x4 matrix",
+      "title": "affine_2tomidway"
+    },
+    "affine_init_translation": {
+      "type": "string",
+      "description": "initialise the translation and centre of rotation \nValid choices are: \nmass (aligns the centers of mass of both images), \ngeometric (aligns geometric image centres) and none. (Default: mass)",
+      "title": "affine_init_translation"
+    },
+    "affine_init_rotation": {
+      "type": "string",
+      "description": "initialise the rotation Valid choices are: \nsearch (search for the best rotation using mean squared residuals), \nmoments (rotation based on directions of intensity variance with respect to centre of mass), \nnone (Default: none).",
+      "title": "affine_init_rotation"
+    },
+    "affine_init_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "initialise either the affine, or syn registration with the supplied affine transformation (as a 4x4 matrix in scanner coordinates). Note that this overrides affine_init_translation and affine_init_rotation initialisation ",
+      "title": "affine_init_matrix"
+    },
+    "affine_scale": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "use a multi-resolution scheme by defining a scale factor for each level using comma separated values (Default: 0.25,0.5,1.0)",
+      "title": "affine_scale"
+    },
+    "affine_niter": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "the maximum number of gradient descent iterations per stage. This can be specified either as a single number for all multi-resolution levels, or a single value for each level. (Default: 1000)",
+      "title": "affine_niter"
+    },
+    "affine_metric": {
+      "type": "string",
+      "description": "valid choices are: diff (intensity differences), Default: diff",
+      "title": "affine_metric"
+    },
+    "affine_metric_diff_estimator": {
+      "type": "string",
+      "description": "Valid choices are: l1 (least absolute: |x|), l2 (ordinary least squares), lp (least powers: |x|^1.2), Default: l2",
+      "title": "affine_metric_diff_estimator"
+    },
+    "affine_lmax": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "explicitly set the lmax to be used per scale factor in affine FOD registration. By default FOD registration will use lmax 0,2,4 with default scale factors 0.25,0.5,1.0 respectively. Note that no reorientation will be performed with lmax = 0.",
+      "title": "affine_lmax"
+    },
+    "affine_log": {
+      "type": "string",
+      "description": "write gradient descent parameter evolution to log file",
+      "title": "affine_log"
+    },
+    "init_translation_unmasked1": {
+      "type": "boolean",
+      "description": "disregard mask1 for the translation initialisation (affects 'mass')",
+      "title": "init_translation_unmasked1",
+      "default": false
+    },
+    "init_translation_unmasked2": {
+      "type": "boolean",
+      "description": "disregard mask2 for the translation initialisation (affects 'mass')",
+      "title": "init_translation_unmasked2",
+      "default": false
+    },
+    "init_rotation_unmasked1": {
+      "type": "boolean",
+      "description": "disregard mask1 for the rotation initialisation (affects 'search' and 'moments')",
+      "title": "init_rotation_unmasked1",
+      "default": false
+    },
+    "init_rotation_unmasked2": {
+      "type": "boolean",
+      "description": "disregard mask2 for the rotation initialisation (affects 'search' and 'moments')",
+      "title": "init_rotation_unmasked2",
+      "default": false
+    },
+    "init_rotation_search_angles": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "rotation angles for the local search in degrees between 0 and 180. (Default: 2,5,10,15,20)",
+      "title": "init_rotation_search_angles"
+    },
+    "init_rotation_search_scale": {
+      "type": "number",
+      "description": "relative size of the images used for the rotation search. (Default: 0.15)",
+      "title": "init_rotation_search_scale"
+    },
+    "init_rotation_search_directions": {
+      "type": "integer",
+      "description": "number of rotation axis for local search. (Default: 250)",
+      "title": "init_rotation_search_directions"
+    },
+    "init_rotation_search_run_global": {
+      "type": "boolean",
+      "description": "perform a global search. (Default: local)",
+      "title": "init_rotation_search_run_global",
+      "default": false
+    },
+    "init_rotation_search_global_iterations": {
+      "type": "integer",
+      "description": "number of rotations to investigate (Default: 10000)",
+      "title": "init_rotation_search_global_iterations"
+    },
+    "linstage_iterations": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "number of iterations for each registration stage, not to be confused with -rigid_niter or -affine_niter. This can be used to generate intermediate diagnostics images (-linstage.diagnostics.prefix) or to change the cost function optimiser during registration (without the need to repeatedly resize the images). (Default: 1 == no repetition)",
+      "title": "linstage_iterations"
+    },
+    "linstage_optimiser_first": {
+      "type": "string",
+      "description": "Cost function optimisation algorithm to use at first iteration of all stages. Valid choices: bbgd (Barzilai-Borwein gradient descent) or gd (simple gradient descent). (Default: bbgd)",
+      "title": "linstage_optimiser_first"
+    },
+    "linstage_optimiser_last": {
+      "type": "string",
+      "description": "Cost function optimisation algorithm to use at last iteration of all stages (if there are more than one). Valid choices: bbgd (Barzilai-Borwein gradient descent) or gd (simple gradient descent). (Default: bbgd)",
+      "title": "linstage_optimiser_last"
+    },
+    "linstage_optimiser_default": {
+      "type": "string",
+      "description": "Cost function optimisation algorithm to use at any stage iteration other than first or last iteration. Valid choices: bbgd (Barzilai-Borwein gradient descent) or gd (simple gradient descent). (Default: bbgd)",
+      "title": "linstage_optimiser_default"
+    },
+    "linstage_diagnostics_prefix": {
+      "type": "string",
+      "description": "generate diagnostics images after every registration stage",
+      "title": "linstage_diagnostics_prefix"
+    },
+    "nl_warp": {
+      "type": "object",
+      "properties": {
+        "warp1": {
+          "type": "string",
+          "description": "the non-linear warp output defined as two deformation fields, where warp1 can be used to transform image1->image2 and warp2 to transform image2->image1. The deformation fields also encapsulate any linear transformation estimated prior to non-linear registration.",
+          "title": "warp1"
+        },
+        "warp2": {
+          "type": "string",
+          "description": "the non-linear warp output defined as two deformation fields, where warp1 can be used to transform image1->image2 and warp2 to transform image2->image1. The deformation fields also encapsulate any linear transformation estimated prior to non-linear registration.",
+          "title": "warp2"
+        }
+      },
+      "required": [
+        "warp1",
+        "warp2"
+      ],
+      "description": "the non-linear warp output defined as two deformation fields, where warp1 can be used to transform image1->image2 and warp2 to transform image2->image1. The deformation fields also encapsulate any linear transformation estimated prior to non-linear registration.",
+      "title": "nl_warp"
+    },
+    "nl_warp_full": {
+      "type": "string",
+      "description": "output all warps used during registration. This saves four different warps that map each image to a midway space and their inverses in a single 5D image file. The 4th image dimension indexes the x,y,z component of the deformation vector and the 5th dimension indexes the field in this order: image1->midway, midway->image1, image2->midway, midway->image2. Where image1->midway defines the field that maps image1 onto the midway space using the reverse convention When linear registration is performed first, the estimated linear transform will be included in the comments of the image header, and therefore the entire linear and non-linear transform can be applied (in either direction) using this output warp file with mrtransform",
+      "title": "nl_warp_full"
+    },
+    "nl_init": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "initialise the non-linear registration with the supplied warp image. The supplied warp must be in the same format as output using the -nl_warp_full option (i.e. have 4 deformation fields with the linear transforms in the image header)",
+      "title": "nl_init"
+    },
+    "nl_scale": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "use a multi-resolution scheme by defining a scale factor for each level using comma separated values (Default: 0.25,0.5,1.0)",
+      "title": "nl_scale"
+    },
+    "nl_niter": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "the maximum number of iterations. This can be specified either as a single number for all multi-resolution levels, or a single value for each level. (Default: 50)",
+      "title": "nl_niter"
+    },
+    "nl_update_smooth": {
+      "type": "number",
+      "description": "regularise the gradient update field with Gaussian smoothing (standard deviation in voxel units, Default 2.0)",
+      "title": "nl_update_smooth"
+    },
+    "nl_disp_smooth": {
+      "type": "number",
+      "description": "regularise the displacement field with Gaussian smoothing (standard deviation in voxel units, Default 1.0)",
+      "title": "nl_disp_smooth"
+    },
+    "nl_grad_step": {
+      "type": "number",
+      "description": "the gradient step size for non-linear registration (Default: 0.5)",
+      "title": "nl_grad_step"
+    },
+    "nl_lmax": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "explicitly set the lmax to be used per scale factor in non-linear FOD registration. By default FOD registration will use lmax 0,2,4 with default scale factors 0.25,0.5,1.0 respectively. Note that no reorientation will be performed with lmax = 0.",
+      "title": "nl_lmax"
+    },
+    "diagnostics_image": {
+      "type": "string",
+      "description": "write intermediate images for diagnostics purposes",
+      "title": "diagnostics_image"
+    },
+    "directions": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "the directions used for FOD reorientation using apodised point spread functions (Default: 60 directions)",
+      "title": "directions"
+    },
+    "noreorientation": {
+      "type": "boolean",
+      "description": "turn off FOD reorientation. Reorientation is on by default if the number of volumes in the 4th dimension corresponds to the number of coefficients in an antipodally symmetric spherical harmonic series (i.e. 6, 15, 28, 45, 66 etc)",
+      "title": "noreorientation",
+      "default": false
+    },
+    "mc_weights": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "relative weight of images used for multi-contrast registration. Default: 1.0 (equal weighting)",
+      "title": "mc_weights"
+    },
+    "datatype": {
+      "type": "string",
+      "description": "specify output image data type. Valid choices are: float32, float32le, float32be, float64, float64le, float64be, int64, uint64, int64le, uint64le, int64be, uint64be, int32, uint32, int32le, uint32le, int32be, uint32be, int16, uint16, int16le, uint16le, int16be, uint16be, cfloat32, cfloat32le, cfloat32be, cfloat64, cfloat64le, cfloat64be, int8, uint8, bit.",
+      "title": "datatype"
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "image1_image2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "input image 1 ('moving') and input image 2 ('template')",
+      "title": "image1_image2"
+    },
+    "contrast1_contrast2": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "optional list of additional input images used as additional contrasts. Can be used multiple times. contrastX and imageX must share the same coordinate system. ",
+      "title": "contrast1_contrast2"
+    }
+  },
+  "required": [
+    "@type",
+    "image1_image2"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLRflip",
+  "description": "Flips the rows of a dataset along one of the three axes to correct dataset direction labeling errors",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLRflip"
+    },
+    "flip_lr": {
+      "type": "boolean",
+      "description": "Flip about Left-Right axis",
+      "title": "Flip Left-Right",
+      "default": false
+    },
+    "flip_ap": {
+      "type": "boolean",
+      "description": "Flip about Anterior-Posterior axis",
+      "title": "Flip Anterior-Posterior",
+      "default": false
+    },
+    "flip_is": {
+      "type": "boolean",
+      "description": "Flip about Inferior-Superior axis",
+      "title": "Flip Inferior-Superior",
+      "default": false
+    },
+    "flip_x": {
+      "type": "boolean",
+      "description": "Flip about the 1st direction",
+      "title": "Flip 1st Direction",
+      "default": false
+    },
+    "flip_y": {
+      "type": "boolean",
+      "description": "Flip about the 2nd direction",
+      "title": "Flip 2nd Direction",
+      "default": false
+    },
+    "flip_z": {
+      "type": "boolean",
+      "description": "Flip about the 3rd direction",
+      "title": "Flip 3rd Direction",
+      "default": false
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Prefix to use for output. If multiple datasets are input, the program will choose a prefix for each output.",
+      "title": "Output Prefix"
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Datasets to flip",
+      "title": "Input Datasets"
+    }
+  },
+  "required": [
+    "@type",
+    "datasets"
+  ]
+}

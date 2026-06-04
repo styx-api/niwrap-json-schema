@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dThreetoRGB",
+  "description": "Converts 3 sub-bricks of input to an RGB-valued dataset.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dThreetoRGB"
+    },
+    "output_prefix": {
+      "type": "string",
+      "description": "Write output into dataset with specified prefix",
+      "title": "Output prefix"
+    },
+    "scale_factor": {
+      "type": "number",
+      "description": "Multiply input values by this factor before using as RGB",
+      "title": "Scale factor"
+    },
+    "mask_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Only output nonzero values where the mask dataset is nonzero",
+      "title": "Mask dataset"
+    },
+    "fim": {
+      "type": "boolean",
+      "description": "Write result as a 'fim' type dataset (default behavior)",
+      "title": "FIM flag",
+      "default": false
+    },
+    "anat": {
+      "type": "boolean",
+      "description": "Write result as a anatomical type dataset",
+      "title": "Anatomical flag",
+      "default": false
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset or first dataset if three datasets are provided",
+      "title": "Input dataset"
+    },
+    "input_dataset2": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Second dataset, required only if three datasets are provided",
+      "title": "Second input dataset"
+    },
+    "input_dataset3": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Third dataset, required only if three datasets are provided",
+      "title": "Third input dataset"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

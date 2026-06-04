@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DISPLAY INFORMATION ABOUT A NIFTI/CIFTI FILE",
+  "description": "You must specify at least one -print-* option.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/nifti_information"
+    },
+    "nifti_file": {
+      "type": "string",
+      "description": "the nifti/cifti file to examine"
+    },
+    "print_header": {
+      "type": "object",
+      "properties": {
+        "allow_truncated": {
+          "type": "boolean",
+          "description": "print the header even if the data is truncated",
+          "default": false
+        }
+      },
+      "description": "display the header contents"
+    },
+    "print_matrix": {
+      "type": "boolean",
+      "description": "output the values in the matrix (cifti only)",
+      "default": false
+    },
+    "print_xml": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "convert the XML to a specific CIFTI version (default is the file's cifti version)"
+        }
+      },
+      "description": "print the cifti XML (cifti only)"
+    }
+  },
+  "required": [
+    "@type",
+    "nifti_file"
+  ]
+}

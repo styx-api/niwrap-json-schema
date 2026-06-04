@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_stats2seg",
+  "description": "A command-line tool for converting MRI statistical maps to segmented volume.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_stats2seg"
+    },
+    "stat_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Stat file in an MRI format.",
+      "title": "Stat File"
+    },
+    "segmentation_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Segmentation volume file.",
+      "title": "Segmentation Volume"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output file.",
+      "title": "Output File"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging.",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "check_opts": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit.",
+      "title": "Check Options Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "stat_file",
+    "segmentation_volume",
+    "output_file"
+  ]
+}

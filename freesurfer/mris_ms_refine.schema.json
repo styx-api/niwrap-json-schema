@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_ms_refine",
+  "description": "This program positions the tessellation of the cortical surface at the white matter surface, then the gray matter surface. It generates surface files for these surfaces as well as a 'curvature' file for the cortical thickness, and a surface file which approximates layer IV of the cortical sheet.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_ms_refine"
+    },
+    "subject_name": {
+      "type": "string",
+      "description": "The name of the subject",
+      "title": "Subject name"
+    },
+    "hemisphere": {
+      "type": "string",
+      "description": "The hemisphere to process ('lh' or 'rh')",
+      "title": "Hemisphere"
+    },
+    "xform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The transform file",
+      "title": "Transform file"
+    },
+    "flash_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Flash images",
+      "title": "Flash files"
+    },
+    "residuals": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Residuals file",
+      "title": "Residuals file"
+    },
+    "omit_self_intersection": {
+      "type": "boolean",
+      "description": "Omit self-intersection and only generate gray/white surface.",
+      "title": "Omit self-intersection flag",
+      "default": false
+    },
+    "create_curvature_files": {
+      "type": "boolean",
+      "description": "Create curvature and area files from white matter surface.",
+      "title": "Create curvature files flag",
+      "default": false
+    },
+    "average_curvature": {
+      "type": "number",
+      "description": "Average curvature values a specified number of times.",
+      "title": "Average curvature values"
+    },
+    "white_only": {
+      "type": "boolean",
+      "description": "Only generate white matter surface.",
+      "title": "White only flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject_name",
+    "hemisphere",
+    "xform",
+    "flash_files",
+    "residuals"
+  ]
+}

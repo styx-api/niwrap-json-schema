@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsr-coreg",
+  "description": "Co-registers input data in preparation for FreeSurfer analysis",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/fsr-coreg"
+    },
+    "import_dir": {
+      "type": "string",
+      "description": "Data directory created by fsr-import",
+      "title": "Import Directory"
+    },
+    "reference_mode": {
+      "type": "string",
+      "description": "Mode to use as a reference (all modes register to this mode)",
+      "title": "Reference Mode"
+    },
+    "num_threads": {
+      "type": "number",
+      "description": "Number of threads to use",
+      "title": "Number of Threads"
+    },
+    "force_update": {
+      "type": "boolean",
+      "description": "Force update of files regardless of time stamp",
+      "title": "Force Update Flag",
+      "default": false
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Set the output directory, default is importdir",
+      "title": "Output Directory"
+    },
+    "expert_options": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Expert options file",
+      "title": "Expert Options File"
+    }
+  },
+  "required": [
+    "@type",
+    "import_dir",
+    "reference_mode"
+  ]
+}

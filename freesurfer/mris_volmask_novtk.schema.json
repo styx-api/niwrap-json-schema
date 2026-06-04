@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_volmask_novtk",
+  "description": "Computes a volume mask at the same resolution as <subject>/mri/brain.mgz and labels voxels based on the signed-distance function from the surface.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_volmask_novtk"
+    },
+    "io": {
+      "type": "string",
+      "description": "Positional argument for input/output",
+      "title": "Input/Output"
+    },
+    "cap_distance": {
+      "type": "number",
+      "description": "Maximum distance up to which the signed distance function computation is accurate",
+      "title": "Cap Distance"
+    },
+    "label_background": {
+      "type": "number",
+      "description": "Override default value for background label value (0)",
+      "title": "Label Background"
+    },
+    "label_left_white": {
+      "type": "number",
+      "description": "Override default value for left white matter label (20)",
+      "title": "Label Left White Matter"
+    },
+    "label_left_ribbon": {
+      "type": "number",
+      "description": "Override default value for left ribbon label (10)",
+      "title": "Label Left Ribbon"
+    },
+    "label_right_white": {
+      "type": "number",
+      "description": "Override default value for right white matter label (120)",
+      "title": "Label Right White Matter"
+    },
+    "label_right_ribbon": {
+      "type": "number",
+      "description": "Override default value for right ribbon label (110)",
+      "title": "Label Right Ribbon"
+    },
+    "surf_white": {
+      "type": "string",
+      "description": "Surface root name, default value is white",
+      "title": "Surface White"
+    },
+    "surf_pial": {
+      "type": "string",
+      "description": "Surface root name, default value is pial",
+      "title": "Surface Pial"
+    },
+    "aseg_name": {
+      "type": "string",
+      "description": "Allows specifying a different name for the aseg input file. Default value is aseg.",
+      "title": "Aseg Name"
+    },
+    "out_root": {
+      "type": "string",
+      "description": "Output root name, default value is ribbon",
+      "title": "Output Root"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Option to specify SUBJECTS_DIR",
+      "title": "Subjects Directory"
+    },
+    "save_distance": {
+      "type": "boolean",
+      "description": "Option to save the signed distance function",
+      "title": "Save Distance Function",
+      "default": false
+    },
+    "lh_only": {
+      "type": "boolean",
+      "description": "Only process left hemisphere",
+      "title": "Left Hemisphere Only",
+      "default": false
+    },
+    "rh_only": {
+      "type": "boolean",
+      "description": "Only process right hemisphere",
+      "title": "Right Hemisphere Only",
+      "default": false
+    },
+    "parallel": {
+      "type": "boolean",
+      "description": "Run hemispheres in parallel and combine the result",
+      "title": "Run in Parallel",
+      "default": false
+    },
+    "edit_aseg": {
+      "type": "boolean",
+      "description": "Edit the aseg using the ribbons and save to aseg.ribbon.mgz",
+      "title": "Edit Aseg",
+      "default": false
+    },
+    "save_ribbon": {
+      "type": "boolean",
+      "description": "Save just the ribbon for the hemispheres",
+      "title": "Save Ribbon",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "io"
+  ]
+}

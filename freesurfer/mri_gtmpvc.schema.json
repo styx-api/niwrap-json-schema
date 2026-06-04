@@ -1,0 +1,370 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_gtmpvc",
+  "description": "mri_gtmpvc performs partial volume correction on PET data using anatomical segmentation.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_gtmpvc"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume: source data to PVC",
+      "title": "Input volume"
+    },
+    "frame": {
+      "type": "number",
+      "description": "Only process 0-based frame F from input volume",
+      "title": "Frame"
+    },
+    "psf": {
+      "type": "number",
+      "description": "Scanner PSF FWHM in mm",
+      "title": "PSF FWHM"
+    },
+    "segmentation": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Anatomical segmentation to define regions for GTM",
+      "title": "Segmentation file"
+    },
+    "registration": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "LTA registration file that maps PET to anatomical",
+      "title": "Registration file"
+    },
+    "regheader": {
+      "type": "boolean",
+      "description": "Assume input and seg share scanner space",
+      "title": "Regheader flag",
+      "default": false
+    },
+    "reg_identity": {
+      "type": "boolean",
+      "description": "Assume that input is in anatomical space",
+      "title": "Reg Identity flag",
+      "default": false
+    },
+    "output_directory": {
+      "type": "string",
+      "description": "Output directory",
+      "title": "Output directory"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Ignore areas outside of the mask (in input vol space)",
+      "title": "Mask volume"
+    },
+    "auto_mask": {
+      "type": "integer",
+      "description": "Automatically compute mask with FWHM and threshold",
+      "title": "Auto mask"
+    },
+    "no_reduce_fov": {
+      "type": "boolean",
+      "description": "Do not reduce FoV to encompass mask",
+      "title": "No reduce field of view",
+      "default": false
+    },
+    "reduce_fov_eqodd": {
+      "type": "boolean",
+      "description": "Reduce FoV to encompass mask but force nc=nr and ns to be odd",
+      "title": "Reduce FoV to odd dimensions",
+      "default": false
+    },
+    "contrast_matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Univariate contrast to test",
+      "title": "Contrast matrix"
+    },
+    "default_seg_merge": {
+      "type": "boolean",
+      "description": "Default schema for merging ROIs",
+      "title": "Default segmentation merge",
+      "default": false
+    },
+    "merge_hypos": {
+      "type": "boolean",
+      "description": "Merge left and right hypointensites into ROI",
+      "title": "Merge hypointensites",
+      "default": false
+    },
+    "merge_cblum_wm_gyri": {
+      "type": "boolean",
+      "description": "Cerebellum WM gyri back into cerebellum WM",
+      "title": "Merge cerebellum WM gyri",
+      "default": false
+    },
+    "tt_reduce": {
+      "type": "boolean",
+      "description": "Reduce segmentation to that of a tissue type",
+      "title": "Tissue-type reduce",
+      "default": false
+    },
+    "replace_seg": {
+      "type": "string",
+      "description": "Replace seg Id1 with seg Id2",
+      "title": "Replace segmentation IDs"
+    },
+    "replace_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with a list of Ids to replace",
+      "title": "Replace file"
+    },
+    "rescale": {
+      "type": "string",
+      "description": "Specify reference region(s) used to rescale (default is pons)",
+      "title": "Rescale"
+    },
+    "no_rescale": {
+      "type": "boolean",
+      "description": "Do not global rescale such that mean of reference region is scaleref",
+      "title": "No rescale",
+      "default": false
+    },
+    "scale_refval": {
+      "type": "number",
+      "description": "Scale such that mean in reference region is refval",
+      "title": "Scale reference value"
+    },
+    "ctab": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Specify color table explicitly",
+      "title": "Color table"
+    },
+    "ctab_default": {
+      "type": "boolean",
+      "description": "Use default color table",
+      "title": "Default color table",
+      "default": false
+    },
+    "tt_update": {
+      "type": "boolean",
+      "description": "Changes tissue type of VentralDC, BrainStem, and Pons to be SubcortGM",
+      "title": "Tissue type update",
+      "default": false
+    },
+    "lateralization": {
+      "type": "boolean",
+      "description": "Lateralize tissue types",
+      "title": "Lateralization",
+      "default": false
+    },
+    "no_tfe": {
+      "type": "boolean",
+      "description": "Do not correct for tissue fraction effect",
+      "title": "No TFE correction",
+      "default": false
+    },
+    "no_pvc": {
+      "type": "boolean",
+      "description": "Turns off PVC entirely",
+      "title": "No PVC",
+      "default": false
+    },
+    "segpvfres": {
+      "type": "number",
+      "description": "Set the tissue fraction resolution parameter (default is 0.5)",
+      "title": "Tissue fraction resolution"
+    },
+    "rbv": {
+      "type": "boolean",
+      "description": "Perform RBV PVC",
+      "title": "RBV PVC",
+      "default": false
+    },
+    "rbv_res": {
+      "type": "number",
+      "description": "Set RBV voxel resolution",
+      "title": "RBV resolution"
+    },
+    "mueller_pvc": {
+      "type": "string",
+      "description": "Perform Mueller-Gaertner PVC",
+      "title": "Mueller-Gaertner PVC"
+    },
+    "mg_ref_cerebral_wm": {
+      "type": "boolean",
+      "description": "Set MG RefIds to 2 and 41",
+      "title": "MG Reference Cerebral WM",
+      "default": false
+    },
+    "mg_ref_lobes_wm": {
+      "type": "boolean",
+      "description": "Set MG RefIds to those for lobes when using wm subseg",
+      "title": "MG Reference Lobes WM",
+      "default": false
+    },
+    "glm_mg_pvc": {
+      "type": "number",
+      "description": "GLM-based Mueller-Gaertner PVC",
+      "title": "GLM-based MG PVC"
+    },
+    "km_ref": {
+      "type": "string",
+      "description": "Compute reference TAC for KM as mean of given RefIds",
+      "title": "KM Reference TAC"
+    },
+    "km_hb": {
+      "type": "string",
+      "description": "Compute HiBinding TAC for KM as mean of given RefIds",
+      "title": "KM HiBinding TAC"
+    },
+    "steady_state": {
+      "type": "string",
+      "description": "Steady-state analysis spec blood plasma concentration, unit scale, and decay correction factor.",
+      "title": "Steady-state analysis"
+    },
+    "save_x": {
+      "type": "boolean",
+      "description": "Save X matrix in matlab4 format as X.mat",
+      "title": "Save X matrix",
+      "default": false
+    },
+    "save_y": {
+      "type": "boolean",
+      "description": "Save y matrix in matlab4 format as y.mat",
+      "title": "Save y matrix",
+      "default": false
+    },
+    "save_beta": {
+      "type": "boolean",
+      "description": "Save beta matrix in matlab4 format as beta.mat",
+      "title": "Save beta matrix",
+      "default": false
+    },
+    "save_x0": {
+      "type": "boolean",
+      "description": "Save X0 matrix in matlab4 format as X0.mat",
+      "title": "Save X0 matrix",
+      "default": false
+    },
+    "save_input": {
+      "type": "boolean",
+      "description": "Saves rescaled input as input.rescaled.nii.gz",
+      "title": "Save rescaled input",
+      "default": false
+    },
+    "save_eres": {
+      "type": "boolean",
+      "description": "Saves residual error",
+      "title": "Save residual error",
+      "default": false
+    },
+    "save_yhat": {
+      "type": "boolean",
+      "description": "Saves yhat",
+      "title": "Save yhat",
+      "default": false
+    },
+    "save_yhat_noise": {
+      "type": "string",
+      "description": "Saves yhat with noise, seed < 0 for TOD",
+      "title": "Save yhat with noise"
+    },
+    "save_yhat_full_fov": {
+      "type": "boolean",
+      "description": "Saves yhat in full FoV (if FoV was reduced)",
+      "title": "Save yhat full FoV",
+      "default": false
+    },
+    "save_yhat0": {
+      "type": "boolean",
+      "description": "Saves yhat prior to smoothing",
+      "title": "Save yhat0",
+      "default": false
+    },
+    "synth": {
+      "type": "string",
+      "description": "Synthesize volume with gtmbeta as input",
+      "title": "Synthesize volume"
+    },
+    "synth_only": {
+      "type": "boolean",
+      "description": "Exit after doing synthesis (implies --synth-save)",
+      "title": "Synthesize only",
+      "default": false
+    },
+    "synth_save": {
+      "type": "boolean",
+      "description": "With --synth saves synthesized volume to outdir/synth.nii.gz",
+      "title": "Synthesize save",
+      "default": false
+    },
+    "save_text": {
+      "type": "boolean",
+      "description": "Save demeaned GTM values out to text files named after the seg",
+      "title": "Save text",
+      "default": false
+    },
+    "threads": {
+      "type": "number",
+      "description": "Use N threads (with Open MP)",
+      "title": "Threads"
+    },
+    "max_threads": {
+      "type": "boolean",
+      "description": "Use the maximum allowable number of threads for this computer",
+      "title": "Max threads",
+      "default": false
+    },
+    "max_threads_minus_one": {
+      "type": "boolean",
+      "description": "Use one less than the maximum allowable number of threads for this computer",
+      "title": "Max threads minus one",
+      "default": false
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Specify SUBJECTS_DIR",
+      "title": "Subjects directory"
+    },
+    "vg_thresh": {
+      "type": "number",
+      "description": "Threshold for LTAconcat error",
+      "title": "VG threshold"
+    },
+    "gdiag": {
+      "type": "number",
+      "description": "Set diagnostic level",
+      "title": "Diagnostic level"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug",
+      "default": false
+    },
+    "checkopts": {
+      "type": "boolean",
+      "description": "Don't run anything, just check options and exit",
+      "title": "Check options",
+      "default": false
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Print out information on how to use this program",
+      "title": "Help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "Print out version and exit",
+      "title": "Version",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_volume",
+    "psf",
+    "segmentation",
+    "output_directory"
+  ]
+}

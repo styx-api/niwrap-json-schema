@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dLocalSVD",
+  "description": "Computes the SVD of time series from a neighborhood of each voxel.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dLocalSVD"
+    },
+    "auto_mask": {
+      "type": "boolean",
+      "description": "Create a mask from time series dataset",
+      "title": "Auto mask flag",
+      "default": false
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input time series dataset file",
+      "title": "Input file"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Restrict operations to this mask dataset",
+      "title": "Mask file"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Prefix for the output SVD vector result dataset file",
+      "title": "Output file"
+    },
+    "nbhd": {
+      "type": "string",
+      "description": "Neighborhood for SVD calculation, e.g., 'SPHERE(5)'",
+      "title": "Neighborhood"
+    },
+    "polort": {
+      "type": "string",
+      "description": "Detrending option, ['+' means to add trend back]",
+      "title": "Polort"
+    },
+    "vnorm": {
+      "type": "boolean",
+      "description": "Normalize data vectors [strongly recommended]",
+      "title": "Normalize data vectors flag",
+      "default": false
+    },
+    "vproj": {
+      "type": "number",
+      "description": "Project central data time series onto local SVD subspace of dimension 'ndim'",
+      "title": "Project onto SVD subspace"
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "output_file"
+  ]
+}

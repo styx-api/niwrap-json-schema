@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dSynthesize",
+  "description": "Reads a '-cbucket' dataset and a '.xmat.1D' matrix from 3dDeconvolve, and synthesizes a fit dataset using selected sub-bricks and matrix columns.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dSynthesize"
+    },
+    "c_bucket": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset from 3dDeconvolve via the '-cbucket' option.",
+      "title": "Cbucket dataset"
+    },
+    "matrix": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Matrix file from 3dDeconvolve via the '-x1D' option.",
+      "title": "Matrix file"
+    },
+    "select": {
+      "type": "string",
+      "description": "Select columns from the matrix and corresponding sub-bricks from the cbucket. Can use forms like 'baseline', 'polort', 'allfunc', 'allstim', 'all', 'something', or numbers/ranges.",
+      "title": "Select columns"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Output result into dataset with the specified name.",
+      "title": "Output prefix"
+    },
+    "dry_flag": {
+      "type": "boolean",
+      "description": "Don't compute the output, just check the inputs.",
+      "title": "Dry run",
+      "default": false
+    },
+    "tr": {
+      "type": "number",
+      "description": "Set TR in the output to the specified value.",
+      "title": "Repetition Time (TR)"
+    },
+    "cenfill": {
+      "enum": [
+        "zero",
+        "nbhr",
+        "none"
+      ],
+      "description": "How censored time points from 3dDeconvolve will be filled (options: 'zero', 'nbhr', 'none').",
+      "title": "Censor fill option"
+    }
+  },
+  "required": [
+    "@type",
+    "c_bucket",
+    "matrix",
+    "select",
+    "prefix"
+  ]
+}

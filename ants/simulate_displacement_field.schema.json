@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SimulateDisplacementField",
+  "description": "Simulate displacement fields using various methods such as BSpline or Exponential.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/SimulateDisplacementField"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "description": "Dimensionality of the image.",
+      "title": "Image Dimension"
+    },
+    "displacement_field_type": {
+      "enum": [
+        "BSpline",
+        "Exponential"
+      ],
+      "description": "Type of displacement field to simulate.",
+      "title": "Displacement Field Type"
+    },
+    "domain_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Image defining the domain for the displacement field.",
+      "title": "Domain Image"
+    },
+    "output_field": {
+      "type": "string",
+      "description": "Path to save the output displacement field.",
+      "title": "Output Field"
+    },
+    "number_of_random_points": {
+      "type": "integer",
+      "description": "Number of random points to use in the simulation.",
+      "title": "Number of Random Points"
+    },
+    "standard_deviation_displacement_field": {
+      "type": "number",
+      "description": "Standard deviation for the displacement field.",
+      "title": "Standard Deviation Displacement Field"
+    },
+    "enforce_stationary_boundary": {
+      "type": "integer",
+      "description": "Boolean flag indicating whether to enforce stationary boundary.",
+      "title": "Enforce Stationary Boundary"
+    },
+    "displacement_specific_options": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "bspline_options"
+            },
+            "number_of_fitting_levels": {
+              "type": "integer"
+            },
+            "number_of_control_points": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "@type"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "exponential_options"
+            },
+            "exponential_options": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "@type"
+          ]
+        }
+      ],
+      "description": "Options specific to the type of displacement field simulation.",
+      "title": "Displacement Specific Options"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "displacement_field_type",
+    "domain_image",
+    "output_field"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "feat2surf",
+  "description": "Resamples Feat statistics onto the surface of the subject and onto a stereo-taxic surface atlas.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/feat2surf"
+    },
+    "feat_dirs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Directory where Feat results are stored. Can specify multiple directories.",
+      "title": "Feat directories"
+    },
+    "feat_dirfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File with a list of Feat directories.",
+      "title": "Feat directory file"
+    },
+    "proj_frac": {
+      "type": "number",
+      "description": "Sample functional a fraction of the cortical thickness normal to the surface. Default is 0.",
+      "title": "Projection fraction"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Run on specified hemisphere (lh or rh) only. Default is both hemispheres.",
+      "title": "Hemisphere"
+    },
+    "target": {
+      "type": "string",
+      "description": "Subject used to define common surface space. Default is fsaverage.",
+      "title": "Target subject"
+    },
+    "surf": {
+      "type": "string",
+      "description": "Surface to resample to. Default is white.",
+      "title": "Surface"
+    },
+    "cope_only": {
+      "type": "boolean",
+      "description": "Only map the copes and varcopes to the common surface space",
+      "title": "Cope only flag",
+      "default": false
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Turn on debugging",
+      "title": "Debug flag",
+      "default": false
+    },
+    "nolog_flag": {
+      "type": "boolean",
+      "description": "Do not create a log file",
+      "title": "No log flag",
+      "default": false
+    },
+    "out_dir": {
+      "type": "string",
+      "description": "Output directory to use instead of default feat/reg_surf-?h/stats.",
+      "title": "Output directory"
+    }
+  },
+  "required": [
+    "@type",
+    "feat_dirs"
+  ]
+}

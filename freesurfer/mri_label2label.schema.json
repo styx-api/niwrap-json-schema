@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_label2label",
+  "description": "No description",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_label2label"
+    },
+    "src_label": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input label file",
+      "title": "Source Label"
+    },
+    "trg_label": {
+      "type": "string",
+      "description": "Output label file",
+      "title": "Target Label"
+    },
+    "erode": {
+      "type": "number",
+      "description": "Erode the label N times before writing",
+      "title": "Erode"
+    },
+    "open": {
+      "type": "number",
+      "description": "Open the label N times before writing",
+      "title": "Open"
+    },
+    "close": {
+      "type": "number",
+      "description": "Close the label N times before writing",
+      "title": "Close"
+    },
+    "dilate": {
+      "type": "number",
+      "description": "Dilate the label N times before writing",
+      "title": "Dilate"
+    },
+    "ring": {
+      "type": "number",
+      "description": "Dilate the label N times then remove the original before writing",
+      "title": "Ring"
+    },
+    "src_subject": {
+      "type": "string",
+      "description": "Source subject",
+      "title": "Source Subject"
+    },
+    "trg_subject": {
+      "type": "string",
+      "description": "Target subject",
+      "title": "Target Subject"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Use for both target and source",
+      "title": "Subject"
+    },
+    "outmask": {
+      "type": "string",
+      "description": "Save output label as a binary mask (surf only)",
+      "title": "Output Mask"
+    },
+    "outstat": {
+      "type": "string",
+      "description": "Save output label stat as a mask (surf only)",
+      "title": "Output Stat"
+    },
+    "sample": {
+      "type": "string",
+      "description": "Sample label onto surface",
+      "title": "Sample"
+    },
+    "regmethod": {
+      "type": "string",
+      "description": "Registration method (surface, volume)",
+      "title": "Registration Method"
+    },
+    "usepathfiles": {
+      "type": "boolean",
+      "description": "Read from and write to a path file",
+      "title": "Use Path Files",
+      "default": false
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere (lh or rh) (with surface)",
+      "title": "Hemisphere"
+    },
+    "src_hemi": {
+      "type": "string",
+      "description": "Source Hemisphere (lh or rh)",
+      "title": "Source Hemisphere"
+    },
+    "trg_hemi": {
+      "type": "string",
+      "description": "Target Hemisphere (lh or rh)",
+      "title": "Target Hemisphere"
+    },
+    "src_ico_order": {
+      "type": "number",
+      "description": "When srcsubject=ico",
+      "title": "Source Ico Order"
+    },
+    "trg_ico_order": {
+      "type": "number",
+      "description": "When trgsubject=ico",
+      "title": "Target Ico Order"
+    },
+    "direct": {
+      "type": "string",
+      "description": "Use the [xyz] coords for src and trg surfaces to do direct lookup",
+      "title": "Direct"
+    },
+    "trgsurf": {
+      "type": "string",
+      "description": "Get xyz from this surface (white)",
+      "title": "Target Surface"
+    },
+    "surfreg": {
+      "type": "string",
+      "description": "Surface registration (sphere.reg)",
+      "title": "Surface Registration"
+    },
+    "srcsurfreg": {
+      "type": "string",
+      "description": "Source surface registration (sphere.reg)",
+      "title": "Source Surface Registration"
+    },
+    "trgsurfreg": {
+      "type": "string",
+      "description": "Target surface registration (sphere.reg)",
+      "title": "Target Surface Registration"
+    },
+    "srcsurfreg_file": {
+      "type": "string",
+      "description": "Specify full path to source reg",
+      "title": "Source Surface Registration File"
+    },
+    "trgsurfreg_file": {
+      "type": "string",
+      "description": "Specify full path to target reg",
+      "title": "Target Surface Registration File"
+    },
+    "paint": {
+      "type": "string",
+      "description": "Map to closest vertex on source surfname if d < dmax",
+      "title": "Paint"
+    },
+    "dmindmin": {
+      "type": "string",
+      "description": "Bin mask with vertex of closest label point when painting",
+      "title": "Dmindmin"
+    },
+    "baryfill": {
+      "type": "string",
+      "description": "Fill with barycentric interpolation",
+      "title": "Baryfill"
+    },
+    "label_cortex": {
+      "type": "string",
+      "description": "Create a label like ?h.cortex.label",
+      "title": "Label Cortex"
+    },
+    "surf_label2mask": {
+      "type": "string",
+      "description": "Convert a label to a binary mask",
+      "title": "Surface Label to Mask"
+    },
+    "srcmask": {
+      "type": "string",
+      "description": "Source mask surfvalfile thresh <format>",
+      "title": "Source Mask"
+    },
+    "srcmasksign": {
+      "type": "string",
+      "description": "Source mask sign (<abs>, pos, neg)",
+      "title": "Source Mask Sign"
+    },
+    "srcmaskframe": {
+      "type": "number",
+      "description": "Source mask frame number (0-based)",
+      "title": "Source Mask Frame"
+    },
+    "xfm": {
+      "type": "string",
+      "description": "Use xfm file instead of computing tal xfm",
+      "title": "XFM File"
+    },
+    "reg": {
+      "type": "string",
+      "description": "Use register.dat file instead of computing tal xfm",
+      "title": "Reg File"
+    },
+    "xfm_invert": {
+      "type": "boolean",
+      "description": "Invert xfm, or reg",
+      "title": "XFM Invert",
+      "default": false
+    },
+    "projabs": {
+      "type": "string",
+      "description": "Project dist mm along surf normal",
+      "title": "Project Absolute"
+    },
+    "projfrac": {
+      "type": "string",
+      "description": "Project frac of thickness along surf normal",
+      "title": "Project Fraction"
+    },
+    "sd": {
+      "type": "string",
+      "description": "Use specified subjects directory",
+      "title": "Subjects Directory"
+    },
+    "nohash": {
+      "type": "boolean",
+      "description": "Don't use hash table when regmethod is surface",
+      "title": "No Hash",
+      "default": false
+    },
+    "norevmap": {
+      "type": "boolean",
+      "description": "Don't use reverse mapping when regmethod is surface",
+      "title": "No Reverse Map",
+      "default": false
+    },
+    "to_scanner": {
+      "type": "string",
+      "description": "Convert coords to scanner RAS prior to other operations",
+      "title": "To Scanner RAS"
+    },
+    "to_tkr": {
+      "type": "string",
+      "description": "Convert coords to tkregister RAS prior to other operations",
+      "title": "To Tkregister RAS"
+    },
+    "scanner": {
+      "type": "boolean",
+      "description": "Set output coordinate type to scanner",
+      "title": "Scanner Coordinate",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "src_label",
+    "trg_label"
+  ]
+}

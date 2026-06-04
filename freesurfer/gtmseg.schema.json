@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gtmseg",
+  "description": "Creates an anatomical segmentation for the geometric transfer matrix (GTM) used in PET partial volume correction.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/gtmseg"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject to analyze",
+      "title": "Subject"
+    },
+    "outvol": {
+      "type": "string",
+      "description": "Output volume relative to subject/mri",
+      "title": "Output Volume"
+    },
+    "usf": {
+      "type": "number",
+      "description": "Upsampling factor for segmentation resolution",
+      "title": "Upsampling Factor"
+    },
+    "subsegwm": {
+      "type": "boolean",
+      "description": "Subsegment white matter into lobes",
+      "title": "Subsegment WM Flag",
+      "default": false
+    },
+    "keep_hypo": {
+      "type": "boolean",
+      "description": "Do not relabel hypointensities as white matter when subsegmenting WM",
+      "title": "Keep Hypointensities Flag",
+      "default": false
+    },
+    "keep_cc": {
+      "type": "boolean",
+      "description": "Do not relabel corpus callosum as white matter",
+      "title": "Keep Corpus Callosum Flag",
+      "default": false
+    },
+    "dmax": {
+      "type": "number",
+      "description": "Distance threshold for subsegmenting WM",
+      "title": "Distance Max"
+    },
+    "ctx_annot": {
+      "type": "string",
+      "description": "Annotation for cortical segmentation",
+      "title": "Cortical Annotation"
+    },
+    "wm_annot": {
+      "type": "string",
+      "description": "Annotation for WM segmentation with --subsegwm",
+      "title": "WM Annotation"
+    },
+    "output_usf": {
+      "type": "number",
+      "description": "Set output upsampling factor different from input USF for debugging",
+      "title": "Output Upsampling Factor"
+    },
+    "head": {
+      "type": "string",
+      "description": "Use alternative head segmentation file",
+      "title": "Head Segmentation"
+    },
+    "subseg_cbwm": {
+      "type": "boolean",
+      "description": "Subsegment cerebellum WM into core and gyri",
+      "title": "Subsegment Cerebellum WM Flag",
+      "default": false
+    },
+    "no_pons": {
+      "type": "boolean",
+      "description": "Do not add pons segmentation when running xcerebralseg",
+      "title": "No Pons Segmentation Flag",
+      "default": false
+    },
+    "no_vermis": {
+      "type": "boolean",
+      "description": "Do not add vermis segmentation when running xcerebralseg",
+      "title": "No Vermis Segmentation Flag",
+      "default": false
+    },
+    "ctab": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Color table for custom segmentation",
+      "title": "Color Table"
+    },
+    "no_seg_stats": {
+      "type": "boolean",
+      "description": "Do not compute segmentation statistics",
+      "title": "No Segmentation Stats Flag",
+      "default": false
+    },
+    "xcerseg": {
+      "type": "boolean",
+      "description": "Run xcerebralseg to create apas+head.mgz",
+      "title": "Xcerseg Flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Enable debugging mode",
+      "title": "Debug Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "subject"
+  ]
+}

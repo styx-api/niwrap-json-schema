@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dFDR",
+  "description": "A tool for applying False Discovery Rate (FDR) thresholding to voxelwise statistics in 3D functional datasets.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dFDR"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input 3D functional dataset filename",
+      "title": "Input file"
+    },
+    "input1d_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": ".1D file containing column of p-values",
+      "title": "Input 1D file"
+    },
+    "mask_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use mask values from file mname. If file mname contains more than 1 sub-brick, the mask sub-brick must be specified. Generally should be used to avoid counting non-brain voxels.",
+      "title": "Mask file"
+    },
+    "mask_threshold": {
+      "type": "number",
+      "description": "Only voxels whose corresponding mask value is greater than or equal to the specified value in absolute terms will be considered. Default is 1.",
+      "title": "Mask threshold"
+    },
+    "constant_type": {
+      "enum": [
+        "cind",
+        "cdep"
+      ],
+      "description": "Set constant c(N): 1 for independent p-values (default) or sum(1/i, i=1,...,N) for any joint distribution.",
+      "title": "Constant type"
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Suppress screen output.",
+      "title": "Quiet flag",
+      "default": false
+    },
+    "list": {
+      "type": "boolean",
+      "description": "Write sorted list of voxel q-values to screen.",
+      "title": "List flag",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Use 'pname' for the output dataset prefix name.",
+      "title": "Output prefix"
+    },
+    "mode_option": {
+      "enum": [
+        "old",
+        "new"
+      ],
+      "description": "Use the old or new mode of operation. 'new' is now the default.",
+      "title": "Mode option"
+    },
+    "pmask": {
+      "type": "boolean",
+      "description": "Ignore p=1 voxels (default in new mode).",
+      "title": "P-mask flag",
+      "default": false
+    },
+    "nopmask": {
+      "type": "boolean",
+      "description": "Count p=1 voxels (default in old mode).",
+      "title": "No P-mask flag",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "Force conversion of all sub-bricks, treating them as p-values.",
+      "title": "Force flag",
+      "default": false
+    },
+    "float": {
+      "type": "boolean",
+      "description": "Force the output of z-scores in floating point format.",
+      "title": "Float flag",
+      "default": false
+    },
+    "qval": {
+      "type": "boolean",
+      "description": "Force the output of q-values rather than z-scores.",
+      "title": "Q-value flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "prefix"
+  ]
+}

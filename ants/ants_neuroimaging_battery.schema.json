@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsNeuroimagingBattery",
+  "description": "Align MR modalities to a common within-subject (and optional template) space.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsNeuroimagingBattery"
+    },
+    "input_directory": {
+      "type": "string",
+      "description": "Directory where to look for modality images.",
+      "title": "Input Directory"
+    },
+    "output_directory": {
+      "type": "string",
+      "description": "Directory where output goes (where antsCorticalThickness output lives).",
+      "title": "Output Directory"
+    },
+    "output_name": {
+      "type": "string",
+      "description": "File prefix for outputs.",
+      "title": "Output Name"
+    },
+    "anatomical_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference subject image (usually T1).",
+      "title": "Anatomical Image"
+    },
+    "anatomical_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask of anatomical image, should contain cerebrum, cerebellum, and brainstem.",
+      "title": "Anatomical Mask"
+    },
+    "template": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Template image.",
+      "title": "Template Image"
+    },
+    "template_transform_name": {
+      "type": "string",
+      "description": "Basename of transforms from anatomical to template space (must be in output base dir).",
+      "title": "Template Transform Name"
+    },
+    "template_labels": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Labels in template space.",
+      "title": "Template Labels"
+    },
+    "dti_flag": {
+      "type": "string",
+      "description": "DTI flag in DIRNAME/fileflag/outid format.",
+      "title": "DTI Flag"
+    },
+    "pcasl_flag": {
+      "type": "string",
+      "description": "pCASL flag in DIRNAME/fileflag/outid format.",
+      "title": "pCASL Flag"
+    },
+    "pasl_flag": {
+      "type": "string",
+      "description": "PASL flag in DIRNAME/fileflag/outid format.",
+      "title": "PASL Flag"
+    },
+    "pasl_m0_flag": {
+      "type": "string",
+      "description": "PASL M0 flag in DIRNAME/fileflag/outid format.",
+      "title": "PASL M0 Flag"
+    },
+    "bold_flag": {
+      "type": "string",
+      "description": "BOLD flag in DIRNAME/fileflag/outid format.",
+      "title": "BOLD Flag"
+    },
+    "rsbold_flag": {
+      "type": "string",
+      "description": "RSBOLD flag in DIRNAME/fileflag/outid format.",
+      "title": "RSBOLD Flag"
+    },
+    "mt_flag": {
+      "type": "string",
+      "description": "MT flag in DIRNAME/fileflag/outid format.",
+      "title": "MT Flag"
+    },
+    "no_mt_flag": {
+      "type": "string",
+      "description": "No MT flag in DIRNAME/fileflag/outid format.",
+      "title": "No MT Flag"
+    },
+    "temp_directory": {
+      "type": "string",
+      "description": "Temporary directory.",
+      "title": "Temporary Directory"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "Display help information.",
+      "title": "Help",
+      "default": false
+    },
+    "info_only": {
+      "type": "boolean",
+      "description": "Look for inputs, output what is there, but don't process any data.",
+      "title": "Info Only",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_directory",
+    "output_directory",
+    "output_name",
+    "anatomical_image",
+    "anatomical_mask"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "register_elderly_subject",
+  "description": "Tool for registering MRI images of elderly subjects using Freesurfer's mri_em_register",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/register_elderly_subject"
+    },
+    "sampling_percentage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Percentage of white matter points to use as control points",
+      "title": "Sampling Percentage"
+    },
+    "output_fsamples": {
+      "type": "string",
+      "description": "Output path for transformed control points",
+      "title": "Output Fs Samples"
+    },
+    "output_norm": {
+      "type": "string",
+      "description": "Output path for intensity normalized volume",
+      "title": "Output Normalized Volume"
+    },
+    "input_volume": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input MRI volume to register",
+      "title": "Input Volume"
+    },
+    "gca_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "GCA file for registration",
+      "title": "GCA File"
+    },
+    "transform_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Output transform file",
+      "title": "Transform File"
+    }
+  },
+  "required": [
+    "@type",
+    "output_fsamples",
+    "output_norm",
+    "input_volume",
+    "gca_file",
+    "transform_file"
+  ]
+}

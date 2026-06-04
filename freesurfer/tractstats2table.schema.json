@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "tractstats2table",
+  "description": "Converts a track overall stats file created by tracula into a table used for group statistics.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/tractstats2table"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specify input stat files.",
+      "title": "Input stat files"
+    },
+    "load_pathstats_from_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of the file which has the list of subjects (one subject per line).",
+      "title": "Load pathstats from file"
+    },
+    "overall": {
+      "type": "boolean",
+      "description": "Operate on the overall path statistics.",
+      "title": "Overall flag",
+      "default": false
+    },
+    "byvoxel": {
+      "type": "boolean",
+      "description": "Operate on the byvoxel path statistics.",
+      "title": "Byvoxel flag",
+      "default": false
+    },
+    "byvoxel_measure": {
+      "enum": [
+        "AD",
+        "RD",
+        "MD",
+        "FA"
+      ],
+      "description": "Specify byvoxel measure. One of [AD, RD, MD, FA]. Required with --byvoxel option.",
+      "title": "Byvoxel measure"
+    },
+    "tablefile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The output table file.",
+      "title": "Output table file"
+    },
+    "delimiter": {
+      "enum": [
+        "tab",
+        "comma",
+        "space",
+        "semicolon"
+      ],
+      "description": "Delimiter between measures in the table. Default is tab (alt comma, space, semicolon).",
+      "title": "Delimiter"
+    },
+    "transpose": {
+      "type": "boolean",
+      "description": "Transpose the table (default is subject in rows and measures/count in cols).",
+      "title": "Transpose flag",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "Increase verbosity.",
+      "title": "Debug flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "tablefile"
+  ]
+}

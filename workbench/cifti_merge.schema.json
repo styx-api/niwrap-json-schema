@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MERGE OR SPLIT ON SERIES, SCALAR, OR LABEL DIMENSIONS",
+  "description": "Given input CIFTI files for which mappings along the selected direction are the same type, all either series, scalars, or labels, and the other dimensions are index-compatible, this command concatenates the data in the specified indices/ranges along the selected direction (by default, on typical 2D cifti, concatenate horizontally, so rows become longer).  The direction can be either an integer starting from 1, or the strings 'ROW' or 'COLUMN'.\n\nExample: wb_command -cifti-merge out.dtseries.nii -cifti first.dtseries.nii -index 1 -cifti second.dtseries.nii\n\nThis example would take the first column from first.dtseries.nii, followed by all columns from second.dtseries.nii, and write these columns to out.dtseries.nii.  ",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/cifti_merge"
+    },
+    "cifti_out": {
+      "type": "string",
+      "description": "output cifti file"
+    },
+    "direction": {
+      "type": "string",
+      "description": "merge in a direction other than along rows"
+    },
+    "mem_limit": {
+      "type": "number",
+      "description": "restrict memory used for file reading efficiency"
+    },
+    "cifti": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cifti_in": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "a cifti file to use data from"
+          },
+          "index": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "type": "string",
+                  "description": "the index number (starting from 1), or name"
+                },
+                "up_to": {
+                  "type": "object",
+                  "properties": {
+                    "last_index": {
+                      "type": "string",
+                      "description": "the number or name of the last index to include"
+                    },
+                    "reverse": {
+                      "type": "boolean",
+                      "description": "use the range in reverse order",
+                      "default": false
+                    }
+                  },
+                  "required": [
+                    "last_index"
+                  ],
+                  "description": "use an inclusive range of indices"
+                }
+              },
+              "required": [
+                "index"
+              ]
+            },
+            "description": "select a single index to use"
+          }
+        },
+        "required": [
+          "cifti_in",
+          "index"
+        ]
+      },
+      "description": "specify an input cifti file"
+    }
+  },
+  "required": [
+    "@type",
+    "cifti_out",
+    "cifti"
+  ]
+}

@@ -1,0 +1,310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "flirt",
+  "description": "FLIRT (FMRIB's Linear Image Registration Tool) is a fully automated robust and accurate tool for linear (affine) intra- and inter-modal brain image registration.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/flirt"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file.",
+      "title": "In file"
+    },
+    "reference": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Reference file.",
+      "title": "Reference"
+    },
+    "out_file": {
+      "type": "string",
+      "description": "Registered output file.",
+      "title": "Out file"
+    },
+    "out_matrix_file": {
+      "type": "string",
+      "description": "Output affine matrix in 4x4 asciii format.",
+      "title": "Out matrix file"
+    },
+    "angle_rep": {
+      "enum": [
+        "quaternion",
+        "euler"
+      ],
+      "description": "'quaternion' or 'euler'. Representation of rotation angles.",
+      "title": "Angle rep"
+    },
+    "apply_isoxfm": {
+      "type": "number",
+      "description": "As applyxfm but forces isotropic resampling.",
+      "title": "Apply isoxfm"
+    },
+    "apply_xfm": {
+      "type": "boolean",
+      "description": "Apply transformation supplied by in_matrix_file or uses_qform to use the affine matrix stored in the reference header.",
+      "title": "Apply xfm",
+      "default": false
+    },
+    "bbrslope": {
+      "type": "number",
+      "description": "Value of bbr slope.",
+      "title": "Bbrslope"
+    },
+    "bbrtype": {
+      "enum": [
+        "signed",
+        "global_abs",
+        "local_abs"
+      ],
+      "description": "'signed' or 'global_abs' or 'local_abs'. Type of bbr cost function: signed [default], global_abs, local_abs.",
+      "title": "Bbrtype"
+    },
+    "bgvalue": {
+      "type": "number",
+      "description": "Use specified background value for points outside fov.",
+      "title": "Bgvalue"
+    },
+    "bins": {
+      "type": "integer",
+      "description": "Number of histogram bins.",
+      "title": "Bins"
+    },
+    "coarse_search": {
+      "type": "integer",
+      "description": "Coarse search delta angle.",
+      "title": "Coarse search"
+    },
+    "cost": {
+      "enum": [
+        "mutualinfo",
+        "corratio",
+        "normcorr",
+        "normmi",
+        "leastsq",
+        "labeldiff",
+        "bbr"
+      ],
+      "description": "'mutualinfo' or 'corratio' or 'normcorr' or 'normmi' or 'leastsq' or 'labeldiff' or 'bbr'. Cost function.",
+      "title": "Cost"
+    },
+    "cost_func": {
+      "enum": [
+        "mutualinfo",
+        "corratio",
+        "normcorr",
+        "normmi",
+        "leastsq",
+        "labeldiff",
+        "bbr"
+      ],
+      "description": "'mutualinfo' or 'corratio' or 'normcorr' or 'normmi' or 'leastsq' or 'labeldiff' or 'bbr'. Cost function.",
+      "title": "Cost func"
+    },
+    "datatype": {
+      "enum": [
+        "char",
+        "short",
+        "int",
+        "float",
+        "double"
+      ],
+      "description": "'char' or 'short' or 'int' or 'float' or 'double'. Force output data type.",
+      "title": "Datatype"
+    },
+    "display_init": {
+      "type": "boolean",
+      "description": "Display initial matrix.",
+      "title": "Display init",
+      "default": false
+    },
+    "dof": {
+      "type": "integer",
+      "description": "Number of transform degrees of freedom.",
+      "title": "Dof"
+    },
+    "echospacing": {
+      "type": "number",
+      "description": "Value of epi echo spacing - units of seconds.",
+      "title": "Echospacing"
+    },
+    "fieldmap": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Fieldmap image in rads/s - must be already registered to the reference image.",
+      "title": "Fieldmap"
+    },
+    "fieldmapmask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask for fieldmap image.",
+      "title": "Fieldmapmask"
+    },
+    "fine_search": {
+      "type": "integer",
+      "description": "Fine search delta angle.",
+      "title": "Fine search"
+    },
+    "force_scaling": {
+      "type": "boolean",
+      "description": "Force rescaling even for low-res images.",
+      "title": "Force scaling",
+      "default": false
+    },
+    "in_matrix_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input 4x4 affine matrix.",
+      "title": "In matrix file"
+    },
+    "in_weight": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File for input weighting volume.",
+      "title": "In weight"
+    },
+    "interp": {
+      "enum": [
+        "trilinear",
+        "nearestneighbour",
+        "sinc",
+        "spline"
+      ],
+      "description": "'trilinear' or 'nearestneighbour' or 'sinc' or 'spline'. Final interpolation method used in reslicing.",
+      "title": "Interp"
+    },
+    "min_sampling": {
+      "type": "number",
+      "description": "Set minimum voxel dimension for sampling.",
+      "title": "Min sampling"
+    },
+    "no_clamp": {
+      "type": "boolean",
+      "description": "Do not use intensity clamping.",
+      "title": "No clamp",
+      "default": false
+    },
+    "no_resample": {
+      "type": "boolean",
+      "description": "Do not change input sampling.",
+      "title": "No resample",
+      "default": false
+    },
+    "no_resample_blur": {
+      "type": "boolean",
+      "description": "Do not use blurring on downsampling.",
+      "title": "No resample blur",
+      "default": false
+    },
+    "no_search": {
+      "type": "boolean",
+      "description": "Set all angular searches to ranges 0 to 0.",
+      "title": "No search",
+      "default": false
+    },
+    "padding_size": {
+      "type": "integer",
+      "description": "For applyxfm: interpolates outside image by size.",
+      "title": "Padding size"
+    },
+    "pedir": {
+      "type": "integer",
+      "description": "Phase encode direction of epi - 1/2/3=x/y/z & -1/-2/-3=-x/-y/-z.",
+      "title": "Pedir"
+    },
+    "ref_weight": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File for reference weighting volume.",
+      "title": "Ref weight"
+    },
+    "rigid2D": {
+      "type": "boolean",
+      "description": "Use 2d rigid body mode - ignores dof.",
+      "title": "Rigid2d",
+      "default": false
+    },
+    "schedule": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Replaces default schedule.",
+      "title": "Schedule"
+    },
+    "searchr_x": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "Search angles along x-axis, in degrees.",
+      "title": "Searchr x"
+    },
+    "searchr_y": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "Search angles along y-axis, in degrees.",
+      "title": "Searchr y"
+    },
+    "searchr_z": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "Search angles along z-axis, in degrees.",
+      "title": "Searchr z"
+    },
+    "sinc_width": {
+      "type": "integer",
+      "description": "Full-width in voxels.",
+      "title": "Sinc width"
+    },
+    "sinc_window": {
+      "enum": [
+        "rectangular",
+        "hanning",
+        "blackman"
+      ],
+      "description": "'rectangular' or 'hanning' or 'blackman'. Sinc window.",
+      "title": "Sinc window"
+    },
+    "uses_qform": {
+      "type": "boolean",
+      "description": "Initialize using sform or qform.",
+      "title": "Uses qform",
+      "default": false
+    },
+    "verbose": {
+      "type": "integer",
+      "description": "Verbose mode, 0 is least.",
+      "title": "Verbose"
+    },
+    "wm_seg": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "White matter segmentation volume needed by bbr cost function.",
+      "title": "Wm seg"
+    },
+    "wmcoords": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "White matter boundary coordinates for bbr cost function.",
+      "title": "Wmcoords"
+    },
+    "wmnorms": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "White matter boundary normals for bbr cost function.",
+      "title": "Wmnorms"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file",
+    "reference",
+    "out_file",
+    "out_matrix_file"
+  ]
+}

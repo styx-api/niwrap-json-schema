@@ -1,0 +1,295 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mrinfo",
+  "description": "Display image header information, or extract specific information from the header.\n\nBy default, all information contained in each image header will be printed to the console in a reader-friendly format.\n\nAlternatively, command-line options may be used to extract specific details from the header(s); these are printed to the console in a format more appropriate for scripting purposes or piping to file. If multiple options and/or images are provided, the requested header fields will be printed in the order in which they appear in the help page, with all requested details from each input image in sequence printed before the next image is processed.\n\nThe command can also write the diffusion gradient table from a single input image to file; either in the MRtrix or FSL format (bvecs/bvals file pair; includes appropriate diffusion gradient vector reorientation)\n\nThe -dwgrad, -export_* and -shell_* options provide (information about) the diffusion weighting gradient table after it has been processed by the MRtrix3 back-end (vectors normalised, b-values scaled by the square of the vector norm, depending on the -bvalue_scaling option). To see the raw gradient table information as stored in the image header, i.e. without MRtrix3 back-end processing, use \"-property dw_scheme\".\n\nThe -bvalue_scaling option controls an aspect of the import of diffusion gradient tables. When the input diffusion-weighting direction vectors have norms that differ substantially from unity, the b-values will be scaled by the square of their corresponding vector norm (this is how multi-shell acquisitions are frequently achieved on scanner platforms). However in some rare instances, the b-values may be correct, despite the vectors not being of unit norm (or conversely, the b-values may need to be rescaled even though the vectors are close to unit norm). This option allows the user to control this operation and override MRrtix3's automatic detection.\n\nReferences:\n\n",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "mrtrix/mrinfo"
+    },
+    "all": {
+      "type": "boolean",
+      "description": "print all properties, rather than the first and last 2 of each.",
+      "title": "all",
+      "default": false
+    },
+    "name": {
+      "type": "boolean",
+      "description": "print the file system path of the image",
+      "title": "name",
+      "default": false
+    },
+    "format": {
+      "type": "boolean",
+      "description": "image file format",
+      "title": "format",
+      "default": false
+    },
+    "ndim": {
+      "type": "boolean",
+      "description": "number of image dimensions",
+      "title": "ndim",
+      "default": false
+    },
+    "size": {
+      "type": "boolean",
+      "description": "image size along each axis",
+      "title": "size",
+      "default": false
+    },
+    "spacing": {
+      "type": "boolean",
+      "description": "voxel spacing along each image dimension",
+      "title": "spacing",
+      "default": false
+    },
+    "datatype": {
+      "type": "boolean",
+      "description": "data type used for image data storage",
+      "title": "datatype",
+      "default": false
+    },
+    "strides": {
+      "type": "boolean",
+      "description": "data strides i.e. order and direction of axes data layout",
+      "title": "strides",
+      "default": false
+    },
+    "offset": {
+      "type": "boolean",
+      "description": "image intensity offset",
+      "title": "offset",
+      "default": false
+    },
+    "multiplier": {
+      "type": "boolean",
+      "description": "image intensity multiplier",
+      "title": "multiplier",
+      "default": false
+    },
+    "transform": {
+      "type": "boolean",
+      "description": "the transformation from image coordinates [mm] to scanner / real world coordinates [mm]",
+      "title": "transform",
+      "default": false
+    },
+    "property": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "any text properties embedded in the image header under the specified key (use 'all' to list all keys found)",
+      "title": "property"
+    },
+    "json_keyval": {
+      "type": "string",
+      "description": "export header key/value entries to a JSON file",
+      "title": "json_keyval"
+    },
+    "json_all": {
+      "type": "string",
+      "description": "export all header contents to a JSON file",
+      "title": "json_all"
+    },
+    "grad": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in a text file. This should be supplied as a 4xN text file with each line is in the format [ X Y Z b ], where [ X Y Z ] describe the direction of the applied gradient, and b gives the b-value in units of s/mm^2. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+      "title": "grad"
+    },
+    "fslgrad": {
+      "type": "object",
+      "properties": {
+        "bvecs": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "title": "bvecs"
+        },
+        "bvals": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+          "title": "bvals"
+        }
+      },
+      "required": [
+        "bvecs",
+        "bvals"
+      ],
+      "description": "Provide the diffusion-weighted gradient scheme used in the acquisition in FSL bvecs/bvals format files. If a diffusion gradient scheme is present in the input image header, the data provided with this option will be instead used.",
+      "title": "fslgrad"
+    },
+    "bvalue_scaling": {
+      "type": "string",
+      "description": "enable or disable scaling of diffusion b-values by the square of the corresponding DW gradient norm (see Desciption). Valid choices are yes/no, true/false, 0/1 (default: automatic).",
+      "title": "bvalue_scaling"
+    },
+    "export_grad_mrtrix": {
+      "type": "string",
+      "description": "export the diffusion-weighted gradient table to file in MRtrix format",
+      "title": "export_grad_mrtrix"
+    },
+    "export_grad_fsl": {
+      "type": "object",
+      "properties": {
+        "bvecs_path": {
+          "type": "string",
+          "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format",
+          "title": "bvecs_path"
+        },
+        "bvals_path": {
+          "type": "string",
+          "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format",
+          "title": "bvals_path"
+        }
+      },
+      "required": [
+        "bvecs_path",
+        "bvals_path"
+      ],
+      "description": "export the diffusion-weighted gradient table to files in FSL (bvecs / bvals) format",
+      "title": "export_grad_fsl"
+    },
+    "dwgrad": {
+      "type": "boolean",
+      "description": "the diffusion-weighting gradient table, as interpreted by MRtrix3",
+      "title": "dwgrad",
+      "default": false
+    },
+    "shell_bvalues": {
+      "type": "boolean",
+      "description": "list the average b-value of each shell",
+      "title": "shell_bvalues",
+      "default": false
+    },
+    "shell_sizes": {
+      "type": "boolean",
+      "description": "list the number of volumes in each shell",
+      "title": "shell_sizes",
+      "default": false
+    },
+    "shell_indices": {
+      "type": "boolean",
+      "description": "list the image volumes attributed to each b-value shell",
+      "title": "shell_indices",
+      "default": false
+    },
+    "export_pe_table": {
+      "type": "string",
+      "description": "export phase-encoding table to file",
+      "title": "export_pe_table"
+    },
+    "export_pe_eddy": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "type": "string",
+          "description": "export phase-encoding information to an EDDY-style config / index file pair",
+          "title": "config"
+        },
+        "indices": {
+          "type": "string",
+          "description": "export phase-encoding information to an EDDY-style config / index file pair",
+          "title": "indices"
+        }
+      },
+      "required": [
+        "config",
+        "indices"
+      ],
+      "description": "export phase-encoding information to an EDDY-style config / index file pair",
+      "title": "export_pe_eddy"
+    },
+    "petable": {
+      "type": "boolean",
+      "description": "print the phase encoding table",
+      "title": "petable",
+      "default": false
+    },
+    "nodelete": {
+      "type": "boolean",
+      "description": "don't delete temporary images or images passed to mrinfo via Unix pipes",
+      "title": "nodelete",
+      "default": false
+    },
+    "info": {
+      "type": "boolean",
+      "description": "display information messages.",
+      "title": "info",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "do not display information messages or progress status; alternatively, this can be achieved by setting the MRTRIX_QUIET environment variable to a non-empty string.",
+      "title": "quiet",
+      "default": false
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "display debugging messages.",
+      "title": "debug",
+      "default": false
+    },
+    "force": {
+      "type": "boolean",
+      "description": "force overwrite of output files (caution: using the same file as input and output might cause unexpected behaviour).",
+      "title": "force",
+      "default": false
+    },
+    "nthreads": {
+      "type": "integer",
+      "description": "use this number of threads in multi-threaded applications (set to 0 to disable multi-threading).",
+      "title": "nthreads"
+    },
+    "config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "description": "temporarily set the value of an MRtrix config file entry.",
+            "title": "value"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      },
+      "description": "temporarily set the value of an MRtrix config file entry.",
+      "title": "config"
+    },
+    "help": {
+      "type": "boolean",
+      "description": "display this information page and exit.",
+      "title": "help",
+      "default": false
+    },
+    "version": {
+      "type": "boolean",
+      "description": "display version information and exit.",
+      "title": "version",
+      "default": false
+    },
+    "image": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "the input image(s).",
+      "title": "image"
+    }
+  },
+  "required": [
+    "@type",
+    "image"
+  ]
+}

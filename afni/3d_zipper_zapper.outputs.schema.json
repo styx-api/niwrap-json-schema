@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "3dZipperZapper",
+  "description": "A basic program to highlight problematic volumes in data sets, especially EPI/DWI data sets with interleaved acquisition.",
+  "properties": {
+    "root": {
+      "type": "string",
+      "x-styx-type": "path"
+    },
+    "bad_slice_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask of potentially bad slices across the input dataset."
+    },
+    "bad_volumes_list": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "1D file containing a list of the bad volumes."
+    },
+    "per_volume_params": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "1D file of the per-volume parameters used to detect badness."
+    },
+    "calculated_slices": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "1D file of the slices within which calculations were made."
+    },
+    "good_volumes_selector": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Text file with the selector string of *good* volumes."
+    }
+  },
+  "required": [
+    "root",
+    "bad_slice_mask",
+    "bad_volumes_list",
+    "per_volume_params",
+    "calculated_slices",
+    "good_volumes_selector"
+  ]
+}

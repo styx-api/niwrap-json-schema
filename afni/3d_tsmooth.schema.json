@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dTsmooth",
+  "description": "Smooths each voxel time series in a 3D+time dataset and produces as output a new 3D+time dataset (e.g., lowpass filter in time).",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dTsmooth"
+    },
+    "input_dataset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The input 3D+time dataset.",
+      "title": "Input Dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Sets the prefix of the output dataset.",
+      "title": "Output Prefix"
+    },
+    "datum_type": {
+      "type": "string",
+      "description": "Coerce output dataset to be stored as the given type.",
+      "title": "Datum Type"
+    },
+    "lin_filter": {
+      "type": "boolean",
+      "description": "3 point linear filter: 0.15*a + 0.70*b + 0.15*c",
+      "title": "Linear Filter",
+      "default": false
+    },
+    "med_filter": {
+      "type": "boolean",
+      "description": "3 point median filter: median(a,b,c)",
+      "title": "Median Filter",
+      "default": false
+    },
+    "osf_filter": {
+      "type": "boolean",
+      "description": "3 point order statistics filter: 0.15*min(a,b,c) + 0.70*median(a,b,c) + 0.15*max(a,b,c)",
+      "title": "Order Statistics Filter",
+      "default": false
+    },
+    "lin_filter_custom": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "3 point linear filter with custom weight: 0.5*(1-m)*a + m*b + 0.5*(1-m)*c",
+      "title": "Custom Linear Filter"
+    },
+    "hamming": {
+      "type": "integer",
+      "description": "Use N point Hamming window filter.",
+      "title": "Hamming Window Filter"
+    },
+    "blackman": {
+      "type": "integer",
+      "description": "Use N point Blackman window filter.",
+      "title": "Blackman Window Filter"
+    },
+    "custom_filter": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use custom filter with coefficients from a specified file.",
+      "title": "Custom Filter File"
+    },
+    "extend": {
+      "type": "boolean",
+      "description": "BEFORE: use the first value; AFTER: use the last value.",
+      "title": "Extend Values",
+      "default": false
+    },
+    "zero": {
+      "type": "boolean",
+      "description": "BEFORE and AFTER: use zero.",
+      "title": "Zero Padding",
+      "default": false
+    },
+    "trend": {
+      "type": "boolean",
+      "description": "Compute a linear trend, and extrapolate BEFORE and AFTER.",
+      "title": "Trend Extrapolation",
+      "default": false
+    },
+    "adaptive": {
+      "type": "integer",
+      "description": "Use adaptive mean filtering of width N (N must be odd and bigger than 3).",
+      "title": "Adaptive Mean Filtering Width"
+    }
+  },
+  "required": [
+    "@type",
+    "input_dataset"
+  ]
+}

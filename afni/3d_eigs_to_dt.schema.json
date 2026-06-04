@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dEigsToDT",
+  "description": "Convert set of DTI eigenvectors and eigenvalues to a diffusion tensor, with optional value-scaling and vector-flipping.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dEigsToDT"
+    },
+    "eig_vals": {
+      "type": "string",
+      "description": "Searchable descriptor for finding all three required eigenvalue files. It should list all three eigenvalue files in descending order of magnitude.",
+      "title": "Eigenvalue Files Descriptor"
+    },
+    "eig_vecs": {
+      "type": "string",
+      "description": "Searchable descriptor for finding all three required eigenvector files. It should list all three eigenvector files in order matching the eigenvalue files.",
+      "title": "Eigenvector Files Descriptor"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for the output file name. It is recommended to include a 'DT' label in it.",
+      "title": "Output File Prefix"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional mask within which to calculate uncertainty. If not provided, the data should be masked already.",
+      "title": "Mask File"
+    },
+    "flip_x": {
+      "type": "boolean",
+      "description": "Change sign of the first element of eigenvectors.",
+      "title": "Flip X",
+      "default": false
+    },
+    "flip_y": {
+      "type": "boolean",
+      "description": "Change sign of the second element of eigenvectors.",
+      "title": "Flip Y",
+      "default": false
+    },
+    "flip_z": {
+      "type": "boolean",
+      "description": "Change sign of the third element of eigenvectors.",
+      "title": "Flip Z",
+      "default": false
+    },
+    "scale_eigs": {
+      "type": "number",
+      "description": "Rescale the eigenvalues by dividing by a number X > 0.",
+      "title": "Scale Eigenvalues"
+    }
+  },
+  "required": [
+    "@type",
+    "eig_vals",
+    "eig_vecs",
+    "prefix"
+  ]
+}

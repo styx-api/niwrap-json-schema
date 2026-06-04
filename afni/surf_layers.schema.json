@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurfLayers",
+  "description": "Compute intermediate equi-distant surfaces between two boundary surfaces.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/SurfLayers"
+    },
+    "spec_dset": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Dataset that is the SUMA specification file describing input surfaces",
+      "title": "Specification dataset"
+    },
+    "outdir": {
+      "type": "string",
+      "description": "New directory for output (default: surflayers)",
+      "title": "Output directory"
+    },
+    "states": {
+      "type": "string",
+      "description": "Typically smoothwm, pial states to describe inner and outer surfaces (default: 'smoothwm pial')",
+      "title": "States"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Choose hemisphere: 'lh', 'rh', or 'lh rh' (for both)",
+      "title": "Hemisphere"
+    },
+    "n_intermed_surfs": {
+      "type": "number",
+      "description": "Total number of intermediate surfaces to create",
+      "title": "Number of intermediate surfaces"
+    },
+    "surf_a": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Inner boundary surface by filename (e.g., smoothwm.gii)",
+      "title": "Inner boundary surface"
+    },
+    "surf_b": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Outer boundary surface by filename (e.g., pial.gii)",
+      "title": "Outer boundary surface"
+    },
+    "surf_intermed_pref": {
+      "type": "string",
+      "description": "Name for interpolated surfaces (default: isurf)",
+      "title": "Interpolated surfaces prefix"
+    },
+    "echo": {
+      "type": "boolean",
+      "description": "Run script with 'set echo' (i.e., verbosely)",
+      "title": "Echo flag",
+      "default": false
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Do not remove temp files (probably just for testing)",
+      "title": "No clean flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

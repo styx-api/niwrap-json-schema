@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dmerge",
+  "description": "3dmerge edits and merges 3D datasets by applying various operations like thresholding, blurring, clustering, and more.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dmerge"
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input dataset files",
+      "title": "Input datasets"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output dataset prefix",
+      "title": "Output file prefix"
+    },
+    "blur_fwhm": {
+      "type": "number",
+      "description": "Gaussian blur with FWHM in mm",
+      "title": "Blur FWHM"
+    },
+    "threshold": {
+      "type": "number",
+      "description": "Threshold data to censor the intensities; only valid for 'fith', 'fico', or 'fitt' datasets",
+      "title": "Threshold value"
+    },
+    "clust": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Form clusters with connection distance and clip off data not in clusters of a minimum volume",
+      "title": "Cluster parameters (rmm, vmul)"
+    },
+    "dindex": {
+      "type": "number",
+      "description": "Specify sub-brick #j as the data source",
+      "title": "Data sub-brick index"
+    },
+    "tindex": {
+      "type": "number",
+      "description": "Specify sub-brick #k as the threshold source",
+      "title": "Threshold sub-brick index"
+    },
+    "absolute": {
+      "type": "boolean",
+      "description": "Take absolute values of intensities",
+      "title": "Absolute intensities flag",
+      "default": false
+    },
+    "dxyz": {
+      "type": "boolean",
+      "description": "Force cluster editing to behave as if all voxel dimensions were set to 1 mm",
+      "title": "Cluster editing voxel dimension flag",
+      "default": false
+    },
+    "gmean": {
+      "type": "boolean",
+      "description": "Combine datasets by averaging intensities (default)",
+      "title": "Average intensities flag",
+      "default": false
+    },
+    "gmax": {
+      "type": "boolean",
+      "description": "Combine datasets by taking max intensity",
+      "title": "Max intensity flag",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Reduce the number of messages shown",
+      "title": "Quiet output flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_files",
+    "output_file"
+  ]
+}

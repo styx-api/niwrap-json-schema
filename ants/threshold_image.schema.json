@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ThresholdImage",
+  "description": "Image thresholding utility that applies different thresholding techniques to an input image. It can use fixed thresholds, Otsu method, or K-means for thresholding.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/ThresholdImage"
+    },
+    "image_dimension": {
+      "type": "integer",
+      "description": "The dimension of the input image.",
+      "title": "Image Dimension"
+    },
+    "image_in": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "The input image file to be thresholded.",
+      "title": "Input Image"
+    },
+    "out_image": {
+      "type": "string",
+      "description": "The output image file after thresholding.",
+      "title": "Output Image"
+    },
+    "threshlo": {
+      "type": "number",
+      "description": "The lower threshold value for fixed thresholding.",
+      "title": "Threshold Low"
+    },
+    "threshhi": {
+      "type": "number",
+      "description": "The upper threshold value for fixed thresholding.",
+      "title": "Threshold High"
+    },
+    "inside_value": {
+      "type": "number",
+      "description": "The pixel value to be used inside the threshold range.",
+      "title": "Inside Value"
+    },
+    "outside_value": {
+      "type": "number",
+      "description": "The pixel value to be used outside the threshold range.",
+      "title": "Outside Value"
+    },
+    "otsu_number_of_thresholds": {
+      "type": "number",
+      "description": "Number of thresholds to use when applying the Otsu method.",
+      "title": "Otsu Number of Thresholds"
+    },
+    "kmeans_number_of_thresholds": {
+      "type": "number",
+      "description": "Number of thresholds to use when applying the K-means method.",
+      "title": "K-means Number of Thresholds"
+    },
+    "mask_image": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Optional mask image for the thresholding operation.",
+      "title": "Mask Image"
+    }
+  },
+  "required": [
+    "@type",
+    "image_dimension",
+    "image_in",
+    "out_image"
+  ]
+}

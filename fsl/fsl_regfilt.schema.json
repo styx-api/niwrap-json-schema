@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsl_regfilt",
+  "description": "Data de-noising by regressing out part of a design matrix using simple OLS regression on 4D images",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/fsl_regfilt"
+    },
+    "infile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input file name (4D image)",
+      "title": "Input file"
+    },
+    "designfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "File name of the matrix with time courses (e.g. GLM design or MELODIC mixing matrix)",
+      "title": "Design file"
+    },
+    "outfile": {
+      "type": "string",
+      "description": "Output file name for the filtered data",
+      "title": "Output file"
+    },
+    "maskfile": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask image file name",
+      "title": "Mask file"
+    },
+    "filter": {
+      "type": "string",
+      "description": "Filter out part of the regression model, e.g., -f \"1,2,3\"",
+      "title": "Filter"
+    },
+    "freq_filter_flag": {
+      "type": "boolean",
+      "description": "Filter out components based on high vs. low frequency content",
+      "title": "Frequency filter flag",
+      "default": false
+    },
+    "freq_ic_flag": {
+      "type": "boolean",
+      "description": "Switch off IC Z-stats filtering as part of frequency filtering",
+      "title": "Frequency IC Z-stats filtering flag",
+      "default": false
+    },
+    "freq_ic_smooth": {
+      "type": "number",
+      "description": "Smoothing width for IC Z-stats filtering as part of frequency filtering",
+      "title": "Frequency IC Z-stats smoothing width"
+    },
+    "fthresh": {
+      "type": "number",
+      "description": "Frequency threshold ratio; default: 0.15",
+      "title": "Frequency threshold ratio"
+    },
+    "fthresh2": {
+      "type": "number",
+      "description": "Frequency filter score threshold; default: 0.02",
+      "title": "Frequency filter score threshold"
+    },
+    "vn_flag": {
+      "type": "boolean",
+      "description": "Perform variance-normalisation on data",
+      "title": "Variance-normalisation flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "aggressive_flag": {
+      "type": "boolean",
+      "description": "Switch on aggressive filtering (full instead of partial regression)",
+      "title": "Aggressive filtering flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help text",
+      "title": "Help flag",
+      "default": false
+    },
+    "out_data": {
+      "type": "string",
+      "description": "Output file name for pre-processed data (prior to denoising)",
+      "title": "Output pre-processed data"
+    },
+    "out_mix": {
+      "type": "string",
+      "description": "Output file name for new mixing matrix",
+      "title": "Output new mixing matrix"
+    },
+    "out_vnscales": {
+      "type": "string",
+      "description": "Output file name for scaling factors from variance normalisation",
+      "title": "Output variance normalisation scales"
+    }
+  },
+  "required": [
+    "@type",
+    "infile",
+    "designfile",
+    "outfile"
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RBA",
+  "description": "Region-Based Analysis Program through Bayesian Multilevel Modeling",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/RBA"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Prefix for output file names.",
+      "title": "Output File Prefix"
+    },
+    "dataTable": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Data table in pure text format.",
+      "title": "Input Data Table"
+    },
+    "chains": {
+      "type": "number",
+      "description": "Specify the number of Markov chains.",
+      "title": "Number of Chains"
+    },
+    "iterations": {
+      "type": "number",
+      "description": "Specify the number of iterations per Markov chain.",
+      "title": "Number of Iterations"
+    },
+    "model": {
+      "type": "string",
+      "description": "Specify the model formula.",
+      "title": "Model Formula"
+    },
+    "eoi": {
+      "type": "string",
+      "description": "Identify effects of interest in the output.",
+      "title": "Effects of Interest"
+    },
+    "wcp": {
+      "type": "number",
+      "description": "Invoke within-chain parallelization.",
+      "title": "Within-Chain Parallelization"
+    },
+    "tstat": {
+      "type": "string",
+      "description": "Specify the column name that lists the t-statistic values.",
+      "title": "T-Statistic Column"
+    },
+    "stdz": {
+      "type": "string",
+      "description": "Identify quantitative variables (or covariates) to be standardized.",
+      "title": "Standardize Quantitative Variables"
+    },
+    "cVars": {
+      "type": "string",
+      "description": "Identify categorical (qualitative) variables (or factors).",
+      "title": "Categorical Variables"
+    },
+    "qVars": {
+      "type": "string",
+      "description": "Identify quantitative variables (or covariates).",
+      "title": "Quantitative Variables"
+    },
+    "distROI": {
+      "type": "string",
+      "description": "Specify the distribution for the ROIs.",
+      "title": "Distribution for ROIs"
+    },
+    "distSubj": {
+      "type": "string",
+      "description": "Specify the distribution for the subjects.",
+      "title": "Distribution for Subjects"
+    },
+    "distY": {
+      "type": "string",
+      "description": "Specify the distribution for the response variable.",
+      "title": "Distribution for Response Variable"
+    },
+    "ridgePlot": {
+      "type": "string",
+      "description": "Plot the posterior distributions stacked together.",
+      "title": "Ridge Plot"
+    },
+    "roi": {
+      "type": "string",
+      "description": "Specify the column name that is designated as the region variable.",
+      "title": "Region Variable"
+    },
+    "subj": {
+      "type": "string",
+      "description": "Specify the column name that is designated as the measuring unit variable (usually subject).",
+      "title": "Subject Variable"
+    },
+    "scale": {
+      "type": "number",
+      "description": "Specify a multiplier for the Y values.",
+      "title": "Scaling Factor"
+    },
+    "se": {
+      "type": "string",
+      "description": "This option indicates that standard error for the response variable is available as input.",
+      "title": "Standard Error Column"
+    },
+    "pdp": {
+      "type": "string",
+      "description": "Specify the layout of posterior distribution plot.",
+      "title": "Posterior Distribution Plot Layout"
+    },
+    "mean": {
+      "type": "string",
+      "description": "Specify the formulation for the mean of the likelihood (sampling distribution).",
+      "title": "Mean Formula"
+    },
+    "sigma": {
+      "type": "string",
+      "description": "Specify the formulation for the standard deviation (sigma) of the likelihood (sampling distribution).",
+      "title": "Sigma Formula"
+    },
+    "debug": {
+      "type": "boolean",
+      "description": "This option will enable R to save the parameters in a file for debugging.",
+      "title": "Debug Flag",
+      "default": false
+    },
+    "verbose": {
+      "type": "number",
+      "description": "Specify verbose level.",
+      "title": "Verbose Level"
+    },
+    "md": {
+      "type": "boolean",
+      "description": "This option indicates that there are missing data in the input.",
+      "title": "Missing Data Flag",
+      "default": false
+    },
+    "r2z": {
+      "type": "boolean",
+      "description": "Perform Fisher transformation on the response variable if it is a correlation coefficient.",
+      "title": "Fisher Transformation Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "prefix",
+    "dataTable"
+  ]
+}

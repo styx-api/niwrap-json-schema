@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "randomise",
+  "description": "FSL Randomise: feeds the 4D projected FA data into GLM modelling and thresholding in order to find voxels which correlate with your model",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/randomise"
+    },
+    "in_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "4d input file.",
+      "title": "In file"
+    },
+    "base_name": {
+      "type": "string",
+      "description": "The rootname that all generated files will have.",
+      "title": "Base name"
+    },
+    "design_mat": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Design matrix file.",
+      "title": "Design mat"
+    },
+    "tcon": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "T contrasts file.",
+      "title": "Tcon"
+    },
+    "c_thresh": {
+      "type": "number",
+      "description": "Carry out cluster-based thresholding.",
+      "title": "C thresh"
+    },
+    "cm_thresh": {
+      "type": "number",
+      "description": "Carry out cluster-mass-based thresholding.",
+      "title": "Cm thresh"
+    },
+    "demean": {
+      "type": "boolean",
+      "description": "Demean data temporally before model fitting.",
+      "title": "Demean",
+      "default": false
+    },
+    "f_c_thresh": {
+      "type": "number",
+      "description": "Carry out f cluster thresholding.",
+      "title": "F c thresh"
+    },
+    "f_cm_thresh": {
+      "type": "number",
+      "description": "Carry out f cluster-mass thresholding.",
+      "title": "F cm thresh"
+    },
+    "f_only": {
+      "type": "boolean",
+      "description": "Calculate f-statistics only.",
+      "title": "F only",
+      "default": false
+    },
+    "fcon": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "F contrasts file.",
+      "title": "Fcon"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Mask image.",
+      "title": "Mask"
+    },
+    "num_perm": {
+      "type": "integer",
+      "description": "Number of permutations (default 5000, set to 0 for exhaustive).",
+      "title": "Num perm"
+    },
+    "one_sample_group_mean": {
+      "type": "boolean",
+      "description": "Perform 1-sample group-mean test instead of generic permutation test.",
+      "title": "One sample group mean",
+      "default": false
+    },
+    "output_type": {
+      "enum": [
+        "NIFTI",
+        "NIFTI_PAIR",
+        "NIFTI_GZ",
+        "NIFTI_PAIR_GZ"
+      ],
+      "description": "'nifti' or 'nifti_pair' or 'nifti_gz' or 'nifti_pair_gz'. Fsl output type.",
+      "title": "Output type"
+    },
+    "p_vec_n_dist_files": {
+      "type": "boolean",
+      "description": "Output permutation vector and null distribution text files.",
+      "title": "P vec n dist files",
+      "default": false
+    },
+    "raw_stats_imgs": {
+      "type": "boolean",
+      "description": "Output raw ( unpermuted ) statistic images.",
+      "title": "Raw stats imgs",
+      "default": false
+    },
+    "seed": {
+      "type": "integer",
+      "description": "Specific integer seed for random number generator.",
+      "title": "Seed"
+    },
+    "show_info_parallel_mode": {
+      "type": "boolean",
+      "description": "Print out information required for parallel mode and exit.",
+      "title": "Show info parallel mode",
+      "default": false
+    },
+    "show_total_perms": {
+      "type": "boolean",
+      "description": "Print out how many unique permutations would be generated and exit.",
+      "title": "Show total perms",
+      "default": false
+    },
+    "tfce": {
+      "type": "boolean",
+      "description": "Carry out threshold-free cluster enhancement.",
+      "title": "Tfce",
+      "default": false
+    },
+    "tfce2D": {
+      "type": "boolean",
+      "description": "Carry out threshold-free cluster enhancement with 2d optimisation.",
+      "title": "Tfce2d",
+      "default": false
+    },
+    "tfce_C": {
+      "type": "number",
+      "description": "Tfce connectivity (6 or 26; default=6).",
+      "title": "Tfce c"
+    },
+    "tfce_E": {
+      "type": "number",
+      "description": "Tfce extent parameter (default=0.5).",
+      "title": "Tfce e"
+    },
+    "tfce_H": {
+      "type": "number",
+      "description": "Tfce height parameter (default=2).",
+      "title": "Tfce h"
+    },
+    "var_smooth": {
+      "type": "integer",
+      "description": "Use variance smoothing (std is in mm).",
+      "title": "Var smooth"
+    },
+    "vox_p_values": {
+      "type": "boolean",
+      "description": "Output voxelwise (corrected and uncorrected) p-value images.",
+      "title": "Vox p values",
+      "default": false
+    },
+    "x_block_labels": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Exchangeability block labels file.",
+      "title": "X block labels"
+    }
+  },
+  "required": [
+    "@type",
+    "in_file"
+  ]
+}

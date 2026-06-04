@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "@afni_refacer_run",
+  "description": "This script re-faces one input dataset, using a master shell dataset to write over the subject's 'face' region.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/@afni_refacer_run"
+    },
+    "input_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Name of input dataset; can contain path information.",
+      "title": "Input File"
+    },
+    "mode_deface": {
+      "type": "boolean",
+      "description": "Replace the computed face+ears voxels with all zeros instead of the artificial face (ears are also removed)",
+      "title": "Mode Deface",
+      "default": false
+    },
+    "mode_reface": {
+      "type": "boolean",
+      "description": "Replace the subject's face+ears with a scaled set of artificial values",
+      "title": "Mode Reface",
+      "default": false
+    },
+    "mode_reface_plus": {
+      "type": "boolean",
+      "description": "Replace the subject's face+ears+skull with a scaled set of artificial values (i.e., like 'refacing', but replacing a more complete shell around the subject's brain)",
+      "title": "Mode Reface Plus",
+      "default": false
+    },
+    "mode_all": {
+      "type": "boolean",
+      "description": "Output three volumes: one defaced, one refaced and one reface_plused",
+      "title": "Mode All",
+      "default": false
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Name of output dataset",
+      "title": "Output Prefix"
+    },
+    "anonymize_output": {
+      "type": "boolean",
+      "description": "Use 3drefit and nifti_tool to anonymize the output datasets",
+      "title": "Anonymize Output",
+      "default": false
+    },
+    "cost_function": {
+      "type": "string",
+      "description": "Specify any cost function that is allowed by 3dAllineate (default: lpa)",
+      "title": "Cost Function"
+    },
+    "shell_option": {
+      "type": "string",
+      "description": "Specify which shell to use. Options: afni_refacer_shell_sym_1.0.nii.gz (traditional), afni_refacer_shell_sym_2.0.nii.gz (more face/neck removal). Default: afni_refacer_shell_sym_1.0.nii.gz",
+      "title": "Shell Option"
+    },
+    "no_clean": {
+      "type": "boolean",
+      "description": "Don't delete temp working directory (default: remove working directory)",
+      "title": "No Clean",
+      "default": false
+    },
+    "no_images": {
+      "type": "boolean",
+      "description": "Don't make pretty images to automatically view the results of re/defacing",
+      "title": "No Images",
+      "default": false
+    },
+    "overwrite": {
+      "type": "boolean",
+      "description": "Final two file outputs will overwrite any existing files of the same name (default: don't do this). NB: this option does not apply to the working directory",
+      "title": "Overwrite",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Run the 3dAllineate part herein with '-verb' (for verbosity)",
+      "title": "Verbose",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_file",
+    "prefix"
+  ]
+}

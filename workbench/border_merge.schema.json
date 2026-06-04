@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MERGE BORDER FILES INTO A NEW FILE",
+  "description": "Takes one or more border files and makes a new border file from the borders in them.\n\nExample: wb_command -border-merge out.border -border first.border -select 1 -border second.border\n\nThis example would take the first border from first.border, followed by all borders from second.border, and write these to out.border.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/border_merge"
+    },
+    "border_file_out": {
+      "type": "string",
+      "description": "the output border file"
+    },
+    "border": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "border_file_in": {
+            "type": "string",
+            "x-styx-type": "path",
+            "description": "a border file to use borders from"
+          },
+          "select": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "border": {
+                  "type": "string",
+                  "description": "the border number or name"
+                },
+                "up_to": {
+                  "type": "object",
+                  "properties": {
+                    "last_border": {
+                      "type": "string",
+                      "description": "the number or name of the last column to include"
+                    },
+                    "reverse": {
+                      "type": "boolean",
+                      "description": "use the range in reverse order",
+                      "default": false
+                    }
+                  },
+                  "required": [
+                    "last_border"
+                  ],
+                  "description": "use an inclusive range of borders"
+                }
+              },
+              "required": [
+                "border"
+              ]
+            },
+            "description": "select a single border to use"
+          }
+        },
+        "required": [
+          "border_file_in",
+          "select"
+        ]
+      },
+      "description": "specify an input border file"
+    }
+  },
+  "required": [
+    "@type",
+    "border_file_out",
+    "border"
+  ]
+}

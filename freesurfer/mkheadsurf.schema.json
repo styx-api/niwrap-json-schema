@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mkheadsurf",
+  "description": "Segment and create a surface representation of the head for visualization and further processing",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mkheadsurf"
+    },
+    "input_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input volume",
+      "title": "Input Volume"
+    },
+    "output_vol": {
+      "type": "string",
+      "description": "Output volume",
+      "title": "Output Volume"
+    },
+    "output_surf": {
+      "type": "string",
+      "description": "Output surface",
+      "title": "Output Surface"
+    },
+    "subject_id": {
+      "type": "string",
+      "description": "Subject ID",
+      "title": "Subject ID"
+    },
+    "nsmooth": {
+      "type": "number",
+      "description": "Number of smoothing iterations (default 10)",
+      "title": "Number of Smoothing Iterations"
+    },
+    "noseghead": {
+      "type": "boolean",
+      "description": "Do not segment the head, only tessellate and smooth existing",
+      "title": "No Segment Head Flag",
+      "default": false
+    },
+    "thresh1": {
+      "type": "number",
+      "description": "Threshold 1 value (default 20)",
+      "title": "Threshold 1"
+    },
+    "thresh2": {
+      "type": "number",
+      "description": "Threshold 2 value (default 20)",
+      "title": "Threshold 2"
+    },
+    "nhitsmin": {
+      "type": "number",
+      "description": "Minimum number of hits (default 2)",
+      "title": "Minimum Hits"
+    },
+    "ndilate": {
+      "type": "number",
+      "description": "Number of dilations (default 0)",
+      "title": "Number of Dilations"
+    },
+    "nerode": {
+      "type": "number",
+      "description": "Number of erosions (default 0)",
+      "title": "Number of Erosions"
+    },
+    "fillval": {
+      "type": "number",
+      "description": "Fill value (default 1)",
+      "title": "Fill Value"
+    },
+    "fhi": {
+      "type": "number",
+      "description": "FHI for MRIchangeType; default is to use default in mri_seghead",
+      "title": "FHI value"
+    },
+    "no_rescale": {
+      "type": "boolean",
+      "description": "Do not rescale input when converting to uchar",
+      "title": "No Rescale Flag",
+      "default": false
+    },
+    "no_fill_holes_islands": {
+      "type": "boolean",
+      "description": "Do not fill holes and remove islands",
+      "title": "No Fill Holes Islands Flag",
+      "default": false
+    },
+    "or_mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Include all voxels in ormask in the head seg",
+      "title": "Or Mask"
+    },
+    "tessellation_method": {
+      "type": "string",
+      "description": "Tessellation method using mri_tessellate or mri_mc (default is -mc)",
+      "title": "Tessellation Method"
+    },
+    "inflate": {
+      "type": "boolean",
+      "description": "Inflate and compute sulc",
+      "title": "Inflate Flag",
+      "default": false
+    },
+    "curv": {
+      "type": "boolean",
+      "description": "Compute curv with smoothing",
+      "title": "Curv Flag",
+      "default": false
+    },
+    "srcvol": {
+      "type": "string",
+      "description": "Source volume ID (default is T1)",
+      "title": "Source Volume ID"
+    },
+    "headvol": {
+      "type": "string",
+      "description": "Head volume ID (default is seghead)",
+      "title": "Head Volume ID"
+    },
+    "headsurf": {
+      "type": "string",
+      "description": "Head surface ID (default is seghead)",
+      "title": "Head Surface ID"
+    },
+    "smheadsurf": {
+      "type": "string",
+      "description": "Smoothed head surface ID (default is smseghead)",
+      "title": "Smoothed Head Surface ID"
+    },
+    "hemi": {
+      "type": "string",
+      "description": "Hemisphere (default is lh)",
+      "title": "Hemisphere"
+    },
+    "subjects_dir": {
+      "type": "string",
+      "description": "Subjects directory (default is SUBJECTS_DIR)",
+      "title": "Subjects Directory"
+    },
+    "umask": {
+      "type": "number",
+      "description": "Umask setting (default is 2)",
+      "title": "Umask"
+    },
+    "logfile": {
+      "type": "string",
+      "description": "Log file",
+      "title": "Log File"
+    }
+  },
+  "required": [
+    "@type",
+    "input_vol",
+    "output_vol",
+    "output_surf",
+    "subject_id"
+  ]
+}

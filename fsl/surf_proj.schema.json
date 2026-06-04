@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "surf_proj",
+  "description": "Projects data onto a surface mesh using specified parameters.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/surf_proj"
+    },
+    "data": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Data to project onto surface",
+      "title": "Data file"
+    },
+    "surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface file",
+      "title": "Surface file"
+    },
+    "output_file": {
+      "type": "string",
+      "description": "Output file",
+      "title": "Output file"
+    },
+    "surface_reference": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Surface volume reference (default=same as data)",
+      "title": "Surface volume reference"
+    },
+    "transform": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Data to surface transform (default=Identity)",
+      "title": "Transform file"
+    },
+    "meshspace": {
+      "type": "string",
+      "description": "Mesh space (default='caret')",
+      "title": "Mesh space"
+    },
+    "step_size": {
+      "type": "number",
+      "description": "Average over step (mm - default=1)",
+      "title": "Step size"
+    },
+    "direction": {
+      "type": "number",
+      "description": "If >0 goes towards brain (default=0 i.e. both directions)",
+      "title": "Direction"
+    },
+    "operation": {
+      "type": "string",
+      "description": "What to do with values: 'mean' (default), 'max', 'median', 'last'",
+      "title": "Operation"
+    },
+    "surface_output": {
+      "type": "string",
+      "description": "Output surface file, not ASCII matrix (valid only for scalars)",
+      "title": "Surface output file"
+    }
+  },
+  "required": [
+    "@type",
+    "data",
+    "surface",
+    "output_file"
+  ]
+}

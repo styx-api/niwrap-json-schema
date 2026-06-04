@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mris_inflate",
+  "description": "Cortical surface inflation tool",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mris_inflate"
+    },
+    "input_surface": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input surface file",
+      "title": "Input Surface"
+    },
+    "output_surface": {
+      "type": "string",
+      "description": "Output surface file",
+      "title": "Output Surface"
+    },
+    "max_iterations": {
+      "type": "number",
+      "description": "Set the maximum number of iterations (default: 10)",
+      "title": "Max Iterations"
+    },
+    "snapshot_interval": {
+      "type": "number",
+      "description": "Write out a snapshot of the inflation every specified time step",
+      "title": "Snapshot Interval"
+    },
+    "dist_coefficient": {
+      "type": "number",
+      "description": "Specify the relative strength of the metric preserving term in the cost functional versus the smoothing term (default: 0.1)",
+      "title": "Distance Coefficient"
+    },
+    "no_save_sulc": {
+      "type": "boolean",
+      "description": "Do not save ?h.sulc",
+      "title": "No Save Sulc Flag",
+      "default": false
+    },
+    "sulcname": {
+      "type": "string",
+      "description": "Save to ?h.sulcname",
+      "title": "Sulc Name"
+    },
+    "mm_flag": {
+      "type": "boolean",
+      "description": "Compute sulc in mm without zero meaning or scaling",
+      "title": "MM Flag",
+      "default": false
+    },
+    "scale_flag": {
+      "type": "number",
+      "description": "Disable or enable scaling of inflated brain",
+      "title": "Scale Flag"
+    }
+  },
+  "required": [
+    "@type",
+    "input_surface",
+    "output_surface"
+  ]
+}

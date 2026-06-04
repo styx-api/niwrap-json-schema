@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsApplyTransformsToPoints",
+  "description": "antsApplyTransformsToPoints, applied to an input image, transforms it according to a reference image and a transform (or a set of transforms). It reads in a CSV file with the first D columns defining the spatial location where the spatial location is defined in physical coordinates. The CSV file should have a header row.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsApplyTransformsToPoints"
+    },
+    "dimensionality": {
+      "enum": [
+        2,
+        3
+      ],
+      "description": "This option forces the points to be treated as a specified-dimensionality.",
+      "title": "Dimensionality"
+    },
+    "precision": {
+      "type": "boolean",
+      "description": "Use double precision.",
+      "title": "Precision"
+    },
+    "forantsr": {
+      "type": "boolean",
+      "description": "Set true for ANTsR IO.",
+      "title": "For ANTsR"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input CSV file with columns including x,y,z,t headers that define the points in physical space, or a 2D .mha binary image file.",
+      "title": "Input"
+    },
+    "output": {
+      "type": "string",
+      "description": "Output the warped points to a CSV file.",
+      "title": "Output"
+    },
+    "transform": {
+      "oneOf": [
+        {
+          "const": "[TRANSFORM]"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "const": "inverse_transform"
+            },
+            "transform_file": {
+              "type": "string",
+              "x-styx-type": "path"
+            }
+          },
+          "required": [
+            "@type",
+            "transform_file"
+          ]
+        }
+      ],
+      "description": "Transform file(s) to apply to the input points. Uses an inverse transform if specified as [transformFileName,1].",
+      "title": "Transform"
+    }
+  },
+  "required": [
+    "@type",
+    "input",
+    "output"
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "mri_ca_normalize",
+  "description": "This program creates a normalized volume using the brain volume and an input gca file.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/mri_ca_normalize"
+    },
+    "input_brain_volumes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "x-styx-type": "path"
+      },
+      "description": "Input brain volume(s). Can specify multiple inputs.",
+      "title": "Input Brain Volumes"
+    },
+    "atlas_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Atlas file in GCA format.",
+      "title": "Atlas File"
+    },
+    "xform_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Transform file in LTA format.",
+      "title": "Transform File"
+    },
+    "output_volumes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Output volume(s) in either mgh or mgz format. Can specify multiple outputs.",
+      "title": "Output Volumes"
+    },
+    "seg_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Aseg file to help normalization.",
+      "title": "Segmentation File"
+    },
+    "sigma_value": {
+      "type": "number",
+      "description": "Smoothing sigma for bias field if control points specified (default=4).",
+      "title": "Smoothing Sigma"
+    },
+    "fsamples_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Write control points to filename.",
+      "title": "Fsamples File"
+    },
+    "dilate_iters": {
+      "type": "number",
+      "description": "Dilate the brain mask niters times before masking.",
+      "title": "Dilate Iterations"
+    },
+    "nsamples_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Write transformed normalization control points to filename.",
+      "title": "Nsamples File"
+    },
+    "mask_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use mri_vol to mask input.",
+      "title": "Mask Volume"
+    },
+    "control_points_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Define control points from filename.",
+      "title": "Control Points File"
+    },
+    "fonly_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Only use control points from filename.",
+      "title": "Fonly File"
+    },
+    "diag_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Write to log file.",
+      "title": "Diagnostic File"
+    },
+    "debug_voxel_coords": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Debug voxel. Needs x, y, z coordinates.",
+      "title": "Debug Voxel Coordinates"
+    },
+    "debug_node_coords": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Debug node. Needs x, y, z coordinates.",
+      "title": "Debug Node Coordinates"
+    },
+    "tr_value": {
+      "type": "number",
+      "description": "Set TR in msec.",
+      "title": "TR Value"
+    },
+    "te_value": {
+      "type": "number",
+      "description": "Set TE in msec.",
+      "title": "TE Value"
+    },
+    "alpha_value": {
+      "type": "number",
+      "description": "Set alpha in radians.",
+      "title": "Alpha Value"
+    },
+    "example_mri_vol": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Use T1 (mri_vol) and segmentation as example.",
+      "title": "Example MRI Volume"
+    },
+    "extra_norm_pctl": {
+      "type": "number",
+      "description": "Use 1+pct and 1-pct to widen the range of T1 values.",
+      "title": "Extra Norm PCT"
+    },
+    "prior_threshold": {
+      "type": "number",
+      "description": "Use prior threshold t (default=.6).",
+      "title": "Prior Threshold"
+    },
+    "n_regions": {
+      "type": "number",
+      "description": "Use n regions/struct for normalization.",
+      "title": "Number of Regions"
+    },
+    "verbose_value": {
+      "type": "number",
+      "description": "Used for debugging and diagnostics.",
+      "title": "Verbose Value"
+    },
+    "top_percent": {
+      "type": "number",
+      "description": "Use top p percent (default=.25) white matter points as control points.",
+      "title": "Top Percent"
+    },
+    "novar_flag": {
+      "type": "boolean",
+      "description": "Do not use variance estimates.",
+      "title": "No Variance Flag",
+      "default": false
+    },
+    "renorm_file": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Renormalize using predicted intensity values in mri_vol.",
+      "title": "Renormalize File"
+    },
+    "flash_flag": {
+      "type": "boolean",
+      "description": "Use FLASH forward model to predict intensity values.",
+      "title": "Flash Flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_brain_volumes",
+    "atlas_file",
+    "xform_file",
+    "output_volumes"
+  ]
+}

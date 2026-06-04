@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CONVERT METRIC FILE TO FAKE NIFTI",
+  "description": "The purpose of this command is to convert between metric files and nifti1 so that gifti-unaware programs can operate on the data.  You must specify exactly one of the options.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "workbench/metric_convert"
+    },
+    "to_nifti": {
+      "type": "object",
+      "properties": {
+        "metric_in": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the metric to convert"
+        },
+        "nifti_out": {
+          "type": "string",
+          "description": "the output nifti file"
+        }
+      },
+      "required": [
+        "metric_in",
+        "nifti_out"
+      ],
+      "description": "convert metric to nifti"
+    },
+    "from_nifti": {
+      "type": "object",
+      "properties": {
+        "nifti_in": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "the nifti file to convert"
+        },
+        "surface_in": {
+          "type": "string",
+          "x-styx-type": "path",
+          "description": "surface file to use number of vertices and structure from"
+        },
+        "metric_out": {
+          "type": "string",
+          "description": "the output metric file"
+        }
+      },
+      "required": [
+        "nifti_in",
+        "surface_in",
+        "metric_out"
+      ],
+      "description": "convert nifti to metric"
+    }
+  },
+  "required": [
+    "@type"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bet2",
+  "description": "Automated brain extraction tool for FSL",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/bet2"
+    },
+    "input_fileroot": {
+      "type": "string",
+      "description": "Input file root (e.g. img)",
+      "title": "Input file root"
+    },
+    "output_fileroot": {
+      "type": "string",
+      "description": "Output file root (e.g. img_bet)",
+      "title": "Output file root"
+    },
+    "fractional_intensity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Fractional intensity threshold (0->1); default=0.5; smaller values give larger brain outline estimates",
+      "title": "Fractional intensity threshold"
+    },
+    "vertical_gradient": {
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1,
+      "description": "Vertical gradient in fractional intensity threshold (-1->1); default=0; positive values give larger brain outline at bottom, smaller at top",
+      "title": "Vertical gradient fractional intensity threshold"
+    },
+    "center_of_gravity": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "The xyz coordinates of the center of gravity (voxels, not mm) of initial mesh surface. Must have exactly three numerical entries in the list (3-vector).",
+      "title": "Center of gravity vector"
+    },
+    "outline_flag": {
+      "type": "boolean",
+      "description": "Generate brain surface outline overlaid onto original image",
+      "title": "Outline flag",
+      "default": false
+    },
+    "mask_flag": {
+      "type": "boolean",
+      "description": "Generate binary brain mask",
+      "title": "Mask flag",
+      "default": false
+    },
+    "skull_flag": {
+      "type": "boolean",
+      "description": "Generate approximate skull image",
+      "title": "Skull flag",
+      "default": false
+    },
+    "no_output_flag": {
+      "type": "boolean",
+      "description": "Don't generate segmented brain image output",
+      "title": "No output flag",
+      "default": false
+    },
+    "mesh_flag": {
+      "type": "boolean",
+      "description": "Generate brain surface as mesh in vtk format",
+      "title": "Mesh flag",
+      "default": false
+    },
+    "head_radius": {
+      "type": "number",
+      "description": "Head radius (mm not voxels); initial surface sphere is set to half of this",
+      "title": "Head radius"
+    },
+    "smooth_factor": {
+      "type": "number",
+      "description": "Smoothness factor; default=1; values smaller than 1 produce more detailed brain surface, values larger than one produce smoother, less detailed surface",
+      "title": "Smoothness factor"
+    },
+    "threshold_flag": {
+      "type": "boolean",
+      "description": "Apply thresholding to segmented brain image and mask",
+      "title": "Threshold flag",
+      "default": false
+    },
+    "verbose_flag": {
+      "type": "boolean",
+      "description": "Switch on diagnostic messages",
+      "title": "Verbose flag",
+      "default": false
+    },
+    "help_flag": {
+      "type": "boolean",
+      "description": "Display help message and exit",
+      "title": "Help flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input_fileroot",
+    "output_fileroot"
+  ]
+}

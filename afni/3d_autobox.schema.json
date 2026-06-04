@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "3dAutobox",
+  "description": "Computes size of a box that fits around the volume. Can also be used to crop the volume to that box.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "afni/3dAutobox"
+    },
+    "input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Input dataset",
+      "title": "Input dataset"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Crop the input dataset to the size of the box, and write an output dataset with PREFIX for the name. If not used, no new volume is written out.",
+      "title": "Prefix name"
+    },
+    "alt_input": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "An alternate way to specify the input dataset.",
+      "title": "Alternate input dataset"
+    },
+    "noclust": {
+      "type": "boolean",
+      "description": "Don't do any clustering to find the box. Any non-zero voxel will be preserved in the cropped volume.",
+      "title": "No clustering flag",
+      "default": false
+    },
+    "extent": {
+      "type": "boolean",
+      "description": "Write to standard out the spatial extent of the box.",
+      "title": "Extent flag",
+      "default": false
+    },
+    "extent_ijk": {
+      "type": "boolean",
+      "description": "Write out the 6 auto bbox ijk slice numbers to screen: imin imax jmin jmax kmin kmax.",
+      "title": "Extent IJK flag",
+      "default": false
+    },
+    "extent_ijk_to_file": {
+      "type": "string",
+      "description": "Write out the 6 auto bbox ijk slice numbers to a simple-formatted text file FF: imin imax jmin jmax kmin kmax.",
+      "title": "Extent IJK to file"
+    },
+    "extent_ijk_midslice": {
+      "type": "boolean",
+      "description": "Write out the 3 ijk midslices of the autobox to the screen: imid jmid kmid.",
+      "title": "Extent IJK midslice flag",
+      "default": false
+    },
+    "extent_ijkord": {
+      "type": "boolean",
+      "description": "Write out the 6 auto bbox ijk slice numbers to screen in a particular order and format. Useful for scripting.",
+      "title": "Extent IJKORD flag",
+      "default": false
+    },
+    "extent_ijkord_to_file": {
+      "type": "string",
+      "description": "Write out the 6 auto bbox ijk slice numbers to a file in a particular order and format. Useful for 3dcalc expressions.",
+      "title": "Extent IJKORD to file"
+    },
+    "extent_xyz_to_file": {
+      "type": "string",
+      "description": "Write out the 6 auto bbox xyz coordinates to a simple-formatted text file GG: xmin xmax ymin ymax zmin zmax.",
+      "title": "Extent XYZ to file"
+    },
+    "extent_xyz_midslice": {
+      "type": "boolean",
+      "description": "Write out the 3 xyz midslices of the autobox to the screen: xmid ymid zmid.",
+      "title": "Extent XYZ midslice flag",
+      "default": false
+    },
+    "npad": {
+      "type": "number",
+      "description": "Number of extra voxels to pad on each side of box.",
+      "title": "Npad"
+    },
+    "npad_safety_on": {
+      "type": "boolean",
+      "description": "Constrain npad-ded extents to be within dataset.",
+      "title": "Npad safety on flag",
+      "default": false
+    }
+  },
+  "required": [
+    "@type",
+    "input"
+  ]
+}

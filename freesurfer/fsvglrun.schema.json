@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fsvglrun",
+  "description": "A tool to execute a command, replacing the shell with the specified program, typically used within FreeSurfer environment.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "freesurfer/fsvglrun"
+    },
+    "zeroth_arg_name": {
+      "type": "string",
+      "description": "Pass NAME as the zeroth argument to COMMAND",
+      "title": "Zeroth Argument Name"
+    },
+    "empty_env": {
+      "type": "boolean",
+      "description": "Execute COMMAND with an empty environment",
+      "title": "Empty Environment Flag",
+      "default": false
+    },
+    "dashed_arg": {
+      "type": "boolean",
+      "description": "Place a dash in the zeroth argument to COMMAND",
+      "title": "Dashed Argument Flag",
+      "default": false
+    },
+    "command": {
+      "type": "string",
+      "description": "The command to be executed, replacing the shell with the specified program",
+      "title": "Command"
+    },
+    "command_args": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Arguments for the command executed by fsvglrun",
+      "title": "Command Arguments"
+    }
+  },
+  "required": [
+    "@type",
+    "command"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "antsSliceRegularizedRegistration",
+  "description": "This program is a user-level application for slice-by-slice translation registration. Results are regularized in z using polynomial regression. The program is targeted at spinal cord MRI. Only one stage is supported where a stage consists of a transform; an image metric; and iterations, shrink factors, and smoothing sigmas for each level. Specialized for 3D data: fixed image is 3D, moving image is 3D. Registration is performed slice-by-slice then regularized in z. The parameter -p controls the polynomial degree. -p 0 means no regularization.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "ants/antsSliceRegularizedRegistration"
+    },
+    "polydegree": {
+      "type": "integer",
+      "description": "Degree of polynomial up to zDimension-2. Controls the polynomial degree. 0 means no regularization.",
+      "title": "Polynomial degree"
+    },
+    "output": {
+      "type": "string",
+      "description": "Specify the output transform prefix (output format is .nii.gz). Optionally, one can choose to warp the moving image to the fixed space, and if the inverse transform exists, one can also output the warped fixed image.",
+      "title": "Output transform prefix"
+    },
+    "metric": {
+      "type": "string",
+      "description": "Four image metrics are available: GC: global correlation, CC: ANTS neighborhood cross correlation, MI: Mutual information, and MeanSquares: mean-squares intensity difference.",
+      "title": "Metric"
+    },
+    "transform": {
+      "type": "string",
+      "description": "Several transform options are available. The gradientStep or learningRate characterizes the gradient descent optimization.",
+      "title": "Transform"
+    },
+    "iterations": {
+      "type": "string",
+      "description": "Specify the number of iterations at each level.",
+      "title": "Iterations"
+    },
+    "shrink_factors": {
+      "type": "string",
+      "description": "Specify the shrink factor for the virtual domain (typically the fixed image) at each level.",
+      "title": "Shrink factors"
+    },
+    "smoothing_sigmas": {
+      "type": "string",
+      "description": "Specify the amount of smoothing at each level.",
+      "title": "Smoothing sigmas"
+    },
+    "mask": {
+      "type": "string",
+      "x-styx-type": "path",
+      "description": "Fixed image mask to limit voxels considered by the metric.",
+      "title": "Mask in fixed image space"
+    },
+    "interpolation": {
+      "enum": [
+        "Linear",
+        "NearestNeighbor",
+        "MultiLabel",
+        "Gaussian",
+        "BSpline",
+        "CosineWindowedSinc",
+        "WelchWindowedSinc",
+        "HammingWindowedSinc",
+        "LanczosWindowedSinc",
+        "GenericLabel"
+      ],
+      "description": "Several interpolation options are available in ITK.",
+      "title": "Interpolation"
+    },
+    "verbose": {
+      "enum": [
+        0
+      ],
+      "description": "Verbose option.",
+      "title": "Verbose"
+    }
+  },
+  "required": [
+    "@type",
+    "polydegree",
+    "output",
+    "metric",
+    "transform",
+    "iterations",
+    "shrink_factors",
+    "smoothing_sigmas"
+  ]
+}

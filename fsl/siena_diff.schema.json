@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "siena_diff",
+  "description": "SIENA_diff: Analysis of longitudinal brain image differences.",
+  "type": "object",
+  "properties": {
+    "@type": {
+      "const": "fsl/siena_diff"
+    },
+    "input1_basename": {
+      "type": "string",
+      "description": "Input image 1 basename",
+      "title": "Input1 basename"
+    },
+    "input2_basename": {
+      "type": "string",
+      "description": "Input image 2 basename",
+      "title": "Input2 basename"
+    },
+    "debug_flag": {
+      "type": "boolean",
+      "description": "Debug - generate edge images and don't remove temporary images",
+      "title": "Debug flag",
+      "default": false
+    },
+    "no_seg_flag": {
+      "type": "boolean",
+      "description": "Don't segment grey+white separately (because there is poor grey-white contrast)",
+      "title": "No segmentation flag",
+      "default": false
+    },
+    "self_corr_factor": {
+      "type": "number",
+      "description": "Apply self-calibrating correction factor",
+      "title": "Self-calibrating correction factor"
+    },
+    "ignore_z_flow_flag": {
+      "type": "boolean",
+      "description": "Ignore flow in z (may be beneficial if top of brain is missing)",
+      "title": "Ignore Z flow flag",
+      "default": false
+    },
+    "apply_std_mask_flag": {
+      "type": "boolean",
+      "description": "Apply <input1_basename>_stdmask to brain edge points",
+      "title": "Apply standard mask flag",
+      "default": false
+    },
+    "segment_options": {
+      "type": "string",
+      "description": "Options to be passed to segmentation (type 'fast' to get these)",
+      "title": "Segmentation options"
+    }
+  },
+  "required": [
+    "@type",
+    "input1_basename",
+    "input2_basename"
+  ]
+}
